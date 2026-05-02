@@ -1511,7 +1511,20 @@ async function cacheMapTiles() {
 
     btn.textContent = '✅ Mapa Offline Pronto!';
     btn.style.background = 'var(--green)';
+    btn.disabled = true;
     status.textContent = tiles.length + ' tiles salvos para uso offline' + (errors > 0 ? ' (' + errors + ' falharam)' : '');
+    localStorage.setItem('mapTilesCached', 'v16');
+}
+
+async function checkMapCacheStatus() {
+    var btn = document.getElementById('btnCacheMap');
+    var status = document.getElementById('mapCacheStatus');
+    if (localStorage.getItem('mapTilesCached') === 'v16') {
+        btn.textContent = '✅ Mapa Offline Pronto!';
+        btn.style.background = 'var(--green)';
+        btn.disabled = true;
+        status.textContent = 'Tiles do mapa já salvos para uso offline';
+    }
 }
 
 function latLngToTile(lat, lng, zoom) {
@@ -1523,9 +1536,21 @@ function latLngToTile(lat, lng, zoom) {
 }
 
 // ==================== INIT ====================
+function getTodayDay() {
+    // Trip dates: Day 1 = Jan 21 2027, Day 34 = Feb 22 2027
+    var tripStart = new Date(2027, 0, 21); // Jan 21 2027
+    var today = new Date();
+    today.setHours(0,0,0,0);
+    tripStart.setHours(0,0,0,0);
+    var diff = Math.floor((today - tripStart) / 86400000) + 1;
+    if (diff >= 1 && diff <= 34) return diff;
+    return 1;
+}
+
 renderDaySelector();
 renderAllDays();
-showDay(1);
+showDay(getTodayDay());
+checkMapCacheStatus();
 
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js').catch(function() {});
