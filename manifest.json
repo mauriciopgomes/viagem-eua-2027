@@ -1,11 +1,11 @@
 {
-  "id": "/viagem/2027/",
+  "id": "/viagem-eua-2027/",
   "name": "Viagem EUA 2027",
   "short_name": "EUA 2027",
   "description": "Roteiro interativo — 34 dias pelos EUA",
   "lang": "pt-BR",
   "dir": "ltr",
-  "start_url": "./index.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
