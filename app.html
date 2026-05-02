@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Roteiro interativo — 34 dias de road trip pelos EUA de Tesla">
+    <title>EUA 2027</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#191919">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="EUA 2027">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="preconnect" href="https://basemaps.cartocdn.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script defer src="data.js"></script>
+    <style>
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        :root {
+            --bg: #0a0a0a;
+            --bg2: #111111;
+            --bg3: #1a1a1a;
+            --bg4: #222222;
+            --glass: rgba(255,255,255,0.06);
+            --glass2: rgba(255,255,255,0.10);
+            --glass3: rgba(255,255,255,0.15);
+            --text: #f5f5f5;
+            --text2: #a0a0a0;
+            --text3: #888888;
+            --blue: #4A9FD9;
+            --gold: #E5A843;
+            --red: #E05A52;
+            --green: #4DB87A;
+            --purple: #A06DD4;
+            --orange: #D4884A;
+            --teal: #4AACAC;
+            --radius: 16px;
+            --safe-top: env(safe-area-inset-top, 0px);
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
+            --tab-height: calc(64px + var(--safe-bottom));
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.5;
+            padding-bottom: var(--tab-height);
+            padding-top: var(--safe-top);
+        }
+
+        /* ==================== BOTTOM TAB BAR ==================== */
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: var(--tab-height);
+            background: rgba(10,10,10,0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-around;
+            padding-top: 8px;
+            padding-bottom: var(--safe-bottom);
+            z-index: 9999;
+        }
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            background: none;
+            border: none;
+            color: var(--text3);
+            font-size: 10px;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            padding: 4px 12px;
+            transition: color 0.2s;
+        }
+        .tab-item .tab-icon { font-size: 22px; line-height: 1; }
+        .tab-item.active { color: var(--blue); }
+
+        /* ==================== SECTIONS ==================== */
+        .section { display: none; }
+        .section.active { display: block; }
+
+        /* ==================== HOME / ITINERARY ==================== */
+        .hero {
+            position: relative;
+            height: 280px;
+            overflow: hidden;
+        }
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 32px 20px 20px;
+            background: linear-gradient(transparent, rgba(10,10,10,0.95));
+        }
+        .hero-title {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+        }
+        .hero-subtitle {
+            font-size: 13px;
+            color: var(--text2);
+            margin-top: 4px;
+        }
+        .hero-badges {
+            display: flex;
+            gap: 6px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+        .hero-badge {
+            background: var(--glass2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 4px 10px;
+            font-size: 11px;
+            color: var(--text2);
+            font-weight: 500;
+        }
+        .hero-badge b { color: var(--text); }
+
+        /* Day selector */
+        .day-selector {
+            display: flex;
+            gap: 6px;
+            padding: 16px 20px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .day-selector::-webkit-scrollbar { display: none; }
+        .day-pill {
+            min-width: 42px;
+            height: 36px;
+            border-radius: 18px;
+            border: 1.5px solid var(--glass2);
+            background: transparent;
+            color: var(--text3);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            padding: 0 14px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .day-pill.active {
+            background: var(--blue);
+            border-color: var(--blue);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(74,159,217,0.4);
+        }
+
+        /* Day content with swipe */
+        .day-container {
+            position: relative;
+            overflow: hidden;
+            touch-action: pan-y;
+        }
+        .day-slide {
+            display: none;
+            padding: 0 20px 24px;
+            animation: slideIn 0.25s ease;
+        }
+        .day-slide.active { display: block; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .day-info {
+            margin-bottom: 20px;
+        }
+        .day-info h2 {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        .day-info .day-route {
+            color: var(--text2);
+            font-size: 14px;
+            margin-top: 2px;
+        }
+        .day-info .day-note {
+            color: var(--text3);
+            font-size: 13px;
+            font-style: italic;
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+        /* Activity cards */
+        .activity-card {
+            background: var(--bg3);
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.15s;
+        }
+        .activity-card:active { transform: scale(0.985); }
+        .activity-card-photo {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+        .activity-card-body {
+            padding: 14px 16px;
+        }
+        .activity-time {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text3);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .activity-name {
+            font-size: 15px;
+            font-weight: 600;
+            margin-top: 2px;
+            line-height: 1.4;
+        }
+        .activity-name strong { color: var(--text); }
+        .activity-desc {
+            font-size: 13px;
+            color: var(--text2);
+            margin-top: 4px;
+            line-height: 1.5;
+        }
+
+        /* Activity type indicators */
+        .activity-card[data-type="highlight"] { border-left: 3px solid var(--gold); }
+        .activity-card[data-type="food"] { border-left: 3px solid var(--red); }
+        .activity-card[data-type="charge"] { border-left: 3px solid var(--green); }
+        .activity-card[data-type="drive"] { border-left: 3px solid var(--blue); }
+
+        /* Simple activity (no photo) */
+        .activity-simple {
+            display: flex;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .activity-simple:last-child { border-bottom: none; }
+        .activity-simple .act-time {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text3);
+            min-width: 48px;
+            padding-top: 1px;
+        }
+        .activity-simple .act-text {
+            font-size: 14px;
+            line-height: 1.5;
+            flex: 1;
+        }
+        .activity-simple .act-text strong { color: var(--text); font-weight: 600; }
+
+        /* Tip cards */
+        .tip-card {
+            background: rgba(229,168,67,0.08);
+            border: 1px solid rgba(229,168,67,0.2);
+            border-radius: var(--radius);
+            padding: 14px 16px;
+            margin-top: 16px;
+            font-size: 13px;
+            color: var(--gold);
+            line-height: 1.6;
+        }
+
+        /* ==================== MAP ==================== */
+        #map-section { padding-bottom: 0; }
+        #map {
+            height: calc(100vh - var(--tab-height) - var(--safe-top));
+            height: calc(100dvh - var(--tab-height) - var(--safe-top));
+            width: 100%;
+        }
+
+        /* ==================== EXPLORE SECTION ==================== */
+        .explore-header {
+            padding: 24px 20px 16px;
+        }
+        .explore-header h2 {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+        .explore-grid {
+            padding: 0 20px;
+        }
+        .explore-card {
+            background: var(--bg3);
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-bottom: 16px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .explore-card-img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+        }
+        .explore-card-body {
+            padding: 14px 16px;
+        }
+        .explore-card-title {
+            font-size: 16px;
+            font-weight: 700;
+        }
+        .explore-card-sub {
+            font-size: 12px;
+            color: var(--text2);
+            margin-top: 2px;
+        }
+        .explore-card-desc {
+            font-size: 13px;
+            color: var(--text2);
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+        /* Subsection tabs */
+        .explore-tabs {
+            display: flex;
+            gap: 8px;
+            padding: 0 20px 16px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .explore-tabs::-webkit-scrollbar { display: none; }
+        .explore-tab {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1.5px solid var(--glass2);
+            background: transparent;
+            color: var(--text2);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            font-family: inherit;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .explore-tab.active {
+            background: var(--glass2);
+            border-color: var(--glass3);
+            color: var(--text);
+        }
+
+        /* Hotel list */
+        .hotel-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .hotel-num {
+            width: 32px; height: 32px;
+            border-radius: 10px;
+            background: var(--glass2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+        .hotel-name { font-weight: 600; font-size: 14px; }
+        .hotel-dates { font-size: 12px; color: var(--text3); margin-top: 1px; }
+        .hotel-nights {
+            margin-left: auto;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text2);
+            background: var(--glass);
+            padding: 4px 10px;
+            border-radius: 8px;
+        }
+
+        /* Charge list */
+        .charge-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .charge-item.critical {
+            background: rgba(229,168,67,0.05);
+        }
+        .charge-icon-wrap {
+            width: 36px; height: 36px;
+            border-radius: 10px;
+            background: rgba(77,184,122,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        .charge-item.critical .charge-icon-wrap { background: rgba(229,168,67,0.15); }
+        .charge-name { font-weight: 600; font-size: 14px; }
+        .charge-leg { font-size: 12px; color: var(--text3); }
+        .charge-note { font-size: 12px; color: var(--gold); margin-top: 2px; }
+
+        /* ==================== SETTINGS ==================== */
+        .settings-section { padding: 24px 20px; }
+        .settings-section h2 { font-size: 28px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 24px; }
+        .setting-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .setting-label { font-size: 15px; font-weight: 500; }
+        .setting-desc { font-size: 12px; color: var(--text3); margin-top: 2px; }
+        .lang-switch {
+            display: flex;
+            gap: 2px;
+            background: var(--bg3);
+            border-radius: 10px;
+            padding: 3px;
+        }
+        .lang-switch button {
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            color: var(--text3);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+        .lang-switch button.active {
+            background: var(--glass2);
+            color: var(--text);
+        }
+
+        /* ==================== LEAFLET OVERRIDES ==================== */
+        .custom-popup .leaflet-popup-content-wrapper {
+            background: var(--bg3);
+            color: var(--text);
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+        }
+        .custom-popup .leaflet-popup-tip { background: var(--bg3); }
+        .custom-popup .leaflet-popup-content { margin: 12px 16px; }
+        .custom-popup h3 { font-weight: 700; font-size: 14px; margin-bottom: 6px; }
+        .custom-popup .days { color: var(--text2); font-size: 12px; line-height: 1.6; }
+
+        .legend {
+            background: rgba(10,10,10,0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            color: var(--text2);
+            padding: 14px 18px;
+            border-radius: 12px;
+            font-size: 12px;
+            line-height: 1.8;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .legend h3 { color: var(--text); margin-bottom: 8px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+        .legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
+        .legend-line { width: 24px; height: 3px; border-radius: 2px; }
+
+        /* ==================== DETAIL SHEET ==================== */
+        .sheet-overlay {
+            position: fixed; inset: 0; z-index: 10000;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.25s;
+        }
+        .sheet-overlay.open { opacity: 1; pointer-events: auto; }
+        .sheet {
+            position: fixed; bottom: 0; left: 0; right: 0; z-index: 10001;
+            background: var(--bg2);
+            border-radius: 20px 20px 0 0;
+            max-height: 85vh; overflow-y: auto;
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.32,0.72,0,1);
+            padding-bottom: calc(24px + var(--safe-bottom));
+            -webkit-overflow-scrolling: touch;
+        }
+        .sheet.open { transform: translateY(0); }
+        .sheet-handle {
+            width: 36px; height: 4px; border-radius: 2px;
+            background: rgba(255,255,255,0.2);
+            margin: 10px auto 0;
+        }
+        .sheet-photo {
+            width: 100%; height: 200px; object-fit: cover;
+            border-radius: 0; margin-top: 12px;
+        }
+        .sheet-body { padding: 16px 20px; }
+        .sheet-badge {
+            display: inline-block;
+            padding: 3px 10px; border-radius: 6px;
+            font-size: 11px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.04em;
+        }
+        .sheet-badge[data-t="highlight"] { background: rgba(229,168,67,0.15); color: var(--gold); }
+        .sheet-badge[data-t="food"] { background: rgba(224,90,82,0.15); color: var(--red); }
+        .sheet-badge[data-t="drive"] { background: rgba(74,159,217,0.15); color: var(--blue); }
+        .sheet-badge[data-t="charge"] { background: rgba(77,184,122,0.15); color: var(--green); }
+        .sheet-badge[data-t=""] { background: var(--glass); color: var(--text2); }
+        .sheet-name {
+            font-size: 20px; font-weight: 700; margin-top: 10px;
+            letter-spacing: -0.02em; line-height: 1.3;
+        }
+        .sheet-name strong { color: var(--text); }
+        .sheet-meta {
+            display: flex; flex-wrap: wrap; gap: 12px;
+            margin-top: 12px; font-size: 13px; color: var(--text2);
+        }
+        .sheet-meta-item { display: flex; align-items: center; gap: 5px; }
+        .sheet-detail {
+            margin-top: 14px; font-size: 14px; color: var(--text2);
+            line-height: 1.65; border-top: 1px solid rgba(255,255,255,0.06);
+            padding-top: 14px;
+        }
+        .sheet-detail p { margin-bottom: 8px; }
+        .sheet-detail .sd-label { color: var(--text3); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px; }
+        .sheet-nav-title {
+            font-size: 13px; font-weight: 700; color: var(--text3);
+            text-transform: uppercase; letter-spacing: 0.05em;
+            margin-top: 18px; margin-bottom: 10px;
+        }
+        .sheet-nav-btns { display: flex; gap: 10px; }
+        .sheet-nav-btn {
+            flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 14px 16px; border-radius: 14px; border: none;
+            font-size: 14px; font-weight: 600; font-family: inherit;
+            cursor: pointer; text-decoration: none; transition: transform 0.12s;
+        }
+        .sheet-nav-btn:active { transform: scale(0.97); }
+        .btn-gmaps { background: rgba(66,133,244,0.15); color: #4285F4; }
+        .btn-amaps { background: rgba(52,199,89,0.15); color: #34C759; }
+        .sheet-close {
+            position: absolute; top: 12px; right: 16px;
+            width: 32px; height: 32px; border-radius: 50%;
+            background: var(--glass2); border: none;
+            color: var(--text2); font-size: 18px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; z-index: 2;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 0; height: 0; }
+
+        /* Focus visible */
+        :focus-visible {
+            outline: 2px solid var(--blue);
+            outline-offset: 2px;
+        }
+        button:focus-visible, a:focus-visible {
+            outline: 2px solid var(--blue);
+            outline-offset: 2px;
+        }
+
+        /* Selection */
+        ::selection { background: rgba(74,159,217,0.3); }
+    </style>
+</head>
+<body>
+
+<main>
+<!-- ==================== HOME / ITINERARY ==================== -->
+<div class="section active" id="sec-home" role="tabpanel" aria-label="Roteiro">
+    <div class="hero" id="heroSection">
+        <img id="heroImg" src="img/dia-01.jpg" alt="Day photo">
+        <div class="hero-overlay">
+            <div class="hero-title" id="heroTitle">🇺🇸 Viagem EUA 2027</div>
+            <div class="hero-subtitle" id="heroSub">20 Jan — 22 Feb • 34 dias</div>
+            <div class="hero-badges">
+                <span class="hero-badge">👨‍👩‍👧 <b>3</b></span>
+                <span class="hero-badge">🚗 <b>~6.500 km</b></span>
+                <span class="hero-badge">🏞️ <b>12</b> Parks</span>
+                <span class="hero-badge">⚡ <b>18</b> SC</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="day-selector" id="daySelector"></div>
+
+    <div class="day-container" id="dayContainer"></div>
+</div>
+
+<!-- ==================== MAP ==================== -->
+<div class="section" id="sec-map" role="tabpanel" aria-label="Mapa">
+    <div id="map"></div>
+</div>
+
+<!-- ==================== EXPLORE ==================== -->
+<div class="section" id="sec-explore" role="tabpanel" aria-label="Explorar">
+    <div class="explore-header">
+        <h2 id="exploreTitle">Explorar</h2>
+    </div>
+    <div class="explore-tabs" id="exploreTabs">
+        <button class="explore-tab active" onclick="showExplore('parks')">🏞️ Parques</button>
+        <button class="explore-tab" onclick="showExplore('hotels')">🏨 Hotéis</button>
+        <button class="explore-tab" onclick="showExplore('charging')">⚡ Carga</button>
+    </div>
+    <div id="exploreContent"></div>
+</div>
+
+<!-- ==================== SETTINGS ==================== -->
+<div class="section" id="sec-settings" role="tabpanel" aria-label="Ajustes">
+    <div class="settings-section">
+        <h2>Ajustes</h2>
+        <div class="setting-row">
+            <div>
+                <div class="setting-label">Idioma</div>
+                <div class="setting-desc">Conteúdo e interface</div>
+            </div>
+            <div class="lang-switch">
+                <button class="active" id="btnPt" onclick="setLang('pt')">🇧🇷 PT</button>
+                <button id="btnEn" onclick="setLang('en')">🇺🇸 EN</button>
+            </div>
+        </div>
+        <div class="setting-row">
+            <div>
+                <div class="setting-label">Versão</div>
+                <div class="setting-desc">EUA 2027 PWA v2.0</div>
+            </div>
+        </div>
+        <div class="setting-row">
+            <div>
+                <div class="setting-label">Tesla</div>
+                <div class="setting-desc">Model Y Long Range + FSD</div>
+            </div>
+        </div>
+        <div class="setting-row">
+            <div>
+                <div class="setting-label">Voo ida</div>
+                <div class="setting-desc">AA 3 JFK→LAX 25/01</div>
+            </div>
+        </div>
+        <div class="setting-row">
+            <div>
+                <div class="setting-label">Voo volta</div>
+                <div class="setting-desc">AA 608 LAX→MIA + AA 905 MIA→GIG 22/02</div>
+            </div>
+        </div>
+    </div>
+</div>
+</main>
+
+<!-- ==================== DETAIL SHEET ==================== -->
+<div class="sheet-overlay" id="sheetOverlay" onclick="closeSheet()"></div>
+<div class="sheet" id="sheet">
+    <div class="sheet-handle"></div>
+    <button class="sheet-close" onclick="closeSheet()">✕</button>
+    <img class="sheet-photo" id="sheetPhoto" src="" alt="" style="display:none" onerror="this.style.display='none'">
+    <div class="sheet-body" id="sheetBody"></div>
+</div>
+
+<!-- ==================== TAB BAR ==================== -->
+<nav class="tab-bar" role="tablist" aria-label="Navegação principal">
+    <button class="tab-item active" onclick="switchTab('home')" role="tab" aria-selected="true" aria-controls="sec-home">
+        <span class="tab-icon">📅</span>
+        <span>Roteiro</span>
+    </button>
+    <button class="tab-item" onclick="switchTab('map')" role="tab" aria-selected="false" aria-controls="sec-map">
+        <span class="tab-icon">🗺️</span>
+        <span>Mapa</span>
+    </button>
+    <button class="tab-item" onclick="switchTab('explore')" role="tab" aria-selected="false" aria-controls="sec-explore">
+        <span class="tab-icon">🔍</span>
+        <span>Explorar</span>
+    </button>
+    <button class="tab-item" onclick="switchTab('settings')" role="tab" aria-selected="false" aria-controls="sec-settings">
+        <span class="tab-icon">⚙️</span>
+        <span>Ajustes</span>
+    </button>
+</nav>
+
+<script>
+// ==================== ACTIVITY PHOTOS ====================
+const activityPhotos = {
+    'Times Square': 'img/activities/times_square.jpg',
+    'Rockefeller': 'img/activities/rockefeller_center.jpg',
+    'FAO Schwarz': 'img/activities/fao_schwarz.jpg',
+    'LEGO Store': 'img/activities/lego_store_ny.jpg',
+    "Joe's Pizza": 'img/activities/joes_pizza.jpg',
+    'Russ & Daughters': 'img/activities/russ_and_daughters.jpg',
+    "Hell's Kitchen": 'img/activities/hells_kitchen.jpg',
+    'Marriott Marquis': 'img/activities/marriott_marquis.jpg',
+    'St. Patrick': 'img/activities/st_patricks_cathedral.jpg',
+    'Nintendo NY': 'img/activities/nintendo_ny.jpg',
+    'MoMA': 'img/activities/moma.jpg',
+    'Bryant Park': 'img/activities/bryant_park.jpg',
+    'Biblioteca Pública': 'img/activities/biblioteca_p_blica.jpg',
+    'NY Public Library': 'img/activities/ny_public_library.jpg',
+    'Ghostbusters': 'img/activities/ghostbusters.jpg',
+    'Charging Bull': 'img/activities/charging_bull.jpg',
+    'Fearless Girl': 'img/activities/fearless_girl.jpg',
+    'Trinity Church': 'img/activities/trinity_church.jpg',
+    'Oculus': 'img/activities/oculus.jpg',
+    '9/11 Memorial': 'img/activities/9_11_memorial.jpg',
+    'One World Observatory': 'img/activities/one_world_observatory.jpg',
+    '7 World Trade': 'img/activities/7_world_trade_center.jpg',
+    'Brooklyn Bridge': 'img/activities/brooklyn_bridge.jpg',
+    'DUMBO': 'img/activities/dumbo.jpg',
+    'Brooklyn Bridge Park': 'img/activities/brooklyn_bridge_park.jpg',
+    "Jane's Carousel": 'img/activities/janes_carousel.jpg',
+    "Juliana's Pizza": 'img/activities/julianas_pizza.jpg',
+    'Coney Island': 'img/activities/coney_island.jpg',
+    "Nathan's Famous": 'img/activities/nathans_famous.jpg',
+    'SoHo': 'img/activities/soho.jpg',
+    'Washington Square': 'img/activities/washington_square.jpg',
+    'Chelsea Market': 'img/activities/chelsea_market.jpg',
+    'High Line': 'img/activities/high_line.jpg',
+    'Little Island': 'img/activities/little_island.jpg',
+    'Pier 57': 'img/activities/pier_57_nyc.jpg',
+    'The Vessel': 'img/activities/the_vessel_nyc.jpg',
+    'Hudson Yards': 'img/activities/hudson_yards.jpg',
+    '5th Avenue': 'img/activities/5th_avenue.jpg',
+    'Central Park': 'img/activities/central_park.jpg',
+    'Strawberry Fields': 'img/activities/strawberry_fields.jpg',
+    'Bethesda Fountain': 'img/activities/bethesda_fountain.jpg',
+    'Bow Bridge': 'img/activities/bow_bridge.jpg',
+    'MET': 'img/activities/met.jpg',
+    'História Natural': 'img/activities/natural_history_museum.jpg',
+    'Shake Shack': 'img/activities/shake_shack.jpg',
+    "Macy's": 'img/activities/macys_herald_square.jpg',
+    'Chinatown': 'img/activities/chinatown_ny.jpg',
+    'Little Italy': 'img/activities/little_italy_ny.jpg',
+    'Ferrara': 'img/activities/little_italy_ny.jpg',
+    'Ess-a-Bagel': 'img/activities/ess_a_bagel.jpg',
+    'Eataly': 'img/activities/eataly_nyc.jpg',
+    "Junior's": 'img/activities/juniors_cheesecake.jpg',
+    "Carmine's": 'img/activities/juniors_cheesecake.jpg',
+    'Summit One Vanderbilt': 'img/activities/summit_one_vanderbilt.jpg',
+    'Grand Central Terminal': 'img/activities/grand_central_terminal.jpg',
+    'General Sherman Tree': 'img/activities/general_sherman_tree.jpg',
+    'Congress Trail': 'img/activities/congress_trail.jpg',
+    'Kings Canyon': 'img/activities/kings_canyon.jpg',
+    'Zumwalt Meadow': 'img/activities/zumwalt_meadow.jpg',
+    'Roaring River Falls': 'img/activities/roaring_river_falls.jpg',
+    'Crescent Meadow': 'img/activities/crescent_meadow.jpg',
+    'Moro Rock': 'img/activities/moro_rock.jpg',
+    'Tunnel View': 'img/activities/tunnel_view.jpg',
+    'Yosemite Fall': 'img/activities/yosemite_falls_lower.jpg',
+    'Swinging Bridge': 'img/activities/swinging_bridge_yosemite.jpg',
+    'Valley View': 'img/activities/valley_view_yosemite.jpg',
+    "Cook's Meadow": 'img/activities/cooks_meadow.jpg',
+    'Vernal Fall': 'img/activities/vernal_fall.jpg',
+    'Mirror Lake': 'img/activities/mirror_lake.jpg',
+    'Bridalveil Fall': 'img/activities/bridalveil_fall.jpg',
+    'Sentinel Bridge': 'img/activities/sentinel_bridge.jpg',
+    'Yosemite Chapel': 'img/activities/yosemite_chapel.jpg',
+    'Half Dome': 'img/activities/half_dome.jpg',
+    'Embarcadero': 'img/activities/embarcadero_sf.jpg',
+    'Crissy Field': 'img/activities/crissy_field.jpg',
+    "Fisherman's Wharf": 'img/activities/fishermans_wharf.jpg',
+    'Golden Gate Bridge': 'img/activities/golden_gate_bridge.jpg',
+    'Pier 39': 'img/activities/pier_39.jpg',
+    'Haight-Ashbury': 'img/activities/haight_ashbury.jpg',
+    'Fort Point': 'img/activities/fort_point.jpg',
+    'Union Square': 'img/activities/union_square_sf.jpg',
+    'North Beach': 'img/activities/north_beach_sf.jpg',
+    'Mission District': 'img/activities/mission_district.jpg',
+    'La Taqueria': 'img/activities/la_taqueria.jpg',
+    'Sausalito': 'img/activities/sausalito.jpg',
+    'Muir Woods': 'img/activities/muir_woods.jpg',
+    'Carson Mansion': 'img/activities/carson_mansion.jpg',
+    'Lady Bird Johnson': 'img/activities/lady_bird_johnson_grove.jpg',
+    'Prairie Creek': 'img/activities/prairie_creek.jpg',
+    'Gold Bluffs Beach': 'img/activities/gold_bluffs_beach.jpg',
+    'Newton B. Drury': 'img/activities/newton_b_drury.jpg',
+    'Big Tree Wayside': 'img/activities/big_tree_wayside.jpg',
+    'Stout Memorial Grove': 'img/activities/stout_memorial_grove.jpg',
+    'Fern Canyon': 'img/activities/fern_canyon.jpg',
+    'Cape Blanco': 'img/activities/cape_blanco.jpg',
+    'Tall Trees Grove': 'img/activities/tall_trees_grove.jpg',
+    'Gold Beach': 'img/activities/gold_beach_or.jpg',
+    'Shore Acres': 'img/activities/shore_acres.jpg',
+    'Ecola State Park': 'img/activities/ecola_state_park.jpg',
+    'Cannon Beach': 'img/activities/cannon_beach.jpg',
+    'Newport': 'img/activities/newport_oregon.jpg',
+    'Haystack Rock': 'img/activities/haystack_rock.jpg',
+    'Lake Crescent': 'img/activities/lake_crescent.jpg',
+    'Sol Duc Falls': 'img/activities/sol_duc_falls.jpg',
+    'Hoh Rain Forest': 'img/activities/hoh_rain_forest.jpg',
+    'Ruby Beach': 'img/activities/ruby_beach.jpg',
+    'Rialto Beach': 'img/activities/rialto_beach.jpg',
+    'Marymere Falls': 'img/activities/marymere_falls.jpg',
+    'Nisqually Vista': 'img/activities/nisqually_vista.jpg',
+    'Olympia': 'img/activities/olympia_wa.jpg',
+    'Mt. Rainier': 'img/activities/mt__rainier.jpg',
+    'Multnomah Falls': 'img/activities/multnomah_falls.jpg',
+    'Boise River': 'img/activities/boise_river.jpg',
+    'Idaho State Capitol': 'img/activities/idaho_state_capitol.jpg',
+    'Basque Block': 'img/activities/basque_block.jpg',
+    'Shoshone Falls': 'img/activities/shoshone_falls.jpg',
+    'Mesa Arch': 'img/activities/mesa_arch.jpg',
+    'Upheaval Dome': 'img/activities/upheaval_dome.jpg',
+    'Delicate Arch': 'img/activities/delicate_arch.jpg',
+    'Balanced Rock': 'img/activities/balanced_rock.jpg',
+    'Dead Horse Point': 'img/activities/dead_horse_point.jpg',
+    'Red Canyon': 'img/activities/red_canyon_ut.jpg',
+    'Bryce Canyon': 'img/activities/bryce_canyon.jpg',
+    'Angels Landing': 'img/activities/angels_landing.jpg',
+    'Grand Canyon': 'img/activities/grand_canyon.jpg',
+    'Valley of Fire': 'img/activities/valley_of_fire.jpg',
+    'Badwater Basin': 'img/activities/badwater_basin.jpg',
+    'Red Rock Canyon': 'img/activities/red_rock_canyon.jpg',
+    'Santa Monica Pier': 'img/activities/santa_monica_pier.jpg',
+    'Griffith Observatory': 'img/activities/griffith_observatory.jpg',
+    'Venice Beach': 'img/activities/venice_beach.jpg',
+    'Welcome to Las Vegas': 'img/activities/welcome_to_las_vegas.jpg',
+    'Katz\'s Deli': 'img/activities/katz_s_deli.jpg',
+    'Levain Bakery': 'img/activities/levain_bakery.jpg',
+    'The Plaza Hotel': 'img/activities/the_plaza_hotel.jpg',
+    'Flatiron': 'img/activities/flatiron.jpg',
+    'Roosevelt Island Tramway': 'img/activities/roosevelt_island_tramway.jpg',
+    'General Grant': 'img/activities/general_grant.jpg',
+    'El Capitan': 'img/activities/el_capitan.jpg',
+    'Badger Pass': 'img/activities/badger_pass.jpg',
+    'Lombard Street': 'img/activities/lombard_street.jpg',
+    'Painted Ladies': 'img/activities/painted_ladies.jpg',
+    'Cable Car': 'img/activities/cable_car.jpg',
+    'Chinatown de SF': 'img/activities/chinatown_de_sf.jpg',
+    'Point Reyes': 'img/activities/point_reyes.jpg',
+    'Astoria': 'img/activities/astoria.jpg',
+    'Astoria-Megler': 'img/activities/astoria_megler_bridge.jpg',
+    'Forks': 'img/activities/forks_washington.jpg',
+    'Hall of Mosses': 'img/activities/hall_of_mosses.jpg',
+    'La Push': 'img/activities/la_push.jpg',
+    'Columbia River Gorge': 'img/activities/columbia_river_gorge.jpg',
+    'Antelope Island': 'img/activities/antelope_island.jpg',
+    'Great Salt Lake': 'img/activities/great_salt_lake.jpg',
+    'Grand View Point': 'img/activities/grand_view_point.jpg',
+    'Green River Overlook': 'img/activities/green_river_overlook.jpg',
+    'White Rim Overlook': 'img/activities/white_rim_overlook.jpg',
+    'Aztec Butte': 'img/activities/aztec_butte.jpg',
+    'Landscape Arch': 'img/activities/landscape_arch.jpg',
+    'Double Arch': 'img/activities/double_arch.jpg',
+    'Windows': 'img/activities/windows_arches.jpg',
+    'Fiery Furnace': 'img/activities/fiery_furnace.jpg',
+    'Park Avenue': 'img/activities/park_avenue_arches.jpg',
+    'Navajo Loop': 'img/activities/navajo_loop.jpg',
+    "Queen's Garden": 'img/activities/queens_garden.jpg',
+    'Sunrise': 'img/activities/sunrise_point_bryce.jpg',
+    'Sunset Point': 'img/activities/sunrise_point_bryce.jpg',
+    'Bryce Point': 'img/activities/bryce_point.jpg',
+    'Inspiration Point': 'img/activities/inspiration_point_bryce.jpg',
+    'Natural Bridge': 'img/activities/natural_bridge_bryce.jpg',
+    'Rainbow Point': 'img/activities/rainbow_point_bryce.jpg',
+    'Riverside Walk': 'img/activities/riverside_walk_zion.jpg',
+    'Canyon Overlook': 'img/activities/canyon_overlook.jpg',
+    'Emerald Pools': 'img/activities/emerald_pools.jpg',
+    "Pa'rus Trail": 'img/activities/parus_trail.jpg',
+    'Weeping Rock': 'img/activities/weeping_rock.jpg',
+    'Court of the Patriarchs': 'img/activities/court_of_patriarchs.jpg',
+    'Mather Point': 'img/activities/mather_point.jpg',
+    'Yavapai': 'img/activities/yavapai_point.jpg',
+    'Grandview Point': 'img/activities/grandview_point.jpg',
+    'Desert View Watchtower': 'img/activities/desert_view_watchtower.jpg',
+    'Hopi Point': 'img/activities/hopi_point.jpg',
+    'Bright Angel Trail': 'img/activities/bright_angel_trail.jpg',
+    'Bellagio Fountains': 'img/activities/bellagio_fountains.jpg',
+    'In-N-Out': 'img/activities/in_n_out_burger.jpg',
+    'Strip': 'img/activities/las_vegas_strip_night.jpg',
+    'Fire Wave': 'img/activities/fire_wave.jpg',
+    'Elephant Rock': 'img/activities/elephant_rock.jpg',
+    'White Domes': 'img/activities/white_domes.jpg',
+    'Zabriskie Point': 'img/activities/zabriskie_point.jpg',
+    "Artist's Palette": 'img/activities/artists_palette.jpg',
+    'El Matador Beach': 'img/activities/el_matador_beach.jpg',
+    'Malibu': 'img/activities/malibu_pch.jpg',
+    'Muscle Beach': 'img/activities/muscle_beach.jpg',
+    'Hollywood Sign': 'img/activities/hollywood_sign.jpg',
+    'Calico Tanks': 'img/activities/calico_tanks.jpg',
+    'Samuel Boardman': 'img/activities/samuel_boardman.jpg',
+    'Cape Perpetua': 'img/activities/cape_perpetua.jpg',
+    "Thor's Well": 'img/activities/thor_s_well.jpg',
+    'Heceta Head': 'img/activities/heceta_head.jpg',
+    'Natural Bridges': 'img/activities/natural_bridges.jpg',
+    'Mesquite Flat Sand Dunes': 'img/activities/mesquite_flat_sand_dunes.jpg',
+    "Dante's View": 'img/activities/dante_s_view.jpg',
+    'Seven Magic Mountains': 'img/activities/seven_magic_mountains.jpg',
+};
+
+function findPhoto(text) {
+    const clean = text.replace(/<[^>]+>/g, '');
+    for (const [key, url] of Object.entries(activityPhotos)) {
+        if (clean.includes(key)) return url;
+    }
+    return null;
+}
+
+// ==================== PLACE INFO (addresses + details) ====================
+const placeInfo = {
+    // Day 1
+    'JFK': { addr: 'John F. Kennedy International Airport, Queens, NY', coords: '40.6413,-73.7781', detail: 'Terminal internacional. Imigração pode levar 1-2h na alta temporada.' },
+    'Marriott Marquis': { addr: '1535 Broadway, New York, NY 10036', coords: '40.7579,-73.9860', detail: 'Hotel 4★ no coração de Times Square. 49 andares, vista panorâmica. Lobby no 8° andar.', hours: 'Check-in: 16h / Check-out: 11h', cost: '~$350-500/noite' },
+    'Russ & Daughters': { addr: '179 E Houston St, New York, NY 10002', coords: '40.7224,-73.9886', detail: 'Deli judaica lendária desde 1914. Famosa por bagels, lox (salmão defumado) e babka.', hours: 'Seg-Dom 8h-18h', cost: '~$15-25/pessoa' },
+    'Nintendo NY': { addr: '10 Rockefeller Plaza, New York, NY 10020', coords: '40.7587,-73.9787', detail: 'Maior loja Nintendo do mundo! 2 andares com consoles pra jogar, merchandise exclusivo e estátuas em tamanho real do Mario, Zelda e Pokémon.', hours: '10h-21h', cost: 'Entrada gratuita' },
+    'St. Patrick': { addr: "St. Patrick's Cathedral, 5th Ave & 50th St, New York, NY 10022", coords: '40.7585,-73.9760', detail: 'Catedral neogótica de 1878, a maior da América do Norte. Vitrais impressionantes, altar de mármore e bronze.', hours: '6h30-20h45', cost: 'Gratuito' },
+    'FAO Schwarz': { addr: '30 Rockefeller Plaza, New York, NY 10112', coords: '40.7590,-73.9795', detail: 'Loja de brinquedos icônica desde 1862. Piano gigante do filme "Big" com Tom Hanks.', hours: '10h-20h' },
+    'LEGO Store': { addr: '636 5th Ave, New York, NY 10020', coords: '40.7583,-73.9775', detail: 'Flagship LEGO com maquetes gigantes: Estátua da Liberdade, Empire State, metrô de NY — tudo em LEGO!', hours: '10h-21h', cost: 'Entrada gratuita' },
+    "Joe's Pizza": { addr: "7 Carmine St, New York, NY 10014", coords: '40.7305,-74.0024', detail: 'Pizza de NY clássica desde 1975. Fatia fina e crocante. Favorita dos locais e turistas. Fila rápida.', hours: '10h-5h (madrugada!)', cost: '~$3-5/fatia' },
+    '5th Avenue': { addr: '5th Avenue & 50th St, New York, NY', coords: '40.7585,-73.9765', detail: 'A avenida mais famosa do mundo. Saks Fifth Avenue, Tiffany & Co., Apple Store (cubo de vidro), Cartier, Bergdorf Goodman.' },
+    'MoMA': { addr: '11 W 53rd St, New York, NY 10019', coords: '40.7614,-73.9776', detail: 'Museum of Modern Art — acervo de 200.000 obras. Noite Estrelada (Van Gogh), Nenúfares (Monet), Campbell\'s Soup (Warhol), Les Demoiselles d\'Avignon (Picasso).', hours: '10h30-17h30 (Sáb até 19h)', cost: '$30 adulto / grátis <16 anos' },
+    'Biblioteca Pública': { addr: '476 5th Ave, New York, NY 10018', coords: '40.7532,-73.9822', detail: 'Beaux-Arts de 1911. A Sala Rose de Leitura tem 23m de pé-direito com nuvens pintadas no teto. Os leões de pedra (Patience & Fortitude) na entrada são ícones de NY.', hours: 'Seg-Sáb 10h-18h, Dom 13h-17h', cost: 'Gratuito' },
+    'NY Public Library': { addr: '476 5th Ave, New York, NY 10018', coords: '40.7532,-73.9822', detail: 'Beaux-Arts de 1911. A Sala Rose de Leitura tem 23m de pé-direito com nuvens pintadas no teto.', hours: 'Seg-Sáb 10h-18h', cost: 'Gratuito' },
+    'Bryant Park': { addr: 'Bryant Park, 42nd St & 6th Ave, New York, NY 10018', coords: '40.7536,-73.9832', detail: 'Parque urbano atrás da Biblioteca. No inverno: pista de patinação gratuita (aluguel de patins ~$20), Winter Village com lojas e comida.', hours: '7h-22h', cost: 'Gratuito (patinação: aluguel ~$20)' },
+    "Hell's Kitchen": { addr: "9th Ave & 46th St, New York, NY 10036", coords: '40.7608,-73.9940', detail: 'Bairro gastronômico de NYC. Restaurant Row (46th St) tem dezenas de opções. Shake Shack, Empanada Mama, Rubirosa, Don Antonio — tudo ali perto.' },
+
+    // Day 2
+    'Ghostbusters': { addr: '14 N Moore St, New York, NY 10013', coords: '40.7197,-74.0066', detail: 'Quartel de bombeiros Hook & Ladder 8, usado como fachada no filme Ghostbusters (1984). Tem o logo pintado na calçada e placa comemorativa.', hours: 'Exterior 24h (interior é quartel ativo)', cost: 'Gratuito' },
+    'Charging Bull': { addr: 'Bowling Green, Broadway, New York, NY 10004', coords: '40.7056,-74.0134', detail: 'Touro de bronze de 3.200kg instalado guerrilheiramente em 1989 por Arturo Di Modica. Símbolo de Wall Street e otimismo financeiro. Fearless Girl fica em frente à NYSE agora.', cost: 'Gratuito' },
+    'Wall Street': { addr: 'Wall Street, New York, NY 10005', coords: '40.7068,-74.0089', detail: 'Centro financeiro do mundo. NYSE (Bolsa de NY), Federal Hall (onde Washington tomou posse), estátuas.', cost: 'Gratuito' },
+    'Trinity Church': { addr: '89 Broadway, New York, NY 10006', coords: '40.7082,-74.0121', detail: 'Igreja anglicana de 1846. Cemitério com o túmulo de Alexander Hamilton. Arquitetura neogótica linda.', hours: '7h-18h', cost: 'Gratuito' },
+    'Oculus': { addr: 'Oculus, 185 Greenwich St, New York, NY 10007', coords: '40.7113,-74.0125', detail: 'Hub de transporte projetado por Santiago Calatrava. Formato de pomba em voo. Interior branco com nervuras simétricas — impressionante! Westfield shops dentro.', hours: '5h-0h', cost: 'Gratuito' },
+    '9/11 Memorial': { addr: '180 Greenwich St, New York, NY 10007', coords: '40.7115,-74.0134', detail: 'Duas piscinas nos exatos locais das torres. Nomes de todas as 2.983 vítimas gravados nas bordas de bronze. Memorial Museum embaixo conta a história completa.', hours: 'Memorial: 10h-17h / Pools: 9h-20h', cost: 'Memorial: gratuito / Museum: $28 adulto' },
+    'One World Observatory': { addr: '117 West St, New York, NY 10007', coords: '40.7130,-74.0132', detail: 'Observatório no topo do One World Trade Center (541m). Elevador sobe 102 andares em 47 segundos com vídeo da história de NY nas paredes. Vista 360° incrível.', hours: '10h-19h', cost: '$43 adulto / $37 criança (6-12)' },
+    '7 World Trade Center': { addr: '7 World Trade Center, 250 Greenwich St, New York, NY 10007', coords: '40.7132,-74.0116', detail: 'Prédio reconstruído após o 11/9. Escritório fictício da Pearson Specter Litt no seriado Suits!' },
+    'Brooklyn Bridge': { addr: 'Brooklyn Bridge, New York, NY', coords: '40.7061,-73.9969', detail: 'Ponte suspensa de 1883, ícone de NY. Travessia a pé leva ~30min pelo passadiço de madeira. Melhor de Manhattan → Brooklyn para ter a vista do skyline de frente.', cost: 'Gratuito' },
+    'DUMBO': { addr: 'Washington St & Water St, Brooklyn, NY 11201', coords: '40.7033,-73.9894', detail: 'Down Under the Manhattan Bridge Overpass. A foto mais instagramável de NY: Manhattan Bridge emoldurada pelos prédios de tijolo na Washington St.', cost: 'Gratuito' },
+    'Brooklyn Bridge Park': { addr: 'Brooklyn Bridge Park, Brooklyn, NY 11201', coords: '40.7003,-73.9965', detail: 'Parque à beira-rio com vista espetacular de Manhattan. Jane\'s Carousel ($2) é um carrossel vintage dentro de um cubo de vidro.' },
+    "Juliana's Pizza": { addr: '19 Old Fulton St, Brooklyn, NY 11201', coords: '40.7027,-73.9938', detail: 'Pizzaria do lendário Patsy Grimaldi. Forno a carvão, massa fininha. Considerada a melhor pizza de NY por muitos. Fila pode ser longa — vá cedo!', hours: '11h30-22h', cost: '~$20-30 pizza inteira' },
+    'Time Out Market': { addr: '55 Water St, Brooklyn, NY 11201', coords: '40.7024,-73.9904', detail: 'Food hall curado pela Time Out. 21 restaurantes + rooftop bar com vista da ponte e Manhattan.', hours: '11h-22h' },
+    'Coney Island': { addr: 'Coney Island Boardwalk, Brooklyn, NY 11224', coords: '40.5738,-73.9712', detail: 'Praia e parque de diversões clássico de NY desde 1900s. Boardwalk de madeira, Luna Park (aberto no verão), aquário de NY. No inverno é mais vazio mas ainda charmoso.', cost: 'Boardwalk gratuito / Luna Park: $$ por atração' },
+    "Nathan's Famous": { addr: '1310 Surf Ave, Brooklyn, NY 11224', coords: '40.5756,-73.9814', detail: 'Hot dog original desde 1916! Local do famoso concurso de comer hot dogs no 4 de julho. O hot dog clássico é obrigatório.', hours: '10h-0h', cost: '~$5-8' },
+    'SoHo': { addr: 'SoHo, Spring St & Broadway, New York, NY 10012', coords: '40.7233,-73.9985', detail: 'South of Houston. Prédios com fachadas de ferro fundido, galerias, lojas de grife, street art. Ótimo para fotos e vitrine.' },
+    'Washington Square': { addr: 'Washington Square Park, New York, NY 10012', coords: '40.7308,-73.9973', detail: 'Coração de Greenwich Village e NYU. O Washington Square Arch (1892) foi inspirado no Arco do Triunfo de Paris. Artistas de rua, músicos, xadrez.', cost: 'Gratuito' },
+    'Chelsea Market': { addr: '75 9th Ave, New York, NY 10011', coords: '40.7424,-74.0061', detail: 'Food hall numa antiga fábrica da Nabisco (onde o Oreo foi inventado!). Los Tacos No.1 é o destaque — tacos autênticos mexicanos com fila que vale a pena.', hours: '7h-21h', cost: 'Los Tacos: ~$5-8/taco' },
+    'High Line': { addr: 'The High Line, New York, NY 10011', coords: '40.7480,-74.0048', detail: 'Parque linear elevado de 2.3km construído sobre uma antiga linha de trem de carga. Jardins, arte urbana, vista do Hudson e da cidade. Acesso gratuito por várias escadas.', hours: '7h-22h (inverno até 19h)', cost: 'Gratuito' },
+    'Little Island': { addr: 'Little Island, Pier 55, Hudson River Park, NY 10014', coords: '40.7415,-74.0100', detail: 'Parque flutuante inaugurado em 2021. 132 tulipas de concreto sustentam o parque sobre o Rio Hudson. Gramados, mirantes e anfiteatro.', hours: '6h-1h (inverno fecha mais cedo)', cost: 'Gratuito' },
+    'Pier 57': { addr: 'Pier 57, 25 11th Ave, New York, NY 10011', coords: '40.7435,-74.0080', detail: 'Sede do Google em NY! Rooftop público com vista do Hudson. Food hall no térreo.' },
+    'Hudson Yards': { addr: 'Hudson Yards, New York, NY 10001', coords: '40.7538,-74.0014', detail: 'Complexo de $25 bilhões inaugurado em 2019. The Vessel: estrutura de 150 escadas interconectadas (16 andares). Edge: observatório ao ar livre a 335m de altura.', hours: 'Shops: 10h-21h', cost: 'Edge: $41 adulto / Vessel: gratuito (reserva)' },
+    'The Vessel': { addr: 'Hudson Yards, 20 Hudson Yards, New York, NY 10001', coords: '40.7538,-74.0014', detail: 'Estrutura em forma de colmeia com 2.500 degraus e 154 lances de escada. Vista 360° da cidade. Precisa de ingresso gratuito (reservar online).', cost: 'Gratuito (reserva obrigatória)' },
+
+    // Day 3
+    'Levain Bakery': { addr: '167 W 74th St, New York, NY 10023', coords: '40.7792,-73.9788', detail: 'Cookies enormes e famosos mundialmente! Chocolate chip walnut é o mais pedido. Fila comum mas anda rápido.', hours: '8h-0h', cost: '~$5/cookie' },
+    'Central Park': { addr: 'Central Park, New York, NY', coords: '40.7829,-73.9654', detail: 'Parque de 341 hectares no coração de Manhattan. Strawberry Fields (memorial John Lennon), Bethesda Fountain (filme Angels in America), Bow Bridge (vista icônica).', hours: '6h-1h', cost: 'Gratuito' },
+    'The Plaza Hotel': { addr: '768 5th Ave, New York, NY 10019', coords: '40.7645,-73.9744', detail: 'Hotel de luxo de 1907. Kevin McCallister ficou aqui em Esqueceram de Mim 2! Lobby aberto ao público.', cost: 'Gratuito (lobby)' },
+    'História Natural': { addr: 'American Museum of Natural History, Central Park West & 79th St, NY 10024', coords: '40.7813,-73.9740', detail: 'Um dos maiores museus de ciência do mundo! Fósseis de dinossauros, planetário, diorama dos oceanos. Filme "Uma Noite no Museu" filmado aqui.', hours: '10h-17h30', cost: '$28 adulto / grátis <13 anos' },
+    'Natural History': { addr: 'American Museum of Natural History, Central Park West & 79th St, NY 10024', coords: '40.7813,-73.9740', detail: 'One of the world\'s largest science museums. Dinosaur fossils, planetarium, ocean dioramas. "Night at the Museum" filmed here.', hours: '10h-17h30', cost: '$28 adult / free <13' },
+    'Shake Shack': { addr: '366 Columbus Ave, New York, NY 10024', coords: '40.7809,-73.9755', detail: 'Rede de hamburgueria premium nascida em NY. ShackBurger e crinkle-cut fries são obrigatórios!', cost: '~$12-18/pessoa' },
+    'MET': { addr: '1000 5th Ave, New York, NY 10028', coords: '40.7794,-73.9632', detail: 'Metropolitan Museum of Art — o maior museu dos EUA! 2 milhões de obras. Egito antigo (Templo de Dendur), arte europeia, armaduras medievais.', hours: '10h-17h (Sex-Sáb até 21h)', cost: '$30 adulto / grátis <12 anos' },
+    'Metropolitan Museum': { addr: '1000 5th Ave, New York, NY 10028', coords: '40.7794,-73.9632', detail: 'Metropolitan Museum of Art — o maior museu dos EUA! 2 milhões de obras.', hours: '10h-17h', cost: '$30 adulto / grátis <12 anos' },
+    "Macy's": { addr: "151 W 34th St, New York, NY 10001", coords: '40.7508,-73.9890', detail: "Maior loja de departamento do mundo! 11 andares. Escada rolante de madeira original de 1902.", hours: '10h-22h', cost: 'Entrada gratuita' },
+    'Chinatown': { addr: 'Canal St & Mott St, New York, NY 10013', coords: '40.7158,-73.9970', detail: 'Maior Chinatown das Américas! ~100.000 moradores. Canal Street para compras, Mott Street para comida. Dim sum no Nom Wah Tea Parlor (desde 1920).', cost: 'Gratuito' },
+    'Little Italy': { addr: 'Mulberry St, New York, NY 10013', coords: '40.7198,-73.9975', detail: 'Bairro italiano histórico. Mulberry St é a principal rua. Ferrara Bakery (desde 1892) para cannoli e espresso.', cost: 'Gratuito' },
+    'Ferrara Bakery': { addr: '195 Grand St, New York, NY 10013', coords: '40.7188,-73.9970', detail: 'A bakery italiana mais antiga dos EUA (desde 1892). Cannoli, tiramisu e espresso são imperdíveis.', hours: '8h-0h', cost: '~$5-12' },
+    "Katz's Deli": { addr: "205 E Houston St, New York, NY 10002", coords: '40.7223,-73.9874', detail: "Deli lendária desde 1888. Pastrami defumado por 30 dias, cortado à mão. Cena 'I\'ll have what she\'s having' de Harry & Sally filmada aqui.", hours: '8h-22h45', cost: '~$25-30/sanduíche' },
+
+    // Day 4
+    'Ess-a-Bagel': { addr: '831 3rd Ave, New York, NY 10022', coords: '40.7569,-73.9689', detail: 'Bagels de NY autênticos desde 1976. Enormes, densos e com cream cheese generoso. Fila longa mas vale a pena.', hours: '6h-21h', cost: '~$5-12' },
+    'Summit One Vanderbilt': { addr: '45 E 42nd St, New York, NY 10017', coords: '40.7530,-73.9785', detail: 'Observatório imersivo a 427m. Salas de espelhos infinitos (SUMMIT One), piso de vidro, terraço ao ar livre. Experiência única!', hours: '9h-0h', cost: '$42 adulto' },
+    'Grand Central': { addr: 'Grand Central Terminal, 89 E 42nd St, New York, NY 10017', coords: '40.7527,-73.9772', detail: 'Estação de trem de 1913. Teto com constelações pintadas (invertidas!), relógio de opala de 4 faces ($20M), Whispering Gallery.', hours: '5h15-2h', cost: 'Gratuito' },
+    'Mr. Robot': { addr: '135 E 57th St, New York, NY 10022', coords: '40.7616,-73.9686', detail: 'Fachada usada como E Corp HQ no seriado Mr. Robot. Prédio de escritórios real.' },
+    'E Corp': { addr: '135 E 57th St, New York, NY 10022', coords: '40.7616,-73.9686', detail: 'Fachada usada como E Corp HQ no seriado Mr. Robot.' },
+    'Roosevelt Island Tramway': { addr: '59th St & 2nd Ave, New York, NY 10022', coords: '40.7613,-73.9645', detail: 'Bondinho aéreo sobre o East River. Vista incrível de Manhattan e Queensboro Bridge. 4 minutos de travessia, usa MetroCard.', hours: '6h-2h (Seg-Sex) / 6h-3h30 (Sáb-Dom)', cost: '$2.90 (MetroCard)' },
+    'Eataly': { addr: '200 5th Ave, New York, NY 10010', coords: '40.7420,-73.9893', detail: 'Mega mercado italiano fundado pelo chef Oscar Farinetti. Restaurantes, padaria, queijos, vinhos. Rooftop bar com vista do Flatiron.', hours: '10h-23h', cost: '~$15-30/pessoa' },
+    'Flatiron': { addr: 'Flatiron Building, 175 5th Ave, New York, NY 10010', coords: '40.7411,-73.9897', detail: 'Prédio triangular de 1902, um dos mais antigos arranha-céus de NY. Formato de ferro de passar. Recentemente convertido em residências de luxo.', cost: 'Exterior gratuito' },
+    "Carmine's": { addr: "200 W 44th St, New York, NY 10036", coords: '40.7575,-73.9875', detail: "Restaurante italiano com porções familiares enormes! Pasta, chicken parm, veal. Reserva recomendada.", hours: '11h-23h', cost: '~$30-50/pessoa' },
+    "Junior's": { addr: "1515 Broadway, New York, NY 10036", coords: '40.7580,-73.9856', detail: "Famoso pelo cheesecake de NY! Desde 1950 no Brooklyn, filial em Times Square. Cheesecake de morango é o clássico.", hours: '6h30-0h', cost: '~$10-15/fatia' },
+
+    // Day 6 — LAX / Sequoia
+    'LAX': { addr: 'Los Angeles International Airport, 1 World Way, LA, CA 90045', coords: '33.9425,-118.4081', detail: 'Aeroporto internacional de LA. Terminal de retirada do Tesla geralmente no estacionamento P1/P2.' },
+    'Supercharger Tejon': { addr: 'Tejon Ranch Commerce Center, Lebec, CA 93243', coords: '34.9876,-118.9199', detail: 'Supercharger Tesla V3 com ~20 stalls. ⚠️ CARREGAR ATÉ 100% — Sequoia não tem carregadores!', cost: '~$10-15' },
+    'Three Rivers': { addr: 'Three Rivers, CA 93271', coords: '36.4524,-118.9048', detail: 'Vilarejo na entrada do Sequoia NP. Poucas opções de restaurante — The Gateway é popular.' },
+
+    // Day 7 — Sequoia + Kings Canyon
+    'General Sherman': { addr: 'General Sherman Tree, Sequoia NP, CA', coords: '36.5819,-118.7513', detail: 'A MAIOR ÁRVORE DO MUNDO em volume! 84m de altura, 11m de diâmetro na base, ~2.100 anos. Trilha pavimentada de ~0.8 km (descida).', cost: 'Entrada do parque: $35/veículo' },
+    'Congress Trail': { addr: 'Congress Trail, Sequoia NP, CA', coords: '36.5810,-118.7520', detail: 'Loop de ~3 km entre dezenas de sequoias gigantes: The President (2° maior), The Senate Group, The House Group.', cost: 'Incluso na entrada do parque' },
+    'General Grant': { addr: 'General Grant Tree Trail, Kings Canyon NP, CA', coords: '36.7472,-118.9717', detail: 'A "Árvore de Natal da Nação" — designada por Eisenhower em 1956. 3ª maior árvore do mundo. Trilha fácil de ~1 km.', cost: 'Incluso na entrada do parque' },
+    'Kings Canyon Scenic Byway': { addr: 'Kings Canyon Scenic Byway (Hwy 180), CA', coords: '36.7947,-118.6731', detail: 'Estrada cênica de 80 km descendo ao fundo do cânion. Profundidade de até 2.500m — mais profundo que o Grand Canyon!', cost: 'Incluso na entrada' },
+    'Zumwalt Meadow': { addr: 'Zumwalt Meadow Trail, Kings Canyon NP, CA', coords: '36.7953,-118.5916', detail: 'Loop de ~2.5 km num vale glacial. Paredões de granito, rio Kings, meadow verde. Relativamente fácil.', cost: 'Incluso' },
+    'Roaring River Falls': { addr: 'Roaring River Falls, Kings Canyon NP, CA', coords: '36.7944,-118.6144', detail: 'Cachoeira curta e poderosa. Caminhada de ~5 min da estrada. Ótima pra foto rápida.' },
+    'Moro Rock': { addr: 'Moro Rock, Sequoia NP, CA', coords: '36.5463,-118.7656', detail: '350 degraus esculpidos na rocha até o topo! Vista 360° do Great Western Divide e do vale. Imperdível ao pôr do sol!', cost: 'Incluso na entrada' },
+    'Crescent Meadow': { addr: 'Crescent Meadow, Sequoia NP, CA', coords: '36.5525,-118.7530', detail: "John Muir a chamou de 'Jóia da Sierra'. Tharp's Log: cabana pioneira dentro de um tronco oco de sequoia!", cost: 'Incluso' },
+
+    // Day 8-9 — Yosemite
+    'Tunnel View': { addr: 'Tunnel View, Yosemite NP, CA', coords: '37.7157,-119.6770', detail: 'A vista mais icônica de Yosemite! El Capitan à esquerda, Half Dome ao centro, Bridalveil Fall à direita. Estacionamento pequeno — chegue cedo!', cost: 'Entrada: $35/veículo' },
+    'Yosemite Valley': { addr: 'Yosemite Valley, Yosemite NP, CA', coords: '37.7459,-119.5933', detail: 'Vale glacial de 11 km rodeado por paredões de granito. Village tem restaurantes, lojas e centro de visitantes.' },
+    'El Capitan': { addr: 'El Capitan Meadow, Yosemite NP, CA', coords: '37.7340,-119.6384', detail: 'Paredão vertical de 900m — maior monolito de granito do mundo! Escaladores levam 4-5 dias. Free Solo (2018) filmado aqui.' },
+    'Lower Yosemite Fall': { addr: 'Lower Yosemite Fall Trail, Yosemite NP, CA', coords: '37.7466,-119.5961', detail: 'Trilha pavimentada de ~1.6 km até a base de Yosemite Falls (739m total). No inverno pode ter gelo — microspikes úteis.' },
+    'Swinging Bridge': { addr: 'Swinging Bridge, Yosemite NP, CA', coords: '37.7436,-119.5997', detail: 'Ponte sobre o Rio Merced com vista clássica de Yosemite Falls. Ótimo ponto para fotos.' },
+    'Valley View': { addr: 'Valley View, Yosemite NP, CA', coords: '37.7189,-119.6595', detail: 'Vista do vale com El Capitan e Bridalveil Fall refletidos no rio Merced. Espetacular ao pôr do sol!' },
+    'Vernal Fall': { addr: 'Vernal Fall Footbridge, Yosemite NP, CA', coords: '37.7270,-119.5425', detail: 'Cachoeira de 97m. Trilha até a ponte (~1.6 km) oferece vista frontal. No inverno pode estar congelada — LINDO!', cost: 'Incluso' },
+    'Mirror Lake': { addr: 'Mirror Lake Trail, Yosemite NP, CA', coords: '37.7507,-119.5574', detail: 'Lago que reflete Half Dome perfeitamente em dias calmos. Trilha de ~8 km (loop). No inverno o lago pode estar seco.', cost: 'Incluso' },
+    'Bridalveil Fall': { addr: 'Bridalveil Fall Trail, Yosemite NP, CA', coords: '37.7171,-119.6465', detail: 'Cachoeira de 189m — uma das primeiras vistas ao entrar no vale. Trilha curta (~0.8 km ida e volta).', cost: 'Incluso' },
+    'Sentinel Bridge': { addr: 'Sentinel Bridge, Yosemite NP, CA', coords: '37.7455,-119.5899', detail: 'Ponte sobre o Rio Merced. Ponto clássico pra foto do Half Dome refletido na água.' },
+    'Badger Pass': { addr: 'Badger Pass Ski Area, Yosemite NP, CA', coords: '37.6625,-119.6621', detail: 'Estação de esqui mais antiga da Califórnia (1935). Esqui, snowboard, snow tubing. Ótimo pra família!', hours: '9h-16h (inverno)', cost: 'Lift: ~$60 adulto / $40 criança' },
+    'Majestic Yosemite': { addr: 'The Majestic Yosemite Hotel, Yosemite NP, CA', coords: '37.7487,-119.5744', detail: 'Hotel histórico de 1927 (ex-Ahwahnee). Dining Room com teto de 10m e vitrais. Reserva obrigatória para jantar!', cost: '~$40-70/pessoa jantar' },
+    'Yosemite Chapel': { addr: 'Yosemite Chapel, Yosemite NP, CA', coords: '37.7441,-119.5880', detail: 'A estrutura mais antiga de Yosemite (1879). Igrejinha de madeira encantadora com Yosemite Falls ao fundo.' },
+    'Ansel Adams Gallery': { addr: 'Ansel Adams Gallery, Yosemite Village, CA', coords: '37.7490,-119.5885', detail: 'Galeria do fotógrafo Ansel Adams, famoso pelas fotos icônicas de Yosemite em preto e branco. Vende prints originais.', hours: '10h-17h', cost: 'Entrada gratuita' },
+
+    // Day 10 — SF
+    'Supercharger Manteca': { addr: 'Bass Pro Shops, Manteca, CA 95337', coords: '37.7880,-121.2390', detail: 'Supercharger V3 com ~16 stalls. Ao lado de Bass Pro Shops — bom pra esticar as pernas.' },
+    'Embarcadero': { addr: 'The Embarcadero, San Francisco, CA', coords: '37.7955,-122.3937', detail: 'Orla de SF. Ferry Building Marketplace tem comidas artesanais, queijos, ostras. Vista da Bay Bridge.', hours: 'Ferry Building: 10h-18h', cost: 'Gratuito' },
+    'Crissy Field': { addr: 'Crissy Field, San Francisco, CA 94129', coords: '37.8036,-122.4652', detail: 'Praia e gramado com vista frontal da Golden Gate Bridge. Melhor ponto pra foto ao pôr do sol!', cost: 'Gratuito' },
+    "Fisherman's Wharf": { addr: "Fisherman's Wharf, San Francisco, CA", coords: '37.8080,-122.4177', detail: "Área turística com Pier 39, Ghirardelli Square, restaurantes de frutos do mar. Clam chowder em bread bowl é obrigatório!", cost: 'Gratuito (passear)' },
+
+    // Day 11 — SF
+    'Pier 39': { addr: 'Pier 39, San Francisco, CA 94133', coords: '37.8087,-122.4098', detail: 'Píer turístico famoso pelos leões-marinhos no K-Dock! Lojas, restaurantes, Aquarium of the Bay. Vista de Alcatraz.', hours: '10h-21h', cost: 'Gratuito (passear)' },
+    'Cable Car': { addr: 'Powell-Hyde Cable Car, Powell & Market, SF, CA', coords: '37.7845,-122.4079', detail: 'Bonde histórico a cabo desde 1873! Linha Powell-Hyde tem as melhores vistas. Pode pegar de pé no estribo!', hours: '6h30-23h30', cost: '$8/viagem' },
+    'Lombard Street': { addr: 'Lombard St, San Francisco, CA 94133', coords: '37.8021,-122.4187', detail: 'A "rua mais sinuosa do mundo" — 8 curvas em um quarteirão! Florida St em Potrero Hill é na verdade mais sinuosa, mas Lombard é a famosa.', cost: 'Gratuito' },
+    'Painted Ladies': { addr: 'Painted Ladies, Steiner St & Hayes St, SF, CA 94117', coords: '37.7763,-122.4328', detail: 'Fileira de casas vitorianas coloridas com o skyline de SF ao fundo. Abertura do seriado Full House! Foto do Alamo Square Park.', cost: 'Gratuito (exterior)' },
+    'Alamo Square': { addr: 'Alamo Square Park, San Francisco, CA 94117', coords: '37.7764,-122.4340', detail: 'Parque no topo de uma colina com a vista icônica das Painted Ladies. Ótimo pra picnic.', cost: 'Gratuito' },
+    'Haight-Ashbury': { addr: 'Haight St & Ashbury St, San Francisco, CA 94117', coords: '37.7697,-122.4468', detail: 'Berço do movimento hippie e Summer of Love (1967). Lojas vintage, head shops, murais. Grateful Dead moraram na Ashbury 710.', cost: 'Gratuito' },
+    'Golden Gate Bridge': { addr: 'Golden Gate Bridge, San Francisco, CA', coords: '37.8199,-122.4783', detail: 'Ponte suspensa de 2.737m inaugurada em 1937. Caminhar leva ~30 min (só lado leste). Bike também! Vista do Baker Beach.', hours: '5h-21h (pedestres)', cost: 'Gratuito (caminhar/pedalar) / Pedágio carro: $8.75' },
+    'Fort Point': { addr: 'Fort Point, Marine Dr, San Francisco, CA 94129', coords: '37.8107,-122.4770', detail: 'Forte militar de 1861 sob a Golden Gate Bridge. Cenário do filme Vertigo (1958) de Hitchcock!', hours: '10h-17h (Sex-Dom)', cost: 'Gratuito' },
+    'Union Square': { addr: 'Union Square, San Francisco, CA 94108', coords: '37.7876,-122.4074', detail: 'Praça central de compras de SF. Macy\'s, Saks, Neiman Marcus, Apple Store. Coração comercial da cidade.' },
+    'North Beach': { addr: 'North Beach, San Francisco, CA', coords: '37.7997,-122.4080', detail: 'Little Italy de SF. Restaurantes italianos, City Lights Bookstore (berço da Beat Generation), Café Trieste.', cost: 'Gratuito' },
+
+    // Day 12 — SF neighborhoods
+    'Chinatown de SF': { addr: 'Chinatown, Grant Ave, San Francisco, CA 94108', coords: '37.7941,-122.4078', detail: 'A Chinatown mais antiga dos EUA (desde 1848)! Dragon\'s Gate na Grant Ave. Dim sum no Great Eastern, R&G Lounge.', cost: 'Gratuito' },
+    'Mission District': { addr: 'Mission District, San Francisco, CA', coords: '37.7599,-122.4148', detail: 'Bairro latino vibrante! Murais em Balmy Alley e Clarion Alley. Melhor burrito de SF na La Taqueria.', cost: 'Gratuito' },
+    'La Taqueria': { addr: '2889 Mission St, San Francisco, CA 94110', coords: '37.7511,-122.4183', detail: 'Melhor burrito de SF (e talvez dos EUA!). Sem arroz no burrito — só carne, feijão, queijo, salsa. Fila longa mas vale!', hours: '11h-21h', cost: '~$12-15' },
+    'Muir Woods': { addr: 'Muir Woods National Monument, Mill Valley, CA 94941', coords: '37.8912,-122.5718', detail: 'Floresta de sequoias costeiras (coast redwoods) a 30 min de SF. Árvores de até 75m! Reserva de estacionamento obrigatória.', hours: '8h-17h', cost: '$15/pessoa + $9 estacionamento' },
+    'Sausalito': { addr: 'Sausalito, CA 94965', coords: '37.8591,-122.4853', detail: 'Vila pitoresca na baía. Casas-barco coloridas, galerias, cafés com vista de SF. Ferry de volta pra SF é uma boa opção.', cost: 'Gratuito' },
+    'Waterbar': { addr: '399 The Embarcadero, San Francisco, CA 94105', coords: '37.7895,-122.3885', detail: 'Restaurante de frutos do mar premium com vista da Bay Bridge. Aquários no interior. Reserva recomendada.', cost: '~$50-80/pessoa' },
+
+    // Day 13 — Point Reyes / Eureka
+    'Point Reyes': { addr: 'Point Reyes National Seashore, CA', coords: '38.0682,-122.8776', detail: 'Reserva costeira com elk preserve (alces tule!), Point Reyes Lighthouse (308 degraus descendo), praias selvagens.', hours: 'Lighthouse: 10h-16h30 (Sex-Seg)', cost: '$0 (estacionamento gratuito)' },
+    'Supercharger Ukiah': { addr: 'Ukiah, CA 95482', coords: '39.1532,-123.2063', detail: 'Supercharger V3. Bom ponto pra almoço — restaurantes perto.' },
+    'Old Town Eureka': { addr: 'Old Town, Eureka, CA 95501', coords: '40.8027,-124.1637', detail: 'Distrito histórico vitoriano. Carson Mansion (1886) é a mansão vitoriana mais fotografada dos EUA! Não abre pro público, mas vale ver de fora.', cost: 'Gratuito' },
+    'Carson Mansion': { addr: '143 M St, Eureka, CA 95501', coords: '40.8032,-124.1626', detail: 'Mansão vitoriana Queen Anne de 1886, considerada a mais ornamentada dos EUA. Agora é um clube privado — exterior apenas.', cost: 'Gratuito (exterior)' },
+
+    // Day 14 — Redwood NP
+    'Fern Canyon': { addr: 'Fern Canyon, Prairie Creek Redwoods SP, CA', coords: '41.4012,-124.0635', detail: 'Cânion estreito com paredes de 15m cobertas de samambaias! Cenário de Jurassic Park 2. Loop de ~1.5 km. Pode ter água no chão — sapato impermeável!', cost: '$12 day use' },
+    'Lady Bird Johnson': { addr: 'Lady Bird Johnson Grove Trail, Redwood NP, CA', coords: '41.3253,-124.0199', detail: 'Trilha suave de ~2.5 km entre as maiores redwoods costeiras. Dedicada à ex-primeira-dama em 1969.', cost: 'Gratuito' },
+    'Prairie Creek': { addr: 'Prairie Creek Redwoods State Park, CA', coords: '41.3676,-124.0268', detail: 'Parque estadual com redwoods gigantes, elk meadows (alces!) e acesso a Fern Canyon.', cost: '$12 day use' },
+    'Newton B. Drury': { addr: 'Newton B. Drury Scenic Parkway, CA', coords: '41.3785,-124.0210', detail: 'Estrada cênica de 16 km sob o dossel de redwoods gigantes. Uma das estradas mais bonitas da CA!' },
+    'Big Tree Wayside': { addr: 'Big Tree Wayside, Prairie Creek Redwoods SP, CA', coords: '41.3768,-124.0232', detail: 'Redwood gigante de 93m de altura e 6m de diâmetro. Acesso fácil da estrada — parada rápida.' },
+    'Gold Bluffs Beach': { addr: 'Gold Bluffs Beach, Prairie Creek Redwoods SP, CA', coords: '41.3860,-124.0776', detail: 'Praia selvagem com falésias douradas e redwoods chegando até a areia. Cenário surreal!', cost: '$12 day use' },
+    'Stout Memorial Grove': { addr: 'Stout Memorial Grove, Jedediah Smith Redwoods SP, CA', coords: '41.7867,-124.0946', detail: 'Bosque de redwoods antigos ao longo do Smith River. Trilha fácil de ~30 min. Paz absoluta.', cost: 'Gratuito' },
+
+    // Day 15 — Oregon Coast South
+    'Tall Trees Grove': { addr: 'Tall Trees Grove, Redwood NP, CA', coords: '41.2137,-124.0022', detail: 'Algumas das árvores mais altas do MUNDO! Trilha de ~5 km. Precisa de permit gratuito no visitor center.', cost: 'Gratuito (permit obrigatório)' },
+    'Samuel Boardman': { addr: 'Samuel H. Boardman State Scenic Corridor, OR', coords: '42.1481,-124.3533', detail: 'Os 19 km mais bonitos da costa de Oregon! Arcos naturais, sea stacks, mirantes sobre o Pacífico.', cost: 'Gratuito' },
+    'Natural Bridges': { addr: 'Natural Bridges Viewpoint, Samuel Boardman Corridor, OR', coords: '42.1489,-124.3564', detail: 'Arcos de rocha naturais esculpidos pelo mar. Vista espetacular do mirante!', cost: 'Gratuito' },
+    'Cape Blanco': { addr: 'Cape Blanco State Park, OR 97415', coords: '42.8372,-124.5634', detail: 'O ponto mais ocidental de Oregon continental! Farol de 1870. Vista selvagem do Pacífico.', cost: 'Gratuito' },
+    'Shore Acres': { addr: 'Shore Acres State Park, Coos Bay, OR 97420', coords: '43.3220,-124.3870', detail: 'Jardim botânico num penhasco sobre o mar! Antigo estado do magnata Louis J. Simpson. Ondas batendo nas rochas — show!', cost: '$5 day use' },
+    'Supercharger Coos Bay': { addr: 'Coos Bay, OR 97420', coords: '43.3660,-124.2138', detail: 'Supercharger Tesla V3. Perto de restaurantes.' },
+
+    // Day 16 — Oregon Coast / Cannon Beach
+    'Cape Perpetua': { addr: 'Cape Perpetua Scenic Area, OR', coords: '44.2808,-124.1092', detail: "Thor's Well — 'poço de Thor', buraco no oceano que engole e cospe água! Spouting Horn geyser natural. Melhor na maré alta!", cost: 'Free' },
+    "Thor's Well": { addr: "Thor's Well, Cape Perpetua, OR", coords: '44.2790,-124.1112', detail: "Buraco natural na rocha vulcânica que drena e explode água do mar. MUITO fotogênico na maré alta! Cuidado com as ondas — pode ser perigoso.", cost: 'Gratuito' },
+    'Heceta Head': { addr: 'Heceta Head Lighthouse, Florence, OR 97439', coords: '44.1372,-124.1285', detail: 'Um dos faróis mais fotografados do mundo! Trilha de ~1 km até o farol. Vista espetacular da costa.', cost: '$5 day use' },
+    'Supercharger Lincoln City': { addr: 'Lincoln City, OR 97367', coords: '44.9628,-123.9847', detail: 'Supercharger Tesla V3.' },
+    'Haystack Rock': { addr: 'Haystack Rock, Cannon Beach, OR 97110', coords: '45.8841,-123.9688', detail: 'Monolito de 72m na praia — ícone do Oregon! Cenário do Goonies. Tidepools na base na maré baixa. Ao pôr do sol é MÁGICO.', cost: 'Gratuito' },
+    'Cannon Beach': { addr: 'Cannon Beach, OR 97110', coords: '45.8918,-123.9615', detail: 'Uma das praias mais bonitas dos EUA. Vilarejo charmoso com galerias e restaurantes. Haystack Rock é o cartão-postal.', cost: 'Gratuito' },
+    'Ecola State Park': { addr: 'Ecola State Park, Cannon Beach, OR 97110', coords: '45.9209,-123.9766', detail: 'Mirantes espetaculares de Cannon Beach e Tillamook Head. Cenário do Goonies e Point Break!', cost: '$5 day use' },
+
+    // Day 17 — Astoria / Olympic
+    'Astoria': { addr: 'Astoria, OR 97103', coords: '46.1879,-123.8313', detail: 'Cidade do filme The Goonies! Astoria Column (164 degraus, vista 360°), Flavel House Museum. Ponte Astoria-Megler cruza pro Washington.', cost: 'Astoria Column: gratuito' },
+    'Astoria Column': { addr: 'Astoria Column, 1 Coxcomb Dr, Astoria, OR 97103', coords: '46.1825,-123.8171', detail: 'Coluna de 38m com espiral de murais contando a história do Oregon. 164 degraus — vista incrível do rio Columbia e Pacífico!', cost: '$5 estacionamento' },
+    'Astoria-Megler Bridge': { addr: 'Astoria-Megler Bridge, US-101', coords: '46.2273,-123.8806', detail: 'Maior ponte contínua de treliça dos EUA! 6.6 km cruzando o Rio Columbia de Oregon → Washington.' },
+    'Supercharger Aberdeen': { addr: 'Aberdeen, WA 98520', coords: '46.9754,-123.8158', detail: '⚠️ CARREGAR ATÉ 100%! Olympic tem 265 km internos + sem SC até Olympia (260 km)!' },
+    'Lake Crescent': { addr: 'Lake Crescent, Olympic NP, WA', coords: '48.0596,-123.7898', detail: 'Lago glacial cristalino com 190m de profundidade! Rodeado por montanhas cobertas de floresta. Storm King trail parte daqui.', cost: 'Incluso na entrada ($30/veículo)' },
+    'Sol Duc Falls': { addr: 'Sol Duc Falls Trail, Olympic NP, WA', coords: '47.9525,-123.8359', detail: 'Cachoeira tríplice numa floresta densa. Trilha fácil de ~2.5 km. Hot springs naturais perto (Sol Duc Hot Springs Resort).', cost: 'Incluso na entrada' },
+    'Forks': { addr: 'Forks, WA 98331', coords: '47.9504,-124.3855', detail: 'Cidade do Twilight! Forks High School, casa da Bella Swan, placa "Welcome to Forks". Também a capital madeireira de WA.' },
+
+    // Day 18 — Olympic NP
+    'Hoh Rain Forest': { addr: 'Hoh Rain Forest, Olympic NP, WA', coords: '47.8602,-123.9343', detail: 'Uma das poucas florestas tropicais temperadas do hemisfério norte! 3-4m de chuva/ano. Árvores cobertas de musgo e samambaias.', hours: 'Amanhecer ao anoitecer', cost: 'Incluso ($30/veículo)' },
+    'Hall of Mosses': { addr: 'Hall of Mosses Trail, Hoh Rain Forest, WA', coords: '47.8602,-123.9343', detail: 'Trilha curta (~1.3 km) entre árvores gigantes cobertas de musgo verde pendurado. Parece um cenário de Senhor dos Anéis!', cost: 'Incluso' },
+    'Ruby Beach': { addr: 'Ruby Beach, Olympic NP, WA', coords: '47.7108,-124.4126', detail: 'Praia selvagem com sea stacks e troncos gigantes na areia. Tidepools com estrelas-do-mar! Uma das praias mais bonitas de WA.', cost: 'Incluso' },
+    'La Push': { addr: 'La Push Beach (First Beach), WA 98350', coords: '47.9075,-124.6356', detail: 'Praia da tribo Quileute — cenário do Twilight! Sea stacks impressionantes. James Island visível da praia.', cost: 'Gratuito' },
+    'Rialto Beach': { addr: 'Rialto Beach, Olympic NP, WA', coords: '47.9210,-124.6376', detail: 'Praia com pilhas de troncos (driftwood) e sea stacks. Hole-in-the-Wall arch fica a ~2.5 km pela praia. Cenário dramático!', cost: 'Incluso' },
+    'Marymere Falls': { addr: 'Marymere Falls Trail, Olympic NP, WA', coords: '48.0571,-123.7982', detail: 'Cachoeira de 27m numa floresta antiga. Trilha de ~2.5 km fácil. Perto de Lake Crescent.', cost: 'Incluso' },
+
+    // Day 19 — Mt. Rainier / Olympia
+    'Supercharger Olympia': { addr: 'Olympia/Tacoma, WA', coords: '47.0379,-122.9007', detail: 'Supercharger Tesla V3.' },
+    'Mt. Rainier': { addr: 'Mt. Rainier National Park — Paradise, WA', coords: '46.7853,-121.7356', detail: 'Vulcão ativo de 4.392m coberto de neve o ano todo! Paradise é o ponto mais acessível — Henry M. Jackson Visitor Center.', hours: 'Paradise: 10h-17h (inverno)', cost: '$30/veículo' },
+    'Paradise': { addr: 'Paradise, Mt. Rainier NP, WA 98304', coords: '46.7853,-121.7356', detail: 'Área mais visitada do Mt. Rainier. No inverno: snowshoeing, sledding. Wildflower meadows no verão. Visitor center com café.' },
+    'Nisqually Vista Trail': { addr: 'Nisqually Vista Trail, Paradise, Mt. Rainier NP', coords: '46.7860,-121.7370', detail: 'Trilha de ~2 km com vista do Glaciar Nisqually. No inverno é uma caminhada na neve — microspikes recomendados!', cost: 'Incluso' },
+
+    // Day 20 — Multnomah / Columbia / Boise
+    'Multnomah Falls': { addr: 'Multnomah Falls, Bridal Veil, OR 97010', coords: '45.5762,-122.1158', detail: 'Cachoeira de 189m — a mais alta de Oregon e uma das mais altas dos EUA! Ponte Benson a 32m. Trilha até o topo ~1.6 km.', hours: '9h-18h', cost: 'Gratuito (reserva de estacionamento: $2)' },
+    'Columbia River Gorge': { addr: 'Columbia River Gorge, OR', coords: '45.5956,-122.0517', detail: 'Desfiladeiro de 130 km no rio Columbia. Paredões de 1.200m, cachoeiras, windsurfing. Historic Columbia River Highway é imperdível.', cost: 'Gratuito' },
+    'Basque Block': { addr: 'Basque Block, 619 Grove St, Boise, ID 83702', coords: '43.6154,-116.2023', detail: 'Boise tem a maior comunidade basca fora da Espanha! Bar Gernika: croquetas, pintxos, lamb grinder. Basque Museum ao lado.', cost: '~$15-25/pessoa' },
+    'Bar Gernika': { addr: '202 S Capitol Blvd, Boise, ID 83702', coords: '43.6155,-116.2023', detail: 'Pub basco autêntico! Croquetas, solomo (pork loin sandwich) e lamb grinder são imperdíveis. Cerveja basca.', hours: '11h-22h', cost: '~$12-20/pessoa' },
+
+    // Day 21 — Shoshone / Antelope Island / Moab
+    'Shoshone Falls': { addr: 'Shoshone Falls, Twin Falls, ID 83301', coords: '42.5930,-114.3984', detail: "'Niágara do Oeste' — 65m de altura (mais alta que Niágara Falls!). Melhor fluxo na primavera. ~5 min do Supercharger Twin Falls.", cost: '$5/veículo' },
+    'Antelope Island': { addr: 'Antelope Island State Park, Syracuse, UT 84075', coords: '40.9577,-112.2102', detail: '~700 bisões selvagens na maior ilha do Great Salt Lake! Buffalo Point tem vista 360°. Pode ver bisões de perto na estrada.', hours: '6h-22h', cost: '$15/veículo' },
+    'Buffalo Point': { addr: 'Buffalo Point, Antelope Island State Park, UT', coords: '40.9516,-112.2326', detail: 'Mirante no topo da ilha com vista 360° do Great Salt Lake e Wasatch Mountains. Trilha curta até o topo.' },
+
+    // Day 22 — Canyonlands
+    'Mesa Arch': { addr: 'Mesa Arch, Canyonlands NP, UT', coords: '38.3891,-109.8673', detail: 'O arco mais fotografado de Utah! Ao nascer do sol, a luz vermelha ilumina o arco por baixo — MÁGICO. Trilha de ~0.8 km. Chegue 30 min antes do sunrise!', cost: 'Entrada: $30/veículo' },
+    'Grand View Point': { addr: 'Grand View Point, Canyonlands NP, UT', coords: '38.3103,-109.8591', detail: 'Mirante no fim da estrada com vista 360° de cânions infinitos. White Rim, La Sal Mountains, rio Colorado e Green River visíveis.', cost: 'Incluso' },
+    'Green River Overlook': { addr: 'Green River Overlook, Canyonlands NP, UT', coords: '38.3300,-109.8839', detail: 'Vista do Green River serpenteando num cânion de 300m. Menos lotado que Grand View Point.', cost: 'Incluso' },
+    'Upheaval Dome': { addr: 'Upheaval Dome Trail, Canyonlands NP, UT', coords: '38.4259,-109.9290', detail: 'Cratera misteriosa de ~5 km de diâmetro! Impacto de meteorito ou domo de sal? Cientistas discutem. Trilha ~2.5 km até 2 mirantes.', cost: 'Incluso' },
+    'Aztec Butte': { addr: 'Aztec Butte Trail, Canyonlands NP, UT', coords: '38.3995,-109.8617', detail: 'Trilha de ~3 km com ruínas ancestrais Pueblo (granários). Vista do canyon. Subida moderada.', cost: 'Incluso' },
+
+    // Day 23 — Arches NP
+    'Delicate Arch': { addr: 'Delicate Arch Trail, Arches NP, UT', coords: '38.7436,-109.4993', detail: 'O arco mais famoso do MUNDO! Trilha de ~5 km (ida e volta), subida moderada. No final: o arco sozinho numa borda — ICÔNICO. Está na placa de Utah!', cost: 'Entrada: $30/veículo' },
+    'Windows Section': { addr: 'Windows Section, Arches NP, UT', coords: '38.6869,-109.5369', detail: 'North Window, South Window e Turret Arch juntos! Trilha fácil de ~1.6 km. Ótimo pra fotos!', cost: 'Incluso' },
+    'Double Arch': { addr: 'Double Arch, Arches NP, UT', coords: '38.6884,-109.5372', detail: 'Dois arcos gigantes conectados! Altura de 32m. Indiana Jones e a Última Cruzada filmado aqui. Trilha curta (~0.5 km).', cost: 'Incluso' },
+    'Balanced Rock': { addr: 'Balanced Rock, Arches NP, UT', coords: '38.7012,-109.5641', detail: 'Pedra de 3.600 toneladas equilibrada sobre um pedestal. 39m de altura total. Loop curto (~0.5 km).', cost: 'Incluso' },
+    'Landscape Arch': { addr: 'Landscape Arch, Devils Garden Trail, Arches NP, UT', coords: '38.7910,-109.6069', detail: 'Arco mais longo do mundo — 93m de envergadura! Fininho e delicado. Trilha de ~3 km pela Devils Garden.', cost: 'Incluso' },
+    'Devils Garden': { addr: 'Devils Garden Trailhead, Arches NP, UT', coords: '38.7828,-109.5946', detail: 'Trilha com 7 arcos! Landscape Arch é o principal. Trilha completa ~12 km. Até Landscape Arch é ~3 km (fácil).', cost: 'Incluso' },
+    'Fiery Furnace': { addr: 'Fiery Furnace Viewpoint, Arches NP, UT', coords: '38.7395,-109.5682', detail: 'Labirinto de arenito vermelho! Visita guiada com ranger ou permit. Viewpoint gratuito com vista panorâmica.', cost: 'Tour guiado: $16/pessoa' },
+    'Park Avenue': { addr: 'Park Avenue Viewpoint, Arches NP, UT', coords: '38.7178,-109.5942', detail: 'Paredões de arenito que lembram arranha-céus! Trilha de ~1.6 km (mão única). Primeira parada no parque.', cost: 'Incluso' },
+    'Dead Horse Point': { addr: 'Dead Horse Point State Park, Moab, UT 84532', coords: '38.4826,-109.7388', detail: 'Mirante 600m acima de uma curva do rio Colorado! Cenário de Missão Impossível 2 e Westworld. Um dos pôr do sol mais lindos de Utah.', cost: '$20/veículo' },
+
+    // Day 24-25 — Bryce Canyon
+    'Red Canyon': { addr: 'Red Canyon, Dixie National Forest, UT', coords: '37.7481,-112.2982', detail: 'Arcos vermelhos naturais sobre a estrada! Parece a entrada de outro planeta. ~15 min antes de Bryce.', cost: 'Gratuito' },
+    'Bryce Canyon': { addr: 'Bryce Canyon NP, UT 84764', coords: '37.6283,-112.1671', detail: 'Anfiteatro de hoodoos (pináculos de rocha) — a maior concentração do mundo! Cores que mudam com a luz.', cost: 'Entrada: $35/veículo' },
+    'Navajo Loop': { addr: 'Navajo Loop Trail, Bryce Canyon NP, UT', coords: '37.6233,-112.1668', detail: 'Trilha de ~2.2 km descendo entre os hoodoos. Wall Street Narrows é o destaque — passagem estreita entre paredões de 40m!', cost: 'Incluso' },
+    "Queen's Garden": { addr: "Queen's Garden Trail, Bryce Canyon NP, UT", coords: '37.6279,-112.1635', detail: "Trilha mais fácil do parque (~3 km). Desce entre os hoodoos até a Queen Victoria (formação que parece a rainha). Conecta com Navajo Loop.", cost: 'Incluso' },
+    'Bryce Point': { addr: 'Bryce Point, Bryce Canyon NP, UT', coords: '37.6147,-112.1545', detail: 'Melhor mirante pra nascer do sol! Vista mais ampla do anfiteatro. Hoodoos iluminados em dourado — INESQUECÍVEL.', cost: 'Incluso' },
+    'Inspiration Point': { addr: 'Inspiration Point, Bryce Canyon NP, UT', coords: '37.6211,-112.1592', detail: 'Vista panorâmica do Bryce Amphitheater. Menos lotado que Sunset Point. 3 níveis de mirante.', cost: 'Incluso' },
+    'Rainbow Point': { addr: 'Rainbow Point, Bryce Canyon NP, UT', coords: '37.4953,-112.2418', detail: 'Ponto mais alto do parque (2.778m)! Vista 360° — num dia claro vê-se até 160 km. Fim da Scenic Drive.', cost: 'Incluso' },
+
+    // Day 25-26 — Zion
+    'Zion': { addr: 'Zion NP, Springdale, UT', coords: '37.2982,-113.0263', detail: 'Cânion de paredões vermelhos de 600m cortados pelo Virgin River. Um dos parques mais visitados dos EUA. Shuttle obrigatório no cânion principal.', cost: 'Entrada: $35/veículo' },
+    'Springdale': { addr: 'Springdale, UT 84767', coords: '37.1899,-112.9988', detail: 'Vilarejo charmoso na entrada de Zion. Restaurantes, lojas de outdoor, hotéis. Base perfeita para explorar o parque.' },
+    'Riverside Walk': { addr: 'Riverside Walk, Zion NP, UT', coords: '37.2851,-112.9476', detail: 'Trilha pavimentada de ~3.5 km ao longo do Virgin River. Leva até o início do The Narrows. Fácil e linda!', cost: 'Incluso' },
+    'Canyon Overlook': { addr: 'Canyon Overlook Trail, Zion NP, UT', coords: '37.2130,-112.9408', detail: 'Trilha curta (~1.6 km ida e volta) com vista panorâmica espetacular do Pine Creek Canyon e Lower Zion Canyon!', cost: 'Incluso' },
+    'Angels Landing': { addr: 'Angels Landing Trail, Zion NP, UT', coords: '37.2692,-112.9478', detail: 'Uma das trilhas mais ÉPICAS do mundo! ~8 km, 450m de desnível. Últimos 800m com correntes sobre abismos! ⚠️ Permit obrigatório (recreation.gov).', cost: 'Permit: $6 (loteria)' },
+    'Emerald Pools': { addr: 'Emerald Pools Trail, Zion NP, UT', coords: '37.2568,-112.9587', detail: 'Lower Pool: trilha fácil (~1.9 km). Upper Pool: mais íngreme (~5 km). Piscinas naturais com cachoeiras. Refrescante!', cost: 'Incluso' },
+    "Pa'rus Trail": { addr: "Pa'rus Trail, Zion NP, UT", coords: '37.2049,-112.9843', detail: 'Trilha plana de ~6 km ao longo do Virgin River. Aceita bicicletas e pets. Vista dos paredões de Zion. Perfeita pra relaxar.', cost: 'Incluso' },
+    'Court of the Patriarchs': { addr: 'Court of the Patriarchs, Zion NP, UT', coords: '37.2512,-112.9635', detail: 'Três picos de arenito nomeados Abraham, Isaac e Jacob. Mirante curto do ponto de shuttle.', cost: 'Incluso' },
+    'Weeping Rock': { addr: 'Weeping Rock, Zion NP, UT', coords: '37.2720,-112.9404', detail: 'Parede de rocha que "chora" — água de chuva que levou 1.200 anos pra filtrar pela rocha! Trilha curta.', cost: 'Incluso' },
+    'Canyon Junction Bridge': { addr: 'Canyon Junction Bridge, Zion NP, UT', coords: '37.2099,-112.9777', detail: 'Ponte com vista panorâmica dos paredões de Zion. Um dos melhores pontos pra pôr do sol no parque!', cost: 'Incluso' },
+
+    // Day 27-28 — Grand Canyon
+    'Kanab': { addr: 'Kanab, UT 84741', coords: '37.0475,-112.5263', detail: '⚠️ CARREGAR ATÉ 100%! GC tem ~130 km internos + 260 km até próximo SC (Kingman). Cidade pequena e charmosa — "Little Hollywood".', cost: 'SC: ~$15' },
+    'Mather Point': { addr: 'Mather Point, Grand Canyon South Rim, AZ', coords: '36.0617,-112.1074', detail: 'Primeira vista do Grand Canyon pra maioria dos visitantes. ABSURDO — nada prepara pra este momento. 1.600m de profundidade, 16 km de largura!', cost: 'Entrada: $35/veículo' },
+    'Grand Canyon': { addr: 'Grand Canyon National Park, South Rim, AZ', coords: '36.0544,-112.1401', detail: 'O cânion mais famoso do mundo! 446 km de comprimento, até 1.800m de profundidade, 2 bilhões de anos de geologia exposta.', cost: '$35/veículo (7 dias)' },
+    'Rim Trail': { addr: 'Rim Trail, Grand Canyon South Rim, AZ', coords: '36.0578,-112.1170', detail: 'Trilha pavimentada de 21 km ao longo da borda. Mather Point → Yavapai (~1.5 km) é o trecho mais popular. Plano e fácil.', cost: 'Incluso' },
+    'Yavapai Geology Museum': { addr: 'Yavapai Geology Museum, Grand Canyon, AZ', coords: '36.0567,-112.1166', detail: 'Museu com painéis de vidro sobre o abismo! Explica 2 bilhões de anos de geologia das camadas visíveis.', hours: '8h-18h', cost: 'Gratuito (incluso na entrada)' },
+    'Desert View': { addr: 'Desert View Watchtower, Grand Canyon, AZ', coords: '36.0444,-111.8264', detail: 'Torre de observação de 1932 projetada por Mary Colter. 21m de altura, murais Hopi no interior. Vista 360° — Colorado River visível!', cost: 'Incluso' },
+    'Grandview Point': { addr: 'Grandview Point, Grand Canyon, AZ', coords: '35.9952,-111.9903', detail: 'Um dos mirantes mais dramáticos! Vistas do Horseshoe Mesa e das camadas geológicas. Menos turistas que Mather Point.', cost: 'Incluso' },
+    'Hopi Point': { addr: 'Hopi Point, Grand Canyon, AZ', coords: '36.0726,-112.1543', detail: 'O melhor ponto pra pôr do sol no South Rim! Vista mais ampla do cânion. Acessível apenas por shuttle (Hermit Road).', cost: 'Incluso' },
+    'Bright Angel Trail': { addr: 'Bright Angel Trailhead, Grand Canyon, AZ', coords: '36.0575,-112.1440', detail: 'Trilha mais popular do Grand Canyon! Primeiros switchbacks (1.5 Mile Resthouse) levam ~1-2h. Vista incrível descendo no cânion.', cost: 'Incluso' },
+    'Hermit Road': { addr: 'Hermit Road, Grand Canyon, AZ', coords: '36.0726,-112.1543', detail: 'Estrada panorâmica de 11 km (shuttle only). 8 mirantes: Hopi Point (melhor pôr do sol), Pima Point, Hermits Rest.', cost: 'Incluso' },
+    'Supercharger Kingman': { addr: 'Kingman, AZ 86401', coords: '35.1894,-114.0530', detail: 'Supercharger na Historic Route 66! Kingman é um marco da Route 66 com museus e diners vintage.' },
+
+    // Day 28-29 — Las Vegas
+    'In-N-Out': { addr: 'In-N-Out Burger, 3545 S Las Vegas Blvd, Las Vegas, NV', coords: '36.1195,-115.1727', detail: 'Fast food cult da Califórnia! Double-Double Animal Style é o pedido secreto. Batata frita fresca. Não existe na Costa Leste!', cost: '~$8-12' },
+    'Seven Magic Mountains': { addr: 'Seven Magic Mountains, Las Vegas, NV', coords: '35.9833,-115.2749', detail: 'Instalação de arte: 7 torres de pedras neon no deserto! Por Ugo Rondinone. ~20 min ao sul da Strip. Grátis.', cost: 'Gratuito' },
+    'Welcome to Las Vegas': { addr: 'Welcome to Fabulous Las Vegas Sign, 5100 Las Vegas Blvd S', coords: '36.0828,-115.1728', detail: 'Placa icônica de 1959! Fila pra foto mas anda rápido. Estacionamento gratuito atrás. Melhor à noite (iluminada).', cost: 'Gratuito' },
+    'Bellagio': { addr: 'Bellagio Hotel & Casino, 3600 S Las Vegas Blvd, Las Vegas, NV', coords: '36.1129,-115.1765', detail: 'Hotel icônico! Fountains of Bellagio (show de águas gratuito a cada 15-30 min), Conservatory (jardim botânico grátis), Galeria de arte.', cost: 'Gratuito (shows de água)' },
+    'Bellagio Fountains': { addr: 'Fountains of Bellagio, Las Vegas Blvd, Las Vegas, NV', coords: '36.1127,-115.1742', detail: 'Show de águas dançantes com música! A cada 15 min (tarde) ou 30 min (manhã). 1.200 jatos, 4.500 luzes. IMPERDÍVEL à noite.', cost: 'Gratuito' },
+
+    // Day 29 — Valley of Fire
+    'Valley of Fire': { addr: 'Valley of Fire State Park, Overton, NV 89040', coords: '36.4414,-114.5135', detail: 'Parque estadual mais antigo de Nevada! Formações de arenito vermelho de 150 milhões de anos. Fire Wave é o destaque.', hours: '8h-16h30', cost: '$10/veículo' },
+    'Fire Wave': { addr: 'Fire Wave Trail, Valley of Fire SP, NV', coords: '36.4389,-114.4997', detail: 'Trilha de ~2 km até formações de rocha listrada em ondas! Parece The Wave (AZ) mas sem permit. Melhor de manhã cedo.', cost: 'Incluso' },
+    'Elephant Rock': { addr: 'Elephant Rock, Valley of Fire SP, NV', coords: '36.4258,-114.5365', detail: 'Formação de arenito que parece um elefante! Parada rápida da estrada. Ótima pra foto.', cost: 'Incluso' },
+    'White Domes': { addr: 'White Domes Trail, Valley of Fire SP, NV', coords: '36.4678,-114.4905', detail: 'Loop de ~1.8 km por um cânion estreito de arenito colorido. Ruínas de set de filme dos anos 1960.', cost: 'Incluso' },
+
+    // Day 30 — Death Valley
+    'Death Valley': { addr: 'Death Valley National Park, CA/NV', coords: '36.5054,-116.9297', detail: 'O lugar mais quente, seco e baixo das Américas! No inverno (~15-25°C) é perfeito. 13.600 km² de paisagens alienígenas.', cost: '$30/veículo' },
+    'Zabriskie Point': { addr: 'Zabriskie Point, Death Valley NP, CA', coords: '36.4200,-116.8117', detail: 'Mirante com formações douradas e erodidas espetaculares. Nascer do sol aqui é INCRÍVEL. Curta caminhada do estacionamento.', cost: 'Incluso' },
+    "Artist's Drive": { addr: "Artist's Drive, Death Valley NP, CA", coords: '36.3664,-116.8072', detail: "Estrada cênica de 14 km (mão única). Artist's Palette: montanhas coloridas por minerais — verde (mica), rosa (manganês), roxo (turmalina).", cost: 'Incluso' },
+    "Artist's Palette": { addr: "Artist's Palette, Death Valley NP, CA", coords: '36.3661,-116.8069', detail: 'Montanhas coloridas naturalmente por minerais oxidados. Melhor à tarde quando o sol realça as cores.', cost: 'Incluso' },
+    'Badwater Basin': { addr: 'Badwater Basin, Death Valley NP, CA', coords: '36.2296,-116.7677', detail: 'Ponto mais baixo das Américas: -86m abaixo do nível do mar! Planície de sal cristalizado que se estende por km. Placa "Sea Level" na montanha acima.', cost: 'Incluso' },
+    'Mesquite Flat Sand Dunes': { addr: 'Mesquite Flat Sand Dunes, Death Valley NP, CA', coords: '36.6119,-117.1086', detail: 'Dunas de areia clássicas! Mais altas chegam a ~30m. Nascer/pôr do sol melhor pra fotos (sombras nas ondulações). Star Wars filmado aqui!', cost: 'Incluso' },
+    "Dante's View": { addr: "Dante's View, Death Valley NP, CA", coords: '36.2206,-116.7262', detail: "Mirante a 1.669m com vista panorâmica de Badwater Basin e do vale inteiro. Num dia claro vê-se o Mt. Whitney (4.421m) — ponto mais alto dos 48 estados!", cost: 'Incluso' },
+
+    // Day 31 — Red Rock Canyon
+    'Red Rock Canyon': { addr: 'Red Rock Canyon NCA, Las Vegas, NV 89161', coords: '36.1350,-115.4294', detail: 'Cânion de arenito vermelho a 30 min da Strip! Scenic Loop Drive de 21 km. Keystone Thrust: onde rochas de 600M anos empurraram sobre rochas de 200M anos.', hours: '6h-17h (inverno) / 6h-19h (verão)', cost: '$15/veículo' },
+    'Calico Tanks': { addr: 'Calico Tanks Trail, Red Rock Canyon NCA, NV', coords: '36.1580,-115.4550', detail: 'Trilha de ~4 km com scrambling (subida em pedras). No topo: vista panorâmica da Las Vegas Strip! Surpresa total.', cost: 'Incluso' },
+    'Gordon Ramsay': { addr: "Gordon Ramsay Hell's Kitchen, 3570 Las Vegas Blvd S, Las Vegas, NV", coords: '36.1204,-115.1692', detail: 'Restaurante do Gordon Ramsay no Caesars Palace! Beef Wellington é o prato estrela. Decoração do Hell\'s Kitchen (lado vermelho vs azul).', hours: '11h-23h', cost: '~$60-100/pessoa' },
+    'Nobu': { addr: 'Nobu Restaurant, Caesars Palace, 3570 Las Vegas Blvd S, Las Vegas, NV', coords: '36.1204,-115.1692', detail: 'Restaurante japonês premium do chef Nobu Matsuhisa. Black cod miso é o prato icônico. Reserva obrigatória.', cost: '~$80-150/pessoa' },
+
+    // Day 32 — LA
+    'Supercharger Barstow': { addr: 'Barstow Supercharger, Barstow, CA 92311', coords: '34.8462,-117.0845', detail: 'Maior Supercharger do mundo! ~120 stalls. No outlet center de Barstow. Route 66 Museum perto.' },
+    'Santa Monica Pier': { addr: 'Santa Monica Pier, 200 Santa Monica Pier, CA 90401', coords: '34.0094,-118.4973', detail: 'Píer icônico com roda-gigante, Pacific Park, aquário. Fim da Route 66! Pôr do sol no Pacífico é PERFEITO.', hours: 'Aberto 24h (atrações: 11h-23h)', cost: 'Pier gratuito / Atrações: $$' },
+
+    // Day 33 — LA final
+    'Malibu': { addr: 'Malibu, CA 90265', coords: '34.0259,-118.7798', detail: 'Praias icônicas ao longo da Pacific Coast Highway. Surfers Paradise, casas de celebridades, paisagens cinematográficas.' },
+    'El Matador Beach': { addr: 'El Matador State Beach, 32350 Pacific Coast Hwy, Malibu, CA', coords: '34.0383,-118.8744', detail: 'A praia mais fotogênica de Malibu! Grutas, arcos de rocha, sea stacks. Descida por escada íngreme. Melhor na maré baixa.', cost: '$12 estacionamento' },
+    'Venice Beach': { addr: 'Venice Beach, Los Angeles, CA 90291', coords: '33.9850,-118.4695', detail: 'Praia e calçadão icônico! Muscle Beach (academia ao ar livre), murais, artistas de rua, skatepark lendário. Vibe única de LA.', cost: 'Gratuito' },
+    'Hollywood Sign': { addr: 'Hollywood Sign, Los Angeles, CA', coords: '34.1341,-118.3215', detail: 'Letreiro de 1923 (originalmente "Hollywoodland"). Melhor visto do Griffith Observatory ou Lake Hollywood Park. Trilha até as letras: ~8 km.', cost: 'Gratuito' },
+    'Griffith Observatory': { addr: 'Griffith Observatory, 2800 E Observatory Rd, Los Angeles, CA 90027', coords: '34.1184,-118.3004', detail: 'Observatório art deco de 1935. Telescópios gratuitos, planetário, vista 360° de LA e Hollywood Sign. Cenário de La La Land!', hours: '12h-22h (Ter-Sex) / 10h-22h (Sáb-Dom)', cost: 'Gratuito (planetário: $7)' },
+};
+
+function findPlaceInfo(text) {
+    var clean = text.replace(/<[^>]+>/g, '');
+    for (var key in placeInfo) {
+        if (clean.indexOf(key) !== -1) return { key: key, info: placeInfo[key] };
+    }
+    return null;
+}
+
+function buildMapsUrl(type, name, info) {
+    var q = encodeURIComponent(name + (info.addr ? ', ' + info.addr : ''));
+    if (type === 'google') {
+        if (info.coords) return 'https://www.google.com/maps/search/?api=1&query=' + info.coords;
+        return 'https://www.google.com/maps/search/?api=1&query=' + q;
+    }
+    if (info.coords) {
+        var parts = info.coords.split(',');
+        return 'https://maps.apple.com/?ll=' + parts[0] + ',' + parts[1] + '&q=' + encodeURIComponent(name);
+    }
+    return 'https://maps.apple.com/?q=' + q;
+}
+
+function buildDirectionsUrl(type, name, info) {
+    var q = encodeURIComponent(name + (info.addr ? ', ' + info.addr : ''));
+    if (type === 'google') {
+        if (info.coords) return 'https://www.google.com/maps/dir/?api=1&destination=' + info.coords;
+        return 'https://www.google.com/maps/dir/?api=1&destination=' + q;
+    }
+    if (info.coords) {
+        var parts = info.coords.split(',');
+        return 'https://maps.apple.com/?daddr=' + parts[0] + ',' + parts[1] + '&dirflg=w';
+    }
+    return 'https://maps.apple.com/?daddr=' + q + '&dirflg=w';
+}
+
+// ==================== STATE ==
+let currentLang = 'pt';
+let currentDay = 1;
+let mapInstance = null;
+const totalDays = 34;
+const protoDays = 34; // all days loaded from data.js
+
+// dayPhotos loaded from data.js
+
+// Days 1-34 data loaded from data.js (days, enData, hotels, parks, superchargers, dayPhotos)
+
+// enData, hotels, parks, superchargers also loaded from data.js
+
+// ==================== HELPERS ====================
+function getTitle(d) { return currentLang === 'en' && enData[d.day] ? enData[d.day].title : d.title; }
+function getRoute(d) { return currentLang === 'en' && enData[d.day] ? enData[d.day].route : d.route; }
+function getNote(d) { return currentLang === 'en' && enData[d.day] ? enData[d.day].note : d.note; }
+function getItemText(d, i) { return currentLang === 'en' && enData[d.day] && enData[d.day].items[i] ? enData[d.day].items[i] : d.items[i].text; }
+
+const typeLabel = { highlight: '⭐ Destaque', food: '🍽️ Comida', charge: '⚡ Carga', drive: '🚗 Transporte', '': '📍 Local' };
+const typeLabelEn = { highlight: '⭐ Highlight', food: '🍽️ Food', charge: '⚡ Charge', drive: '🚗 Transport', '': '📍 Stop' };
+
+// ==================== RENDER DAY SELECTOR ====================
+function renderDaySelector() {
+    const el = document.getElementById('daySelector');
+    const regions = ['ny','ny','ny','ny','ny','ca','ca','ca','ca','ca','ca','ca','ca','ca','ca','ca','pnw','pnw','pnw','pnw','ut','ut','ut','ut','ut','ut','ut','ut','nv','nv','nv','nv','ca','ca'];
+    let html = '';
+    for (let i = 1; i <= totalDays; i++) {
+        const r = (days[i-1] && days[i-1].region) || regions[i - 1] || 'nv';
+        const cls = '';
+        html += '<button class="day-pill ' + r + '" data-d="' + i + '" onclick="showDay(' + i + ')"' + cls + '>' + i + '</button>';
+    }
+    el.innerHTML = html;
+}
+
+// ==================== RENDER DAY CONTENT ====================
+function renderDay(d) {
+    let html = '<div class="day-slide" id="ds-' + d.day + '">';
+    html += '<div class="day-info"><h2>' + getTitle(d) + '</h2>';
+    html += '<div class="day-route">📍 ' + d.location + ' — ' + getRoute(d) + '</div>';
+    html += '<div class="day-note">' + getNote(d) + '</div></div>';
+
+    var usedPhotos = {};
+    d.items.forEach(function(item, idx) {
+        var text = getItemText(d, idx);
+        var photo = findPhoto(item.text);
+        if (photo && usedPhotos[photo]) photo = null;
+        if (photo) usedPhotos[photo] = true;
+        var tl = currentLang === 'en' ? (typeLabelEn[item.type] || '📍 Stop') : (typeLabel[item.type] || '📍 Local');
+
+        var hasInfo = !!findPlaceInfo(item.text);
+        var click = hasInfo ? ' onclick="openDetail(' + d.day + ',' + idx + ')" style="cursor:pointer"' : '';
+
+        if (photo) {
+            html += '<div class="activity-card" data-type="' + item.type + '"' + click + '>';
+            html += '<img class="activity-card-photo" src="' + photo + '" alt="" loading="lazy" onerror="this.style.display=\'none\'">';
+            html += '<div class="activity-card-body">';
+            html += '<div class="activity-time">' + item.time + ' • ' + tl + (hasInfo ? ' • <span style="color:var(--blue)">ⓘ</span>' : '') + '</div>';
+            html += '<div class="activity-name">' + text + '</div>';
+            html += '</div></div>';
+        } else {
+            html += '<div class="activity-simple" data-type="' + item.type + '"' + click + '>';
+            html += '<div class="act-time">' + item.time + '</div>';
+            html += '<div class="act-text">' + text + (hasInfo ? ' <span style="color:var(--blue);font-size:12px">ⓘ</span>' : '') + '</div>';
+            html += '</div>';
+        }
+    });
+
+    // Tips section
+    if (d.tips && d.tips.length) {
+        html += '<div class="tips-box" style="margin:12px 0;padding:12px 14px;background:rgba(255,200,50,0.08);border-radius:14px;border:1px solid rgba(255,200,50,0.15)">';
+        var tipsData = (currentLang === 'en' && enData[d.day] && enData[d.day].tips) ? enData[d.day].tips : d.tips;
+        tipsData.forEach(function(tip) {
+            html += '<div style="font-size:13px;color:rgba(255,255,255,0.85);margin:4px 0">' + tip + '</div>';
+        });
+        html += '</div>';
+    }
+
+    html += '</div>';
+    return html;
+}
+
+function renderAllDays() {
+    var el = document.getElementById('dayContainer');
+    el.innerHTML = days.map(renderDay).join('');
+}
+
+// ==================== SHOW DAY ====================
+function showDay(n) {
+    if (n < 1 || n > protoDays) return;
+    var prev = currentDay;
+    currentDay = n;
+
+    document.querySelectorAll('.day-slide').forEach(function(s) { s.classList.remove('active'); s.style.display = 'none'; });
+    document.querySelectorAll('.day-pill').forEach(function(b) { b.classList.remove('active'); });
+
+    var slide = document.getElementById('ds-' + n);
+    if (slide) {
+        slide.style.display = 'block';
+        slide.classList.add('active');
+        slide.style.animation = n > prev ? 'slideIn 0.25s ease' : 'slideInLeft 0.25s ease';
+    }
+
+    var btn = document.querySelector('.day-pill[data-d="' + n + '"]');
+    if (btn) {
+        btn.classList.add('active');
+        btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+
+    document.getElementById('heroImg').src = dayPhotos[n] || dayPhotos[1];
+}
+
+// ==================== TAB SWITCHING ====================
+function switchTab(tab) {
+    document.querySelectorAll('.tab-item').forEach(function(t) { t.classList.remove('active'); });
+    document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+    event.currentTarget.classList.add('active');
+    document.getElementById('sec-' + tab).classList.add('active');
+
+    if (tab === 'map' && !mapInstance) setTimeout(initMap, 100);
+    if (tab === 'map' && mapInstance) setTimeout(function() { mapInstance.invalidateSize(); }, 100);
+    if (tab === 'explore') renderExplore();
+}
+
+// ==================== LANGUAGE ====================
+function setLang(lang) {
+    currentLang = lang;
+    document.getElementById('btnPt').classList.toggle('active', lang === 'pt');
+    document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+    renderAllDays();
+    showDay(currentDay);
+}
+
+// ==================== EXPLORE ====================
+var currentExploreTab = 'parks';
+
+function showExplore(type) {
+    currentExploreTab = type;
+    document.querySelectorAll('.explore-tab').forEach(function(t) { t.classList.remove('active'); });
+    event.currentTarget.classList.add('active');
+    renderExplore();
+}
+
+function renderExplore() {
+    var el = document.getElementById('exploreContent');
+    if (currentExploreTab === 'parks') {
+        el.innerHTML = '<div class="explore-grid">' + parks.map(function(p) {
+            return '<div class="explore-card">' +
+                '<img class="explore-card-img" src="' + p.img + '" alt="" loading="lazy" onerror="this.style.display=\'none\'">' +
+                '<div class="explore-card-body">' +
+                '<div class="explore-card-title">' + p.name + '</div>' +
+                '<div class="explore-card-sub">📅 ' + p.days + '</div>' +
+                '<div class="explore-card-desc">' + (p.hl || p.highlights || '') + '</div>' +
+                '</div></div>';
+        }).join('') + '</div>';
+    } else if (currentExploreTab === 'hotels') {
+        el.innerHTML = hotels.map(function(h) {
+            return '<div class="hotel-item">' +
+                '<div class="hotel-num">' + h.num + '</div>' +
+                '<div style="flex:1;min-width:0">' +
+                '<div class="hotel-name">' + h.name + '</div>' +
+                '<div class="hotel-dates">' + h.checkin + ' → ' + h.checkout + '</div>' +
+                '</div>' +
+                '<div class="hotel-nights">' + h.nights + 'n</div>' +
+                '</div>';
+        }).join('');
+    } else {
+        el.innerHTML = superchargers.map(function(sc) {
+            var isCrit = sc.crit || sc.critical;
+            return '<div class="charge-item' + (isCrit ? ' critical' : '') + '">' +
+                '<div class="charge-icon-wrap">⚡</div>' +
+                '<div style="flex:1">' +
+                '<div class="charge-name">' + sc.name + (isCrit ? ' ⚠️' : '') + '</div>' +
+                '<div class="charge-leg">Dia ' + sc.day + ' • ' + sc.leg + '</div>' +
+                (sc.note ? '<div class="charge-note">' + sc.note + '</div>' : '') +
+                '</div></div>';
+        }).join('');
+    }
+}
+
+// ==================== DETAIL SHEET ====================
+function openDetail(dayNum, itemIdx) {
+    var d = days.find(function(x) { return x.day === dayNum; });
+    if (!d) return;
+    var item = d.items[itemIdx];
+    var text = getItemText(d, itemIdx);
+    var pi = findPlaceInfo(item.text);
+    var photo = findPhoto(item.text);
+    var tl = currentLang === 'en' ? (typeLabelEn[item.type] || '📍 Stop') : (typeLabel[item.type] || '📍 Local');
+
+    var img = document.getElementById('sheetPhoto');
+    if (photo) { img.src = photo; img.style.display = 'block'; } else { img.style.display = 'none'; }
+
+    var html = '';
+    html += '<div class="sheet-badge" data-t="' + item.type + '">' + tl + '</div>';
+    html += '<div class="sheet-name">' + text + '</div>';
+
+    html += '<div class="sheet-meta">';
+    html += '<div class="sheet-meta-item">🕐 ' + item.time + '</div>';
+    html += '<div class="sheet-meta-item">📅 ' + getTitle(d).replace(/Dia \d+ — |Day \d+ — /, '') + '</div>';
+    if (pi && pi.info.cost) html += '<div class="sheet-meta-item">💰 ' + pi.info.cost + '</div>';
+    if (pi && pi.info.hours) html += '<div class="sheet-meta-item">🕑 ' + pi.info.hours + '</div>';
+    html += '</div>';
+
+    if (pi) {
+        html += '<div class="sheet-detail">';
+        if (pi.info.detail) html += '<p>' + pi.info.detail + '</p>';
+        if (pi.info.addr) html += '<p><span class="sd-label">' + (currentLang === 'en' ? 'Address' : 'Endereço') + '</span><br>' + pi.info.addr + '</p>';
+        html += '</div>';
+
+        html += '<div class="sheet-nav-title">' + (currentLang === 'en' ? '📍 Navigate' : '📍 Navegar') + '</div>';
+        html += '<div class="sheet-nav-btns">';
+        html += '<a class="sheet-nav-btn btn-gmaps" href="' + buildDirectionsUrl('google', pi.key, pi.info) + '" target="_blank" rel="noopener">🗺️ Google Maps</a>';
+        html += '<a class="sheet-nav-btn btn-amaps" href="' + buildDirectionsUrl('apple', pi.key, pi.info) + '" target="_blank" rel="noopener">🍎 Apple Maps</a>';
+        html += '</div>';
+    }
+
+    document.getElementById('sheetBody').innerHTML = html;
+    document.getElementById('sheetOverlay').classList.add('open');
+    document.getElementById('sheet').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeSheet() {
+    document.getElementById('sheetOverlay').classList.remove('open');
+    document.getElementById('sheet').classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+// ==================== MAP ====================
+function initMap() {
+    mapInstance = L.map('map', { center: [38, -105], zoom: 5, zoomControl: true });
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; OSM &copy; CARTO', maxZoom: 19
+    }).addTo(mapInstance);
+
+    var routeCoords = [
+        [33.9425,-118.4081],[34.9876,-118.9148],[36.4519,-118.9054],
+        [37.8651,-119.5383],[37.7974,-121.2262],[37.7749,-122.4194],
+        [38.0682,-122.8838],[39.1502,-123.2078],[40.8021,-124.1637],
+        [41.4013,-124.0653],[41.7558,-124.2026],[42.1542,-124.3486],
+        [42.4074,-124.4218],[43.3665,-124.2179],[44.2780,-124.1135],
+        [44.9581,-124.0159],[45.8918,-123.9615],[46.1879,-123.8313],
+        [46.9754,-123.8157],[47.9504,-124.3855],[47.0379,-122.9007],
+        [46.8523,-121.7603],[47.0379,-122.9007],[45.5762,-122.1158],
+        [45.5946,-121.1787],[45.6721,-118.7886],[44.7749,-117.8344],
+        [43.6150,-116.2023],[42.5558,-114.4614],[40.7608,-111.8910],
+        [41.0650,-112.2462],[40.7608,-111.8910],[39.5994,-110.8107],
+        [38.9953,-110.1593],[38.5733,-109.5498],[38.9953,-110.1593],
+        [38.9340,-111.8600],[37.6283,-112.1677],[37.2090,-112.9871],
+        [37.0215,-112.5263],[36.0544,-112.1401],[35.2053,-114.0530],
+        [36.1699,-115.1398],[35.0527,-117.0676],[34.0522,-118.2437]
+    ];
+    L.polyline(routeCoords, { color: '#4ecdc4', weight: 3.5, opacity: 0.85, smoothFactor: 1.5 }).addTo(mapInstance);
+
+    var dayTrips = [
+        [[36.1699,-115.1398],[36.4394,-114.5131]],
+        [[36.1699,-115.1398],[36.5054,-116.9325]],
+        [[36.1699,-115.1398],[36.1357,-115.4279]]
+    ];
+    dayTrips.forEach(function(p) { L.polyline(p, { color: '#ffd700', weight: 2.5, dashArray: '6,6', opacity: 0.7 }).addTo(mapInstance); });
+
+    var stops = [
+        { n: "New York (JFK)", lat: 40.6413, lng: -73.7781, i: "✈️", info: "Dias 1–5 • 4 noites\nMarriott Marquis, Times Square" },
+        { n: "Los Angeles (LAX)", lat: 33.9425, lng: -118.4081, i: "✈️", info: "Dia 6 • Retirada Tesla" },
+        { n: "Sequoia / Kings Canyon", lat: 36.4519, lng: -118.9054, i: "🌲", info: "Dia 7 • General Sherman Tree" },
+        { n: "Yosemite NP", lat: 37.8651, lng: -119.5383, i: "🏞️", info: "Dias 8–10 • Half Dome, El Capitan" },
+        { n: "San Francisco", lat: 37.7749, lng: -122.4194, i: "🌉", info: "Dias 10–12 • Golden Gate" },
+        { n: "Redwood NP", lat: 41.7558, lng: -124.2026, i: "🦕", info: "Dia 14 • Fern Canyon" },
+        { n: "Cannon Beach, OR", lat: 45.8918, lng: -123.9615, i: "🌅", info: "Dia 16 • Haystack Rock" },
+        { n: "Olympic NP / Forks", lat: 47.9504, lng: -124.3855, i: "🧛", info: "Dias 17–18 • Hoh, Ruby Beach" },
+        { n: "Mt. Rainier NP", lat: 46.8523, lng: -121.7603, i: "🌋", info: "Dia 19 • Paradise" },
+        { n: "Boise, ID", lat: 43.6150, lng: -116.2023, i: "🏙️", info: "Dia 20 • Basque Block" },
+        { n: "Moab, UT", lat: 38.5733, lng: -109.5498, i: "🏜️", info: "Dias 21–23 • Arches, Canyonlands" },
+        { n: "Bryce Canyon, UT", lat: 37.6283, lng: -112.1677, i: "🏔️", info: "Dia 24 • Hoodoos + stargazing" },
+        { n: "Zion NP", lat: 37.2090, lng: -112.9871, i: "🏞️", info: "Dias 25–26 • Angels Landing" },
+        { n: "Grand Canyon, AZ", lat: 36.0544, lng: -112.1401, i: "🏞️", info: "Dias 27–28 • Mather Point" },
+        { n: "Las Vegas, NV", lat: 36.1699, lng: -115.1398, i: "🎰", info: "Dias 28–31 • Grand Finale!" },
+        { n: "Los Angeles, CA", lat: 34.0522, lng: -118.2437, i: "🎬", info: "Dias 32–33 • Griffith, Venice" }
+    ];
+
+    stops.forEach(function(s) {
+        var ic = L.divIcon({
+            html: '<div style="font-size:22px;text-shadow:0 2px 6px rgba(0,0,0,0.6)">' + s.i + '</div>',
+            className: '', iconSize: [22,22], iconAnchor: [11,11], popupAnchor: [0,-11]
+        });
+        L.marker([s.lat, s.lng], { icon: ic }).addTo(mapInstance)
+            .bindPopup('<h3>' + s.i + ' ' + s.n + '</h3><div class="days">' + s.info.replace(/\n/g,'<br>') + '</div>', { className: 'custom-popup' });
+    });
+
+    var scCoords = {
+        "Tejon / Lebec, CA": [34.9876,-118.9148], "Manteca / Oakdale, CA": [37.7974,-121.2262],
+        "Ukiah, CA": [39.1502,-123.2078], "Coos Bay, OR": [43.3665,-124.2179],
+        "Lincoln City, OR": [44.9581,-124.0159], "Aberdeen, WA": [46.9754,-123.8157],
+        "Olympia / Tacoma, WA": [47.0379,-122.9007], "The Dalles, OR": [45.5946,-121.1787],
+        "Pendleton, OR": [45.6721,-118.7886], "Baker City, OR": [44.7749,-117.8344],
+        "Twin Falls, ID": [42.5558,-114.4614], "Salt Lake City, UT": [40.7608,-111.8910],
+        "Price, UT": [39.5994,-110.8107], "Green River, UT": [38.9953,-110.1593],
+        "Salina, UT": [38.9340,-111.8600], "Kanab, UT": [37.0215,-112.5263],
+        "Kingman, AZ": [35.2053,-114.0530], "Barstow, CA": [35.0527,-117.0676]
+    };
+    superchargers.forEach(function(sc) {
+        var c = scCoords[sc.name];
+        if (!c) return;
+        var scI = L.divIcon({
+            html: '<div style="font-size:13px;background:#00c853;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.5);border:2px solid #fff">⚡</div>',
+            className: '', iconSize: [18,18], iconAnchor: [9,9], popupAnchor: [0,-9]
+        });
+        L.marker(c, { icon: scI }).addTo(mapInstance)
+            .bindPopup('<h3>⚡ SC ' + sc.name + '</h3><div class="days">Dia ' + sc.day + ' • ' + sc.leg + (sc.note ? '<br>' + sc.note : '') + '</div>', { className: 'custom-popup' });
+    });
+
+    var legend = L.control({ position: 'bottomright' });
+    legend.onAdd = function() {
+        var div = L.DomUtil.create('div', 'legend');
+        div.innerHTML = '<h3>🗺️ Legenda</h3>' +
+            '<div class="legend-item"><div class="legend-line" style="background:#4ecdc4"></div><span>Roadtrip Tesla</span></div>' +
+            '<div class="legend-item"><div class="legend-line" style="background:#ffd700;border-style:dashed"></div><span>Day trips (Vegas)</span></div>' +
+            '<div class="legend-item"><div style="font-size:11px;background:#00c853;border-radius:50%;width:14px;height:14px;display:flex;align-items:center;justify-content:center;border:1.5px solid #fff">⚡</div><span>Superchargers (19)</span></div>' +
+            '<br><div style="color:#888;font-size:10px">📅 20/01 → 22/02/2027<br>🚗 ~6.500 km • 🔄 Anti-horário</div>';
+        return div;
+    };
+    legend.addTo(mapInstance);
+    mapInstance.fitBounds(L.latLngBounds(routeCoords).pad(0.1));
+}
+
+// ==================== INIT ====================
+renderDaySelector();
+renderAllDays();
+showDay(1);
+
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').catch(function() {});
+}
+</script>
+
+</body>
+</html>
