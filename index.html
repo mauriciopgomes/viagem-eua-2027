@@ -1973,23 +1973,22 @@ function updateCountdown() {
 
 if (history.scrollRestoration) history.scrollRestoration = 'manual';
 renderDaySelector();
-// Reset Chrome's overflow scroll restoration immediately
-document.getElementById('daySelector').scrollLeft = 0;
+var daySel = document.getElementById('daySelector');
+// Block Chrome scroll restoration: lock overflow, unlock after scroll is set
+daySel.style.overflow = 'hidden';
 renderAllDays();
 var initDay = getTodayDay();
 showDay(initDay);
-// Chrome restores overflow scroll async — fight it multiple times
-(function fixScroll() {
-    var sel = document.getElementById('daySelector');
+// Now enable scrolling and position correctly
+requestAnimationFrame(function() {
     var btn = document.querySelector('.day-pill[data-d="' + initDay + '"]');
-    if (!btn) return;
-    var times = [0, 50, 150, 300, 500];
-    times.forEach(function(ms) {
-        setTimeout(function() {
-            btn.scrollIntoView({ behavior: 'instant', inline: 'center', block: 'nearest' });
-        }, ms);
-    });
-})();
+    if (btn) {
+        var container = document.getElementById('daySelector');
+        var scrollPos = btn.offsetLeft - container.offsetWidth / 2 + btn.offsetWidth / 2;
+        container.scrollLeft = Math.max(0, scrollPos);
+        container.style.overflow = '';
+    }
+});
 checkMapCacheStatus();
 
 if ('serviceWorker' in navigator) {
