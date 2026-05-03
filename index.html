@@ -1492,12 +1492,12 @@ function buildDirectionsUrl(type, name, info) {
 let currentLang = 'pt';
 let currentDay = 1;
 let mapInstance = null;
-const totalDays = 34;
-const protoDays = 34; // all days loaded from data.js
+const totalDays = 33;
+const protoDays = 33; // all days loaded from data.js
 
 // dayPhotos loaded from data.js
 
-// Days 1-34 data loaded from data.js (days, enData, hotels, parks, superchargers, dayPhotos)
+// Days 1-33 data loaded from data.js (days, enData, hotels, parks, superchargers, dayPhotos)
 
 // enData, hotels, parks, superchargers also loaded from data.js
 
@@ -1513,7 +1513,7 @@ const typeLabelEn = { highlight: '⭐ Highlight', food: '🍽️ Food', charge: 
 // ==================== RENDER DAY SELECTOR ====================
 function renderDaySelector() {
     const el = document.getElementById('daySelector');
-    const regions = ['ny','ny','ny','ny','ny','ca','ca','ca','ca','ca','ca','ca','ca','ca','ca','ca','pnw','pnw','pnw','pnw','ut','ut','ut','ut','ut','ut','ut','ut','nv','nv','nv','nv','ca','ca'];
+    const regions = ['ny','ny','ny','ny','ca','ca','ca','ca','ca','ca','ca','ca','ca','ca','pnw','pnw','pnw','pnw','pnw','ut','ut','ut','ut','ut','ut','ut','ut','ut','nv','nv','nv','ca','ca'];
     let html = '';
     for (let i = 1; i <= totalDays; i++) {
         const r = (days[i-1] && days[i-1].region) || regions[i - 1] || 'nv';
