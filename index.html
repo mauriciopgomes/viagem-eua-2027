@@ -676,6 +676,132 @@
 
         /* Selection */
         ::selection { background: rgba(10,132,255,0.3); }
+
+        /* Activity checklist */
+        .check-circle {
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.15);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+            color: transparent;
+            min-width: 24px;
+        }
+        .check-circle.checked {
+            background: var(--green);
+            border-color: var(--green);
+            color: #fff;
+        }
+        .item-done { opacity: 0.4; }
+        .activity-card { position: relative; }
+        .activity-card > .check-circle {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 2;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .activity-card > .check-circle.checked {
+            background: var(--green);
+        }
+        .day-progress {
+            font-size: 12px;
+            color: var(--text3);
+            font-weight: 600;
+            padding: 0 0 12px;
+        }
+
+        /* Supercharger info card */
+        .sc-card {
+            background: linear-gradient(135deg, rgba(48,209,88,0.1), rgba(48,209,88,0.05));
+            border: 0.5px solid rgba(48,209,88,0.2);
+            border-radius: var(--radius);
+            padding: 14px 16px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .sc-card-icon {
+            width: 40px; height: 40px;
+            border-radius: 12px;
+            background: rgba(48,209,88,0.15);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .sc-card-text { font-size: 13px; color: var(--text2); line-height: 1.5; }
+        .sc-card-text strong { color: var(--green); font-weight: 700; }
+
+        /* ==================== IPAD / TABLET (≥768px) ==================== */
+        @media (min-width: 768px) {
+            /* Hero wider with larger text */
+            .hero { max-width: 100%; }
+            .hero-title { font-size: 36px; }
+            .hero-subtitle { font-size: 15px; }
+
+            /* Day selector centered */
+            .day-selector {
+                max-width: 720px;
+                margin: 0 auto;
+                justify-content: center;
+            }
+
+            /* Day content centered and wider */
+            .day-slide {
+                max-width: 720px;
+                margin: 0 auto;
+            }
+
+            /* Activity cards in 2-col grid */
+            .day-slide .activity-card {
+                display: inline-block;
+                width: calc(50% - 7px);
+                vertical-align: top;
+            }
+            .day-slide .activity-card:nth-child(odd) {
+                margin-right: 14px;
+            }
+
+            /* Settings centered */
+            .settings-section {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            /* Sheet narrower and centered */
+            .sheet {
+                max-width: 500px;
+                left: 50%;
+                right: auto;
+                transform: translateX(-50%) translateY(100%);
+                border-radius: 24px 24px 0 0;
+            }
+            .sheet.open {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            /* Tab bar centered */
+            .tab-bar {
+                max-width: 500px;
+                left: 50%;
+                right: auto;
+                transform: translateX(-50%);
+                border-radius: 20px 20px 0 0;
+            }
+        }
+
+        /* ==================== IPAD LANDSCAPE / LARGE TABLETS (≥1024px) ==================== */
+        @media (min-width: 1024px) {
+            .day-slide { max-width: 800px; }
+            .hero-title { font-size: 40px; }
+            .settings-section { max-width: 700px; }
+        }
     </style>
 </head>
 <body>
@@ -746,6 +872,33 @@
                 <div>
                     <div class="setting-label">✈️ Voo volta</div>
                     <div class="setting-desc">AA 608 LAX→MIA + AA 905 MIA→GIG 22/02</div>
+                </div>
+            </div>
+        </div>
+        <div class="settings-group-label">Emergência</div>
+        <div class="settings-group">
+            <div class="setting-row">
+                <div>
+                    <div class="setting-label">🆘 Emergência EUA</div>
+                    <div class="setting-desc"><a href="tel:911" style="color:var(--red)">911</a> (polícia, bombeiro, ambulância)</div>
+                </div>
+            </div>
+            <div class="setting-row">
+                <div>
+                    <div class="setting-label">🇧🇷 Consulado Brasileiro</div>
+                    <div class="setting-desc">Los Angeles: <a href="tel:+13233515538" style="color:var(--blue)">(323) 351-5538</a><br>Nova York: <a href="tel:+12127779020" style="color:var(--blue)">(212) 777-9020</a></div>
+                </div>
+            </div>
+            <div class="setting-row">
+                <div>
+                    <div class="setting-label">🚗 Tesla Roadside</div>
+                    <div class="setting-desc"><a href="tel:+18777983752" style="color:var(--blue)">(877) 798-3752</a> — 24h</div>
+                </div>
+            </div>
+            <div class="setting-row">
+                <div>
+                    <div class="setting-label">🏥 Seguro Viagem</div>
+                    <div class="setting-desc">Número e apólice — preencher antes da viagem</div>
                 </div>
             </div>
         </div>
@@ -1370,12 +1523,61 @@ function renderDaySelector() {
     el.innerHTML = html;
 }
 
+// ==================== ACTIVITY CHECKLIST ====================
+function toggleCheck(dayNum, itemIdx, event) {
+    event.stopPropagation();
+    var key = 'check-' + dayNum + '-' + itemIdx;
+    var done = localStorage.getItem(key) === '1';
+    localStorage.setItem(key, done ? '0' : '1');
+    updateCheckUI(dayNum, itemIdx, !done);
+    updateDayProgress(dayNum);
+}
+
+function isChecked(dayNum, itemIdx) {
+    return localStorage.getItem('check-' + dayNum + '-' + itemIdx) === '1';
+}
+
+function updateCheckUI(dayNum, itemIdx, done) {
+    var el = document.querySelector('[data-check="' + dayNum + '-' + itemIdx + '"]');
+    if (el) {
+        el.classList.toggle('checked', done);
+        var parent = el.closest('.activity-card, .activity-simple');
+        if (parent) parent.classList.toggle('item-done', done);
+    }
+}
+
+function updateDayProgress(dayNum) {
+    var d = days.find(function(x) { return x.day === dayNum; });
+    if (!d) return;
+    var total = d.items.length;
+    var done = 0;
+    for (var i = 0; i < total; i++) {
+        if (isChecked(dayNum, i)) done++;
+    }
+    var el = document.getElementById('day-progress-' + dayNum);
+    if (el) el.textContent = done + '/' + total;
+}
+
 // ==================== RENDER DAY CONTENT ====================
 function renderDay(d) {
     let html = '<div class="day-slide" id="ds-' + d.day + '">';
     html += '<div class="day-info"><h2>' + getTitle(d) + '</h2>';
     html += '<div class="day-route">📍 ' + d.location + ' — ' + getRoute(d) + '</div>';
     html += '<div class="day-note">' + getNote(d) + '</div></div>';
+
+    // Supercharger info cards
+    d.items.forEach(function(item, idx) {
+        if (item.type === 'charge') {
+            var scText = getItemText(d, idx);
+            html += '<div class="sc-card">';
+            html += '<div class="sc-card-icon">⚡</div>';
+            html += '<div class="sc-card-text">' + scText + '</div>';
+            html += '</div>';
+        }
+    });
+
+    // Progress counter
+    html += '<div class="day-progress"><span id="day-progress-' + d.day + '">0/' + d.items.length + '</span> ' + (currentLang === 'en' ? 'completed' : 'concluídos') + '</div>';
 
     var usedPhotos = {};
     d.items.forEach(function(item, idx) {
@@ -1387,16 +1589,20 @@ function renderDay(d) {
 
         var hasInfo = !!findPlaceInfo(item.text);
         var click = hasInfo ? ' onclick="openDetail(' + d.day + ',' + idx + ')" style="cursor:pointer"' : '';
+        var checkClass = isChecked(d.day, idx) ? ' checked' : '';
+        var doneClass = isChecked(d.day, idx) ? ' item-done' : '';
 
         if (photo) {
-            html += '<div class="activity-card" data-type="' + item.type + '"' + click + '>';
+            html += '<div class="activity-card' + doneClass + '" data-type="' + item.type + '"' + click + '>';
+            html += '<div class="check-circle' + checkClass + '" data-check="' + d.day + '-' + idx + '" onclick="toggleCheck(' + d.day + ',' + idx + ',event)">✓</div>';
             html += '<img class="activity-card-photo" src="' + photo + '" alt="" loading="lazy" onerror="this.style.display=\'none\'">';
             html += '<div class="activity-card-body">';
             html += '<div class="activity-time">' + item.time + ' • ' + tl + (hasInfo ? ' • <span style="color:var(--blue)">ⓘ</span>' : '') + '</div>';
             html += '<div class="activity-name">' + text + '</div>';
             html += '</div></div>';
         } else {
-            html += '<div class="activity-simple" data-type="' + item.type + '"' + click + '>';
+            html += '<div class="activity-simple' + doneClass + '" data-type="' + item.type + '"' + click + '>';
+            html += '<div class="check-circle' + checkClass + '" data-check="' + d.day + '-' + idx + '" onclick="toggleCheck(' + d.day + ',' + idx + ',event)">✓</div>';
             html += '<div class="act-time">' + item.time + '</div>';
             html += '<div class="act-text">' + text + (hasInfo ? ' <span style="color:var(--blue);font-size:12px">ⓘ</span>' : '') + '</div>';
             html += '</div>';
@@ -1461,6 +1667,9 @@ function showDay(n) {
     if (pf) pf.style.width = pct + '%';
     var pl = document.getElementById('heroProgressLabel');
     if (pl) pl.textContent = (currentLang === 'en' ? 'Day ' : 'Dia ') + n + (currentLang === 'en' ? ' of ' : ' de ') + totalDays;
+
+    updateDayProgress(n);
+    updateCountdown();
 }
 
 // ==================== TAB SWITCHING ====================
@@ -1734,6 +1943,20 @@ function getTodayDay() {
     var diff = Math.floor((today - tripStart) / 86400000) + 1;
     if (diff >= 1 && diff <= 34) return diff;
     return 1;
+}
+
+function updateCountdown() {
+    var tripStart = new Date(2027, 0, 21);
+    var today = new Date();
+    today.setHours(0,0,0,0);
+    tripStart.setHours(0,0,0,0);
+    var diff = Math.floor((tripStart - today) / 86400000);
+    if (diff > 0) {
+        var pl = document.getElementById('heroProgressLabel');
+        var pf = document.getElementById('heroProgress');
+        if (pl) pl.textContent = '🛫 Faltam ' + diff + ' dias!';
+        if (pf) pf.style.width = '0%';
+    }
 }
 
 renderDaySelector();
