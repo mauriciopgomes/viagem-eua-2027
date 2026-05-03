@@ -1780,10 +1780,10 @@ if ('serviceWorker' in navigator) {
         var absDy = Math.abs(dy);
 
         // Wait until enough movement to decide direction
-        if (absDx < 10 && absDy < 10) return;
+        if (absDx < 15 && absDy < 15) return;
 
-        // If vertical-dominant, stop tracking — let native scroll handle it
-        if (absDy > absDx) {
+        // Must be CLEARLY horizontal: dx must be at least 3x dy
+        if (absDx < absDy * 3) {
             tracking = false;
             return;
         }
@@ -1802,8 +1802,8 @@ if ('serviceWorker' in navigator) {
         var endX = e.changedTouches[0].clientX;
         var dx = endX - startX;
 
-        // Minimum 50px horizontal distance
-        if (Math.abs(dx) < 50) return;
+        // Minimum 80px horizontal distance
+        if (Math.abs(dx) < 80) return;
 
         if (dx < 0 && currentDay < totalDays) {
             showDay(currentDay + 1);
