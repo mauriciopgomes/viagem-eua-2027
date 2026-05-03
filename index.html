@@ -191,12 +191,12 @@
             letter-spacing: 0.02em;
         }
 
-        /* Day selector — starts hidden to block Chrome scroll restoration */
+        /* Day selector */
         .day-selector {
             display: flex;
             gap: 8px;
             padding: 12px 20px 16px;
-            overflow: hidden;
+            overflow-x: auto;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
             mask-image: linear-gradient(to right, transparent, black 20px, black calc(100% - 20px), transparent);
@@ -1985,12 +1985,17 @@ function scrollPillToCenter(btn, instant) {
 
 if (history.scrollRestoration) history.scrollRestoration = 'manual';
 renderDaySelector();
+// Clone the day selector to defeat Chrome bfcache scroll restoration
+var oldSel = document.getElementById('daySelector');
+var newSel = oldSel.cloneNode(true);
+oldSel.parentNode.replaceChild(newSel, oldSel);
+// Re-attach click handlers (cloneNode doesn't copy inline onclick for all browsers)
+newSel.querySelectorAll('.day-pill').forEach(function(btn) {
+    btn.addEventListener('click', function() { showDay(parseInt(this.dataset.d)); });
+});
 renderAllDays();
 var initDay = getTodayDay();
 showDay(initDay);
-// CSS starts with overflow:hidden to block Chrome scroll restoration
-var daySel = document.getElementById('daySelector');
-daySel.style.overflowX = 'auto';
 scrollPillToCenter(document.querySelector('.day-pill[data-d="' + initDay + '"]'), true);
 checkMapCacheStatus();
 
