@@ -9,9 +9,13 @@
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#191919",
-  "theme_color": "#191919",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
   "categories": ["travel", "navigation"],
+  "prefer_related_applications": false,
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
   "icons": [
     {
       "src": "icons/icon-192.png",

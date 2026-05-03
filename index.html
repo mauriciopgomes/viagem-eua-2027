@@ -6,12 +6,14 @@
     <meta name="description" content="Roteiro interativo — 34 dias de road trip pelos EUA de Tesla">
     <title>EUA 2027</title>
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#191919">
+    <meta name="theme-color" content="#0a0a0a">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+    <link rel="preload" href="img/dia-01.jpg" as="image" fetchpriority="high">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="EUA 2027">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
-    <link rel="stylesheet" href="lib/leaflet.css" />
+    <link rel="stylesheet" href="lib/leaflet.css" media="print" onload="this.media='all'" />
     <style>
         @font-face {
             font-family: 'Inter';
@@ -93,8 +95,9 @@
             min-width: 64px;
             transition: color 0.2s;
         }
-        .tab-item .tab-icon { font-size: 22px; line-height: 1; }
+        .tab-item .tab-icon { font-size: 22px; line-height: 1; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
         .tab-item.active { color: var(--blue); }
+        .tab-item.active .tab-icon { transform: scale(1.15); }
 
         /* ==================== SECTIONS ==================== */
         .section { display: none; }
@@ -116,14 +119,15 @@
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 32px 20px 20px;
-            background: linear-gradient(transparent, rgba(10,10,10,0.95));
+            padding: 48px 20px 24px;
+            background: linear-gradient(to bottom, transparent 0%, rgba(10,10,10,0.3) 25%, rgba(10,10,10,0.85) 60%, var(--bg) 100%);
         }
         .hero-title {
-            font-size: 28px;
+            font-size: 30px;
             font-weight: 800;
             letter-spacing: -0.03em;
-            line-height: 1.15;
+            line-height: 1.1;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.5);
         }
         .hero-subtitle {
             font-size: 13px;
@@ -137,12 +141,12 @@
             flex-wrap: wrap;
         }
         .hero-badge {
-            background: var(--glass2);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.12);
             border-radius: 20px;
-            padding: 4px 10px;
+            padding: 5px 12px;
             font-size: 11px;
             color: var(--text2);
             font-weight: 500;
@@ -169,7 +173,7 @@
             font-size: 13px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
             font-family: inherit;
             padding: 0 14px;
             white-space: nowrap;
@@ -179,8 +183,18 @@
             background: var(--blue);
             border-color: var(--blue);
             color: #fff;
-            box-shadow: 0 4px 12px rgba(74,159,217,0.4);
+            box-shadow: 0 4px 14px rgba(74,159,217,0.35);
         }
+        /* Region-tinted day pills */
+        .day-pill.ny { border-color: rgba(74,159,217,0.25); }
+        .day-pill.ca { border-color: rgba(229,168,67,0.25); }
+        .day-pill.pnw { border-color: rgba(77,184,122,0.25); }
+        .day-pill.ut { border-color: rgba(224,90,82,0.25); }
+        .day-pill.nv { border-color: rgba(160,109,212,0.25); }
+        .day-pill.ca.active { background: var(--gold); border-color: var(--gold); color: #1a1a1a; box-shadow: 0 4px 14px rgba(229,168,67,0.35); }
+        .day-pill.pnw.active { background: var(--green); border-color: var(--green); box-shadow: 0 4px 14px rgba(77,184,122,0.35); }
+        .day-pill.ut.active { background: var(--red); border-color: var(--red); box-shadow: 0 4px 14px rgba(224,90,82,0.35); }
+        .day-pill.nv.active { background: var(--purple); border-color: var(--purple); box-shadow: 0 4px 14px rgba(160,109,212,0.35); }
 
         /* Day content with swipe */
         .day-container {
@@ -231,13 +245,17 @@
             border-radius: var(--radius);
             overflow: hidden;
             margin-bottom: 12px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: transform 0.15s;
+            border: 1px solid rgba(255,255,255,0.06);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.03);
+            transition: transform 0.2s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.2s;
         }
-        .activity-card:active { transform: scale(0.985); }
+        .activity-card:active { transform: scale(0.98); }
+        @media (hover: hover) {
+            .activity-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.08); }
+        }
         .activity-card-photo {
             width: 100%;
-            height: 160px;
+            height: 180px;
             object-fit: cover;
         }
         .activity-card-body {
@@ -291,6 +309,15 @@
             flex: 1;
         }
         .activity-simple .act-text strong { color: var(--text); font-weight: 600; }
+        .activity-simple[onclick] { cursor: pointer; }
+        .activity-simple[onclick]::after {
+            content: '›';
+            color: var(--text3);
+            font-size: 20px;
+            font-weight: 300;
+            flex-shrink: 0;
+            padding-left: 8px;
+        }
 
         /* Tip cards */
         .tip-card {
@@ -301,6 +328,19 @@
             margin-top: 16px;
             font-size: 13px;
             color: var(--gold);
+            line-height: 1.6;
+        }
+        .tips-box {
+            margin: 16px 0 8px;
+            padding: 14px 16px;
+            background: rgba(229,168,67,0.06);
+            border-radius: var(--radius);
+            border: 1px solid rgba(229,168,67,0.15);
+        }
+        .tips-box > div {
+            font-size: 13px;
+            color: rgba(255,255,255,0.8);
+            margin: 6px 0;
             line-height: 1.6;
         }
 
@@ -462,15 +502,15 @@
             margin: 10px auto 0;
         }
         .sheet-photo {
-            width: 100%; height: 200px; object-fit: cover;
+            width: 100%; height: 240px; object-fit: cover;
             border-radius: 0; margin-top: 12px;
         }
-        .sheet-body { padding: 16px 20px; }
+        .sheet-body { padding: 20px 20px 8px; }
         .sheet-badge {
             display: inline-block;
-            padding: 3px 10px; border-radius: 6px;
+            padding: 4px 12px; border-radius: 8px;
             font-size: 11px; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 0.04em;
+            text-transform: uppercase; letter-spacing: 0.06em;
         }
         .sheet-badge[data-t="highlight"] { background: rgba(229,168,67,0.15); color: var(--gold); }
         .sheet-badge[data-t="food"] { background: rgba(224,90,82,0.15); color: var(--red); }
@@ -510,15 +550,31 @@
         .btn-gmaps { background: rgba(66,133,244,0.15); color: #4285F4; }
         .btn-amaps { background: rgba(52,199,89,0.15); color: #34C759; }
         .sheet-close {
-            position: absolute; top: 8px; right: 12px;
+            position: absolute; top: 12px; right: 12px;
             width: 44px; height: 44px; border-radius: 50%;
-            background: var(--glass2); border: none;
-            color: var(--text2); font-size: 18px;
+            background: rgba(0,0,0,0.45);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text); font-size: 18px;
             display: flex; align-items: center; justify-content: center;
             cursor: pointer; z-index: 2;
+            transition: background 0.2s, transform 0.15s;
         }
+        .sheet-close:active { transform: scale(0.9); }
 
         /* Scrollbar — scoped to day selector only */
+
+        /* Desktop hover refinements */
+        @media (hover: hover) {
+            .day-pill:hover:not(.active) { background: var(--glass); }
+            .activity-simple[onclick]:hover { background: var(--glass); border-radius: 12px; }
+            .setting-row:hover { background: var(--glass); border-radius: 12px; }
+            .hotel-item:hover, .charge-item:hover { background: var(--glass); }
+            .sheet-close:hover { background: rgba(255,255,255,0.15); }
+            .sheet-nav-btn:hover { transform: translateY(-1px); filter: brightness(1.1); }
+            .lang-switch button:hover:not(.active) { background: var(--glass); color: var(--text2); }
+            .tab-item:hover { color: var(--text2); }
+        }
 
         /* Rubber-band scrolling prevention (iOS PWA) */
         html, body { overscroll-behavior: none; }
@@ -560,10 +616,10 @@
 <!-- ==================== HOME / ITINERARY ==================== -->
 <div class="section active" id="sec-home" role="tabpanel" aria-label="Roteiro">
     <div class="hero" id="heroSection">
-        <img id="heroImg" src="img/dia-01.jpg" alt="Day photo">
+        <img id="heroImg" src="img/dia-01.jpg" alt="Day photo" fetchpriority="high" width="960" height="641">
         <div class="hero-overlay">
             <div class="hero-title" id="heroTitle">🇺🇸 Viagem EUA 2027</div>
-            <div class="hero-subtitle" id="heroSub">20 Jan — 22 Feb • 34 dias</div>
+            <div class="hero-subtitle" id="heroSub">21 Jan — 22 Feb • 34 dias</div>
             <div class="hero-badges">
                 <span class="hero-badge">👨‍👩‍👧 <b>3</b></span>
                 <span class="hero-badge">🚗 <b>~6.500 km</b></span>
@@ -662,7 +718,6 @@
     </button>
 </nav>
 
-<script src="lib/leaflet.js"></script>
 <script src="data.js"></script>
 <script>
 // ==================== ACTIVITY PHOTOS ====================
@@ -1269,10 +1324,10 @@ function renderDay(d) {
 
     // Tips section
     if (d.tips && d.tips.length) {
-        html += '<div class="tips-box" style="margin:12px 0;padding:12px 14px;background:rgba(255,200,50,0.08);border-radius:14px;border:1px solid rgba(255,200,50,0.15)">';
+        html += '<div class="tips-box">';
         var tipsData = (currentLang === 'en' && enData[d.day] && enData[d.day].tips) ? enData[d.day].tips : d.tips;
         tipsData.forEach(function(tip) {
-            html += '<div style="font-size:13px;color:rgba(255,255,255,0.85);margin:4px 0">' + tip + '</div>';
+            html += '<div>' + tip + '</div>';
         });
         html += '</div>';
     }
@@ -1281,9 +1336,16 @@ function renderDay(d) {
     return html;
 }
 
+var renderedDays = {};
 function renderAllDays() {
-    var el = document.getElementById('dayContainer');
-    el.innerHTML = days.map(renderDay).join('');
+    renderedDays = {};
+    document.getElementById('dayContainer').innerHTML = '';
+}
+function ensureDayRendered(n) {
+    if (renderedDays[n]) return;
+    var container = document.getElementById('dayContainer');
+    container.insertAdjacentHTML('beforeend', renderDay(days[n - 1]));
+    renderedDays[n] = true;
 }
 
 // ==================== SHOW DAY ====================
@@ -1295,6 +1357,7 @@ function showDay(n) {
     document.querySelectorAll('.day-slide').forEach(function(s) { s.classList.remove('active'); s.style.display = 'none'; });
     document.querySelectorAll('.day-pill').forEach(function(b) { b.classList.remove('active'); });
 
+    ensureDayRendered(n);
     var slide = document.getElementById('ds-' + n);
     if (slide) {
         slide.style.display = 'block';
@@ -1389,6 +1452,16 @@ document.addEventListener('keydown', function(e) {
 
 // ==================== MAP ====================
 function initMap() {
+    if (typeof L === 'undefined') {
+        var s = document.createElement('script');
+        s.src = 'lib/leaflet.js';
+        s.onload = doInitMap;
+        document.head.appendChild(s);
+        return;
+    }
+    doInitMap();
+}
+function doInitMap() {
     L.Icon.Default.imagePath = 'lib/';
     mapInstance = L.map('map', { center: [38, -105], zoom: 5, zoomControl: true });
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
@@ -1477,8 +1550,8 @@ function initMap() {
         div.innerHTML = '<h3>🗺️ Legenda</h3>' +
             '<div class="legend-item"><div class="legend-line" style="background:#4ecdc4"></div><span>Roadtrip Tesla</span></div>' +
             '<div class="legend-item"><div class="legend-line" style="background:#ffd700;border-style:dashed"></div><span>Day trips (Vegas)</span></div>' +
-            '<div class="legend-item"><div style="font-size:11px;background:#00c853;border-radius:50%;width:14px;height:14px;display:flex;align-items:center;justify-content:center;border:1.5px solid #fff">⚡</div><span>Superchargers (19)</span></div>' +
-            '<br><div style="color:#888;font-size:10px">📅 20/01 → 22/02/2027<br>🚗 ~6.500 km • 🔄 Anti-horário</div>';
+            '<div class="legend-item"><div style="font-size:11px;background:#00c853;border-radius:50%;width:14px;height:14px;display:flex;align-items:center;justify-content:center;border:1.5px solid #fff">⚡</div><span>Superchargers (18)</span></div>' +
+            '<br><div style="color:#888;font-size:10px">📅 21/01 → 22/02/2027<br>🚗 ~6.500 km • 🔄 Anti-horário</div>';
         return div;
     };
     legend.addTo(mapInstance);
@@ -1515,7 +1588,7 @@ async function cacheMapTiles() {
     }
 
     status.textContent = '0 / ' + tiles.length + ' tiles...';
-    var cache = await caches.open('viagem-eua-2027-v16');
+    var cache = await caches.open('viagem-tiles-v1');
     var done = 0;
     var errors = 0;
     var batchSize = 10;
@@ -1541,13 +1614,13 @@ async function cacheMapTiles() {
     btn.style.background = 'var(--green)';
     btn.disabled = true;
     status.textContent = tiles.length + ' tiles salvos para uso offline' + (errors > 0 ? ' (' + errors + ' falharam)' : '');
-    localStorage.setItem('mapTilesCached', 'v16');
+    localStorage.setItem('mapTilesCached', 'tiles-v1');
 }
 
 async function checkMapCacheStatus() {
     var btn = document.getElementById('btnCacheMap');
     var status = document.getElementById('mapCacheStatus');
-    if (localStorage.getItem('mapTilesCached') === 'v16') {
+    if (localStorage.getItem('mapTilesCached') === 'tiles-v1') {
         btn.textContent = '✅ Mapa Offline Pronto!';
         btn.style.background = 'var(--green)';
         btn.disabled = true;
@@ -1581,7 +1654,16 @@ showDay(getTodayDay());
 checkMapCacheStatus();
 
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js').catch(function() {});
+    navigator.serviceWorker.register('./sw.js').then(function(reg) {
+        reg.addEventListener('updatefound', function() {
+            var newWorker = reg.installing;
+            newWorker.addEventListener('statechange', function() {
+                if (newWorker.state === 'activated') {
+                    window.location.reload();
+                }
+            });
+        });
+    }).catch(function(err) { console.warn('SW:', err); });
 }
 </script>
 

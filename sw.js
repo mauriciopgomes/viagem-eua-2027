@@ -1,4 +1,21 @@
-const CACHE_NAME = 'viagem-eua-2027-v16';
+const CACHE_NAME = 'viagem-eua-2027-v17';
+const TILE_CACHE = 'viagem-tiles-v1';
+
+// Critical assets — must succeed for install
+const CRITICAL_ASSETS = [
+  './',
+  './index.html',
+  './data.js',
+  './manifest.json',
+  './icons/icon-192.png',
+  './icons/icon-512.png',
+  './lib/leaflet.js',
+  './lib/leaflet.css',
+  './lib/marker-icon.png',
+  './lib/marker-icon-2x.png',
+  './lib/marker-shadow.png',
+  './fonts/inter.woff2',
+];
 
 // ALL assets precached on install (full offline mode)
 const ASSETS_TO_CACHE = [
@@ -255,21 +272,27 @@ const ASSETS_TO_CACHE = [
   './img/activities/zumwalt_meadow.jpg',
 ];
 
-// Install: precache ALL assets (full offline — ~83MB, one-time on WiFi)
+// Install: precache critical assets, then best-effort images
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE);
+    caches.open(CACHE_NAME).then(async (cache) => {
+      // Critical assets must all succeed
+      await cache.addAll(CRITICAL_ASSETS);
+      // Images: best-effort — don't block install if one fails
+      const images = ASSETS_TO_CACHE.filter(a => a.includes('/img/'));
+      await Promise.allSettled(
+        images.map(url => cache.add(url).catch(() => console.warn('SW: failed to cache', url)))
+      );
     }).then(() => self.skipWaiting())
   );
 });
 
-// Activate: clean old caches
+// Activate: clean old caches (preserve tile cache)
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
       return Promise.all(
-        keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
+        keys.filter((key) => key !== CACHE_NAME && key !== TILE_CACHE).map((key) => caches.delete(key))
       );
     }).then(() => self.clients.claim())
   );
@@ -279,10 +302,10 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
-  // Map tiles: cache on first load for offline use
+  // Map tiles: cache on first load in dedicated tile cache
   if (url.hostname.includes('basemaps.cartocdn.com') || url.hostname.includes('tile.openstreetmap.org')) {
     event.respondWith(
-      caches.open(CACHE_NAME).then((cache) => {
+      caches.open(TILE_CACHE).then((cache) => {
         return cache.match(event.request).then((cached) => {
           if (cached) return cached;
           return fetch(event.request).then((response) => {
@@ -313,6 +336,10 @@ self.addEventListener('fetch', (event) => {
         // Offline fallback for navigation requests
         if (event.request.mode === 'navigate') {
           return caches.match('./index.html');
+        }
+        // Offline placeholder for images
+        if (event.request.destination === 'image') {
+          return new Response('<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"/>', { headers: { 'Content-Type': 'image/svg+xml' } });
         }
         return new Response('Offline', { status: 503 });
       });
