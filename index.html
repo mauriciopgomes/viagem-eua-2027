@@ -1983,20 +1983,49 @@ function scrollPillToCenter(btn, instant) {
     }
 }
 
+// DEBUG — temporary overlay to diagnose Chrome scroll issue
+var _dbg = document.createElement('div');
+_dbg.id = 'scrollDebug';
+_dbg.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99999;background:rgba(0,0,0,0.85);color:#0f0;font:12px monospace;padding:8px;white-space:pre-wrap;pointer-events:none;';
+document.body.appendChild(_dbg);
+var _dbgLog = [];
+function dbg(msg) {
+    var sel = document.getElementById('daySelector');
+    var sL = sel ? sel.scrollLeft : '?';
+    _dbgLog.push(msg + ' | scrollLeft=' + Math.round(sL));
+    _dbg.textContent = _dbgLog.join('\n');
+}
+
 if (history.scrollRestoration) history.scrollRestoration = 'manual';
+dbg('1. before renderDaySelector');
 renderDaySelector();
+
 // Clone the day selector to defeat Chrome bfcache scroll restoration
 var oldSel = document.getElementById('daySelector');
 var newSel = oldSel.cloneNode(true);
 oldSel.parentNode.replaceChild(newSel, oldSel);
-// Re-attach click handlers (cloneNode doesn't copy inline onclick for all browsers)
 newSel.querySelectorAll('.day-pill').forEach(function(btn) {
     btn.addEventListener('click', function() { showDay(parseInt(this.dataset.d)); });
 });
+dbg('2. after clone');
+
 renderAllDays();
 var initDay = getTodayDay();
+dbg('3. initDay=' + initDay + ', before showDay');
 showDay(initDay);
+dbg('4. after showDay');
 scrollPillToCenter(document.querySelector('.day-pill[data-d="' + initDay + '"]'), true);
+dbg('5. after scrollPillToCenter');
+
+// Watch for Chrome overriding our scroll
+var _watchCount = 0;
+var _watcher = setInterval(function() {
+    _watchCount++;
+    var sel = document.getElementById('daySelector');
+    if (sel) dbg('watch-' + (_watchCount * 100) + 'ms');
+    if (_watchCount >= 20) clearInterval(_watcher);
+}, 100);
+
 checkMapCacheStatus();
 
 if ('serviceWorker' in navigator) {
