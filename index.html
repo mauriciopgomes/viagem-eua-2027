@@ -1667,7 +1667,7 @@ function showDay(n) {
     var btn = document.querySelector('.day-pill[data-d="' + n + '"]');
     if (btn) {
         btn.classList.add('active');
-        btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        scrollPillToCenter(btn, n === 1);
     }
 
     document.getElementById('heroImg').src = dayPhotos[n] || dayPhotos[1];
@@ -1971,19 +1971,27 @@ function updateCountdown() {
     }
 }
 
+// Scroll active pill to center — avoids Chrome scrollIntoView bugs with overflow
+function scrollPillToCenter(btn, instant) {
+    var container = document.getElementById('daySelector');
+    if (!btn || !container) return;
+    var target = btn.offsetLeft - container.offsetWidth / 2 + btn.offsetWidth / 2;
+    if (instant) {
+        container.scrollLeft = Math.max(0, target);
+    } else {
+        container.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
+    }
+}
+
 if (history.scrollRestoration) history.scrollRestoration = 'manual';
 renderDaySelector();
 renderAllDays();
 var initDay = getTodayDay();
 showDay(initDay);
-// Enable scrolling now that we control the position
 // CSS starts with overflow:hidden to block Chrome scroll restoration
 var daySel = document.getElementById('daySelector');
-var initBtn = document.querySelector('.day-pill[data-d="' + initDay + '"]');
-if (initBtn) {
-    daySel.scrollLeft = initBtn.offsetLeft - daySel.offsetWidth / 2 + initBtn.offsetWidth / 2;
-}
 daySel.style.overflowX = 'auto';
+scrollPillToCenter(document.querySelector('.day-pill[data-d="' + initDay + '"]'), true);
 checkMapCacheStatus();
 
 if ('serviceWorker' in navigator) {
