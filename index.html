@@ -919,7 +919,7 @@
             <div class="setting-row">
                 <div>
                     <div class="setting-label">Versão</div>
-                    <div class="setting-desc">EUA 2027 PWA v3.0</div>
+                    <div class="setting-desc" id="appVersion">EUA 2027 PWA v3.0</div>
                 </div>
             </div>
         </div>
@@ -1995,6 +1995,15 @@ if ('serviceWorker' in navigator) {
         });
     }).catch(function(err) { console.warn('SW:', err); });
 }
+
+// Show actual cache version in settings
+caches.keys().then(function(names) {
+    var ver = names.find(function(n) { return n.startsWith('viagem-eua-2027-v'); });
+    if (ver) {
+        var el = document.getElementById('appVersion');
+        if (el) el.textContent = 'EUA 2027 PWA — cache ' + ver.replace('viagem-eua-2027-', '');
+    }
+});
 
 // ==================== SWIPE GESTURE (day navigation) ====================
 (function() {
