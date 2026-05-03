@@ -1971,9 +1971,16 @@ function updateCountdown() {
     }
 }
 
+if (history.scrollRestoration) history.scrollRestoration = 'manual';
 renderDaySelector();
 renderAllDays();
-showDay(getTodayDay());
+var initDay = getTodayDay();
+showDay(initDay);
+// Re-scroll pill after Chrome scroll restoration kicks in
+setTimeout(function() {
+    var btn = document.querySelector('.day-pill[data-d="' + initDay + '"]');
+    if (btn) btn.scrollIntoView({ behavior: 'instant', inline: 'center', block: 'nearest' });
+}, 50);
 checkMapCacheStatus();
 
 if ('serviceWorker' in navigator) {
