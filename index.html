@@ -1977,6 +1977,15 @@ renderDaySelector();
 renderAllDays();
 var initDay = getTodayDay();
 showDay(initDay);
+// Ensure day selector scroll position is correct after layout
+requestAnimationFrame(function() {
+    var btn = document.querySelector('.day-pill.active');
+    var container = document.getElementById('daySelector');
+    if (btn && container) {
+        var target = btn.offsetLeft - container.offsetWidth / 2 + btn.offsetWidth / 2;
+        container.scrollLeft = Math.max(0, target);
+    }
+});
 checkMapCacheStatus();
 
 if ('serviceWorker' in navigator) {
