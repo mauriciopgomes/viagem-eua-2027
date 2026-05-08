@@ -179,6 +179,7 @@
 | 08:00 | ☕ Café — **Levain Bakery** (167 W 74th St) — cookies gigantes e famosos! | 🚇 Linha **1** de Times Sq → **72nd St** (~5 min), caminhar 2 min |
 | 09:00 | 🌳 **Central Park** — entrar pela **72nd St West**. Roteiro sugerido: **Strawberry Fields** (mosaico "Imagine", homenagem ao John Lennon, logo na entrada) → **Bethesda Fountain** (a fonte do filme Elf/Encantada) → **Bow Bridge** (ponte romântica, cenário de vários filmes) | 🚶 5 min da Levain, entrar pelo portão W 72nd St |
 | 10:30 | 🏛️ **MET** (opcional ~2h) — já está ali na 82nd com 5th! Ingresso ~$30. Ou pular e descer direto | 🚶 Sair do Central Park pela saída leste (82nd St), o MET está ali |
+| 10:30 | 🏛️ **Met Cloisters** (opcional, alternativa ao MET) — museu de arte medieval com claustros europeus reais em **Fort Tryon Park**. Vista linda do Rio Hudson. Ingresso incluso no MET (~$30). ~1.5h de visita | 🚇 Linha **A** até **190th St** (~30 min do Central Park), caminhar 10 min pelo parque |
 | 12:30 | 🏨 **The Plaza Hotel** (768 5th Ave, esquina Central Park South) — o hotel do Kevin em **Esqueceram de Mim 2**! Lobby luxuoso, entrada livre pra olhar. Foto na entrada ~15 min | 🚶 Descer a 5th Ave até 59th St |
 | 13:00 | 🍔 Almoço — **Shake Shack** (Columbus Circle ou Midtown) | 🚶 Perto do Plaza |
 | 14:00 | 🛍️ **Macy's Herald Square** (151 W 34th St) — a maior loja de departamento do mundo! 11 andares | 🚶 Descer pela Broadway ~25 min ou 🚇 linha **N/R** → **34th St** |
