@@ -489,30 +489,6 @@
         .setting-row:last-child { border-bottom: none; }
         .setting-label { font-size: 15px; font-weight: 500; }
         .setting-desc { font-size: 12px; color: var(--text3); margin-top: 2px; }
-        .lang-switch {
-            display: flex;
-            gap: 2px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 10px;
-            padding: 3px;
-        }
-        .lang-switch button {
-            padding: 10px 16px;
-            border-radius: 8px;
-            border: none;
-            background: transparent;
-            color: var(--text3);
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            font-family: inherit;
-            min-height: 44px;
-            transition: all 0.25s;
-        }
-        .lang-switch button.active {
-            background: var(--glass3);
-            color: var(--text);
-        }
 
         /* ==================== LEAFLET OVERRIDES ==================== */
         .custom-popup .leaflet-popup-content-wrapper {
@@ -641,7 +617,6 @@
             .hotel-item:hover, .charge-item:hover { background: var(--glass); }
             .sheet-close:hover { background: rgba(255,255,255,0.2); }
             .sheet-nav-btn:hover { transform: translateY(-1px); filter: brightness(1.12); }
-            .lang-switch button:hover:not(.active) { background: var(--glass); color: var(--text2); }
             .tab-item:hover { color: var(--text2); }
         }
 
@@ -842,19 +817,6 @@
 <div class="section" id="sec-settings" role="tabpanel" aria-label="Ajustes">
     <div class="settings-section">
         <h2>Ajustes</h2>
-        <div class="settings-group-label">Preferências</div>
-        <div class="settings-group">
-            <div class="setting-row">
-                <div>
-                    <div class="setting-label">Idioma</div>
-                    <div class="setting-desc">Conteúdo e interface</div>
-                </div>
-                <div class="lang-switch">
-                    <button class="active" id="btnPt" onclick="setLang('pt')">🇧🇷 PT</button>
-                    <button id="btnEn" onclick="setLang('en')">🇺🇸 EN</button>
-                </div>
-            </div>
-        </div>
         <div class="settings-group-label">Viagem</div>
         <div class="settings-group">
             <div class="setting-row">
@@ -1502,26 +1464,18 @@ function buildDirectionsUrl(type, name, info) {
 }
 
 // ==================== STATE ==
-let currentLang = 'pt';
 let currentDay = 1;
 let mapInstance = null;
 const totalDays = 33;
-const protoDays = 33; // all days loaded from data.js
-
-// dayPhotos loaded from data.js
-
-// Days 1-33 data loaded from data.js (days, enData, hotels, parks, superchargers, dayPhotos)
-
-// enData, hotels, parks, superchargers also loaded from data.js
+const protoDays = 33;
 
 // ==================== HELPERS ====================
-function getTitle(d) { return currentLang === 'en' && enData[d.day] ? enData[d.day].title : d.title; }
-function getRoute(d) { return currentLang === 'en' && enData[d.day] ? enData[d.day].route : d.route; }
-function getNote(d) { return currentLang === 'en' && enData[d.day] ? enData[d.day].note : d.note; }
-function getItemText(d, i) { return currentLang === 'en' && enData[d.day] && enData[d.day].items[i] ? enData[d.day].items[i] : d.items[i].text; }
+function getTitle(d) { return d.title; }
+function getRoute(d) { return d.route; }
+function getNote(d) { return d.note; }
+function getItemText(d, i) { return d.items[i].text; }
 
 const typeLabel = { highlight: '⭐ Destaque', food: '🍽️ Comida', charge: '⚡ Carga', drive: '🚗 Transporte', '': '📍 Local' };
-const typeLabelEn = { highlight: '⭐ Highlight', food: '🍽️ Food', charge: '⚡ Charge', drive: '🚗 Transport', '': '📍 Stop' };
 
 // ==================== RENDER DAY SELECTOR ====================
 function renderDaySelector() {
@@ -1590,7 +1544,7 @@ function renderDay(d) {
     });
 
     // Progress counter
-    html += '<div class="day-progress"><span id="day-progress-' + d.day + '">0/' + d.items.length + '</span> ' + (currentLang === 'en' ? 'completed' : 'concluídos') + '</div>';
+    html += '<div class="day-progress"><span id="day-progress-' + d.day + '">0/' + d.items.length + '</span> concluídos</div>';
 
     var usedPhotos = {};
     d.items.forEach(function(item, idx) {
@@ -1598,7 +1552,7 @@ function renderDay(d) {
         var photo = findPhoto(item.text);
         if (photo && usedPhotos[photo]) photo = null;
         if (photo) usedPhotos[photo] = true;
-        var tl = currentLang === 'en' ? (typeLabelEn[item.type] || '📍 Stop') : (typeLabel[item.type] || '📍 Local');
+        var tl = typeLabel[item.type] || '📍 Local';
 
         var hasInfo = !!findPlaceInfo(item.text);
         var click = hasInfo ? ' onclick="openDetail(' + d.day + ',' + idx + ')" style="cursor:pointer"' : '';
@@ -1625,7 +1579,7 @@ function renderDay(d) {
     // Tips section
     if (d.tips && d.tips.length) {
         html += '<div class="tips-box">';
-        var tipsData = (currentLang === 'en' && enData[d.day] && enData[d.day].tips) ? enData[d.day].tips : d.tips;
+        var tipsData = d.tips;
         tipsData.forEach(function(tip) {
             html += '<div>' + tip + '</div>';
         });
@@ -1685,7 +1639,7 @@ function showDay(n) {
     var pf = document.getElementById('heroProgress');
     if (pf) pf.style.width = pct + '%';
     var pl = document.getElementById('heroProgressLabel');
-    if (pl) pl.textContent = (currentLang === 'en' ? 'Day ' : 'Dia ') + n + (currentLang === 'en' ? ' of ' : ' de ') + totalDays;
+    if (pl) pl.textContent = 'Dia ' + n + ' de ' + totalDays;
 
     updateDayProgress(n);
 }
@@ -1703,15 +1657,6 @@ function switchTab(tab) {
     if (tab === 'explore') renderExplore();
 }
 
-// ==================== LANGUAGE ====================
-function setLang(lang) {
-    currentLang = lang;
-    document.getElementById('btnPt').classList.toggle('active', lang === 'pt');
-    document.getElementById('btnEn').classList.toggle('active', lang === 'en');
-    renderAllDays();
-    showDay(currentDay);
-}
-
 // ==================== DETAIL SHEET ====================
 function openDetail(dayNum, itemIdx) {
     var d = days.find(function(x) { return x.day === dayNum; });
@@ -1720,7 +1665,7 @@ function openDetail(dayNum, itemIdx) {
     var text = getItemText(d, itemIdx);
     var pi = findPlaceInfo(item.text);
     var photo = findPhoto(item.text);
-    var tl = currentLang === 'en' ? (typeLabelEn[item.type] || '📍 Stop') : (typeLabel[item.type] || '📍 Local');
+    var tl = typeLabel[item.type] || '📍 Local';
 
     var img = document.getElementById('sheetPhoto');
     if (photo) { img.src = photo; img.style.display = 'block'; } else { img.style.display = 'none'; }
@@ -1739,10 +1684,10 @@ function openDetail(dayNum, itemIdx) {
     if (pi) {
         html += '<div class="sheet-detail">';
         if (pi.info.detail) html += '<p>' + pi.info.detail + '</p>';
-        if (pi.info.addr) html += '<p><span class="sd-label">' + (currentLang === 'en' ? 'Address' : 'Endereço') + '</span><br>' + pi.info.addr + '</p>';
+        if (pi.info.addr) html += '<p><span class="sd-label">Endereço</span><br>' + pi.info.addr + '</p>';
         html += '</div>';
 
-        html += '<div class="sheet-nav-title">' + (currentLang === 'en' ? '📍 Navigate' : '📍 Navegar') + '</div>';
+        html += '<div class="sheet-nav-title">📍 Navegar</div>';
         html += '<div class="sheet-nav-btns">';
         html += '<a class="sheet-nav-btn btn-gmaps" href="' + buildDirectionsUrl('google', pi.key, pi.info) + '" target="_blank" rel="noopener">🗺️ Google Maps</a>';
         html += '<a class="sheet-nav-btn btn-amaps" href="' + buildDirectionsUrl('apple', pi.key, pi.info) + '" target="_blank" rel="noopener">🍎 Apple Maps</a>';
