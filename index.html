@@ -9,6 +9,7 @@
     <meta name="theme-color" content="#050508">
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
     <link rel="preload" href="img/dia-01.jpg" as="image" fetchpriority="high">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="EUA 2027">
@@ -1668,8 +1669,12 @@ function showDay(n) {
     if (btn) {
         btn.classList.add('active');
         var container = document.getElementById('daySelector');
-        var target = btn.offsetLeft - container.offsetWidth / 2 + btn.offsetWidth / 2;
-        container.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
+        var target = btn.offsetLeft - container.offsetLeft - container.offsetWidth / 2 + btn.offsetWidth / 2;
+        var scrollTarget = Math.max(0, target);
+        // setTimeout to run after browser's native focus scroll
+        setTimeout(function() {
+            container.scrollTo({ left: scrollTarget, behavior: 'smooth' });
+        }, 0);
     }
 
     document.getElementById('heroImg').src = dayPhotos[n] || dayPhotos[1];
@@ -1975,6 +1980,12 @@ function updateCountdown() {
 
 renderDaySelector();
 renderAllDays();
+
+// Prevent native focus-scroll on day pills (browser scrolls overflow containers on button focus)
+document.getElementById('daySelector').addEventListener('mousedown', function(e) {
+    if (e.target.closest('.day-pill')) e.preventDefault();
+});
+
 var initDay = getTodayDay();
 showDay(initDay);
 // Ensure day selector scroll position is correct after layout
@@ -1982,7 +1993,7 @@ requestAnimationFrame(function() {
     var btn = document.querySelector('.day-pill.active');
     var container = document.getElementById('daySelector');
     if (btn && container) {
-        var target = btn.offsetLeft - container.offsetWidth / 2 + btn.offsetWidth / 2;
+        var target = btn.offsetLeft - container.offsetLeft - container.offsetWidth / 2 + btn.offsetWidth / 2;
         container.scrollLeft = Math.max(0, target);
     }
 });
