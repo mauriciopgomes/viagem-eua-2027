@@ -1,4 +1,4 @@
-const CACHE_NAME = 'viagem-eua-2027-v33';
+const CACHE_NAME = 'viagem-eua-2027-v34';
 const TILE_CACHE = 'viagem-tiles-v1';
 
 // Critical assets — must succeed for install
@@ -281,7 +281,9 @@ self.addEventListener('install', (event) => {
       // Images: best-effort — don't block install if one fails
       const images = ASSETS_TO_CACHE.filter(a => a.includes('/img/'));
       await Promise.allSettled(
-        images.map(url => cache.add(url).catch(() => console.warn('SW: failed to cache', url)))
+        images.map(async (url) => {
+          try { await cache.add(url); } catch (e) { console.warn('SW: skip', url); }
+        })
       );
     }).then(() => self.skipWaiting())
   );
