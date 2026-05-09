@@ -1688,7 +1688,6 @@ function showDay(n) {
     if (pl) pl.textContent = (currentLang === 'en' ? 'Day ' : 'Dia ') + n + (currentLang === 'en' ? ' of ' : ' de ') + totalDays;
 
     updateDayProgress(n);
-    updateCountdown();
 }
 
 // ==================== TAB SWITCHING ====================
@@ -1988,6 +1987,7 @@ document.getElementById('daySelector').addEventListener('mousedown', function(e)
 
 var initDay = getTodayDay();
 showDay(initDay);
+updateCountdown(); // show countdown only on initial load
 // Ensure day selector scroll position is correct after layout
 requestAnimationFrame(function() {
     var btn = document.querySelector('.day-pill.active');
