@@ -543,48 +543,46 @@ const days = [
         tips: ["🥾 Dia mais tranquilo, mas igualmente lindo! Watchman Trail tem vista privilegiada e é acessível no inverno."]
     },
     {
-        day: 27, title: "Dia 27 — Ter, 16/02", location: "Zion → Grand Canyon",
-        route: "Rumo ao Grand Canyon via Kanab! 🏜️",
-        note: "Um dos pôr do sol mais impressionantes da viagem!",
-        region: "ut",
+        day: 27, title: "Dia 27 — Ter, 16/02", location: "Zion → Grand Canyon → Vegas!",
+        route: "GC à tarde + pôr do sol → Vegas à noite! 🏜️🎰",
+        note: "Dia longo mas épico — vocês já conhecem o GC, a tarde é suficiente!",
+        region: "nv",
         items: [
             { time: "08:00", text: "☕ Café + check-out de Springdale", type: "" },
             { time: "08:30", text: "🚗 Saída rumo ao <strong>Grand Canyon South Rim</strong> (~270 km, ~3.5h)", type: "drive" },
-            { time: "10:00", text: "⚡🍽️ <strong>Kanab, UT</strong> — ⚠️ <strong>CARREGAR ATÉ 100%!</strong> (~40 min) + café. GC tem ~130 km internos + próximo SC é Kingman a 260 km!", type: "charge" },
-            { time: "~12:15", text: "🏜️ Chegada no <strong>Grand Canyon South Rim</strong>!", type: "highlight" },
-            { time: "12:30", text: "📸 <strong>Mather Point</strong> — primeira vista do cânion. ABSURDO!", type: "highlight" },
-            { time: "13:00", text: "🍽️ Almoço no parque (Market Plaza ou El Tovar)", type: "food" },
+            { time: "09:30", text: "⚡🍽️ <strong>Kanab, UT</strong> — ⚠️ <strong>CARREGAR ATÉ 100%!</strong> (~40 min) + café. GC 130 km internos + Kingman a 260 km!", type: "charge" },
+            { time: "~12:30", text: "🏜️ Chegada no <strong>Grand Canyon South Rim</strong>!", type: "highlight" },
+            { time: "12:45", text: "📸 <strong>Mather Point</strong> — vista absurda do cânion!", type: "highlight" },
+            { time: "13:15", text: "🍽️ Almoço no parque (Market Plaza ou El Tovar)", type: "food" },
             { time: "14:00", text: "🥾 <strong>Rim Trail</strong> (Mather Point → Yavapai Point, ~1.5 km)", type: "" },
             { time: "14:45", text: "🏛️ <strong>Yavapai Geology Museum</strong> — painéis de vidro sobre o abismo", type: "" },
-            { time: "16:00", text: "🚗 <strong>Desert View Drive</strong> (~40 km)", type: "drive" },
-            { time: "16:30", text: "📸 <strong>Grandview Point</strong> — mirante dramático", type: "" },
-            { time: "17:00", text: "🏛️ <strong>Desert View Watchtower</strong> — torre de 1932, vista 360°", type: "" },
-            { time: "17:30", text: "🌅 <strong>Pôr do sol no Grand Canyon</strong> — Hopi Point. ESPETACULAR!", type: "highlight" },
-            { time: "19:00", text: "🍽️ Jantar no parque ou Tusayan", type: "food" }
+            { time: "15:30", text: "📸 <strong>Bright Angel Trailhead</strong> — vista da trilha mais famosa", type: "" },
+            { time: "16:00", text: "📸 <strong>Hopi Point</strong> — vista mais ampla do cânion", type: "" },
+            { time: "17:00", text: "🌅 <strong>Pôr do sol no Grand Canyon</strong> — Hopi Point. ESPETACULAR!", type: "highlight" },
+            { time: "17:30", text: "🚗 Saída rumo a <strong>Las Vegas</strong> (~430 km, ~4.5h via I-40 → US-93)", type: "drive" },
+            { time: "19:15", text: "⚡ <strong>Supercharger Kingman, AZ</strong> (~260 km) — ~25 min. Route 66!", type: "charge" },
+            { time: "~21:45", text: "🎰 Chegada em <strong>Las Vegas</strong>! Check-in no <strong>Sahara</strong>", type: "highlight" },
+            { time: "22:00", text: "🍽️ Jantar tardio (hotel ou Strip)", type: "food" }
         ],
-        tips: ["🌌 Grand Canyon é International Dark Sky Park — saiam à noite pra ver as estrelas!", "⚠️ CARREGAR ATÉ 100% em Kanab — GC tem 130 km internos + 260 km até Kingman!"]
+        tips: ["🚗 Dia longo (~10h com paradas). Se estiverem cansados, pulem o pôr do sol e saiam ~15:30 — chegam em Vegas ~20h.", "⚡ Carregar 100% em Kanab é ESSENCIAL — próximo SC é Kingman a ~390 km!"]
     },
     {
-        day: 28, title: "Dia 28 — Qua, 17/02", location: "Grand Canyon → Las Vegas! 🎰",
-        route: "Nascer do sol no GC + Vegas à tarde!",
-        note: "Chegada triunfal em Vegas! Grand finale!",
+        day: 28, title: "Dia 28 — Qua, 17/02", location: "Las Vegas livre! 🎰",
+        route: "Dia pra curtir Vegas com calma!",
+        note: "Descansem do dia longo de ontem — Strip, compras e diversão!",
         region: "nv",
         items: [
-            { time: "06:30", text: "🌅 <strong>Nascer do sol no Grand Canyon</strong> — Mather/Yaki Point. INESQUECÍVEL!", type: "highlight" },
-            { time: "08:00", text: "☕ Café", type: "" },
-            { time: "08:30", text: "🥾 <strong>Bright Angel Trail</strong> — primeiros switchbacks (~1.5h)", type: "" },
-            { time: "10:00", text: "📸 <strong>Hermit Road</strong> (shuttle) — Hopi Point (vista mais ampla), Pima Point", type: "" },
-            { time: "11:00", text: "🚗 Check-out + saída rumo a <strong>Las Vegas</strong> (~430 km, ~4.5h)", type: "drive" },
-            { time: "12:45", text: "⚡ <strong>Supercharger Kingman, AZ</strong> (~260 km) — ~25 min. Route 66!", type: "charge" },
-            { time: "~15:15", text: "🎰 Chegada em <strong>Las Vegas</strong>! Check-in na Strip!", type: "highlight" },
-            { time: "15:30", text: "🍽️ Almoço tardio — <strong>In-N-Out Burger</strong>!", type: "food" },
-            { time: "16:30", text: "🎨 <strong>Seven Magic Mountains</strong> — torres neon no deserto!", type: "" },
-            { time: "17:00", text: "📸 <strong>Welcome to Las Vegas Sign</strong>!", type: "" },
-            { time: "18:00", text: "🏨 Hotéis temáticos — Venetian, Bellagio, Caesars Palace", type: "" },
+            { time: "09:00", text: "☕ Café com calma (merecido!)", type: "" },
+            { time: "10:00", text: "🎨 <strong>Seven Magic Mountains</strong> (~20 min ao sul da Strip) — torres neon no deserto!", type: "" },
+            { time: "10:30", text: "📸 <strong>Welcome to Las Vegas Sign</strong>!", type: "" },
+            { time: "11:00", text: "🍽️ Brunch — <strong>In-N-Out Burger</strong> ou café na Strip", type: "food" },
+            { time: "12:00", text: "🏨 Hotéis temáticos — Venetian, Bellagio (jardim + fontes), Caesars Palace", type: "highlight" },
+            { time: "14:00", text: "🛍️ Compras — Fashion Show Mall ou Las Vegas North Premium Outlets", type: "" },
+            { time: "17:00", text: "🏊 Piscina no Sahara (ou descanso)", type: "" },
             { time: "19:00", text: "🍽️ Jantar na Strip", type: "food" },
-            { time: "21:00", text: "🌃 <strong>Strip à noite</strong> — Bellagio Fountains, cassinos!", type: "highlight" }
+            { time: "21:00", text: "🌃 <strong>Strip à noite</strong> — Bellagio Fountains, cassinos, neon!", type: "highlight" }
         ],
-        tips: ["🎰 Chegada triunfal em Vegas depois de 24 dias de roadtrip!"]
+        tips: ["🎰 Dia perfeito pra explorar a Strip sem pressa!"]
     },
     {
         day: 29, title: "Dia 29 — Qui, 18/02", location: "Valley of Fire + Strip",
@@ -599,8 +597,9 @@ const days = [
             { time: "11:00", text: "📸 <strong>White Domes Trail</strong> (~1.8 km) — cânion colorido", type: "" },
             { time: "11:45", text: "🚗 Volta pra Vegas (~1h)", type: "drive" },
             { time: "12:45", text: "🍽️ Almoço na Strip", type: "food" },
-            { time: "14:00", text: "🛍️ <strong>Outlets</strong> — Las Vegas North Premium Outlets", type: "" },
-            { time: "17:00", text: "🎲 Passeio pela Strip", type: "" },
+            { time: "14:00", text: "� <strong>Area 15</strong> (~15 min da Strip) — <strong>Meow Wolf's Omega Mart</strong> (supermercado alienígena surreal!), instalações imersivas. ~1.5h. Ingresso ~$45/pessoa", type: "highlight" },
+            { time: "16:30", text: "🛍️ Compras — Fashion Show Mall ou Outlets", type: "" },
+            { time: "17:30", text: "🎲 Passeio pela Strip — Bellagio Fountains", type: "" },
             { time: "19:00", text: "🍽️ Jantar na Strip", type: "food" }
         ]
     },
@@ -690,9 +689,8 @@ const hotels = [
     { num: 13, name: "Moab, UT", checkin: "10/02", checkout: "13/02", nights: 3 },
     { num: 14, name: "Bryce Canyon, UT", checkin: "13/02", checkout: "14/02", nights: 1 },
     { num: 15, name: "Springdale, UT (Zion)", checkin: "14/02", checkout: "16/02", nights: 2 },
-    { num: 16, name: "Grand Canyon, AZ (Tusayan)", checkin: "16/02", checkout: "17/02", nights: 1 },
-    { num: 17, name: "Las Vegas, NV (Strip)", checkin: "17/02", checkout: "20/02", nights: 3 },
-    { num: 18, name: "Los Angeles, CA", checkin: "20/02", checkout: "22/02", nights: 2 }
+    { num: 15, name: "Las Vegas, NV (Sahara)", checkin: "16/02", checkout: "20/02", nights: 4 },
+    { num: 16, name: "Los Angeles, CA", checkin: "20/02", checkout: "22/02", nights: 2 }
 ];
 
 const parks = [
@@ -705,7 +703,7 @@ const parks = [
     { name: "🏜️ Arches National Park", days: "Dia 23", highlights: "Delicate Arch (o arco mais famoso do mundo!), Windows, Double Arch, Landscape Arch (93m!), Fiery Furnace." },
     { name: "🏔️ Bryce Canyon National Park", days: "Dias 24–25", highlights: "Navajo Loop, Queen's Garden Trail, hoodoos, Bryce Amphitheater, stargazing (International Dark Sky Park!)." },
     { name: "🏞️ Zion National Park", days: "Dias 25–26", highlights: "Watchman Trail, Canyon Overlook Trail, Emerald Pools, Riverside Walk, Pa'rus Trail, Court of the Patriarchs." },
-    { name: "🏞️ Grand Canyon National Park", days: "Dias 27–28", highlights: "Mather Point, Bright Angel Trail, Desert View Watchtower, Hermit Road, Rim Trail, nascer/pôr do sol ÉPICOS." },
+    { name: "🏞️ Grand Canyon National Park", days: "Dia 27", highlights: "Mather Point, Rim Trail, Yavapai Geology Museum, Hopi Point, pôr do sol ÉPICO." },
     { name: "🏜️ Death Valley National Park", days: "Dia 30", highlights: "Badwater Basin (-86m!), Zabriskie Point, Artist's Palette, Mesquite Sand Dunes, Dante's View." }
 ];
 
@@ -726,7 +724,7 @@ const superchargers = [
     { day: 21, name: "Green River, UT", leg: "SLC → Moab", critical: false },
     { day: 24, name: "Green River, UT", leg: "Moab → Bryce", critical: false },
     { day: 24, name: "Salina, UT", leg: "Moab → Bryce", critical: false },
-    { day: 27, name: "Kanab, UT", leg: "Zion → Grand Canyon", critical: true, note: "⚠️ CARREGAR ATÉ 100% — GC 130 km internos + 260 km até Kingman!", noteEn: "⚠️ CHARGE TO 100% — GC 80 mi internal + 160 mi to Kingman!" },
-    { day: 28, name: "Kingman, AZ", leg: "Grand Canyon → Vegas", critical: false },
+    { day: 27, name: "Kanab, UT", leg: "Zion → GC → Vegas", critical: true, note: "⚠️ CARREGAR ATÉ 100% — GC 130 km internos + 260 km até Kingman!" },
+    { day: 27, name: "Kingman, AZ", leg: "Zion → GC → Vegas", critical: false },
     { day: 31, name: "Barstow, CA", leg: "Vegas → LA", critical: false, note: "Maior Supercharger do mundo! 120 stalls" }
 ];

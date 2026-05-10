@@ -103,11 +103,10 @@
 | 12 | **Moab, UT** (Arches/Canyonlands) | 09/02 (Ter) | 12/02 (Sex) | 3 | 20-22 |
 | 13 | **Bryce Canyon, UT** (região) | 12/02 (Sex) | 13/02 (Sáb) | 1 | 23 |
 | 14 | **Springdale, UT** (Zion) | 13/02 (Sáb) | 15/02 (Seg) | 2 | 24-25 |
-| 15 | **Grand Canyon, AZ** (Tusayan) | 15/02 (Seg) | 16/02 (Ter) | 1 | 26 |
-| 16 | **Las Vegas, NV** (Strip) | 16/02 (Ter) | 20/02 (Sáb) | 4 | 27-30 |
-| 17 | **Los Angeles, CA** | 20/02 (Sáb) | 22/02 (Seg) | 2 | 31-32 |
+| 15 | **Las Vegas, NV** (Sahara) | 16/02 (Ter) | 20/02 (Sáb) | 4 | 27-30 |
+| 16 | **Los Angeles, CA** | 20/02 (Sáb) | 22/02 (Seg) | 2 | 31-32 |
 
-> **Total: 32 noites de hospedagem** (noite de 20→21/01 no avião GRU→JFK, noite de 22/02 no avião MIA→GIG)
+> **Total: 31 noites de hospedagem** (noite de 20→21/01 no avião GRU→JFK, noite de 22/02 no avião MIA→GIG)
 
 ---
 
@@ -761,69 +760,51 @@
 
 ---
 
-### Dia 27 — Ter, 16/02 (Zion → Grand Canyon) 📍 Grand Canyon, AZ
+### Dia 27 — Ter, 16/02 (Zion → Grand Canyon → Las Vegas!) 📍 Las Vegas, NV
 ![Grand Canyon](https://commons.wikimedia.org/wiki/Special:FilePath/USA_09847_Grand_Canyon_Luca_Galuzzi_2007.jpg?width=800)
-> Rumo ao Grand Canyon! ~3.5h via Kanab.
+> Grand Canyon à tarde + pôr do sol, depois direto pra Vegas! Dia longo mas épico.
 
 | Horário | Atividade |
 |---------|-----------|
 | 08:00 | ☕ Café + check-out de Springdale |
 | 08:30 | 🚗 Saída rumo ao **Grand Canyon South Rim** (~270 km, ~3.5h via US-89 S por Kanab) |
-| 10:00 | ⚡🍽️ **Kanab, UT** (~100 km) — ⚠️ **CARREGAR ATÉ 100%!** (~40 min) + café/snack. "Little Hollywood"! — GC tem ~130 km internos + próximo SC é Kingman a 260 km |
-
-> 🔄 **OPCIONAL — Page, AZ (Horseshoe Bend + Antelope Canyon):**
-> De Kanab, seguir pela US-89 E até Page (~120 km, ~1.5h). Adiciona ~3h ao dia.
->
-> | Horário | Atividade |
-> |---------|-----------|
-> | 10:45 | 🚗 De Kanab → US-89 E rumo a **Page, AZ** (~120 km, ~1.5h) |
-> | 12:15 | 🏜️ **Horseshoe Bend** — mirante sobre a curva do rio Colorado, 300m acima! Grátis, caminhada de ~15 min |
-> | 13:00 | 🏞️ **Upper Antelope Canyon** — cânion slot com raios de luz! Tour guiado obrigatório (~1h, ~$60-100/pessoa). Reservar em [antelopecanyon.az](https://antelopecanyon.az) |
-> | 14:00 | 🍽️ Almoço em Page |
-> | 14:30 | 🚗 Page → Grand Canyon South Rim (~220 km, ~2.5h via US-89 S → AZ-64) |
-> | ~17:00 | 🏜️ Chegada no Grand Canyon — direto pro pôr do sol! |
->
-> ⚠️ Com essa opção, chegada no GC ~17h. Pular Desert View Drive e ir direto pro pôr do sol em Hopi Point.
-> 💰 Antelope Canyon: reserva Navajo, $60-100/pessoa (não vale America the Beautiful Pass). Reservar com antecedência!
-
-| ~12:15 | 🏜️ Chegada no **Grand Canyon South Rim**! |
-| 12:30 | 📸 **Mather Point** — primeira vista do cânion. ABSURDO! |
-| 13:00 | 🍽️ Almoço no parque (Market Plaza ou El Tovar) |
+| 09:30 | ⚡🍽️ **Kanab, UT** (~100 km) — ⚠️ **CARREGAR ATÉ 100%!** (~40 min) + café/snack. "Little Hollywood"! — GC tem ~130 km internos + Kingman a 260 km |
+| ~12:30 | 🏜️ Chegada no **Grand Canyon South Rim**! |
+| 12:45 | 📸 **Mather Point** — vista absurda do cânion! |
+| 13:15 | 🍽️ Almoço no parque (Market Plaza ou El Tovar) |
 | 14:00 | 🥾 **Rim Trail** (Mather Point → Yavapai Point, ~1.5 km) |
 | 14:45 | 🏛️ **Yavapai Geology Museum** — painéis de vidro sobre o abismo |
 | 15:30 | 📸 **Bright Angel Trailhead** — vista da trilha mais famosa |
-| 16:00 | 🚗 **Desert View Drive** (~40 km) — mirantes na borda leste |
-| 16:30 | 📸 **Grandview Point** — um dos mirantes mais dramáticos |
-| 17:00 | 🏛️ **Desert View Watchtower** — torre de 1932, vista 360° |
-| 17:30 | 🌅 **Pôr do sol no Grand Canyon** — Hopi Point ou Yavapai Point. ESPETACULAR! |
-| 19:00 | 🍽️ Jantar no parque ou Tusayan |
+| 16:00 | 📸 **Hopi Point** — vista mais ampla do cânion |
+| 17:00 | 🌅 **Pôr do sol no Grand Canyon** — Hopi Point ou Yavapai Point. ESPETACULAR! |
+| 17:30 | 🚗 Saída rumo a **Las Vegas** (~430 km, ~4.5h via I-40 → US-93) |
+| 19:15 | ⚡ **Supercharger Kingman, AZ** (~260 km) — parada ~25 min. Trecho da **Route 66**! |
+| 19:45 | 🚗 Continuação até Vegas (~170 km, ~2h) |
+| ~21:45 | 🎰 Chegada em **Las Vegas**! Check-in no **Sahara** |
+| 22:00 | 🍽️ Jantar tardio (hotel ou Strip) |
 
-> 🌌 Grand Canyon é **International Dark Sky Park** — saiam à noite pra ver as estrelas!
+> 🚗 Dia longo (~10h de estrada com paradas), mas vocês já conhecem o GC — a tarde é suficiente! Se estiverem cansados, pulem o pôr do sol e saiam ~15:30 (chegam em Vegas ~20h).
+> ⚡ Carregar 100% em Kanab é ESSENCIAL — próximo SC é Kingman a ~390 km (GC interno + I-40).
 
 ---
 
-### Dia 28 — Qua, 17/02 (Grand Canyon AM → Las Vegas!) 📍 Las Vegas, NV
+### Dia 28 — Qua, 17/02 (Vegas livre! 🎰) 📍 Las Vegas, NV
 ![Welcome to Las Vegas](https://commons.wikimedia.org/wiki/Special:FilePath/Welcome_to_Fabulous_Las_Vegas.jpg?width=800)
-> Nascer do sol no GC, Bright Angel Trail de manhã, Vegas à tarde! 🎰
+> Dia livre pra curtir Vegas com calma depois do dia longo de ontem!
 
 | Horário | Atividade |
 |---------|-----------|
-| 06:30 | 🌅 **Nascer do sol no Grand Canyon** — Mather Point ou Yaki Point. INESQUECÍVEL! |
-| 08:00 | ☕ Café |
-| 08:30 | 🥾 **Bright Angel Trail** — descer os primeiros switchbacks (~1.5h ida e volta ao 1º mirante) |
-| 10:00 | 📸 **Hermit Road** (shuttle) — mirantes: Powell Point, **Hopi Point** (vista mais ampla), Pima Point |
-| 11:00 | 🚗 Check-out + saída rumo a **Las Vegas** (~430 km, ~4.5h via I-40 → US-93) |
-| 12:45 | ⚡ **Supercharger Kingman, AZ** (~260 km) — parada ~25 min. Trecho da **Route 66**! |
-| 13:15 | 🚗 Continuação até Vegas (~170 km, ~2h) |
-| ~15:15 | 🎰 Chegada em **Las Vegas**! Check-in |
-| 15:30 | 🍽️ Almoço tardio na Strip — **In-N-Out Burger** (clássico!) |
-| 16:30 | 🎨 **Seven Magic Mountains** (~20 min ao sul da Strip) — torres de pedras neon no deserto! |
-| 17:00 | 📸 **Welcome to Las Vegas Sign** — foto icônica! |
-| 18:00 | 🏨 Passeio pelos **hotéis temáticos** — Venetian, Bellagio (jardim interno), Caesars Palace |
+| 09:00 | ☕ Café com calma (merecido!) |
+| 10:00 | 🎨 **Seven Magic Mountains** (~20 min ao sul da Strip) — torres de pedras neon no deserto! |
+| 10:30 | 📸 **Welcome to Las Vegas Sign** — foto icônica! |
+| 11:00 | 🍽️ Brunch — **In-N-Out Burger** (clássico!) ou café na Strip |
+| 12:00 | 🏨 Passeio pelos **hotéis temáticos** — Venetian, Bellagio (jardim interno + fontes), Caesars Palace |
+| 14:00 | 🛍️ Compras — Fashion Show Mall ou Las Vegas North Premium Outlets |
+| 17:00 | 🏊 Piscina no Sahara (ou descanso) |
 | 19:00 | 🍽️ Jantar na Strip |
-| 21:00 | 🌃 Passeio noturno pela **Strip** — Bellagio Fountains, cassinos! |
+| 21:00 | 🌃 Passeio noturno pela **Strip** — Bellagio Fountains, cassinos, neon! |
 
-> 🎰 Chegada triunfal em Vegas depois de 24 dias de roadtrip! Strip à noite é a celebração perfeita!
+> 🎰 Dia perfeito pra explorar a Strip sem pressa!
 
 ---
 
@@ -841,8 +822,9 @@
 | 11:00 | 📸 **White Domes Trail** (~1.8 km loop) — cânion estreito colorido |
 | 11:45 | 🚗 Volta pra Vegas (~1h) |
 | 12:45 | 🍽️ Almoço na Strip |
-| 14:00 | 🛍️ **Outlets** — Las Vegas North Premium Outlets ou Fashion Show Mall |
-| 17:00 | 🎲 Passeio pela Strip — Bellagio Fountains, lojas, pessoas |
+| 14:00 | � **Area 15** (~15 min da Strip) — complexo imersivo futurista! **Meow Wolf's Omega Mart** (supermercado alienígena surreal, ~1.5h), instalações de arte, bares temáticos. Ingresso Omega Mart ~$45/pessoa. Imperdível pra toda a família! |
+| 16:30 | 🛍️ Compras — Fashion Show Mall ou Outlets |
+| 17:30 | 🎲 Passeio pela Strip — Bellagio Fountains, lojas, pessoas |
 | 19:00 | 🍽️ Jantar na Strip |
 
 ---
@@ -936,7 +918,7 @@
 | 7 | Arches | 23 |
 | 8 | Bryce Canyon | 24-25 |
 | 9 | Zion | 25-26 |
-| 10 | Grand Canyon | 27-28 |
+| 10 | Grand Canyon | 27 |
 | 11 | Death Valley | 30 |
 
 ---
@@ -956,8 +938,7 @@
 | 20 | Boise → SLC | Twin Falls, SLC |
 | 21 | SLC → Moab | Price, Green River |
 | 24 | Moab → Bryce | Green River, Salina |
-| 27 | Zion → GC | Kanab |
-| 28 | GC → Vegas | Kingman |
+| 27 | Zion → GC → Vegas | Kanab, Kingman |
 | 31 | Vegas → LA | Barstow |
 
 > ⚡ Sempre carregando até 80% (~280 km de autonomia real no inverno). Paradas de ~25 min no V3 Supercharger.
