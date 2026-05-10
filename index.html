@@ -397,10 +397,68 @@
 
         /* ==================== MAP ==================== */
         #map-section { padding-bottom: 0; }
+        #sec-map { position: relative; }
         #map {
             height: calc(100vh - var(--tab-height) - var(--safe-top));
             height: calc(100dvh - var(--tab-height) - var(--safe-top));
             width: 100%;
+        }
+
+        .map-toolbar {
+            position: absolute;
+            top: 12px; left: 12px; right: 12px;
+            display: flex;
+            gap: 8px;
+            z-index: 1000;
+            pointer-events: none;
+        }
+        .map-tb-btn {
+            pointer-events: auto;
+            background: rgba(5,5,8,0.88);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text);
+            padding: 8px 14px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .map-tb-btn:active { background: rgba(255,255,255,0.12); }
+        .map-tb-btn.active { border-color: var(--blue); background: rgba(10,132,255,0.18); }
+        #btnMapDay { flex: 1; text-align: left; }
+
+        .map-layers-panel {
+            position: absolute;
+            top: 52px; right: 12px;
+            background: rgba(5,5,8,0.92);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+            padding: 12px 16px;
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--text2);
+            min-width: 180px;
+        }
+        .map-layers-panel.open { display: flex; }
+        .map-layers-panel label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        .map-layers-panel input[type="checkbox"] {
+            width: 18px; height: 18px;
+            accent-color: var(--blue);
         }
 
         /* Hotel list */
@@ -501,9 +559,33 @@
             box-shadow: 0 8px 32px rgba(0,0,0,0.6);
         }
         .custom-popup .leaflet-popup-tip { background: var(--bg3); }
-        .custom-popup .leaflet-popup-content { margin: 12px 16px; }
+        .custom-popup .leaflet-popup-content { margin: 12px 16px; max-width: 260px; }
         .custom-popup h3 { font-weight: 700; font-size: 14px; margin-bottom: 6px; }
         .custom-popup .days { color: var(--text2); font-size: 12px; line-height: 1.6; }
+        .popup-nav-btns { display: flex; gap: 6px; margin-top: 10px; }
+        .popup-nav-btn {
+            flex: 1;
+            padding: 7px 0;
+            border-radius: 8px;
+            border: none;
+            font-size: 11px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            display: block;
+        }
+        .popup-nav-btn.gmaps { background: rgba(66,133,244,0.15); color: #4285F4; }
+        .popup-nav-btn.amaps { background: rgba(52,199,89,0.15); color: #34C759; }
+
+        .marker-pulse {
+            animation: markerPulse 1.5s ease-in-out infinite;
+        }
+        @keyframes markerPulse {
+            0%, 100% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.35); filter: brightness(1.5) drop-shadow(0 0 8px rgba(10,132,255,0.6)); }
+        }
 
         .legend {
             background: rgba(5,5,8,0.92);
@@ -811,6 +893,19 @@
 <!-- ==================== MAP ==================== -->
 <div class="section" id="sec-map" role="tabpanel" aria-label="Mapa">
     <div id="map"></div>
+    <div class="map-toolbar">
+        <button class="map-tb-btn" id="btnMapDay" onclick="mapFlyToDay()" title="Ir ao dia atual">📅 <span id="mapDayLabel">Dia 1</span></button>
+        <button class="map-tb-btn" id="btnMapFit" onclick="mapFitAll()" title="Ver rota completa">🗺️</button>
+        <button class="map-tb-btn" id="btnMapSat" onclick="mapToggleSat()" title="Alternar satélite">🛰️</button>
+        <button class="map-tb-btn" id="btnMapLayers" onclick="mapTogglePanel()" title="Camadas">☰</button>
+    </div>
+    <div class="map-layers-panel" id="mapLayersPanel">
+        <label><input type="checkbox" id="chkRoute" checked onchange="mapToggleLayer('route')"> 🛣️ Rota completa</label>
+        <label><input type="checkbox" id="chkStops" checked onchange="mapToggleLayer('stops')"> 📍 Paradas</label>
+        <label><input type="checkbox" id="chkSuperchargers" checked onchange="mapToggleLayer('sc')"> ⚡ Superchargers</label>
+        <label><input type="checkbox" id="chkDayTrips" checked onchange="mapToggleLayer('daytrips')"> 🟡 Day trips</label>
+        <label><input type="checkbox" id="chkDayRoute" checked onchange="mapToggleLayer('dayroute')"> 🔵 Trecho do dia</label>
+    </div>
 </div>
 
 <!-- ==================== SETTINGS ==================== -->
@@ -1653,7 +1748,7 @@ function switchTab(tab) {
     document.getElementById('sec-' + tab).classList.add('active');
 
     if (tab === 'map' && !mapInstance) setTimeout(initMap, 100);
-    if (tab === 'map' && mapInstance) setTimeout(function() { mapInstance.invalidateSize(); }, 100);
+    if (tab === 'map' && mapInstance) setTimeout(function() { mapInstance.invalidateSize(); mapUpdateDay(currentDay); }, 100);
     if (tab === 'explore') renderExplore();
 }
 
@@ -1721,13 +1816,79 @@ function initMap() {
     }
     doInitMap();
 }
+
+// Map layer groups & state
+var mapLayers = { route: null, stops: null, sc: null, daytrips: null, dayroute: null };
+var mapTileDark = null, mapTileSat = null;
+var isSatellite = false;
+var mapStopMarkers = {};
+var activeMarkerEl = null;
+
+// Day → coordinate mapping for fly-to
+var dayCoords = {
+    1:[40.7580,-73.9855], 2:[40.7580,-73.9855], 3:[40.7580,-73.9855], 4:[40.7580,-73.9855],
+    5:[33.9425,-118.4081], 6:[36.4519,-118.9054], 7:[37.8651,-119.5383], 8:[37.8651,-119.5383],
+    9:[37.8651,-119.5383], 10:[37.7749,-122.4194], 11:[37.7749,-122.4194],
+    12:[39.1502,-123.2078], 13:[41.7558,-124.2026], 14:[42.4074,-124.4218],
+    15:[44.9581,-124.0159], 16:[45.8918,-123.9615], 17:[47.9504,-124.3855],
+    18:[47.9504,-124.3855], 19:[46.8523,-121.7603], 20:[43.6150,-116.2023],
+    21:[40.7608,-111.8910], 22:[38.5733,-109.5498], 23:[38.5733,-109.5498],
+    24:[38.5733,-109.5498], 25:[37.6283,-112.1677], 26:[37.2090,-112.9871],
+    27:[36.0544,-112.1401], 28:[36.1699,-115.1398], 29:[36.1699,-115.1398],
+    30:[36.1699,-115.1398], 31:[34.9876,-118.9148], 32:[34.0522,-118.2437],
+    33:[34.0522,-118.2437]
+};
+
+// Route coordinates per day for day-route highlighting
+var dayRouteSegments = {
+    5: [[33.9425,-118.4081],[34.9876,-118.9148],[36.4519,-118.9054]],
+    6: [[36.4519,-118.9054]],
+    7: [[36.4519,-118.9054],[37.8651,-119.5383]],
+    8: [[37.8651,-119.5383]],
+    9: [[37.8651,-119.5383],[37.7974,-121.2262],[37.7749,-122.4194]],
+    10: [[37.7749,-122.4194]],
+    11: [[37.7749,-122.4194]],
+    12: [[37.7749,-122.4194],[38.0682,-122.8838],[39.1502,-123.2078]],
+    13: [[39.1502,-123.2078],[40.8021,-124.1637],[41.4013,-124.0653],[41.7558,-124.2026]],
+    14: [[41.7558,-124.2026],[42.1542,-124.3486],[42.4074,-124.4218],[43.3665,-124.2179]],
+    15: [[43.3665,-124.2179],[44.2780,-124.1135],[44.9581,-124.0159]],
+    16: [[44.9581,-124.0159],[45.8918,-123.9615]],
+    17: [[45.8918,-123.9615],[46.1879,-123.8313],[46.9754,-123.8157],[47.9504,-124.3855]],
+    18: [[47.9504,-124.3855]],
+    19: [[47.9504,-124.3855],[47.0379,-122.9007],[46.8523,-121.7603],[47.0379,-122.9007]],
+    20: [[47.0379,-122.9007],[45.5762,-122.1158],[45.5946,-121.1787],[45.6721,-118.7886],[44.7749,-117.8344],[43.6150,-116.2023]],
+    21: [[43.6150,-116.2023],[42.5558,-114.4614],[40.7608,-111.8910]],
+    22: [[40.7608,-111.8910],[39.5994,-110.8107],[38.9953,-110.1593],[38.5733,-109.5498]],
+    23: [[38.5733,-109.5498]],
+    24: [[38.5733,-109.5498],[38.9953,-110.1593],[38.9340,-111.8600],[37.6283,-112.1677]],
+    25: [[37.6283,-112.1677],[37.2090,-112.9871]],
+    26: [[37.2090,-112.9871]],
+    27: [[37.2090,-112.9871],[37.0215,-112.5263],[36.0544,-112.1401],[35.2053,-114.0530],[36.1699,-115.1398]],
+    28: [[36.1699,-115.1398]],
+    29: [[36.1699,-115.1398]],
+    30: [[36.1699,-115.1398],[36.5054,-116.9325],[36.1699,-115.1398]],
+    31: [[36.1699,-115.1398],[35.0527,-117.0676],[34.0522,-118.2437]],
+    32: [[34.0522,-118.2437]],
+    33: [[34.0522,-118.2437]]
+};
+
 function doInitMap() {
     L.Icon.Default.imagePath = 'lib/';
-    mapInstance = L.map('map', { center: [38, -105], zoom: 5, zoomControl: true });
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; OSM &copy; CARTO', maxZoom: 19
-    }).addTo(mapInstance);
+    mapInstance = L.map('map', { center: [38, -105], zoom: 5, zoomControl: false });
 
+    // Zoom control bottom-left
+    L.control.zoom({ position: 'bottomleft' }).addTo(mapInstance);
+
+    // Tile layers
+    mapTileDark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; OSM &copy; CARTO', maxZoom: 19
+    });
+    mapTileSat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: '&copy; Esri', maxZoom: 18
+    });
+    mapTileDark.addTo(mapInstance);
+
+    // ---- ROUTE LAYER ----
     var routeCoords = [
         [33.9425,-118.4081],[34.9876,-118.9148],[36.4519,-118.9054],
         [37.8651,-119.5383],[37.7974,-121.2262],[37.7749,-122.4194],
@@ -1745,43 +1906,63 @@ function doInitMap() {
         [37.0215,-112.5263],[36.0544,-112.1401],[35.2053,-114.0530],
         [36.1699,-115.1398],[35.0527,-117.0676],[34.0522,-118.2437]
     ];
-    L.polyline(routeCoords, { color: '#4ecdc4', weight: 3.5, opacity: 0.85, smoothFactor: 1.5 }).addTo(mapInstance);
+    mapLayers.route = L.layerGroup([
+        L.polyline(routeCoords, { color: '#4ecdc4', weight: 3.5, opacity: 0.85, smoothFactor: 1.5 })
+    ]);
+    mapLayers.route.addTo(mapInstance);
 
+    // ---- DAY TRIPS LAYER ----
     var dayTrips = [
         [[36.1699,-115.1398],[36.4394,-114.5131]],
         [[36.1699,-115.1398],[36.5054,-116.9325]],
         [[36.1699,-115.1398],[36.1357,-115.4279]]
     ];
-    dayTrips.forEach(function(p) { L.polyline(p, { color: '#ffd700', weight: 2.5, dashArray: '6,6', opacity: 0.7 }).addTo(mapInstance); });
+    mapLayers.daytrips = L.layerGroup();
+    dayTrips.forEach(function(p) { L.polyline(p, { color: '#ffd700', weight: 2.5, dashArray: '6,6', opacity: 0.7 }).addTo(mapLayers.daytrips); });
+    mapLayers.daytrips.addTo(mapInstance);
 
+    // ---- STOPS LAYER ----
     var stops = [
-        { n: "New York (JFK)", lat: 40.6413, lng: -73.7781, i: "✈️", info: "Dias 1–5 • 4 noites\nMarriott Marquis, Times Square" },
-        { n: "Los Angeles (LAX)", lat: 33.9425, lng: -118.4081, i: "✈️", info: "Dia 6 • Retirada Tesla" },
-        { n: "Sequoia / Kings Canyon", lat: 36.4519, lng: -118.9054, i: "🌲", info: "Dia 7 • General Sherman Tree" },
-        { n: "Yosemite NP", lat: 37.8651, lng: -119.5383, i: "🏞️", info: "Dias 8–10 • Half Dome, El Capitan" },
-        { n: "San Francisco", lat: 37.7749, lng: -122.4194, i: "🌉", info: "Dias 10–12 • Golden Gate" },
-        { n: "Redwood NP", lat: 41.7558, lng: -124.2026, i: "🦕", info: "Dia 14 • Fern Canyon" },
-        { n: "Cannon Beach, OR", lat: 45.8918, lng: -123.9615, i: "🌅", info: "Dia 16 • Haystack Rock" },
-        { n: "Olympic NP / Forks", lat: 47.9504, lng: -124.3855, i: "🧛", info: "Dias 17–18 • Hoh, Ruby Beach" },
-        { n: "Mt. Rainier NP", lat: 46.8523, lng: -121.7603, i: "🌋", info: "Dia 19 • Paradise" },
-        { n: "Boise, ID", lat: 43.6150, lng: -116.2023, i: "🏙️", info: "Dia 20 • Basque Block" },
-        { n: "Moab, UT", lat: 38.5733, lng: -109.5498, i: "🏜️", info: "Dias 21–23 • Arches, Canyonlands" },
-        { n: "Bryce Canyon, UT", lat: 37.6283, lng: -112.1677, i: "🏔️", info: "Dia 24 • Hoodoos + stargazing" },
-        { n: "Zion NP", lat: 37.2090, lng: -112.9871, i: "🏞️", info: "Dias 25–26 • Angels Landing" },
-        { n: "Grand Canyon, AZ", lat: 36.0544, lng: -112.1401, i: "🏞️", info: "Dias 27–28 • Mather Point" },
-        { n: "Las Vegas, NV", lat: 36.1699, lng: -115.1398, i: "🎰", info: "Dias 28–31 • Grand Finale!" },
-        { n: "Los Angeles, CA", lat: 34.0522, lng: -118.2437, i: "🎬", info: "Dias 32–33 • Griffith, Venice" }
+        { n: "New York (JFK)", lat: 40.6413, lng: -73.7781, i: "✈️", info: "Dias 1–4 • 4 noites\nMarriott Marquis, Times Square", days: [1,2,3,4] },
+        { n: "Los Angeles (LAX)", lat: 33.9425, lng: -118.4081, i: "✈️", info: "Dia 5 • Retirada Tesla", days: [5] },
+        { n: "Sequoia / Kings Canyon", lat: 36.4519, lng: -118.9054, i: "🌲", info: "Dias 6–7 • General Sherman Tree", days: [6,7] },
+        { n: "Yosemite NP", lat: 37.8651, lng: -119.5383, i: "🏞️", info: "Dias 7–9 • Half Dome, El Capitan", days: [7,8,9] },
+        { n: "San Francisco", lat: 37.7749, lng: -122.4194, i: "🌉", info: "Dias 10–11 • Golden Gate", days: [10,11] },
+        { n: "Redwood NP", lat: 41.7558, lng: -124.2026, i: "🦕", info: "Dia 13 • Fern Canyon", days: [13] },
+        { n: "Cannon Beach, OR", lat: 45.8918, lng: -123.9615, i: "🌅", info: "Dia 16 • Haystack Rock", days: [16] },
+        { n: "Olympic NP / Forks", lat: 47.9504, lng: -124.3855, i: "🧛", info: "Dias 17–18 • Hoh, Ruby Beach", days: [17,18] },
+        { n: "Mt. Rainier NP", lat: 46.8523, lng: -121.7603, i: "🌋", info: "Dia 19 • Paradise", days: [19] },
+        { n: "Boise, ID", lat: 43.6150, lng: -116.2023, i: "🏙️", info: "Dia 20 • Basque Block", days: [20] },
+        { n: "Moab, UT", lat: 38.5733, lng: -109.5498, i: "🏜️", info: "Dias 22–24 • Arches, Canyonlands", days: [22,23,24] },
+        { n: "Bryce Canyon, UT", lat: 37.6283, lng: -112.1677, i: "🏔️", info: "Dia 25 • Hoodoos + stargazing", days: [25] },
+        { n: "Zion NP", lat: 37.2090, lng: -112.9871, i: "🏞️", info: "Dias 25–26 • Angels Landing", days: [25,26] },
+        { n: "Grand Canyon, AZ", lat: 36.0544, lng: -112.1401, i: "🏞️", info: "Dia 27 • Mather Point, pôr do sol", days: [27] },
+        { n: "Las Vegas, NV", lat: 36.1699, lng: -115.1398, i: "🎰", info: "Dias 27–30 • Sahara, 4 noites", days: [27,28,29,30] },
+        { n: "Los Angeles, CA", lat: 34.0522, lng: -118.2437, i: "🎬", info: "Dias 31–33 • Griffith, Venice", days: [31,32,33] }
     ];
 
+    mapLayers.stops = L.layerGroup();
     stops.forEach(function(s) {
         var ic = L.divIcon({
-            html: '<div style="font-size:22px;text-shadow:0 2px 6px rgba(0,0,0,0.6)">' + s.i + '</div>',
-            className: '', iconSize: [22,22], iconAnchor: [11,11], popupAnchor: [0,-11]
+            html: '<div class="map-stop-icon" style="font-size:22px;text-shadow:0 2px 6px rgba(0,0,0,0.6)">' + s.i + '</div>',
+            className: '', iconSize: [22,22], iconAnchor: [11,11], popupAnchor: [0,-14]
         });
-        L.marker([s.lat, s.lng], { icon: ic }).addTo(mapInstance)
-            .bindPopup('<h3>' + s.i + ' ' + s.n + '</h3><div class="days">' + s.info.replace(/\n/g,'<br>') + '</div>', { className: 'custom-popup' });
+        var q = encodeURIComponent(s.n);
+        var navHtml = '<div class="popup-nav-btns">' +
+            '<a class="popup-nav-btn gmaps" href="https://www.google.com/maps/search/?api=1&query=' + q + '" target="_blank" rel="noopener">🗺️ Google</a>' +
+            '<a class="popup-nav-btn amaps" href="https://maps.apple.com/?q=' + q + '" target="_blank" rel="noopener">🍎 Apple</a>' +
+            '</div>';
+        var marker = L.marker([s.lat, s.lng], { icon: ic }).addTo(mapLayers.stops)
+            .bindPopup('<h3>' + s.i + ' ' + s.n + '</h3><div class="days">' + s.info.replace(/\n/g,'<br>') + '</div>' + navHtml, { className: 'custom-popup' });
+        // Index marker by days it belongs to
+        s.days.forEach(function(d) {
+            if (!mapStopMarkers[d]) mapStopMarkers[d] = [];
+            mapStopMarkers[d].push(marker);
+        });
     });
+    mapLayers.stops.addTo(mapInstance);
 
+    // ---- SUPERCHARGER LAYER ----
     var scCoords = {
         "Tejon / Lebec, CA": [34.9876,-118.9148], "Manteca / Oakdale, CA": [37.7974,-121.2262],
         "Ukiah, CA": [39.1502,-123.2078], "Coos Bay, OR": [43.3665,-124.2179],
@@ -1793,6 +1974,7 @@ function doInitMap() {
         "Salina, UT": [38.9340,-111.8600], "Kanab, UT": [37.0215,-112.5263],
         "Kingman, AZ": [35.2053,-114.0530], "Barstow, CA": [35.0527,-117.0676]
     };
+    mapLayers.sc = L.layerGroup();
     superchargers.forEach(function(sc) {
         var c = scCoords[sc.name];
         if (!c) return;
@@ -1800,22 +1982,114 @@ function doInitMap() {
             html: '<div style="font-size:13px;background:#00c853;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.5);border:2px solid #fff">⚡</div>',
             className: '', iconSize: [18,18], iconAnchor: [9,9], popupAnchor: [0,-9]
         });
-        L.marker(c, { icon: scI }).addTo(mapInstance)
-            .bindPopup('<h3>⚡ SC ' + sc.name + '</h3><div class="days">Dia ' + sc.day + ' • ' + sc.leg + (sc.note ? '<br>' + sc.note : '') + '</div>', { className: 'custom-popup' });
+        var q = encodeURIComponent('Tesla Supercharger ' + sc.name);
+        var navHtml = '<div class="popup-nav-btns">' +
+            '<a class="popup-nav-btn gmaps" href="https://www.google.com/maps/search/?api=1&query=' + q + '" target="_blank" rel="noopener">🗺️ Google</a>' +
+            '<a class="popup-nav-btn amaps" href="https://maps.apple.com/?q=' + q + '" target="_blank" rel="noopener">🍎 Apple</a>' +
+            '</div>';
+        L.marker(c, { icon: scI }).addTo(mapLayers.sc)
+            .bindPopup('<h3>⚡ SC ' + sc.name + '</h3><div class="days">Dia ' + sc.day + ' • ' + sc.leg + (sc.note ? '<br>' + sc.note : '') + '</div>' + navHtml, { className: 'custom-popup' });
     });
+    mapLayers.sc.addTo(mapInstance);
 
+    // ---- DAY ROUTE LAYER ----
+    mapLayers.dayroute = L.layerGroup();
+    mapLayers.dayroute.addTo(mapInstance);
+
+    // ---- LEGEND ----
     var legend = L.control({ position: 'bottomright' });
     legend.onAdd = function() {
         var div = L.DomUtil.create('div', 'legend');
         div.innerHTML = '<h3>🗺️ Legenda</h3>' +
             '<div class="legend-item"><div class="legend-line" style="background:#4ecdc4"></div><span>Roadtrip Tesla</span></div>' +
             '<div class="legend-item"><div class="legend-line" style="background:#ffd700;border-style:dashed"></div><span>Day trips (Vegas)</span></div>' +
+            '<div class="legend-item"><div class="legend-line" style="background:#0a84ff;height:4px"></div><span>Trecho do dia</span></div>' +
             '<div class="legend-item"><div style="font-size:11px;background:#00c853;border-radius:50%;width:14px;height:14px;display:flex;align-items:center;justify-content:center;border:1.5px solid #fff">⚡</div><span>Superchargers (18)</span></div>' +
             '<br><div style="color:#888;font-size:10px">📅 21/01 → 22/02/2027<br>🚗 ~6.500 km • 🔄 Anti-horário</div>';
         return div;
     };
     legend.addTo(mapInstance);
+
+    // Initial fly to current day
+    mapUpdateDay(currentDay);
+
     mapInstance.fitBounds(L.latLngBounds(routeCoords).pad(0.1));
+
+    // Close layers panel on map click
+    mapInstance.on('click', function() {
+        document.getElementById('mapLayersPanel').classList.remove('open');
+    });
+}
+
+function mapUpdateDay(dayNum) {
+    var label = document.getElementById('mapDayLabel');
+    if (label) {
+        var d = days.find(function(x) { return x.day === dayNum; });
+        label.textContent = 'Dia ' + dayNum + (d ? ' — ' + d.location : '');
+    }
+
+    // Clear old day route
+    if (mapLayers.dayroute) mapLayers.dayroute.clearLayers();
+
+    // Draw day segment
+    var seg = dayRouteSegments[dayNum];
+    if (seg && seg.length > 1 && mapLayers.dayroute) {
+        L.polyline(seg, { color: '#0a84ff', weight: 5, opacity: 0.9, smoothFactor: 1 }).addTo(mapLayers.dayroute);
+    }
+
+    // Pulse active marker
+    if (activeMarkerEl) { activeMarkerEl.classList.remove('marker-pulse'); activeMarkerEl = null; }
+    var markers = mapStopMarkers[dayNum];
+    if (markers && markers.length > 0) {
+        var el = markers[0].getElement();
+        if (el) {
+            var iconDiv = el.querySelector('.map-stop-icon');
+            if (iconDiv) { iconDiv.classList.add('marker-pulse'); activeMarkerEl = iconDiv; }
+        }
+    }
+}
+
+function mapFlyToDay() {
+    if (!mapInstance) return;
+    var c = dayCoords[currentDay];
+    if (c) mapInstance.flyTo(c, currentDay <= 4 ? 11 : 10, { duration: 1.2 });
+    mapUpdateDay(currentDay);
+}
+
+function mapFitAll() {
+    if (!mapInstance) return;
+    mapInstance.flyToBounds(mapInstance.getBounds().pad(-0.1), { duration: 0.8 });
+    setTimeout(function() {
+        mapInstance.fitBounds(L.latLngBounds([
+            [33.9425,-118.4081],[47.9504,-124.3855],[36.1699,-115.1398],[40.6413,-73.7781]
+        ]).pad(0.1), { animate: true, duration: 0.8 });
+    }, 100);
+}
+
+function mapToggleSat() {
+    if (!mapInstance) return;
+    isSatellite = !isSatellite;
+    if (isSatellite) {
+        mapInstance.removeLayer(mapTileDark);
+        mapTileSat.addTo(mapInstance);
+    } else {
+        mapInstance.removeLayer(mapTileSat);
+        mapTileDark.addTo(mapInstance);
+    }
+    document.getElementById('btnMapSat').classList.toggle('active', isSatellite);
+}
+
+function mapTogglePanel() {
+    document.getElementById('mapLayersPanel').classList.toggle('open');
+}
+
+function mapToggleLayer(key) {
+    if (!mapInstance || !mapLayers[key]) return;
+    if (mapInstance.hasLayer(mapLayers[key])) {
+        mapInstance.removeLayer(mapLayers[key]);
+    } else {
+        mapLayers[key].addTo(mapInstance);
+    }
 }
 
 // ==================== OFFLINE MAP TILES ====================

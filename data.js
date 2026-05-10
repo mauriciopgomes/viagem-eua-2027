@@ -689,8 +689,8 @@ const hotels = [
     { num: 13, name: "Moab, UT", checkin: "10/02", checkout: "13/02", nights: 3 },
     { num: 14, name: "Bryce Canyon, UT", checkin: "13/02", checkout: "14/02", nights: 1 },
     { num: 15, name: "Springdale, UT (Zion)", checkin: "14/02", checkout: "16/02", nights: 2 },
-    { num: 15, name: "Las Vegas, NV (Sahara)", checkin: "16/02", checkout: "20/02", nights: 4 },
-    { num: 16, name: "Los Angeles, CA", checkin: "20/02", checkout: "22/02", nights: 2 }
+    { num: 16, name: "Las Vegas, NV (Sahara)", checkin: "16/02", checkout: "20/02", nights: 4 },
+    { num: 17, name: "Los Angeles, CA", checkin: "20/02", checkout: "22/02", nights: 2 }
 ];
 
 const parks = [
@@ -708,12 +708,12 @@ const parks = [
 ];
 
 const superchargers = [
-    { day: 5, name: "Tejon / Lebec, CA", leg: "LAX → Three Rivers", critical: true, note: "⚠️ CARREGAR ATÉ 100% — Sequoia sem carregadores!", noteEn: "⚠️ CHARGE TO 100% — No chargers in Sequoia!" },
+    { day: 5, name: "Tejon / Lebec, CA", leg: "LAX → Three Rivers", critical: true, note: "⚠️ CARREGAR ATÉ 100% — Sequoia sem carregadores!" },
     { day: 9, name: "Manteca / Oakdale, CA", leg: "Yosemite → SF", critical: false },
     { day: 12, name: "Ukiah, CA", leg: "SF → Eureka", critical: false },
     { day: 14, name: "Coos Bay, OR", leg: "Crescent City → Coos Bay", critical: false },
     { day: 15, name: "Lincoln City, OR", leg: "Coos Bay → Cannon Beach", critical: false },
-    { day: 16, name: "Aberdeen, WA", leg: "Cannon Beach → Forks", critical: true, note: "⚠️ CARREGAR ATÉ 100% — Olympic 265 km internos + sem SC até Olympia!", noteEn: "⚠️ CHARGE TO 100% — Olympic 165 mi internal + no SC until Olympia!" },
+    { day: 16, name: "Aberdeen, WA", leg: "Cannon Beach → Forks", critical: true, note: "⚠️ CARREGAR ATÉ 100% — Olympic 265 km internos + sem SC até Olympia!" },
     { day: 18, name: "Olympia / Tacoma, WA", leg: "Forks → Olympia", critical: false },
     { day: 19, name: "The Dalles, OR", leg: "Olympia → Boise", critical: false },
     { day: 19, name: "Pendleton, OR", leg: "Olympia → Boise", critical: false },
