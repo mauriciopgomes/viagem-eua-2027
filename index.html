@@ -916,6 +916,9 @@
         @keyframes checkPop { 0% { transform: scale(1); } 40% { transform: scale(1.35); } 100% { transform: scale(1); } }
         @keyframes checkRing { 0% { box-shadow: 0 0 0 0 rgba(48,209,88,0.5); } 100% { box-shadow: 0 0 0 14px rgba(48,209,88,0); } }
         .check-circle.just-checked { animation: checkPop 0.4s cubic-bezier(0.34,1.56,0.64,1), checkRing 0.6s ease-out; }
+        @keyframes favPop { 0% { transform: scale(1); } 40% { transform: scale(1.4); } 100% { transform: scale(1); } }
+        @keyframes favRing { 0% { box-shadow: 0 0 0 0 rgba(255,69,58,0.5); } 100% { box-shadow: 0 0 0 14px rgba(255,69,58,0); } }
+        .fav-btn.just-faved { animation: favPop 0.4s cubic-bezier(0.34,1.56,0.64,1), favRing 0.6s ease-out; }
         /* Card actions bar */
         .card-actions {
             display: flex;
@@ -1280,7 +1283,7 @@
 <main>
 <!-- ==================== HOME / ITINERARY ==================== -->
 <div class="section active" id="sec-home" role="tabpanel" aria-label="Roteiro">
-    <div class="hero" id="heroSection">
+    <div class="hero" id="heroSection" onclick="window.scrollTo({top:0,behavior:'smooth'})">
         <img id="heroImg" src="img/dia-01.jpg" alt="Day photo" fetchpriority="high" width="960" height="641">
         <div class="hero-overlay">
             <div class="hero-title" id="heroTitle">🇺🇸 Viagem EUA 2027</div>
@@ -1301,7 +1304,7 @@
     <div class="trip-stats-card" id="tripStatsCard">
         <div class="trip-stat"><span class="trip-stat-value" id="statChecked">0/0</span><span class="trip-stat-label">Concluídos</span></div>
         <div class="trip-stat"><span class="trip-stat-value" id="statParks">0/11</span><span class="trip-stat-label">Parques</span></div>
-        <div class="trip-stat"><span class="trip-stat-value" id="statKm">~0 km</span><span class="trip-stat-label">Percorridos</span></div>
+        <div class="trip-stat"><span class="trip-stat-value" id="statKm">~0/6.500</span><span class="trip-stat-label">km</span></div>
     </div>
 
     <div class="search-bar-wrap">
@@ -1459,19 +1462,19 @@
 <!-- ==================== TAB BAR ==================== -->
 <nav class="tab-bar" role="tablist" aria-label="Navegação principal">
     <button class="tab-item active" onclick="switchTab('home', event)" role="tab" aria-selected="true" aria-controls="sec-home">
-        <span class="tab-icon">📅</span>
+        <span class="tab-icon" aria-hidden="true">📅</span>
         <span>Roteiro</span>
     </button>
     <button class="tab-item" onclick="switchTab('map', event)" role="tab" aria-selected="false" aria-controls="sec-map">
-        <span class="tab-icon">🗺️</span>
+        <span class="tab-icon" aria-hidden="true">🗺️</span>
         <span>Mapa</span>
     </button>
     <button class="tab-item" onclick="switchTab('explore', event)" role="tab" aria-selected="false" aria-controls="sec-explore">
-        <span class="tab-icon">🔍</span>
+        <span class="tab-icon" aria-hidden="true">🔍</span>
         <span>Explorar</span>
     </button>
     <button class="tab-item" onclick="switchTab('settings', event)" role="tab" aria-selected="false" aria-controls="sec-settings">
-        <span class="tab-icon">⚙️</span>
+        <span class="tab-icon" aria-hidden="true">⚙️</span>
         <span>Ajustes</span>
     </button>
 </nav>
@@ -2048,8 +2051,8 @@ function renderDaySelector() {
     let html = '';
     for (let i = 1; i <= totalDays; i++) {
         const r = (days[i-1] && days[i-1].region) || regions[i - 1] || 'nv';
-        const cls = '';
-        html += '<button class="day-pill ' + r + '" data-d="' + i + '" onclick="showDay(' + i + ')" aria-label="Dia ' + i + '"' + cls + '>' + i + '<span class="pill-dot"></span></button>';
+        const loc = days[i-1] ? days[i-1].location : '';
+        html += '<button class="day-pill ' + r + '" data-d="' + i + '" onclick="showDay(' + i + ')" aria-label="Dia ' + i + ' — ' + loc + '" title="' + loc + '">' + i + '<span class="pill-dot"></span></button>';
     }
     el.innerHTML = html;
 }
@@ -2124,17 +2127,6 @@ function renderDay(d) {
     html += getWeatherCard(d);
     html += '</div>';
 
-    // Supercharger info cards
-    d.items.forEach(function(item, idx) {
-        if (item.type === 'charge') {
-            var scText = getItemText(d, idx);
-            html += '<div class="sc-card">';
-            html += '<div class="sc-card-icon">⚡</div>';
-            html += '<div class="sc-card-text">' + scText + '</div>';
-            html += '</div>';
-        }
-    });
-
     // Progress counter
     html += '<div class="day-progress"><span id="day-progress-' + d.day + '">0/' + d.items.length + '</span> concluídos <button type="button" class="toggle-done-btn" id="toggleDone-' + d.day + '" onclick="toggleHideDone(' + d.day + ')" aria-label="Esconder concluídos">👁️ Esconder</button></div>';
 
@@ -2161,7 +2153,7 @@ function renderDay(d) {
 
         html += '<div class="activity-card' + doneClass + '" data-type="' + item.type + '"' + click + '>';
         if (photo) {
-            html += '<img class="activity-card-photo" src="' + photo + '" alt="' + plainText.replace(/"/g, '&quot;') + '" loading="lazy" onload="this.classList.add(\'loaded\')" onerror="this.style.display=\'none\'" onclick="event.stopPropagation();openLightbox(this.src,this.parentElement.querySelector(\'.activity-name\').textContent)">';
+            html += '<img class="activity-card-photo" src="' + photo + '" alt="' + plainText.replace(/"/g, '&quot;') + '" width="400" height="200" loading="lazy" onload="this.classList.add(\'loaded\')" onerror="this.style.display=\'none\'" onclick="event.stopPropagation();openLightbox(this.src,this.parentElement.querySelector(\'.activity-name\').textContent)">';
         }
         if (hasInfo) html += '<span class="detail-arrow">›</span>';
         html += '<div class="activity-card-body">';
@@ -2260,6 +2252,9 @@ function showDay(n) {
 
     document.getElementById('heroImg').src = dayPhotos[n] || dayPhotos[1];
     document.getElementById('heroImg').alt = getTitle(days[n-1]) || 'Foto do dia';
+    // Preload adjacent hero images
+    if (dayPhotos[n+1]) { var pre = new Image(); pre.src = dayPhotos[n+1]; }
+    if (dayPhotos[n-1]) { var pre2 = new Image(); pre2.src = dayPhotos[n-1]; }
 
     // Update trip progress
     var pct = Math.round((n / totalDays) * 100);
@@ -2337,6 +2332,11 @@ function openDetail(dayNum, itemIdx) {
     document.getElementById('sheetOverlay').classList.add('open');
     document.getElementById('sheet').classList.add('open');
     document.body.style.overflow = 'hidden';
+    // Focus trap
+    setTimeout(function() {
+        var close = document.querySelector('.sheet-close');
+        if (close) close.focus();
+    }, 400);
 }
 
 function closeSheet() {
@@ -2347,6 +2347,18 @@ function closeSheet() {
 
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeSheet();
+    // Focus trap in sheet
+    if (e.key === 'Tab' && document.getElementById('sheet').classList.contains('open')) {
+        var sheet = document.getElementById('sheet');
+        var focusable = sheet.querySelectorAll('button, a, input, textarea, [tabindex]:not([tabindex="-1"])');
+        if (focusable.length === 0) return;
+        var first = focusable[0], last = focusable[focusable.length - 1];
+        if (e.shiftKey) {
+            if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+        } else {
+            if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+    }
 });
 
 // ==================== MAP ====================
@@ -2922,7 +2934,10 @@ function toggleFav(dayNum, itemIdx, event) {
     var faved = localStorage.getItem(key) === '1';
     localStorage.setItem(key, faved ? '0' : '1');
     var el = document.querySelector('[data-fav="' + dayNum + '-' + itemIdx + '"]');
-    if (el) el.classList.toggle('fav-active', !faved);
+    if (el) {
+        el.classList.toggle('fav-active', !faved);
+        if (!faved) { el.classList.add('just-faved'); setTimeout(function() { el.classList.remove('just-faved'); }, 600); }
+    }
     var actionBtn = document.querySelector('[data-action-fav="' + dayNum + '-' + itemIdx + '"]');
     if (actionBtn) {
         actionBtn.classList.toggle('action-fav-active', !faved);
@@ -2944,7 +2959,7 @@ function searchItems(query) {
             var text = item.text.replace(/<[^>]+>/g, '');
             if (showFavsOnly && !isFav(d.day, idx)) return;
             if (!q || text.toLowerCase().indexOf(q) !== -1) {
-                results.push({ day: d.day, idx: idx, time: item.time, text: text });
+                results.push({ day: d.day, idx: idx, time: item.time, text: text, hasInfo: !!findPlaceInfo(item.text) });
             }
         });
     });
@@ -2957,10 +2972,12 @@ function searchItems(query) {
     }
     var html = '';
     results.slice(0, 40).forEach(function(r) {
-        html += '<div class="search-result-item" tabindex="0" role="option" onclick="closeSearch();showDay(' + r.day + ');setTimeout(function(){openDetail(' + r.day + ',' + r.idx + ')},300)" onkeydown="if(event.key===\'Enter\')this.click()">';
+        html += '<div class="search-result-item" tabindex="0" role="option" onclick="closeSearch();showDay(' + r.day + ')' + (r.hasInfo ? ';setTimeout(function(){openDetail(' + r.day + ',' + r.idx + ')},300)' : '') + '" onkeydown="if(event.key===\'Enter\')this.click()">';
         html += '<span class="search-result-day">Dia ' + r.day + '</span>';
         html += '<span class="search-result-time">' + r.time + '</span>';
-        html += '<span class="search-result-text">' + r.text + '</span>';
+        var displayText = r.text;
+        if (q) { displayText = displayText.replace(new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi'), '<mark style="background:rgba(10,132,255,0.3);color:var(--text);border-radius:2px;padding:0 2px">$1</mark>'); }
+        html += '<span class="search-result-text">' + displayText + '</span>';
         html += '</div>';
     });
     el.innerHTML = html;
@@ -3113,11 +3130,11 @@ function updateTripStats() {
             statsAnimated = true;
             animateCounter(document.getElementById('statChecked'), totalChecked, '', '/' + totalItems, 800);
             animateCounter(document.getElementById('statParks'), parksVisited, '', '/11', 800);
-            animateCounter(document.getElementById('statKm'), kmTraveled, '~', ' km', 1000);
+            animateCounter(document.getElementById('statKm'), kmTraveled, '~', '/6.500', 1000);
         } else {
             document.getElementById('statChecked').textContent = totalChecked + '/' + totalItems;
             document.getElementById('statParks').textContent = parksVisited + '/11';
-            document.getElementById('statKm').textContent = '~' + kmTraveled.toLocaleString() + ' km';
+            document.getElementById('statKm').textContent = '~' + kmTraveled.toLocaleString() + '/6.500';
         }
     }
 }
@@ -3199,8 +3216,8 @@ function filterExplore(filter, btn) {
             // Wait until enough movement to decide direction
             if (absDx < 15 && absDy < 15) return;
 
-            // Must be CLEARLY horizontal: dx must be at least 3x dy
-            if (absDx < absDy * 3) {
+            // Must be CLEARLY horizontal: dx must be at least 2x dy
+            if (absDx < absDy * 2) {
                 tracking = false;
                 return;
             }
@@ -3244,8 +3261,8 @@ function filterExplore(filter, btn) {
         var endX = e.changedTouches[0].clientX;
         var dx = endX - startX;
 
-        // Minimum 80px horizontal distance
-        if (Math.abs(dx) < 80) return;
+        // Minimum 60px horizontal distance
+        if (Math.abs(dx) < 60) return;
 
         if (dx < 0 && currentDay < totalDays) {
             showDay(currentDay + 1);
