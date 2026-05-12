@@ -130,6 +130,7 @@
             height: 100%;
             object-fit: cover;
             transition: opacity 0.4s ease;
+            will-change: transform;
         }
         .hero-overlay {
             position: absolute;
@@ -205,6 +206,7 @@
         }
         .day-selector::-webkit-scrollbar { display: none; }
         .day-pill {
+            position: relative;
             min-width: 48px;
             height: 48px;
             border-radius: 14px;
@@ -236,6 +238,13 @@
         .day-pill.pnw.active { background: var(--green); border-color: transparent; color: #fff; box-shadow: 0 4px 20px rgba(48,209,88,0.35), 0 0 0 1px rgba(48,209,88,0.2); }
         .day-pill.ut.active { background: var(--red); border-color: transparent; color: #fff; box-shadow: 0 4px 20px rgba(255,69,58,0.35), 0 0 0 1px rgba(255,69,58,0.2); }
         .day-pill.nv.active { background: var(--purple); border-color: transparent; color: #fff; box-shadow: 0 4px 20px rgba(191,90,242,0.35), 0 0 0 1px rgba(191,90,242,0.2); }
+        .day-pill.active { animation: pillPulse 2.5s ease-in-out infinite; }
+        @keyframes pillPulse { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.15); } }
+        @media (prefers-reduced-motion: reduce) { .day-pill.active { animation: none; } }
+
+        /* Pill progress dot */
+        .pill-dot { position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 4px; height: 4px; border-radius: 50%; background: var(--green); opacity: 0; transition: opacity 0.3s; }
+        .day-pill.day-complete .pill-dot { opacity: 1; }
 
         /* Day content with swipe */
         .day-container {
@@ -303,8 +312,15 @@
         }
         .activity-card-photo {
             width: 100%;
-            height: 200px;
+            height: auto;
+            aspect-ratio: 2 / 1;
             object-fit: cover;
+            max-height: 160px;
+            filter: blur(6px);
+            transition: filter 0.4s ease;
+        }
+        .activity-card-photo.loaded {
+            filter: blur(0);
         }
         .activity-card-body {
             padding: 14px 16px 16px;
@@ -327,6 +343,12 @@
             letter-spacing: -0.01em;
         }
         .activity-name strong { color: var(--text); }
+        .activity-card .activity-name {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
         .activity-desc {
             font-size: 13px;
             color: var(--text2);
@@ -353,6 +375,26 @@
         .activity-grid {
             display: flex;
             flex-direction: column;
+        }
+
+        /* Staggered card entrance */
+        .activity-card {
+            opacity: 0;
+            transform: translateY(16px);
+            animation: cardEntrance 0.35s ease forwards;
+        }
+        .activity-grid .activity-card:nth-child(1) { animation-delay: 0.03s; }
+        .activity-grid .activity-card:nth-child(2) { animation-delay: 0.06s; }
+        .activity-grid .activity-card:nth-child(3) { animation-delay: 0.09s; }
+        .activity-grid .activity-card:nth-child(4) { animation-delay: 0.12s; }
+        .activity-grid .activity-card:nth-child(5) { animation-delay: 0.15s; }
+        .activity-grid .activity-card:nth-child(6) { animation-delay: 0.18s; }
+        .activity-grid .activity-card:nth-child(7) { animation-delay: 0.21s; }
+        .activity-grid .activity-card:nth-child(8) { animation-delay: 0.24s; }
+        .activity-grid .activity-card:nth-child(n+9) { animation-delay: 0.27s; }
+        @keyframes cardEntrance { to { opacity: 1; transform: translateY(0); } }
+        @media (prefers-reduced-motion: reduce) {
+            .activity-card { opacity: 1; transform: none; animation: none; }
         }
 
         /* Tip cards */
@@ -723,7 +765,7 @@
             background: rgba(0,0,0,0.5);
             backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             opacity: 0; pointer-events: none;
-            transition: opacity 0.3s;
+            transition: opacity 0.4s cubic-bezier(0.32,0.72,0,1);
         }
         .sheet-overlay.open { opacity: 1; pointer-events: auto; }
         .sheet {
@@ -870,6 +912,9 @@
         }
         .item-done { opacity: 0.4; }
         .activity-card { position: relative; }
+        @keyframes checkPop { 0% { transform: scale(1); } 40% { transform: scale(1.35); } 100% { transform: scale(1); } }
+        @keyframes checkRing { 0% { box-shadow: 0 0 0 0 rgba(48,209,88,0.5); } 100% { box-shadow: 0 0 0 14px rgba(48,209,88,0); } }
+        .check-circle.just-checked { animation: checkPop 0.4s cubic-bezier(0.34,1.56,0.64,1), checkRing 0.6s ease-out; }
         /* Card actions bar */
         .card-actions {
             display: flex;
@@ -1157,6 +1202,55 @@
         .explore-park-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
         .explore-park-days { font-size: 12px; color: var(--text3); font-weight: 600; margin-bottom: 8px; }
         .explore-park-highlights { font-size: 13px; color: var(--text2); line-height: 1.55; }
+
+        /* Skeleton loading */
+        .skeleton-card { background: var(--bg3); border-radius: var(--radius); overflow: hidden; margin-bottom: 16px; border: 0.5px solid rgba(255,255,255,0.06); }
+        .skeleton-shimmer { background: linear-gradient(90deg, var(--bg3) 25%, var(--glass2) 50%, var(--bg3) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+        .skeleton-photo { height: 120px; }
+        .skeleton-text { height: 14px; border-radius: 4px; margin: 12px 16px; }
+        .skeleton-text.w70 { width: 70%; }
+        .skeleton-text.w40 { width: 40%; }
+        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+        /* ==================== TIME GROUP LABELS ==================== */
+        .time-group-label {
+            font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+            color: var(--text3); padding: 16px 0 6px; display: flex; align-items: center; gap: 8px;
+            grid-column: 1 / -1;
+        }
+        .time-group-label::after { content: ''; flex: 1; height: 0.5px; background: rgba(255,255,255,0.06); }
+
+        /* ==================== TOAST ==================== */
+        .toast {
+            position: fixed; bottom: calc(var(--tab-height) + 12px); left: 50%;
+            transform: translateX(-50%) translateY(100px); background: var(--green); color: #fff;
+            padding: 12px 24px; border-radius: 100px; font-weight: 700; font-size: 14px;
+            font-family: inherit; z-index: 9998; pointer-events: none; white-space: nowrap;
+            transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+            box-shadow: 0 8px 24px rgba(48,209,88,0.35);
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* ==================== VER NO MAPA BUTTON ==================== */
+        .btn-appmap { background: rgba(100,210,255,0.12); color: var(--teal); border: 0.5px solid rgba(100,210,255,0.2); border-radius: var(--radius-sm); padding: 12px; text-align: center; font-weight: 600; font-size: 13px; text-decoration: none; cursor: pointer; font-family: inherit; display: block; margin-top: 10px; width: 100%; }
+
+        /* ==================== SWIPE PEEK INDICATORS ==================== */
+        .swipe-hint {
+            position: fixed; top: 50%; transform: translateY(-50%);
+            background: rgba(10,132,255,0.2); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            color: var(--blue); padding: 10px 14px; border-radius: 14px;
+            font-weight: 700; font-size: 13px; font-family: inherit;
+            opacity: 0; transition: opacity 0.15s; z-index: 100; pointer-events: none;
+        }
+        .swipe-hint.left { left: 8px; }
+        .swipe-hint.right { right: 8px; }
+        .swipe-hint.visible { opacity: 1; }
+
+        /* ==================== ONBOARDING ==================== */
+        .onboarding-overlay { position: fixed; inset: 0; z-index: 30000; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+        .onboarding-overlay.hidden { display: none; }
+        .onboarding-card { background: var(--bg3); border-radius: var(--radius); padding: 28px 24px; text-align: center; max-width: 300px; border: 0.5px solid rgba(255,255,255,0.1); box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+        .onboarding-btn { margin-top: 20px; background: var(--blue); color: #fff; border: none; border-radius: 100px; padding: 12px 32px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit; }
     </style>
 </head>
 <body>
@@ -1338,6 +1432,8 @@
     <div class="lightbox-caption" id="lightboxCaption"></div>
 </div>
 
+<div class="toast" id="toast"></div>
+
 <!-- ==================== TAB BAR ==================== -->
 <nav class="tab-bar" role="tablist" aria-label="Navegação principal">
     <button class="tab-item active" onclick="switchTab('home', event)" role="tab" aria-selected="true" aria-controls="sec-home">
@@ -1357,6 +1453,16 @@
         <span>Ajustes</span>
     </button>
 </nav>
+
+<div class="swipe-hint left" id="swipeHintL"></div>
+<div class="swipe-hint right" id="swipeHintR"></div>
+
+<div class="onboarding-overlay" id="onboarding">
+    <div class="onboarding-card">
+        <div id="onboardStep"></div>
+        <button type="button" class="onboarding-btn" id="onboardBtn" onclick="nextOnboardStep()">Próximo</button>
+    </div>
+</div>
 
 <script src="data.js"></script>
 <script>
@@ -1928,7 +2034,7 @@ function renderDaySelector() {
     for (let i = 1; i <= totalDays; i++) {
         const r = (days[i-1] && days[i-1].region) || regions[i - 1] || 'nv';
         const cls = '';
-        html += '<button class="day-pill ' + r + '" data-d="' + i + '" onclick="showDay(' + i + ')" aria-label="Dia ' + i + '"' + cls + '>' + i + '</button>';
+        html += '<button class="day-pill ' + r + '" data-d="' + i + '" onclick="showDay(' + i + ')" aria-label="Dia ' + i + '"' + cls + '>' + i + '<span class="pill-dot"></span></button>';
     }
     el.innerHTML = html;
 }
@@ -1952,6 +2058,7 @@ function updateCheckUI(dayNum, itemIdx, done) {
     var el = document.querySelector('[data-check="' + dayNum + '-' + itemIdx + '"]');
     if (el) {
         el.classList.toggle('checked', done);
+        if (done) { el.classList.add('just-checked'); setTimeout(function() { el.classList.remove('just-checked'); }, 600); }
         var parent = el.closest('.activity-card');
         if (parent) parent.classList.toggle('item-done', done);
         var actionBtn = document.querySelector('[data-action-check="' + dayNum + '-' + itemIdx + '"]');
@@ -1973,6 +2080,16 @@ function updateDayProgress(dayNum) {
     }
     var el = document.getElementById('day-progress-' + dayNum);
     if (el) el.textContent = done + '/' + total;
+    var pill = document.querySelector('.day-pill[data-d="' + dayNum + '"]');
+    if (pill) pill.classList.toggle('day-complete', done === total && total > 0);
+    if (done === total && total > 0) {
+        var toast = document.getElementById('toast');
+        if (toast) {
+            toast.textContent = '🎉 Dia ' + dayNum + ' completo!';
+            toast.classList.add('show');
+            setTimeout(function() { toast.classList.remove('show'); }, 2500);
+        }
+    }
 }
 
 // ==================== RENDER DAY CONTENT ====================
@@ -1999,7 +2116,15 @@ function renderDay(d) {
     html += '<div class="day-progress"><span id="day-progress-' + d.day + '">0/' + d.items.length + '</span> concluídos</div>';
 
     html += '<div class="activity-grid">';
+    var currentPeriod = '';
     d.items.forEach(function(item, idx) {
+        var hour = parseInt(item.time) || 0;
+        var period = hour < 12 ? 'manha' : hour < 17 ? 'tarde' : 'noite';
+        var periodLabels = { manha: '☀️ Manhã', tarde: '🌤️ Tarde', noite: '🌙 Noite' };
+        if (period !== currentPeriod) {
+            currentPeriod = period;
+            html += '<div class="time-group-label">' + periodLabels[period] + '</div>';
+        }
         var text = getItemText(d, idx);
         var plainText = text.replace(/<[^>]+>/g, '');
         var photo = findPhoto(item.text);
@@ -2013,7 +2138,7 @@ function renderDay(d) {
 
         html += '<div class="activity-card' + doneClass + '" data-type="' + item.type + '"' + click + '>';
         if (photo) {
-            html += '<img class="activity-card-photo" src="' + photo + '" alt="' + plainText.replace(/"/g, '&quot;') + '" loading="lazy" onerror="this.style.display=\'none\'" onclick="event.stopPropagation();openLightbox(this.src,this.parentElement.querySelector(\'.activity-name\').textContent)">';
+            html += '<img class="activity-card-photo" src="' + photo + '" alt="' + plainText.replace(/"/g, '&quot;') + '" loading="lazy" onload="this.classList.add(\'loaded\')" onerror="this.style.display=\'none\'" onclick="event.stopPropagation();openLightbox(this.src,this.parentElement.querySelector(\'.activity-name\').textContent)">';
         }
         if (hasInfo) html += '<span class="detail-arrow">›</span>';
         html += '<div class="activity-card-body">';
@@ -2073,12 +2198,29 @@ function showDay(n) {
     document.querySelectorAll('.day-slide').forEach(function(s) { s.classList.remove('active'); s.style.display = 'none'; });
     document.querySelectorAll('.day-pill').forEach(function(b) { b.classList.remove('active'); });
 
-    ensureDayRendered(n);
-    var slide = document.getElementById('ds-' + n);
-    if (slide) {
-        slide.style.display = 'block';
-        slide.classList.add('active');
-        slide.style.animation = n > prev ? 'slideIn 0.25s ease' : 'slideInLeft 0.25s ease';
+    if (!renderedDays[n]) {
+        var skelId = 'ds-skel-' + n;
+        document.getElementById('dayContainer').insertAdjacentHTML('beforeend',
+            '<div class="day-slide" id="' + skelId + '" style="display:block;padding:0 20px 32px">' +
+            '<div class="skeleton-card"><div class="skeleton-shimmer skeleton-photo"></div><div class="skeleton-shimmer skeleton-text w70"></div><div class="skeleton-shimmer skeleton-text w40"></div></div>' +
+            '<div class="skeleton-card"><div class="skeleton-shimmer skeleton-photo"></div><div class="skeleton-shimmer skeleton-text w70"></div><div class="skeleton-shimmer skeleton-text w40"></div></div>' +
+            '<div class="skeleton-card"><div class="skeleton-shimmer skeleton-photo"></div><div class="skeleton-shimmer skeleton-text w70"></div><div class="skeleton-shimmer skeleton-text w40"></div></div>' +
+            '</div>');
+        requestAnimationFrame(function() {
+            var skel = document.getElementById(skelId);
+            if (skel) skel.remove();
+            ensureDayRendered(n);
+            var s = document.getElementById('ds-' + n);
+            if (s) { s.style.display = 'block'; s.classList.add('active'); s.style.animation = n > prev ? 'slideIn 0.25s ease' : 'slideInLeft 0.25s ease'; }
+            updateDayProgress(n);
+        });
+    } else {
+        var slide = document.getElementById('ds-' + n);
+        if (slide) {
+            slide.style.display = 'block';
+            slide.classList.add('active');
+            slide.style.animation = n > prev ? 'slideIn 0.25s ease' : 'slideInLeft 0.25s ease';
+        }
     }
 
     var btn = document.querySelector('.day-pill[data-d="' + n + '"]');
@@ -2122,6 +2264,9 @@ function switchTab(tab, e) {
     if (tab === 'map' && !mapInstance) setTimeout(initMap, 100);
     if (tab === 'map' && mapInstance) setTimeout(function() { mapInstance.invalidateSize(); mapUpdateDay(currentDay, false); }, 100);
     if (tab === 'explore') renderExplore();
+    if (tab === 'home' && typeof mapScrubDay !== 'undefined' && mapScrubDay && mapScrubDay !== currentDay) {
+        showDay(mapScrubDay);
+    }
 }
 
 // ==================== DETAIL SHEET ====================
@@ -2159,6 +2304,10 @@ function openDetail(dayNum, itemIdx) {
         html += '<a class="sheet-nav-btn btn-gmaps" href="' + buildDirectionsUrl('google', pi.key, pi.info) + '" target="_blank" rel="noopener">🗺️ Google Maps</a>';
         html += '<a class="sheet-nav-btn btn-amaps" href="' + buildDirectionsUrl('apple', pi.key, pi.info) + '" target="_blank" rel="noopener">🍎 Apple Maps</a>';
         html += '</div>';
+        if (pi.info.coords) {
+            var c = pi.info.coords.split(',');
+            html += '<button type="button" class="sheet-nav-btn btn-appmap" onclick="closeSheet();switchTab(\'map\',event);setTimeout(function(){if(mapInstance)mapInstance.flyTo([' + c[0] + ',' + c[1] + '],15)},500)">📌 Ver no Mapa</button>';
+        }
     }
 
     document.getElementById('sheetBody').innerHTML = html;
@@ -2780,7 +2929,8 @@ function searchItems(query) {
     });
     var el = document.getElementById('searchResults');
     if (results.length === 0) {
-        el.innerHTML = '<div style="padding:16px;color:var(--text3);font-size:13px">Nenhum resultado encontrado</div>';
+        var emptyMsg = showFavsOnly ? '<div style="padding:24px;text-align:center;color:var(--text3);font-size:13px"><div style="font-size:32px;margin-bottom:8px">⭐</div>Nenhum favorito ainda.<br>Toque ♥ nos cards para favoritar.</div>' : '<div style="padding:16px;color:var(--text3);font-size:13px">Nenhum resultado encontrado</div>';
+        el.innerHTML = emptyMsg;
         el.style.display = 'block';
         return;
     }
@@ -2875,7 +3025,9 @@ function getWeatherCard(d) {
     };
     var region = d.region;
     if (!region || !regionWeather[region]) return '';
-    return '<div class="weather-card">🌤️ Clima: ' + regionWeather[region] + '</div>';
+    var weatherIcons = { ny: '❄️', ca: '☀️', pnw: '🌧️', ut: '❄️', nv: '☀️' };
+    var wIcon = weatherIcons[region] || '🌤️';
+    return '<div class="weather-card">' + wIcon + ' Clima: ' + regionWeather[region] + '</div>';
 }
 
 // ==================== DAY NOTES ====================
@@ -2892,6 +3044,20 @@ function autoResizeTextarea(el) {
 }
 
 // ==================== TRIP STATS ====================
+var statsAnimated = false;
+function animateCounter(el, target, prefix, suffix, duration) {
+    if (!el) return;
+    var numTarget = parseInt(String(target).replace(/[^0-9]/g, '')) || 0;
+    var start = null;
+    function step(ts) {
+        if (!start) start = ts;
+        var p = Math.min((ts - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = (prefix || '') + Math.round(eased * numTarget).toLocaleString() + (suffix || '');
+        if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+}
 function updateTripStats() {
     var totalChecked = 0, totalItems = 0, kmTraveled = 0;
     var parkDaySets = {
@@ -2922,9 +3088,16 @@ function updateTripStats() {
     });
     var el = document.getElementById('tripStatsCard');
     if (el) {
-        document.getElementById('statChecked').textContent = totalChecked + '/' + totalItems;
-        document.getElementById('statParks').textContent = parksVisited + '/11';
-        document.getElementById('statKm').textContent = '~' + kmTraveled.toLocaleString() + ' km';
+        if (!statsAnimated) {
+            statsAnimated = true;
+            animateCounter(document.getElementById('statChecked'), totalChecked, '', '/' + totalItems, 800);
+            animateCounter(document.getElementById('statParks'), parksVisited, '', '/11', 800);
+            animateCounter(document.getElementById('statKm'), kmTraveled, '~', ' km', 1000);
+        } else {
+            document.getElementById('statChecked').textContent = totalChecked + '/' + totalItems;
+            document.getElementById('statParks').textContent = parksVisited + '/11';
+            document.getElementById('statKm').textContent = '~' + kmTraveled.toLocaleString() + ' km';
+        }
     }
 }
 
@@ -2995,26 +3168,52 @@ function filterExplore(filter, btn) {
     }, { passive: true });
 
     container.addEventListener('touchmove', function(e) {
-        if (!tracking || decided) return;
+        if (!tracking) return;
         var dx = e.touches[0].clientX - startX;
         var dy = e.touches[0].clientY - startY;
         var absDx = Math.abs(dx);
         var absDy = Math.abs(dy);
 
-        // Wait until enough movement to decide direction
-        if (absDx < 15 && absDy < 15) return;
+        if (!decided) {
+            // Wait until enough movement to decide direction
+            if (absDx < 15 && absDy < 15) return;
 
-        // Must be CLEARLY horizontal: dx must be at least 3x dy
-        if (absDx < absDy * 3) {
-            tracking = false;
-            return;
+            // Must be CLEARLY horizontal: dx must be at least 3x dy
+            if (absDx < absDy * 3) {
+                tracking = false;
+                return;
+            }
+
+            // Horizontal-dominant: lock in for swipe detection
+            decided = true;
         }
 
-        // Horizontal-dominant: lock in for swipe detection
-        decided = true;
+        // Show swipe peek indicators
+        var hintL = document.getElementById('swipeHintL');
+        var hintR = document.getElementById('swipeHintR');
+        if (hintL && hintR) {
+            if (dx > 40 && currentDay > 1) {
+                hintL.textContent = '← ' + (currentDay - 1);
+                hintL.classList.add('visible');
+            } else {
+                hintL.classList.remove('visible');
+            }
+            if (dx < -40 && currentDay < totalDays) {
+                hintR.textContent = (currentDay + 1) + ' →';
+                hintR.classList.add('visible');
+            } else {
+                hintR.classList.remove('visible');
+            }
+        }
     }, { passive: true });
 
     container.addEventListener('touchend', function(e) {
+        // Hide swipe hints
+        var hintL = document.getElementById('swipeHintL');
+        var hintR = document.getElementById('swipeHintR');
+        if (hintL) hintL.classList.remove('visible');
+        if (hintR) hintR.classList.remove('visible');
+
         if (!tracking || !decided) {
             tracking = false;
             return;
@@ -3034,6 +3233,66 @@ function filterExplore(filter, btn) {
         }
     }, { passive: true });
 })();
+
+window.addEventListener('scroll', function() {
+    if (!document.getElementById('sec-home').classList.contains('active')) return;
+    var heroImg = document.querySelector('.hero img');
+    if (heroImg && window.scrollY < 400) {
+        heroImg.style.transform = 'translateY(' + (window.scrollY * 0.3) + 'px) scale(1.05)';
+    }
+}, { passive: true });
+
+// ==================== SHEET PULL-TO-DISMISS ====================
+(function() {
+    var sheet = document.getElementById('sheet');
+    var startY = 0, dragging = false;
+    sheet.addEventListener('touchstart', function(e) {
+        if (sheet.scrollTop > 0) return;
+        startY = e.touches[0].clientY;
+        dragging = true;
+        sheet.style.transition = 'none';
+    });
+    sheet.addEventListener('touchmove', function(e) {
+        if (!dragging) return;
+        var dy = e.touches[0].clientY - startY;
+        if (dy > 0) { sheet.style.transform = 'translateY(' + dy + 'px)'; e.preventDefault(); }
+    }, { passive: false });
+    sheet.addEventListener('touchend', function(e) {
+        if (!dragging) return;
+        dragging = false;
+        sheet.style.transition = '';
+        var dy = e.changedTouches[0].clientY - startY;
+        if (dy > 100) closeSheet(); else sheet.style.transform = '';
+    });
+})();
+
+// ==================== ONBOARDING ====================
+var onboardSteps = [
+    { emoji: '👋', title: 'Bem-vindo!', text: 'Seu roteiro interativo de 34 dias pelos EUA' },
+    { emoji: '👆', title: 'Toque nos cards', text: 'Veja detalhes, endereços e navegação GPS' },
+    { emoji: '✅', title: 'Marque o progresso', text: 'Use os botões Concluir e Favoritar' },
+    { emoji: '👉', title: 'Deslize para navegar', text: 'Swipe para trocar entre os dias' }
+];
+var onboardIdx = 0;
+function nextOnboardStep() {
+    onboardIdx++;
+    if (onboardIdx >= onboardSteps.length) {
+        document.getElementById('onboarding').classList.add('hidden');
+        localStorage.setItem('onboarded', '1');
+        return;
+    }
+    renderOnboardStep();
+}
+function renderOnboardStep() {
+    var s = onboardSteps[onboardIdx];
+    document.getElementById('onboardStep').innerHTML = '<div style="font-size:48px;margin-bottom:12px">' + s.emoji + '</div><div style="font-size:18px;font-weight:800;margin-bottom:8px">' + s.title + '</div><div style="font-size:14px;color:var(--text2)">' + s.text + '</div>';
+    document.getElementById('onboardBtn').textContent = onboardIdx === onboardSteps.length - 1 ? 'Começar!' : 'Próximo';
+}
+if (!localStorage.getItem('onboarded')) {
+    renderOnboardStep();
+} else {
+    document.getElementById('onboarding').classList.add('hidden');
+}
 </script>
 
 </body>
