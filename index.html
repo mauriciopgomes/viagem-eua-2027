@@ -1998,14 +1998,11 @@ function renderDay(d) {
     // Progress counter
     html += '<div class="day-progress"><span id="day-progress-' + d.day + '">0/' + d.items.length + '</span> concluídos</div>';
 
-    var usedPhotos = {};
     html += '<div class="activity-grid">';
     d.items.forEach(function(item, idx) {
         var text = getItemText(d, idx);
         var plainText = text.replace(/<[^>]+>/g, '');
         var photo = findPhoto(item.text);
-        if (photo && usedPhotos[photo]) photo = null;
-        if (photo) usedPhotos[photo] = true;
         var tl = typeLabel[item.type] || '📍 Local';
 
         var hasInfo = !!findPlaceInfo(item.text);
