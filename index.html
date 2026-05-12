@@ -876,17 +876,48 @@
         }
         .item-done { opacity: 0.4; }
         .activity-card { position: relative; }
-        .activity-card > .check-circle {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            z-index: 2;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+        /* Card actions bar */
+        .card-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 0.5px solid rgba(255,255,255,0.06);
         }
-        .activity-card > .check-circle.checked {
-            background: var(--green);
+        .card-action-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.06);
+            border: 0.5px solid rgba(255,255,255,0.08);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 13px;
+            color: var(--text3);
+            -webkit-tap-highlight-color: transparent;
+        }
+        .card-action-btn:active { transform: scale(0.95); }
+        .card-action-btn .check-circle {
+            width: 20px; height: 20px;
+            min-width: 20px;
+            font-size: 12px;
+        }
+        .card-action-btn .fav-btn {
+            width: 20px; height: 20px;
+            min-width: 20px;
+            font-size: 13px;
+        }
+        .card-action-btn.action-done {
+            background: rgba(48,209,88,0.15);
+            border-color: rgba(48,209,88,0.3);
+            color: var(--green);
+        }
+        .card-action-btn.action-fav-active {
+            background: rgba(255,69,58,0.15);
+            border-color: rgba(255,69,58,0.3);
+            color: var(--red);
         }
         .day-progress {
             font-size: 12px;
@@ -1050,11 +1081,6 @@
             transition: all 0.2s; flex-shrink: 0;
         }
         .fav-btn.fav-active { color: var(--red); }
-        .activity-card > .fav-btn {
-            position: absolute; top: 12px; left: 48px; z-index: 2;
-            background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-        }
-        .activity-card > .fav-btn.fav-active { background: rgba(255,69,58,0.3); }
         .fav-simple { min-width: 28px; }
 
         /* ==================== LIGHTBOX ==================== */
@@ -1941,6 +1967,12 @@ function updateCheckUI(dayNum, itemIdx, done) {
         el.classList.toggle('checked', done);
         var parent = el.closest('.activity-card, .activity-simple');
         if (parent) parent.classList.toggle('item-done', done);
+        var actionBtn = document.querySelector('[data-action-check="' + dayNum + '-' + itemIdx + '"]');
+        if (actionBtn) {
+            actionBtn.classList.toggle('action-done', done);
+            var label = actionBtn.querySelector('span');
+            if (label) label.textContent = done ? 'Concluído' : 'Concluir';
+        }
     }
 }
 
@@ -1995,12 +2027,18 @@ function renderDay(d) {
 
         if (photo) {
             html += '<div class="activity-card' + doneClass + '" data-type="' + item.type + '"' + click + '>';
-            html += '<div class="check-circle' + checkClass + '" data-check="' + d.day + '-' + idx + '" onclick="toggleCheck(' + d.day + ',' + idx + ',event)">✓</div>';
-            html += '<div class="fav-btn' + favClass + '" data-fav="' + d.day + '-' + idx + '" onclick="toggleFav(' + d.day + ',' + idx + ',event)">♥</div>';
             html += '<img class="activity-card-photo" src="' + photo + '" alt="" loading="lazy" onerror="this.style.display=\'none\'" onclick="event.stopPropagation();openLightbox(this.src,this.parentElement.querySelector(\'.activity-name\').textContent)">';
             html += '<div class="activity-card-body">';
             html += '<div class="activity-time">' + item.time + ' • ' + tl + (hasInfo ? ' • <span style="color:var(--blue)">ⓘ</span>' : '') + '</div>';
             html += '<div class="activity-name">' + text + '</div>';
+            html += '<div class="card-actions">';
+            html += '<div class="card-action-btn' + (isChecked(d.day, idx) ? ' action-done' : '') + '" onclick="event.stopPropagation();toggleCheck(' + d.day + ',' + idx + ',event)" data-action-check="' + d.day + '-' + idx + '">';
+            html += '<div class="check-circle' + checkClass + '" data-check="' + d.day + '-' + idx + '">✓</div>';
+            html += '<span>' + (isChecked(d.day, idx) ? 'Concluído' : 'Concluir') + '</span></div>';
+            html += '<div class="card-action-btn' + (isFav(d.day, idx) ? ' action-fav-active' : '') + '" onclick="event.stopPropagation();toggleFav(' + d.day + ',' + idx + ',event)" data-action-fav="' + d.day + '-' + idx + '">';
+            html += '<div class="fav-btn' + favClass + '" data-fav="' + d.day + '-' + idx + '">♥</div>';
+            html += '<span>' + (isFav(d.day, idx) ? 'Favoritado' : 'Favoritar') + '</span></div>';
+            html += '</div>';
             html += '</div></div>';
         } else {
             html += '<div class="activity-simple' + doneClass + '" data-type="' + item.type + '"' + click + '>';
@@ -2732,6 +2770,12 @@ function toggleFav(dayNum, itemIdx, event) {
     localStorage.setItem(key, faved ? '0' : '1');
     var el = document.querySelector('[data-fav="' + dayNum + '-' + itemIdx + '"]');
     if (el) el.classList.toggle('fav-active', !faved);
+    var actionBtn = document.querySelector('[data-action-fav="' + dayNum + '-' + itemIdx + '"]');
+    if (actionBtn) {
+        actionBtn.classList.toggle('action-fav-active', !faved);
+        var label = actionBtn.querySelector('span');
+        if (label) label.textContent = !faved ? 'Favoritado' : 'Favoritar';
+    }
 }
 
 // ==================== SEARCH ====================
