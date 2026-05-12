@@ -980,7 +980,170 @@
             .day-slide { max-width: 800px; }
             .hero-title { font-size: 40px; }
             .settings-section { max-width: 700px; }
+            .explore-container { max-width: 700px; margin: 0 auto; }
         }
+
+        /* ==================== SEARCH BAR ==================== */
+        .search-bar-wrap {
+            display: flex; gap: 8px; padding: 8px 20px 4px; align-items: center;
+        }
+        .search-input {
+            flex: 1; background: var(--glass2);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border: 0.5px solid rgba(255,255,255,0.1); border-radius: 100px;
+            padding: 12px 18px; font-size: 14px; font-family: inherit;
+            color: var(--text); outline: none; transition: border-color 0.2s;
+        }
+        .search-input:focus { border-color: var(--blue); }
+        .search-input::placeholder { color: var(--text3); }
+        .search-fav-btn {
+            background: var(--glass); border: 0.5px solid rgba(255,255,255,0.08);
+            border-radius: 50%; width: 44px; height: 44px; font-size: 18px;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s; flex-shrink: 0;
+        }
+        .search-fav-btn.active { background: rgba(255,214,10,0.15); border-color: rgba(255,214,10,0.3); }
+        .search-results {
+            margin: 0 20px; background: var(--bg3); border-radius: var(--radius);
+            border: 0.5px solid rgba(255,255,255,0.06); max-height: 300px; overflow-y: auto;
+        }
+        .search-result-item {
+            display: flex; align-items: center; gap: 10px; padding: 12px 14px;
+            border-bottom: 0.5px solid rgba(255,255,255,0.04); cursor: pointer;
+            transition: background 0.15s; font-size: 13px;
+        }
+        .search-result-item:last-child { border-bottom: none; }
+        .search-result-item:active { background: var(--glass); }
+        .search-result-day {
+            background: var(--blue); color: #fff; border-radius: 6px;
+            padding: 2px 8px; font-size: 11px; font-weight: 700; flex-shrink: 0;
+        }
+        .search-result-time {
+            color: var(--text3); font-size: 11px; font-weight: 600; min-width: 40px; flex-shrink: 0;
+        }
+        .search-result-text {
+            flex: 1; color: var(--text2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+        }
+
+        /* ==================== TRIP STATS ==================== */
+        .trip-stats-card {
+            display: flex; gap: 6px; padding: 10px 20px; justify-content: center;
+        }
+        .trip-stat {
+            background: rgba(255,255,255,0.06); backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px); border: 0.5px solid rgba(255,255,255,0.1);
+            border-radius: 14px; padding: 10px 16px; text-align: center; flex: 1;
+        }
+        .trip-stat-value {
+            display: block; font-size: 16px; font-weight: 800; color: var(--text); letter-spacing: -0.02em;
+        }
+        .trip-stat-label {
+            display: block; font-size: 10px; color: var(--text3); margin-top: 2px;
+            font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
+        }
+
+        /* ==================== FAVORITES ==================== */
+        .fav-btn {
+            width: 28px; height: 28px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; color: rgba(255,255,255,0.2); cursor: pointer;
+            transition: all 0.2s; flex-shrink: 0;
+        }
+        .fav-btn.fav-active { color: var(--red); }
+        .activity-card > .fav-btn {
+            position: absolute; top: 12px; left: 48px; z-index: 2;
+            background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+        }
+        .activity-card > .fav-btn.fav-active { background: rgba(255,69,58,0.3); }
+        .fav-simple { min-width: 28px; }
+
+        /* ==================== LIGHTBOX ==================== */
+        .lightbox {
+            position: fixed; inset: 0; z-index: 20000;
+            background: rgba(0,0,0,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s;
+        }
+        .lightbox.open { opacity: 1; pointer-events: auto; }
+        .lightbox-close {
+            position: absolute; top: calc(12px + var(--safe-top)); right: 12px;
+            width: 44px; height: 44px; border-radius: 50%;
+            background: rgba(255,255,255,0.15); border: none; color: #fff; font-size: 20px;
+            cursor: pointer; z-index: 2; display: flex; align-items: center; justify-content: center;
+        }
+        .lightbox-img {
+            max-width: 95vw; max-height: 80vh; object-fit: contain;
+            border-radius: 8px; touch-action: none; transition: transform 0.1s;
+        }
+        .lightbox-caption {
+            color: var(--text2); font-size: 14px; margin-top: 12px;
+            text-align: center; padding: 0 20px; max-width: 400px;
+        }
+
+        /* ==================== SHARE BUTTON ==================== */
+        .share-day-btn {
+            background: var(--glass); border: 0.5px solid rgba(255,255,255,0.08);
+            border-radius: 12px; width: 44px; height: 44px; font-size: 20px;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s; flex-shrink: 0;
+        }
+        .share-day-btn:active { background: var(--glass3); }
+
+        /* ==================== WEATHER CARD ==================== */
+        .weather-card {
+            margin-top: 10px; padding: 10px 14px;
+            background: rgba(100,210,255,0.06); border: 0.5px solid rgba(100,210,255,0.15);
+            border-radius: 12px; font-size: 12px; color: var(--teal); line-height: 1.5;
+        }
+
+        /* ==================== DAY NOTES ==================== */
+        .day-notes-wrap { margin: 20px 0 8px; }
+        .day-notes-summary {
+            font-size: 14px; font-weight: 600; color: var(--text2); cursor: pointer;
+            padding: 10px 0; list-style: none;
+        }
+        .day-notes-summary::-webkit-details-marker { display: none; }
+        .day-notes-summary::before { content: '▸ '; }
+        details[open] > .day-notes-summary::before { content: '▾ '; }
+        .day-notes-textarea {
+            width: 100%; min-height: 60px; background: var(--glass);
+            border: 0.5px solid rgba(255,255,255,0.1); border-radius: 12px;
+            padding: 12px 14px; font-family: inherit; font-size: 13px;
+            color: var(--text); resize: none; outline: none; line-height: 1.6;
+            overflow: hidden; transition: border-color 0.2s;
+        }
+        .day-notes-textarea:focus { border-color: var(--blue); }
+        .day-notes-textarea::placeholder { color: var(--text3); }
+
+        /* ==================== EXPLORE TAB ==================== */
+        .explore-container { padding: 20px 20px; }
+        .explore-header {
+            font-size: 32px; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 16px;
+        }
+        .explore-filters {
+            display: flex; gap: 6px; margin-bottom: 20px; overflow-x: auto; scrollbar-width: none;
+        }
+        .explore-filters::-webkit-scrollbar { display: none; }
+        .explore-filter-btn {
+            background: var(--glass); border: 0.5px solid rgba(255,255,255,0.08);
+            border-radius: 100px; padding: 8px 16px; font-size: 13px; font-weight: 600;
+            font-family: inherit; color: var(--text2); cursor: pointer; white-space: nowrap;
+            transition: all 0.2s; min-height: 48px; display: flex; align-items: center;
+        }
+        .explore-filter-btn.active {
+            background: rgba(10,132,255,0.15); border-color: rgba(10,132,255,0.3); color: var(--blue);
+        }
+        .explore-title {
+            font-size: 18px; font-weight: 700; margin: 20px 0 12px; letter-spacing: -0.02em;
+        }
+        .explore-title:first-child { margin-top: 0; }
+        .explore-park-card {
+            background: var(--bg3); border-radius: var(--radius);
+            border: 0.5px solid rgba(255,255,255,0.06); padding: 16px; margin-bottom: 12px;
+        }
+        .explore-park-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+        .explore-park-days { font-size: 12px; color: var(--text3); font-weight: 600; margin-bottom: 8px; }
+        .explore-park-highlights { font-size: 13px; color: var(--text2); line-height: 1.55; }
     </style>
 </head>
 <body>
@@ -1005,6 +1168,18 @@
             <div class="hero-progress-label" id="heroProgressLabel">Dia 1 de 34</div>
         </div>
     </div>
+
+    <div class="trip-stats-card" id="tripStatsCard">
+        <div class="trip-stat"><span class="trip-stat-value" id="statChecked">0/0</span><span class="trip-stat-label">Concluídos</span></div>
+        <div class="trip-stat"><span class="trip-stat-value" id="statParks">0/11</span><span class="trip-stat-label">Parques</span></div>
+        <div class="trip-stat"><span class="trip-stat-value" id="statKm">~0 km</span><span class="trip-stat-label">Percorridos</span></div>
+    </div>
+
+    <div class="search-bar-wrap">
+        <input type="search" class="search-input" id="searchInput" placeholder="🔍 Buscar lugares, atividades..." oninput="searchItems(this.value)" autocomplete="off">
+        <button class="search-fav-btn" id="searchFavFilter" onclick="toggleSearchFav(this)" aria-label="Filtrar favoritos">⭐</button>
+    </div>
+    <div class="search-results" id="searchResults" style="display:none"></div>
 
     <div class="day-selector" id="daySelector"></div>
 
@@ -1040,6 +1215,20 @@
         <input type="range" id="mapScrubRange" min="1" max="33" value="1" oninput="mapScrubTo(this.value)">
         <button class="map-scrub-arrow" onclick="mapScrubNext()">›</button>
         <div class="map-scrub-label" id="mapScrubLabel">1 / 33</div>
+    </div>
+</div>
+
+<!-- ==================== EXPLORE ==================== -->
+<div class="section" id="sec-explore" role="tabpanel" aria-label="Explorar">
+    <div class="explore-container">
+        <h2 class="explore-header">Explorar</h2>
+        <div class="explore-filters">
+            <button class="explore-filter-btn active" onclick="filterExplore('all', this)">Todos</button>
+            <button class="explore-filter-btn" onclick="filterExplore('hotels', this)">🏨 Hotéis</button>
+            <button class="explore-filter-btn" onclick="filterExplore('parks', this)">🏞️ Parques</button>
+            <button class="explore-filter-btn" onclick="filterExplore('superchargers', this)">⚡ SC</button>
+        </div>
+        <div id="exploreContent"></div>
     </div>
 </div>
 
@@ -1129,17 +1318,28 @@
     <div class="sheet-body" id="sheetBody"></div>
 </div>
 
+<!-- ==================== LIGHTBOX ==================== -->
+<div class="lightbox" id="lightbox" onclick="if(event.target===this)closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
 <!-- ==================== TAB BAR ==================== -->
 <nav class="tab-bar" role="tablist" aria-label="Navegação principal">
-    <button class="tab-item active" onclick="switchTab('home')" role="tab" aria-selected="true" aria-controls="sec-home">
+    <button class="tab-item active" onclick="switchTab('home', event)" role="tab" aria-selected="true" aria-controls="sec-home">
         <span class="tab-icon">📅</span>
         <span>Roteiro</span>
     </button>
-    <button class="tab-item" onclick="switchTab('map')" role="tab" aria-selected="false" aria-controls="sec-map">
+    <button class="tab-item" onclick="switchTab('map', event)" role="tab" aria-selected="false" aria-controls="sec-map">
         <span class="tab-icon">🗺️</span>
         <span>Mapa</span>
     </button>
-    <button class="tab-item" onclick="switchTab('settings')" role="tab" aria-selected="false" aria-controls="sec-settings">
+    <button class="tab-item" onclick="switchTab('explore', event)" role="tab" aria-selected="false" aria-controls="sec-explore">
+        <span class="tab-icon">🔍</span>
+        <span>Explorar</span>
+    </button>
+    <button class="tab-item" onclick="switchTab('settings', event)" role="tab" aria-selected="false" aria-controls="sec-settings">
         <span class="tab-icon">⚙️</span>
         <span>Ajustes</span>
     </button>
@@ -1758,9 +1958,11 @@ function updateDayProgress(dayNum) {
 // ==================== RENDER DAY CONTENT ====================
 function renderDay(d) {
     let html = '<div class="day-slide" id="ds-' + d.day + '">';
-    html += '<div class="day-info"><h2>' + getTitle(d) + '</h2>';
+    html += '<div class="day-info"><div style="display:flex;align-items:center;justify-content:space-between"><h2>' + getTitle(d) + '</h2><button class="share-day-btn" onclick="shareDay(' + d.day + ')" aria-label="Compartilhar dia">📤</button></div>';
     html += '<div class="day-route">📍 ' + d.location + ' — ' + getRoute(d) + '</div>';
-    html += '<div class="day-note">' + getNote(d) + '</div></div>';
+    html += '<div class="day-note">' + getNote(d) + '</div>';
+    html += getWeatherCard(d);
+    html += '</div>';
 
     // Supercharger info cards
     d.items.forEach(function(item, idx) {
@@ -1788,11 +1990,13 @@ function renderDay(d) {
         var click = hasInfo ? ' onclick="openDetail(' + d.day + ',' + idx + ')" style="cursor:pointer"' : '';
         var checkClass = isChecked(d.day, idx) ? ' checked' : '';
         var doneClass = isChecked(d.day, idx) ? ' item-done' : '';
+        var favClass = isFav(d.day, idx) ? ' fav-active' : '';
 
         if (photo) {
             html += '<div class="activity-card' + doneClass + '" data-type="' + item.type + '"' + click + '>';
             html += '<div class="check-circle' + checkClass + '" data-check="' + d.day + '-' + idx + '" onclick="toggleCheck(' + d.day + ',' + idx + ',event)">✓</div>';
-            html += '<img class="activity-card-photo" src="' + photo + '" alt="" loading="lazy" onerror="this.style.display=\'none\'">';
+            html += '<div class="fav-btn' + favClass + '" data-fav="' + d.day + '-' + idx + '" onclick="toggleFav(' + d.day + ',' + idx + ',event)">♥</div>';
+            html += '<img class="activity-card-photo" src="' + photo + '" alt="" loading="lazy" onerror="this.style.display=\'none\'" onclick="event.stopPropagation();openLightbox(this.src,this.parentElement.querySelector(\'.activity-name\').textContent)">';
             html += '<div class="activity-card-body">';
             html += '<div class="activity-time">' + item.time + ' • ' + tl + (hasInfo ? ' • <span style="color:var(--blue)">ⓘ</span>' : '') + '</div>';
             html += '<div class="activity-name">' + text + '</div>';
@@ -1800,11 +2004,19 @@ function renderDay(d) {
         } else {
             html += '<div class="activity-simple' + doneClass + '" data-type="' + item.type + '"' + click + '>';
             html += '<div class="check-circle' + checkClass + '" data-check="' + d.day + '-' + idx + '" onclick="toggleCheck(' + d.day + ',' + idx + ',event)">✓</div>';
+            html += '<div class="fav-btn fav-simple' + favClass + '" data-fav="' + d.day + '-' + idx + '" onclick="toggleFav(' + d.day + ',' + idx + ',event)">♥</div>';
             html += '<div class="act-time">' + item.time + '</div>';
             html += '<div class="act-text">' + text + (hasInfo ? ' <span style="color:var(--blue);font-size:12px">ⓘ</span>' : '') + '</div>';
             html += '</div>';
         }
     });
+
+    // Day notes
+    var noteVal = loadDayNote(d.day);
+    html += '<details class="day-notes-wrap"' + (noteVal ? ' open' : '') + '>';
+    html += '<summary class="day-notes-summary">📝 Notas pessoais</summary>';
+    html += '<textarea class="day-notes-textarea" id="daynote-' + d.day + '" placeholder="Adicione suas anotações para este dia..." oninput="saveDayNote(' + d.day + ')">' + noteVal.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</textarea>';
+    html += '</details>';
 
     // Tips section
     if (d.tips && d.tips.length) {
@@ -1872,14 +2084,19 @@ function showDay(n) {
     if (pl) pl.textContent = 'Dia ' + n + ' de ' + totalDays;
 
     updateDayProgress(n);
+    updateTripStats();
+    var nt = document.getElementById('daynote-' + n);
+    if (nt && nt.value) setTimeout(function() { autoResizeTextarea(nt); }, 50);
 }
 
 // ==================== TAB SWITCHING ====================
-function switchTab(tab) {
+function switchTab(tab, e) {
     document.querySelectorAll('.tab-item').forEach(function(t) { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
     document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
-    event.currentTarget.classList.add('active');
-    event.currentTarget.setAttribute('aria-selected', 'true');
+    if (e && e.currentTarget) {
+        e.currentTarget.classList.add('active');
+        e.currentTarget.setAttribute('aria-selected', 'true');
+    }
     document.getElementById('sec-' + tab).classList.add('active');
 
     if (tab === 'map' && !mapInstance) setTimeout(initMap, 100);
@@ -2502,6 +2719,236 @@ caches.keys().then(function(names) {
         if (el) el.textContent = 'EUA 2027 PWA — cache ' + ver.replace('viagem-eua-2027-', '');
     }
 });
+
+// ==================== FAVORITES ====================
+function isFav(dayNum, itemIdx) {
+    return localStorage.getItem('fav-' + dayNum + '-' + itemIdx) === '1';
+}
+function toggleFav(dayNum, itemIdx, event) {
+    event.stopPropagation();
+    var key = 'fav-' + dayNum + '-' + itemIdx;
+    var faved = localStorage.getItem(key) === '1';
+    localStorage.setItem(key, faved ? '0' : '1');
+    var el = document.querySelector('[data-fav="' + dayNum + '-' + itemIdx + '"]');
+    if (el) el.classList.toggle('fav-active', !faved);
+}
+
+// ==================== SEARCH ====================
+function searchItems(query) {
+    var showFavsOnly = document.getElementById('searchFavFilter').classList.contains('active');
+    if ((!query || query.length < 2) && !showFavsOnly) {
+        document.getElementById('searchResults').innerHTML = '';
+        document.getElementById('searchResults').style.display = 'none';
+        return;
+    }
+    var results = [];
+    var q = query ? query.toLowerCase() : '';
+    days.forEach(function(d) {
+        d.items.forEach(function(item, idx) {
+            var text = item.text.replace(/<[^>]+>/g, '');
+            if (showFavsOnly && !isFav(d.day, idx)) return;
+            if (!q || text.toLowerCase().indexOf(q) !== -1) {
+                results.push({ day: d.day, idx: idx, time: item.time, text: text });
+            }
+        });
+    });
+    var el = document.getElementById('searchResults');
+    if (results.length === 0) {
+        el.innerHTML = '<div style="padding:16px;color:var(--text3);font-size:13px">Nenhum resultado encontrado</div>';
+        el.style.display = 'block';
+        return;
+    }
+    var html = '';
+    results.slice(0, 40).forEach(function(r) {
+        html += '<div class="search-result-item" onclick="closeSearch();showDay(' + r.day + ');setTimeout(function(){openDetail(' + r.day + ',' + r.idx + ')},300)">';
+        html += '<span class="search-result-day">Dia ' + r.day + '</span>';
+        html += '<span class="search-result-time">' + r.time + '</span>';
+        html += '<span class="search-result-text">' + r.text + '</span>';
+        html += '</div>';
+    });
+    el.innerHTML = html;
+    el.style.display = 'block';
+}
+function closeSearch() {
+    document.getElementById('searchResults').style.display = 'none';
+    document.getElementById('searchInput').value = '';
+}
+function toggleSearchFav(btn) {
+    btn.classList.toggle('active');
+    searchItems(document.getElementById('searchInput').value);
+}
+
+// ==================== LIGHTBOX ====================
+var lbScale = 1, lbStartDist = 0, lbStartScale = 1;
+function openLightbox(src, caption) {
+    var lb = document.getElementById('lightbox');
+    var img = document.getElementById('lightboxImg');
+    document.getElementById('lightboxCaption').textContent = caption || '';
+    img.src = src;
+    img.style.transform = '';
+    lbScale = 1;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+}
+function lbGetDist(t) {
+    var dx = t[0].clientX - t[1].clientX;
+    var dy = t[0].clientY - t[1].clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+}
+(function() {
+    var img = document.getElementById('lightboxImg');
+    if (!img) return;
+    img.addEventListener('touchstart', function(e) {
+        if (e.touches.length === 2) { e.preventDefault(); lbStartDist = lbGetDist(e.touches); lbStartScale = lbScale; }
+    }, { passive: false });
+    img.addEventListener('touchmove', function(e) {
+        if (e.touches.length === 2) {
+            e.preventDefault();
+            lbScale = Math.min(5, Math.max(1, lbStartScale * (lbGetDist(e.touches) / lbStartDist)));
+            img.style.transform = 'scale(' + lbScale + ')';
+        }
+    }, { passive: false });
+    img.addEventListener('touchend', function() {
+        if (lbScale <= 1) { lbScale = 1; img.style.transform = ''; }
+    });
+})();
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && document.getElementById('lightbox').classList.contains('open')) closeLightbox();
+});
+
+// ==================== SHARE DAY ====================
+function shareDay(dayNum) {
+    var d = days.find(function(x) { return x.day === dayNum; });
+    if (!d) return;
+    var text = getTitle(d) + '\n📍 ' + d.location + ' — ' + getRoute(d) + '\n\n';
+    d.items.forEach(function(item) {
+        text += item.time + ' — ' + item.text.replace(/<[^>]+>/g, '') + '\n';
+    });
+    if (navigator.share) {
+        navigator.share({ title: getTitle(d), text: text, url: location.href }).catch(function() {});
+    } else {
+        navigator.clipboard.writeText(text).then(function() {
+            var btn = document.querySelector('#ds-' + dayNum + ' .share-day-btn');
+            if (btn) { btn.textContent = '✅'; setTimeout(function() { btn.textContent = '📤'; }, 1500); }
+        }).catch(function() {});
+    }
+}
+
+// ==================== WEATHER CARD ====================
+function getWeatherCard(d) {
+    var regionWeather = {
+        ny: '🌡️ -2°C a 4°C • 🧥 Casaco pesado, luvas, gorro',
+        ca: '🌡️ 10°C a 20°C • 🧥 Camadas, jaqueta leve',
+        pnw: '🌡️ 3°C a 10°C • 🧥 Impermeável, camadas, guarda-chuva',
+        ut: '🌡️ -5°C a 8°C • 🧥 Casaco pesado, térmica, bota',
+        nv: '🌡️ 5°C a 15°C • 🧥 Camadas, jaqueta, protetor solar'
+    };
+    var region = d.region;
+    if (!region || !regionWeather[region]) return '';
+    return '<div class="weather-card">🌤️ Clima: ' + regionWeather[region] + '</div>';
+}
+
+// ==================== DAY NOTES ====================
+function saveDayNote(dayNum) {
+    var el = document.getElementById('daynote-' + dayNum);
+    if (el) { localStorage.setItem('note-' + dayNum, el.value); autoResizeTextarea(el); }
+}
+function loadDayNote(dayNum) {
+    return localStorage.getItem('note-' + dayNum) || '';
+}
+function autoResizeTextarea(el) {
+    el.style.height = 'auto';
+    el.style.height = el.scrollHeight + 'px';
+}
+
+// ==================== TRIP STATS ====================
+function updateTripStats() {
+    var totalChecked = 0, totalItems = 0, kmTraveled = 0;
+    var parkDaySets = {
+        'Sequoia': [6], 'Yosemite': [7,8,9], 'Redwood': [13], 'Olympic': [17,18],
+        'Mt. Rainier': [19], 'Canyonlands': [22], 'Arches': [23], 'Bryce Canyon': [24,25],
+        'Zion': [25,26], 'Grand Canyon': [27], 'Death Valley': [30]
+    };
+    days.forEach(function(d) {
+        var dayHasCheck = false;
+        d.items.forEach(function(item, idx) {
+            totalItems++;
+            if (isChecked(d.day, idx)) { totalChecked++; dayHasCheck = true; }
+        });
+        if (dayHasCheck && dayStats[d.day] && dayStats[d.day].km !== '—') {
+            var km = parseInt(dayStats[d.day].km.replace('~', ''));
+            if (!isNaN(km)) kmTraveled += km;
+        }
+    });
+    var parksVisited = 0;
+    Object.keys(parkDaySets).forEach(function(park) {
+        var ds = parkDaySets[park];
+        var hasAny = ds.some(function(dayNum) {
+            var d = days.find(function(x) { return x.day === dayNum; });
+            if (!d) return false;
+            return d.items.some(function(item, idx) { return isChecked(dayNum, idx); });
+        });
+        if (hasAny) parksVisited++;
+    });
+    var el = document.getElementById('tripStatsCard');
+    if (el) {
+        document.getElementById('statChecked').textContent = totalChecked + '/' + totalItems;
+        document.getElementById('statParks').textContent = parksVisited + '/11';
+        document.getElementById('statKm').textContent = '~' + kmTraveled.toLocaleString() + ' km';
+    }
+}
+
+// ==================== EXPLORE TAB ====================
+function renderExplore() {
+    var el = document.getElementById('exploreContent');
+    if (!el || el.innerHTML !== '') return;
+    var html = '';
+    html += '<div class="explore-section" data-explore="hotels">';
+    html += '<h3 class="explore-title">🏨 Hotéis</h3>';
+    hotels.forEach(function(h) {
+        html += '<div class="hotel-item">';
+        html += '<div class="hotel-num">' + h.num + '</div>';
+        html += '<div><div class="hotel-name">' + h.name + '</div>';
+        html += '<div class="hotel-dates">' + h.checkin + ' → ' + h.checkout + '</div></div>';
+        html += '<div class="hotel-nights">' + h.nights + 'n</div>';
+        html += '</div>';
+    });
+    html += '</div>';
+    html += '<div class="explore-section" data-explore="parks">';
+    html += '<h3 class="explore-title">🏞️ Parques Nacionais</h3>';
+    parks.forEach(function(p) {
+        html += '<div class="explore-park-card">';
+        html += '<div class="explore-park-name">' + p.name + '</div>';
+        html += '<div class="explore-park-days">' + p.days + '</div>';
+        html += '<div class="explore-park-highlights">' + p.highlights + '</div>';
+        html += '</div>';
+    });
+    html += '</div>';
+    html += '<div class="explore-section" data-explore="superchargers">';
+    html += '<h3 class="explore-title">⚡ Superchargers</h3>';
+    superchargers.forEach(function(sc) {
+        html += '<div class="charge-item' + (sc.critical ? ' critical' : '') + '">';
+        html += '<div class="charge-icon-wrap">' + (sc.critical ? '⚠️' : '⚡') + '</div>';
+        html += '<div><div class="charge-name">' + sc.name + '</div>';
+        html += '<div class="charge-leg">Dia ' + sc.day + ' • ' + sc.leg + '</div>';
+        if (sc.note) html += '<div class="charge-note">' + sc.note + '</div>';
+        html += '</div></div>';
+    });
+    html += '</div>';
+    el.innerHTML = html;
+}
+function filterExplore(filter, btn) {
+    document.querySelectorAll('.explore-filter-btn').forEach(function(b) { b.classList.remove('active'); });
+    if (btn) btn.classList.add('active');
+    document.querySelectorAll('.explore-section').forEach(function(s) {
+        if (filter === 'all') { s.style.display = ''; return; }
+        s.style.display = s.dataset.explore === filter ? '' : 'none';
+    });
+}
 
 // ==================== SWIPE GESTURE (day navigation) ====================
 (function() {
