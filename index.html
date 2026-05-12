@@ -1928,6 +1928,7 @@ function toggleCheck(dayNum, itemIdx, event) {
     localStorage.setItem(key, done ? '0' : '1');
     updateCheckUI(dayNum, itemIdx, !done);
     updateDayProgress(dayNum);
+    updateTripStats();
 }
 
 function isChecked(dayNum, itemIdx) {
