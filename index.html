@@ -927,11 +927,12 @@
         .card-action-btn {
             display: flex;
             align-items: center;
-            gap: 6px;
-            padding: 10px 14px;
+            justify-content: center;
+            padding: 0;
+            width: 44px;
+            height: 44px;
             min-height: 44px;
-            min-width: 120px;
-            border-radius: 20px;
+            border-radius: 50%;
             background: rgba(255,255,255,0.06);
             border: 0.5px solid rgba(255,255,255,0.08);
             cursor: pointer;
@@ -943,14 +944,14 @@
         }
         .card-action-btn:active { transform: scale(0.95); }
         .card-action-btn .check-circle {
-            width: 20px; height: 20px;
-            min-width: 20px;
-            font-size: 12px;
+            width: 22px; height: 22px;
+            min-width: 22px;
+            font-size: 14px;
         }
         .card-action-btn .fav-btn {
-            width: 20px; height: 20px;
-            min-width: 20px;
-            font-size: 13px;
+            width: 22px; height: 22px;
+            min-width: 22px;
+            font-size: 15px;
         }
         .card-action-btn.action-done {
             background: rgba(48,209,88,0.15);
@@ -2078,8 +2079,6 @@ function updateCheckUI(dayNum, itemIdx, done) {
         var actionBtn = document.querySelector('[data-action-check="' + dayNum + '-' + itemIdx + '"]');
         if (actionBtn) {
             actionBtn.classList.toggle('action-done', done);
-            var label = actionBtn.querySelector('span');
-            if (label) label.textContent = done ? 'Concluído' : 'Concluir';
         }
     }
 }
@@ -2171,10 +2170,10 @@ function renderDay(d) {
         html += '<div class="card-actions">';
         html += '<button type="button" class="card-action-btn' + (isChecked(d.day, idx) ? ' action-done' : '') + '" onclick="event.stopPropagation();toggleCheck(' + d.day + ',' + idx + ',event)" data-action-check="' + d.day + '-' + idx + '" aria-label="Marcar como concluído">';
         html += '<div class="check-circle' + checkClass + '" data-check="' + d.day + '-' + idx + '">✓</div>';
-        html += '<span>' + (isChecked(d.day, idx) ? 'Concluído' : 'Concluir') + '</span></button>';
+        html += '</button>';
         html += '<button type="button" class="card-action-btn' + (isFav(d.day, idx) ? ' action-fav-active' : '') + '" onclick="event.stopPropagation();toggleFav(' + d.day + ',' + idx + ',event)" data-action-fav="' + d.day + '-' + idx + '" aria-label="Favoritar">';
         html += '<div class="fav-btn' + favClass + '" data-fav="' + d.day + '-' + idx + '">♥</div>';
-        html += '<span>' + (isFav(d.day, idx) ? 'Favoritado' : 'Favoritar') + '</span></button>';
+        html += '</button>';
         html += '</div>';
         html += '</div></div>';
     });
@@ -2927,8 +2926,6 @@ function toggleFav(dayNum, itemIdx, event) {
     var actionBtn = document.querySelector('[data-action-fav="' + dayNum + '-' + itemIdx + '"]');
     if (actionBtn) {
         actionBtn.classList.toggle('action-fav-active', !faved);
-        var label = actionBtn.querySelector('span');
-        if (label) label.textContent = !faved ? 'Favoritado' : 'Favoritar';
     }
 }
 
