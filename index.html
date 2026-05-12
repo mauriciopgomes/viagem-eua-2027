@@ -965,6 +965,30 @@
             color: var(--text3);
             font-weight: 600;
             padding: 0 0 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .toggle-done-btn {
+            background: var(--glass);
+            border: 0.5px solid rgba(255,255,255,0.08);
+            border-radius: 100px;
+            padding: 5px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text3);
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .toggle-done-btn.active {
+            background: rgba(10,132,255,0.15);
+            border-color: rgba(10,132,255,0.3);
+            color: var(--blue);
+        }
+        .activity-grid.hide-done .activity-card.item-done {
+            display: none;
         }
 
         /* Supercharger info card */
@@ -2092,6 +2116,16 @@ function updateDayProgress(dayNum) {
     }
 }
 
+function toggleHideDone(dayNum) {
+    var grid = document.querySelector('#ds-' + dayNum + ' .activity-grid');
+    var btn = document.getElementById('toggleDone-' + dayNum);
+    if (!grid || !btn) return;
+    var hiding = !grid.classList.contains('hide-done');
+    grid.classList.toggle('hide-done', hiding);
+    btn.classList.toggle('active', hiding);
+    btn.textContent = hiding ? '👁️ Mostrar' : '👁️ Esconder';
+}
+
 // ==================== RENDER DAY CONTENT ====================
 function renderDay(d) {
     let html = '<div class="day-slide" id="ds-' + d.day + '">';
@@ -2113,7 +2147,7 @@ function renderDay(d) {
     });
 
     // Progress counter
-    html += '<div class="day-progress"><span id="day-progress-' + d.day + '">0/' + d.items.length + '</span> concluídos</div>';
+    html += '<div class="day-progress"><span id="day-progress-' + d.day + '">0/' + d.items.length + '</span> concluídos <button type="button" class="toggle-done-btn" id="toggleDone-' + d.day + '" onclick="toggleHideDone(' + d.day + ')" aria-label="Esconder concluídos">👁️ Esconder</button></div>';
 
     html += '<div class="activity-grid">';
     var currentPeriod = '';
