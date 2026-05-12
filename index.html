@@ -307,6 +307,7 @@
             flex-direction: column;
         }
         .activity-card:active { transform: scale(0.97); }
+        .activity-card:has(.card-action-btn:active) { transform: none; }
         @media (hover: hover) {
             .activity-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.08); }
         }
@@ -929,11 +930,12 @@
             gap: 6px;
             padding: 10px 14px;
             min-height: 44px;
+            min-width: 120px;
             border-radius: 20px;
             background: rgba(255,255,255,0.06);
             border: 0.5px solid rgba(255,255,255,0.08);
             cursor: pointer;
-            transition: all 0.2s;
+            transition: background 0.2s, border-color 0.2s, color 0.2s;
             font-size: 13px;
             font-family: inherit;
             color: var(--text2);
