@@ -1270,11 +1270,6 @@
         .swipe-hint.right { right: 8px; }
         .swipe-hint.visible { opacity: 1; }
 
-        /* ==================== ONBOARDING ==================== */
-        .onboarding-overlay { position: fixed; inset: 0; z-index: 30000; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
-        .onboarding-overlay.hidden { display: none; }
-        .onboarding-card { background: var(--bg3); border-radius: var(--radius); padding: 28px 24px; text-align: center; max-width: 300px; border: 0.5px solid rgba(255,255,255,0.1); box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
-        .onboarding-btn { margin-top: 20px; background: var(--blue); color: #fff; border: none; border-radius: 100px; padding: 12px 32px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit; }
     </style>
 </head>
 <body>
@@ -1480,13 +1475,6 @@
 
 <div class="swipe-hint left" id="swipeHintL"></div>
 <div class="swipe-hint right" id="swipeHintR"></div>
-
-<div class="onboarding-overlay" id="onboarding">
-    <div class="onboarding-card">
-        <div id="onboardStep"></div>
-        <button type="button" class="onboarding-btn" id="onboardBtn" onclick="nextOnboardStep()">Próximo</button>
-    </div>
-</div>
 
 <script src="data.js"></script>
 <script>
@@ -3299,34 +3287,6 @@ window.addEventListener('scroll', function() {
         if (dy > 100) closeSheet(); else sheet.style.transform = '';
     });
 })();
-
-// ==================== ONBOARDING ====================
-var onboardSteps = [
-    { emoji: '👋', title: 'Bem-vindo!', text: 'Seu roteiro interativo de 34 dias pelos EUA' },
-    { emoji: '👆', title: 'Toque nos cards', text: 'Veja detalhes, endereços e navegação GPS' },
-    { emoji: '✅', title: 'Marque o progresso', text: 'Use os botões Concluir e Favoritar' },
-    { emoji: '👉', title: 'Deslize para navegar', text: 'Swipe para trocar entre os dias' }
-];
-var onboardIdx = 0;
-function nextOnboardStep() {
-    onboardIdx++;
-    if (onboardIdx >= onboardSteps.length) {
-        document.getElementById('onboarding').classList.add('hidden');
-        localStorage.setItem('onboarded', '1');
-        return;
-    }
-    renderOnboardStep();
-}
-function renderOnboardStep() {
-    var s = onboardSteps[onboardIdx];
-    document.getElementById('onboardStep').innerHTML = '<div style="font-size:48px;margin-bottom:12px">' + s.emoji + '</div><div style="font-size:18px;font-weight:800;margin-bottom:8px">' + s.title + '</div><div style="font-size:14px;color:var(--text2)">' + s.text + '</div>';
-    document.getElementById('onboardBtn').textContent = onboardIdx === onboardSteps.length - 1 ? 'Começar!' : 'Próximo';
-}
-if (!localStorage.getItem('onboarded')) {
-    renderOnboardStep();
-} else {
-    document.getElementById('onboarding').classList.add('hidden');
-}
 </script>
 
 </body>
