@@ -1484,7 +1484,7 @@
 <div class="section" id="sec-settings" role="tabpanel" aria-label="Ajustes">
     <div class="settings-section">
         <h2>Ajustes</h2>
-        <div id="appVersion" style="font-size:12px;color:var(--text3);text-align:center;margin:-16px 0 20px">EUA 2027 PWA v74</div>
+        <div id="appVersion" style="font-size:12px;color:var(--text3);text-align:center;margin:-16px 0 20px">EUA 2027 PWA v75</div>
         <div class="settings-group-label">Viagem</div>
         <div class="settings-group">
             <div class="setting-row">
@@ -3757,6 +3757,18 @@ if (SyncEngine.url) setTimeout(function() {
         SyncEngine.fullSync();
     }
 }, 5000);
+
+// Poll for remote changes every 2 minutes
+if (SyncEngine.url) setInterval(function() {
+    if (navigator.onLine && !SyncEngine.syncing) SyncEngine.pull();
+}, 120000);
+
+// Pull when tab/app regains focus (user switches back)
+document.addEventListener('visibilitychange', function() {
+    if (!document.hidden && SyncEngine.url && navigator.onLine && !SyncEngine.syncing) {
+        SyncEngine.fullSync();
+    }
+});
 
 // ==================== EXPORT / IMPORT USER DATA ====================
 function exportUserData() {
