@@ -3589,10 +3589,9 @@ var SyncEngine = {
         });
         var changes = Object.values(latest);
         try {
-            var resp = await fetch(this.url, {
-                method: 'POST',
-                body: JSON.stringify({ changes: changes })
-            });
+            // Use GET with data param (Google Apps Script 302 redirect breaks POST)
+            var payload = encodeURIComponent(JSON.stringify({ changes: changes }));
+            var resp = await fetch(this.url + '?action=push&data=' + payload);
             var result = await resp.json();
             this.queue = [];
             localStorage.setItem('syncQueue', '[]');

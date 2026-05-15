@@ -18,11 +18,39 @@ function doGet(e) {
   lock.waitLock(10000);
   try {
     var sheet = getOrCreateSheet();
-    var rows = sheet.getDataRange().getValues();
+
+    // Handle push via GET (workaround for CORS/redirect issues with POST)
+    if (e.parameter && e.parameter.action === 'push' && e.parameter.data) {
+      var payload = JSON.parse(e.parameter.data);
+      var rows = sheet.getDataRange().getValues();
+      var keyRows = {};
+      for (var i = 1; i < rows.length; i++) {
+        if (rows[i][0]) {
+          keyRows[rows[i][0]] = { row: i + 1, ts: Number(rows[i][2]) || 0 };
+        }
+      }
+      var changes = payload.changes || [];
+      changes.forEach(function(c) {
+        if (!c.key) return;
+        var existing = keyRows[c.key];
+        if (existing) {
+          if (c.ts > existing.ts) {
+            sheet.getRange(existing.row, 2).setValue(String(c.value));
+            sheet.getRange(existing.row, 3).setValue(Number(c.ts));
+          }
+        } else {
+          sheet.appendRow([String(c.key), String(c.value), Number(c.ts)]);
+          keyRows[c.key] = { row: sheet.getLastRow(), ts: c.ts };
+        }
+      });
+    }
+
+    // Return current state
+    var allRows = sheet.getDataRange().getValues();
     var data = {};
-    for (var i = 1; i < rows.length; i++) {
-      if (rows[i][0]) {
-        data[rows[i][0]] = { v: String(rows[i][1]), ts: Number(rows[i][2]) || 0 };
+    for (var i = 1; i < allRows.length; i++) {
+      if (allRows[i][0]) {
+        data[allRows[i][0]] = { v: String(allRows[i][1]), ts: Number(allRows[i][2]) || 0 };
       }
     }
     return ContentService
