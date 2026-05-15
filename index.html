@@ -1484,7 +1484,7 @@
 <div class="section" id="sec-settings" role="tabpanel" aria-label="Ajustes">
     <div class="settings-section">
         <h2>Ajustes</h2>
-        <div id="appVersion" style="font-size:12px;color:var(--text3);text-align:center;margin:-16px 0 20px">EUA 2027 PWA v70</div>
+        <div id="appVersion" style="font-size:12px;color:var(--text3);text-align:center;margin:-16px 0 20px">EUA 2027 PWA v71</div>
         <div class="settings-group-label">Viagem</div>
         <div class="settings-group">
             <div class="setting-row">
@@ -3594,10 +3594,17 @@ var SyncEngine = {
         });
         var changes = Object.values(latest);
         try {
-            // Use GET with data param (Google Apps Script 302 redirect breaks POST)
-            var payload = encodeURIComponent(JSON.stringify({ changes: changes }));
-            var resp = await fetch(this.url + '?action=push&data=' + payload);
-            var result = await resp.json();
+            // Batch in chunks of 15 to avoid URL length limits (GET workaround for Apps Script)
+            var BATCH = 15;
+            for (var i = 0; i < changes.length; i += BATCH) {
+                var chunk = changes.slice(i, i + BATCH);
+                var payload = encodeURIComponent(JSON.stringify({ changes: chunk }));
+                var resp = await fetch(this.url + '?action=push&data=' + payload);
+                if (!resp.ok) throw new Error('HTTP ' + resp.status);
+            }
+            // Pull final state after all batches
+            var pullResp = await fetch(this.url);
+            var result = await pullResp.json();
             this.queue = [];
             localStorage.setItem('syncQueue', '[]');
             if (result && result.data) this.mergeRemote(result.data);
@@ -3610,11 +3617,13 @@ var SyncEngine = {
     },
 
     pull: async function() {
-        if (!this.url || !navigator.onLine || this.syncing) return;
+        if (!this.url || !navigator.onLine) return;
+        if (this.syncing) return;
         this.syncing = true;
         this.updateUI('syncing');
         try {
             var resp = await fetch(this.url);
+            if (!resp.ok) throw new Error('HTTP ' + resp.status);
             var result = await resp.json();
             if (result && result.data) this.mergeRemote(result.data);
             this.updateUI('synced');
