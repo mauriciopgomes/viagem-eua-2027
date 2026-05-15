@@ -1141,7 +1141,7 @@
             }
             .sidebar-item:hover { background: var(--glass); }
             .sidebar-item.active { background: rgba(10,132,255,0.1); border-left-color: var(--blue); color: var(--text); }
-            .sidebar-day { font-weight: 700; font-size: 14px; min-width: 24px; }
+            .sidebar-day { font-weight: 700; font-size: 12px; min-width: 40px; }
             .sidebar-loc { font-size: 12px; color: var(--text3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
             .sidebar-item.active .sidebar-loc { color: var(--text2); }
 
@@ -2159,11 +2159,14 @@ function renderDaySelector() {
 function renderSidebar() {
     var el = document.getElementById('homeSidebar');
     if (!el) return;
+    var tripStart = new Date(2027, 0, 21);
     var html = '<div style="padding:12px 16px;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em">Dias</div>';
     for (var i = 1; i <= totalDays; i++) {
         var d = days[i-1];
         var loc = d ? d.location.replace(/ dia cheio| 🌲| 🌊| 🌅| 🧛| 🏜️| ✈️| 🎰| ❤️/g, '').split(' → ').pop().split(' — ').pop().trim() : '';
-        html += '<div class="sidebar-item" data-sd="' + i + '" onclick="showDay(' + i + ')"><span class="sidebar-day">' + i + '</span><span class="sidebar-loc">' + loc + '</span></div>';
+        var dt = new Date(tripStart); dt.setDate(dt.getDate() + i - 1);
+        var dateStr = String(dt.getDate()).padStart(2,'0') + '/' + String(dt.getMonth()+1).padStart(2,'0');
+        html += '<div class="sidebar-item" data-sd="' + i + '" onclick="showDay(' + i + ')"><span class="sidebar-day">' + dateStr + '</span><span class="sidebar-loc">' + loc + '</span></div>';
     }
     el.innerHTML = html;
 }
