@@ -1484,7 +1484,7 @@
 <div class="section" id="sec-settings" role="tabpanel" aria-label="Ajustes">
     <div class="settings-section">
         <h2>Ajustes</h2>
-        <div id="appVersion" style="font-size:12px;color:var(--text3);text-align:center;margin:-16px 0 20px">EUA 2027 PWA v75</div>
+        <div id="appVersion" style="font-size:12px;color:var(--text3);text-align:center;margin:-16px 0 20px">EUA 2027 PWA v76</div>
         <div class="settings-group-label">Viagem</div>
         <div class="settings-group">
             <div class="setting-row">
@@ -3637,22 +3637,38 @@ var SyncEngine = {
     },
 
     mergeRemote: function(remote) {
-        var changed = false;
+        var dominated = false;
         Object.keys(remote).forEach(function(key) {
             var localTs = parseInt(localStorage.getItem('_ts_' + key)) || 0;
             var remoteTs = remote[key].ts || 0;
             if (remoteTs > localTs) {
                 localStorage.setItem(key, remote[key].v);
                 localStorage.setItem('_ts_' + key, remoteTs);
-                changed = true;
+                // Targeted DOM update instead of full re-render
+                var val = remote[key].v;
+                if (key.startsWith('check-')) {
+                    var parts = key.replace('check-', '').split('-');
+                    var el = document.querySelector('[data-check="' + parts[0] + '-' + parts[1] + '"]');
+                    if (el) {
+                        var row = el.closest('.item');
+                        if (row) row.classList.toggle('done', val === '1');
+                        el.textContent = val === '1' ? '✅' : '⬜';
+                    }
+                    dominated = true;
+                } else if (key.startsWith('fav-')) {
+                    var parts2 = key.replace('fav-', '').split('-');
+                    var favEl = document.querySelector('[data-fav="' + parts2[0] + '-' + parts2[1] + '"]');
+                    if (favEl) favEl.classList.toggle('fav-active', val === '1');
+                    dominated = true;
+                } else if (key.startsWith('note-')) {
+                    var dayNum = key.replace('note-', '');
+                    var noteEl = document.getElementById('note-' + dayNum);
+                    if (noteEl && noteEl.value !== val) noteEl.value = val || '';
+                    dominated = true;
+                }
             }
         });
-        if (changed) {
-            renderedDays = {};
-            document.getElementById('dayContainer').innerHTML = '';
-            showDay(currentDay);
-            updateTripStats();
-        }
+        if (dominated) updateTripStats();
     },
 
     fullSync: async function() {
