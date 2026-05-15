@@ -3553,7 +3553,7 @@ window.addEventListener('scroll', function() {
 
 // ==================== GOOGLE SHEETS SYNC ====================
 var SyncEngine = {
-    url: localStorage.getItem('syncUrl') || '',
+    url: localStorage.getItem('syncUrl') || 'https://script.google.com/macros/s/AKfycbzYaHa1-kCXWbSdm4jALX7-tPu3OFS_x5uraXByh3E3zULJOv502tR5GNqep7CO5t077Q/exec',
     queue: JSON.parse(localStorage.getItem('syncQueue') || '[]'),
     syncing: false,
     debounceTimer: null,
