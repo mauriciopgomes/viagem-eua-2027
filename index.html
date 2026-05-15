@@ -992,21 +992,13 @@
             border: 1px solid rgba(255,255,255,0.08);
             cursor: pointer;
             transition: all 0.2s;
-            font-size: 13px;
+            font-size: 0;
             font-family: inherit;
             color: var(--text3);
             -webkit-tap-highlight-color: transparent;
         }
         .card-action-btn:active { transform: scale(0.92); }
-        .card-action-btn .check-circle {
-            width: 100%; height: 100%;
-            min-width: auto;
-            border: none !important;
-            background: none !important;
-            border-radius: 0;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .card-action-btn .check-circle::after {
+        .card-action-btn[data-action-check]::after {
             content: '';
             width: 16px; height: 16px;
             background: rgba(255,255,255,0.3);
@@ -1014,35 +1006,27 @@
             -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E") center/contain no-repeat;
             mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E") center/contain no-repeat;
         }
-        .card-action-btn .check-circle.checked::after {
+        .card-action-btn.action-done {
+            background: rgba(48,209,88,0.1);
+            border-color: rgba(48,209,88,0.25);
+        }
+        .card-action-btn.action-done::after {
             background: var(--green);
         }
-        .card-action-btn .fav-btn {
-            width: 100%; height: 100%;
-            min-width: auto;
-            border: none !important;
-            background: none !important;
-            border-radius: 0;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .card-action-btn .fav-btn::after {
+        .card-action-btn[data-action-fav]::after {
             content: '';
-            width: 14px; height: 13px;
+            width: 15px; height: 14px;
             background: rgba(255,255,255,0.3);
             display: block;
             -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E") center/contain no-repeat;
             mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E") center/contain no-repeat;
         }
-        .card-action-btn .fav-btn.fav-active::after {
-            background: var(--red);
-        }
-        .card-action-btn.action-done {
-            background: rgba(48,209,88,0.08);
-            border-color: rgba(48,209,88,0.2);
-        }
         .card-action-btn.action-fav-active {
-            background: rgba(255,69,58,0.08);
-            border-color: rgba(255,69,58,0.2);
+            background: rgba(255,69,58,0.1);
+            border-color: rgba(255,69,58,0.25);
+        }
+        .card-action-btn.action-fav-active::after {
+            background: var(--red);
         }
         .day-progress {
             font-size: 12px;
@@ -1509,7 +1493,7 @@
 <div class="section" id="sec-settings" role="tabpanel" aria-label="Ajustes">
     <div class="settings-section">
         <h2>Ajustes</h2>
-        <div id="appVersion" style="font-size:12px;color:var(--text3);text-align:center;margin:-16px 0 20px">EUA 2027 PWA v80</div>
+        <div id="appVersion" style="font-size:12px;color:var(--text3);text-align:center;margin:-16px 0 20px">EUA 2027 PWA v81</div>
         <div class="settings-group-label">Viagem</div>
         <div class="settings-group">
             <div class="setting-row">
@@ -2272,16 +2256,12 @@ function isChecked(dayNum, itemIdx) {
 }
 
 function updateCheckUI(dayNum, itemIdx, done) {
-    var el = document.querySelector('[data-check="' + dayNum + '-' + itemIdx + '"]');
-    if (el) {
-        el.classList.toggle('checked', done);
-        if (done) { el.classList.add('just-checked'); setTimeout(function() { el.classList.remove('just-checked'); }, 600); }
-        var parent = el.closest('.activity-card');
+    var actionBtn = document.querySelector('[data-action-check="' + dayNum + '-' + itemIdx + '"]');
+    if (actionBtn) {
+        actionBtn.classList.toggle('action-done', done);
+        if (done) { actionBtn.classList.add('just-checked'); setTimeout(function() { actionBtn.classList.remove('just-checked'); }, 600); }
+        var parent = actionBtn.closest('.activity-card');
         if (parent) parent.classList.toggle('item-done', done);
-        var actionBtn = document.querySelector('[data-action-check="' + dayNum + '-' + itemIdx + '"]');
-        if (actionBtn) {
-            actionBtn.classList.toggle('action-done', done);
-        }
     }
 }
 
@@ -2361,12 +2341,8 @@ function renderDay(d) {
         html += '<div class="activity-time">' + item.time + ' • ' + tl + (hasInfo ? ' • <span style="color:var(--blue)">ⓘ</span>' : '') + '</div>';
         html += '<div class="activity-name">' + text + '</div>';
         html += '<div class="card-actions">';
-        html += '<button type="button" class="card-action-btn' + (isChecked(d.day, idx) ? ' action-done' : '') + '" onclick="event.stopPropagation();toggleCheck(' + d.day + ',' + idx + ',event)" data-action-check="' + d.day + '-' + idx + '" aria-label="Marcar como concluído">';
-        html += '<div class="check-circle' + checkClass + '" data-check="' + d.day + '-' + idx + '"></div>';
-        html += '</button>';
-        html += '<button type="button" class="card-action-btn' + (isFav(d.day, idx) ? ' action-fav-active' : '') + '" onclick="event.stopPropagation();toggleFav(' + d.day + ',' + idx + ',event)" data-action-fav="' + d.day + '-' + idx + '" aria-label="Favoritar">';
-        html += '<div class="fav-btn' + favClass + '" data-fav="' + d.day + '-' + idx + '"></div>';
-        html += '</button>';
+        html += '<button type="button" class="card-action-btn' + (isChecked(d.day, idx) ? ' action-done' : '') + '" onclick="event.stopPropagation();toggleCheck(' + d.day + ',' + idx + ',event)" data-action-check="' + d.day + '-' + idx + '" aria-label="Marcar como concluído"></button>';
+        html += '<button type="button" class="card-action-btn' + (isFav(d.day, idx) ? ' action-fav-active' : '') + '" onclick="event.stopPropagation();toggleFav(' + d.day + ',' + idx + ',event)" data-action-fav="' + d.day + '-' + idx + '" aria-label="Favoritar"></button>';
         html += '</div>';
         html += '</div></div>';
     });
@@ -3169,14 +3145,10 @@ function toggleFav(dayNum, itemIdx, event) {
     var key = 'fav-' + dayNum + '-' + itemIdx;
     var faved = localStorage.getItem(key) === '1';
     localStorage.setItem(key, faved ? '0' : '1');
-    var el = document.querySelector('[data-fav="' + dayNum + '-' + itemIdx + '"]');
-    if (el) {
-        el.classList.toggle('fav-active', !faved);
-        if (!faved) { el.classList.add('just-faved'); setTimeout(function() { el.classList.remove('just-faved'); }, 600); }
-    }
     var actionBtn = document.querySelector('[data-action-fav="' + dayNum + '-' + itemIdx + '"]');
     if (actionBtn) {
         actionBtn.classList.toggle('action-fav-active', !faved);
+        if (!faved) { actionBtn.classList.add('just-faved'); setTimeout(function() { actionBtn.classList.remove('just-faved'); }, 600); }
     }
 }
 
@@ -3673,17 +3645,17 @@ var SyncEngine = {
                 var val = remote[key].v;
                 if (key.startsWith('check-')) {
                     var parts = key.replace('check-', '').split('-');
-                    var el = document.querySelector('[data-check="' + parts[0] + '-' + parts[1] + '"]');
-                    if (el) {
-                        var row = el.closest('.item');
-                        if (row) row.classList.toggle('done', val === '1');
-                        el.textContent = val === '1' ? '✅' : '⬜';
+                    var actionBtn = document.querySelector('[data-action-check="' + parts[0] + '-' + parts[1] + '"]');
+                    if (actionBtn) {
+                        actionBtn.classList.toggle('action-done', val === '1');
+                        var card = actionBtn.closest('.activity-card');
+                        if (card) card.classList.toggle('item-done', val === '1');
                     }
                     dominated = true;
                 } else if (key.startsWith('fav-')) {
                     var parts2 = key.replace('fav-', '').split('-');
-                    var favEl = document.querySelector('[data-fav="' + parts2[0] + '-' + parts2[1] + '"]');
-                    if (favEl) favEl.classList.toggle('fav-active', val === '1');
+                    var favBtn = document.querySelector('[data-action-fav="' + parts2[0] + '-' + parts2[1] + '"]');
+                    if (favBtn) favBtn.classList.toggle('action-fav-active', val === '1');
                     dominated = true;
                 } else if (key.startsWith('note-')) {
                     var dayNum = key.replace('note-', '');
