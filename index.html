@@ -207,8 +207,8 @@
         .day-selector::-webkit-scrollbar { display: none; }
         .day-pill {
             position: relative;
-            min-width: 48px;
-            height: 48px;
+            min-width: 52px;
+            height: 54px;
             border-radius: 14px;
             border: 1.5px solid rgba(255,255,255,0.06);
             background: rgba(255,255,255,0.03);
@@ -218,9 +218,14 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
             font-family: inherit;
-            padding: 0 14px;
+            padding: 4px 10px 8px;
             white-space: nowrap;
             flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
         }
         .day-pill.active {
             background: var(--blue);
@@ -241,6 +246,9 @@
         .day-pill.active { animation: pillPulse 2.5s ease-in-out infinite; }
         @keyframes pillPulse { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.15); } }
         @media (prefers-reduced-motion: reduce) { .day-pill.active { animation: none; } }
+        .pill-label { display: block; font-size: 9px; font-weight: 500; opacity: 0.7; margin-top: 1px; letter-spacing: 0; }
+        .day-pill.active .pill-label { opacity: 1; }
+        @media (max-width: 374px) { .hero { height: 240px; } .hero-title { font-size: 22px; } }
 
         /* Pill progress dot */
         .pill-dot { position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 4px; height: 4px; border-radius: 50%; background: var(--green); opacity: 0; transition: opacity 0.3s; }
@@ -853,6 +861,17 @@
         @media (hover: hover) {
             .day-pill:hover:not(.active) { background: var(--glass2); }
             .activity-card[onclick]:hover { background: rgba(255,255,255,0.03); }
+            .activity-card[title]:hover::after {
+                content: attr(title);
+                position: absolute; bottom: calc(100% + 8px); left: 16px; right: 16px;
+                background: rgba(5,5,8,0.95); color: var(--text2);
+                padding: 10px 14px; border-radius: 12px; font-size: 12px; line-height: 1.5;
+                border: 0.5px solid rgba(255,255,255,0.1);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+                z-index: 100; pointer-events: none;
+                animation: tooltipIn 0.15s ease;
+            }
+            @keyframes tooltipIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
             .setting-row:hover { background: var(--glass); border-radius: var(--radius-sm); }
             .hotel-item:hover, .charge-item:hover { background: var(--glass); }
             .sheet-close:hover { background: rgba(255,255,255,0.2); }
@@ -892,6 +911,14 @@
 
         /* Selection */
         ::selection { background: rgba(10,132,255,0.3); }
+
+        /* Styled scrollbar (desktop/tablet) */
+        @media (hover: hover) {
+            ::-webkit-scrollbar { width: 6px; }
+            ::-webkit-scrollbar-track { background: transparent; }
+            ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 3px; }
+            ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+        }
 
         /* Activity checklist */
         .check-circle {
@@ -945,7 +972,7 @@
             color: var(--text2);
             -webkit-tap-highlight-color: transparent;
         }
-        .card-action-btn:active { transform: scale(0.95); }
+        .card-action-btn:active { transform: scale(0.95); background: rgba(255,255,255,0.15); }
         .card-action-btn .check-circle {
             width: 22px; height: 22px;
             min-width: 22px;
@@ -1023,7 +1050,7 @@
         /* ==================== IPAD / TABLET (≥768px) ==================== */
         @media (min-width: 768px) {
             /* Hero wider with larger text */
-            .hero { max-width: 100%; }
+            .hero { max-width: 100%; height: 260px; }
             .hero-title { font-size: 36px; }
             .hero-subtitle { font-size: 15px; }
 
@@ -1056,9 +1083,9 @@
                 margin: 0 auto;
             }
 
-            /* Sheet narrower and centered */
+            /* Sheet as centered modal on tablet */
             .sheet {
-                max-width: 500px;
+                max-width: 540px;
                 left: 50%;
                 right: auto;
                 transform: translateX(-50%) translateY(100%);
@@ -1080,10 +1107,69 @@
 
         /* ==================== IPAD LANDSCAPE / LARGE TABLETS (≥1024px) ==================== */
         @media (min-width: 1024px) {
-            .day-slide { max-width: 800px; }
+            .day-slide { max-width: 900px; }
             .hero-title { font-size: 40px; }
+            .hero { height: 280px; }
             .settings-section { max-width: 700px; }
             .explore-container { max-width: 700px; margin: 0 auto; }
+            .activity-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* ==================== DESKTOP (≥1200px) ==================== */
+        @media (min-width: 1200px) {
+            /* Sidebar layout */
+            #sec-home { display: flex; flex-direction: row; }
+            #sec-home.active { display: flex; }
+            .home-sidebar {
+                display: block;
+                width: 240px; min-width: 240px; max-height: 100vh; height: 100vh;
+                position: sticky; top: 0;
+                overflow-y: auto; scrollbar-width: thin;
+                background: var(--bg2); border-right: 0.5px solid rgba(255,255,255,0.06);
+                padding: 16px 0; flex-shrink: 0;
+            }
+            .home-sidebar::-webkit-scrollbar { width: 4px; }
+            .home-sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+            .home-main { flex: 1; min-width: 0; }
+            .sidebar-item {
+                display: flex; align-items: center; gap: 10px;
+                padding: 10px 16px; cursor: pointer; font-size: 13px;
+                color: var(--text2); transition: background 0.15s, color 0.15s;
+                border-left: 3px solid transparent;
+            }
+            .sidebar-item:hover { background: var(--glass); }
+            .sidebar-item.active { background: rgba(10,132,255,0.1); border-left-color: var(--blue); color: var(--text); }
+            .sidebar-day { font-weight: 700; font-size: 14px; min-width: 24px; }
+            .sidebar-loc { font-size: 12px; color: var(--text3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+            .sidebar-item.active .sidebar-loc { color: var(--text2); }
+
+            /* Hide horizontal day selector on desktop */
+            .day-selector { display: none; }
+
+            /* Day slide wider */
+            .day-slide { max-width: 960px; }
+
+            /* Tab bar as top nav */
+            .tab-bar {
+                top: 0; bottom: auto; left: 0; right: 0;
+                max-width: 100%; transform: none;
+                border-top: none;
+                border-bottom: 0.5px solid rgba(255,255,255,0.06);
+                border-radius: 0;
+                flex-direction: row; height: 52px;
+                justify-content: center; gap: 8px;
+                padding-top: 0; padding-bottom: 0;
+            }
+            .tab-item { flex-direction: row; gap: 6px; min-height: 36px; padding: 6px 16px; font-size: 13px; }
+            .tab-item .tab-icon { font-size: 16px; }
+            .tab-item.active::before { top: auto; bottom: 0; width: 100%; height: 2px; left: 0; transform: none; }
+            body { padding-bottom: 0; padding-top: 52px; }
+            --tab-height: 0px;
+
+            /* Hero smaller on desktop */
+            .hero { height: 240px; }
         }
 
         /* ==================== SEARCH BAR ==================== */
@@ -1277,6 +1363,9 @@
         .swipe-hint.right { right: 8px; }
         .swipe-hint.visible { opacity: 1; }
 
+        /* Hide sidebar below desktop */
+        .home-sidebar { display: none; }
+
     </style>
 </head>
 <body>
@@ -1284,6 +1373,8 @@
 <main>
 <!-- ==================== HOME / ITINERARY ==================== -->
 <div class="section active" id="sec-home" role="tabpanel" aria-label="Roteiro">
+    <div class="home-sidebar" id="homeSidebar"></div>
+    <div class="home-main">
     <div class="hero" id="heroSection" onclick="window.scrollTo({top:0,behavior:'smooth'})">
         <img id="heroImg" src="img/dia-01.jpg" alt="Day photo" fetchpriority="high" width="960" height="641">
         <div class="hero-overlay">
@@ -1317,6 +1408,7 @@
     <div class="day-selector" id="daySelector"></div>
 
     <div class="day-container" id="dayContainer"></div>
+    </div><!-- .home-main -->
 </div>
 
 <!-- ==================== MAP ==================== -->
@@ -2050,10 +2142,25 @@ function renderDaySelector() {
     const el = document.getElementById('daySelector');
     const regions = ['ny','ny','ny','ny','ca','ca','ca','ca','ca','ca','ca','ca','ca','ca','pnw','pnw','pnw','pnw','pnw','ut','ut','ut','ut','ut','ut','ut','ut','ut','nv','nv','nv','ca','ca'];
     let html = '';
+    var shortLocs = {1:'NYC',2:'NYC',3:'NYC',4:'NYC',5:'LAX',6:'Sequoia',7:'Yosemite',8:'Yosemite',9:'SF',10:'SF',11:'SF',12:'Eureka',13:'Redwood',14:'Oregon',15:'Oregon',16:'Forks',17:'Olympic',18:'Rainier',19:'Boise',20:'SLC',21:'Moab',22:'Canyonlands',23:'Arches',24:'Bryce',25:'Zion',26:'Zion',27:'GC+Vegas',28:'Vegas',29:'Vegas',30:'DV',31:'LA',32:'LA',33:'LAX'};
     for (let i = 1; i <= totalDays; i++) {
         const r = (days[i-1] && days[i-1].region) || regions[i - 1] || 'nv';
         const loc = days[i-1] ? days[i-1].location : '';
-        html += '<button class="day-pill ' + r + '" data-d="' + i + '" onclick="showDay(' + i + ')" aria-label="Dia ' + i + ' — ' + loc + '" title="' + loc + '">' + i + '<span class="pill-dot"></span></button>';
+        const short = shortLocs[i] || '';
+        html += '<button class="day-pill ' + r + '" data-d="' + i + '" onclick="showDay(' + i + ')" aria-label="Dia ' + i + ' — ' + loc + '" title="' + loc + '">' + i + '<span class="pill-label">' + short + '</span><span class="pill-dot"></span></button>';
+    }
+    el.innerHTML = html;
+}
+
+// ==================== RENDER SIDEBAR (desktop) ====================
+function renderSidebar() {
+    var el = document.getElementById('homeSidebar');
+    if (!el) return;
+    var html = '<div style="padding:12px 16px;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em">Dias</div>';
+    for (var i = 1; i <= totalDays; i++) {
+        var d = days[i-1];
+        var loc = d ? d.location.replace(/ dia cheio| 🌲| 🌊| 🌅| 🧛| 🏜️| ✈️| 🎰| ❤️/g, '').split(' → ').pop().split(' — ').pop().trim() : '';
+        html += '<div class="sidebar-item" data-sd="' + i + '" onclick="showDay(' + i + ')"><span class="sidebar-day">' + i + '</span><span class="sidebar-loc">' + loc + '</span></div>';
     }
     el.innerHTML = html;
 }
@@ -2147,12 +2254,14 @@ function renderDay(d) {
         var tl = typeLabel[item.type] || '📍 Local';
 
         var hasInfo = !!findPlaceInfo(item.text);
+        var placeData = findPlaceInfo(item.text);
+        var cardTitle = placeData && placeData.info.detail ? ' title="' + placeData.info.detail.replace(/"/g, '&quot;').substring(0, 150) + '"' : '';
         var click = hasInfo ? ' onclick="openDetail(' + d.day + ',' + idx + ')" style="cursor:pointer"' : '';
         var checkClass = isChecked(d.day, idx) ? ' checked' : '';
         var doneClass = isChecked(d.day, idx) ? ' item-done' : '';
         var favClass = isFav(d.day, idx) ? ' fav-active' : '';
 
-        html += '<div class="activity-card' + doneClass + '" data-type="' + item.type + '"' + click + '>';
+        html += '<div class="activity-card' + doneClass + '" data-type="' + item.type + '"' + click + cardTitle + '>';
         if (photo) {
             html += '<img class="activity-card-photo" src="' + photo + '" alt="' + plainText.replace(/"/g, '&quot;') + '" width="400" height="200" loading="lazy" onload="this.classList.add(\'loaded\')" onerror="this.style.display=\'none\'" onclick="event.stopPropagation();openLightbox(this.src,this.parentElement.querySelector(\'.activity-name\').textContent)">';
         }
@@ -2213,6 +2322,10 @@ function showDay(n) {
 
     document.querySelectorAll('.day-slide').forEach(function(s) { s.classList.remove('active'); s.style.display = 'none'; });
     document.querySelectorAll('.day-pill').forEach(function(b) { b.classList.remove('active'); });
+    // Sync sidebar
+    document.querySelectorAll('.sidebar-item').forEach(function(s) { s.classList.remove('active'); });
+    var sideItem = document.querySelector('.sidebar-item[data-sd="' + n + '"]');
+    if (sideItem) { sideItem.classList.add('active'); sideItem.scrollIntoView({ block: 'nearest' }); }
 
     if (!renderedDays[n]) {
         var skelId = 'ds-skel-' + n;
@@ -2348,6 +2461,12 @@ function closeSheet() {
 
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeSheet();
+    // Arrow keys to navigate days (only on home tab, not in inputs)
+    if ((e.key === 'ArrowLeft' || e.key === 'ArrowRight') && document.getElementById('sec-home').classList.contains('active') && !e.target.closest('input, textarea')) {
+        e.preventDefault();
+        if (e.key === 'ArrowLeft' && currentDay > 1) showDay(currentDay - 1);
+        if (e.key === 'ArrowRight' && currentDay < totalDays) showDay(currentDay + 1);
+    }
     // Focus trap in sheet
     if (e.key === 'Tab' && document.getElementById('sheet').classList.contains('open')) {
         var sheet = document.getElementById('sheet');
@@ -2882,6 +3001,7 @@ function updateCountdown() {
 }
 
 renderDaySelector();
+renderSidebar();
 renderAllDays();
 
 // Prevent native focus-scroll on day pills (browser scrolls overflow containers on button focus)
