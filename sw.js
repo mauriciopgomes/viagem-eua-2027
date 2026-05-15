@@ -1,4 +1,4 @@
-const CACHE_NAME = 'viagem-eua-2027-v71';
+const CACHE_NAME = 'viagem-eua-2027-v72';
 const TILE_CACHE = 'viagem-tiles-v1';
 
 // Critical assets — must succeed for install
