@@ -1484,7 +1484,7 @@
 <div class="section" id="sec-settings" role="tabpanel" aria-label="Ajustes">
     <div class="settings-section">
         <h2>Ajustes</h2>
-        <div id="appVersion" style="font-size:12px;color:var(--text3);text-align:center;margin:-16px 0 20px">EUA 2027 PWA v69</div>
+        <div id="appVersion" style="font-size:12px;color:var(--text3);text-align:center;margin:-16px 0 20px">EUA 2027 PWA v70</div>
         <div class="settings-group-label">Viagem</div>
         <div class="settings-group">
             <div class="setting-row">
@@ -3553,7 +3553,17 @@ window.addEventListener('scroll', function() {
 
 // ==================== GOOGLE SHEETS SYNC ====================
 var SyncEngine = {
-    url: localStorage.getItem('syncUrl') || 'https://script.google.com/macros/s/AKfycbyEfTe62Z58eUSE5KOTzRy6Tm5DoDIso6qZPE1MsUXU1bdzA9ObT2eyWTKfeCZDgfp-Og/exec',
+    defaultUrl: 'https://script.google.com/macros/s/AKfycbyEfTe62Z58eUSE5KOTzRy6Tm5DoDIso6qZPE1MsUXU1bdzA9ObT2eyWTKfeCZDgfp-Og/exec',
+    url: (function() {
+        var saved = localStorage.getItem('syncUrl');
+        var def = 'https://script.google.com/macros/s/AKfycbyEfTe62Z58eUSE5KOTzRy6Tm5DoDIso6qZPE1MsUXU1bdzA9ObT2eyWTKfeCZDgfp-Og/exec';
+        // Reset if user has old/stale URL
+        if (saved && saved !== def && saved.indexOf('AKfycbzYaHa1') !== -1) {
+            localStorage.removeItem('syncUrl');
+            return def;
+        }
+        return saved || def;
+    })(),
     queue: JSON.parse(localStorage.getItem('syncQueue') || '[]'),
     syncing: false,
     debounceTimer: null,
