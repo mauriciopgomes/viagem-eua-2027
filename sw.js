@@ -1,4 +1,4 @@
-const CACHE_NAME = 'viagem-eua-2027-v58';
+const CACHE_NAME = 'viagem-eua-2027-v59';
 const TILE_CACHE = 'viagem-tiles-v1';
 
 // Critical assets — must succeed for install
@@ -322,7 +322,26 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Everything else: cache-first
+  // HTML, JS, CSS: network-first (always get latest, fallback to cache)
+  if (event.request.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname.endsWith('.js') || url.pathname.endsWith('.css')) {
+    event.respondWith(
+      fetch(event.request).then((response) => {
+        if (response.ok && url.origin === self.location.origin) {
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, response.clone());
+          });
+        }
+        return response;
+      }).catch(() => {
+        return caches.match(event.request).then((cached) => {
+          return cached || caches.match('./index.html');
+        });
+      })
+    );
+    return;
+  }
+
+  // Everything else (images, fonts): cache-first
   event.respondWith(
     caches.match(event.request).then((cached) => {
       if (cached) return cached;
