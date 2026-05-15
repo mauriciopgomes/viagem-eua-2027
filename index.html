@@ -14,6 +14,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="EUA 2027">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-192.png">
     <link rel="stylesheet" href="lib/leaflet.css" media="print" onload="this.media='all'" />
     <style>
         @font-face {
@@ -24,7 +25,7 @@
             src: url('fonts/inter.woff2') format('woff2');
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 
         :root {
             --bg: #050508;
@@ -884,6 +885,29 @@
         html, body { overscroll-behavior: none; }
         .sheet { overscroll-behavior: contain; }
 
+        /* ==================== OFFLINE INDICATOR ==================== */
+        .offline-bar {
+            position: fixed;
+            top: var(--safe-top);
+            left: 0; right: 0;
+            background: rgba(255,159,10,0.92);
+            color: #1a1a1a;
+            text-align: center;
+            padding: 6px 16px;
+            font-size: 12px;
+            font-weight: 700;
+            z-index: 99999;
+            transform: translateY(-100%);
+            transition: transform 0.35s cubic-bezier(0.32,0.72,0,1);
+            letter-spacing: 0.01em;
+        }
+        .offline-bar.visible { transform: translateY(0); }
+        body.is-offline { padding-top: calc(var(--safe-top) + 28px); }
+        body.is-offline .tab-bar { /* keep tab bar position */ }
+        @media (min-width: 1200px) {
+            body.is-offline { padding-top: calc(52px + 28px); }
+        }
+
         /* Reduced motion */
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
@@ -1508,19 +1532,59 @@
                 </div>
             </div>
         </div>
+        <div class="settings-group-label">Sincronização</div>
+        <div class="settings-group">
+            <div class="setting-row" style="flex-direction:column;align-items:stretch;gap:12px">
+                <div>
+                    <div class="setting-label">☁️ Google Sheets Sync</div>
+                    <div class="setting-desc">Sincronizar progresso, favoritos e notas entre dispositivos via Google Sheets</div>
+                </div>
+                <input type="url" id="syncUrlInput" placeholder="URL do Google Apps Script (ver instruções abaixo)" style="background:var(--glass);border:0.5px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 14px;font-family:inherit;font-size:13px;color:var(--text);outline:none;width:100%" onchange="SyncEngine.setUrl(this.value)">
+                <button onclick="SyncEngine.fullSync()" style="background:var(--glass2);color:var(--text);border:0.5px solid rgba(255,255,255,0.1);padding:14px 20px;border-radius:14px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;width:100%">
+                    🔄 Sincronizar Agora
+                </button>
+                <div id="syncStatus" style="font-size:12px;color:var(--text3);text-align:center;min-height:18px"></div>
+                <details style="font-size:12px;color:var(--text3);line-height:1.6">
+                    <summary style="cursor:pointer;color:var(--text2);font-weight:600;padding:4px 0">📋 Como configurar</summary>
+                    <div style="padding:8px 0">
+                        1. Abra <a href="https://sheets.google.com" target="_blank" rel="noopener" style="color:var(--blue)">Google Sheets</a> e crie uma planilha<br>
+                        2. Vá em <b>Extensões → Apps Script</b><br>
+                        3. Apague tudo e cole o código da aba <b>Code.gs</b> (veja no GitHub ou peça ao assistente)<br>
+                        4. Clique <b>Implantar → Nova implantação</b><br>
+                        5. Tipo: <b>App da Web</b> • Executar como: <b>Eu</b> • Acesso: <b>Qualquer pessoa</b><br>
+                        6. Copie a URL e cole acima
+                    </div>
+                </details>
+            </div>
+        </div>
         <div class="settings-group-label">Dados</div>
         <div class="settings-group">
             <div class="setting-row" style="flex-direction:column;align-items:stretch;gap:12px">
                 <div>
                     <div class="setting-label">🗺️ Mapa Offline</div>
-                    <div class="setting-desc" id="mapCacheStatus">Baixe os tiles do mapa para usar sem internet</div>
+                    <div class="setting-desc" id="mapCacheStatus">Tiles do mapa são baixados automaticamente</div>
                 </div>
-                <button id="btnCacheMap" onclick="cacheMapTiles()" style="background:var(--blue);color:#fff;border:none;padding:14px 20px;border-radius:14px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;width:100%">
+                <button id="btnCacheMap" onclick="localStorage.removeItem('mapTilesCached');cacheMapTiles(false)" style="background:var(--blue);color:#fff;border:none;padding:14px 20px;border-radius:14px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;width:100%">
                     📥 Baixar Mapa Offline
                 </button>
                 <div class="progress-bar" id="mapProgress" style="display:none;height:6px;background:var(--glass);border-radius:3px;overflow:hidden">
                     <div id="mapProgressFill" style="height:100%;background:var(--blue);width:0%;transition:width 0.3s;border-radius:3px"></div>
                 </div>
+            </div>
+            <div class="setting-row" style="flex-direction:column;align-items:stretch;gap:12px">
+                <div>
+                    <div class="setting-label">💾 Backup de Dados</div>
+                    <div class="setting-desc">Exportar notas, favoritos e progresso</div>
+                </div>
+                <button id="btnExportData" onclick="exportUserData()" style="background:var(--glass2);color:var(--text);border:0.5px solid rgba(255,255,255,0.1);padding:14px 20px;border-radius:14px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;width:100%">
+                    📤 Exportar Backup
+                </button>
+                <label style="display:flex;align-items:center;gap:10px;cursor:pointer;padding:4px 0">
+                    <input type="file" id="importDataFile" accept=".json" onchange="importUserData(event)" style="display:none">
+                    <button onclick="this.previousElementSibling.click()" style="background:var(--glass2);color:var(--text);border:0.5px solid rgba(255,255,255,0.1);padding:14px 20px;border-radius:14px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;width:100%">
+                        📥 Importar Backup
+                    </button>
+                </label>
             </div>
             <div class="setting-row">
                 <div>
@@ -1549,6 +1613,7 @@
     <div class="lightbox-caption" id="lightboxCaption"></div>
 </div>
 
+<div class="offline-bar" id="offlineBar">📡 Sem conexão — modo offline</div>
 <div class="toast" id="toast"></div>
 
 <!-- ==================== TAB BAR ==================== -->
@@ -2903,23 +2968,12 @@ function mapScrubNext() {
 }
 
 // ==================== OFFLINE MAP TILES ====================
-async function cacheMapTiles() {
-    var btn = document.getElementById('btnCacheMap');
-    var status = document.getElementById('mapCacheStatus');
-    var progress = document.getElementById('mapProgress');
-    var fill = document.getElementById('mapProgressFill');
+var tileCacheRunning = false;
 
-    btn.disabled = true;
-    btn.textContent = '⏳ Baixando...';
-    progress.style.display = 'block';
-
-    // Route bounding box: roughly lat 33-48, lng -125 to -109
-    // Zoom levels 4-8 cover the route overview well
+function generateTileList() {
     var tileUrl = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
     var subdomains = ['a', 'b', 'c', 'd'];
     var tiles = [];
-
-    // Generate tile coordinates for zoom levels 4-8 within route bounds
     for (var z = 4; z <= 8; z++) {
         var minTile = latLngToTile(48, -125, z);
         var maxTile = latLngToTile(33, -109, z);
@@ -2930,18 +2984,39 @@ async function cacheMapTiles() {
             }
         }
     }
+    return tiles;
+}
 
-    status.textContent = '0 / ' + tiles.length + ' tiles...';
+async function cacheMapTiles(silent) {
+    if (tileCacheRunning) return;
+    if (localStorage.getItem('mapTilesCached') === 'tiles-v1') {
+        updateTileCacheUI(true, 0);
+        return;
+    }
+    if (!navigator.onLine) return;
+
+    tileCacheRunning = true;
+    var btn = document.getElementById('btnCacheMap');
+    var status = document.getElementById('mapCacheStatus');
+    var progress = document.getElementById('mapProgress');
+    var fill = document.getElementById('mapProgressFill');
+
+    if (btn) { btn.disabled = true; btn.textContent = '⏳ Baixando...'; }
+    if (progress) progress.style.display = 'block';
+
+    var tiles = generateTileList();
+    if (status) status.textContent = '0 / ' + tiles.length + ' tiles...';
+
     var cache = await caches.open('viagem-tiles-v1');
     var done = 0;
     var errors = 0;
-    var batchSize = 10;
+    var batchSize = silent ? 6 : 10; // smaller batches in background to save bandwidth
 
     for (var i = 0; i < tiles.length; i += batchSize) {
         var batch = tiles.slice(i, i + batchSize);
         var results = await Promise.allSettled(batch.map(function(url) {
             return cache.match(url).then(function(cached) {
-                if (cached) return; // already cached
+                if (cached) return;
                 return fetch(url).then(function(r) {
                     if (r.ok) return cache.put(url, r);
                 });
@@ -2950,25 +3025,27 @@ async function cacheMapTiles() {
         results.forEach(function(r) { if (r.status === 'rejected') errors++; });
         done += batch.length;
         var pct = Math.round((done / tiles.length) * 100);
-        fill.style.width = pct + '%';
-        status.textContent = done + ' / ' + tiles.length + ' tiles...' + (errors > 0 ? ' (' + errors + ' erros)' : '');
+        if (fill) fill.style.width = pct + '%';
+        if (status) status.textContent = done + ' / ' + tiles.length + ' tiles...' + (errors > 0 ? ' (' + errors + ' erros)' : '');
     }
 
-    btn.textContent = '✅ Mapa Offline Pronto!';
-    btn.style.background = 'var(--green)';
-    btn.disabled = true;
-    status.textContent = tiles.length + ' tiles salvos para uso offline' + (errors > 0 ? ' (' + errors + ' falharam)' : '');
+    tileCacheRunning = false;
     localStorage.setItem('mapTilesCached', 'tiles-v1');
+    updateTileCacheUI(true, errors);
+}
+
+function updateTileCacheUI(complete, errors) {
+    var btn = document.getElementById('btnCacheMap');
+    var status = document.getElementById('mapCacheStatus');
+    var progress = document.getElementById('mapProgress');
+    if (btn) { btn.textContent = '✅ Mapa Offline Pronto!'; btn.style.background = 'var(--green)'; btn.disabled = true; }
+    if (progress) progress.style.display = 'none';
+    if (status) status.textContent = 'Tiles do mapa salvos para uso offline' + (errors ? ' (' + errors + ' falharam)' : '');
 }
 
 async function checkMapCacheStatus() {
-    var btn = document.getElementById('btnCacheMap');
-    var status = document.getElementById('mapCacheStatus');
     if (localStorage.getItem('mapTilesCached') === 'tiles-v1') {
-        btn.textContent = '✅ Mapa Offline Pronto!';
-        btn.style.background = 'var(--green)';
-        btn.disabled = true;
-        status.textContent = 'Tiles do mapa já salvos para uso offline';
+        updateTileCacheUI(true, 0);
     }
 }
 
@@ -3016,6 +3093,11 @@ document.getElementById('daySelector').addEventListener('mousedown', function(e)
 });
 
 var initDay = getTodayDay();
+// Restore last viewed day if not during trip dates
+if (initDay === 1) {
+    var saved = parseInt(localStorage.getItem('lastDay'));
+    if (saved >= 1 && saved <= totalDays) initDay = saved;
+}
 showDay(initDay);
 updateCountdown(); // show countdown only on initial load
 // Ensure day selector scroll position is correct after layout
@@ -3028,6 +3110,12 @@ requestAnimationFrame(function() {
     }
 });
 checkMapCacheStatus();
+// Auto-download map tiles in background after 3s (only if online and not already cached)
+setTimeout(function() { cacheMapTiles(true); }, 3000);
+
+// Init sync UI and auto-sync
+SyncEngine.initUI();
+if (SyncEngine.url) setTimeout(function() { SyncEngine.fullSync(); }, 5000);
 
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js').then(function(reg) {
@@ -3430,6 +3518,270 @@ window.addEventListener('scroll', function() {
         if (dy > 100) closeSheet(); else sheet.style.transform = '';
     });
 })();
+
+// ==================== OFFLINE INDICATOR ====================
+(function() {
+    var bar = document.getElementById('offlineBar');
+    function updateOnline() {
+        if (navigator.onLine) {
+            bar.classList.remove('visible');
+            document.body.classList.remove('is-offline');
+        } else {
+            bar.classList.add('visible');
+            document.body.classList.add('is-offline');
+        }
+    }
+    window.addEventListener('online', updateOnline);
+    window.addEventListener('offline', updateOnline);
+    // Sync when coming back online
+    window.addEventListener('online', function() {
+        if (SyncEngine.url && SyncEngine.queue.length > 0) {
+            setTimeout(function() { SyncEngine.push(); }, 2000);
+        }
+    });
+    updateOnline();
+})();
+
+// ==================== PERSIST CURRENT DAY ====================
+(function() {
+    var origShowDay = showDay;
+    showDay = function(n) {
+        origShowDay(n);
+        try { localStorage.setItem('lastDay', n); } catch(e) {}
+    };
+})();
+
+// ==================== GOOGLE SHEETS SYNC ====================
+var SyncEngine = {
+    url: localStorage.getItem('syncUrl') || '',
+    queue: JSON.parse(localStorage.getItem('syncQueue') || '[]'),
+    syncing: false,
+    debounceTimer: null,
+
+    track: function(key, value) {
+        if (!this.url) return;
+        var ts = Date.now();
+        localStorage.setItem('_ts_' + key, ts);
+        this.queue.push({ key: key, value: value, ts: ts });
+        localStorage.setItem('syncQueue', JSON.stringify(this.queue));
+        this.debouncedSync();
+    },
+
+    debouncedSync: function() {
+        var self = this;
+        if (self.debounceTimer) clearTimeout(self.debounceTimer);
+        self.debounceTimer = setTimeout(function() { self.push(); }, 3000);
+    },
+
+    push: async function() {
+        if (!this.url || !navigator.onLine || this.syncing || this.queue.length === 0) return;
+        this.syncing = true;
+        this.updateUI('syncing');
+        // Deduplicate: keep only latest per key
+        var latest = {};
+        this.queue.forEach(function(e) {
+            if (!latest[e.key] || e.ts > latest[e.key].ts) latest[e.key] = e;
+        });
+        var changes = Object.values(latest);
+        try {
+            var resp = await fetch(this.url, {
+                method: 'POST',
+                body: JSON.stringify({ changes: changes })
+            });
+            var result = await resp.json();
+            this.queue = [];
+            localStorage.setItem('syncQueue', '[]');
+            if (result && result.data) this.mergeRemote(result.data);
+            this.updateUI('synced');
+        } catch(e) {
+            console.warn('Sync push failed:', e);
+            this.updateUI('error');
+        }
+        this.syncing = false;
+    },
+
+    pull: async function() {
+        if (!this.url || !navigator.onLine || this.syncing) return;
+        this.syncing = true;
+        this.updateUI('syncing');
+        try {
+            var resp = await fetch(this.url);
+            var result = await resp.json();
+            if (result && result.data) this.mergeRemote(result.data);
+            this.updateUI('synced');
+        } catch(e) {
+            console.warn('Sync pull failed:', e);
+            this.updateUI('error');
+        }
+        this.syncing = false;
+    },
+
+    mergeRemote: function(remote) {
+        var changed = false;
+        Object.keys(remote).forEach(function(key) {
+            var localTs = parseInt(localStorage.getItem('_ts_' + key)) || 0;
+            var remoteTs = remote[key].ts || 0;
+            if (remoteTs > localTs) {
+                localStorage.setItem(key, remote[key].v);
+                localStorage.setItem('_ts_' + key, remoteTs);
+                changed = true;
+            }
+        });
+        if (changed) {
+            renderedDays = {};
+            document.getElementById('dayContainer').innerHTML = '';
+            showDay(currentDay);
+            updateTripStats();
+        }
+    },
+
+    fullSync: async function() {
+        if (!this.url) { this.updateUI('nourl'); return; }
+        await this.push();
+        await this.pull();
+    },
+
+    initialPush: async function() {
+        var changes = [];
+        for (var i = 0; i < localStorage.length; i++) {
+            var key = localStorage.key(i);
+            if (key.startsWith('check-') || key.startsWith('fav-') || key.startsWith('note-')) {
+                if (key.startsWith('_ts_')) continue;
+                var ts = parseInt(localStorage.getItem('_ts_' + key)) || Date.now();
+                changes.push({ key: key, value: localStorage.getItem(key), ts: ts });
+            }
+        }
+        if (changes.length > 0) {
+            this.queue = changes.concat(this.queue);
+            localStorage.setItem('syncQueue', JSON.stringify(this.queue));
+        }
+        await this.push();
+        await this.pull();
+    },
+
+    setUrl: function(url) {
+        this.url = (url || '').trim();
+        localStorage.setItem('syncUrl', this.url);
+        if (this.url) this.initialPush();
+        else this.updateUI('');
+    },
+
+    updateUI: function(status) {
+        var el = document.getElementById('syncStatus');
+        if (!el) return;
+        var pending = this.queue.length;
+        if (status === 'syncing') el.textContent = '🔄 Sincronizando...';
+        else if (status === 'synced') {
+            localStorage.setItem('lastSync', Date.now());
+            el.textContent = '✅ Sincronizado agora';
+        }
+        else if (status === 'error') el.textContent = '⚠️ Falha na sync' + (pending ? ' (' + pending + ' pendentes)' : '');
+        else if (status === 'nourl') el.textContent = '⚠️ Cole a URL acima primeiro';
+        else el.textContent = '';
+    },
+
+    initUI: function() {
+        var input = document.getElementById('syncUrlInput');
+        if (input && this.url) input.value = this.url;
+        var last = parseInt(localStorage.getItem('lastSync'));
+        if (last && this.url) {
+            var ago = Math.round((Date.now() - last) / 60000);
+            var el = document.getElementById('syncStatus');
+            if (el) el.textContent = ago < 1 ? '✅ Sincronizado agora' : '✅ Última sync: ' + (ago < 60 ? ago + ' min' : Math.round(ago/60) + 'h') + ' atrás';
+        }
+    }
+};
+
+// ==================== HAPTIC FEEDBACK ====================
+function haptic(style) {
+    if (navigator.vibrate) {
+        if (style === 'light') navigator.vibrate(10);
+        else if (style === 'medium') navigator.vibrate(20);
+        else navigator.vibrate(30);
+    }
+}
+// Patch toggleCheck, toggleFav, saveDayNote for haptic + sync
+(function() {
+    var origCheck = toggleCheck;
+    toggleCheck = function(d, i, e) {
+        origCheck(d, i, e);
+        haptic('light');
+        SyncEngine.track('check-' + d + '-' + i, localStorage.getItem('check-' + d + '-' + i));
+    };
+    var origFav = toggleFav;
+    toggleFav = function(d, i, e) {
+        origFav(d, i, e);
+        haptic('light');
+        SyncEngine.track('fav-' + d + '-' + i, localStorage.getItem('fav-' + d + '-' + i));
+    };
+    var origNote = saveDayNote;
+    saveDayNote = function(dayNum) {
+        origNote(dayNum);
+        SyncEngine.track('note-' + dayNum, localStorage.getItem('note-' + dayNum));
+    };
+})();
+
+// ==================== EXPORT / IMPORT USER DATA ====================
+function exportUserData() {
+    var data = { version: 1, exported: new Date().toISOString(), checks: {}, favs: {}, notes: {} };
+    for (var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+        var val = localStorage.getItem(key);
+        if (key.startsWith('check-')) data.checks[key] = val;
+        else if (key.startsWith('fav-')) data.favs[key] = val;
+        else if (key.startsWith('note-')) data.notes[key] = val;
+    }
+    var json = JSON.stringify(data, null, 2);
+    var blob = new Blob([json], { type: 'application/json' });
+    if (navigator.share && navigator.canShare && navigator.canShare({ files: [new File([blob], 'viagem-backup.json', { type: 'application/json' })] })) {
+        navigator.share({
+            title: 'Backup Viagem EUA 2027',
+            files: [new File([blob], 'viagem-eua-2027-backup.json', { type: 'application/json' })]
+        }).catch(function() {});
+    } else {
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'viagem-eua-2027-backup.json';
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+    var btn = document.getElementById('btnExportData');
+    btn.textContent = '✅ Exportado!';
+    setTimeout(function() { btn.textContent = '📤 Exportar Backup'; }, 2000);
+}
+
+function importUserData(event) {
+    var file = event.target.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            var data = JSON.parse(e.target.result);
+            if (!data.version) throw new Error('Invalid');
+            var count = 0;
+            if (data.checks) Object.keys(data.checks).forEach(function(k) { localStorage.setItem(k, data.checks[k]); count++; });
+            if (data.favs) Object.keys(data.favs).forEach(function(k) { localStorage.setItem(k, data.favs[k]); count++; });
+            if (data.notes) Object.keys(data.notes).forEach(function(k) { localStorage.setItem(k, data.notes[k]); count++; });
+            var toast = document.getElementById('toast');
+            toast.textContent = '✅ ' + count + ' itens restaurados!';
+            toast.classList.add('show');
+            setTimeout(function() { toast.classList.remove('show'); }, 2500);
+            // Re-render current day to reflect imported data
+            renderedDays = {};
+            document.getElementById('dayContainer').innerHTML = '';
+            showDay(currentDay);
+        } catch(err) {
+            var toast = document.getElementById('toast');
+            toast.textContent = '❌ Arquivo inválido';
+            toast.style.background = 'var(--red)';
+            toast.classList.add('show');
+            setTimeout(function() { toast.classList.remove('show'); toast.style.background = ''; }, 2500);
+        }
+    };
+    reader.readAsText(file);
+    event.target.value = '';
+}
 </script>
 
 </body>
