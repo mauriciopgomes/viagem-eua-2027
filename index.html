@@ -2467,6 +2467,7 @@ function switchTab(tab, e) {
     if (tab === 'map' && !mapInstance) setTimeout(initMap, 100);
     if (tab === 'map' && mapInstance) setTimeout(function() { mapInstance.invalidateSize(); mapUpdateDay(currentDay, false); }, 100);
     if (tab === 'explore') renderExplore();
+    if (tab === 'settings') updateAppVersion();
     if (tab === 'home' && typeof mapScrubDay !== 'undefined' && mapScrubDay && mapScrubDay !== currentDay) {
         showDay(mapScrubDay);
     }
@@ -3131,13 +3132,17 @@ if ('serviceWorker' in navigator) {
 }
 
 // Show actual cache version in settings
-caches.keys().then(function(names) {
-    var ver = names.find(function(n) { return n.startsWith('viagem-eua-2027-v'); });
-    if (ver) {
-        var el = document.getElementById('appVersion');
-        if (el) el.textContent = 'EUA 2027 PWA — cache ' + ver.replace('viagem-eua-2027-', '');
+function updateAppVersion() {
+    var el = document.getElementById('appVersion');
+    if (!el) return;
+    if ('caches' in window) {
+        caches.keys().then(function(names) {
+            var ver = names.find(function(n) { return n.startsWith('viagem-eua-2027-v'); });
+            if (ver) el.textContent = 'EUA 2027 PWA — cache ' + ver.replace('viagem-eua-2027-', '');
+        }).catch(function() {});
     }
-});
+}
+updateAppVersion();
 
 // ==================== FAVORITES ====================
 function isFav(dayNum, itemIdx) {
