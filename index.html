@@ -888,12 +888,12 @@
         /* ==================== OFFLINE INDICATOR ==================== */
         .offline-bar {
             position: fixed;
-            top: var(--safe-top);
+            top: 0;
             left: 0; right: 0;
             background: rgba(255,159,10,0.92);
             color: #1a1a1a;
             text-align: center;
-            padding: 6px 16px;
+            padding: calc(var(--safe-top) + 4px) 16px 6px;
             font-size: 12px;
             font-weight: 700;
             z-index: 99999;
@@ -1484,7 +1484,7 @@
 <div class="section" id="sec-settings" role="tabpanel" aria-label="Ajustes">
     <div class="settings-section">
         <h2>Ajustes</h2>
-        <div id="appVersion" style="font-size:12px;color:var(--text3);text-align:center;margin:-16px 0 20px">EUA 2027 PWA v73</div>
+        <div id="appVersion" style="font-size:12px;color:var(--text3);text-align:center;margin:-16px 0 20px">EUA 2027 PWA v74</div>
         <div class="settings-group-label">Viagem</div>
         <div class="settings-group">
             <div class="setting-row">
@@ -3518,24 +3518,30 @@ window.addEventListener('scroll', function() {
 // ==================== OFFLINE INDICATOR ====================
 (function() {
     var bar = document.getElementById('offlineBar');
-    function updateOnline() {
-        if (navigator.onLine) {
-            bar.classList.remove('visible');
-            document.body.classList.remove('is-offline');
-        } else {
+    function setOffline(offline) {
+        if (offline) {
             bar.classList.add('visible');
             document.body.classList.add('is-offline');
+        } else {
+            bar.classList.remove('visible');
+            document.body.classList.remove('is-offline');
         }
     }
-    window.addEventListener('online', updateOnline);
-    window.addEventListener('offline', updateOnline);
-    // Sync when coming back online
+    function checkOnline() {
+        if (!navigator.onLine) { setOffline(true); return; }
+        // Verify real connectivity (navigator.onLine is unreliable on iOS PWA)
+        fetch('./manifest.json', { cache: 'no-store' }).then(function(r) {
+            setOffline(!r.ok);
+        }).catch(function() { setOffline(true); });
+    }
     window.addEventListener('online', function() {
-        if (SyncEngine.url && SyncEngine.queue.length > 0) {
+        setOffline(false);
+        if (typeof SyncEngine !== 'undefined' && SyncEngine.url && SyncEngine.queue.length > 0) {
             setTimeout(function() { SyncEngine.push(); }, 2000);
         }
     });
-    updateOnline();
+    window.addEventListener('offline', function() { setOffline(true); });
+    checkOnline();
 })();
 
 // ==================== PERSIST CURRENT DAY ====================
