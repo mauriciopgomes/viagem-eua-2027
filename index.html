@@ -1008,14 +1008,14 @@
         }
         .card-action-btn .check-circle::after {
             content: '';
-            width: 10px; height: 6px;
-            border-left: 2px solid rgba(255,255,255,0.3);
-            border-bottom: 2px solid rgba(255,255,255,0.3);
-            transform: rotate(-45deg);
+            width: 16px; height: 16px;
+            background: rgba(255,255,255,0.3);
             display: block;
+            -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E") center/contain no-repeat;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E") center/contain no-repeat;
         }
         .card-action-btn .check-circle.checked::after {
-            border-color: var(--green);
+            background: var(--green);
         }
         .card-action-btn .fav-btn {
             width: 100%; height: 100%;
@@ -1509,7 +1509,7 @@
 <div class="section" id="sec-settings" role="tabpanel" aria-label="Ajustes">
     <div class="settings-section">
         <h2>Ajustes</h2>
-        <div id="appVersion" style="font-size:12px;color:var(--text3);text-align:center;margin:-16px 0 20px">EUA 2027 PWA v79</div>
+        <div id="appVersion" style="font-size:12px;color:var(--text3);text-align:center;margin:-16px 0 20px">EUA 2027 PWA v80</div>
         <div class="settings-group-label">Viagem</div>
         <div class="settings-group">
             <div class="setting-row">
