@@ -98,7 +98,7 @@
 | 7 | **Gold Beach / Coos Bay, OR** | 03/02 (Qua) | 04/02 (Qui) | 1 | 14 |
 | 8 | **Cannon Beach, OR** | 04/02 (Qui) | 05/02 (Sex) | 1 | 15 |
 | 9 | **Forks / Port Angeles, WA** | 05/02 (Sex) | 07/02 (Dom) | 2 | 16-17 |
-| 10 | **Olympia, WA** | 07/02 (Dom) | 08/02 (Seg) | 1 | 18 |
+| 10 | **Portland, OR** | 07/02 (Dom) | 08/02 (Seg) | 1 | 18 |
 | 11 | **Boise, ID** | 08/02 (Seg) | 09/02 (Ter) | 1 | 19 |
 | 12 | **Moab, UT** (Arches/Canyonlands) | 09/02 (Ter) | 12/02 (Sex) | 3 | 20-22 |
 | 13 | **Bryce Canyon, UT** (região) | 12/02 (Sex) | 13/02 (Sáb) | 1 | 23 |
@@ -516,48 +516,62 @@
 
 ---
 
-### Dia 18 — Dom, 07/02 (Forks → Mt. Rainier → Olympia) 📍 Olympia, WA
+### Dia 18 — Dom, 07/02 (Forks → Mt. Rainier → Portland) 📍 Portland, OR
 ![Mt. Rainier](https://commons.wikimedia.org/wiki/Special:FilePath/Mount_Rainier_from_the_Silver_Queen_Peak.jpg?width=800)
-> Saindo de Olympic, desvio pelo vulcão Rainier!
+> Saindo de Olympic, visita ao vulcão Rainier no caminho — sem backtracking! Se Rainier estiver fechado, seguem direto pra Portland e chegam cedo.
 
 | Horário | Atividade |
 |---------|-----------|
 | 07:00 | ☕ Café + check-out de Forks |
-| 07:30 | 🚗 Saída rumo ao sul (~5h com paradas até Olympia via Rainier) |
-| 10:30 | ⚡ **Supercharger Olympia/Tacoma** (~260 km de Forks) — parada ~25 min |
-| 11:00 | 🚗 Desvio rumo a **Mt. Rainier NP** (~100 km, ~1.5h) |
+| 07:30 | 🚗 Saída rumo ao sul via US-101 S |
+| 10:30 | ⚡ **Supercharger Olympia/Centralia** (~260 km de Forks) — ⚠️ **CARREGAR ATÉ 90-100%!** (~35 min) — trecho até Portland inclui subida de montanha ao Rainier + 200 km de descida, sem SC no caminho |
+| 11:00 | 🚗 Desvio rumo a **Mt. Rainier NP** (~100 km, ~1.5h via SR-7 → SR-706) |
 | 12:30 | 🌋 **Mt. Rainier NP — Paradise!** Vulcão de 4.392m coberto de neve! |
 | 12:45 | 🏔️ **Henry M. Jackson Visitor Center** — vista panorâmica |
 | 13:15 | 🥾 **Nisqually Vista Trail** (~2 km loop) — trilha com neve, vista do glaciar |
 | 14:00 | 📸 Fotos no mirante de Paradise |
 | 14:30 | 🍽️ Almoço na região (Ashford ou Elbe) |
-| 15:30 | 🚗 Volta pra Olympia (~1.5h) |
-| ~17:00 | 🏨 Chegada em **Olympia**! Check-in |
-| 17:30 | 🏙️ Passeio pelo centro — capital do estado de Washington, waterfront tranquilo |
-| 18:30 | 🍽️ Jantar em Olympia |
+| 15:00 | 🚗 Descida rumo a **Portland** (~200 km, ~2.5h via SR-706 → SR-7 S → I-5 S) |
+| ~17:30 | 🏨 Chegada em **Portland**! Check-in |
+| 18:00 | 🍩 Passeio rápido — **Voodoo Doughnut** ou **Powell's Books** (maior livraria independente do mundo!) |
+| 19:00 | 🍽️ Jantar em Portland — food trucks no **Cartopia** ou cervejaria artesanal |
 
-> ⚠️ **Inverno em Mt. Rainier:** A SR-706 até Paradise costuma estar aberta, e o Tesla Model Y AWD é aceito sem correntes. Verifiquem condições no site do NPS na manhã — se fechada por neve forte, sigam direto pra Olympia. Trilhas estarão com neve profunda; curtam os mirantes do Visitor Center.
+> ⚠️ **Inverno em Mt. Rainier:** A SR-706 até Paradise costuma estar aberta, e o Tesla Model Y AWD é aceito sem correntes. Verifiquem condições no site do NPS na manhã. Trilhas estarão com neve profunda; curtam os mirantes do Visitor Center.
+>
+> 🔄 **Se Rainier estiver FECHADO:** Pulem o desvio e sigam direto Olympia → I-5 S → Portland (~410 km total, chegada ~13:00). Tarde livre pra curtir Portland ou até avançar até **Hood River** (+1h) e encurtar o Dia 19!
+>
+> 🏙️ **OPCIONAL — Tarde em Portland (se Rainier fechado, chegada ~13:00):**
+>
+> | Horário | Atividade |
+> |---------|-----------|
+> | 13:00 | 🏨 Check-in + descanso rápido |
+> | 13:30 | 🏰 **Pittock Mansion** (~15 min do centro) — mansão de 1914 com vista panorâmica de Portland, Mt. Hood e Mt. St. Helens! Gratuito do lado de fora, ~$15 por dentro |
+> | 14:30 | 🌹 **International Rose Test Garden** (Washington Park) — jardim gratuito com 10.000 roseiras + vista do Mt. Hood. Mesmo no inverno o jardim é bonito! |
+> | 15:15 | 📚 **Powell's Books** (1005 W Burnside St) — maior livraria independente do MUNDO! Ocupa um quarteirão inteiro, 4 andares. Fácil perder 1-2h aqui |
+> | 16:30 | 🍩 **Voodoo Doughnut** (22 SW 3rd Ave) — donuts bizarros e famosos! Fila rápida no inverno |
+> | 17:00 | 🍺 **Brewery tour** — Portland é a capital da cerveja artesanal dos EUA! **Deschutes Brewery** (210 NW 11th Ave) ou **10 Barrel Brewing** (1411 NW Flanders St) |
+> | 18:30 | 🍽️ Jantar — food trucks no **Cartopia** ou restaurante no **Pearl District** |
 
 ---
 
-### Dia 19 — Seg, 08/02 (Olympia → Boise) 📍 Boise, ID
+### Dia 19 — Seg, 08/02 (Portland → Boise) 📍 Boise, ID
 ![Boise, Idaho](https://commons.wikimedia.org/wiki/Special:FilePath/Boise_skyline_2022.jpg?width=800)
-> Multnomah Falls + Columbia River Gorge no caminho!
+> Multnomah Falls logo na saída + Columbia River Gorge o dia todo!
 
 | Horário | Atividade |
 |---------|-----------|
-| 07:00 | ☕ Café em Olympia + check-out (carro carregado overnight) |
-| 07:30 | 🚗 Saída rumo a **Boise, ID** (~8h com paradas, ~600 km via I-5 S → I-84 E) |
-| 09:00 | 🌲 **Multnomah Falls** (~170 km) — cachoeira icônica de 189m! Ponte panorâmica ~10 min |
-| 09:30 | 🏞️ **Columbia River Gorge** — gargantas espetaculares, rio Columbia entre paredões |
-| 10:00 | ⚡ **Supercharger The Dalles, OR** (~100 km) — parada ~25 min |
-| 12:00 | ⚡🍽️ **Supercharger Pendleton, OR** (~200 km) — parada ~20 min + almoço |
-| 14:30 | ⚡ **Supercharger Baker City, OR** (~200 km) — parada ~25 min |
-| 17:00 | 🏨 Chegada em **Boise**! Check-in |
-| 17:30 | 🏙️ Passeio pelo **Boise River Greenbelt** + **Idaho State Capitol** |
-| 18:30 | 🍽️ Jantar no **Basque Block** — **Bar Gernika** ou **Leku Ona** |
+| 07:00 | ☕ Café em Portland + check-out (carro carregado overnight) |
+| 07:30 | 🚗 Saída rumo a **Boise, ID** (~530 km, ~6.5h via I-84 E) |
+| 08:00 | 🌲 **Multnomah Falls** (~50 km de Portland) — cachoeira icônica de 189m! Ponte panorâmica ~10 min |
+| 08:30 | 🏞️ **Columbia River Gorge** — gargantas espetaculares, rio Columbia entre paredões |
+| 09:00 | ⚡ **Supercharger The Dalles, OR** (~130 km) — parada ~25 min |
+| 11:00 | ⚡🍽️ **Supercharger Pendleton, OR** (~200 km) — parada ~20 min + almoço |
+| 13:30 | ⚡ **Supercharger Baker City, OR** (~200 km) — parada ~25 min |
+| ~16:00 | 🏨 Chegada em **Boise**! Check-in |
+| 16:30 | 🏙️ Passeio pelo **Boise River Greenbelt** + **Idaho State Capitol** |
+| 18:00 | 🍽️ Jantar no **Basque Block** — **Bar Gernika** ou **Leku Ona** |
 
-> ⚡ 3 Superchargers no caminho. Multnomah Falls e Columbia River Gorge são o highlight!
+> ⚡ 3 Superchargers no caminho. Partindo de Portland, Multnomah Falls fica a apenas 50 km — perfeito pra primeira parada da manhã!
 
 ---
 
@@ -933,8 +947,8 @@
 | 14 | Crescent City → Coos Bay | Coos Bay |
 | 15 | Coos Bay → Cannon Beach | Lincoln City |
 | 16 | Cannon Beach → Forks | Aberdeen |
-| 18 | Forks → Rainier → Olympia | Olympia/Tacoma |
-| 19 | Olympia → Boise | The Dalles, Pendleton, Baker City |
+| 18 | Forks → Rainier → Portland | Olympia/Centralia |
+| 19 | Portland → Boise | The Dalles, Pendleton, Baker City |
 | 20 | Boise → SLC | Twin Falls, SLC |
 | 21 | SLC → Moab | Price, Green River |
 | 24 | Moab → Bryce | Green River, Salina |
