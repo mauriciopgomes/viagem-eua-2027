@@ -512,11 +512,10 @@
             -webkit-backdrop-filter: saturate(180%) blur(20px);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 16px;
-            padding: 12px 14px;
+            padding: 0;
             z-index: 1000;
             display: flex;
-            align-items: center;
-            gap: 12px;
+            flex-direction: column;
             opacity: 0;
             transform: translateY(10px);
             transition: opacity 0.3s, transform 0.3s;
@@ -527,6 +526,11 @@
             transform: translateY(0);
             pointer-events: auto;
         }
+        .map-stats-main {
+            display: flex; align-items: center; gap: 12px; padding: 12px 14px;
+            cursor: pointer;
+        }
+        .map-stats-main:active { background: rgba(255,255,255,0.05); border-radius: 16px; }
         .map-stats-photo {
             width: 52px; height: 52px;
             border-radius: 12px;
@@ -548,6 +552,19 @@
         }
         .map-stats-badge.drive { background: rgba(10,132,255,0.15); color: #0a84ff; }
         .map-stats-badge.hotel { background: rgba(255,159,10,0.15); color: #ff9f0a; }
+        .map-stats-badge.progress { background: rgba(48,209,88,0.15); color: #30d158; }
+        .map-stats-actions {
+            display: flex; gap: 6px; padding: 0 14px 12px;
+        }
+        .map-stats-action-btn {
+            flex: 1; padding: 8px 0; border-radius: 10px; border: none;
+            font-size: 12px; font-weight: 600; font-family: inherit;
+            cursor: pointer; text-align: center; display: block;
+            text-decoration: none; -webkit-tap-highlight-color: transparent;
+        }
+        .map-stats-action-btn:active { opacity: 0.7; }
+        .map-stats-action-btn.btn-roteiro { background: rgba(10,132,255,0.15); color: #0a84ff; }
+        .map-stats-action-btn.btn-directions { background: rgba(52,199,89,0.15); color: #34C759; }
 
         /* Map day scrubber */
         .map-scrubber {
@@ -558,11 +575,17 @@
             -webkit-backdrop-filter: saturate(180%) blur(20px);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 14px;
-            padding: 8px 12px;
+            padding: 6px 12px 8px;
             z-index: 1000;
             display: flex;
             align-items: center;
             gap: 8px;
+            flex-wrap: wrap;
+        }
+        .map-scrub-loc {
+            width: 100%; font-size: 11px; color: var(--text2); font-weight: 600;
+            text-align: center; order: -1; white-space: nowrap; overflow: hidden;
+            text-overflow: ellipsis; padding: 0 4px;
         }
         .map-scrub-arrow {
             background: none;
@@ -709,9 +732,17 @@
             line-height: 1.8;
             border: 1px solid rgba(255,255,255,0.08);
         }
-        .legend h3 { color: var(--text); margin-bottom: 8px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+        .legend h3 { color: var(--text); margin-bottom: 8px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; }
         .legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
         .legend-line { width: 24px; height: 3px; border-radius: 2px; }
+        .legend-body { transition: max-height 0.3s, opacity 0.3s; overflow: hidden; }
+        @media (max-width: 768px) {
+            .legend { padding: 10px 14px; }
+            .legend-body { max-height: 0; opacity: 0; }
+            .legend.open .legend-body { max-height: 200px; opacity: 1; }
+            .legend h3::after { content: ' ▸'; font-size: 10px; }
+            .legend.open h3::after { content: ' ▾'; }
+        }
 
         /* ==================== DETAIL SHEET ==================== */
         .sheet-overlay {
@@ -1493,14 +1524,18 @@
         <label><input type="checkbox" id="chkDayRoute" checked onchange="mapToggleLayer('dayroute')"> 🔵 Trecho do dia</label>
     </div>
     <div class="map-stats-card" id="mapStatsCard">
-        <div class="map-stats-photo" id="mapStatsPhoto"></div>
-        <div class="map-stats-info">
-            <div class="map-stats-title" id="mapStatsTitle">Dia 1</div>
-            <div class="map-stats-sub" id="mapStatsSub"></div>
-            <div class="map-stats-badges" id="mapStatsBadges"></div>
+        <div class="map-stats-main" onclick="switchTab('home');showDay(mapScrubDay)">
+            <div class="map-stats-photo" id="mapStatsPhoto"></div>
+            <div class="map-stats-info">
+                <div class="map-stats-title" id="mapStatsTitle">Dia 1</div>
+                <div class="map-stats-sub" id="mapStatsSub"></div>
+                <div class="map-stats-badges" id="mapStatsBadges"></div>
+            </div>
         </div>
+        <div class="map-stats-actions" id="mapStatsActions"></div>
     </div>
     <div class="map-scrubber">
+        <div class="map-scrub-loc" id="mapScrubLoc"></div>
         <button class="map-scrub-arrow" onclick="mapScrubPrev()" aria-label="Dia anterior">‹</button>
         <input type="range" id="mapScrubRange" min="1" max="33" value="1" oninput="mapScrubTo(this.value)" aria-label="Selecionar dia">
         <button class="map-scrub-arrow" onclick="mapScrubNext()" aria-label="Próximo dia">›</button>
@@ -1527,7 +1562,7 @@
 <div class="section" id="sec-settings" role="tabpanel" aria-label="Ajustes">
     <div class="settings-section">
         <h2>Ajustes</h2>
-        <div id="appVersion" style="font-size:12px;color:var(--text3);text-align:center;margin:-16px 0 20px">EUA 2027 PWA v82</div>
+        <div id="appVersion" style="font-size:12px;color:var(--text3);text-align:center;margin:-16px 0 20px">EUA 2027 PWA v83</div>
         <div class="settings-group-label">Viagem</div>
         <div class="settings-group">
             <div class="setting-row">
@@ -2787,7 +2822,8 @@ function doInitMap() {
         var navHtml = '<div class="popup-nav-btns">' +
             '<a class="popup-nav-btn gmaps" href="https://www.google.com/maps/search/?api=1&query=' + q + '" target="_blank" rel="noopener">🗺️ Google</a>' +
             '<a class="popup-nav-btn amaps" href="https://maps.apple.com/?q=' + q + '" target="_blank" rel="noopener">🍎 Apple</a>' +
-            '</div>';
+            '</div>' +
+            '<div class="popup-nav-btns" style="margin-top:4px"><a class="popup-nav-btn" style="background:rgba(10,132,255,0.15);color:#0a84ff;flex:1;cursor:pointer" onclick="switchTab(\'home\');showDay(' + s.days[0] + ')">📅 Ver Dia ' + s.days[0] + '</a></div>';
         var marker = L.marker([s.lat, s.lng], { icon: ic }).addTo(mapLayers.stops)
             .bindPopup('<h3>' + s.i + ' ' + s.n + '</h3><div class="days">' + s.info.replace(/\n/g,'<br>') + '</div>' + navHtml, { className: 'custom-popup' });
         s.days.forEach(function(d) {
@@ -2822,7 +2858,8 @@ function doInitMap() {
         var navHtml = '<div class="popup-nav-btns">' +
             '<a class="popup-nav-btn gmaps" href="https://www.google.com/maps/search/?api=1&query=' + q + '" target="_blank" rel="noopener">🗺️ Google</a>' +
             '<a class="popup-nav-btn amaps" href="https://maps.apple.com/?q=' + q + '" target="_blank" rel="noopener">🍎 Apple</a>' +
-            '</div>';
+            '</div>' +
+            '<div class="popup-nav-btns" style="margin-top:4px"><a class="popup-nav-btn" style="background:rgba(10,132,255,0.15);color:#0a84ff;flex:1;cursor:pointer" onclick="switchTab(\'home\');showDay(' + sc.day + ')">📅 Ver Dia ' + sc.day + '</a></div>';
         L.marker(c, { icon: scI }).addTo(mapLayers.sc)
             .bindPopup('<h3>⚡ SC ' + sc.name + '</h3><div class="days">Dia ' + sc.day + ' • ' + sc.leg + (sc.note ? '<br>' + sc.note : '') + '</div>' + navHtml, { className: 'custom-popup' });
     });
@@ -2836,13 +2873,16 @@ function doInitMap() {
     var legend = L.control({ position: 'bottomright' });
     legend.onAdd = function() {
         var div = L.DomUtil.create('div', 'legend');
-        div.innerHTML = '<h3>🗺️ Legenda</h3>' +
+        div.innerHTML = '<h3 onclick="this.parentElement.classList.toggle(\'open\')">🗺️ Legenda</h3>' +
+            '<div class="legend-body">' +
             '<div class="legend-item"><div class="legend-line" style="background:#4ecdc4"></div><span>Rota percorrida</span></div>' +
             '<div class="legend-item"><div class="legend-line" style="background:#4ecdc4;opacity:0.25"></div><span>Trecho restante</span></div>' +
             '<div class="legend-item"><div class="legend-line" style="background:#0a84ff;height:4px"></div><span>Trecho do dia</span></div>' +
             '<div class="legend-item"><div class="legend-line" style="background:#ffd700;border-style:dashed"></div><span>Day trips (Vegas)</span></div>' +
             '<div class="legend-item"><div style="font-size:11px;background:#00c853;border-radius:50%;width:14px;height:14px;display:flex;align-items:center;justify-content:center;border:1.5px solid #fff">⚡</div><span>Superchargers</span></div>' +
-            '<br><div style="color:#888;font-size:10px">📅 21/01 → 22/02/2027<br>🚗 ~6.500 km • 🔄 Anti-horário</div>';
+            '<br><div style="color:#888;font-size:10px">📅 21/01 → 22/02/2027<br>🚗 ~6.500 km • 🔄 Anti-horário</div>' +
+            '</div>';
+        L.DomEvent.disableClickPropagation(div);
         return div;
     };
     legend.addTo(mapInstance);
@@ -2883,6 +2923,11 @@ function mapUpdateDay(dayNum, fly) {
     if (range) range.value = dayNum;
     var scrubLabel = document.getElementById('mapScrubLabel');
     if (scrubLabel) scrubLabel.textContent = dayNum + ' / 33';
+    var scrubLoc = document.getElementById('mapScrubLoc');
+    if (scrubLoc) {
+        var dl = days.find(function(x) { return x.day === dayNum; });
+        scrubLoc.textContent = dl ? dl.location : '';
+    }
 
     // Clear old day route
     if (mapLayers.dayroute) mapLayers.dayroute.clearLayers();
@@ -2943,7 +2988,21 @@ function mapUpdateStatsCard(dayNum) {
     if (stats.km !== '—') badges += '<span class="map-stats-badge drive">🚗 ' + stats.km + ' km</span>';
     if (stats.drive) badges += '<span class="map-stats-badge">' + stats.drive + '</span>';
     if (stats.hotel) badges += '<span class="map-stats-badge hotel">🏨 ' + stats.hotel + '</span>';
+    // Day progress
+    var total = d.items.length, done = 0;
+    for (var i = 0; i < total; i++) { if (isChecked(dayNum, i)) done++; }
+    if (total > 0) badges += '<span class="map-stats-badge progress">✓ ' + done + '/' + total + '</span>';
     document.getElementById('mapStatsBadges').innerHTML = badges;
+
+    // Action buttons
+    var actions = '';
+    actions += '<button class="map-stats-action-btn btn-roteiro" onclick="event.stopPropagation();switchTab(\'home\');showDay(' + dayNum + ')">📅 Ver Roteiro</button>';
+    var coord = dayCoords[dayNum];
+    if (coord) {
+        var locName = encodeURIComponent(d.location);
+        actions += '<a class="map-stats-action-btn btn-directions" href="https://maps.apple.com/?daddr=' + coord[0] + ',' + coord[1] + '&dirflg=d" target="_blank" rel="noopener" onclick="event.stopPropagation()">🧭 Direções</a>';
+    }
+    document.getElementById('mapStatsActions').innerHTML = actions;
 
     card.classList.add('visible');
 }
