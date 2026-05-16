@@ -637,63 +637,6 @@
             box-shadow: 0 0 12px rgba(10,132,255,0.5);
         }
 
-        /* Hotel list */
-        .hotel-item {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 14px 20px;
-            border-bottom: 0.5px solid rgba(255,255,255,0.04);
-        }
-        .hotel-num {
-            width: 32px; height: 32px;
-            border-radius: 10px;
-            background: var(--glass2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 13px;
-            flex-shrink: 0;
-        }
-        .hotel-name { font-weight: 600; font-size: 14px; }
-        .hotel-dates { font-size: 12px; color: var(--text3); margin-top: 1px; }
-        .hotel-nights {
-            margin-left: auto;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text2);
-            background: var(--glass);
-            padding: 4px 10px;
-            border-radius: 8px;
-        }
-
-        /* Charge list */
-        .charge-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 20px;
-            border-bottom: 0.5px solid rgba(255,255,255,0.04);
-        }
-        .charge-item.critical {
-            background: rgba(255,214,10,0.04);
-        }
-        .charge-icon-wrap {
-            width: 36px; height: 36px;
-            border-radius: 10px;
-            background: rgba(48,209,88,0.12);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            flex-shrink: 0;
-        }
-        .charge-item.critical .charge-icon-wrap { background: rgba(255,214,10,0.12); }
-        .charge-name { font-weight: 600; font-size: 14px; }
-        .charge-leg { font-size: 12px; color: var(--text3); }
-        .charge-note { font-size: 12px; color: var(--gold); margin-top: 2px; }
-
         /* ==================== SETTINGS ==================== */
         .settings-section { padding: 20px 20px; }
         .settings-section h2 { font-size: 32px; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 28px; }
@@ -875,7 +818,7 @@
             }
             @keyframes tooltipIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
             .setting-row:hover { background: var(--glass); border-radius: var(--radius-sm); }
-            .hotel-item:hover, .charge-item:hover { background: var(--glass); }
+            .hotel-item:hover, .charge-item:hover, .fav-item:hover, .explore-park-card:hover { background: var(--glass); }
             .sheet-close:hover { background: rgba(255,255,255,0.2); }
             .sheet-nav-btn:hover { transform: translateY(-1px); filter: brightness(1.12); }
             .tab-item:hover { color: var(--text2); }
@@ -1338,22 +1281,112 @@
             background: var(--glass); border: 0.5px solid rgba(255,255,255,0.08);
             border-radius: 100px; padding: 8px 16px; font-size: 13px; font-weight: 600;
             font-family: inherit; color: var(--text2); cursor: pointer; white-space: nowrap;
-            transition: all 0.2s; min-height: 48px; display: flex; align-items: center;
+            transition: all 0.2s; min-height: 44px; display: flex; align-items: center;
         }
         .explore-filter-btn.active {
             background: rgba(10,132,255,0.15); border-color: rgba(10,132,255,0.3); color: var(--blue);
         }
         .explore-title {
-            font-size: 18px; font-weight: 700; margin: 20px 0 12px; letter-spacing: -0.02em;
+            font-size: 18px; font-weight: 700; margin: 24px 0 12px; letter-spacing: -0.02em;
         }
         .explore-title:first-child { margin-top: 0; }
+        /* Explore stats */
+        .explore-stats {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 20px;
+        }
+        .explore-stat-card {
+            background: var(--bg3); border-radius: 14px; padding: 14px 12px; text-align: center;
+            border: 0.5px solid rgba(255,255,255,0.06);
+        }
+        .explore-stat-value { font-size: 22px; font-weight: 800; letter-spacing: -0.03em; }
+        .explore-stat-label { font-size: 11px; color: var(--text3); font-weight: 600; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.03em; }
+        .explore-stat-value.green { color: var(--green); }
+        .explore-stat-value.blue { color: var(--blue); }
+        .explore-stat-value.gold { color: var(--gold); }
+        /* Park cards */
         .explore-park-card {
             background: var(--bg3); border-radius: var(--radius);
             border: 0.5px solid rgba(255,255,255,0.06); padding: 16px; margin-bottom: 12px;
+            cursor: pointer; transition: background 0.2s;
         }
+        .explore-park-card:active { background: var(--glass2); }
+        .explore-park-header { display: flex; align-items: center; justify-content: space-between; }
         .explore-park-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
         .explore-park-days { font-size: 12px; color: var(--text3); font-weight: 600; margin-bottom: 8px; }
         .explore-park-highlights { font-size: 13px; color: var(--text2); line-height: 1.55; }
+        .explore-goto { font-size: 12px; color: var(--blue); font-weight: 600; white-space: nowrap; flex-shrink: 0; }
+        /* Hotel cards */
+        .hotel-item {
+            display: flex; align-items: center; gap: 14px; padding: 14px 16px;
+            border-bottom: 0.5px solid rgba(255,255,255,0.04);
+            cursor: pointer; transition: background 0.2s;
+        }
+        .hotel-item:active { background: var(--glass2); }
+        .hotel-item:last-child { border-bottom: none; }
+        .hotel-num {
+            width: 32px; height: 32px; border-radius: 10px; background: var(--glass2);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 13px; flex-shrink: 0;
+        }
+        .hotel-info { flex: 1; min-width: 0; }
+        .hotel-name { font-weight: 600; font-size: 14px; }
+        .hotel-dates { font-size: 12px; color: var(--text3); margin-top: 1px; }
+        .hotel-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+        .hotel-nights {
+            font-size: 12px; font-weight: 600; color: var(--text2);
+            background: var(--glass); padding: 4px 10px; border-radius: 8px;
+        }
+        .hotel-map-link {
+            width: 32px; height: 32px; border-radius: 8px; background: rgba(10,132,255,0.1);
+            border: none; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-size: 14px; -webkit-tap-highlight-color: transparent;
+        }
+        .hotel-map-link:active { background: rgba(10,132,255,0.25); }
+        /* Supercharger items */
+        .charge-item {
+            display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+            border-bottom: 0.5px solid rgba(255,255,255,0.04);
+            cursor: pointer; transition: background 0.2s;
+        }
+        .charge-item:active { background: var(--glass2); }
+        .charge-item:last-child { border-bottom: none; }
+        .charge-item.critical { background: rgba(255,214,10,0.04); }
+        .charge-icon-wrap {
+            width: 36px; height: 36px; border-radius: 10px; background: rgba(48,209,88,0.12);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; flex-shrink: 0;
+        }
+        .charge-item.critical .charge-icon-wrap { background: rgba(255,214,10,0.12); }
+        .charge-info { flex: 1; min-width: 0; }
+        .charge-name { font-weight: 600; font-size: 14px; }
+        .charge-leg { font-size: 12px; color: var(--text3); }
+        .charge-note { font-size: 12px; color: var(--gold); margin-top: 2px; }
+        .charge-map-link {
+            width: 32px; height: 32px; border-radius: 8px; background: rgba(48,209,88,0.1);
+            border: none; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-size: 14px; flex-shrink: 0; -webkit-tap-highlight-color: transparent;
+        }
+        .charge-map-link:active { background: rgba(48,209,88,0.25); }
+        /* Favorites */
+        .fav-item {
+            display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+            border-bottom: 0.5px solid rgba(255,255,255,0.04);
+            cursor: pointer; transition: background 0.2s;
+        }
+        .fav-item:active { background: var(--glass2); }
+        .fav-item:last-child { border-bottom: none; }
+        .fav-day-badge {
+            width: 36px; height: 36px; border-radius: 10px; background: rgba(255,69,58,0.1);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 12px; color: var(--red); flex-shrink: 0;
+        }
+        .fav-text { font-size: 14px; font-weight: 500; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .fav-time { font-size: 12px; color: var(--text3); flex-shrink: 0; }
+        .explore-empty { text-align: center; padding: 40px 20px; color: var(--text3); font-size: 14px; }
+        .explore-section-card {
+            background: var(--bg3); border-radius: var(--radius);
+            border: 0.5px solid rgba(255,255,255,0.06); overflow: hidden; margin-bottom: 16px;
+        }
 
         /* Skeleton loading */
         .skeleton-card { background: var(--bg3); border-radius: var(--radius); overflow: hidden; margin-bottom: 16px; border: 0.5px solid rgba(255,255,255,0.06); }
@@ -1481,6 +1514,7 @@
         <h2 class="explore-header">Explorar</h2>
         <div class="explore-filters">
             <button class="explore-filter-btn active" onclick="filterExplore('all', this)">Todos</button>
+            <button class="explore-filter-btn" onclick="filterExplore('favs', this)">❤️ Favoritos</button>
             <button class="explore-filter-btn" onclick="filterExplore('hotels', this)">🏨 Hotéis</button>
             <button class="explore-filter-btn" onclick="filterExplore('parks', this)">🏞️ Parques</button>
             <button class="explore-filter-btn" onclick="filterExplore('superchargers', this)">⚡ SC</button>
@@ -1493,7 +1527,7 @@
 <div class="section" id="sec-settings" role="tabpanel" aria-label="Ajustes">
     <div class="settings-section">
         <h2>Ajustes</h2>
-        <div id="appVersion" style="font-size:12px;color:var(--text3);text-align:center;margin:-16px 0 20px">EUA 2027 PWA v81</div>
+        <div id="appVersion" style="font-size:12px;color:var(--text3);text-align:center;margin:-16px 0 20px">EUA 2027 PWA v82</div>
         <div class="settings-group-label">Viagem</div>
         <div class="settings-group">
             <div class="setting-row">
@@ -3350,48 +3384,133 @@ function updateTripStats() {
 // ==================== EXPLORE TAB ====================
 function renderExplore() {
     var el = document.getElementById('exploreContent');
-    if (!el || el.innerHTML !== '') return;
+    if (!el) return;
+    el.innerHTML = '';
     var html = '';
+
+    // Trip stats
+    var totalChecked = 0, totalItems = 0, totalFavs = 0;
+    days.forEach(function(d) {
+        d.items.forEach(function(item, idx) {
+            totalItems++;
+            if (isChecked(d.day, idx)) totalChecked++;
+            if (isFav(d.day, idx)) totalFavs++;
+        });
+    });
+    var pct = totalItems > 0 ? Math.round(totalChecked / totalItems * 100) : 0;
+    html += '<div class="explore-section" data-explore="stats">';
+    html += '<div class="explore-stats">';
+    html += '<div class="explore-stat-card"><div class="explore-stat-value green">' + pct + '%</div><div class="explore-stat-label">Concluído</div></div>';
+    html += '<div class="explore-stat-card"><div class="explore-stat-value blue">' + totalItems + '</div><div class="explore-stat-label">Atividades</div></div>';
+    html += '<div class="explore-stat-card"><div class="explore-stat-value gold">' + totalFavs + '</div><div class="explore-stat-label">Favoritos</div></div>';
+    html += '</div></div>';
+
+    // Favorites
+    html += '<div class="explore-section" data-explore="favs">';
+    html += '<h3 class="explore-title">❤️ Favoritos</h3>';
+    var favItems = [];
+    days.forEach(function(d) {
+        d.items.forEach(function(item, idx) {
+            if (isFav(d.day, idx)) {
+                favItems.push({ day: d.day, idx: idx, time: item.time, text: item.text.replace(/<[^>]+>/g, '') });
+            }
+        });
+    });
+    if (favItems.length > 0) {
+        html += '<div class="explore-section-card">';
+        favItems.forEach(function(f) {
+            html += '<div class="fav-item" onclick="switchTab(\'home\');showDay(' + f.day + ')">';
+            html += '<div class="fav-day-badge">D' + f.day + '</div>';
+            html += '<div class="fav-text">' + f.text + '</div>';
+            html += '<div class="fav-time">' + f.time + '</div>';
+            html += '</div>';
+        });
+        html += '</div>';
+    } else {
+        html += '<div class="explore-empty">Toque no ♥ nas atividades para adicionar favoritos</div>';
+    }
+    html += '</div>';
+
+    // Hotels
     html += '<div class="explore-section" data-explore="hotels">';
-    html += '<h3 class="explore-title">🏨 Hotéis</h3>';
+    html += '<h3 class="explore-title">🏨 Hotéis <span style="font-size:13px;font-weight:500;color:var(--text3)">' + hotels.length + '</span></h3>';
+    html += '<div class="explore-section-card">';
     hotels.forEach(function(h) {
-        html += '<div class="hotel-item">';
+        var mapsUrl = 'https://maps.apple.com/?q=' + encodeURIComponent(h.name);
+        html += '<div class="hotel-item" onclick="switchTab(\'home\');showDay(' + findDayByDate(h.checkin) + ')">';
         html += '<div class="hotel-num">' + h.num + '</div>';
-        html += '<div><div class="hotel-name">' + h.name + '</div>';
+        html += '<div class="hotel-info"><div class="hotel-name">' + h.name + '</div>';
         html += '<div class="hotel-dates">' + h.checkin + ' → ' + h.checkout + '</div></div>';
+        html += '<div class="hotel-right">';
         html += '<div class="hotel-nights">' + h.nights + 'n</div>';
+        html += '<a class="hotel-map-link" href="' + mapsUrl + '" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="Abrir no Maps">📍</a>';
+        html += '</div>';
         html += '</div>';
     });
-    html += '</div>';
+    html += '</div></div>';
+
+    // Parks
     html += '<div class="explore-section" data-explore="parks">';
-    html += '<h3 class="explore-title">🏞️ Parques Nacionais</h3>';
+    html += '<h3 class="explore-title">🏞️ Parques Nacionais <span style="font-size:13px;font-weight:500;color:var(--text3)">' + parks.length + '</span></h3>';
     parks.forEach(function(p) {
-        html += '<div class="explore-park-card">';
+        var dayMatch = p.days.match(/\d+/);
+        var dayNum = dayMatch ? parseInt(dayMatch[0]) : 1;
+        html += '<div class="explore-park-card" onclick="switchTab(\'home\');showDay(' + dayNum + ')">';
+        html += '<div class="explore-park-header"><div>';
         html += '<div class="explore-park-name">' + p.name + '</div>';
         html += '<div class="explore-park-days">' + p.days + '</div>';
+        html += '</div><div class="explore-goto">Ver dia →</div></div>';
         html += '<div class="explore-park-highlights">' + p.highlights + '</div>';
         html += '</div>';
     });
     html += '</div>';
+
+    // Superchargers
     html += '<div class="explore-section" data-explore="superchargers">';
-    html += '<h3 class="explore-title">⚡ Superchargers</h3>';
+    html += '<h3 class="explore-title">⚡ Superchargers <span style="font-size:13px;font-weight:500;color:var(--text3)">' + superchargers.length + '</span></h3>';
+    html += '<div class="explore-section-card">';
     superchargers.forEach(function(sc) {
-        html += '<div class="charge-item' + (sc.critical ? ' critical' : '') + '">';
+        var mapsUrl = 'https://maps.apple.com/?q=' + encodeURIComponent('Tesla Supercharger ' + sc.name);
+        html += '<div class="charge-item' + (sc.critical ? ' critical' : '') + '" onclick="switchTab(\'home\');showDay(' + sc.day + ')">';
         html += '<div class="charge-icon-wrap">' + (sc.critical ? '⚠️' : '⚡') + '</div>';
-        html += '<div><div class="charge-name">' + sc.name + '</div>';
+        html += '<div class="charge-info"><div class="charge-name">' + sc.name + '</div>';
         html += '<div class="charge-leg">Dia ' + sc.day + ' • ' + sc.leg + '</div>';
         if (sc.note) html += '<div class="charge-note">' + sc.note + '</div>';
-        html += '</div></div>';
+        html += '</div>';
+        html += '<a class="charge-map-link" href="' + mapsUrl + '" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="Abrir no Maps">📍</a>';
+        html += '</div>';
     });
-    html += '</div>';
+    html += '</div></div>';
+
     el.innerHTML = html;
 }
+
+function findDayByDate(dateStr) {
+    var parts = dateStr.split('/');
+    var d = parseInt(parts[0]), m = parseInt(parts[1]);
+    var tripStart = new Date(2027, 0, 21);
+    var target = new Date(2027, m - 1, d);
+    var diff = Math.round((target - tripStart) / 86400000) + 1;
+    return Math.max(1, Math.min(diff, totalDays));
+}
+
 function filterExplore(filter, btn) {
     document.querySelectorAll('.explore-filter-btn').forEach(function(b) { b.classList.remove('active'); });
     if (btn) btn.classList.add('active');
+    if (filter === 'favs') {
+        // Re-render to update favorites list
+        var el = document.getElementById('exploreContent');
+        if (el) el.innerHTML = '';
+        renderExplore();
+    }
     document.querySelectorAll('.explore-section').forEach(function(s) {
+        var type = s.dataset.explore;
         if (filter === 'all') { s.style.display = ''; return; }
-        s.style.display = s.dataset.explore === filter ? '' : 'none';
+        if (filter === 'favs') {
+            s.style.display = (type === 'favs' || type === 'stats') ? '' : 'none';
+            return;
+        }
+        s.style.display = (type === filter || type === 'stats') ? '' : 'none';
     });
 }
 
