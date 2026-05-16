@@ -1,4 +1,4 @@
-const CACHE_NAME = 'viagem-eua-2027-v90';
+const CACHE_NAME = 'viagem-eua-2027-v92';
 const TILE_CACHE = 'viagem-tiles-v1';
 
 // Critical assets — must succeed for install
@@ -331,8 +331,9 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       fetch(event.request).then((response) => {
         if (response.ok && url.origin === self.location.origin) {
+          const cloned = response.clone();
           caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, response.clone());
+            cache.put(event.request, cloned);
           });
         }
         return response;
@@ -352,8 +353,9 @@ self.addEventListener('fetch', (event) => {
       return fetch(event.request).then((response) => {
         // Cache any new local assets on the fly
         if (response.ok && url.origin === self.location.origin) {
+          const cloned = response.clone();
           caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, response.clone());
+            cache.put(event.request, cloned);
           });
         }
         return response;
