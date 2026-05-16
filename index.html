@@ -441,6 +441,9 @@
             height: calc(100dvh - var(--tab-height) - var(--safe-top));
             width: 100%;
         }
+        #map .leaflet-top { top: 56px; }
+        #map .leaflet-control-zoom { border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; }
+        #map .leaflet-control-zoom a { background: rgba(5,5,8,0.88); color: var(--text); border-color: rgba(255,255,255,0.08); }
 
         .map-toolbar {
             position: absolute;
@@ -1562,7 +1565,7 @@
 <div class="section" id="sec-settings" role="tabpanel" aria-label="Ajustes">
     <div class="settings-section">
         <h2>Ajustes</h2>
-        <div id="appVersion" style="font-size:12px;color:var(--text3);text-align:center;margin:-16px 0 20px">EUA 2027 PWA v84</div>
+        <div id="appVersion" style="font-size:12px;color:var(--text3);text-align:center;margin:-16px 0 20px">EUA 2027 PWA v85</div>
         <div class="settings-group-label">Viagem</div>
         <div class="settings-group">
             <div class="setting-row">
@@ -2755,7 +2758,7 @@ function doInitMap() {
     mapInstance = L.map('map', { center: [38, -105], zoom: 5, zoomControl: false });
 
     // Zoom control bottom-left
-    L.control.zoom({ position: 'bottomleft' }).addTo(mapInstance);
+    L.control.zoom({ position: 'topleft' }).addTo(mapInstance);
 
     // Tile layers
     mapTileDark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
@@ -2870,7 +2873,7 @@ function doInitMap() {
     mapLayers.dayroute.addTo(mapInstance);
 
     // ---- LEGEND ----
-    var legend = L.control({ position: 'bottomright' });
+    var legend = L.control({ position: 'topright' });
     legend.onAdd = function() {
         var div = L.DomUtil.create('div', 'legend');
         div.innerHTML = '<h3 onclick="this.parentElement.classList.toggle(\'open\')">🗺️ Legenda</h3>' +
