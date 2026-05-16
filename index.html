@@ -688,6 +688,7 @@
             justify-content: space-between;
             padding: 14px 0;
             border-bottom: 0.5px solid rgba(255,255,255,0.04);
+            -webkit-tap-highlight-color: transparent;
         }
         .setting-row:last-child { border-bottom: none; }
         .setting-label { font-size: 15px; font-weight: 500; }
@@ -836,8 +837,8 @@
 
         /* Scrollbar — scoped to day selector only */
 
-        /* Desktop hover refinements */
-        @media (hover: hover) {
+        /* Desktop hover refinements — only for mouse devices, not touch */
+        @media (hover: hover) and (pointer: fine) {
             .day-pill:hover:not(.active) { background: var(--glass2); }
             .activity-card[onclick]:hover { background: rgba(255,255,255,0.03); }
             .activity-card[title]:hover::after {
@@ -1565,7 +1566,7 @@
 <div class="section" id="sec-settings" role="tabpanel" aria-label="Ajustes">
     <div class="settings-section">
         <h2>Ajustes</h2>
-        <div id="appVersion" style="font-size:12px;color:var(--text3);text-align:center;margin:-16px 0 20px">EUA 2027 PWA v85</div>
+        <div id="appVersion" style="font-size:12px;color:var(--text3);text-align:center;margin:-16px 0 20px">EUA 2027 PWA v86</div>
         <div class="settings-group-label">Viagem</div>
         <div class="settings-group">
             <div class="setting-row">
