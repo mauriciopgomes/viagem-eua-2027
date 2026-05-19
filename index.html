@@ -3410,11 +3410,19 @@ setTimeout(function() { cacheMapTiles(true); }, 3000);
 
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js').then(function(reg) {
+        // Check for updates, but don't auto-reload — let the new SW take control on next visit
         reg.addEventListener('updatefound', function() {
             var newWorker = reg.installing;
             newWorker.addEventListener('statechange', function() {
-                if (newWorker.state === 'activated') {
-                    window.location.reload();
+                if (newWorker.state === 'activated' && navigator.serviceWorker.controller) {
+                    // New version available — show subtle toast instead of reload loop
+                    var toast = document.createElement('div');
+                    toast.className = 'update-toast';
+                    toast.innerHTML = '🔄 Nova versão disponível <button onclick="window.location.reload()">Atualizar</button>';
+                    toast.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--glass2);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:0.5px solid rgba(255,255,255,0.15);color:var(--text);padding:12px 20px;border-radius:16px;z-index:9999;font-family:inherit;font-size:14px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 32px rgba(0,0,0,0.4)';
+                    toast.querySelector('button').style.cssText = 'background:var(--blue);color:#fff;border:none;padding:8px 16px;border-radius:10px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer';
+                    document.body.appendChild(toast);
+                    setTimeout(function() { if (toast.parentNode) toast.remove(); }, 15000);
                 }
             });
         });
