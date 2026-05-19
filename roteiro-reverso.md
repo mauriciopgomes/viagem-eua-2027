@@ -69,7 +69,7 @@ NYC ✈️ LAX → Las Vegas → Grand Canyon → Zion → Bryce Canyon → Moab
 | Horário | Atividade | Como chegar |
 |---------|-----------|-------------|
 | 07:00 | ✈️ Chegada no JFK — imigração + bagagem | — |
-| ~09:00 | 🚕 Transporte JFK → Hotel | Uber/táxi ~$70, ~60 min. Ou AirTrain + metrô ~$10, ~75 min |
+| ~09:00 | 🚕 Transporte JFK → Hotel | AirTrain + Subway E: ~$11/pessoa, ~65 min. Ou AirTrain + LIRR até Penn Station: ~$14/pessoa, ~45 min (mais confortável com malas). Ou Uber/táxi ~$70, ~60 min |
 | ~10:00 | 🏨 Check-in no **Marriott Marquis** (1535 Broadway) ou deixar malas na recepção | O hotel fica na Times Square, bem no centro de tudo |
 | 10:30 | ☕ Café da manhã perto do hotel | 🚶 A pé |
 | 11:00 | 🎮 **Nintendo NY** (10 Rockefeller Plaza) — loja oficial, 2 andares de games pra jogar | 🚶 10 min a pé do hotel. Descer pela 7th Ave, virar na 49th St |
@@ -172,7 +172,7 @@ NYC ✈️ LAX → Las Vegas → Grand Canyon → Zion → Bryce Canyon → Moab
 |---------|-----------|
 | 07:30 | ☕ Café no Marriott Marquis |
 | 08:00 | 🏨 Check-out |
-| 08:30 | 🚕 Times Square → JFK (Uber/táxi ~$70, ~60 min) |
+| 08:30 | 🚕 Times Square → JFK (AirTrain + Subway E: ~$11/pessoa, ~65 min. Ou AirTrain + LIRR via Penn Station: ~$14/pessoa, ~45 min. Ou Uber/táxi ~$70, ~60 min) |
 | ~09:30 | Chegada no JFK — check-in / despachar malas / segurança |
 | 11:00 | ✈️ Voo AA 3 → Los Angeles (~5.5h) |
 | 14:20 | ✈️ Chegada no LAX (horário local, -3h) |

@@ -46,7 +46,7 @@ const days = [
         region: "ny",
         items: [
             { time: "07:00", text: "✈️ Chegada no JFK — imigração + bagagem", type: "drive" },
-            { time: "~09:00", text: "🚕 Transporte JFK → Hotel (Uber ~$70, ~60 min)", type: "drive" },
+            { time: "~09:00", text: "🚕 Transporte JFK → Hotel (AirTrain + Subway E ~$11/pessoa, ~65 min · AirTrain + LIRR ~$14/pessoa, ~45 min · Uber ~$70, ~60 min)", type: "drive" },
             { time: "~10:00", text: "🏨 Check-in no <strong>Marriott Marquis</strong> (1535 Broadway, Times Square)", type: "" },
             { time: "10:30", text: "☕ Café da manhã perto do hotel", type: "food" },
             { time: "11:00", text: "🎮 <strong>Nintendo NY</strong> (10 Rockefeller Plaza) — loja oficial, 2 andares de games!", type: "highlight" },
@@ -131,7 +131,7 @@ const days = [
         items: [
             { time: "07:30", text: "☕ Café no Marriott Marquis", type: "" },
             { time: "08:00", text: "🏨 Check-out", type: "" },
-            { time: "08:30", text: "🚕 Times Square → JFK (Uber ~$70, ~60 min)", type: "drive" },
+            { time: "08:30", text: "🚕 Times Square → JFK (AirTrain + Subway E ~$11/pessoa, ~65 min · AirTrain + LIRR ~$14/pessoa, ~45 min · Uber ~$70, ~60 min)", type: "drive" },
             { time: "~09:30", text: "Chegada no JFK — check-in / despachar malas", type: "" },
             { time: "11:00", text: "✈️ Voo AA 3 → Los Angeles (~5.5h)", type: "drive" },
             { time: "14:20", text: "✈️ Chegada no LAX (horário local, -3h)", type: "drive" },
