@@ -3,39 +3,39 @@
 // NYC → Vegas → Utah → PNW → Costa Oregon → SF → Yosemite → Sequoia → LA
 
 const dayPhotos = {
-    1: 'img/dia-01.jpg',
-    2: 'img/dia-02.jpg',
-    3: 'img/dia-03.jpg',
-    4: 'img/dia-04.jpg',
-    5: 'img/dia-05.jpg',
-    6: 'img/dia-06.jpg',
-    7: 'img/dia-07.jpg',
-    8: 'img/dia-08.jpg',
-    9: 'img/dia-09.jpg',
-    10: 'img/dia-10.jpg',
-    11: 'img/dia-11.jpg',
-    12: 'img/dia-12.jpg',
-    13: 'img/dia-13.jpg',
-    14: 'img/dia-14.jpg',
-    15: 'img/dia-15.jpg',
-    16: 'img/dia-16.jpg',
-    17: 'img/dia-17.jpg',
-    18: 'img/dia-18.jpg',
-    19: 'img/dia-19.jpg',
-    20: 'img/dia-20.jpg',
-    21: 'img/dia-21.jpg',
-    22: 'img/dia-22.jpg',
-    23: 'img/dia-23.jpg',
-    24: 'img/dia-24.jpg',
-    25: 'img/dia-25.jpg',
-    26: 'img/dia-26.jpg',
-    27: 'img/dia-27.jpg',
-    28: 'img/dia-28.jpg',
-    29: 'img/dia-29.jpg',
-    30: 'img/dia-30.jpg',
-    31: 'img/dia-31.jpg',
-    32: 'img/dia-32.jpg',
-    33: 'img/dia-33.jpg'
+    1: 'img/dia-01.jpg',                          // NYC — Times Square
+    2: 'img/dia-02.jpg',                          // NYC — Brooklyn Bridge
+    3: 'img/dia-03.jpg',                          // NYC — Central Park
+    4: 'img/dia-04.jpg',                          // NYC — Skyline
+    5: 'img/dia-05.jpg',                          // Voo NYC → Vegas
+    6: 'img/dia-29.jpg',                          // Las Vegas — Welcome Sign
+    7: 'img/dia-31.jpg',                          // Valley of Fire
+    8: 'img/dia-32.jpg',                          // Death Valley
+    9: 'img/dia-27.jpg',                          // Grand Canyon
+    10: 'img/dia-26.jpg',                         // Zion NP
+    11: 'img/dia-24.jpg',                         // Bryce Canyon
+    12: 'img/dia-25.jpg',                         // Bryce Canyon — Hoodoos
+    13: 'img/dia-22.jpg',                         // Canyonlands — Mesa Arch
+    14: 'img/dia-21.jpg',                         // Arches — Delicate Arch
+    15: 'img/activities/temple_square.jpg',       // Salt Lake City
+    16: 'img/activities/shoshone_falls.jpg',      // Boise — Shoshone Falls
+    17: 'img/activities/columbia_river_gorge.jpg',// Centralia — Columbia River Gorge
+    18: 'img/dia-19.jpg',                         // Mt Rainier
+    19: 'img/dia-17.jpg',                         // Olympic NP — Hoh Rain Forest
+    20: 'img/dia-16.jpg',                         // Cannon Beach
+    21: 'img/dia-15.jpg',                         // Oregon Coast
+    22: 'img/dia-14.jpg',                         // Redwood NP — Fern Canyon
+    23: 'img/dia-13.jpg',                         // Eureka — Lighthouse
+    24: 'img/dia-11.jpg',                         // San Francisco — Golden Gate
+    25: 'img/dia-12.jpg',                         // San Francisco — Muir Woods
+    26: 'img/activities/malibu_pch.jpg',          // PCH — Malibu
+    27: 'img/dia-08.jpg',                         // Yosemite — Tunnel View
+    28: 'img/dia-09.jpg',                         // Yosemite — Half Dome
+    29: 'img/dia-07.jpg',                         // Three Rivers — Sequoia Forest
+    30: 'img/dia-06.jpg',                         // Sequoia NP — General Sherman
+    31: 'img/dia-33.jpg',                         // Los Angeles — Hollywood Sign
+    32: 'img/dia-34.jpg',                         // Los Angeles — Santa Monica Pier
+    33: 'img/dia-30.jpg',                         // Volta pra casa — Vegas Strip
 };
 
 const days = [
