@@ -1963,6 +1963,44 @@ const activityPhotos = {
     'Temple Square': 'img/activities/temple_square.jpg',
     'Buffalo Point': 'img/activities/buffalo_point.jpg',
     'Hermit Road': 'img/activities/hermit_road.jpg',
+    // --- Additional mappings (coverage pass) ---
+    'Las Vegas': 'img/activities/las_vegas_strip_night.jpg',
+    'Kyle Canyon': 'img/activities/red_rock_canyon.jpg',
+    'brincar na neve': 'img/activities/badger_pass.jpg',
+    'Cathedral Rock Trail': 'img/activities/calico_tanks.jpg',
+    'Mt. Charleston Lodge': 'img/activities/red_rock_canyon.jpg',
+    'Death Valley': 'img/activities/zabriskie_point.jpg',
+    'Springdale': 'img/activities/canyon_overlook.jpg',
+    'Bryce Amphitheater': 'img/activities/bryce_canyon.jpg',
+    'Stargazing': 'img/activities/bryce_point.jpg',
+    'Moab': 'img/activities/corona_arch.jpg',
+    'Potash Road': 'img/activities/dead_horse_point.jpg',
+    'Thelma & Louise': 'img/activities/dead_horse_point.jpg',
+    'SLC': 'img/activities/temple_square.jpg',
+    'Boise': 'img/activities/shoshone_falls.jpg',
+    'Centralia': 'img/activities/columbia_river_gorge.jpg',
+    'Henry M. Jackson': 'img/activities/mt__rainier.jpg',
+    'Spruce Nature Trail': 'img/activities/hoh_rain_forest.jpg',
+    'Crescent City': 'img/activities/tall_trees_grove.jpg',
+    'Avenue of the Giants': 'img/activities/tall_trees_grove.jpg',
+    'Eureka': 'img/activities/carson_mansion.jpg',
+    'Nintendo San Francisco': 'img/activities/nintendo_ny.jpg',
+    'San Francisco': 'img/activities/golden_gate_bridge.jpg',
+    'Half Moon Bay': 'img/activities/ocean_beach_sf.jpg',
+    'Santa Cruz': 'img/activities/venice_beach.jpg',
+    'Monterey': 'img/activities/fishermans_wharf.jpg',
+    'Carmel-by-the-Sea': 'img/activities/malibu_pch.jpg',
+    '17-Mile Drive': 'img/activities/malibu_pch.jpg',
+    'Bixby Creek Bridge': 'img/activities/golden_gate_bridge.jpg',
+    'Big Sur': 'img/activities/el_matador_beach.jpg',
+    'Mariposa': 'img/activities/tunnel_view.jpg',
+    '1850 Restaurant': 'img/activities/tunnel_view.jpg',
+    'Majestic Yosemite': 'img/activities/half_dome.jpg',
+    'Yosemite Village': 'img/activities/yosemite_falls_lower.jpg',
+    'Ansel Adams': 'img/activities/half_dome.jpg',
+    'Three Rivers': 'img/activities/general_sherman_tree.jpg',
+    'LA': 'img/activities/griffith_observatory.jpg',
+    'Santa Monica': 'img/activities/santa_monica_pier.jpg',
 };
 
 function findPhoto(text) {
@@ -2259,6 +2297,95 @@ const placeInfo = {
     'Venice Beach': { addr: 'Venice Beach, Los Angeles, CA 90291', coords: '33.9850,-118.4695', detail: 'Praia e calçadão icônico! Muscle Beach (academia ao ar livre), murais, artistas de rua, skatepark lendário. Vibe única de LA.', cost: 'Gratuito' },
     'Hollywood Sign': { addr: 'Hollywood Sign, Los Angeles, CA', coords: '34.1341,-118.3215', detail: 'Letreiro de 1923 (originalmente "Hollywoodland"). Melhor visto do Griffith Observatory ou Lake Hollywood Park. Trilha até as letras: ~8 km.', cost: 'Gratuito' },
     'Griffith Observatory': { addr: 'Griffith Observatory, 2800 E Observatory Rd, Los Angeles, CA 90027', coords: '34.1184,-118.3004', detail: 'Observatório art deco de 1935. Telescópios gratuitos, planetário, vista 360° de LA e Hollywood Sign. Cenário de La La Land!', hours: '12h-22h (Ter-Sex) / 10h-22h (Sáb-Dom)', cost: 'Gratuito (planetário: $7)' },
+
+    // Day 1 — NYC
+    'Rockefeller Center Plaza': { addr: '45 Rockefeller Plaza, New York, NY 10111', coords: '40.7587,-73.9787', detail: 'Complexo art deco icônico. Pista de patinação no inverno, bandeiras internacionais, estátua de Prometheus dourada. Top of the Rock no topo.', hours: 'Praça aberta 24h', cost: 'Gratuito (Top of the Rock: $40+)' },
+
+    // Day 5 — Flight
+    'Las Vegas': { addr: 'Las Vegas, NV 89109', coords: '36.1699,-115.1398', detail: 'A capital mundial do entretenimento. Cassinos, shows, restaurantes de chefs famosos e a icônica Strip iluminada.' },
+
+    // Day 6 — Mt. Charleston
+    'Kyle Canyon Scenic Drive': { addr: 'Kyle Canyon Rd, Mt. Charleston, NV 89124', coords: '36.2719,-115.6513', detail: 'Rota cênica de 45 min saindo de Vegas até as Spring Mountains. Paisagem desértica vira floresta alpina. Neve no inverno!', cost: 'Gratuito' },
+    'brincar na neve': { addr: 'Mt. Charleston, Spring Mountains NRA, NV 89124', coords: '36.3100,-115.6800', detail: 'Área de neve perto de Lee Canyon. Atividades de inverno a menos de 1h de Las Vegas!', cost: 'Gratuito' },
+    'Cathedral Rock Trail': { addr: 'Cathedral Rock Trail, Mt. Charleston, NV 89124', coords: '36.2696,-115.6639', detail: 'Trilha de ~4 km com vistas panorâmicas das Spring Mountains. Moderada, ideal para famílias.', cost: 'Gratuito' },
+    'Mt. Charleston Lodge': { addr: '5375 Kyle Canyon Rd, Mt. Charleston, NV 89124', coords: '36.2670,-115.6475', detail: 'Lodge de montanha com lareira, chocolate quente e vista para o canyon. Refúgio aconchegante a 45 min de Vegas.' },
+
+    // Day 10 — Zion
+    'Watchman Trail': { addr: 'Watchman Trail, Zion NP, Springdale, UT 84767', coords: '37.1988,-112.9841', detail: 'Trilha de ~5 km com vistas panorâmicas do canyon. Começa perto do Visitor Center. Moderada, pôr do sol espetacular.', cost: 'Incluído no ingresso do parque' },
+
+    // Day 11 — Bryce Canyon
+    'Sunrise/Sunset Point': { addr: 'Sunrise/Sunset Point, Bryce Canyon NP, UT 84764', coords: '37.6270,-112.1671', detail: 'Primeira vista do anfiteatro de hoodoos. Nascer e pôr do sol transformam as formações em tons dourados e vermelhos.', cost: 'Incluído no ingresso do parque' },
+    'Bryce Amphitheater': { addr: 'Bryce Amphitheater, Bryce Canyon NP, UT 84764', coords: '37.6230,-112.1680', detail: 'Maior concentração de hoodoos do mundo. Tons dourados ao pôr do sol criam cenário surreal.', cost: 'Incluído no ingresso do parque' },
+    'Stargazing': { addr: 'Bryce Canyon NP, UT 84764', coords: '37.5930,-112.1871', detail: 'International Dark Sky Park. Via Láctea visível a olho nu! Um dos melhores céus noturnos dos EUA.', cost: 'Gratuito' },
+
+    // Day 12 — Bryce → Moab
+    'Moab': { addr: 'Moab, UT 84532', coords: '38.5733,-109.5498', detail: 'Cidade-base para Arches e Canyonlands. Capital da aventura de Utah: jeep, mountain bike, rafting.' },
+    'Corona Arch Trail': { addr: 'Corona Arch Trail, Moab, UT 84532', coords: '38.5777,-109.6208', detail: 'Trilha de ~5 km até um arco gigante sem multidões. Alternativa gratuita ao Arches NP!', cost: 'Gratuito' },
+    'Scenic Byway 128': { addr: 'UT-128, Moab, UT 84532', coords: '38.6131,-109.5103', detail: 'Estrada cênica com paredões vermelhos ao longo do Rio Colorado. Cenário de vários filmes de faroeste.', cost: 'Gratuito' },
+
+    // Day 13 — Canyonlands
+    'White Rim Overlook': { addr: 'White Rim Overlook Trail, Canyonlands NP, UT 84532', coords: '38.4593,-109.8203', detail: 'Trilha de ~3 km (ida e volta) com vista do White Rim abaixo. Vista vertiginosa dos canyons e do Rio Colorado.', cost: 'Incluído no ingresso do parque' },
+    'Potash Road': { addr: 'Potash Road (UT-279), Moab, UT 84532', coords: '38.5450,-109.5950', detail: 'Estrada cênica com petróglifos indígenas e pegadas de dinossauro ao longo do Rio Colorado.', cost: 'Gratuito' },
+    'Thelma & Louise Point': { addr: 'Fossil Point, Potash Road, Moab, UT 84532', coords: '38.5200,-109.6100', detail: 'Local de filmagem da cena final icônica do filme Thelma & Louise (1991). Vista dramática do penhasco.', cost: 'Gratuito' },
+
+    // Day 15 — Salt Lake City
+    'SLC': { addr: 'Salt Lake City, UT 84101', coords: '40.7608,-111.8910', detail: 'Capital de Utah, fundada por pioneiros mórmons em 1847. Cercada por montanhas, porta de entrada para estações de ski.' },
+    'Temple Square + State Capitol': { addr: 'Temple Square, 50 N Temple, Salt Lake City, UT 84150', coords: '40.7708,-111.8919', detail: 'Centro espiritual dos mórmons: templo, tabernáculo (acústica perfeita), jardins. State Capitol com vista panorâmica da cidade.', hours: '9h-21h', cost: 'Gratuito' },
+
+    // Day 16 — Boise
+    'Boise': { addr: 'Boise, ID 83702', coords: '43.6150,-116.2023', detail: 'Capital de Idaho, conhecida pela cultura basca, cena gastronômica e o Greenbelt ao longo do rio.' },
+    'Boise River Greenbelt + Idaho State Capitol': { addr: 'Boise River Greenbelt, Boise, ID 83702', coords: '43.6088,-116.2050', detail: 'Caminho pavimentado de 40 km ao longo do Rio Boise + Capitólio neoclássico com cúpula de águia dourada.', cost: 'Gratuito' },
+
+    // Day 17 — Centralia
+    'Centralia': { addr: 'Centralia, WA 98531', coords: '46.7162,-122.9543', detail: 'Pequena cidade entre Portland e Seattle. Parada estratégica na I-5 com outlets e restaurantes locais.' },
+
+    // Day 18 — Mt. Rainier
+    'Henry M. Jackson Visitor Center': { addr: 'Henry M. Jackson Memorial Visitor Center, Paradise, Mt. Rainier NP, WA 98304', coords: '46.7864,-121.7353', detail: 'Centro de visitantes principal em Paradise. Exposições sobre o vulcão e geleiras. Ponto de partida para trilhas com vista do Rainier.', hours: '10h-17h (varia por estação)', cost: 'Incluído no ingresso do parque' },
+
+    // Day 19 — Olympic
+    'Spruce Nature Trail': { addr: 'Spruce Nature Trail, Hoh Rain Forest, Olympic NP, WA 98382', coords: '47.8608,-123.9344', detail: 'Loop de ~2 km ao longo do Rio Hoh através de floresta primária. Musgos, samambaias e árvores centenárias.', cost: 'Incluído no ingresso do parque' },
+
+    // Day 21 — Oregon Coast
+    'Newport, OR': { addr: 'Newport, OR 97365', coords: '44.6368,-124.0535', detail: 'Vila de pescadores charmosa. Distrito Bayfront com frutos do mar frescos, leões-marinhos e aquário.' },
+    'Gold Beach': { addr: 'Gold Beach, OR 97444', coords: '42.4073,-124.4218', detail: 'Pequena cidade costeira na foz do Rio Rogue. Praias selvagens e passeios de jet boat.' },
+
+    // Day 22 — Redwood
+    'Crescent City': { addr: 'Crescent City, CA 95531', coords: '41.7558,-124.2026', detail: 'Porta de entrada para o Redwood NP. Cidade mais ao norte da costa da Califórnia, com farol histórico.' },
+
+    // Day 23 — Eureka
+    'Avenue of the Giants': { addr: 'Avenue of the Giants, Humboldt Redwoods SP, CA 95571', coords: '40.3521,-123.9218', detail: 'Estrada de 50 km através de sequoias monumentais. Árvores de 100m de altura formam um túnel natural.', cost: 'Gratuito' },
+    'Eureka': { addr: 'Eureka, CA 95501', coords: '40.8021,-124.1637', detail: 'Cidade portuária vitoriana. Old Town com edifícios históricos, Carson Mansion e baía de Humboldt.' },
+
+    // Day 24 — San Francisco
+    'San Francisco': { addr: 'San Francisco, CA 94102', coords: '37.7749,-122.4194', detail: 'City by the Bay. Icônica pela neblina, ladeiras, Golden Gate Bridge, bondinhos e diversidade cultural.' },
+
+    // Day 25 — San Francisco
+    'Nintendo San Francisco': { addr: '200 Stockton St, San Francisco, CA 94108', coords: '37.7867,-122.4065', detail: 'Segunda loja oficial da Nintendo nos EUA, inaugurada em 2025. Produtos exclusivos, demos jogáveis e experiências interativas.', hours: '10h-20h (Dom: 11h-19h)', cost: 'Gratuito (loja)' },
+
+    // Day 26 — PCH
+    'Half Moon Bay': { addr: 'Half Moon Bay, CA 94019', coords: '37.4636,-122.4286', detail: 'Cidade costeira famosa pelo surf gigante de Mavericks e festival de abóboras no outono.' },
+    'Santa Cruz': { addr: 'Santa Cruz, CA 95060', coords: '36.9741,-122.0308', detail: 'Cidade praiana com o icônico boardwalk (parque de diversões à beira-mar desde 1907). Vibe surf e universitária.' },
+    'Monterey': { addr: 'Monterey, CA 93940', coords: '36.6002,-121.8947', detail: 'Cidade portuária histórica. Cannery Row (Steinbeck), Monterey Bay Aquarium de classe mundial e Old Fisherman\'s Wharf.' },
+    'Carmel-by-the-Sea': { addr: 'Carmel-by-the-Sea, CA 93921', coords: '36.5554,-121.9233', detail: 'Vila artística com casinhas de conto de fadas, galerias de arte e praia de areia branca. Sem semáforos nem números nas casas!' },
+    '17-Mile Drive': { addr: '17-Mile Drive, Pebble Beach, CA 93953', coords: '36.5725,-121.9614', detail: 'Estrada cênica costeira. Lone Cypress, Pebble Beach Golf Links, mansões e paisagens deslumbrantes.', cost: '$11.25/carro' },
+    'Bixby Creek Bridge': { addr: 'Bixby Creek Bridge, Big Sur, CA 93920', coords: '36.3714,-121.9016', detail: 'Ponte icônica de 1932, 85m de altura. A ponte mais fotografada da Califórnia, cenário de comerciais e filmes.', cost: 'Gratuito' },
+    'Big Sur': { addr: 'Big Sur, CA 93920', coords: '36.2704,-121.8081', detail: '145 km de costa dramática. McWay Falls (cachoeira que cai direto no oceano!), Pfeiffer Beach com areia roxa.', cost: 'Gratuito (estacionamentos: $10-12)' },
+    'Mariposa': { addr: 'Mariposa, CA 95338', coords: '37.4849,-119.9663', detail: 'Cidade da Corrida do Ouro, porta de entrada para o Yosemite. Charme histórico e California State Mining Museum.' },
+    '1850 Restaurant': { addr: '5114 CA-140, Mariposa, CA 95338', coords: '37.4830,-119.9690', detail: 'Restaurante farm-to-table na histórica Mariposa. Ingredientes locais e ambiente acolhedor.', hours: '17h-21h (Qui-Dom)' },
+
+    // Day 27-28 — Yosemite
+    'Cook\'s Meadow Loop': { addr: 'Cook\'s Meadow, Yosemite Valley, CA 95389', coords: '37.7460,-119.5890', detail: 'Loop fácil de 1,6 km com vistas de Half Dome, Yosemite Falls e Glacier Point. Perfeito para amanhecer.', cost: 'Incluído no ingresso do parque' },
+    'Cook\'s Meadow': { addr: 'Cook\'s Meadow, Yosemite Valley, CA 95389', coords: '37.7460,-119.5890', detail: 'Prado aberto no coração do Yosemite Valley. Vistas clássicas de Half Dome e Yosemite Falls refletidas na grama.', cost: 'Incluído no ingresso do parque' },
+    'Yosemite Village': { addr: 'Yosemite Village, Yosemite NP, CA 95389', coords: '37.7490,-119.5870', detail: 'Hub principal do parque: Visitor Center, Ansel Adams Gallery, museu, lojas e restaurantes.', hours: '9h-17h', cost: 'Incluído no ingresso do parque' },
+    'Ansel Adams': { addr: 'Ansel Adams Gallery, Yosemite Village, CA 95389', coords: '37.7489,-119.5873', detail: 'Galeria gratuita com fotografias icônicas em preto e branco de Ansel Adams. Yosemite foi sua grande musa.', hours: '10h-17h', cost: 'Gratuito' },
+
+    // Day 30 — Sequoia
+    'Giant Forest Museum': { addr: 'Giant Forest Museum, Sequoia NP, CA 93262', coords: '36.5640,-118.7510', detail: 'Exposições sobre ecologia e história das sequoias gigantes. Ponto de partida para trilhas no Giant Forest.', hours: '9h-16h30', cost: 'Incluído no ingresso do parque' },
+    'Big Trees Trail': { addr: 'Big Trees Trail, Sequoia NP, CA 93262', coords: '36.5630,-118.7520', detail: 'Loop pavimentado de ~2 km ao redor de Round Meadow. Sequoias refletidas na água, acessível para cadeirantes.', cost: 'Incluído no ingresso do parque' },
+
+    // Day 31 — LA
+    'LA': { addr: 'Los Angeles, CA 90012', coords: '34.0522,-118.2437', detail: 'A Cidade dos Anjos! Segunda maior cidade dos EUA, capital do cinema e do entretenimento.' },
+    'Santa Monica': { addr: 'Santa Monica, CA 90401', coords: '34.0195,-118.4912', detail: 'Cidade praiana com o icônico píer, roda-gigante, 3rd Street Promenade (shopping a céu aberto) e ciclovia à beira-mar.' },
 };
 
 function findPlaceInfo(text) {
