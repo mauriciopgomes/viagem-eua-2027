@@ -357,7 +357,8 @@
 | 14:00 | 🌲 **Golden Gate Park** — Japanese Tea Garden, Conservatory of Flowers, Bison Paddock |
 | 15:30 | ☕ **Sausalito** (~15 min de carro) — cidadezinha charmosa, casas-barco, cafés |
 | 16:30 | 🌉 Volta pela Golden Gate (pôr do sol!) |
-| 17:00 | 🛍️ **Union Square** — compras de última hora (Apple Store, Macy's, Nordstrom) |
+| 17:00 | 🎮 **Nintendo San Francisco** (200 Stockton St, Union Square) — 2ª loja oficial dos EUA! Abriu em 2025. Games pra jogar + merch exclusiva |
+| 17:45 | 🛍️ **Union Square** — compras de última hora (Apple Store, Macy's, Nordstrom) |
 | 18:30 | 🍽️ Último jantar em SF — **Waterbar** (frutos do mar, vista Bay Bridge) |
 
 > 🔄 **OPCIONAL — Day trip pela PCH (Pacific Coast Highway):**

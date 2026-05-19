@@ -117,8 +117,19 @@
         }
 
         /* ==================== SECTIONS ==================== */
-        .section { display: none; }
-        .section.active { display: block; }
+        .section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.25s cubic-bezier(0.32,0.72,0,1);
+        }
+        .section.active {
+            display: block;
+            opacity: 1;
+        }
+        .section.section-entering {
+            display: block;
+            opacity: 0;
+        }
 
         /* ==================== HOME / ITINERARY ==================== */
         .hero {
@@ -127,11 +138,16 @@
             overflow: hidden;
         }
         .hero img {
+            position: absolute;
+            top: 0; left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: opacity 0.4s ease;
-            will-change: transform;
+            transition: opacity 0.5s cubic-bezier(0.32,0.72,0,1);
+            will-change: transform, opacity;
+        }
+        .hero img.hero-img-out {
+            opacity: 0;
         }
         .hero-overlay {
             position: absolute;
@@ -265,17 +281,24 @@
         .day-slide {
             display: none;
             padding: 0 20px 32px;
-            animation: slideIn 0.3s ease;
         }
         .day-slide.active { display: block; }
 
         @keyframes slideIn {
-            from { opacity: 0; transform: translateX(30px); }
-            to { opacity: 1; transform: translateX(0); }
+            0% { opacity: 0; transform: translateX(40px) scale(0.98); }
+            100% { opacity: 1; transform: translateX(0) scale(1); }
         }
         @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-30px); }
-            to { opacity: 1; transform: translateX(0); }
+            0% { opacity: 0; transform: translateX(-40px) scale(0.98); }
+            100% { opacity: 1; transform: translateX(0) scale(1); }
+        }
+        @keyframes slideOut {
+            0% { opacity: 1; transform: translateX(0) scale(1); }
+            100% { opacity: 0; transform: translateX(-30px) scale(0.98); }
+        }
+        @keyframes slideOutRight {
+            0% { opacity: 1; transform: translateX(0) scale(1); }
+            100% { opacity: 0; transform: translateX(30px) scale(0.98); }
         }
 
         .day-info {
@@ -1478,6 +1501,7 @@
     <div class="home-main">
     <div class="hero" id="heroSection" onclick="window.scrollTo({top:0,behavior:'smooth'})">
         <img id="heroImg" src="img/dia-01.jpg" alt="Day photo" fetchpriority="high" width="960" height="641">
+        <img id="heroImgNext" src="" alt="" width="960" height="641" class="hero-img-out">
         <div class="hero-overlay">
             <div class="hero-title" id="heroTitle">🇺🇸 Viagem EUA 2027</div>
             <div class="hero-subtitle" id="heroSub">21 Jan — 22 Feb • 34 dias</div>
@@ -2467,7 +2491,16 @@ function showDay(n) {
     var prev = currentDay;
     currentDay = n;
 
-    document.querySelectorAll('.day-slide').forEach(function(s) { s.classList.remove('active'); s.style.display = 'none'; });
+    // Animate outgoing day slide
+    var outgoing = document.querySelector('.day-slide.active');
+    if (outgoing && outgoing.id !== 'ds-' + n) {
+        var outAnim = n > prev ? 'slideOut' : 'slideOutRight';
+        outgoing.style.animation = outAnim + ' 0.2s ease forwards';
+        outgoing.classList.remove('active');
+        setTimeout(function() { outgoing.style.display = 'none'; outgoing.style.animation = ''; }, 200);
+    } else {
+        document.querySelectorAll('.day-slide').forEach(function(s) { s.classList.remove('active'); s.style.display = 'none'; });
+    }
     document.querySelectorAll('.day-pill').forEach(function(b) { b.classList.remove('active'); });
     // Sync sidebar
     document.querySelectorAll('.sidebar-item').forEach(function(s) { s.classList.remove('active'); });
@@ -2511,8 +2544,24 @@ function showDay(n) {
         }, 0);
     }
 
-    document.getElementById('heroImg').src = dayPhotos[n] || dayPhotos[1];
-    document.getElementById('heroImg').alt = getTitle(days[n-1]) || 'Foto do dia';
+    // Hero crossfade
+    var heroA = document.getElementById('heroImg');
+    var heroB = document.getElementById('heroImgNext');
+    var newSrc = dayPhotos[n] || dayPhotos[1];
+    if (heroA.src !== newSrc && !heroA.src.endsWith(newSrc)) {
+        heroB.src = newSrc;
+        heroB.alt = getTitle(days[n-1]) || 'Foto do dia';
+        heroB.onload = function() {
+            heroB.classList.remove('hero-img-out');
+            heroA.classList.add('hero-img-out');
+            setTimeout(function() {
+                heroA.src = newSrc;
+                heroA.alt = heroB.alt;
+                heroA.classList.remove('hero-img-out');
+                heroB.classList.add('hero-img-out');
+            }, 520);
+        };
+    }
     // Preload adjacent hero images
     if (dayPhotos[n+1]) { var pre = new Image(); pre.src = dayPhotos[n+1]; }
     if (dayPhotos[n-1]) { var pre2 = new Image(); pre2.src = dayPhotos[n-1]; }
@@ -2533,12 +2582,26 @@ function showDay(n) {
 // ==================== TAB SWITCHING ====================
 function switchTab(tab, e) {
     document.querySelectorAll('.tab-item').forEach(function(t) { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
-    document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
     if (e && e.currentTarget) {
         e.currentTarget.classList.add('active');
         e.currentTarget.setAttribute('aria-selected', 'true');
     }
-    document.getElementById('sec-' + tab).classList.add('active');
+    // Fade out current, fade in next
+    var current = document.querySelector('.section.active');
+    var next = document.getElementById('sec-' + tab);
+    if (current && current !== next) {
+        current.classList.remove('active');
+        next.classList.add('section-entering');
+        requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+                next.classList.remove('section-entering');
+                next.classList.add('active');
+            });
+        });
+    } else if (next) {
+        document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+        next.classList.add('active');
+    }
 
     if (tab === 'map' && !mapInstance) setTimeout(initMap, 100);
     if (tab === 'map' && mapInstance) setTimeout(function() { mapInstance.invalidateSize(); mapUpdateDay(currentDay, false); }, 100);
@@ -2653,73 +2716,75 @@ var mapScrubDay = 1;
 // Day → coordinate mapping for fly-to
 var dayCoords = {
     1:[40.7580,-73.9855], 2:[40.7580,-73.9855], 3:[40.7580,-73.9855], 4:[40.7580,-73.9855],
-    5:[33.9425,-118.4081], 6:[36.4519,-118.9054], 7:[37.8651,-119.5383], 8:[37.8651,-119.5383],
-    9:[37.8651,-119.5383], 10:[37.7749,-122.4194], 11:[37.7749,-122.4194],
-    12:[39.1502,-123.2078], 13:[41.7558,-124.2026], 14:[42.4074,-124.4218],
-    15:[44.9581,-124.0159], 16:[45.8918,-123.9615], 17:[47.9504,-124.3855],
-    18:[47.9504,-124.3855], 19:[46.8523,-121.7603], 20:[43.6150,-116.2023],
-    21:[40.7608,-111.8910], 22:[38.5733,-109.5498], 23:[38.5733,-109.5498],
-    24:[38.5733,-109.5498], 25:[37.6283,-112.1677], 26:[37.2090,-112.9871],
-    27:[36.0544,-112.1401], 28:[36.1699,-115.1398], 29:[36.1699,-115.1398],
-    30:[36.1699,-115.1398], 31:[34.9876,-118.9148], 32:[34.0522,-118.2437],
+    5:[36.1699,-115.1398], 6:[36.1699,-115.1398], 7:[36.1699,-115.1398], 8:[36.1699,-115.1398],
+    9:[37.2090,-112.9871], 10:[37.2090,-112.9871], 11:[37.6283,-112.1677],
+    12:[38.5733,-109.5498], 13:[38.5733,-109.5498], 14:[38.5733,-109.5498],
+    15:[40.7608,-111.8910], 16:[43.6150,-116.2023], 17:[46.7218,-122.9542],
+    18:[47.9504,-124.3855], 19:[47.9504,-124.3855], 20:[45.8918,-123.9615],
+    21:[42.4074,-124.4218], 22:[41.7558,-124.2026], 23:[40.8021,-124.1637],
+    24:[37.7749,-122.4194], 25:[37.7749,-122.4194], 26:[37.4849,-119.9663],
+    27:[37.8651,-119.5383], 28:[37.8651,-119.5383], 29:[36.4519,-118.9054],
+    30:[36.4519,-118.9054], 31:[34.0522,-118.2437], 32:[34.0522,-118.2437],
     33:[34.0522,-118.2437]
 };
 
 // Route split by day index (cumulative coordinates for progress)
 var routeCoords = [
-    [33.9425,-118.4081],[34.9876,-118.9148],[36.4519,-118.9054],
-    [37.8651,-119.5383],[37.7974,-121.2262],[37.7749,-122.4194],
-    [38.0682,-122.8838],[39.1502,-123.2078],[40.8021,-124.1637],
-    [41.4013,-124.0653],[41.7558,-124.2026],[42.1542,-124.3486],
-    [42.4074,-124.4218],[43.3665,-124.2179],[44.2780,-124.1135],
-    [44.9581,-124.0159],[45.8918,-123.9615],[46.1879,-123.8313],
-    [46.9754,-123.8157],[47.9504,-124.3855],
-    [46.8523,-121.7603],[45.5231,-122.6765],[45.5762,-122.1158],
-    [45.5946,-121.1787],[45.6721,-118.7886],[44.7749,-117.8344],
-    [43.6150,-116.2023],[42.5558,-114.4614],[40.7608,-111.8910],
-    [41.0650,-112.2462],[40.7608,-111.8910],[39.5994,-110.8107],
+    [33.9425,-118.4081],[35.0527,-117.0676],[36.1699,-115.1398],
+    [35.2053,-114.0530],[36.0544,-112.1401],[37.0215,-112.5263],
+    [37.2090,-112.9871],[37.6283,-112.1677],[38.9340,-111.8600],
     [38.9953,-110.1593],[38.5733,-109.5498],[38.9953,-110.1593],
-    [38.9340,-111.8600],[37.6283,-112.1677],[37.2090,-112.9871],
-    [37.0215,-112.5263],[36.0544,-112.1401],[35.2053,-114.0530],
-    [36.1699,-115.1398],[35.0527,-117.0676],[34.0522,-118.2437]
+    [39.5994,-110.8107],[40.7608,-111.8910],[41.0650,-112.2462],
+    [40.7608,-111.8910],[42.5558,-114.4614],[43.6150,-116.2023],
+    [44.7749,-117.8344],[45.6721,-118.7886],[45.5946,-121.1787],
+    [45.5762,-122.1158],[46.7218,-122.9542],[46.8523,-121.7603],
+    [47.0379,-122.9007],[47.9504,-124.3855],[46.9754,-123.8157],
+    [46.1879,-123.8313],[45.8918,-123.9615],[44.9581,-124.0159],
+    [43.3665,-124.2179],[42.4074,-124.4218],[41.7558,-124.2026],
+    [40.8021,-124.1637],[39.1502,-123.2078],[38.0682,-122.8838],
+    [37.7749,-122.4194],[37.4636,-122.4286],[36.6002,-121.8947],
+    [36.2704,-121.8081],[36.6002,-121.8947],[37.3022,-120.4830],
+    [37.4849,-119.9663],[37.8651,-119.5383],[37.3268,-119.6487],
+    [36.3302,-119.2921],[36.4519,-118.9054],[34.9876,-118.9148],
+    [34.0522,-118.2437]
 ];
 
 // Day index → route coord index (approximate)
 var dayRouteIdx = {
-    1:0,2:0,3:0,4:0,5:0,6:2,7:3,8:3,9:3,10:5,11:5,12:5,13:7,14:10,
-    15:13,16:16,17:16,18:19,19:21,20:26,21:28,22:33,23:33,24:33,
-    25:36,26:37,27:37,28:41,29:41,30:41,31:41,32:43,33:43
+    1:0,2:0,3:0,4:0,5:0,6:2,7:2,8:2,9:2,10:6,11:6,12:7,13:10,14:10,
+    15:10,16:15,17:17,18:22,19:25,20:25,21:28,22:31,23:32,24:33,
+    25:36,26:36,27:42,28:43,29:43,30:46,31:46,32:48,33:48
 };
 
 // Route coordinates per day for day-route highlighting
 var dayRouteSegments = {
-    5: [[33.9425,-118.4081],[34.9876,-118.9148],[36.4519,-118.9054]],
-    6: [[36.4519,-118.9054]],
-    7: [[36.4519,-118.9054],[37.8651,-119.5383]],
-    8: [[37.8651,-119.5383]],
-    9: [[37.8651,-119.5383],[37.7974,-121.2262],[37.7749,-122.4194]],
-    10: [[37.7749,-122.4194]],
-    11: [[37.7749,-122.4194]],
-    12: [[37.7749,-122.4194],[38.0682,-122.8838],[39.1502,-123.2078]],
-    13: [[39.1502,-123.2078],[40.8021,-124.1637],[41.4013,-124.0653],[41.7558,-124.2026]],
-    14: [[41.7558,-124.2026],[42.1542,-124.3486],[42.4074,-124.4218],[43.3665,-124.2179]],
-    15: [[43.3665,-124.2179],[44.2780,-124.1135],[44.9581,-124.0159]],
-    16: [[44.9581,-124.0159],[45.8918,-123.9615]],
-    17: [[45.8918,-123.9615],[46.1879,-123.8313],[46.9754,-123.8157],[47.9504,-124.3855]],
-    18: [[47.9504,-124.3855],[46.8523,-121.7603],[45.5231,-122.6765]],
-    19: [[45.5231,-122.6765],[45.5762,-122.1158],[45.5946,-121.1787],[45.6721,-118.7886],[44.7749,-117.8344],[43.6150,-116.2023]],
-    20: [[43.6150,-116.2023],[42.5558,-114.4614],[40.7608,-111.8910]],
-    21: [[40.7608,-111.8910],[39.5994,-110.8107],[38.9953,-110.1593],[38.5733,-109.5498]],
-    22: [[38.5733,-109.5498]],
-    23: [[38.5733,-109.5498]],
-    24: [[38.5733,-109.5498],[38.9953,-110.1593],[38.9340,-111.8600],[37.6283,-112.1677]],
-    25: [[37.6283,-112.1677],[37.2090,-112.9871]],
-    26: [[37.2090,-112.9871]],
-    27: [[37.2090,-112.9871],[37.0215,-112.5263],[36.0544,-112.1401],[35.2053,-114.0530],[36.1699,-115.1398]],
-    28: [[36.1699,-115.1398]],
-    29: [[36.1699,-115.1398]],
-    30: [[36.1699,-115.1398],[36.5054,-116.9325],[36.1699,-115.1398]],
-    31: [[36.1699,-115.1398],[35.0527,-117.0676],[34.0522,-118.2437]],
+    5: [[33.9425,-118.4081],[35.0527,-117.0676],[36.1699,-115.1398]],
+    6: [[36.1699,-115.1398]],
+    7: [[36.1699,-115.1398]],
+    8: [[36.1699,-115.1398]],
+    9: [[36.1699,-115.1398],[35.2053,-114.0530],[36.0544,-112.1401],[37.0215,-112.5263],[37.2090,-112.9871]],
+    10: [[37.2090,-112.9871]],
+    11: [[37.2090,-112.9871],[37.6283,-112.1677]],
+    12: [[37.6283,-112.1677],[38.9340,-111.8600],[38.9953,-110.1593],[38.5733,-109.5498]],
+    13: [[38.5733,-109.5498]],
+    14: [[38.5733,-109.5498]],
+    15: [[38.5733,-109.5498],[38.9953,-110.1593],[39.5994,-110.8107],[40.7608,-111.8910],[41.0650,-112.2462],[40.7608,-111.8910]],
+    16: [[40.7608,-111.8910],[42.5558,-114.4614],[43.6150,-116.2023]],
+    17: [[43.6150,-116.2023],[44.7749,-117.8344],[45.6721,-118.7886],[45.5946,-121.1787],[45.5762,-122.1158],[46.7218,-122.9542]],
+    18: [[46.7218,-122.9542],[46.8523,-121.7603],[47.0379,-122.9007],[47.9504,-124.3855]],
+    19: [[47.9504,-124.3855]],
+    20: [[47.9504,-124.3855],[46.9754,-123.8157],[46.1879,-123.8313],[45.8918,-123.9615]],
+    21: [[45.8918,-123.9615],[44.9581,-124.0159],[43.3665,-124.2179],[42.4074,-124.4218]],
+    22: [[42.4074,-124.4218],[41.7558,-124.2026]],
+    23: [[41.7558,-124.2026],[40.8021,-124.1637]],
+    24: [[40.8021,-124.1637],[39.1502,-123.2078],[38.0682,-122.8838],[37.7749,-122.4194]],
+    25: [[37.7749,-122.4194]],
+    26: [[37.7749,-122.4194],[37.4636,-122.4286],[36.6002,-121.8947],[36.2704,-121.8081],[36.6002,-121.8947],[37.3022,-120.4830],[37.4849,-119.9663]],
+    27: [[37.4849,-119.9663],[37.8651,-119.5383]],
+    28: [[37.8651,-119.5383]],
+    29: [[37.8651,-119.5383],[37.3268,-119.6487],[36.3302,-119.2921],[36.4519,-118.9054]],
+    30: [[36.4519,-118.9054]],
+    31: [[36.4519,-118.9054],[34.9876,-118.9148],[34.0522,-118.2437]],
     32: [[34.0522,-118.2437]],
     33: [[34.0522,-118.2437]]
 };
@@ -2730,33 +2795,33 @@ var dayStats = {
     2: { km: '—', drive: '', hotel: 'Marriott Marquis' },
     3: { km: '—', drive: '', hotel: 'Marriott Marquis' },
     4: { km: '—', drive: '', hotel: 'Marriott Marquis' },
-    5: { km: '~300', drive: 'LAX → Sequoia', hotel: 'Three Rivers' },
-    6: { km: '~30', drive: 'Sequoia NP', hotel: 'Three Rivers' },
-    7: { km: '~200', drive: 'Sequoia → Yosemite', hotel: 'Yosemite' },
-    8: { km: '~50', drive: 'Yosemite NP', hotel: 'Yosemite' },
-    9: { km: '~270', drive: 'Yosemite → SF', hotel: 'San Francisco' },
-    10: { km: '~30', drive: 'San Francisco', hotel: 'San Francisco' },
-    11: { km: '~30', drive: 'San Francisco', hotel: 'San Francisco' },
-    12: { km: '~350', drive: 'SF → Eureka', hotel: 'Eureka' },
-    13: { km: '~200', drive: 'Eureka → Redwood', hotel: 'Crescent City' },
-    14: { km: '~320', drive: 'Crescent City → Oregon', hotel: 'Coos Bay' },
-    15: { km: '~250', drive: 'Oregon Coast', hotel: 'Cannon Beach' },
-    16: { km: '~300', drive: 'Cannon Beach → Forks', hotel: 'Forks' },
-    17: { km: '~100', drive: 'Olympic NP', hotel: 'Forks' },
-    18: { km: '~610', drive: 'Forks → Rainier → Portland', hotel: 'Portland' },
-    19: { km: '~530', drive: 'Portland → Boise', hotel: 'Boise' },
-    20: { km: '~500', drive: 'Boise → SLC', hotel: 'Salt Lake City' },
-    21: { km: '~380', drive: 'SLC → Moab', hotel: 'Moab' },
-    22: { km: '~80', drive: 'Canyonlands', hotel: 'Moab' },
-    23: { km: '~50', drive: 'Arches NP', hotel: 'Moab' },
-    24: { km: '~400', drive: 'Moab → Bryce', hotel: 'Bryce Canyon' },
-    25: { km: '~130', drive: 'Bryce → Zion', hotel: 'Springdale' },
-    26: { km: '~30', drive: 'Zion NP', hotel: 'Springdale' },
-    27: { km: '~700', drive: 'Zion → GC → Vegas', hotel: 'Sahara, Vegas' },
-    28: { km: '~50', drive: 'Vegas livre', hotel: 'Sahara, Vegas' },
-    29: { km: '~60', drive: 'Valley of Fire + Area 15', hotel: 'Sahara, Vegas' },
-    30: { km: '~350', drive: 'Death Valley', hotel: 'Sahara, Vegas' },
-    31: { km: '~430', drive: 'Vegas → LA', hotel: 'Los Angeles' },
+    5: { km: '~430', drive: 'LAX → Vegas', hotel: 'Las Vegas' },
+    6: { km: '~110', drive: 'Mt. Charleston', hotel: 'Las Vegas' },
+    7: { km: '~100', drive: 'Valley of Fire', hotel: 'Las Vegas' },
+    8: { km: '~380', drive: 'Death Valley', hotel: 'Las Vegas' },
+    9: { km: '~700', drive: 'Vegas → GC → Zion', hotel: 'Springdale' },
+    10: { km: '~30', drive: 'Zion NP', hotel: 'Springdale' },
+    11: { km: '~130', drive: 'Zion → Bryce', hotel: 'Bryce Canyon' },
+    12: { km: '~430', drive: 'Bryce → Moab', hotel: 'Moab' },
+    13: { km: '~80', drive: 'Canyonlands', hotel: 'Moab' },
+    14: { km: '~50', drive: 'Arches NP', hotel: 'Moab' },
+    15: { km: '~380', drive: 'Moab → SLC', hotel: 'Salt Lake City' },
+    16: { km: '~490', drive: 'SLC → Boise', hotel: 'Boise' },
+    17: { km: '~670', drive: 'Boise → Centralia', hotel: 'Centralia' },
+    18: { km: '~500', drive: 'Centralia → Rainier → Forks', hotel: 'Forks' },
+    19: { km: '~100', drive: 'Olympic NP', hotel: 'Forks' },
+    20: { km: '~380', drive: 'Forks → Cannon Beach', hotel: 'Cannon Beach' },
+    21: { km: '~350', drive: 'Costa Oregon', hotel: 'Gold Beach' },
+    22: { km: '~160', drive: 'Redwood NP', hotel: 'Crescent City' },
+    23: { km: '~130', drive: 'Crescent City → Eureka', hotel: 'Eureka' },
+    24: { km: '~440', drive: 'Eureka → SF', hotel: 'San Francisco' },
+    25: { km: '~30', drive: 'San Francisco', hotel: 'San Francisco' },
+    26: { km: '~530', drive: 'SF → PCH → Mariposa', hotel: 'Mariposa' },
+    27: { km: '~55', drive: 'Mariposa → Yosemite', hotel: 'Yosemite' },
+    28: { km: '~30', drive: 'Yosemite NP', hotel: 'Yosemite' },
+    29: { km: '~200', drive: 'Yosemite → Three Rivers', hotel: 'Three Rivers' },
+    30: { km: '~100', drive: 'Sequoia NP', hotel: 'Three Rivers' },
+    31: { km: '~300', drive: 'Three Rivers → LA', hotel: 'Los Angeles' },
     32: { km: '~80', drive: 'LA: Malibu, Venice', hotel: 'Los Angeles' },
     33: { km: '~30', drive: 'LAX → voo', hotel: '✈️ Volta!' }
 };
@@ -2787,9 +2852,9 @@ function doInitMap() {
 
     // ---- DAY TRIPS LAYER ----
     var dayTrips = [
+        [[36.1699,-115.1398],[36.2716,-115.6956]],
         [[36.1699,-115.1398],[36.4394,-114.5131]],
-        [[36.1699,-115.1398],[36.5054,-116.9325]],
-        [[36.1699,-115.1398],[36.1357,-115.4279]]
+        [[36.1699,-115.1398],[36.5054,-116.9325]]
     ];
     mapLayers.daytrips = L.layerGroup();
     dayTrips.forEach(function(p) { L.polyline(p, { color: '#ffd700', weight: 2.5, dashArray: '6,6', opacity: 0.7 }).addTo(mapLayers.daytrips); });
@@ -2798,21 +2863,20 @@ function doInitMap() {
     // ---- STOPS LAYER (with photo markers) ----
     var stops = [
         { n: "New York", lat: 40.7580, lng: -73.9855, i: "✈️", info: "Dias 1–4 • 4 noites\nMarriott Marquis, Times Square", days: [1,2,3,4], photo: 1 },
-        { n: "Los Angeles (LAX)", lat: 33.9425, lng: -118.4081, i: "✈️", info: "Dia 5 • Retirada Tesla", days: [5], photo: 5 },
-        { n: "Sequoia NP", lat: 36.4519, lng: -118.9054, i: "🌲", info: "Dias 6–7 • General Sherman Tree", days: [6,7], photo: 6 },
-        { n: "Yosemite NP", lat: 37.8651, lng: -119.5383, i: "🏞️", info: "Dias 7–9 • Half Dome, El Capitan", days: [7,8,9], photo: 8 },
-        { n: "San Francisco", lat: 37.7749, lng: -122.4194, i: "🌉", info: "Dias 10–11 • Golden Gate", days: [10,11], photo: 10 },
-        { n: "Redwood NP", lat: 41.7558, lng: -124.2026, i: "🦕", info: "Dia 13 • Fern Canyon", days: [13], photo: 13 },
-        { n: "Cannon Beach", lat: 45.8918, lng: -123.9615, i: "🌅", info: "Dia 16 • Haystack Rock", days: [16], photo: 16 },
-        { n: "Olympic NP", lat: 47.9504, lng: -124.3855, i: "🧛", info: "Dias 16–17 • Hoh, Ruby Beach", days: [16,17], photo: 17 },
+        { n: "Las Vegas", lat: 36.1699, lng: -115.1398, i: "🎰", info: "Dias 5–8 • 4 noites", days: [5,6,7,8], photo: 6 },
+        { n: "Grand Canyon", lat: 36.0544, lng: -112.1401, i: "🏞️", info: "Dia 9 • Mather Point", days: [9], photo: 9 },
+        { n: "Zion NP", lat: 37.2090, lng: -112.9871, i: "🏞️", info: "Dias 9–10 • Watchman Trail", days: [9,10], photo: 10 },
+        { n: "Bryce Canyon", lat: 37.6283, lng: -112.1677, i: "🏔️", info: "Dias 11–12 • Hoodoos + stargazing", days: [11,12], photo: 11 },
+        { n: "Moab, UT", lat: 38.5733, lng: -109.5498, i: "🏜️", info: "Dias 12–14 • Arches, Canyonlands", days: [12,13,14], photo: 13 },
+        { n: "Salt Lake City", lat: 40.7608, lng: -111.8910, i: "🏙️", info: "Dia 15 • Antelope Island", days: [15], photo: 15 },
+        { n: "Boise, ID", lat: 43.6150, lng: -116.2023, i: "🏙️", info: "Dia 16 • Basque Block", days: [16], photo: 16 },
         { n: "Mt. Rainier NP", lat: 46.8523, lng: -121.7603, i: "🌋", info: "Dia 18 • Paradise (no caminho)", days: [18], photo: 18 },
-        { n: "Portland, OR", lat: 45.5231, lng: -122.6765, i: "🍩", info: "Dia 18 • Voodoo Doughnut, Powell's", days: [18], photo: 18 },
-        { n: "Boise, ID", lat: 43.6150, lng: -116.2023, i: "🏙️", info: "Dia 19 • Basque Block", days: [19], photo: 19 },
-        { n: "Moab, UT", lat: 38.5733, lng: -109.5498, i: "🏜️", info: "Dias 22–24 • Arches, Canyonlands", days: [22,23,24], photo: 22 },
-        { n: "Bryce Canyon", lat: 37.6283, lng: -112.1677, i: "🏔️", info: "Dia 25 • Hoodoos + stargazing", days: [25], photo: 25 },
-        { n: "Zion NP", lat: 37.2090, lng: -112.9871, i: "🏞️", info: "Dias 25–26 • Angels Landing", days: [25,26], photo: 26 },
-        { n: "Grand Canyon", lat: 36.0544, lng: -112.1401, i: "🏞️", info: "Dia 27 • Mather Point, pôr do sol", days: [27], photo: 27 },
-        { n: "Las Vegas", lat: 36.1699, lng: -115.1398, i: "🎰", info: "Dias 27–30 • Sahara, 4 noites", days: [27,28,29,30], photo: 28 },
+        { n: "Olympic NP", lat: 47.9504, lng: -124.3855, i: "🧛", info: "Dias 18–19 • Hoh, Ruby Beach", days: [18,19], photo: 19 },
+        { n: "Cannon Beach", lat: 45.8918, lng: -123.9615, i: "🌅", info: "Dia 20 • Haystack Rock", days: [20], photo: 20 },
+        { n: "Redwood NP", lat: 41.7558, lng: -124.2026, i: "🦕", info: "Dia 22 • Fern Canyon", days: [22], photo: 22 },
+        { n: "San Francisco", lat: 37.7749, lng: -122.4194, i: "🌉", info: "Dias 24–25 • Golden Gate", days: [24,25], photo: 25 },
+        { n: "Yosemite NP", lat: 37.8651, lng: -119.5383, i: "🏞️", info: "Dias 27–28 • Half Dome, El Capitan", days: [27,28], photo: 27 },
+        { n: "Sequoia NP", lat: 36.4519, lng: -118.9054, i: "🌲", info: "Dia 30 • General Sherman Tree", days: [30], photo: 30 },
         { n: "Los Angeles, CA", lat: 34.0522, lng: -118.2437, i: "🎬", info: "Dias 31–33 • Griffith, Venice", days: [31,32,33], photo: 32 }
     ];
 
@@ -2848,15 +2912,17 @@ function doInitMap() {
 
     // ---- SUPERCHARGER LAYER ----
     var scCoords = {
-        "Tejon / Lebec, CA": [34.9876,-118.9148], "Manteca / Oakdale, CA": [37.7974,-121.2262],
-        "Ukiah, CA": [39.1502,-123.2078], "Coos Bay, OR": [43.3665,-124.2179],
-        "Lincoln City, OR": [44.9581,-124.0159], "Aberdeen, WA": [46.9754,-123.8157],
-        "Olympia / Centralia, WA": [47.0379,-122.9007], "The Dalles, OR": [45.5946,-121.1787],
-        "Pendleton, OR": [45.6721,-118.7886], "Baker City, OR": [44.7749,-117.8344],
-        "Twin Falls, ID": [42.5558,-114.4614], "Salt Lake City, UT": [40.7608,-111.8910],
-        "Price, UT": [39.5994,-110.8107], "Green River, UT": [38.9953,-110.1593],
-        "Salina, UT": [38.9340,-111.8600], "Kanab, UT": [37.0215,-112.5263],
-        "Kingman, AZ": [35.2053,-114.0530], "Barstow, CA": [35.0527,-117.0676]
+        "Barstow, CA": [35.0527,-117.0676], "Kingman, AZ": [35.2053,-114.0530],
+        "Kanab, UT": [37.0215,-112.5263], "Salina, UT": [38.9340,-111.8600],
+        "Green River, UT": [38.9953,-110.1593], "Price, UT": [39.5994,-110.8107],
+        "Twin Falls, ID": [42.5558,-114.4614], "Baker City, OR": [44.7749,-117.8344],
+        "Pendleton, OR": [45.6721,-118.7886], "The Dalles, OR": [45.5946,-121.1787],
+        "Centralia, WA": [46.7218,-122.9542], "Olympia / Centralia, WA": [47.0379,-122.9007],
+        "Aberdeen, WA": [46.9754,-123.8157], "Lincoln City, OR": [44.9581,-124.0159],
+        "Coos Bay, OR": [43.3665,-124.2179], "Eureka, CA": [40.8021,-124.1637],
+        "Ukiah, CA": [39.1502,-123.2078], "Monterey / Salinas, CA": [36.6780,-121.6555],
+        "Merced, CA": [37.3022,-120.4830], "Oakhurst, CA": [37.3268,-119.6487],
+        "Visalia, CA": [36.3302,-119.2921], "Tejon / Lebec, CA": [34.9876,-118.9148]
     };
     mapLayers.sc = L.layerGroup();
     superchargers.forEach(function(sc) {
@@ -2892,7 +2958,7 @@ function doInitMap() {
             '<div class="legend-item"><div class="legend-line" style="background:#0a84ff;height:4px"></div><span>Trecho do dia</span></div>' +
             '<div class="legend-item"><div class="legend-line" style="background:#ffd700;border-style:dashed"></div><span>Day trips (Vegas)</span></div>' +
             '<div class="legend-item"><div style="font-size:11px;background:#00c853;border-radius:50%;width:14px;height:14px;display:flex;align-items:center;justify-content:center;border:1.5px solid #fff">⚡</div><span>Superchargers</span></div>' +
-            '<br><div style="color:#888;font-size:10px">📅 21/01 → 22/02/2027<br>🚗 ~6.500 km • 🔄 Anti-horário</div>' +
+            '<br><div style="color:#888;font-size:10px">📅 21/01 → 22/02/2027<br>🚗 ~6.500 km • 🔄 Sentido horário</div>' +
             '</div>';
         L.DomEvent.disableClickPropagation(div);
         return div;
@@ -3672,9 +3738,9 @@ function filterExplore(filter, btn) {
 
 window.addEventListener('scroll', function() {
     if (!document.getElementById('sec-home').classList.contains('active')) return;
-    var heroImg = document.querySelector('.hero img');
-    if (heroImg && window.scrollY < 400) {
-        heroImg.style.transform = 'translateY(' + (window.scrollY * 0.3) + 'px) scale(1.05)';
+    if (window.scrollY < 400) {
+        var t = 'translateY(' + (window.scrollY * 0.3) + 'px) scale(1.05)';
+        document.querySelectorAll('.hero img').forEach(function(img) { img.style.transform = t; });
     }
 }, { passive: true });
 
