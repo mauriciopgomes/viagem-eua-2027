@@ -3973,8 +3973,10 @@ var SyncEngine = {
         self.debounceTimer = setTimeout(function() { self.push(); }, 3000);
     },
 
+    pushRetries: 0,
+
     push: async function() {
-        if (!this.url || !navigator.onLine || this.syncing || this.queue.length === 0) return;
+        if (!this.url || this.syncing || this.queue.length === 0) return;
         this.syncing = true;
         this.updateUI('syncing');
         // Snapshot current queue — items added during push will remain
@@ -4003,9 +4005,17 @@ var SyncEngine = {
             localStorage.setItem('syncQueue', JSON.stringify(this.queue));
             if (result && result.data) this.mergeRemote(result.data);
             this.updateUI('synced');
+            this.pushRetries = 0;
         } catch(e) {
             console.warn('Sync push failed:', e);
             this.updateUI('error');
+            // Retry with exponential backoff (3s, 6s, 12s, max 30s)
+            this.pushRetries = Math.min((this.pushRetries || 0) + 1, 5);
+            var delay = Math.min(3000 * Math.pow(2, this.pushRetries - 1), 30000);
+            var self = this;
+            this.syncing = false;
+            setTimeout(function() { self.push(); }, delay);
+            return;
         }
         this.syncing = false;
         // If new items were added during push, trigger another push
@@ -4016,8 +4026,12 @@ var SyncEngine = {
     },
 
     pull: async function() {
-        if (!this.url || !navigator.onLine) return;
-        if (this.syncing) return;
+        if (!this.url || this.syncing) return;
+        // Drain pending queue before pulling
+        if (this.queue.length > 0) {
+            await this.push();
+            return; // push already pulls after sending
+        }
         this.syncing = true;
         this.updateUI('syncing');
         try {
