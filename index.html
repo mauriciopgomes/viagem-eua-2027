@@ -3969,9 +3969,12 @@ var SyncEngine = {
         if (!this.url || !navigator.onLine || this.syncing || this.queue.length === 0) return;
         this.syncing = true;
         this.updateUI('syncing');
+        // Snapshot current queue — items added during push will remain
+        var snapshotLen = this.queue.length;
+        var snapshot = this.queue.slice(0, snapshotLen);
         // Deduplicate: keep only latest per key
         var latest = {};
-        this.queue.forEach(function(e) {
+        snapshot.forEach(function(e) {
             if (!latest[e.key] || e.ts > latest[e.key].ts) latest[e.key] = e;
         });
         var changes = Object.values(latest);
@@ -3987,8 +3990,9 @@ var SyncEngine = {
             // Pull final state after all batches
             var pullResp = await fetch(this.url);
             var result = await pullResp.json();
-            this.queue = [];
-            localStorage.setItem('syncQueue', '[]');
+            // Remove only sent items, keep any added during push
+            this.queue.splice(0, snapshotLen);
+            localStorage.setItem('syncQueue', JSON.stringify(this.queue));
             if (result && result.data) this.mergeRemote(result.data);
             this.updateUI('synced');
         } catch(e) {
@@ -3996,6 +4000,11 @@ var SyncEngine = {
             this.updateUI('error');
         }
         this.syncing = false;
+        // If new items were added during push, trigger another push
+        if (this.queue.length > 0) {
+            var self = this;
+            setTimeout(function() { self.push(); }, 1000);
+        }
     },
 
     pull: async function() {
