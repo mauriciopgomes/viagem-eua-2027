@@ -4154,10 +4154,10 @@ if (SyncEngine.url) setTimeout(function() {
     }
 }, 5000);
 
-// Poll for remote changes every 2 minutes
+// Poll for remote changes every 30 seconds
 if (SyncEngine.url) setInterval(function() {
     if (navigator.onLine && !SyncEngine.syncing) SyncEngine.pull();
-}, 120000);
+}, 30000);
 
 // Pull when tab/app regains focus (user switches back)
 document.addEventListener('visibilitychange', function() {
