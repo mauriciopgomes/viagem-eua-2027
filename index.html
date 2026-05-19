@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="Roteiro interativo — 34 dias de road trip pelos EUA de Tesla">
+    <meta name="description" content="Roteiro interativo — 33 dias de road trip pelos EUA de Tesla">
     <title>EUA 2027</title>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#050508">
@@ -1504,17 +1504,17 @@
         <img id="heroImgNext" src="" alt="" width="960" height="641" class="hero-img-out">
         <div class="hero-overlay">
             <div class="hero-title" id="heroTitle">🇺🇸 Viagem EUA 2027</div>
-            <div class="hero-subtitle" id="heroSub">21 Jan — 22 Feb • 34 dias</div>
+            <div class="hero-subtitle" id="heroSub">21 Jan — 22 Feb • 33 dias</div>
             <div class="hero-badges">
                 <span class="hero-badge">👨‍👩‍👧 <b>3</b></span>
                 <span class="hero-badge">🚗 <b>~6.500 km</b></span>
-                <span class="hero-badge">🏞️ <b>12</b> Parks</span>
-                <span class="hero-badge">⚡ <b>18</b> SC</span>
+                <span class="hero-badge">🏞️ <b>11</b> Parks</span>
+                <span class="hero-badge">⚡ <b>23</b> SC</span>
             </div>
             <div class="hero-progress">
                 <div class="hero-progress-fill" id="heroProgress" style="width:2.94%"></div>
             </div>
-            <div class="hero-progress-label" id="heroProgressLabel">Dia 1 de 34</div>
+            <div class="hero-progress-label" id="heroProgressLabel">Dia 1 de 33</div>
         </div>
     </div>
 
@@ -2149,8 +2149,8 @@ const placeInfo = {
     'Rialto Beach': { addr: 'Rialto Beach, Olympic NP, WA', coords: '47.9210,-124.6376', detail: 'Praia com pilhas de troncos (driftwood) e sea stacks. Hole-in-the-Wall arch fica a ~2.5 km pela praia. Cenário dramático!', cost: 'Incluso' },
     'Marymere Falls': { addr: 'Marymere Falls Trail, Olympic NP, WA', coords: '48.0571,-123.7982', detail: 'Cachoeira de 27m numa floresta antiga. Trilha de ~2.5 km fácil. Perto de Lake Crescent.', cost: 'Incluso' },
 
-    // Day 19 — Mt. Rainier / Portland
-    'Supercharger Olympia': { addr: 'Olympia/Centralia, WA', coords: '47.0379,-122.9007', detail: 'Supercharger Tesla V3. ⚠️ CARREGAR ATÉ 90-100%! Trecho até Portland inclui subida ao Rainier.' },
+    // Day 18 — Centralia → Mt. Rainier → Forks
+    'Supercharger Olympia': { addr: 'Olympia/Centralia, WA', coords: '47.0379,-122.9007', detail: 'Supercharger Tesla V3. ⚠️ CARREGAR ATÉ 90-100%! Trecho longo até Forks sem Supercharger, inclui subida ao Rainier.' },
     'Mt. Rainier': { addr: 'Mt. Rainier National Park — Paradise, WA', coords: '46.7853,-121.7356', detail: 'Vulcão ativo de 4.392m coberto de neve o ano todo! Paradise é o ponto mais acessível — Henry M. Jackson Visitor Center.', hours: 'Paradise: 10h-17h (inverno)', cost: '$30/veículo' },
     'Paradise': { addr: 'Paradise, Mt. Rainier NP, WA 98304', coords: '46.7853,-121.7356', detail: 'Área mais visitada do Mt. Rainier. No inverno: snowshoeing, sledding. Wildflower meadows no verão. Visitor center com café.' },
     'Nisqually Vista Trail': { addr: 'Nisqually Vista Trail, Paradise, Mt. Rainier NP', coords: '46.7860,-121.7370', detail: 'Trilha de ~2 km com vista do Glaciar Nisqually. No inverno é uma caminhada na neve — microspikes recomendados!', cost: 'Incluso' },
@@ -2312,9 +2312,9 @@ const typeLabel = { highlight: '⭐ Destaque', food: '🍽️ Comida', charge: '
 // ==================== RENDER DAY SELECTOR ====================
 function renderDaySelector() {
     const el = document.getElementById('daySelector');
-    const regions = ['ny','ny','ny','ny','ca','ca','ca','ca','ca','ca','ca','ca','ca','ca','pnw','pnw','pnw','pnw','pnw','ut','ut','ut','ut','ut','ut','ut','ut','ut','nv','nv','nv','ca','ca'];
+    const regions = ['ny','ny','ny','ny','nv','nv','nv','nv','ut','ut','ut','ut','ut','ut','ut','pnw','pnw','pnw','pnw','pnw','pnw','ca','ca','ca','ca','ca','ca','ca','ca','ca','ca','ca','ca'];
     let html = '';
-    var shortLocs = {1:'NYC',2:'NYC',3:'NYC',4:'NYC',5:'LAX',6:'Sequoia',7:'Yosemite',8:'Yosemite',9:'SF',10:'SF',11:'SF',12:'Eureka',13:'Redwood',14:'Oregon',15:'Oregon',16:'Forks',17:'Olympic',18:'Rainier',19:'Boise',20:'SLC',21:'Moab',22:'Canyonlands',23:'Arches',24:'Bryce',25:'Zion',26:'Zion',27:'GC+Vegas',28:'Vegas',29:'Vegas',30:'DV',31:'LA',32:'LA',33:'LAX'};
+    var shortLocs = {1:'NYC',2:'NYC',3:'NYC',4:'NYC',5:'Vegas',6:'Vegas',7:'Vegas',8:'Vegas',9:'GC→Zion',10:'Zion',11:'Bryce',12:'Moab',13:'Moab',14:'Moab',15:'SLC',16:'Boise',17:'Centralia',18:'Rainier',19:'Olympic',20:'Cannon',21:'Oregon',22:'Redwood',23:'Eureka',24:'SF',25:'SF',26:'PCH',27:'Yosemite',28:'Yosemite',29:'3 Rivers',30:'Sequoia',31:'LA',32:'LA',33:'LAX'};
     // Trip starts Jan 21 2027
     var tripStart = new Date(2027, 0, 21);
     for (let i = 1; i <= totalDays; i++) {
@@ -3227,13 +3227,13 @@ function latLngToTile(lat, lng, zoom) {
 
 // ==================== INIT ====================
 function getTodayDay() {
-    // Trip dates: Day 1 = Jan 21 2027, Day 34 = Feb 22 2027
+    // Trip dates: Day 1 = Jan 21 2027, Day 33 = Feb 22 2027
     var tripStart = new Date(2027, 0, 21); // Jan 21 2027
     var today = new Date();
     today.setHours(0,0,0,0);
     tripStart.setHours(0,0,0,0);
     var diff = Math.floor((today - tripStart) / 86400000) + 1;
-    if (diff >= 1 && diff <= 34) return diff;
+    if (diff >= 1 && diff <= 33) return diff;
     return 1;
 }
 
@@ -3478,9 +3478,9 @@ function animateCounter(el, target, prefix, suffix, duration) {
 function updateTripStats() {
     var totalChecked = 0, totalItems = 0, kmTraveled = 0;
     var parkDaySets = {
-        'Sequoia': [6], 'Yosemite': [7,8,9], 'Redwood': [13], 'Olympic': [17,18],
-        'Mt. Rainier': [19], 'Canyonlands': [22], 'Arches': [23], 'Bryce Canyon': [24,25],
-        'Zion': [25,26], 'Grand Canyon': [27], 'Death Valley': [30]
+        'Death Valley': [8], 'Grand Canyon': [9], 'Zion': [10,11], 'Bryce Canyon': [11,12],
+        'Canyonlands': [13], 'Arches': [14], 'Mt. Rainier': [18], 'Olympic': [18,19],
+        'Redwood': [22], 'Yosemite': [27,28], 'Sequoia': [30]
     };
     days.forEach(function(d) {
         var dayHasCheck = false;
