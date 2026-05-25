@@ -1,4 +1,4 @@
-const CACHE_NAME = 'viagem-eua-2027-v103';
+const CACHE_NAME = 'viagem-eua-2027-v108';
 const TILE_CACHE = 'viagem-tiles-v1';
 
 // Critical assets — must succeed for install
@@ -6,9 +6,15 @@ const CRITICAL_ASSETS = [
   './',
   './index.html',
   './data.js',
+  './app.js',
+  './styles.css',
   './manifest.json',
   './icons/icon-192.png',
+  './icons/icon-192-maskable.png',
   './icons/icon-512.png',
+  './icons/icon-512-maskable.png',
+  './icons/screenshot-narrow.png',
+  './icons/screenshot-wide.png',
   './lib/leaflet.js',
   './lib/leaflet.css',
   './lib/marker-icon.png',
@@ -22,9 +28,15 @@ const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './data.js',
+  './app.js',
+  './styles.css',
   './manifest.json',
   './icons/icon-192.png',
+  './icons/icon-192-maskable.png',
   './icons/icon-512.png',
+  './icons/icon-512-maskable.png',
+  './icons/screenshot-narrow.png',
+  './icons/screenshot-wide.png',
   // Local libraries
   './lib/leaflet.js',
   './lib/leaflet.css',
@@ -312,14 +324,18 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Activate: clean old caches (preserve tile cache)
+// Activate: clean old caches (preserve tile cache) + enable navigation preload
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keys) => {
-      return Promise.all(
-        keys.filter((key) => key !== CACHE_NAME && key !== TILE_CACHE).map((key) => caches.delete(key))
-      );
-    }).then(() => self.clients.claim())
+    Promise.all([
+      caches.keys().then((keys) => {
+        return Promise.all(
+          keys.filter((key) => key !== CACHE_NAME && key !== TILE_CACHE).map((key) => caches.delete(key))
+        );
+      }),
+      // Enable navigation preload if supported (speeds up network-first navigations)
+      self.registration.navigationPreload && self.registration.navigationPreload.enable()
+    ]).then(() => self.clients.claim())
   );
 });
 
@@ -348,19 +364,21 @@ self.addEventListener('fetch', (event) => {
   // HTML, JS, CSS: network-first (always get latest, fallback to cache)
   if (event.request.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname.endsWith('.js') || url.pathname.endsWith('.css')) {
     event.respondWith(
-      fetch(event.request).then((response) => {
-        if (response.ok && url.origin === self.location.origin) {
-          const cloned = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, cloned);
-          });
-        }
-        return response;
-      }).catch(() => {
-        return caches.match(event.request).then((cached) => {
+      (async () => {
+        try {
+          // Use navigation preload response if available (faster)
+          const preloadResponse = event.preloadResponse && await event.preloadResponse;
+          const response = preloadResponse || await fetch(event.request);
+          if (response.ok && url.origin === self.location.origin) {
+            const cache = await caches.open(CACHE_NAME);
+            cache.put(event.request, response.clone());
+          }
+          return response;
+        } catch (e) {
+          const cached = await caches.match(event.request);
           return cached || caches.match('./index.html');
-        });
-      })
+        }
+      })()
     );
     return;
   }

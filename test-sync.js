@@ -458,21 +458,21 @@ async function runTests() {
 
     // ---- 11. Verificação do código real ----
     test('index.html: SyncEngine não usa navigator.onLine no push', () => {
-        const html = fs.readFileSync('index.html', 'utf8');
+        const html = fs.readFileSync('index.html', 'utf8') + '\n' + fs.readFileSync('app.js', 'utf8');
         const pushMatch = html.match(/push:\s*async\s*function\s*\(\)\s*\{([\s\S]*?)\n    \},/);
         assert(pushMatch, 'should find push function');
         assert(!pushMatch[1].includes('navigator.onLine'), 'push should NOT check navigator.onLine');
     });
 
     test('index.html: SyncEngine não usa navigator.onLine no pull', () => {
-        const html = fs.readFileSync('index.html', 'utf8');
+        const html = fs.readFileSync('index.html', 'utf8') + '\n' + fs.readFileSync('app.js', 'utf8');
         const pullMatch = html.match(/pull:\s*async\s*function\s*\(\)\s*\{([\s\S]*?)\n    \},/);
         assert(pullMatch, 'should find pull function');
         assert(!pullMatch[1].includes('navigator.onLine'), 'pull should NOT check navigator.onLine');
     });
 
     test('index.html: push faz splice em vez de queue=[]', () => {
-        const html = fs.readFileSync('index.html', 'utf8');
+        const html = fs.readFileSync('index.html', 'utf8') + '\n' + fs.readFileSync('app.js', 'utf8');
         const pushCode = html.match(/push:\s*async\s*function[\s\S]*?this\.syncing\s*=\s*false/);
         assert(pushCode, 'should find push function');
         assert(pushCode[0].includes('.splice('), 'push should use splice to remove sent items');
@@ -480,13 +480,13 @@ async function runTests() {
     });
 
     test('index.html: push tem retry com backoff', () => {
-        const html = fs.readFileSync('index.html', 'utf8');
+        const html = fs.readFileSync('index.html', 'utf8') + '\n' + fs.readFileSync('app.js', 'utf8');
         assert(html.includes('pushRetries'), 'should have pushRetries counter');
         assert(html.includes('Math.pow(2,'), 'should use exponential backoff');
     });
 
     test('index.html: pull drena fila pendente', () => {
-        const html = fs.readFileSync('index.html', 'utf8');
+        const html = fs.readFileSync('index.html', 'utf8') + '\n' + fs.readFileSync('app.js', 'utf8');
         const pullMatch = html.match(/pull:\s*async\s*function\s*\(\)\s*\{([\s\S]*?)\n    \},/);
         assert(pullMatch, 'should find pull function');
         assert(pullMatch[1].includes('this.queue.length > 0'), 'pull should check for pending items');
@@ -494,22 +494,22 @@ async function runTests() {
     });
 
     test('index.html: toggleCheck chama SyncEngine.track', () => {
-        const html = fs.readFileSync('index.html', 'utf8');
+        const html = fs.readFileSync('index.html', 'utf8') + '\n' + fs.readFileSync('app.js', 'utf8');
         assert(html.includes("SyncEngine.track('check-'"), 'toggleCheck patch should call SyncEngine.track for checks');
     });
 
     test('index.html: toggleFav chama SyncEngine.track', () => {
-        const html = fs.readFileSync('index.html', 'utf8');
+        const html = fs.readFileSync('index.html', 'utf8') + '\n' + fs.readFileSync('app.js', 'utf8');
         assert(html.includes("SyncEngine.track('fav-'"), 'toggleFav patch should call SyncEngine.track for favs');
     });
 
     test('index.html: saveDayNote chama SyncEngine.track', () => {
-        const html = fs.readFileSync('index.html', 'utf8');
+        const html = fs.readFileSync('index.html', 'utf8') + '\n' + fs.readFileSync('app.js', 'utf8');
         assert(html.includes("SyncEngine.track('note-'"), 'saveDayNote patch should call SyncEngine.track for notes');
     });
 
     test('index.html: SW não faz window.location.reload() automático', () => {
-        const html = fs.readFileSync('index.html', 'utf8');
+        const html = fs.readFileSync('index.html', 'utf8') + '\n' + fs.readFileSync('app.js', 'utf8');
         const swBlock = html.match(/serviceWorker\.register[\s\S]*?\}\);[\s\S]*?\}/);
         assert(swBlock, 'should find SW registration block');
         // The reload should only be inside an onclick handler, not automatic
@@ -517,7 +517,7 @@ async function runTests() {
     });
 
     test('index.html: poll interval é 30s', () => {
-        const html = fs.readFileSync('index.html', 'utf8');
+        const html = fs.readFileSync('index.html', 'utf8') + '\n' + fs.readFileSync('app.js', 'utf8');
         assert(html.includes('}, 30000);'), 'poll interval should be 30000ms (30s)');
         assert(!html.includes('}, 120000);'), 'should NOT have old 120000ms interval');
     });
@@ -531,7 +531,7 @@ async function runTests() {
 
     test('sw.js: todos os arquivos de img/activities/ estão no precache', () => {
         const sw = fs.readFileSync('sw.js', 'utf8');
-        const files = fs.readdirSync('img/activities/');
+        const files = fs.readdirSync('img/activities/').filter(f => f.endsWith('.jpg'));
         const missing = files.filter(f => !sw.includes(f));
         assert(missing.length === 0, 'Not in precache: ' + missing.join(', '));
     });
