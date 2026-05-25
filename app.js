@@ -875,7 +875,7 @@ function renderDay(d) {
         if (photo) {
             h.push('<picture>');
             h.push('<source type="image/webp" srcset="' + webpSrc400(photo) + ' 400w, ' + webpSrc(photo) + ' 800w" sizes="(max-width:768px) 400px, 800px">');
-            h.push('<img class="activity-card-photo" src="' + photo + '" alt="' + plainText.replace(/"/g, '&quot;') + '" width="400" height="200" loading="lazy" decoding="async" onload="this.classList.add(\'loaded\')" onerror="this.style.display=\'none\'" onclick="event.stopPropagation();openLightbox(this.src,this.parentElement.querySelector(\'.activity-name\').textContent)">');
+            h.push('<img class="activity-card-photo" src="' + photo + '" alt="' + plainText.replace(/"/g, '&quot;') + '" width="400" height="200" loading="lazy" decoding="async" onload="this.classList.add(\'loaded\')" onerror="this.style.display=\'none\'"' + (hasInfo ? ' onclick="event.stopPropagation();openDetail(' + d.day + ',' + idx + ')"' : ' onclick="event.stopPropagation();openLightbox(this.src,this.parentElement.querySelector(\'.activity-name\').textContent)"') + '>');
             h.push('</picture>');
         }
         if (hasInfo) h.push('<span class="detail-arrow">›</span>');
