@@ -650,14 +650,6 @@ body {
     text-align: center;
 }
 
-/* Animated ant-march route */
-.ant-march {
-    stroke-dasharray: 12, 8;
-    animation: antMarch 1.2s linear infinite;
-}
-@keyframes antMarch {
-    to { stroke-dashoffset: -20; }
-}
 /* Route done vs upcoming */
 .route-done path { stroke: #4ecdc4 !important; opacity: 0.95 !important; }
 .route-upcoming path { stroke: #4ecdc4 !important; opacity: 0.25 !important; }
