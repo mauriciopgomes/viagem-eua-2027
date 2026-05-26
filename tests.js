@@ -156,9 +156,9 @@ test('dayPhotos referencia arquivos que existem', () => {
 // ==================== 3. DATA.JS — HOTELS ====================
 section('data.js — Hotéis');
 
-test('hotels é um array com 18 hotéis', () => {
+test('hotels é um array com 17 hotéis', () => {
     assert(Array.isArray(hotels), 'hotels deve ser array');
-    assertEqual(hotels.length, 18, 'deve ter 18 hotéis');
+    assertEqual(hotels.length, 17, 'deve ter 17 hotéis');
 });
 
 test('hotéis têm campos obrigatórios', () => {
@@ -219,9 +219,9 @@ test('parques referenciam dias válidos', () => {
 // ==================== 5. DATA.JS — SUPERCHARGERS ====================
 section('data.js — Superchargers');
 
-test('superchargers é um array com 23 paradas', () => {
+test('superchargers é um array com 24 paradas', () => {
     assert(Array.isArray(superchargers), 'superchargers deve ser array');
-    assertEqual(superchargers.length, 23, 'deve ter 23 superchargers');
+    assertEqual(superchargers.length, 24, 'deve ter 24 superchargers');
 });
 
 test('superchargers têm campos obrigatórios', () => {
@@ -903,9 +903,10 @@ test('lightbox tem pinch-to-zoom', () => {
 section('Cross-file — Consistência entre arquivos');
 
 test('totalDays no HTML === dias em data.js', () => {
-    const match = allJs.match(/totalDays\s*=\s*(\d+)/);
-    assert(match, 'totalDays deve estar definido');
-    assertEqual(parseInt(match[1]), days.length, 'totalDays deve bater com days.length');
+    const matchNum = allJs.match(/totalDays\s*=\s*(\d+)/);
+    const matchDyn = allJs.match(/totalDays\s*=\s*days\.length/);
+    assert(matchNum || matchDyn, 'totalDays deve estar definido');
+    if (matchNum) assertEqual(parseInt(matchNum[1]), days.length, 'totalDays deve bater com days.length');
 });
 
 test('dayPhotos referenciados no SW cache existem no data.js', () => {
@@ -1015,15 +1016,19 @@ test('dia 5 tem voo NYC → LAX', () => {
     assert(hasFlight, 'Dia 5 deve ter voo');
 });
 
-test('regiões seguem a rota (NY→NV→UT→PNW→CA)', () => {
+test('regiões seguem a rota (NY→CA→NV→UT→PNW→CA)', () => {
     // NY: dias 1-4
     for (let i = 0; i < 4; i++) assertEqual(days[i].region, 'ny', `Dia ${i + 1}`);
-    // NV: dias 5-8
-    for (let i = 4; i < 8; i++) assertEqual(days[i].region, 'nv', `Dia ${i + 1}`);
-    // UT: dias 9-15
-    for (let i = 8; i < 15; i++) assertEqual(days[i].region, 'ut', `Dia ${i + 1}`);
-    // CA: dias 22+ (some PNW in between)
-    assertEqual(days[32].region, 'ca', 'Dia 33');
+    // CA: dias 5-8 (Yosemite, Sequoia)
+    for (let i = 4; i < 8; i++) assertEqual(days[i].region, 'ca', `Dia ${i + 1}`);
+    // NV: dias 9-12 (Vegas)
+    for (let i = 8; i < 12; i++) assertEqual(days[i].region, 'nv', `Dia ${i + 1}`);
+    // UT: dias 13-18 (GC, Zion, Bryce, Moab)
+    for (let i = 12; i < 18; i++) assertEqual(days[i].region, 'ut', `Dia ${i + 1}`);
+    // PNW: dias 19-24
+    for (let i = 18; i < 24; i++) assertEqual(days[i].region, 'pnw', `Dia ${i + 1}`);
+    // CA: dias 25-33 (Redwood, SF, PCH, LA)
+    for (let i = 24; i < 33; i++) assertEqual(days[i].region, 'ca', `Dia ${i + 1}`);
 });
 
 test('cada dia tem pelo menos 5 atividades', () => {
@@ -1041,7 +1046,7 @@ test('cada dia tem pelo menos 1 item food (exceto dia de voo)', () => {
 });
 
 test('dias de estrada (>100km) têm items drive', () => {
-    const driveDays = [5, 9, 11, 12, 15, 16, 17, 18, 20, 21, 24, 26, 29, 31];
+    const driveDays = [5, 7, 9, 13, 15, 16, 19, 20, 21, 23, 24, 27, 30, 31];
     driveDays.forEach((d) => {
         const day = days[d - 1];
         const hasDrive = day.items.some(i => i.type === 'drive');
