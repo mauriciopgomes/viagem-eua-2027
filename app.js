@@ -1445,7 +1445,7 @@ function doInitMap() {
     // ---- ROUTE: DONE + UPCOMING (progress split) ----
     mapLayers.route = L.layerGroup();
     mapLayers.routeDone = L.polyline(routeCoords, { color: '#4ecdc4', weight: 2.5, opacity: 0.35, smoothFactor: 1.5 });
-    mapLayers.routeUpcoming = L.polyline([], { color: '#4ecdc4', weight: 3.5, opacity: 0.9, smoothFactor: 1.5 });
+    mapLayers.routeUpcoming = L.polyline([], { color: '#4ecdc4', weight: 3.5, opacity: 0.9, smoothFactor: 1.5, dashArray: '10,6' });
     mapLayers.routeDone.addTo(mapLayers.route);
     mapLayers.routeUpcoming.addTo(mapLayers.route);
     mapLayers.route.addTo(mapInstance);
@@ -1555,7 +1555,7 @@ function doInitMap() {
         div.innerHTML = '<h3 onclick="this.parentElement.classList.toggle(\'open\')">🗺️ Legenda</h3>' +
             '<div class="legend-body">' +
             '<div class="legend-item"><div class="legend-line" style="background:#4ecdc4;opacity:0.35"></div><span>Rota percorrida</span></div>' +
-            '<div class="legend-item"><div class="legend-line" style="background:#4ecdc4"></div><span>Trecho restante</span></div>' +
+            '<div class="legend-item"><div class="legend-line" style="background:#4ecdc4;border-style:dashed"></div><span>Trecho restante</span></div>' +
             '<div class="legend-item"><div class="legend-line" style="background:#0a84ff;height:4px"></div><span>Trecho do dia</span></div>' +
             '<div class="legend-item"><div class="legend-line" style="background:#ffd700;border-style:dashed"></div><span>Day trips (Vegas)</span></div>' +
             '<div class="legend-item"><div style="font-size:11px;background:#00c853;border-radius:50%;width:14px;height:14px;display:flex;align-items:center;justify-content:center;border:1.5px solid #fff">⚡</div><span>Superchargers</span></div>' +
