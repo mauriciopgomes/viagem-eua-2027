@@ -654,6 +654,15 @@ body {
 .route-done path { stroke: #4ecdc4 !important; opacity: 0.95 !important; }
 .route-upcoming path { stroke: #4ecdc4 !important; opacity: 0.25 !important; }
 
+/* Animated marching ants on upcoming route */
+.route-upcoming path {
+    stroke-dasharray: 10, 6;
+    animation: antMarch 0.8s linear infinite;
+}
+@keyframes antMarch {
+    to { stroke-dashoffset: -16; }
+}
+
 /* Stop photo circle marker */
 .map-photo-marker {
     width: 36px; height: 36px;

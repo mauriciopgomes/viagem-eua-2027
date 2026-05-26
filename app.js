@@ -1445,7 +1445,7 @@ function doInitMap() {
     // ---- ROUTE: DONE + UPCOMING (progress split) ----
     mapLayers.route = L.layerGroup();
     mapLayers.routeDone = L.polyline(routeCoords, { color: '#4ecdc4', weight: 2.5, opacity: 0.35, smoothFactor: 1.5 });
-    mapLayers.routeUpcoming = L.polyline([], { color: '#4ecdc4', weight: 3.5, opacity: 0.9, smoothFactor: 1.5, dashArray: '10,6' });
+    mapLayers.routeUpcoming = L.polyline([], { color: '#4ecdc4', weight: 3.5, opacity: 0.9, smoothFactor: 1.5, dashArray: '10,6', className: 'route-upcoming' });
     mapLayers.routeDone.addTo(mapLayers.route);
     mapLayers.routeUpcoming.addTo(mapLayers.route);
     mapLayers.route.addTo(mapInstance);
