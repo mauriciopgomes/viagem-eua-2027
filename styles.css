@@ -651,13 +651,12 @@ body {
 }
 
 /* Route done vs upcoming */
-.route-done path { stroke: #4ecdc4 !important; opacity: 0.95 !important; }
 
 /* Animated marching ants on upcoming route */
-.route-upcoming path {
+path.route-upcoming {
     stroke: #4ecdc4 !important;
     opacity: 0.9 !important;
-    stroke-dasharray: 10, 6;
+    stroke-dasharray: 10, 6 !important;
     animation: antMarch 0.8s linear infinite;
 }
 @keyframes antMarch {
