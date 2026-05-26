@@ -284,6 +284,33 @@ const activityPhotos = {
     'Three Rivers': 'img/activities/three_rivers_ca.jpg',
     'LA': 'img/activities/griffith_observatory.jpg',
     'Santa Monica': 'img/activities/santa_monica_pier.jpg',
+    // --- New route additions ---
+    'Tunnel Log': 'img/activities/congress_trail.jpg',
+    'Auto Log': 'img/activities/congress_trail.jpg',
+    'Howland Hill Road': 'img/activities/stout_memorial_grove.jpg',
+    'Boy Scout Tree Trail': 'img/activities/stout_memorial_grove.jpg',
+    'Battery Point Lighthouse': 'img/activities/crescent_city_ca.jpg',
+    'Del Norte Coast Redwoods': 'img/activities/newton_b_drury.jpg',
+    'Damnation Creek': 'img/activities/newton_b_drury.jpg',
+    'Jedediah Smith': 'img/activities/stout_memorial_grove.jpg',
+    'Orick': 'img/activities/tall_trees_grove.jpg',
+    'Fog Harbor': 'img/activities/fishermans_wharf.jpg',
+    'Ferry Building': 'img/activities/embarcadero_sf.jpg',
+    'Alcatraz': 'img/activities/alcatraz.jpg',
+    'Elephant Seal Vista Point': 'img/activities/elephant_seal_vista_point.jpg',
+    'Hearst Castle': 'img/activities/hearst_castle.jpg',
+    'Santa Barbara': 'img/activities/santa_barbara.jpg',
+    'State Street': 'img/activities/santa_barbara.jpg',
+    'Santa Barbara County Courthouse': 'img/activities/santa_barbara.jpg',
+    'East Beach': 'img/activities/santa_barbara.jpg',
+    'Stearns Wharf': 'img/activities/stearns_wharf.jpg',
+    'Point Mugu': 'img/activities/point_mugu.jpg',
+    'Hollywood Walk of Fame': 'img/activities/hollywood_walk_of_fame.jpg',
+    'TCL Chinese Theatre': 'img/activities/tcl_chinese_theatre.jpg',
+    'The Grove': 'img/activities/the_grove_la.jpg',
+    'Farmers Market': 'img/activities/the_grove_la.jpg',
+    'Citadel Outlets': 'img/activities/citadel_outlets.jpg',
+    'The Lark': 'img/activities/santa_barbara.jpg',
 };
 
 // Pre-sort keys longest-first for accurate matching (e.g., "Brooklyn Bridge Park" before "Brooklyn Bridge")
@@ -672,6 +699,40 @@ const placeInfo = {
     // Day 30 — Sequoia
     'Giant Forest Museum': { addr: 'Giant Forest Museum, Sequoia NP, CA 93262', coords: '36.5640,-118.7510', detail: 'Exposições sobre ecologia e história das sequoias gigantes. Ponto de partida para trilhas no Giant Forest.', hours: '9h-16h30', cost: 'Incluído no ingresso do parque' },
     'Big Trees Trail': { addr: 'Big Trees Trail, Sequoia NP, CA 93262', coords: '36.5630,-118.7520', detail: 'Loop pavimentado de ~2 km ao redor de Round Meadow. Sequoias refletidas na água, acessível para cadeirantes.', cost: 'Incluído no ingresso do parque' },
+    'Tunnel Log': { addr: 'Tunnel Log, Crescent Meadow Rd, Sequoia NP, CA 93262', coords: '36.5560,-118.7480', detail: 'Tronco caído de sequoia gigante com túnel escavado para carros passarem. Caiu em 1937 por causas naturais.', cost: 'Incluído no ingresso do parque' },
+    'Auto Log': { addr: 'Auto Log, Sequoia NP, CA 93262', coords: '36.5550,-118.7500', detail: 'Tronco caído de sequoia onde antigamente carros estacionavam em cima para fotos. Hoje apenas pedestres.', cost: 'Incluído no ingresso do parque' },
+
+    // Day 31 — PCH South: Elephant Seal, Hearst Castle, Santa Barbara
+    'Elephant Seal Vista Point': { addr: 'Elephant Seal Vista Point, CA-1, San Simeon, CA 93452', coords: '35.6625,-121.2547', detail: 'Colônia de elefantes-marinhos na praia! Milhares de animais descansando, brigando e brincando. Passarelas de observação gratuitas.', cost: 'Gratuito' },
+    'Hearst Castle': { addr: '750 Hearst Castle Rd, San Simeon, CA 93452', coords: '35.6854,-121.1685', detail: 'Mansão espetacular do magnata William Randolph Hearst. 165 quartos, piscinas romanas, arte europeia. Patrimônio histórico.', hours: '9h-17h', cost: '~$30/adulto (tour guiado obrigatório)' },
+    'Stearns Wharf': { addr: 'Stearns Wharf, Santa Barbara, CA 93101', coords: '34.4098,-119.6853', detail: 'Píer de madeira mais antigo da Califórnia em funcionamento (1872). Restaurantes, lojas e vista panorâmica do litoral e das montanhas.', cost: 'Gratuito' },
+    'Santa Barbara': { addr: 'Santa Barbara, CA 93101', coords: '34.4208,-119.6982', detail: 'A "Riviera Americana". Arquitetura espanhola colonial, praias douradas, montanhas como pano de fundo. Clima perfeito o ano todo.' },
+    'Santa Barbara County Courthouse': { addr: '1100 Anacapa St, Santa Barbara, CA 93101', coords: '34.4255,-119.7030', detail: 'Prédio público mais bonito dos EUA! Estilo colonial espanhol de 1929. Suba na torre do relógio para vista 360° gratuita.', hours: '8h-17h (torre até 16h45)', cost: 'Gratuito' },
+    'State Street': { addr: 'State Street, Santa Barbara, CA 93101', coords: '34.4220,-119.7020', detail: 'Rua principal de Santa Barbara. Lojas, restaurantes, galerias e vida noturna. Trecho de pedestres (State Street Promenade).', cost: 'Gratuito' },
+    'East Beach': { addr: 'East Beach, Santa Barbara, CA 93103', coords: '34.4150,-119.6780', detail: 'Praia mais popular de Santa Barbara. Areia ampla, vôlei de praia, ciclovias e vista do Stearns Wharf.', cost: 'Gratuito (estacionamento: $2/h)' },
+    'The Lark': { addr: '131 Anacapa St, Santa Barbara, CA 93101', coords: '34.4170,-119.6930', detail: 'Restaurante premiado no Funk Zone. Pratos criativos para compartilhar, coquetelaria artesanal. Ambiente industrial-chique em antigo armazém ferroviário.', hours: '17h-22h (Sex-Sáb até 23h)', cost: '~$40-60/pessoa' },
+    'Point Mugu': { addr: 'Point Mugu State Park, Malibu, CA 90265', coords: '34.0860,-119.0360', detail: 'Parque estadual na PCH com praias selvagens, trilhas costeiras e formações rochosas dramáticas. Big Sycamore Canyon é destaque.', cost: '$12/carro' },
+
+    // Day 32 — LA Hollywood + Shopping
+    'Hollywood Walk of Fame': { addr: 'Hollywood Blvd, Los Angeles, CA 90028', coords: '34.1016,-118.3267', detail: 'Mais de 2.700 estrelas na calçada homenageando celebridades do entretenimento. 15 quarteirões de Hollywood Blvd.', cost: 'Gratuito' },
+    'TCL Chinese Theatre': { addr: '6925 Hollywood Blvd, Los Angeles, CA 90028', coords: '34.1022,-118.3409', detail: 'Cinema lendário de 1927. Pegadas e mãos de estrelas no cimento do pátio. Premieres de Hollywood acontecem aqui.', hours: 'Pátio: 24h / Tours: 10h30-16h', cost: 'Pátio gratuito / Tour: ~$18' },
+    'The Grove': { addr: '189 The Grove Dr, Los Angeles, CA 90036', coords: '34.0720,-118.3578', detail: 'Shopping ao ar livre com bonde elétrico, fonte dançante e The Original Farmers Market (1934) ao lado. Experiência LA.', hours: '10h-21h (Dom: 10h-20h)', cost: 'Gratuito (estacionamento: primeiras 2h grátis)' },
+    'Citadel Outlets': { addr: '100 Citadel Dr, Commerce, CA 90040', coords: '34.0005,-118.1520', detail: 'Outlet a céu aberto com arquitetura estilo fortaleza assíria. 130+ lojas de marca com descontos. Próximo ao aeroporto.', hours: '10h-21h (Dom: 10h-20h)', cost: 'Gratuito' },
+
+    // Day 22 — Jedediah Smith / Crescent City additions
+    'Jedediah Smith Redwoods': { addr: 'Jedediah Smith Redwoods SP, Crescent City, CA 95531', coords: '41.8020,-124.0880', detail: 'Parque estadual com redwoods antigos intocados. Stout Memorial Grove, Howland Hill Road e Smith River cristalino.', cost: '$8/carro' },
+    'Howland Hill Road': { addr: 'Howland Hill Rd, Crescent City, CA 95531', coords: '41.7900,-124.0800', detail: 'Estrada de terra de 10 km através de redwoods gigantes. Uma das drives mais impressionantes — árvores tocam o carro! Não recomendada para trailers.', cost: 'Gratuito' },
+    'Boy Scout Tree Trail': { addr: 'Boy Scout Tree Trail, Jedediah Smith Redwoods SP, CA', coords: '41.7805,-124.0695', detail: 'Trilha de ~8 km (ida e volta) por floresta primária de redwoods. Pouco visitada, silêncio total. Uma das melhores trilhas do norte da CA.', cost: 'Gratuito' },
+    'Battery Point Lighthouse': { addr: 'Battery Point Lighthouse, Crescent City, CA 95531', coords: '41.7445,-124.2048', detail: 'Farol de 1856 em uma ilha rochosa acessível apenas na maré baixa! Museu dentro. Um dos faróis mais fotogênicos da costa oeste.', hours: '10h-16h (Abr-Set, maré baixa)', cost: '$5/adulto' },
+    'Del Norte Coast Redwoods': { addr: 'Del Norte Coast Redwoods SP, CA', coords: '41.7150,-124.1250', detail: 'Parque com redwoods que descem até o oceano. Damnation Creek Trail é a jóia escondida — descida íngreme até praia selvagem.', cost: '$8/carro' },
+    'Damnation Creek Trail': { addr: 'Damnation Creek Trail, Del Norte Coast Redwoods SP, CA', coords: '41.6700,-124.1200', detail: 'Trilha de 7 km que desce 300m de altitude dos redwoods até uma praia remota. Vegetação densa, neblina mística. Nível moderado-difícil.', cost: 'Gratuito' },
+
+    // Day 29 — San Francisco (Alcatraz + extras)
+    'Alcatraz': { addr: 'Alcatraz Island, San Francisco, CA 94133', coords: '37.8267,-122.4233', detail: 'A prisão mais famosa do mundo, na ilha da baía de SF. Tour de áudio premiado narra histórias de Al Capone e fugas lendárias. Reserve com antecedência!', hours: 'Ferries: 8h45-15h30', cost: '$41/adulto (ferry + tour)' },
+    'Golden Gate Park': { addr: 'Golden Gate Park, San Francisco, CA 94118', coords: '37.7694,-122.4862', detail: 'Parque urbano maior que o Central Park! Jardim Japonês, California Academy of Sciences, de Young Museum, bisão e moinhos.', cost: 'Gratuito (atrações internas pagas)' },
+    'Ocean Beach': { addr: 'Ocean Beach, San Francisco, CA 94122', coords: '37.7594,-122.5107', detail: 'Praia oceânica de 5,6 km na borda oeste de SF. Ondas fortes, vento, fogueiras no pôr do sol. Surfistas e corredores.', cost: 'Gratuito' },
+    'Fog Harbor Fish House': { addr: 'Pier 39, Ste A-202, San Francisco, CA 94133', coords: '37.8090,-122.4100', detail: 'Restaurante no Pier 39 com vista para a baía e Alcatraz. Especialidade: Dungeness crab e clam chowder em pão sourdough.', hours: '11h-21h30', cost: '~$30-50/pessoa' },
+    'Ferry Building': { addr: 'Ferry Building, San Francisco, CA 94105', coords: '37.7955,-122.3937', detail: 'Marco histórico com mercado gastronômico artesanal. Queijos, ostras, café Blue Bottle, padarias. Farmers market aos sábados.', hours: '10h-18h (mercado)', cost: 'Gratuito' },
 
     // Day 31 — LA
     'LA': { addr: 'Los Angeles, CA 90012', coords: '34.0522,-118.2437', detail: 'A Cidade dos Anjos! Segunda maior cidade dos EUA, capital do cinema e do entretenimento.' },

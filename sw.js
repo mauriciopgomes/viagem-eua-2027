@@ -1,4 +1,4 @@
-const CACHE_NAME = 'viagem-eua-2027-v111';
+const CACHE_NAME = 'viagem-eua-2027-v112';
 const TILE_CACHE = 'viagem-tiles-v1';
 
 // Critical assets — must succeed for install
@@ -305,6 +305,17 @@ const ASSETS_TO_CACHE = [
   './img/activities/yosemite_village_hub.jpg',
   './img/activities/zabriskie_point.jpg',
   './img/activities/zumwalt_meadow.jpg',
+  // New route photos
+  './img/activities/alcatraz.jpg',
+  './img/activities/citadel_outlets.jpg',
+  './img/activities/elephant_seal_vista_point.jpg',
+  './img/activities/hearst_castle.jpg',
+  './img/activities/hollywood_walk_of_fame.jpg',
+  './img/activities/point_mugu.jpg',
+  './img/activities/santa_barbara.jpg',
+  './img/activities/stearns_wharf.jpg',
+  './img/activities/tcl_chinese_theatre.jpg',
+  './img/activities/the_grove_la.jpg',
 ];
 
 // Install: precache critical assets, then best-effort images
