@@ -9,19 +9,18 @@
 | 3 | **Springdale, UT** (Zion) | 29/01 (Sex) | 31/01 (Dom) | 2 | 9-10 |
 | 4 | **Bryce Canyon, UT** | 31/01 (Dom) | 01/02 (Seg) | 1 | 11 |
 | 5 | **Moab, UT** (Arches/Canyonlands) | 01/02 (Seg) | 04/02 (Qui) | 3 | 12-14 |
-| 6 | **Salt Lake City, UT** | 04/02 (Qui) | 05/02 (Sex) | 1 | 15 |
-| 7 | **Boise, ID** | 05/02 (Sex) | 06/02 (Sáb) | 1 | 16 |
-| 8 | **Centralia, WA** | 06/02 (Sáb) | 07/02 (Dom) | 1 | 17 |
-| 9 | **Forks / Port Angeles, WA** (Olympic) | 07/02 (Dom) | 09/02 (Ter) | 2 | 18-19 |
-| 10 | **Cannon Beach, OR** | 09/02 (Ter) | 10/02 (Qua) | 1 | 20 |
-| 11 | **Gold Beach / Coos Bay, OR** | 10/02 (Qua) | 11/02 (Qui) | 1 | 21 |
-| 12 | **Crescent City / Klamath, CA** | 11/02 (Qui) | 12/02 (Sex) | 1 | 22 |
-| 13 | **Eureka / Arcata, CA** | 12/02 (Sex) | 13/02 (Sáb) | 1 | 23 |
-| 14 | **San Francisco, CA** | 13/02 (Sáb) | 15/02 (Seg) | 2 | 24-25 |
-| 15 | **Mariposa, CA** | 15/02 (Seg) | 16/02 (Ter) | 1 | 26 |
-| 16 | **Yosemite NP, CA** | 16/02 (Ter) | 18/02 (Qui) | 2 | 27-28 |
-| 17 | **Three Rivers, CA** (Sequoia) | 18/02 (Qui) | 20/02 (Sáb) | 2 | 29-30 |
-| 18 | **Los Angeles, CA** | 20/02 (Sáb) | 22/02 (Seg) | 2 | 31-32 |
+| 6 | **Twin Falls, ID** | 04/02 (Qui) | 05/02 (Sex) | 1 | 15 |
+| 7 | **Centralia, WA** | 05/02 (Sex) | 06/02 (Sáb) | 1 | 16 |
+| 8 | **Forks / Port Angeles, WA** (Olympic) | 06/02 (Sáb) | 08/02 (Seg) | 2 | 17-18 |
+| 9 | **Cannon Beach, OR** | 08/02 (Seg) | 09/02 (Ter) | 1 | 19 |
+| 10 | **Gold Beach / Coos Bay, OR** | 09/02 (Ter) | 10/02 (Qua) | 1 | 20 |
+| 11 | **Crescent City / Klamath, CA** | 10/02 (Qua) | 11/02 (Qui) | 1 | 21 |
+| 12 | **Eureka / Arcata, CA** | 11/02 (Qui) | 12/02 (Sex) | 1 | 22 |
+| 13 | **San Francisco, CA** | 12/02 (Sex) | 14/02 (Dom) | 2 | 23-24 |
+| 14 | **Mariposa, CA** | 14/02 (Dom) | 15/02 (Seg) | 1 | 25 |
+| 15 | **Yosemite NP, CA** | 15/02 (Seg) | 17/02 (Qua) | 2 | 26-27 |
+| 16 | **Three Rivers, CA** (Sequoia) | 17/02 (Qua) | 19/02 (Sex) | 2 | 28-29 |
+| 17 | **Los Angeles, CA** | 19/02 (Sex) | 22/02 (Seg) | 3 | 30-32 |
 
 > **Total: 32 noites de hospedagem** (noite de 20→21/01 no avião GRU→JFK, noite de 22/02 no avião MIA→GIG)
 
@@ -31,9 +30,9 @@
 
 ```
 NYC ✈️ LAX → Las Vegas → Grand Canyon → Zion → Bryce Canyon → Moab
-→ SLC → Boise → Multnomah Falls → Centralia → Mt. Rainier → Olympic NP → Cannon Beach
-→ Costa Oregon ↓ → Redwood NP → Eureka → SF → Yosemite
-→ Sequoia → LA ✈️ volta
+→ Antelope Island → Twin Falls → Multnomah Falls → Centralia → Mt. Rainier → Olympic NP
+→ Cannon Beach → Costa Oregon ↓ → Redwood NP → Eureka → SF (3 dias)
+→ Yosemite → Sequoia → LA ✈️ volta
 ```
 
 ---
@@ -48,11 +47,11 @@ NYC ✈️ LAX → Las Vegas → Grand Canyon → Zion → Bryce Canyon → Moab
 | 4 | Bryce Canyon | 11-12 |
 | 5 | Canyonlands | 13 |
 | 6 | Arches | 14 |
-| 7 | Mt. Rainier | 18 |
-| 8 | Olympic | 18-19 |
-| 9 | Redwood | 22 |
-| 10 | Yosemite | 27-28 |
-| 11 | Sequoia + Kings Canyon | 30 |
+| 7 | Mt. Rainier | 17 |
+| 8 | Olympic | 17-18 |
+| 9 | Redwood | 21 |
+| 10 | Yosemite | 26-27 |
+| 11 | Sequoia + Kings Canyon | 29 |
 
 ---
 
@@ -445,67 +444,53 @@ NYC ✈️ LAX → Las Vegas → Grand Canyon → Zion → Bryce Canyon → Moab
 
 ---
 
-### Dia 15 — Qui, 04/02 (Moab → Salt Lake City) 📍 Salt Lake City, UT
-![Salt Lake City](https://commons.wikimedia.org/wiki/Special:FilePath/Saltlaketemple.jpg?width=800)
-> Rumo a SLC! Antelope Island à tarde.
-
-| Horário | Atividade |
-|---------|-----------|
-| 08:00 | ☕ Café + check-out de Moab |
-| 08:30 | 🚗 Saída rumo a **Salt Lake City** (~370 km, ~4h via US-191 N → I-70 W → US-6 W → I-15 N) |
-| 10:00 | ⚡ **Supercharger Green River, UT** (~100 km) — parada ~20 min |
-| 11:30 | ⚡🍽️ **Supercharger Price, UT** (~100 km) — parada ~20 min + almoço |
-| ~13:00 | 🏨 Chegada em **SLC**! Check-in |
-| 14:00 | 🦬 **Antelope Island State Park** (~45 min de SLC) — ilha no **Great Salt Lake** com ~700 bisões selvagens! Vista panorâmica + montanhas Wasatch cobertas de neve |
-| 15:00 | 📸 **Buffalo Point** — mirante 360° do Great Salt Lake |
-| 16:00 | 🚗 Volta pra SLC |
-| 16:30 | 🏙️ Passeio pelo centro — **Temple Square**, **State Capitol** |
-| 18:00 | 🍽️ Jantar em SLC |
-
----
-
-### Dia 16 — Sex, 05/02 (SLC → Boise) 📍 Boise, ID
+### Dia 15 — Qui, 04/02 (Moab → Antelope Island → Twin Falls) 📍 Twin Falls, ID
 ![Shoshone Falls](https://commons.wikimedia.org/wiki/Special:FilePath/Shoshone_Falls_Idaho.jpg?width=800)
-> Shoshone Falls no caminho! "Niágara do Oeste"!
+> Dia longo de trânsito mas com duas paradas épicas: bisões na Antelope Island + Shoshone Falls!
 
 | Horário | Atividade |
 |---------|-----------|
-| 07:00 | ☕ Café + check-out de SLC |
-| 07:30 | 🚗 Saída rumo a **Boise, ID** (~490 km, ~5.5h via I-15 N → I-86 → I-84 W) |
-| 10:00 | ⚡ **Supercharger Twin Falls, ID** (~330 km) — parada ~25 min |
-| 10:30 | 🌊 **Shoshone Falls** (~5 min do SC) — a "Niágara do Oeste"! Queda d'água de 65m, mais larga que Niagara! Parada ~30 min |
-| 11:00 | 🚗 Continuação I-84 oeste (~210 km, ~2h) |
-| 13:00 | 🍽️ Almoço em Boise |
-| 14:00 | 🏨 Check-in em **Boise** |
-| 14:30 | 🏙️ Passeio pelo **Boise River Greenbelt** + **Idaho State Capitol** |
-| 16:00 | Tempo livre — descanso |
-| 18:00 | 🍽️ Jantar no **Basque Block** — **Bar Gernika** ou **Leku Ona** |
+| 07:00 | ☕ Café + check-out de Moab |
+| 07:30 | 🚗 Saída rumo ao norte (~370 km até SLC, ~4h via US-191 N → I-70 W → US-6 W → I-15 N) |
+| 09:00 | ⚡ **Supercharger Green River, UT** (~100 km) — parada ~20 min |
+| 10:30 | ⚡ **Supercharger Price, UT** (~100 km) — parada ~20 min |
+| ~12:00 | 🦬 **Antelope Island State Park** (saída 332 da I-15, Syracuse) — ilha no **Great Salt Lake** com ~700 bisões selvagens! |
+| 12:30 | 📸 **Buffalo Point** — mirante 360° do Great Salt Lake + montanhas Wasatch cobertas de neve |
+| 13:00 | 🍽️ Almoço rápido em Layton/Ogden (na I-15) |
+| 13:30 | 🚗 I-15 N → I-84 W rumo Twin Falls (~340 km, ~3.5h) |
+| ~17:00 | ⚡ **Supercharger Twin Falls, ID** — parada ~25 min |
+| 17:15 | 🌊 **Shoshone Falls** (~5 min do SC) — a "Niágara do Oeste"! Queda d'água de 65m, mais larga que Niagara! |
+| 18:00 | 🏨 Check-in em **Twin Falls** |
+| 18:30 | 🍽️ Jantar em Twin Falls |
+
+> ⚠️ Dia longo (~770 km, ~8.5h + paradas) mas tudo rodovia reta (I-15/I-84). FSD ajuda bastante!
+> 🦬 Antelope Island é rápida — sair da I-15, ~15 min até a ilha, 45-60 min visitando, voltar pra I-15. Não é desvio grande.
 
 ---
 
-### Dia 17 — Sab, 06/02 (Boise → Multnomah Falls → Centralia) 📍 Centralia, WA
+### Dia 16 — Sex, 05/02 (Twin Falls → Multnomah Falls → Centralia) 📍 Centralia, WA
 ![Multnomah Falls](https://commons.wikimedia.org/wiki/Special:FilePath/Multnomah_Falls_(aerial_view).jpg?width=800)
-> Dia de transição longo! Columbia River Gorge + Multnomah Falls no caminho. Dormem em Centralia, mais perto de Mt. Rainier.
+> Dia de transição! Columbia River Gorge + Multnomah Falls no caminho. Dormem em Centralia, perto de Mt. Rainier.
 
 | Horário | Atividade |
 |---------|-----------|
-| 07:00 | ☕ Café em Boise + check-out (carro carregado overnight) |
-| 07:30 | 🚗 Saída rumo ao noroeste (~670 km, ~7.5h via I-84 W → I-5 N) |
-| 09:00 | ⚡ **Supercharger Baker City, OR** (~200 km) — parada ~25 min |
-| 11:00 | ⚡🍽️ **Supercharger Pendleton, OR** (~200 km) — parada ~20 min + almoço |
-| 13:00 | ⚡ **Supercharger The Dalles, OR** (~200 km) — parada ~25 min |
-| 13:30 | 🏞️ **Columbia River Gorge** — gargantas espetaculares, rio Columbia entre paredões |
+| 07:30 | ☕ Café + check-out de Twin Falls |
+| 08:00 | 🚗 Saída rumo ao noroeste via I-84 W (~460 km até Centralia) |
+| 09:30 | ⚡ **Supercharger Baker City, OR** (~200 km) — parada ~25 min |
+| 11:30 | ⚡🍽️ **Supercharger Pendleton, OR** (~200 km) — parada ~20 min + almoço |
+| 13:30 | ⚡ **Supercharger The Dalles, OR** (~200 km) — parada ~25 min |
+| 14:00 | 🏞️ **Columbia River Gorge** — gargantas espetaculares, rio Columbia entre paredões |
 | 14:30 | 🌲 **Multnomah Falls** — cachoeira icônica de 189m! Ponte panorâmica ~10 min |
 | 15:00 | 🚗 Continuação I-84 W → I-5 N rumo a **Centralia** (~240 km, ~2.5h) |
 | ~17:30 | 🏨 Chegada em **Centralia**! Check-in |
 | 18:00 | ⚡ **Supercharger Centralia, WA** — carregar pro trecho de amanhã |
 | 18:30 | 🍽️ Jantar em Centralia |
 
-> ⚡ 4 Superchargers no caminho. Dia longo de estrada (~670 km) mas sem atividades turísticas além de Multnomah Falls — é transit day.
+> ⚡ 4 Superchargers no caminho. ~460 km — bem mais confortável que o antigo trecho de Boise (670 km)!
 
 ---
 
-### Dia 18 — Dom, 07/02 (Centralia → Mt. Rainier → Forks) 📍 Forks / Port Angeles, WA
+### Dia 17 — Sáb, 06/02 (Centralia → Mt. Rainier → Forks) 📍 Forks / Port Angeles, WA
 ![Mt. Rainier](https://commons.wikimedia.org/wiki/Special:FilePath/Mount_Rainier_from_the_Silver_Queen_Peak.jpg?width=800)
 > Visita ao vulcão Rainier (só ~1.5h de Centralia!), depois rumo a Olympic. Se Rainier estiver fechado, seguem direto e chegam cedo em Forks.
 
@@ -531,11 +516,11 @@ NYC ✈️ LAX → Las Vegas → Grand Canyon → Zion → Bryce Canyon → Moab
 >
 > 🔄 **Se Rainier estiver FECHADO:** Pulem o desvio e sigam direto Centralia → I-5 N → US-101 W → Forks (~370 km, ~4.5h). Chegada ~12:00. Tarde livre pra curtir Lake Crescent e Sol Duc com calma!
 
-> ⚡ **Dica EV**: Forks → Aberdeen (na volta, Dia 20) é um trecho longo (~200 km) sem Supercharger. Dirijam devagar e evitem aquecimento forte no carro pra preservar autonomia.
+> ⚡ **Dica EV**: Forks → Aberdeen (na volta, Dia 19) é um trecho longo (~200 km) sem Supercharger. Dirijam devagar e evitem aquecimento forte no carro pra preservar autonomia.
 
 ---
 
-### Dia 19 — Seg, 08/02 (Olympic NP dia cheio + Twilight 🧛) 📍 Forks, WA
+### Dia 18 — Dom, 07/02 (Olympic NP dia cheio + Twilight 🧛) 📍 Forks, WA
 ![Hoh Rainforest, Olympic NP](https://commons.wikimedia.org/wiki/Special:FilePath/Hoh_Rainforest.jpg?width=800)
 > Florestas místicas, praias selvagens e tidepools!
 
@@ -556,7 +541,7 @@ NYC ✈️ LAX → Las Vegas → Grand Canyon → Zion → Bryce Canyon → Moab
 
 ---
 
-### Dia 20 — Ter, 09/02 (Forks → Cannon Beach) 📍 Cannon Beach, OR
+### Dia 19 — Seg, 08/02 (Forks → Cannon Beach) 📍 Cannon Beach, OR
 ![Cannon Beach, Oregon](https://commons.wikimedia.org/wiki/Special:FilePath/Cannon_Beach.jpg?width=800)
 > Cruzando de Washington pra Oregon! Astoria + Haystack Rock ao pôr do sol!
 
@@ -581,7 +566,7 @@ NYC ✈️ LAX → Las Vegas → Grand Canyon → Zion → Bryce Canyon → Moab
 
 ---
 
-### Dia 21 — Qua, 10/02 (Costa Oregon Sul) 📍 Gold Beach / Coos Bay, OR
+### Dia 20 — Ter, 09/02 (Costa Oregon Sul) 📍 Gold Beach / Coos Bay, OR
 ![Costa de Oregon](https://commons.wikimedia.org/wiki/Special:FilePath/Samuel_H._Boardman_State_Scenic_Corridor.jpg?width=800)
 > O melhor dia de costa! Thor's Well, Newport e faróis!
 
@@ -605,7 +590,7 @@ NYC ✈️ LAX → Las Vegas → Grand Canyon → Zion → Bryce Canyon → Moab
 
 ---
 
-### Dia 22 — Qui, 11/02 (Redwood NP dia cheio 🌲) 📍 Crescent City, CA
+### Dia 21 — Qua, 10/02 (Redwood NP dia cheio 🌲) 📍 Crescent City, CA
 ![Redwood National Park](https://commons.wikimedia.org/wiki/Special:FilePath/Redwood_National_Park,_fog_in_the_forest.jpg?width=800)
 > As árvores mais altas do mundo! Fern Canyon — cenário de Jurassic Park 2!
 
@@ -631,7 +616,7 @@ NYC ✈️ LAX → Las Vegas → Grand Canyon → Zion → Bryce Canyon → Moab
 
 ---
 
-### Dia 23 — Sex, 12/02 (Crescent City → Eureka) 📍 Eureka, CA
+### Dia 22 — Qui, 11/02 (Crescent City → Eureka) 📍 Eureka, CA
 ![Avenue of the Giants](https://commons.wikimedia.org/wiki/Special:FilePath/Redwood_National_Park,_fog_in_the_forest.jpg?width=800)
 > Mais redwoods + chegada em Eureka!
 
@@ -651,7 +636,7 @@ NYC ✈️ LAX → Las Vegas → Grand Canyon → Zion → Bryce Canyon → Moab
 
 ---
 
-### Dia 24 — Sab, 13/02 (Eureka → San Francisco) 📍 San Francisco, CA
+### Dia 23 — Sex, 12/02 (Eureka → San Francisco) 📍 San Francisco, CA
 ![Golden Gate Bridge](https://commons.wikimedia.org/wiki/Special:FilePath/Golden_Gate_Bridge_as_seen_from_Battery_East.jpg?width=800)
 > Descendo a costa! Point Reyes + chegada em SF!
 
@@ -669,9 +654,9 @@ NYC ✈️ LAX → Las Vegas → Grand Canyon → Zion → Bryce Canyon → Moab
 
 ---
 
-### Dia 25 — Dom, 14/02 (San Francisco dia cheio) ❤️ Valentine's Day! 📍 San Francisco
+### Dia 24 — Sáb, 13/02 (San Francisco dia cheio) 📍 San Francisco, CA
 ![Alcatraz Island](https://commons.wikimedia.org/wiki/Special:FilePath/Alcatraz_Island_as_seen_from_the_East.jpg?width=800)
-> Dia cheio em SF! Chinatown, Golden Gate e Nintendo. Valentine's Day! ❤️
+> Dia cheio em SF! Chinatown, Golden Gate, Nintendo e compras!
 
 | Horário | Atividade |
 |---------|-----------|
@@ -685,7 +670,7 @@ NYC ✈️ LAX → Las Vegas → Grand Canyon → Zion → Bryce Canyon → Moab
 | 16:00 | 🏰 **Fort Point** — forte da Guerra Civil DEBAIXO da Golden Gate! Cenário de **Vertigo**. Entrada gratuita |
 | 17:00 | 🎮 **Nintendo San Francisco** (200 Stockton St, Union Square) — 2ª loja oficial dos EUA! |
 | 18:00 | 🛍️ **Union Square** — compras (Apple Store, Macy's, Nordstrom) |
-| 19:00 | 🍽️ Jantar Valentine's Day ❤️ — reservar restaurante especial! |
+| 19:00 | 🍽️ Jantar — restaurante especial em SF |
 
 > 💡 **Se sobrar tempo:** Ocean Beach (praia), Golden Gate Park (Japanese Tea Garden, Bison Paddock)
 
@@ -702,7 +687,7 @@ NYC ✈️ LAX → Las Vegas → Grand Canyon → Zion → Bryce Canyon → Moab
 
 ---
 
-### Dia 26 — Seg, 15/02 (SF → PCH → Mariposa) 📍 Mariposa, CA
+### Dia 25 — Dom, 14/02 (SF → PCH → Mariposa) ❤️ Valentine's Day! 📍 Mariposa, CA
 ![Bixby Bridge, Big Sur](https://commons.wikimedia.org/wiki/Special:FilePath/Bixby_Creek_Bridge,_March_2018.jpg?width=800)
 > Pacific Coast Highway completa + pernoite em Mariposa! Evita estrada de montanha no escuro.
 
@@ -731,7 +716,7 @@ NYC ✈️ LAX → Las Vegas → Grand Canyon → Zion → Bryce Canyon → Moab
 
 ---
 
-### Dia 27 — Ter, 16/02 (Mariposa → Yosemite dia cheio 1) 📍 Yosemite NP
+### Dia 26 — Seg, 15/02 (Mariposa → Yosemite dia cheio 1) 📍 Yosemite NP
 ![Tunnel View, Yosemite](https://commons.wikimedia.org/wiki/Special:FilePath/Tunnel_View,_Yosemite_Valley,_Yosemite_NP_-_Diliff.jpg?width=800)
 > Saída cedo de Mariposa pro nascer do sol em Tunnel View! Cachoeiras, El Capitan e neve!
 
@@ -757,7 +742,7 @@ NYC ✈️ LAX → Las Vegas → Grand Canyon → Zion → Bryce Canyon → Moab
 
 ---
 
-### Dia 28 — Qua, 17/02 (Yosemite dia cheio 2) 📍 Yosemite NP
+### Dia 27 — Ter, 16/02 (Yosemite dia cheio 2) 📍 Yosemite NP
 ![Half Dome, Yosemite](https://commons.wikimedia.org/wiki/Special:FilePath/Half_Dome_from_Glacier_Point,_Yosemite_NP_-_Diliff.jpg?width=800)
 > 2º dia inteiro! Trilhas mais longas e últimos momentos no parque.
 
@@ -776,7 +761,7 @@ NYC ✈️ LAX → Las Vegas → Grand Canyon → Zion → Bryce Canyon → Moab
 
 ---
 
-### Dia 29 — Qui, 18/02 (Yosemite → Three Rivers) 📍 Three Rivers, CA
+### Dia 28 — Qua, 17/02 (Yosemite → Three Rivers) 📍 Three Rivers, CA
 ![Generals Highway](https://commons.wikimedia.org/wiki/Special:FilePath/General_Sherman_tree_looking_up.jpg?width=800)
 > Manhã de despedida em Yosemite, tarde em Three Rivers!
 
@@ -795,7 +780,7 @@ NYC ✈️ LAX → Las Vegas → Grand Canyon → Zion → Bryce Canyon → Moab
 
 ---
 
-### Dia 30 — Sex, 19/02 (Sequoia + Kings Canyon) 📍 Three Rivers, CA
+### Dia 29 — Qui, 18/02 (Sequoia + Kings Canyon) 📍 Three Rivers, CA
 ![General Sherman Tree, Sequoia NP](https://commons.wikimedia.org/wiki/Special:FilePath/General_Sherman_tree_looking_up.jpg?width=800)
 > Dia inteiro! Giant Forest de manhã, General Grant Tree, depois volta pra Moro Rock e Crescent Meadow.
 
@@ -822,7 +807,7 @@ NYC ✈️ LAX → Las Vegas → Grand Canyon → Zion → Bryce Canyon → Moab
 
 ---
 
-### Dia 31 — Sab, 20/02 (Three Rivers → Los Angeles) 📍 Los Angeles
+### Dia 30 — Sex, 19/02 (Three Rivers → Los Angeles) 📍 Los Angeles
 ![Hollywood Sign](https://commons.wikimedia.org/wiki/Special:FilePath/Hollywood_Sign_(Zuschnitt).jpg?width=800)
 > Rumo a LA! Outlet no caminho.
 
@@ -840,7 +825,7 @@ NYC ✈️ LAX → Las Vegas → Grand Canyon → Zion → Bryce Canyon → Moab
 
 ---
 
-### Dia 32 — Dom, 21/02 (LA — Malibu + Venice + despedida) 📍 Los Angeles
+### Dia 31 — Sáb, 20/02 (LA — Malibu + Venice + Griffith) 📍 Los Angeles
 ![Venice Beach, Los Angeles](https://commons.wikimedia.org/wiki/Special:FilePath/Venice_Beach,_Los_Angeles,_CA_01_(cropped).jpg?width=800)
 > Último dia completo nos EUA! Malibu, Venice e Griffith à noite.
 
@@ -853,9 +838,21 @@ NYC ✈️ LAX → Las Vegas → Grand Canyon → Zion → Bryce Canyon → Moab
 | 13:30 | 🏖️ **Venice Beach** — Muscle Beach, murais, skatepark, Abbot Kinney Blvd |
 | 15:00 | 📸 **Hollywood Sign** — melhor vista do Griffith Park |
 | 16:00 | 🛍️ Compras de última hora |
-| 17:30 | 🍽️ Último jantar nos EUA! |
-| 19:30 | 🔭 **Griffith Observatory à noite** — observatório gratuito + telescópios! Vista panorâmica de LA iluminada. Despedida perfeita! |
-| 21:30 | 🧳 Hotel — arrumar malas, dormir cedo (voo amanhã!) |
+| 17:30 | 🍽️ Jantar |
+| 19:30 | 🔭 **Griffith Observatory à noite** — observatório gratuito + telescópios! Vista panorâmica de LA iluminada |
+| 21:30 | 🏨 Hotel — descansar |
+
+---
+
+### Dia 32 — Dom, 21/02 (DAY-OFF — dia livre / reserva) 📍 Los Angeles
+> 🔄 **Dia coringa!** Pode ser usado em LA ou movido para outra cidade se precisar de mais tempo em algum lugar.
+>
+> **Opções se ficar em LA:**
+> - 🎬 **Universal Studios Hollywood** (~$130/pessoa, dia inteiro)
+> - 🛍️ Compras — **Citadel Outlets**, **The Grove**, **The Americana at Brand**
+> - 🏖️ **Santa Monica Pier** + praia
+> - 📸 Revisitar favoritos da viagem
+> - 🧳 Arrumar malas com calma (voo no dia seguinte)
 
 ---
 
@@ -887,11 +884,11 @@ NYC ✈️ LAX → Las Vegas → Grand Canyon → Zion → Bryce Canyon → Moab
 | 4 | Bryce Canyon | 11-12 |
 | 5 | Canyonlands | 13 |
 | 6 | Arches | 14 |
-| 7 | Mt. Rainier | 18 |
-| 8 | Olympic | 18-19 |
-| 9 | Redwood | 22 |
-| 10 | Yosemite | 27-28 |
-| 11 | Sequoia + Kings Canyon | 30 |
+| 7 | Mt. Rainier | 17 |
+| 8 | Olympic | 17-18 |
+| 9 | Redwood | 21 |
+| 10 | Yosemite | 26-27 |
+| 11 | Sequoia + Kings Canyon | 29 |
 
 ---
 
@@ -902,17 +899,16 @@ NYC ✈️ LAX → Las Vegas → Grand Canyon → Zion → Bryce Canyon → Moab
 | 5 | LAX → Vegas | Barstow |
 | 9 | Vegas → GC → Zion | Kingman, Kanab |
 | 12 | Bryce → Moab | Salina, Green River |
-| 15 | Moab → SLC | Green River, Price |
-| 16 | SLC → Boise | Twin Falls |
-| 17 | Boise → Centralia | Baker City, Pendleton, The Dalles, Centralia |
-| 18 | Centralia → Rainier → Forks | Olympia/Centralia |
-| 20 | Forks → Cannon Beach | Aberdeen |
-| 21 | Cannon Beach → Gold Beach | Lincoln City, Coos Bay |
-| 23 | Crescent City → Eureka | Eureka |
-| 24 | Eureka → SF | Ukiah |
-| 26 | SF → PCH → Mariposa | Monterey/Salinas, Merced |
-| 29 | Yosemite → Three Rivers | Oakhurst, Visalia |
-| 31 | Three Rivers → LA | Tejon/Lebec |
+| 15 | Moab → Antelope Island → Twin Falls | Green River, Price, Twin Falls |
+| 16 | Twin Falls → Centralia | Baker City, Pendleton, The Dalles, Centralia |
+| 17 | Centralia → Rainier → Forks | Olympia/Centralia |
+| 19 | Forks → Cannon Beach | Aberdeen |
+| 20 | Cannon Beach → Gold Beach | Lincoln City, Coos Bay |
+| 22 | Crescent City → Eureka | Eureka |
+| 23 | Eureka → SF | Ukiah |
+| 25 | SF → PCH → Mariposa | Monterey/Salinas, Merced |
+| 28 | Yosemite → Three Rivers | Oakhurst, Visalia |
+| 30 | Three Rivers → LA | Tejon/Lebec |
 
 > ⚡ Sempre carregando até 80% (~280 km de autonomia real no inverno). Paradas de ~25 min no V3 Supercharger.
 

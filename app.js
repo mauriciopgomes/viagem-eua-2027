@@ -718,8 +718,8 @@ function buildDirectionsUrl(type, name, info) {
 // ==================== STATE ==
 let currentDay = 1;
 let mapInstance = null;
-const totalDays = 33;
-const protoDays = 33;
+const totalDays = days.length;
+const protoDays = days.length;
 
 // ==================== HELPERS ====================
 function getTitle(d) { return d.title; }
@@ -732,17 +732,14 @@ const typeLabel = { highlight: '⭐ Destaque', food: '🍽️ Comida', charge: '
 // ==================== RENDER DAY SELECTOR ====================
 function renderDaySelector() {
     const el = document.getElementById('daySelector');
-    const regions = ['ny','ny','ny','ny','nv','nv','nv','nv','ut','ut','ut','ut','ut','ut','ut','pnw','pnw','pnw','pnw','pnw','pnw','ca','ca','ca','ca','ca','ca','ca','ca','ca','ca','ca','ca'];
     let html = '';
-    var shortLocs = {1:'NYC',2:'NYC',3:'NYC',4:'NYC',5:'Vegas',6:'Vegas',7:'Vegas',8:'Vegas',9:'GC→Zion',10:'Zion',11:'Bryce',12:'Moab',13:'Moab',14:'Moab',15:'SLC',16:'Boise',17:'Centralia',18:'Rainier',19:'Olympic',20:'Cannon',21:'Oregon',22:'Redwood',23:'Eureka',24:'SF',25:'SF',26:'PCH',27:'Yosemite',28:'Yosemite',29:'3 Rivers',30:'Sequoia',31:'LA',32:'LA',33:'LAX'};
-    // Trip starts Jan 21 2027
-    var tripStart = new Date(2027, 0, 21);
     for (let i = 1; i <= totalDays; i++) {
-        const r = (days[i-1] && days[i-1].region) || regions[i - 1] || 'nv';
-        const loc = days[i-1] ? days[i-1].location : '';
-        const short = shortLocs[i] || '';
-        var d = new Date(tripStart); d.setDate(d.getDate() + i - 1);
-        var dateStr = String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0');
+        var dd = days[i-1];
+        const r = dd ? dd.region || 'nv' : 'nv';
+        const loc = dd ? dd.location : '';
+        const short = dd ? dd.shortLoc || '' : '';
+        var dt = new Date(TRIP_START); dt.setDate(dt.getDate() + i - 1);
+        var dateStr = String(dt.getDate()).padStart(2,'0') + '/' + String(dt.getMonth()+1).padStart(2,'0');
         html += '<button class="day-pill ' + r + '" data-d="' + i + '" onclick="showDay(' + i + ')" aria-label="Dia ' + i + ' — ' + dateStr + ' — ' + loc + '" title="' + loc + '"><span class="pill-date">' + dateStr + '</span><span class="pill-label">' + short + '</span><span class="pill-dot"></span></button>';
     }
     el.innerHTML = html;
@@ -752,12 +749,11 @@ function renderDaySelector() {
 function renderSidebar() {
     var el = document.getElementById('homeSidebar');
     if (!el) return;
-    var tripStart = new Date(2027, 0, 21);
     var html = '<div style="padding:12px 16px;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em">Dias</div>';
     for (var i = 1; i <= totalDays; i++) {
         var d = days[i-1];
         var loc = d ? d.location.replace(/ dia cheio| 🌲| 🌊| 🌅| 🧛| 🏜️| ✈️| 🎰| ❤️/g, '').split(' → ').pop().split(' — ').pop().trim() : '';
-        var dt = new Date(tripStart); dt.setDate(dt.getDate() + i - 1);
+        var dt = new Date(TRIP_START); dt.setDate(dt.getDate() + i - 1);
         var dateStr = String(dt.getDate()).padStart(2,'0') + '/' + String(dt.getMonth()+1).padStart(2,'0');
         html += '<div class="sidebar-item" data-sd="' + i + '" onclick="showDay(' + i + ')"><span class="sidebar-day">' + dateStr + '</span><span class="sidebar-loc">' + loc + '</span></div>';
     }
@@ -1321,20 +1317,21 @@ function doInitMap() {
     // ---- STOPS LAYER (with photo markers) ----
     var stops = [
         { n: "New York", lat: 40.7580, lng: -73.9855, i: "✈️", info: "Dias 1–4 • 4 noites\nMarriott Marquis, Times Square", days: [1,2,3,4], photo: 1 },
-        { n: "Las Vegas", lat: 36.1699, lng: -115.1398, i: "🎰", info: "Dias 5–8 • 4 noites", days: [5,6,7,8], photo: 6 },
-        { n: "Grand Canyon", lat: 36.0544, lng: -112.1401, i: "🏞️", info: "Dia 9 • Mather Point", days: [9], photo: 9 },
-        { n: "Zion NP", lat: 37.2090, lng: -112.9871, i: "🏞️", info: "Dias 9–10 • Watchman Trail", days: [9,10], photo: 10 },
-        { n: "Bryce Canyon", lat: 37.6283, lng: -112.1677, i: "🏔️", info: "Dias 11–12 • Hoodoos + stargazing", days: [11,12], photo: 11 },
-        { n: "Moab, UT", lat: 38.5733, lng: -109.5498, i: "🏜️", info: "Dias 12–14 • Arches, Canyonlands", days: [12,13,14], photo: 13 },
-        { n: "Salt Lake City", lat: 40.7608, lng: -111.8910, i: "🏙️", info: "Dia 15 • Antelope Island", days: [15], photo: 15 },
-        { n: "Boise, ID", lat: 43.6150, lng: -116.2023, i: "🏙️", info: "Dia 16 • Basque Block", days: [16], photo: 16 },
-        { n: "Mt. Rainier NP", lat: 46.8523, lng: -121.7603, i: "🌋", info: "Dia 18 • Paradise (no caminho)", days: [18], photo: 18 },
-        { n: "Olympic NP", lat: 47.9504, lng: -124.3855, i: "🧛", info: "Dias 18–19 • Hoh, Ruby Beach", days: [18,19], photo: 19 },
-        { n: "Cannon Beach", lat: 45.8918, lng: -123.9615, i: "🌅", info: "Dia 20 • Haystack Rock", days: [20], photo: 20 },
-        { n: "Redwood NP", lat: 41.7558, lng: -124.2026, i: "🦕", info: "Dia 22 • Fern Canyon", days: [22], photo: 22 },
-        { n: "San Francisco", lat: 37.7749, lng: -122.4194, i: "🌉", info: "Dias 24–25 • Golden Gate", days: [24,25], photo: 25 },
-        { n: "Yosemite NP", lat: 37.8651, lng: -119.5383, i: "🏞️", info: "Dias 27–28 • Half Dome, El Capitan", days: [27,28], photo: 27 },
-        { n: "Sequoia NP", lat: 36.4519, lng: -118.9054, i: "🌲", info: "Dia 30 • General Sherman Tree", days: [30], photo: 30 },
+        { n: "Mariposa / Yosemite", lat: 37.4849, lng: -119.9663, i: "🏞️", info: "Dias 5–7 • Yosemite NP", days: [5,6,7], photo: 6 },
+        { n: "Three Rivers / Sequoia", lat: 36.4519, lng: -118.9054, i: "🌲", info: "Dias 7–8 • Sequoia + Kings Canyon", days: [7,8], photo: 8 },
+        { n: "Las Vegas", lat: 36.1699, lng: -115.1398, i: "🎰", info: "Dias 9–12 • 4 noites", days: [9,10,11,12], photo: 9 },
+        { n: "Grand Canyon", lat: 36.0544, lng: -112.1401, i: "🏞️", info: "Dia 13 • Mather Point", days: [13], photo: 13 },
+        { n: "Zion NP", lat: 37.2090, lng: -112.9871, i: "🏞️", info: "Dias 13–15 • Watchman, Emerald Pools", days: [13,14,15], photo: 14 },
+        { n: "Bryce Canyon", lat: 37.6283, lng: -112.1677, i: "🏔️", info: "Dias 15–16 • Hoodoos + stargazing", days: [15,16], photo: 15 },
+        { n: "Moab, UT", lat: 38.5733, lng: -109.5498, i: "🏜️", info: "Dias 16–18 • Arches, Canyonlands", days: [16,17,18], photo: 17 },
+        { n: "Twin Falls, ID", lat: 42.5558, lng: -114.4701, i: "🌊", info: "Dia 19 • Shoshone Falls", days: [19], photo: 19 },
+        { n: "Mt. Rainier NP", lat: 46.8523, lng: -121.7603, i: "🌋", info: "Dia 21 • Paradise", days: [21], photo: 21 },
+        { n: "Olympic NP", lat: 47.9504, lng: -124.3855, i: "🧛", info: "Dias 21–22 • Hoh, Ruby Beach", days: [21,22], photo: 22 },
+        { n: "Cannon Beach", lat: 45.8918, lng: -123.9615, i: "🌅", info: "Dia 23 • Haystack Rock", days: [23], photo: 23 },
+        { n: "Costa Oregon", lat: 43.3407, lng: -124.2132, i: "🌊", info: "Dia 24 • Thor's Well, Samuel Boardman", days: [24], photo: 24 },
+        { n: "Redwood NP", lat: 41.7558, lng: -124.2026, i: "🦕", info: "Dias 25–26 • Fern Canyon, Tall Trees", days: [25,26], photo: 26 },
+        { n: "San Francisco", lat: 37.7749, lng: -122.4194, i: "🌉", info: "Dias 27–29 • Golden Gate, Alcatraz", days: [27,28,29], photo: 28 },
+        { n: "Santa Barbara", lat: 34.4208, lng: -119.6982, i: "🏖️", info: "Dia 30 • PCH + costa", days: [30,31], photo: 30 },
         { n: "Los Angeles, CA", lat: 34.0522, lng: -118.2437, i: "🎬", info: "Dias 31–33 • Griffith, Venice", days: [31,32,33], photo: 32 }
     ];
 
@@ -1458,7 +1455,7 @@ function mapUpdateDay(dayNum, fly) {
     var range = document.getElementById('mapScrubRange');
     if (range) range.value = dayNum;
     var scrubLabel = document.getElementById('mapScrubLabel');
-    if (scrubLabel) scrubLabel.textContent = dayNum + ' / 33';
+    if (scrubLabel) scrubLabel.textContent = dayNum + ' / ' + totalDays;
     var scrubLoc = document.getElementById('mapScrubLoc');
     if (scrubLoc) {
         var dl = days.find(function(x) { return x.day === dayNum; });
@@ -1582,7 +1579,7 @@ function mapToggleLayer(key) {
 
 function mapScrubTo(val) {
     var d = parseInt(val);
-    if (d >= 1 && d <= 33) mapUpdateDay(d, true);
+    if (d >= 1 && d <= totalDays) mapUpdateDay(d, true);
 }
 
 function mapScrubPrev() {
@@ -1590,7 +1587,7 @@ function mapScrubPrev() {
 }
 
 function mapScrubNext() {
-    if (mapScrubDay < 33) mapScrubTo(mapScrubDay + 1);
+    if (mapScrubDay < totalDays) mapScrubTo(mapScrubDay + 1);
 }
 
 // ==================== OFFLINE MAP TILES ====================
@@ -1685,18 +1682,17 @@ function latLngToTile(lat, lng, zoom) {
 
 // ==================== INIT ====================
 function getTodayDay() {
-    // Trip dates: Day 1 = Jan 21 2027, Day 33 = Feb 22 2027
-    var tripStart = new Date(2027, 0, 21); // Jan 21 2027
+    var tripStart = new Date(TRIP_START);
     var today = new Date();
     today.setHours(0,0,0,0);
     tripStart.setHours(0,0,0,0);
     var diff = Math.floor((today - tripStart) / 86400000) + 1;
-    if (diff >= 1 && diff <= 33) return diff;
+    if (diff >= 1 && diff <= totalDays) return diff;
     return 1;
 }
 
 function updateCountdown() {
-    var tripStart = new Date(2027, 0, 21);
+    var tripStart = new Date(TRIP_START);
     var today = new Date();
     today.setHours(0,0,0,0);
     tripStart.setHours(0,0,0,0);
@@ -2093,7 +2089,7 @@ function renderExplore() {
 function findDayByDate(dateStr) {
     var parts = dateStr.split('/');
     var d = parseInt(parts[0]), m = parseInt(parts[1]);
-    var tripStart = new Date(2027, 0, 21);
+    var tripStart = new Date(TRIP_START);
     var target = new Date(2027, m - 1, d);
     var diff = Math.round((target - tripStart) / 86400000) + 1;
     return Math.max(1, Math.min(diff, totalDays));
