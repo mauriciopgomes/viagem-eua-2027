@@ -643,7 +643,7 @@ test('dayRouteSegments tem segmentos para dias de estrada', () => {
     const match = allJs.match(/var dayRouteSegments\s*=\s*\{([\s\S]*?)\};/);
     assert(match, 'dayRouteSegments deve existir');
     // Dias com estrada significativa
-    [5, 9, 11, 12, 15, 16, 17, 18, 20, 21, 22, 23, 24, 26, 27, 29, 31].forEach((d) => {
+    [5, 6, 7, 9, 13, 15, 16, 19, 20, 21, 23, 24, 25, 26, 27, 30, 31].forEach((d) => {
         assert(match[1].includes(`${d}:`), `dayRouteSegments[${d}] ausente`);
     });
 });
