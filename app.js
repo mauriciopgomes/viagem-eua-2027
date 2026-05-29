@@ -1280,161 +1280,148 @@ var mapScrubDay = 1;
 // Day → coordinate mapping for fly-to
 var dayCoords = {
     1:[40.7580,-73.9855], 2:[40.7580,-73.9855], 3:[40.7580,-73.9855], 4:[40.7580,-73.9855],
-    5:[37.4849,-119.9663], 6:[37.8651,-119.5383], 7:[37.0,-119.3],
-    8:[36.5640,-118.7510], 9:[36.1699,-115.1398], 10:[36.1699,-115.1398],
-    11:[36.1699,-115.1398], 12:[36.1699,-115.1398], 13:[36.0544,-112.1401],
-    14:[37.0215,-112.5263], 15:[37.2090,-112.9871], 16:[38.5733,-109.5498],
-    17:[38.5733,-109.5498], 18:[38.5733,-109.5498], 19:[40.7608,-111.8910],
-    20:[45.5,-121.0], 21:[47.0,-123.5], 22:[47.9504,-124.3855],
-    23:[45.8918,-123.9615], 24:[43.3665,-124.2179], 25:[41.7558,-124.2026],
-    26:[40.8021,-124.1637], 27:[37.7749,-122.4194], 28:[37.7749,-122.4194],
-    29:[37.7749,-122.4194], 30:[36.0,-121.0], 31:[34.2,-118.8],
+    5:[36.1699,-115.1398], 6:[36.1699,-115.1398], 7:[36.1699,-115.1398], 8:[36.1699,-115.1398],
+    9:[36.0544,-112.1401], 10:[37.2090,-112.9871], 11:[37.6283,-112.1677],
+    12:[38.5733,-109.5498], 13:[38.5733,-109.5498], 14:[38.5733,-109.5498],
+    15:[40.7608,-111.8910], 16:[45.5,-121.0], 17:[47.0,-123.5],
+    18:[47.9504,-124.3855], 19:[45.8918,-123.9615], 20:[43.3665,-124.2179],
+    21:[41.7558,-124.2026], 22:[40.8021,-124.1637], 23:[37.7749,-122.4194],
+    24:[37.7749,-122.4194], 25:[37.7749,-122.4194], 26:[37.7749,-122.4194],
+    27:[36.6,-121.9], 28:[37.8651,-119.5383], 29:[37.8651,-119.5383],
+    30:[36.5640,-118.7510], 31:[34.0522,-118.2437],
     32:[34.0522,-118.2437], 33:[34.0522,-118.2437]
 };
 
 // Route split by day index (cumulative coordinates for progress)
 var routeCoords = [
-    // Day 5: LAX → Mariposa (I-5 N → CA-99 N → CA-140 E) — west valley
+    // Day 5: LAX → Vegas (I-10 → I-15 N)
     [33.94,-118.41],  // 0: LAX
-    [34.30,-118.47],  // 1: I-5 through San Fernando
-    [34.84,-118.87],  // 2: Lebec/Tejon Pass SC
-    [35.40,-119.05],  // 3: I-5/CA-99 Bakersfield (west)
-    [35.88,-119.30],  // 4: Delano (CA-99 N)
-    [36.32,-119.65],  // 5: Tulare area
-    [36.75,-119.82],  // 6: Fresno west (CA-99)
-    [37.30,-120.48],  // 7: Merced SC
-    [37.49,-119.97],  // 8: Mariposa
-    // Days 6-7: Yosemite → Three Rivers — east valley via Clovis/Reedley
-    [37.87,-119.54],  // 9: Yosemite Valley
-    [37.33,-119.65],  // 10: Oakhurst SC (CA-41 S)
-    [37.06,-119.58],  // 11: Coarsegold (CA-41 S)
-    [36.82,-119.68],  // 12: Clovis/E. Fresno
-    [36.60,-119.40],  // 13: Reedley/Dinuba (CA-63 S)
-    [36.33,-119.29],  // 14: Visalia SC
-    [36.45,-118.91],  // 15: Three Rivers
-    // Day 9: Three Rivers → Vegas (CA-65 S → CA-58 E → I-15 NE)
-    [36.06,-118.96],  // 16: Porterville (CA-65 S)
-    [35.40,-118.98],  // 17: Bakersfield (east, CA-58)
-    [35.13,-118.44],  // 18: Tehachapi Pass
-    [35.05,-118.17],  // 19: Mojave
-    [34.90,-117.02],  // 20: Barstow SC
-    [35.27,-116.07],  // 21: Baker (I-15)
-    [35.61,-115.39],  // 22: Primm/NV border
-    [36.17,-115.14],  // 23: Las Vegas
-    // Day 13: Vegas → GC → Zion (US-93 → I-40 → AZ-64 → US-89)
-    [35.98,-114.83],  // 24: Boulder City
-    [35.20,-114.05],  // 25: Kingman SC
-    [35.25,-112.19],  // 26: Williams (I-40 E)
-    [36.06,-112.14],  // 27: Grand Canyon
-    [36.81,-111.63],  // 28: Marble Canyon (US-89A)
-    [36.86,-112.53],  // 29: Kanab (US-89)
-    [37.02,-112.53],  // 30: Zion/Springdale
-    // Day 15: Zion → Bryce (UT-9 → US-89 → UT-12)
-    [37.29,-112.68],  // 31: UT-9/US-89 junction
-    [37.68,-112.15],  // 32: US-89 N (Panguitch area)
-    [37.63,-112.17],  // 33: UT-12 junction
-    [37.21,-112.99],  // 34: Bryce Canyon
-    // Day 16: Bryce → Moab (US-89 → UT-24 → I-70 → US-191)
-    [37.76,-112.33],  // 35: US-89 N
-    [38.29,-111.57],  // 36: Capitol Reef/UT-24 area
-    [38.75,-111.50],  // 37: I-70 junction
-    [38.99,-110.16],  // 38: Green River SC
-    [38.57,-109.55],  // 39: Moab
-    // Day 19: Moab → SLC → Twin Falls
-    [38.99,-110.16],  // 40: Green River (backtrack I-70)
-    [39.60,-110.81],  // 41: Price SC (US-6 W)
-    [39.97,-111.53],  // 42: Spanish Fork (US-6/I-15)
-    [40.76,-111.89],  // 43: SLC
-    [41.07,-112.25],  // 44: Antelope Island
-    [40.76,-111.89],  // 45: SLC (back)
-    [41.73,-112.17],  // 46: Brigham City (I-15 N)
-    [42.00,-112.45],  // 47: I-84 W junction
-    [42.56,-114.46],  // 48: Twin Falls
-    // Day 20: Twin Falls → Centralia (I-84 W → I-82 → I-5 N)
-    [42.87,-115.54],  // 49: I-84 W
-    [43.62,-116.20],  // 50: Boise SC
-    [44.05,-116.97],  // 51: Ontario, OR area
-    [44.77,-117.83],  // 52: Baker City SC
-    [45.67,-118.79],  // 53: Pendleton SC
-    [45.60,-121.18],  // 54: The Dalles SC
-    [45.57,-122.40],  // 55: Troutdale/Portland area
-    [46.07,-122.88],  // 56: Kelso (I-5 N)
-    [46.72,-122.95],  // 57: Centralia
-    // Day 21: Centralia → Rainier → Forks
-    [46.85,-121.76],  // 58: Mt. Rainier
-    [47.04,-122.90],  // 59: Olympia SC
-    [47.30,-123.10],  // 60: US-101 N
-    [47.59,-123.79],  // 61: US-101 W (Queets area)
-    [47.95,-124.39],  // 62: Forks
-    // Day 23: Forks → Cannon Beach (US-101 S)
-    [47.50,-124.35],  // 63: US-101 S
-    [46.98,-123.82],  // 64: Aberdeen SC
-    [46.19,-123.83],  // 65: Astoria
-    [45.89,-123.96],  // 66: Cannon Beach
-    // Day 24: Oregon Coast (US-101 S)
-    [45.37,-123.97],  // 67: Lincoln City SC
-    [44.96,-124.02],  // 68: Newport
-    [43.97,-124.10],  // 69: Florence/Dunes
-    [43.37,-124.22],  // 70: Coos Bay SC
-    [42.86,-124.42],  // 71: Brookings area
-    [42.41,-124.42],  // 72: Gold Beach
-    // Day 25: → Crescent City
-    [41.94,-124.20],  // 73: Brookings
-    [41.76,-124.20],  // 74: Crescent City
-    // Day 26: → Eureka (US-101 S)
-    [41.20,-124.09],  // 75: Prairie Creek/Orick
-    [40.80,-124.16],  // 76: Eureka
-    // Day 27: Eureka → SF (US-101 S)
-    [40.10,-123.79],  // 77: Garberville
-    [39.15,-123.21],  // 78: Ukiah SC
-    [38.44,-122.72],  // 79: Santa Rosa
-    [38.07,-122.88],  // 80: Point Reyes area
-    [37.77,-122.42],  // 81: San Francisco
-    // Day 30: SF → PCH south → Santa Barbara
-    [37.46,-122.43],  // 82: Half Moon Bay
-    [36.97,-122.03],  // 83: Santa Cruz
-    [36.60,-121.89],  // 84: Monterey
-    [36.37,-121.90],  // 85: Carmel
-    [36.27,-121.81],  // 86: Big Sur
-    [35.97,-121.47],  // 87: south Big Sur coast
-    [35.66,-121.25],  // 88: San Simeon/Elephant Seal
-    [35.28,-120.66],  // 89: SLO SC
-    [34.95,-120.44],  // 90: Santa Maria
-    [34.61,-120.19],  // 91: Gaviota
-    [34.42,-119.70],  // 92: Santa Barbara
-    // Day 31: Santa Barbara → LA (US-101 → PCH)
-    [34.28,-119.29],  // 93: Ventura
-    [34.09,-119.04],  // 94: Point Mugu
-    [34.03,-118.69],  // 95: Malibu
-    [34.02,-118.49],  // 96: Santa Monica
-    [34.05,-118.24]   // 97: LA
+    [34.10,-117.89],  // 1: Ontario / I-15 junction
+    [34.90,-117.02],  // 2: Barstow SC
+    [35.27,-116.07],  // 3: Baker
+    [35.61,-115.39],  // 4: Primm / NV border
+    [36.17,-115.14],  // 5: Las Vegas
+    // Day 9: Vegas → GC → Zion (US-93 → I-40 → AZ-64 → US-89)
+    [35.98,-114.83],  // 6: Boulder City
+    [35.20,-114.05],  // 7: Kingman SC
+    [35.25,-112.19],  // 8: Williams
+    [36.06,-112.14],  // 9: Grand Canyon
+    [36.81,-111.63],  // 10: Marble Canyon
+    [36.86,-112.53],  // 11: Kanab
+    [37.02,-112.53],  // 12: Zion / Springdale
+    // Day 11: Zion → Bryce (UT-9 → US-89 → UT-12)
+    [37.29,-112.68],  // 13: UT-9/US-89 junction
+    [37.68,-112.15],  // 14: Panguitch area
+    [37.63,-112.17],  // 15: UT-12 junction
+    [37.21,-112.99],  // 16: Bryce Canyon
+    // Day 12: Bryce → Moab (US-89 → UT-24 → I-70 → US-191)
+    [37.76,-112.33],  // 17: US-89 N
+    [38.29,-111.57],  // 18: Capitol Reef area
+    [38.75,-111.50],  // 19: I-70 junction
+    [38.99,-110.16],  // 20: Green River SC
+    [38.57,-109.55],  // 21: Moab
+    // Day 15: Moab → SLC → Twin Falls
+    [38.99,-110.16],  // 22: Green River (backtrack)
+    [39.60,-110.81],  // 23: Price SC
+    [39.97,-111.53],  // 24: Spanish Fork
+    [40.76,-111.89],  // 25: SLC
+    [41.07,-112.25],  // 26: Antelope Island
+    [40.76,-111.89],  // 27: SLC (back)
+    [41.73,-112.17],  // 28: Brigham City
+    [42.00,-112.45],  // 29: I-84 junction
+    [42.56,-114.46],  // 30: Twin Falls
+    // Day 16: Twin Falls → Centralia (I-84 W → I-82 → I-5 N)
+    [42.87,-115.54],  // 31: I-84 W
+    [43.62,-116.20],  // 32: Boise
+    [44.05,-116.97],  // 33: Ontario OR
+    [44.77,-117.83],  // 34: Baker City SC
+    [45.67,-118.79],  // 35: Pendleton SC
+    [45.60,-121.18],  // 36: The Dalles SC
+    [45.57,-122.40],  // 37: Portland area
+    [46.07,-122.88],  // 38: Kelso
+    [46.72,-122.95],  // 39: Centralia
+    // Day 17: Centralia → Rainier → Forks
+    [46.85,-121.76],  // 40: Mt. Rainier
+    [47.04,-122.90],  // 41: Olympia SC
+    [47.30,-123.10],  // 42: US-101
+    [47.59,-123.79],  // 43: Queets area
+    [47.95,-124.39],  // 44: Forks
+    // Day 19: Forks → Cannon Beach (US-101 S)
+    [47.50,-124.35],  // 45: US-101 S
+    [46.98,-123.82],  // 46: Aberdeen SC
+    [46.19,-123.83],  // 47: Astoria
+    [45.89,-123.96],  // 48: Cannon Beach
+    // Day 20: Oregon Coast (US-101 S)
+    [45.37,-123.97],  // 49: Lincoln City SC
+    [44.96,-124.02],  // 50: Newport
+    [43.97,-124.10],  // 51: Florence / Dunes
+    [43.37,-124.22],  // 52: Coos Bay SC
+    [42.86,-124.42],  // 53: Brookings
+    [42.41,-124.42],  // 54: Gold Beach
+    // Day 21: → Crescent City
+    [41.94,-124.20],  // 55: Brookings
+    [41.76,-124.20],  // 56: Crescent City
+    // Day 22: → Eureka (US-101 S)
+    [41.20,-124.09],  // 57: Prairie Creek / Orick
+    [40.80,-124.16],  // 58: Eureka
+    // Day 23: Eureka → SF (US-101 S)
+    [40.10,-123.79],  // 59: Garberville
+    [39.15,-123.21],  // 60: Ukiah SC
+    [38.44,-122.72],  // 61: Santa Rosa
+    [38.07,-122.88],  // 62: Point Reyes area
+    [37.77,-122.42],  // 63: San Francisco
+    // Day 27: SF → PCH → Mariposa / Yosemite
+    [37.46,-122.43],  // 64: Half Moon Bay
+    [36.97,-122.03],  // 65: Santa Cruz
+    [36.60,-121.89],  // 66: Monterey
+    [36.55,-121.92],  // 67: Carmel
+    [36.83,-121.40],  // 68: inland (Hwy 156)
+    [37.30,-120.48],  // 69: Merced SC
+    [37.49,-119.97],  // 70: Mariposa
+    // Day 28-29: Yosemite (day trip)
+    [37.74,-119.60],  // 71: Yosemite Valley
+    // Day 30: Mariposa → KC → Sequoia → Three Rivers
+    [37.33,-119.65],  // 72: Oakhurst
+    [37.06,-119.58],  // 73: Coarsegold
+    [36.82,-119.68],  // 74: Fresno area
+    [36.80,-118.68],  // 75: Kings Canyon
+    [36.56,-118.77],  // 76: Sequoia
+    [36.45,-118.91],  // 77: Three Rivers
+    // Day 31: Three Rivers → LA
+    [36.06,-118.96],  // 78: Porterville
+    [35.37,-119.02],  // 79: Bakersfield SC
+    [35.13,-118.44],  // 80: Tehachapi
+    [34.90,-118.17],  // 81: Palmdale
+    [34.50,-118.15],  // 82: Santa Clarita
+    [34.05,-118.24]   // 83: LA
 ];
 
 // Day index → route coord index (approximate)
 var dayRouteIdx = {
-    1:0,2:0,3:0,4:0,5:8,6:9,7:15,8:15,9:23,10:23,11:23,12:23,13:30,14:30,
-    15:34,16:39,17:39,18:39,19:48,20:57,21:62,22:62,23:66,24:72,
-    25:74,26:76,27:81,28:81,29:81,30:92,31:97,32:97,33:97
+    1:0,2:0,3:0,4:0,5:5,6:5,7:5,8:5,9:12,10:12,
+    11:16,12:21,13:21,14:21,15:30,16:39,17:44,18:44,19:48,20:54,
+    21:56,22:58,23:63,24:63,25:63,26:63,27:70,28:71,29:71,
+    30:77,31:83,32:83,33:83
 };
 
 // Route coordinates per day for day-route highlighting
 var dayRouteSegments = {
-    5: [[33.94,-118.41],[34.30,-118.47],[34.84,-118.87],[35.40,-119.05],[35.88,-119.30],[36.32,-119.65],[36.75,-119.82],[37.30,-120.48],[37.49,-119.97]],
-    6: [[37.49,-119.97],[37.87,-119.54]],
-    7: [[37.87,-119.54],[37.33,-119.65],[37.06,-119.58],[36.82,-119.68],[36.60,-119.40],[36.33,-119.29],[36.45,-118.91]],
-    9: [[36.45,-118.91],[36.06,-118.96],[35.40,-118.98],[35.13,-118.44],[35.05,-118.17],[34.90,-117.02],[35.27,-116.07],[35.61,-115.39],[36.17,-115.14]],
-    13: [[36.17,-115.14],[35.98,-114.83],[35.20,-114.05],[35.25,-112.19],[36.06,-112.14],[36.81,-111.63],[36.86,-112.53],[37.02,-112.53]],
-    15: [[37.02,-112.53],[37.29,-112.68],[37.68,-112.15],[37.63,-112.17],[37.21,-112.99]],
-    16: [[37.21,-112.99],[37.76,-112.33],[38.29,-111.57],[38.75,-111.50],[38.57,-110.70],[38.99,-110.16],[38.57,-109.55]],
-    19: [[38.57,-109.55],[38.99,-110.16],[39.60,-110.81],[39.97,-111.53],[40.76,-111.89],[41.07,-112.25],[40.76,-111.89],[41.73,-112.17],[42.00,-112.45],[42.56,-114.46]],
-    20: [[42.56,-114.46],[42.87,-115.54],[43.62,-116.20],[44.05,-116.97],[44.77,-117.83],[45.67,-118.79],[45.60,-121.18],[45.57,-122.40],[46.07,-122.88],[46.72,-122.95]],
-    21: [[46.72,-122.95],[46.85,-121.76],[47.04,-122.90],[47.30,-123.10],[47.59,-123.79],[47.95,-124.39]],
-    23: [[47.95,-124.39],[47.61,-124.37],[47.50,-124.35],[46.98,-123.82],[46.19,-123.83],[45.89,-123.96]],
-    24: [[45.89,-123.96],[45.37,-123.97],[44.96,-124.02],[43.97,-124.10],[43.72,-124.12],[43.37,-124.22],[42.86,-124.42],[42.41,-124.42]],
-    25: [[42.41,-124.42],[41.94,-124.20],[41.76,-124.20]],
-    26: [[41.76,-124.20],[41.20,-124.09],[40.80,-124.16]],
-    27: [[40.80,-124.16],[40.10,-123.79],[39.15,-123.21],[39.45,-123.81],[39.31,-123.80],[38.44,-122.72],[38.07,-122.88],[37.77,-122.42]],
-    30: [[37.77,-122.42],[37.46,-122.43],[36.97,-122.03],[36.60,-121.89],[36.37,-121.90],[36.27,-121.81],[35.97,-121.47],[35.66,-121.25],[35.28,-120.66],[34.95,-120.44],[34.61,-120.19],[34.42,-119.70],[34.28,-119.29],[34.09,-119.04],[34.03,-118.69],[34.02,-118.49],[34.05,-118.24]]
+    5: [[33.94,-118.41],[34.10,-117.89],[34.90,-117.02],[35.27,-116.07],[35.61,-115.39],[36.17,-115.14]],
+    9: [[36.17,-115.14],[35.98,-114.83],[35.20,-114.05],[35.25,-112.19],[36.06,-112.14],[36.81,-111.63],[36.86,-112.53],[37.02,-112.53]],
+    11: [[37.02,-112.53],[37.29,-112.68],[37.68,-112.15],[37.63,-112.17],[37.21,-112.99]],
+    12: [[37.21,-112.99],[37.76,-112.33],[38.29,-111.57],[38.75,-111.50],[38.99,-110.16],[38.57,-109.55]],
+    15: [[38.57,-109.55],[38.99,-110.16],[39.60,-110.81],[39.97,-111.53],[40.76,-111.89],[41.07,-112.25],[40.76,-111.89],[41.73,-112.17],[42.00,-112.45],[42.56,-114.46]],
+    16: [[42.56,-114.46],[42.87,-115.54],[43.62,-116.20],[44.05,-116.97],[44.77,-117.83],[45.67,-118.79],[45.60,-121.18],[45.57,-122.40],[46.07,-122.88],[46.72,-122.95]],
+    17: [[46.72,-122.95],[46.85,-121.76],[47.04,-122.90],[47.30,-123.10],[47.59,-123.79],[47.95,-124.39]],
+    19: [[47.95,-124.39],[47.50,-124.35],[46.98,-123.82],[46.19,-123.83],[45.89,-123.96]],
+    20: [[45.89,-123.96],[45.37,-123.97],[44.96,-124.02],[43.97,-124.10],[43.37,-124.22],[42.86,-124.42],[42.41,-124.42]],
+    21: [[42.41,-124.42],[41.94,-124.20],[41.76,-124.20]],
+    22: [[41.76,-124.20],[41.20,-124.09],[40.80,-124.16]],
+    23: [[40.80,-124.16],[40.10,-123.79],[39.15,-123.21],[38.44,-122.72],[38.07,-122.88],[37.77,-122.42]],
+    27: [[37.77,-122.42],[37.46,-122.43],[36.97,-122.03],[36.60,-121.89],[36.55,-121.92],[36.83,-121.40],[37.30,-120.48],[37.49,-119.97]],
+    28: [[37.49,-119.97],[37.74,-119.60]],
+    30: [[37.49,-119.97],[37.33,-119.65],[37.06,-119.58],[36.82,-119.68],[36.80,-118.68],[36.56,-118.77],[36.45,-118.91]],
+    31: [[36.45,-118.91],[36.06,-118.96],[35.37,-119.02],[35.13,-118.44],[34.90,-118.17],[34.50,-118.15],[34.05,-118.24]]
 };
 
 // Day stats for stats card
@@ -1443,34 +1430,34 @@ var dayStats = {
     2: { km: '—', drive: '', hotel: 'Marriott Marquis' },
     3: { km: '—', drive: '', hotel: 'Marriott Marquis' },
     4: { km: '—', drive: '', hotel: 'Marriott Marquis' },
-    5: { km: '~460', drive: 'LAX → Mariposa', hotel: 'Mariposa' },
-    6: { km: '~110', drive: 'Yosemite NP', hotel: 'Mariposa' },
-    7: { km: '~200', drive: 'Yosemite → Three Rivers', hotel: 'Three Rivers' },
-    8: { km: '~100', drive: 'Sequoia NP', hotel: 'Three Rivers' },
-    9: { km: '~430', drive: 'Three Rivers → Vegas', hotel: 'Las Vegas' },
-    10: { km: '~110', drive: 'Mt. Charleston', hotel: 'Las Vegas' },
-    11: { km: '~100', drive: 'Valley of Fire', hotel: 'Las Vegas' },
-    12: { km: '~380', drive: 'Death Valley', hotel: 'Las Vegas' },
-    13: { km: '~700', drive: 'Vegas → GC → Zion', hotel: 'Springdale' },
-    14: { km: '~30', drive: 'Zion NP', hotel: 'Springdale' },
-    15: { km: '~130', drive: 'Zion → Bryce', hotel: 'Bryce Canyon' },
-    16: { km: '~490', drive: 'Bryce → Goblin Valley → Moab', hotel: 'Moab' },
-    17: { km: '~80', drive: 'Canyonlands', hotel: 'Moab' },
-    18: { km: '~50', drive: 'Arches NP', hotel: 'Moab' },
-    19: { km: '~770', drive: 'Moab → SLC → Twin Falls', hotel: 'Twin Falls' },
-    20: { km: '~670', drive: 'Twin Falls → Centralia', hotel: 'Centralia' },
-    21: { km: '~500', drive: 'Centralia → Rainier → Forks', hotel: 'Forks' },
-    22: { km: '~100', drive: 'Olympic NP', hotel: 'Forks' },
-    23: { km: '~380', drive: 'Forks → Cannon Beach', hotel: 'Cannon Beach' },
-    24: { km: '~350', drive: 'Costa Oregon', hotel: 'Gold Beach' },
-    25: { km: '~160', drive: 'Redwood NP', hotel: 'Crescent City' },
-    26: { km: '~130', drive: 'Crescent City → Eureka', hotel: 'Eureka' },
-    27: { km: '~440', drive: 'Eureka → SF', hotel: 'San Francisco' },
-    28: { km: '~30', drive: 'San Francisco', hotel: 'San Francisco' },
-    29: { km: '~30', drive: 'San Francisco', hotel: 'San Francisco' },
-    30: { km: '~750', drive: 'SF → PCH → LA', hotel: 'Los Angeles' },
-    31: { km: '~50', drive: 'LA: praias + descanso', hotel: 'Los Angeles' },
-    32: { km: '~80', drive: 'LA: Hollywood, shopping', hotel: 'Los Angeles' },
+    5: { km: '~430', drive: 'LAX → Las Vegas', hotel: 'Las Vegas' },
+    6: { km: '~110', drive: 'Mt. Charleston', hotel: 'Las Vegas' },
+    7: { km: '~100', drive: 'Valley of Fire', hotel: 'Las Vegas' },
+    8: { km: '~380', drive: 'Death Valley', hotel: 'Las Vegas' },
+    9: { km: '~700', drive: 'Vegas → GC → Zion', hotel: 'Springdale' },
+    10: { km: '~30', drive: 'Zion NP', hotel: 'Springdale' },
+    11: { km: '~130', drive: 'Zion → Bryce', hotel: 'Bryce Canyon' },
+    12: { km: '~490', drive: 'Bryce → Goblin Valley → Moab', hotel: 'Moab' },
+    13: { km: '~80', drive: 'Canyonlands', hotel: 'Moab' },
+    14: { km: '~50', drive: 'Arches NP', hotel: 'Moab' },
+    15: { km: '~770', drive: 'Moab → SLC → Twin Falls', hotel: 'Twin Falls' },
+    16: { km: '~670', drive: 'Twin Falls → Centralia', hotel: 'Centralia' },
+    17: { km: '~500', drive: 'Centralia → Rainier → Forks', hotel: 'Forks' },
+    18: { km: '~100', drive: 'Olympic NP', hotel: 'Forks' },
+    19: { km: '~380', drive: 'Forks → Cannon Beach', hotel: 'Cannon Beach' },
+    20: { km: '~350', drive: 'Costa Oregon', hotel: 'Gold Beach' },
+    21: { km: '~160', drive: 'Redwood NP', hotel: 'Crescent City' },
+    22: { km: '~130', drive: 'Crescent City → Eureka', hotel: 'Eureka' },
+    23: { km: '~440', drive: 'Eureka → SF', hotel: 'San Francisco' },
+    24: { km: '~30', drive: 'San Francisco', hotel: 'San Francisco' },
+    25: { km: '~30', drive: 'San Francisco', hotel: 'San Francisco' },
+    26: { km: '~30', drive: 'San Francisco', hotel: 'San Francisco' },
+    27: { km: '~450', drive: 'SF → PCH → Yosemite', hotel: 'Mariposa' },
+    28: { km: '~110', drive: 'Yosemite NP', hotel: 'Mariposa' },
+    29: { km: '~110', drive: 'Yosemite NP', hotel: 'Mariposa' },
+    30: { km: '~250', drive: 'Mariposa → KC → Sequoia', hotel: 'Three Rivers' },
+    31: { km: '~330', drive: 'Three Rivers → LA', hotel: 'Los Angeles' },
+    32: { km: '~80', drive: 'LA: Hollywood, Griffith', hotel: 'Los Angeles' },
     33: { km: '~30', drive: 'LAX → voo', hotel: '✈️ Volta!' }
 };
 
@@ -1511,22 +1498,22 @@ function doInitMap() {
     // ---- STOPS LAYER (with photo markers) ----
     var stops = [
         { n: "New York", lat: 40.7580, lng: -73.9855, i: "✈️", info: "Dias 1–4 • 4 noites\nMarriott Marquis, Times Square", days: [1,2,3,4], photo: 1 },
-        { n: "Mariposa / Yosemite", lat: 37.4849, lng: -119.9663, i: "🏞️", info: "Dias 5–7 • Yosemite NP", days: [5,6,7], photo: 6 },
-        { n: "Three Rivers / Sequoia", lat: 36.4519, lng: -118.9054, i: "🌲", info: "Dias 7–8 • Sequoia + Kings Canyon", days: [7,8], photo: 8 },
-        { n: "Las Vegas", lat: 36.1699, lng: -115.1398, i: "🎰", info: "Dias 9–12 • 4 noites", days: [9,10,11,12], photo: 9 },
-        { n: "Grand Canyon", lat: 36.0544, lng: -112.1401, i: "🏞️", info: "Dia 13 • Mather Point", days: [13], photo: 13 },
-        { n: "Zion NP", lat: 37.2090, lng: -112.9871, i: "🏞️", info: "Dias 13–15 • Watchman, Emerald Pools", days: [13,14,15], photo: 14 },
-        { n: "Bryce Canyon", lat: 37.6283, lng: -112.1677, i: "🏔️", info: "Dias 15–16 • Hoodoos + stargazing", days: [15,16], photo: 15 },
-        { n: "Moab, UT", lat: 38.5733, lng: -109.5498, i: "🏜️", info: "Dias 16–18 • Arches, Canyonlands", days: [16,17,18], photo: 17 },
-        { n: "Twin Falls, ID", lat: 42.5558, lng: -114.4701, i: "🌊", info: "Dia 19 • Perrine Bridge, Evel Knievel Jump Site, Shoshone Falls", days: [19], photo: 19 },
-        { n: "Mt. Rainier NP", lat: 46.8523, lng: -121.7603, i: "🌋", info: "Dia 21 • Paradise", days: [21], photo: 21 },
-        { n: "Olympic NP", lat: 47.9504, lng: -124.3855, i: "🧛", info: "Dias 21–22 • Hoh, Ruby Beach", days: [21,22], photo: 22 },
-        { n: "Cannon Beach", lat: 45.8918, lng: -123.9615, i: "🌅", info: "Dia 23 • Haystack Rock", days: [23], photo: 23 },
-        { n: "Costa Oregon", lat: 43.3407, lng: -124.2132, i: "🌊", info: "Dia 24 • Thor's Well, Samuel Boardman", days: [24], photo: 24 },
-        { n: "Redwood NP", lat: 41.7558, lng: -124.2026, i: "🦕", info: "Dias 25–26 • Fern Canyon, Tall Trees", days: [25,26], photo: 26 },
-        { n: "San Francisco", lat: 37.7749, lng: -122.4194, i: "🌉", info: "Dias 27–29 • Golden Gate, Alcatraz", days: [27,28,29], photo: 28 },
-        { n: "Santa Barbara", lat: 34.4208, lng: -119.6982, i: "🏖️", info: "Dia 30 • PCH + costa", days: [30,31], photo: 30 },
-        { n: "Los Angeles, CA", lat: 34.0522, lng: -118.2437, i: "🎬", info: "Dias 31–33 • Griffith, Venice", days: [31,32,33], photo: 32 }
+        { n: "Las Vegas", lat: 36.1699, lng: -115.1398, i: "🎰", info: "Dias 5–8 • 4 noites", days: [5,6,7,8], photo: 5 },
+        { n: "Grand Canyon", lat: 36.0544, lng: -112.1401, i: "🏞️", info: "Dia 9 • Mather Point", days: [9], photo: 9 },
+        { n: "Zion NP", lat: 37.2090, lng: -112.9871, i: "🏞️", info: "Dias 9–11 • Watchman, Emerald Pools", days: [9,10,11], photo: 10 },
+        { n: "Bryce Canyon", lat: 37.6283, lng: -112.1677, i: "🏔️", info: "Dias 11–12 • Hoodoos + stargazing", days: [11,12], photo: 11 },
+        { n: "Moab, UT", lat: 38.5733, lng: -109.5498, i: "🏜️", info: "Dias 12–14 • Arches, Canyonlands", days: [12,13,14], photo: 13 },
+        { n: "Twin Falls, ID", lat: 42.5558, lng: -114.4701, i: "🌊", info: "Dia 15 • Perrine Bridge, Shoshone Falls", days: [15], photo: 15 },
+        { n: "Mt. Rainier NP", lat: 46.8523, lng: -121.7603, i: "🌋", info: "Dia 17 • Paradise", days: [17], photo: 17 },
+        { n: "Olympic NP", lat: 47.9504, lng: -124.3855, i: "🧛", info: "Dias 17–18 • Hoh, Ruby Beach", days: [17,18], photo: 18 },
+        { n: "Cannon Beach", lat: 45.8918, lng: -123.9615, i: "🌅", info: "Dia 19 • Haystack Rock", days: [19], photo: 19 },
+        { n: "Costa Oregon", lat: 43.3407, lng: -124.2132, i: "🌊", info: "Dia 20 • Thor's Well, Samuel Boardman", days: [20], photo: 20 },
+        { n: "Redwood NP", lat: 41.7558, lng: -124.2026, i: "🦕", info: "Dias 21–22 • Fern Canyon, Tall Trees", days: [21,22], photo: 22 },
+        { n: "San Francisco", lat: 37.7749, lng: -122.4194, i: "🌉", info: "Dias 23–26 • Golden Gate, Alcatraz", days: [23,24,25,26], photo: 24 },
+        { n: "Monterey / PCH", lat: 36.6002, lng: -121.8947, i: "🏖️", info: "Dia 27 • PCH, 17-Mile Drive", days: [27], photo: 27 },
+        { n: "Mariposa / Yosemite", lat: 37.4849, lng: -119.9663, i: "🏞️", info: "Dias 27–29 • Yosemite NP", days: [27,28,29], photo: 28 },
+        { n: "Three Rivers / Sequoia", lat: 36.4519, lng: -118.9054, i: "🌲", info: "Dia 30 • Sequoia + Kings Canyon", days: [30], photo: 30 },
+        { n: "Los Angeles, CA", lat: 34.0522, lng: -118.2437, i: "🎬", info: "Dias 31–33 • Griffith, Hollywood", days: [31,32,33], photo: 32 }
     ];
 
     mapLayers.stops = L.layerGroup();
@@ -1569,9 +1556,9 @@ function doInitMap() {
         "Centralia, WA": [46.7218,-122.9542], "Olympia / Centralia, WA": [47.0379,-122.9007],
         "Aberdeen, WA": [46.9754,-123.8157], "Lincoln City, OR": [44.9581,-124.0159],
         "Coos Bay, OR": [43.3665,-124.2179], "Eureka, CA": [40.8021,-124.1637],
-        "Ukiah, CA": [39.1502,-123.2078], "Monterey / Salinas, CA": [36.6780,-121.6555],
-        "Merced, CA": [37.3022,-120.4830], "Oakhurst, CA": [37.3268,-119.6487],
-        "Visalia, CA": [36.3302,-119.2921], "Tejon / Lebec, CA": [34.9876,-118.9148]
+        "Ukiah, CA": [39.1502,-123.2078], "Gilroy, CA": [37.0058,-121.5882],
+        "Merced, CA": [37.3022,-120.4830], "Fresno, CA": [36.7378,-119.7871],
+        "Bakersfield, CA": [35.3733,-119.0187]
     };
     mapLayers.sc = L.layerGroup();
     superchargers.forEach(function(sc) {

@@ -1,7 +1,7 @@
 // ==================== TRIP DATA ====================
 // Roteiro Alternativo — Viagem EUA 2027
-// NYC → LAX → Yosemite → Sequoia → Vegas → GC → Zion → Bryce → Moab
-// → Twin Falls → PNW → Costa Oregon → Redwood → SF → PCH → LA
+// NYC → LAX → Vegas → GC → Zion → Bryce → Moab
+// → Twin Falls → PNW → Costa Oregon → Redwood → SF → PCH → Yosemite → Sequoia → LA
 //
 // Para REORDENAR dias: mova os objetos dentro do array `days`.
 // initDays() recalcula automaticamente: número, data, dia da semana, dayPhotos e superchargers.
@@ -94,150 +94,50 @@ const days = [
         ]
     },
 
-    // ==================== YOSEMITE + SEQUOIA (Dias 5-8) ====================
+    // ==================== LAS VEGAS (Dias 5-8) ====================
     {
-        photo: 'img/dia-05.jpg', shortLoc: 'Mariposa',
+        photo: 'img/dia-05.jpg', shortLoc: 'Vegas',
         chargeStops: [
-            { name: 'Tejon/Lebec, CA', leg: 'LAX → Mariposa', critical: false },
-            { name: 'Merced, CA', leg: 'LAX → Mariposa', critical: false }
+            { name: 'Barstow, CA', leg: 'LAX → Vegas', critical: false }
         ],
-        location: "New York → LAX → Mariposa",
-        route: "NY → LA → Yosemite! ✈️🚗",
-        note: "Check-out do Marriott, voo pro LAX, Tesla e direto pra Yosemite!",
-        region: "ca",
+        location: "New York → LAX → Las Vegas",
+        route: "NY → LA → Vegas! ✈️🚗",
+        note: "Check-out do Marriott, voo pro LAX, Tesla e direto pra Vegas!",
+        region: "nv",
         items: [
             { time: "07:30", text: "☕ Café no Marriott Marquis", type: "" },
             { time: "08:00", text: "🏨 Check-out", type: "" },
             { time: "08:30", text: "🚕 Times Square → JFK", type: "drive" },
             { time: "~09:30", text: "Chegada no JFK — check-in / despachar malas", type: "" },
             { time: "11:00", text: "✈️ Voo AA 3 → Los Angeles (~5.5h)", type: "drive" },
-            { time: "14:20", text: "✈️ Chegada no LAX (horário local, -3h)", type: "drive" },
-            { time: "~15:30", text: "🚗 Retirada do <strong>Tesla Model Y</strong>", type: "drive" },
-            { time: "16:00", text: "🛣️ Saída rumo a <strong>Mariposa</strong> (~460 km, ~5h via I-5 N → CA-99 N → CA-140 E)", type: "drive" },
-            { time: "18:00", text: "⚡ <strong>Supercharger Tejon/Lebec</strong> (~130 km) — ~25 min", type: "charge" },
-            { time: "20:00", text: "⚡ <strong>Supercharger Merced</strong> (~270 km) — ~25 min", type: "charge" },
-            { time: "~21:00", text: "🏨 Chegada em <strong>Mariposa</strong>! Check-in", type: "" },
-            { time: "21:30", text: "🍽️ Jantar em Mariposa", type: "food" }
+            { time: "13:20", text: "✈️ Chegada no LAX (horário local, -3h)", type: "drive" },
+            { time: "~14:00", text: "🚗 Retirada do <strong>Tesla Model Y</strong>", type: "drive" },
+            { time: "14:30", text: "🛣️ Saída rumo a <strong>Las Vegas</strong> (~430 km, ~4.5h via I-15 N)", type: "drive" },
+            { time: "16:30", text: "⚡🍽️ <strong>Supercharger Barstow</strong> (~200 km) — ~25 min + lanche", type: "charge" },
+            { time: "~19:00", text: "🎰 Chegada em <strong>Las Vegas</strong>! Check-in", type: "" },
+            { time: "19:30", text: "🍽️ Jantar perto do hotel", type: "food" },
+            { time: "21:00", text: "🏨 Dormir cedo (jet lag + dia longo!)", type: "" }
         ],
-        tips: ["⚡ Dia longo mas o fuso horário ajuda (-3h). Chegam cansados — dormir cedo pra Yosemite amanhã!"]
+        tips: ["⚡ Dia longo mas o fuso horário ajuda (-3h). Chegam cansados — dormir cedo!"]
     },
     {
-        photo: 'img/dia-08.jpg', shortLoc: 'Yosemite', location: "Yosemite NP dia cheio",
-        route: "Nascer do sol em Tunnel View! 🏞️",
-        note: "Saída cedo de Mariposa — Cachoeiras, El Capitan e neve!",
-        region: "ca",
-        items: [
-            { time: "06:00", text: "☕ Café rápido", type: "" },
-            { time: "06:15", text: "🚗 Saída rumo a <strong>Yosemite</strong> (~55 km, ~45 min via CA-140)", type: "drive" },
-            { time: "07:00", text: "🌅 Nascer do sol em <strong>Tunnel View</strong> — El Capitan, Half Dome, Bridalveil Fall!", type: "highlight" },
-            { time: "08:30", text: "☕ Café da manhã", type: "food" },
-            { time: "09:00", text: "🥾 <strong>Lower Yosemite Fall Trail</strong> (~30 min) — base da cachoeira", type: "" },
-            { time: "10:00", text: "📸 <strong>El Capitan Meadow</strong> — paredão de 900m", type: "" },
-            { time: "11:00", text: "🌉 <strong>Swinging Bridge</strong> — vista clássica de Yosemite Falls", type: "" },
-            { time: "12:00", text: "🍽️ Almoço no Yosemite Village", type: "food" },
-            { time: "13:00", text: "🥾 <strong>Bridalveil Fall Trail</strong> (curta, ~20 min)", type: "" },
-            { time: "13:30", text: "📸 <strong>Sentinel Bridge</strong> — Half Dome refletido no rio Merced", type: "" },
-            { time: "14:00", text: "⛄ <strong>Badger Pass</strong> — brincar na neve! Boneco de neve, guerra de bolas, sled", type: "highlight" },
-            { time: "16:00", text: "📸 <strong>Cook's Meadow Loop</strong>", type: "" },
-            { time: "17:00", text: "🌅 Pôr do sol no <strong>Valley View</strong>", type: "highlight" },
-            { time: "18:30", text: "🍽️ Jantar — Yosemite Village ou <strong>Majestic Yosemite Hotel</strong>", type: "food" },
-            { time: "~20:00", text: "🚗 Volta pra Mariposa (~45 min)", type: "drive" }
-        ],
-        tips: ["❄️ Yosemite nevado em janeiro é LINDO! Menos turistas, silêncio, neve nos picos."]
-    },
-    {
-        photo: 'img/dia-09.jpg', shortLoc: 'Yosemite',
-        chargeStops: [
-            { name: 'Oakhurst, CA', leg: 'Yosemite → Three Rivers', critical: false },
-            { name: 'Visalia, CA', leg: 'Yosemite → Three Rivers', critical: true, note: '⚠️ CARREGAR ATÉ 100% — Sequoia sem carregadores!' }
-        ],
-        location: "Yosemite manhã → Three Rivers",
-        route: "Despedida de Yosemite + Three Rivers! 🌲",
-        note: "Manhã em Yosemite — últimas trilhas. Tarde: estrada pra Three Rivers.",
-        region: "ca",
-        items: [
-            { time: "06:30", text: "☕ Café + check-out de Mariposa", type: "" },
-            { time: "07:00", text: "🚗 Entrada em Yosemite", type: "drive" },
-            { time: "07:30", text: "🌅 Nascer do sol em <strong>Cook's Meadow</strong>", type: "highlight" },
-            { time: "08:30", text: "🥾 <strong>Vernal Fall Footbridge Trail</strong> (~3 km) — cachoeira congelada!", type: "" },
-            { time: "10:00", text: "📸 <strong>Yosemite Chapel</strong> — linda na neve", type: "" },
-            { time: "10:30", text: "🖼️ <strong>Ansel Adams Gallery</strong> — fotografias icônicas", type: "" },
-            { time: "11:30", text: "🌲 <strong>Yosemite Village</strong> — Visitor Center, lojinhas", type: "" },
-            { time: "12:30", text: "🍽️ Almoço no parque", type: "food" },
-            { time: "13:30", text: "📸 Últimas fotos — <strong>Tunnel View</strong> de despedida", type: "" },
-            { time: "14:00", text: "🚗 Saída rumo a <strong>Three Rivers</strong> (~200 km, ~3h via CA-41 S)", type: "drive" },
-            { time: "15:00", text: "⚡ <strong>Supercharger Oakhurst</strong> (~60 km) — ~20 min", type: "charge" },
-            { time: "16:30", text: "⚡🍽️ <strong>Supercharger Visalia</strong> — ⚠️ <strong>CARREGAR ATÉ 100%!</strong> (~40 min) — Sequoia não tem carregadores!", type: "charge" },
-            { time: "~18:00", text: "🏨 Chegada em <strong>Three Rivers</strong>! Check-in", type: "" },
-            { time: "18:30", text: "🍽️ Jantar em Three Rivers", type: "food" }
-        ]
-    },
-    {
-        photo: 'img/dia-06.jpg', shortLoc: 'Sequoia', location: "Sequoia + Kings Canyon",
-        route: "General Sherman + Moro Rock! 🌲",
-        note: "Dia inteiro entre as maiores árvores do mundo!",
-        region: "ca",
-        items: [
-            { time: "07:00", text: "☕ Café", type: "" },
-            { time: "07:30", text: "🚗 Entrada no <strong>Sequoia NP</strong> via Ash Mountain (CA-198)", type: "drive" },
-            { time: "08:30", text: "🚗 Subir Generals Highway até <strong>Grant Grove</strong> (Kings Canyon)", type: "drive" },
-            { time: "09:00", text: "🌲 <strong>General Grant Tree Trail</strong> (~1 km loop) — a 'árvore de Natal da nação'!", type: "highlight" },
-            { time: "10:00", text: "🚗 Voltar pela Generals Highway rumo sul", type: "drive" },
-            { time: "10:30", text: "🌲 <strong>General Sherman Tree</strong> — a maior árvore do mundo em volume!", type: "highlight" },
-            { time: "11:00", text: "🥾 <strong>Congress Trail</strong> (~3 km loop) — entre sequoias gigantes", type: "" },
-            { time: "12:30", text: "🍽️ Almoço (levar lanche — poucas opções no parque)", type: "food" },
-            { time: "13:30", text: "📸 <strong>Moro Rock</strong> — escadaria de 400 degraus com vista 360° (se aberto)", type: "highlight" },
-            { time: "14:30", text: "📸 <strong>Tunnel Log</strong> — tronco caído que dá pra passar de carro!", type: "" },
-            { time: "15:00", text: "🌲 <strong>Auto Log</strong> + fotos entre as sequoias", type: "" },
-            { time: "16:00", text: "🌅 Pôr do sol no parque", type: "highlight" },
-            { time: "17:30", text: "🚗 Descida pra Three Rivers", type: "drive" },
-            { time: "18:00", text: "🍽️ Jantar em Three Rivers", type: "food" }
-        ],
-        tips: ["❄️ Em janeiro pode ter neve nas áreas mais altas.", "⚠️ Kings Canyon Scenic Byway (CA-180 leste) fecha no inverno (nov–abr). Só General Grant Tree é acessível."]
-    },
-
-    // ==================== LAS VEGAS (Dias 9-12) ====================
-    {
-        photo: 'img/dia-33.jpg', shortLoc: 'Vegas',
-        chargeStops: [
-            { name: 'Bakersfield, CA', leg: 'Three Rivers → Vegas', critical: false },
-            { name: 'Barstow, CA', leg: 'Three Rivers → Vegas', critical: false }
-        ],
-        location: "Three Rivers → Las Vegas",
-        route: "Rumo a Vegas! 🎰",
-        note: "Chegada no início da tarde pra curtir a Strip.",
-        region: "nv",
-        items: [
-            { time: "08:00", text: "☕ Café + check-out de Three Rivers", type: "" },
-            { time: "08:30", text: "🚗 Saída rumo a <strong>Las Vegas</strong> (~430 km, ~4.5h via CA-99 S → CA-58 E → I-15 N)", type: "drive" },
-            { time: "10:00", text: "⚡ <strong>Supercharger Bakersfield</strong> (~170 km) — ~25 min", type: "charge" },
-            { time: "10:45", text: "🛤️ <strong>Tehachapi Loop</strong> — mirante da famosa curva ferroviária! Trens fazem um loop completo!", type: "" },
-            { time: "12:00", text: "⚡🍽️ <strong>Supercharger Barstow</strong> (~200 km) — ~25 min + almoço", type: "charge" },
-            { time: "12:45", text: "🌡️ <strong>World's Tallest Thermometer</strong> — termômetro de 40m em Baker, CA! Ao lado: <strong>Alien Fresh Jerky</strong> 🛸", type: "" },
-            { time: "~14:00", text: "🎰 Chegada em <strong>Las Vegas</strong>! Check-in", type: "" },
-            { time: "14:30", text: "🏨 Descanso / piscina do hotel", type: "" },
-            { time: "16:00", text: "📸 <strong>Welcome to Las Vegas Sign</strong> — foto icônica!", type: "" },
-            { time: "16:30", text: "🚶 Passeio pelos <strong>hotéis temáticos</strong> — Venetian, Bellagio (jardim + fontes), Caesars Palace", type: "highlight" },
-            { time: "19:00", text: "🍽️ Jantar na Strip", type: "food" },
-            { time: "21:00", text: "🌃 Passeio noturno pela <strong>Strip</strong> — Bellagio Fountains, cassinos, neon!", type: "highlight" }
-        ]
-    },
-    {
-        photo: 'img/dia-29.jpg', shortLoc: 'Vegas', location: "Mt. Charleston + Vegas",
+        photo: 'img/dia-29.jpg', shortLoc: 'Vegas', location: "Welcome Sign + Mt. Charleston",
         route: "Neve a 45 min de Vegas! 🏔️",
-        note: "Contraste incrível: neve nas montanhas → deserto na Strip!",
+        note: "Foto no Welcome Sign de manhã + neve em Mt. Charleston!",
         region: "nv",
         items: [
-            { time: "07:30", text: "☕ Café + saída", type: "" },
-            { time: "08:15", text: "🚗 Rumo a <strong>Mt. Charleston</strong> (~55 km, ~45 min)", type: "drive" },
-            { time: "09:00", text: "🏔️ <strong>Kyle Canyon Scenic Drive</strong> — neve nas montanhas!", type: "" },
-            { time: "09:30", text: "⛄ Parada — <strong>brincar na neve!</strong> Boneco de neve, guerra de bolas!", type: "highlight" },
-            { time: "10:30", text: "🥾 <strong>Cathedral Rock Trail</strong> (~4 km, ~1.5h) — vista panorâmica", type: "" },
+            { time: "08:15", text: "☕ Café", type: "" },
+            { time: "09:00", text: "📸 <strong>Welcome to Las Vegas Sign</strong> — foto icônica!", type: "highlight" },
+            { time: "09:30", text: "🚗 Rumo a <strong>Mt. Charleston</strong> (~55 km, ~45 min)", type: "drive" },
+            { time: "10:15", text: "🏔️ <strong>Kyle Canyon Scenic Drive</strong> — neve nas montanhas!", type: "" },
+            { time: "10:45", text: "⛄ Parada — <strong>brincar na neve!</strong> Boneco de neve, guerra de bolas!", type: "highlight" },
             { time: "12:00", text: "☕ <strong>Mt. Charleston Lodge</strong> — chocolate quente com lareira!", type: "food" },
-            { time: "13:00", text: "🚗 Volta pra Vegas (~45 min)", type: "drive" },
-            { time: "14:30", text: "🏨 Hotéis temáticos — Venetian, Bellagio, Caesars Palace", type: "highlight" },
+            { time: "12:45", text: "🚗 Volta pra Vegas (~45 min)", type: "drive" },
+            { time: "14:00", text: "🍔 Almoço na Strip", type: "food" },
+            { time: "15:00", text: "🏨 Explorar hotéis — <strong>Venetian</strong> (canais), <strong>Bellagio</strong> (conservatório), <strong>Caesars Palace</strong>", type: "highlight" },
+            { time: "18:00", text: "🌅 <strong>Bellagio Fountains</strong> — show a cada 30 min!", type: "highlight" },
             { time: "19:00", text: "🍽️ Jantar na Strip", type: "food" },
-            { time: "21:00", text: "🌃 <strong>Strip à noite</strong> — Bellagio Fountains, cassinos, neon!", type: "highlight" }
+            { time: "20:30", text: "🌃 <strong>Strip à noite</strong> — cassinos, neon!", type: "highlight" }
         ],
         tips: ["🏔️ Mt. Charleston: pode estar -5°C com neve! Levar casaco, luvas e botas."]
     },
@@ -247,7 +147,6 @@ const days = [
         note: "Fire Wave + Elephant Rock de manhã, tarde livre na Strip.",
         region: "nv",
         items: [
-            { time: "07:30", text: "☕ Café + saída cedo", type: "" },
             { time: "08:45", text: "🚗 Rumo a <strong>Valley of Fire</strong> (~45 min pela I-15 N)", type: "drive" },
             { time: "09:30", text: "🔥 <strong>Valley of Fire</strong> — arenito vermelho surreal!", type: "highlight" },
             { time: "09:45", text: "🥾 <strong>Fire Wave Trail</strong> (~2 km) — ondas de rocha listrada!", type: "highlight" },
@@ -256,31 +155,33 @@ const days = [
             { time: "11:45", text: "🚗 Volta pra Vegas (~1h)", type: "drive" },
             { time: "12:45", text: "🍽️ Almoço na Strip", type: "food" },
             { time: "14:00", text: "Tempo livre — descanso, piscina, explorar a Strip", type: "" },
-            { time: "19:00", text: "🍽️ Jantar na Strip", type: "food" }
+            { time: "19:00", text: "🍽️ Jantar na Strip", type: "food" },
+            { time: "20:30", text: "🌃 Noite na Strip", type: "" }
         ]
     },
     {
         photo: 'img/dia-32.jpg', shortLoc: 'Vegas', location: "Day trip Death Valley 🏜️",
         route: "Ponto mais baixo das Américas!",
-        note: "Inverno é a melhor época pra Death Valley!",
+        note: "Última noite em Vegas! Inverno é a melhor época pra Death Valley.",
         region: "nv",
         items: [
-            { time: "07:00", text: "☕ Café + saída cedo de Vegas", type: "" },
-            { time: "~09:00", text: "🏜️ Chegada em <strong>Death Valley National Park</strong>", type: "" },
-            { time: "09:30", text: "📸 <strong>Zabriskie Point</strong> — formações douradas", type: "highlight" },
-            { time: "10:30", text: "🚗 <strong>Artist's Drive + Artist's Palette</strong> — montanhas coloridas", type: "" },
-            { time: "11:30", text: "⬇️ <strong>Badwater Basin</strong> — ponto mais baixo das Américas (-86m)!", type: "highlight" },
-            { time: "12:30", text: "🍽️ Almoço — lanche/picnic (levar de Vegas)", type: "food" },
-            { time: "13:30", text: "🏜️ <strong>Mesquite Flat Sand Dunes</strong> — dunas clássicas", type: "" },
-            { time: "14:30", text: "👀 <strong>Dante's View</strong> — mirante panorâmico", type: "" },
-            { time: "15:30", text: "🚗 Volta pra Vegas (~2h)", type: "drive" },
-            { time: "~17:30", text: "Chegada em Vegas — descanso", type: "" },
-            { time: "19:00", text: "🍽️ Jantar na Strip", type: "food" }
+            { time: "08:00", text: "☕ Café", type: "" },
+            { time: "08:30", text: "🚗 Rumo a <strong>Death Valley</strong> (~190 km, ~2h)", type: "drive" },
+            { time: "10:30", text: "⬇️ <strong>Badwater Basin</strong> — ponto mais baixo das Américas (-86m)!", type: "highlight" },
+            { time: "11:15", text: "🚗 <strong>Artist's Drive + Artist's Palette</strong> — montanhas coloridas", type: "" },
+            { time: "12:00", text: "🏜️ <strong>Devil's Golf Course</strong> — cristais de sal!", type: "" },
+            { time: "12:30", text: "📸 <strong>Zabriskie Point</strong> — formações douradas", type: "highlight" },
+            { time: "13:00", text: "🍽️ Almoço no <strong>Furnace Creek</strong>", type: "food" },
+            { time: "14:00", text: "🏜️ <strong>Mesquite Flat Sand Dunes</strong> — dunas clássicas!", type: "" },
+            { time: "15:00", text: "🚗 Volta pra Vegas (~2h)", type: "drive" },
+            { time: "17:00", text: "🏨 Chegada em Vegas — piscina / descanso", type: "" },
+            { time: "19:00", text: "🍽️ Jantar na Strip", type: "food" },
+            { time: "20:00", text: "🌃 Última noite em Vegas!", type: "" }
         ],
         tips: ["⚡ EV: Round trip ~380 km. Carregar a 100% na noite anterior!"]
     },
 
-    // ==================== UTAH (Dias 13-18) ====================
+    // ==================== UTAH (Dias 9-14) ====================
     {
         photo: 'img/dia-27.jpg', shortLoc: 'GC→Zion',
         chargeStops: [
@@ -425,7 +326,7 @@ const days = [
         ]
     },
 
-    // ==================== TRANSIÇÃO → PNW (Dias 19-20) ====================
+    // ==================== TRANSIÇÃO → PNW (Dias 15-16) ====================
     {
         photo: 'img/activities/shoshone_falls.jpg', shortLoc: 'Twin Falls',
         chargeStops: [
@@ -484,7 +385,7 @@ const days = [
         ]
     },
 
-    // ==================== PNW (Dias 21-24) ====================
+    // ==================== PNW (Dias 17-20) ====================
     {
         photo: 'img/dia-19.jpg', shortLoc: 'Rainier',
         chargeStops: [{ name: 'Olympia, WA', leg: 'Centralia → Rainier → Forks', critical: true, note: '⚠️ CARREGAR ATÉ 100% — Olympic 265 km sem SC!' }],
@@ -582,12 +483,12 @@ const days = [
         ]
     },
 
-    // ==================== REDWOOD (Dias 25-26) ====================
+    // ==================== REDWOOD (Dias 21-22) ====================
     {
-        photo: 'img/activities/stout_memorial_grove.jpg', shortLoc: 'Redwood', titleSuffix: ' ❤️',
-        location: "Redwood NP norte — Valentine's Day! ❤️",
+        photo: 'img/activities/stout_memorial_grove.jpg', shortLoc: 'Redwood',
+        location: "Redwood NP norte — Jedediah Smith! 🌲",
         route: "Jedediah Smith + Crescent City! 🌲",
-        note: "Valentine's Day entre as redwoods! Dia tranquilo perto de Crescent City.",
+        note: "Dia tranquilo entre redwoods perto de Crescent City.",
         region: "ca",
         items: [
             { time: "08:00", text: "☕ Café + check-out de Gold Beach", type: "" },
@@ -600,7 +501,7 @@ const days = [
             { time: "14:30", text: "🏝️ <strong>Battery Point Lighthouse</strong> — ilha acessível na maré baixa!", type: "" },
             { time: "15:30", text: "🌲 <strong>Del Norte Coast Redwoods SP</strong> — <strong>Damnation Creek Trail</strong> (~7 km, ~2.5h)", type: "highlight" },
             { time: "18:00", text: "🌅 Pôr do sol no porto de Crescent City", type: "" },
-            { time: "19:00", text: "🍽️ Jantar especial de Valentine's Day ❤️", type: "food" }
+            { time: "19:00", text: "🍽️ Jantar — frutos do mar!", type: "food" }
         ],
         tips: ["🌊 Battery Point: verificar tábua de marés! Só acessível na maré baixa."]
     },
@@ -631,7 +532,7 @@ const days = [
         tips: ["⚠️ Tall Trees Grove: permit gratuito no Thomas Clarke Info Center (Orick).", "⚠️ Fern Canyon: Davison Road pode fechar no inverno. Verificar em nps.gov/redw."]
     },
 
-    // ==================== SAN FRANCISCO (Dias 27-29) ====================
+    // ==================== SAN FRANCISCO (Dias 23-26) ====================
     {
         photo: 'img/dia-11.jpg', shortLoc: 'SF',
         chargeStops: [{ name: 'Ukiah, CA', leg: 'Eureka → SF', critical: false }],
@@ -672,9 +573,9 @@ const days = [
         ]
     },
     {
-        photo: 'img/activities/golden_gate_park.jpg', shortLoc: 'SF', location: "San Francisco dia cheio 2",
-        route: "Alcatraz + Golden Gate Park + Mission! 🏝️",
-        note: "Alcatraz de manhã, Golden Gate Park e Haight-Ashbury à tarde!",
+        photo: 'img/activities/golden_gate_park.jpg', shortLoc: 'SF', location: "San Francisco — Valentine's Day! ❤️",
+        route: "Alcatraz + Golden Gate Park + Valentine's! ❤️",
+        note: "Valentine's Day! Alcatraz de manhã, Golden Gate Park e jantar especial à noite!",
         region: "ca",
         items: [
             { time: "09:00", text: "☕ Café", type: "" },
@@ -685,55 +586,148 @@ const days = [
             { time: "15:00", text: "🎨 <strong>Mission District</strong> — murais, <strong>Painted Ladies</strong> (Alamo Square)", type: "" },
             { time: "16:00", text: "🏖️ <strong>Ocean Beach</strong> — praia do Pacífico", type: "" },
             { time: "17:00", text: "🛍️ <strong>Haight-Ashbury</strong> — berço da contracultura, lojas vintage", type: "" },
-            { time: "18:00", text: "🍽️ Jantar — <strong>Fog Harbor Fish House</strong> (Pier 39)", type: "food" }
+            { time: "18:00", text: "🍽️ Jantar especial de Valentine's Day ❤️ — <strong>Fog Harbor Fish House</strong> (Pier 39)", type: "food" }
         ],
         tips: ["⚠️ Alcatraz esgota meses antes! Comprar em alcatrazcruises.com (~$45/pessoa)."]
     },
-
-    // ==================== PCH + LA (Dias 30-32) ====================
     {
-        photo: 'img/activities/big_sur_coast.jpg', shortLoc: 'PCH',
+        photo: 'img/dia-12.jpg', shortLoc: 'SF', location: "San Francisco dia cheio 3",
+        route: "Golden Gate + Fisherman's Wharf! 🌉",
+        note: "Mais um dia em SF — Golden Gate, Painted Ladies, Chinatown!",
+        region: "ca",
+        items: [
+            { time: "08:30", text: "☕ Café", type: "" },
+            { time: "09:00", text: "🌉 <strong>Golden Gate Bridge</strong> — caminhada + fotos!", type: "highlight" },
+            { time: "10:00", text: "🏞️ <strong>Battery Spencer</strong> — vista icônica da ponte!", type: "highlight" },
+            { time: "11:00", text: "🦞 <strong>Fisherman's Wharf</strong> + Pier 39 — leões-marinhos!", type: "highlight" },
+            { time: "12:30", text: "🍽️ Almoço — clam chowder em pão!", type: "food" },
+            { time: "13:30", text: "🚋 <strong>Cable Car</strong> (Powell-Hyde line)", type: "highlight" },
+            { time: "14:30", text: "🏘️ <strong>Lombard Street</strong> — rua mais sinuosa!", type: "" },
+            { time: "15:00", text: "🎨 <strong>Painted Ladies</strong> — Alamo Square, casinhas vitorianas!", type: "" },
+            { time: "16:00", text: "🌳 <strong>Golden Gate Park</strong> — Japanese Tea Garden", type: "" },
+            { time: "17:30", text: "🌅 Sunset no Baker Beach", type: "highlight" },
+            { time: "19:00", text: "🍽️ Jantar no Chinatown", type: "food" }
+        ]
+    },
+
+    // ==================== PCH + YOSEMITE + SEQUOIA (Dias 27-30) ====================
+    {
+        photo: 'img/activities/big_sur_coast.jpg', shortLoc: 'Yosemite',
         chargeStops: [
-            { name: 'San Luis Obispo, CA', leg: 'SF → PCH → LA', critical: false },
-            { name: 'Santa Barbara, CA', leg: 'SF → PCH → LA', critical: false }
+            { name: 'Gilroy, CA', leg: 'SF → Yosemite', critical: false },
+            { name: 'Merced, CA', leg: 'SF → Yosemite', critical: false }
         ],
-        location: "SF → PCH → LA",
-        route: "Pacific Coast Highway num dia! 🌊",
-        note: "Bixby Bridge, Big Sur, elefantes-marinhos + direto pra LA! Se PCH fechada: I-5 (~6h).",
+        location: "SF → PCH → Yosemite",
+        route: "Bixby Bridge + drive pra Yosemite! 🌊🏔️",
+        note: "PCH de manhã, depois corta pro interior rumo a Yosemite!",
         region: "ca",
         items: [
             { time: "07:00", text: "☕ Café + check-out de SF", type: "" },
-            { time: "07:30", text: "🚗 Highway 1 sul", type: "drive" },
-            { time: "09:00", text: "🏄 <strong>Santa Cruz</strong> — boardwalk, parada rápida", type: "" },
-            { time: "10:30", text: "🚗 <strong>Monterey</strong> — Cannery Row", type: "" },
-            { time: "11:30", text: "🍽️ Almoço em <strong>Carmel-by-the-Sea</strong>", type: "food" },
-            { time: "12:30", text: "📸 <strong>Bixby Creek Bridge</strong> — a ponte mais fotografada da CA!", type: "highlight" },
-            { time: "13:00", text: "🏞️ <strong>Big Sur</strong> — McWay Falls!", type: "highlight" },
-            { time: "14:30", text: "🦭 <strong>Elephant Seal Vista Point</strong> — centenas de elefantes-marinhos!", type: "highlight" },
-            { time: "15:00", text: "🚗 Highway 1 → US-101 S rumo LA", type: "drive" },
-            { time: "15:30", text: "⚡ <strong>Supercharger San Luis Obispo</strong> — ~25 min", type: "charge" },
-            { time: "17:00", text: "⚡ <strong>Supercharger Santa Barbara</strong> — ~20 min", type: "charge" },
-            { time: "~19:00", text: "🏨 Chegada em <strong>LA</strong>! Check-in", type: "" },
-            { time: "19:30", text: "🍽️ Jantar", type: "food" }
+            { time: "07:30", text: "🚗 Hwy 1 sul → <strong>Half Moon Bay</strong> (~45 min)", type: "drive" },
+            { time: "08:15", text: "🏖️ Parada rápida em Half Moon Bay", type: "" },
+            { time: "09:00", text: "🚗 Continue Hwy 1 → Monterey (~1.5h)", type: "drive" },
+            { time: "10:30", text: "🦞 <strong>Cannery Row</strong> — passear + café", type: "" },
+            { time: "11:15", text: "🚗 <strong>17-Mile Drive</strong> — Lone Cypress, Pebble Beach!", type: "highlight" },
+            { time: "12:15", text: "🌉 <strong>Bixby Creek Bridge</strong> — foto icônica!", type: "highlight" },
+            { time: "12:45", text: "🍽️ Almoço rápido em Big Sur / Carmel", type: "food" },
+            { time: "13:30", text: "🚗 Corta pro interior: Carmel → CA-68 → CA-99 → CA-140 → Yosemite (~300 km, ~3.5h)", type: "drive" },
+            { time: "14:00", text: "⚡ <strong>Supercharger Gilroy</strong> — ~20 min", type: "charge" },
+            { time: "15:30", text: "⚡ <strong>Supercharger Merced</strong> — ~20 min", type: "charge" },
+            { time: "~17:00", text: "🏨 Chegada em <strong>Mariposa</strong>! Check-in", type: "" },
+            { time: "18:00", text: "🍽️ Jantar em Mariposa", type: "food" }
         ],
-        tips: ["⚠️ Se Highway 1 estiver FECHADA em Big Sur (comum no inverno): SF → I-5 S → LA direto (~6h, ~600 km). Parar em Tejon SC.", "🔄 Nesse caso o dia fica leve — aproveitar pra descansar em LA!"]
+        tips: ["⚠️ Se Highway 1 estiver FECHADA em Big Sur: SF → I-5 S → CA-140 E direto pra Mariposa (~450 km, ~5h)."]
     },
     {
-        photo: 'img/activities/malibu_pch.jpg', shortLoc: 'LA',
-        location: "LA — praias + descanso 🧺",
-        route: "Dia leve: praias + lavanderia! 🏖️",
-        note: "Santa Monica, Venice Beach + lavar roupa e recarregar as energias!",
+        photo: 'img/dia-08.jpg', shortLoc: 'Yosemite', location: "Yosemite NP dia 1 — Valley",
+        route: "Tunnel View + cachoeiras + neve! 🏞️",
+        note: "Primeiro dia em Yosemite! Valley com neve — lindo!",
         region: "ca",
         items: [
-            { time: "09:00", text: "☕ Café com calma — sem pressa hoje!", type: "" },
-            { time: "10:00", text: "🧺 <strong>Lavanderia</strong> — lavar e secar roupa (~1.5h)", type: "" },
-            { time: "11:30", text: "🏖️ <strong>Santa Monica Pier</strong> — roda-gigante, praia, Route 66 End Sign!", type: "highlight" },
-            { time: "12:30", text: "🍽️ Almoço na praia", type: "food" },
-            { time: "13:30", text: "🏖️ <strong>Venice Beach</strong> — Muscle Beach, murais, Abbot Kinney Blvd", type: "" },
-            { time: "15:00", text: "🏝️ <strong>El Matador Beach</strong> — grutas e arcos de rocha! (~30 min de carro)", type: "highlight" },
-            { time: "16:30", text: "Tempo livre — descanso / piscina / compras", type: "" },
-            { time: "18:00", text: "🌅 Pôr do sol na praia!", type: "highlight" },
-            { time: "19:00", text: "🍽️ Jantar", type: "food" }
+            { time: "07:30", text: "☕ Café em Mariposa", type: "" },
+            { time: "08:00", text: "🚗 Drive Mariposa → Yosemite Valley (~1.5h via CA-140)", type: "drive" },
+            { time: "09:30", text: "📸 <strong>Tunnel View</strong> — vista icônica: El Capitan + Half Dome + Bridalveil!", type: "highlight" },
+            { time: "10:00", text: "🌊 <strong>Bridalveil Fall</strong> — trilha curta ~10 min", type: "" },
+            { time: "10:45", text: "🏔️ <strong>El Capitan Meadow</strong> — paredão de 900m!", type: "" },
+            { time: "11:30", text: "🌊 <strong>Yosemite Falls</strong> — Lower trail ~30 min — pode ter gelo!", type: "highlight" },
+            { time: "12:30", text: "🍽️ Almoço no Yosemite Valley Lodge", type: "food" },
+            { time: "13:30", text: "🪞 <strong>Mirror Lake</strong> — trilha ~3 km, reflexo do Half Dome!", type: "" },
+            { time: "15:00", text: "🌲 <strong>Valley View</strong> — foto clássica do Merced River", type: "" },
+            { time: "15:30", text: "📸 <strong>Swinging Bridge</strong> — outra vista do Yosemite Falls", type: "" },
+            { time: "16:30", text: "🌅 Sunset no <strong>Sentinel Bridge</strong> — Half Dome dourado!", type: "highlight" },
+            { time: "17:30", text: "🚗 Volta pra Mariposa (~45 min)", type: "drive" },
+            { time: "19:00", text: "🍽️ Jantar em Mariposa", type: "food" }
+        ],
+        tips: ["❄️ Yosemite nevado em fevereiro é LINDO! Menos turistas, silêncio, neve nos picos."]
+    },
+    {
+        photo: 'img/dia-09.jpg', shortLoc: 'Yosemite', location: "Yosemite NP dia 2 — Neve!",
+        route: "Badger Pass + trilhas na neve! ⛷️",
+        note: "Snow tubing, snowshoeing e mais Yosemite Valley!",
+        region: "ca",
+        items: [
+            { time: "07:30", text: "☕ Café em Mariposa", type: "" },
+            { time: "08:00", text: "🚗 Drive → Yosemite", type: "drive" },
+            { time: "09:00", text: "⛷️ <strong>Badger Pass Ski Area</strong> — snow tubing! Perfeito pra família!", type: "highlight" },
+            { time: "11:00", text: "🏔️ Snowshoeing guiado pelo ranger (grátis, ~2h)", type: "highlight" },
+            { time: "13:00", text: "🍽️ Almoço no Yosemite Valley", type: "food" },
+            { time: "14:00", text: "🌲 <strong>Cook's Meadow Loop</strong> — trilha fácil, Half Dome + Yosemite Falls com neve", type: "" },
+            { time: "15:00", text: "📸 Revisitar favoritos — luz diferente da tarde!", type: "" },
+            { time: "16:00", text: "🎨 <strong>Ansel Adams Gallery</strong> — fotografia icônica de Yosemite", type: "" },
+            { time: "16:30", text: "🌅 Sunset no <strong>Tunnel View</strong> — segunda chance, luz dourada!", type: "highlight" },
+            { time: "17:30", text: "🚗 Volta pra Mariposa", type: "drive" },
+            { time: "19:00", text: "🍽️ Jantar de despedida em Mariposa", type: "food" }
+        ]
+    },
+    {
+        photo: 'img/dia-06.jpg', shortLoc: 'Sequoia',
+        chargeStops: [
+            { name: 'Fresno, CA', leg: 'Mariposa → Sequoia', critical: false }
+        ],
+        location: "Mariposa → Kings Canyon → Sequoia",
+        route: "General Sherman + Moro Rock! 🌲",
+        note: "Dia inteiro entre as maiores árvores do mundo!",
+        region: "ca",
+        items: [
+            { time: "07:30", text: "☕ Café + check-out de Mariposa", type: "" },
+            { time: "08:00", text: "🚗 Drive Mariposa → Kings Canyon (~250 km, ~3.5h via Fresno)", type: "drive" },
+            { time: "09:30", text: "⚡ <strong>Supercharger Fresno</strong> — ~25 min", type: "charge" },
+            { time: "11:30", text: "🌲 <strong>General Grant Tree</strong> — 2ª maior sequoia do mundo!", type: "highlight" },
+            { time: "12:00", text: "🌲 <strong>North Grove Loop</strong> (~1 km) — floresta de sequoias gigantes!", type: "" },
+            { time: "12:45", text: "🍽️ Almoço (levar lanche ou Grant Grove Restaurant)", type: "food" },
+            { time: "13:30", text: "🚗 <strong>Generals Highway</strong> → Sequoia NP (~1h, estrada cênica!)", type: "drive" },
+            { time: "14:30", text: "🌲 <strong>General Sherman Tree</strong> — a MAIOR árvore do mundo! 84m!", type: "highlight" },
+            { time: "15:00", text: "🥾 <strong>Congress Trail</strong> (~3 km loop) — entre sequoias gigantes", type: "" },
+            { time: "16:00", text: "📸 <strong>Moro Rock</strong> — 400 degraus com vista 360°!", type: "highlight" },
+            { time: "17:00", text: "🚗 Descida → Three Rivers (~1h)", type: "drive" },
+            { time: "18:00", text: "🏨 Check-in em <strong>Three Rivers</strong>", type: "" },
+            { time: "19:00", text: "🍽️ Jantar em Three Rivers", type: "food" }
+        ],
+        tips: ["❄️ Em fevereiro pode ter neve nas áreas mais altas.", "⚠️ Kings Canyon Scenic Byway (CA-180 leste) fecha no inverno (nov–abr). Só General Grant Tree é acessível."]
+    },
+
+    // ==================== LA (Dias 31-33) ====================
+    {
+        photo: 'img/dia-33.jpg', shortLoc: 'LA',
+        chargeStops: [
+            { name: 'Bakersfield, CA', leg: 'Three Rivers → LA', critical: false }
+        ],
+        location: "Three Rivers → Los Angeles",
+        route: "Tehachapi Loop + rumo a LA! 🚗",
+        note: "Último dia de estrada! Parada no Tehachapi Loop, depois praias de LA.",
+        region: "ca",
+        items: [
+            { time: "08:00", text: "☕ Café + check-out de Three Rivers", type: "" },
+            { time: "08:30", text: "🚗 Saída rumo a LA (~330 km, ~3.5h)", type: "drive" },
+            { time: "10:00", text: "⚡ <strong>Supercharger Bakersfield</strong> (~180 km) — ~25 min", type: "charge" },
+            { time: "10:30", text: "🛤️ <strong>Tehachapi Loop</strong> — famoso loop ferroviário!", type: "" },
+            { time: "11:30", text: "🚗 Continue I-5 S → LA", type: "drive" },
+            { time: "~13:00", text: "🏨 Chegada em <strong>LA</strong>! Check-in", type: "" },
+            { time: "13:30", text: "🍽️ Almoço", type: "food" },
+            { time: "15:00", text: "🏖️ <strong>Santa Monica Pier</strong> — roda-gigante, Route 66 End Sign!", type: "highlight" },
+            { time: "16:30", text: "🌴 <strong>Venice Beach</strong> — boardwalk, Muscle Beach!", type: "" },
+            { time: "18:00", text: "🌅 Sunset na praia!", type: "highlight" },
+            { time: "19:00", text: "🍽️ Jantar em Santa Monica", type: "food" }
         ]
     },
     {
@@ -742,17 +736,16 @@ const days = [
         note: "Último dia completo nos EUA!",
         region: "ca",
         items: [
-            { time: "09:00", text: "☕ Café", type: "" },
-            { time: "10:00", text: "📸 <strong>Hollywood Sign</strong> — vista do Griffith Park", type: "" },
-            { time: "11:00", text: "📸 <strong>Hollywood Walk of Fame</strong> + <strong>TCL Chinese Theatre</strong>", type: "" },
-            { time: "12:00", text: "🍽️ Almoço", type: "food" },
-            { time: "13:00", text: "🛍️ <strong>The Grove + Farmers Market</strong>", type: "" },
-            { time: "15:00", text: "🛍️ Compras — <strong>Citadel Outlets</strong> ou <strong>The Americana at Brand</strong>", type: "" },
-            { time: "17:00", text: "🏖️ Praia — último mergulho!", type: "" },
+            { time: "08:30", text: "☕ Café", type: "" },
+            { time: "09:00", text: "⭐ <strong>Hollywood Walk of Fame</strong> + <strong>TCL Chinese Theatre</strong>", type: "" },
+            { time: "10:00", text: "📸 <strong>Hollywood Sign</strong> — vista do Griffith Observatory trail", type: "" },
+            { time: "11:00", text: "🔭 <strong>Griffith Observatory</strong> — vista panorâmica de LA!", type: "highlight" },
+            { time: "12:30", text: "🍽️ Almoço", type: "food" },
+            { time: "14:00", text: "🎬 <strong>Universal Studios Hollywood</strong> OU passeio livre (compras, Beverly Hills)", type: "highlight" },
             { time: "18:00", text: "🌅 Último pôr do sol nos EUA!", type: "highlight" },
             { time: "19:00", text: "🍽️ Último jantar nos EUA!", type: "food" },
-            { time: "20:30", text: "🔭 <strong>Griffith Observatory</strong> — gratuito + telescópios! Vista de LA iluminada. Despedida perfeita!", type: "highlight" },
-            { time: "22:00", text: "🧳 Hotel — arrumar malas, dormir cedo (voo amanhã!)", type: "" }
+            { time: "20:30", text: "🔭 <strong>Griffith Observatory à noite</strong> — LA iluminada!", type: "highlight" },
+            { time: "22:00", text: "🧳 Hotel — arrumar malas", type: "" }
         ]
     },
     {
@@ -762,9 +755,10 @@ const days = [
         region: "ca",
         items: [
             { time: "08:00", text: "☕ Café + check-out", type: "" },
-            { time: "09:00", text: "🚗 Devolução do Tesla no LAX", type: "drive" },
-            { time: "10:00", text: "Chegada no LAX — check-in", type: "" },
-            { time: "11:00", text: "🛍️ Últimas compras duty free", type: "" },
+            { time: "09:00", text: "🛍️ Manhã livre — compras de última hora", type: "" },
+            { time: "11:00", text: "🚗 Devolução do <strong>Tesla</strong> no LAX", type: "drive" },
+            { time: "12:00", text: "Chegada no LAX — check-in", type: "" },
+            { time: "13:00", text: "🛍️ Últimas compras duty free", type: "" },
             { time: "13:45", text: "✈️ Voo AA 608 → Miami (conexão)", type: "drive" },
             { time: "21:44", text: "Chegada em Miami", type: "" },
             { time: "22:55", text: "✈️ Voo AA 905 → Rio de Janeiro", type: "drive" }
@@ -776,36 +770,36 @@ const days = [
 // ==================== HOTELS ====================
 const hotels = [
     { num: 1, name: "Marriott Marquis, Times Square, NY", checkin: "21/01", checkout: "25/01", nights: 4 },
-    { num: 2, name: "Mariposa / El Portal, CA", checkin: "25/01", checkout: "27/01", nights: 2 },
-    { num: 3, name: "Three Rivers, CA (Sequoia)", checkin: "27/01", checkout: "29/01", nights: 2 },
-    { num: 4, name: "Las Vegas, NV", checkin: "29/01", checkout: "02/02", nights: 4 },
-    { num: 5, name: "Springdale, UT (Zion)", checkin: "02/02", checkout: "04/02", nights: 2 },
-    { num: 6, name: "Bryce Canyon, UT", checkin: "04/02", checkout: "05/02", nights: 1 },
-    { num: 7, name: "Moab, UT (Arches/Canyonlands)", checkin: "05/02", checkout: "08/02", nights: 3 },
-    { num: 8, name: "Twin Falls, ID", checkin: "08/02", checkout: "09/02", nights: 1 },
-    { num: 9, name: "Centralia, WA", checkin: "09/02", checkout: "10/02", nights: 1 },
-    { num: 10, name: "Forks / Port Angeles, WA (Olympic)", checkin: "10/02", checkout: "12/02", nights: 2 },
-    { num: 11, name: "Cannon Beach, OR", checkin: "12/02", checkout: "13/02", nights: 1 },
-    { num: 12, name: "Gold Beach / Coos Bay, OR", checkin: "13/02", checkout: "14/02", nights: 1 },
-    { num: 13, name: "Crescent City / Klamath, CA", checkin: "14/02", checkout: "15/02", nights: 1 },
-    { num: 14, name: "Eureka / Arcata, CA", checkin: "15/02", checkout: "16/02", nights: 1 },
-    { num: 15, name: "San Francisco, CA", checkin: "16/02", checkout: "19/02", nights: 3 },
-    { num: 16, name: "Los Angeles, CA", checkin: "19/02", checkout: "22/02", nights: 3 }
+    { num: 2, name: "Las Vegas, NV", checkin: "25/01", checkout: "29/01", nights: 4 },
+    { num: 3, name: "Springdale, UT (Zion)", checkin: "29/01", checkout: "31/01", nights: 2 },
+    { num: 4, name: "Bryce Canyon, UT", checkin: "31/01", checkout: "01/02", nights: 1 },
+    { num: 5, name: "Moab, UT (Arches/Canyonlands)", checkin: "01/02", checkout: "04/02", nights: 3 },
+    { num: 6, name: "Twin Falls, ID", checkin: "04/02", checkout: "05/02", nights: 1 },
+    { num: 7, name: "Centralia, WA", checkin: "05/02", checkout: "06/02", nights: 1 },
+    { num: 8, name: "Forks / Port Angeles, WA (Olympic)", checkin: "06/02", checkout: "08/02", nights: 2 },
+    { num: 9, name: "Cannon Beach, OR", checkin: "08/02", checkout: "09/02", nights: 1 },
+    { num: 10, name: "Gold Beach / Coos Bay, OR", checkin: "09/02", checkout: "10/02", nights: 1 },
+    { num: 11, name: "Crescent City / Klamath, CA", checkin: "10/02", checkout: "11/02", nights: 1 },
+    { num: 12, name: "Eureka / Arcata, CA", checkin: "11/02", checkout: "12/02", nights: 1 },
+    { num: 13, name: "San Francisco, CA", checkin: "12/02", checkout: "16/02", nights: 4 },
+    { num: 14, name: "Mariposa / El Portal, CA", checkin: "16/02", checkout: "19/02", nights: 3 },
+    { num: 15, name: "Three Rivers, CA (Sequoia)", checkin: "19/02", checkout: "20/02", nights: 1 },
+    { num: 16, name: "Los Angeles, CA", checkin: "20/02", checkout: "22/02", nights: 2 }
 ];
 
 // ==================== NATIONAL PARKS ====================
 const parks = [
-    { name: "🏞️ Yosemite National Park", days: "Dias 6–7", highlights: "Tunnel View, El Capitan, Half Dome, Yosemite Falls, Vernal Fall, Badger Pass." },
-    { name: "🌲 Sequoia + Kings Canyon NP", days: "Dia 8", highlights: "General Sherman Tree (maior árvore!), Congress Trail, Moro Rock, General Grant Tree." },
-    { name: "🏜️ Death Valley National Park", days: "Dia 12", highlights: "Badwater Basin (-86m!), Zabriskie Point, Artist's Palette, Mesquite Sand Dunes." },
-    { name: "🏞️ Grand Canyon National Park", days: "Dia 13", highlights: "Mather Point, Rim Trail, Yavapai Geology Museum, Bright Angel, Hopi Point." },
-    { name: "🏞️ Zion National Park", days: "Dias 14–15", highlights: "Watchman Trail, Emerald Pools, Canyon Overlook Trail, Riverside Walk." },
-    { name: "🏔️ Bryce Canyon National Park", days: "Dias 15–16", highlights: "Navajo Loop, Queen's Garden, hoodoos, Bryce Amphitheater, stargazing!" },
-    { name: "🏜️ Canyonlands National Park", days: "Dia 17", highlights: "Mesa Arch sunrise, Grand View Point, Upheaval Dome, Aztec Butte." },
-    { name: "🏜️ Arches National Park", days: "Dia 18", highlights: "Delicate Arch, Windows, Double Arch, Landscape Arch (93m!), Fiery Furnace." },
-    { name: "🌋 Mt. Rainier National Park", days: "Dia 21", highlights: "Paradise, neve, vulcão de 4.392m." },
-    { name: "🌲 Olympic National Park", days: "Dias 21–22", highlights: "Hoh Rain Forest, Hall of Mosses, Ruby Beach, La Push (Twilight!), Sol Duc Falls." },
-    { name: "🌲 Redwood National Park", days: "Dias 25–26", highlights: "Stout Memorial Grove, Fern Canyon (Jurassic Park 2!), Tall Trees, Lady Bird Johnson, Avenue of Giants." }
+    { name: "🏜️ Death Valley National Park", days: "Dia 8", highlights: "Badwater Basin (-86m!), Zabriskie Point, Artist's Palette, Devil's Golf Course, Mesquite Sand Dunes." },
+    { name: "🏞️ Grand Canyon National Park", days: "Dia 9", highlights: "Mather Point, Rim Trail, Yavapai Geology Museum, Bright Angel, Hopi Point." },
+    { name: "🏞️ Zion National Park", days: "Dias 10–11", highlights: "Watchman Trail, Emerald Pools, Canyon Overlook Trail, Riverside Walk." },
+    { name: "🏔️ Bryce Canyon National Park", days: "Dias 11–12", highlights: "Navajo Loop, Queen's Garden, hoodoos, Bryce Amphitheater, stargazing!" },
+    { name: "🏜️ Canyonlands National Park", days: "Dia 13", highlights: "Mesa Arch sunrise, Grand View Point, Upheaval Dome, Aztec Butte." },
+    { name: "🏜️ Arches National Park", days: "Dia 14", highlights: "Delicate Arch, Windows, Double Arch, Landscape Arch (93m!), Fiery Furnace." },
+    { name: "🌋 Mt. Rainier National Park", days: "Dia 17", highlights: "Paradise, neve, vulcão de 4.392m." },
+    { name: "🌲 Olympic National Park", days: "Dias 17–18", highlights: "Hoh Rain Forest, Hall of Mosses, Ruby Beach, La Push (Twilight!), Sol Duc Falls." },
+    { name: "🌲 Redwood National Park", days: "Dias 21–22", highlights: "Stout Memorial Grove, Fern Canyon (Jurassic Park 2!), Tall Trees, Lady Bird Johnson, Avenue of Giants." },
+    { name: "🏞️ Yosemite National Park", days: "Dias 28–29", highlights: "Tunnel View, El Capitan, Half Dome, Yosemite Falls, Badger Pass, Mirror Lake." },
+    { name: "🌲 Sequoia + Kings Canyon NP", days: "Dia 30", highlights: "General Sherman Tree (maior árvore!), Congress Trail, Moro Rock, General Grant Tree." }
 ];
 
 // ==================== REORDERING SYSTEM ====================

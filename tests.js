@@ -219,9 +219,9 @@ test('parques referenciam dias válidos', () => {
 // ==================== 5. DATA.JS — SUPERCHARGERS ====================
 section('data.js — Superchargers');
 
-test('superchargers é um array com 25 paradas', () => {
+test('superchargers é um array com 22 paradas', () => {
     assert(Array.isArray(superchargers), 'superchargers deve ser array');
-    assertEqual(superchargers.length, 25, 'deve ter 25 superchargers');
+    assertEqual(superchargers.length, 22, 'deve ter 22 superchargers');
 });
 
 test('superchargers têm campos obrigatórios', () => {
@@ -643,7 +643,7 @@ test('dayRouteSegments tem segmentos para dias de estrada', () => {
     const match = allJs.match(/var dayRouteSegments\s*=\s*\{([\s\S]*?)\};/);
     assert(match, 'dayRouteSegments deve existir');
     // Dias com estrada significativa
-    [5, 6, 7, 9, 13, 15, 16, 19, 20, 21, 23, 24, 25, 26, 27, 30].forEach((d) => {
+    [5, 9, 11, 12, 15, 16, 17, 19, 20, 21, 22, 23, 27, 28, 30, 31].forEach((d) => {
         assert(match[1].includes(`${d}:`), `dayRouteSegments[${d}] ausente`);
     });
 });
@@ -1016,19 +1016,17 @@ test('dia 5 tem voo NYC → LAX', () => {
     assert(hasFlight, 'Dia 5 deve ter voo');
 });
 
-test('regiões seguem a rota (NY→CA→NV→UT→PNW→CA)', () => {
+test('regiões seguem a rota (NY→NV→UT→PNW→CA)', () => {
     // NY: dias 1-4
     for (let i = 0; i < 4; i++) assertEqual(days[i].region, 'ny', `Dia ${i + 1}`);
-    // CA: dias 5-8 (Yosemite, Sequoia)
-    for (let i = 4; i < 8; i++) assertEqual(days[i].region, 'ca', `Dia ${i + 1}`);
-    // NV: dias 9-12 (Vegas)
-    for (let i = 8; i < 12; i++) assertEqual(days[i].region, 'nv', `Dia ${i + 1}`);
-    // UT: dias 13-18 (GC, Zion, Bryce, Moab)
-    for (let i = 12; i < 18; i++) assertEqual(days[i].region, 'ut', `Dia ${i + 1}`);
-    // PNW: dias 19-24
-    for (let i = 18; i < 24; i++) assertEqual(days[i].region, 'pnw', `Dia ${i + 1}`);
-    // CA: dias 25-33 (Redwood, SF, PCH, LA)
-    for (let i = 24; i < 33; i++) assertEqual(days[i].region, 'ca', `Dia ${i + 1}`);
+    // NV: dias 5-8 (Vegas)
+    for (let i = 4; i < 8; i++) assertEqual(days[i].region, 'nv', `Dia ${i + 1}`);
+    // UT: dias 9-14 (GC, Zion, Bryce, Moab)
+    for (let i = 8; i < 14; i++) assertEqual(days[i].region, 'ut', `Dia ${i + 1}`);
+    // PNW: dias 15-20
+    for (let i = 14; i < 20; i++) assertEqual(days[i].region, 'pnw', `Dia ${i + 1}`);
+    // CA: dias 21-33 (Redwood, SF, PCH, Yosemite, Sequoia, LA)
+    for (let i = 20; i < 33; i++) assertEqual(days[i].region, 'ca', `Dia ${i + 1}`);
 });
 
 test('cada dia tem pelo menos 5 atividades', () => {
@@ -1046,7 +1044,7 @@ test('cada dia tem pelo menos 1 item food (exceto dia de voo)', () => {
 });
 
 test('dias de estrada (>100km) têm items drive', () => {
-    const driveDays = [5, 7, 9, 13, 15, 16, 19, 20, 21, 23, 24, 27, 30];
+    const driveDays = [5, 9, 11, 12, 15, 16, 17, 19, 20, 23, 27, 30, 31];
     driveDays.forEach((d) => {
         const day = days[d - 1];
         const hasDrive = day.items.some(i => i.type === 'drive');
