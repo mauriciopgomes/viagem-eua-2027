@@ -1,4 +1,4 @@
-const CACHE_NAME = 'viagem-eua-2027-v119';
+const CACHE_NAME = 'viagem-eua-2027-v126';
 const TILE_CACHE = 'viagem-tiles-v1';
 
 // Critical assets — must succeed for install
@@ -134,6 +134,8 @@ const ASSETS_TO_CACHE = [
   './img/activities/crescent_city_ca.jpg',
   './img/activities/dante_s_view.jpg',
   './img/activities/dead_horse_point.jpg',
+  './img/activities/deadman_pass.jpg',
+  './img/activities/dean_creek_elk.jpg',
   './img/activities/delicate_arch.jpg',
   './img/activities/desert_view_watchtower.jpg',
   './img/activities/double_arch.jpg',
@@ -146,6 +148,7 @@ const ASSETS_TO_CACHE = [
   './img/activities/embarcadero_sf.jpg',
   './img/activities/emerald_pools.jpg',
   './img/activities/ess_a_bagel.jpg',
+  './img/activities/evel_knievel_jump_site.jpg',
   './img/activities/fao_schwarz.jpg',
   './img/activities/fearless_girl.jpg',
   './img/activities/fern_canyon.jpg',
@@ -240,6 +243,7 @@ const ASSETS_TO_CACHE = [
   './img/activities/painted_ladies.jpg',
   './img/activities/park_avenue_arches.jpg',
   './img/activities/parus_trail.jpg',
+  './img/activities/perrine_bridge.jpg',
   './img/activities/pier_39.jpg',
   './img/activities/pier_57_nyc.jpg',
   './img/activities/pittock_mansion.jpg',
@@ -273,6 +277,7 @@ const ASSETS_TO_CACHE = [
   './img/activities/st_patricks_cathedral.jpg',
   './img/activities/stout_memorial_grove.jpg',
   './img/activities/strawberry_fields.jpg',
+  './img/activities/suka_sushi.jpg',
   './img/activities/summit_one_vanderbilt.jpg',
   './img/activities/sunrise_point_bryce.jpg',
   './img/activities/swinging_bridge_yosemite.jpg',
@@ -316,6 +321,24 @@ const ASSETS_TO_CACHE = [
   './img/activities/stearns_wharf.jpg',
   './img/activities/tcl_chinese_theatre.jpg',
   './img/activities/the_grove_la.jpg',
+  // Roadside stops
+  './img/activities/alien_fresh_jerky.jpg',
+  './img/activities/cape_disappointment.jpg',
+  './img/activities/capitol_reef.jpg',
+  './img/activities/checkerboard_mesa.jpg',
+  './img/activities/glass_beach.jpg',
+  './img/activities/goblin_valley.jpg',
+  './img/activities/hackberry_general_store.jpg',
+  './img/activities/head_of_the_rocks.jpg',
+  './img/activities/hoover_dam.jpg',
+  './img/activities/kalaloch_tree_of_life.jpg',
+  './img/activities/mendocino.jpg',
+  './img/activities/navajo_bridge.jpg',
+  './img/activities/peter_iredale_shipwreck.jpg',
+  './img/activities/seligman_route66.jpg',
+  './img/activities/tehachapi_loop.jpg',
+  './img/activities/vista_house.jpg',
+  './img/activities/worlds_tallest_thermometer.jpg',
 ];
 
 // Install: precache critical assets, then best-effort images

@@ -79,6 +79,7 @@ const activityPhotos = {
     'Ferrara': 'img/activities/little_italy_ny.jpg',
     'Ess-a-Bagel': 'img/activities/ess_a_bagel.jpg',
     'Eataly': 'img/activities/eataly_nyc.jpg',
+    'Suka Sushi': 'img/activities/suka_sushi.jpg',
     "Junior's": 'img/activities/juniors_cheesecake.jpg',
     "Carmine's": 'img/activities/juniors_cheesecake.jpg',
     'Summit One Vanderbilt': 'img/activities/summit_one_vanderbilt.jpg',
@@ -125,6 +126,7 @@ const activityPhotos = {
     'Cape Blanco': 'img/activities/cape_blanco.jpg',
     'Tall Trees Grove': 'img/activities/tall_trees_grove.jpg',
     'Gold Beach': 'img/activities/gold_beach_or.jpg',
+    'Dean Creek': 'img/activities/dean_creek_elk.jpg',
     'Shore Acres': 'img/activities/shore_acres.jpg',
     'Ecola State Park': 'img/activities/ecola_state_park.jpg',
     'Cannon Beach': 'img/activities/cannon_beach.jpg',
@@ -147,6 +149,8 @@ const activityPhotos = {
     'Idaho State Capitol': 'img/activities/idaho_state_capitol.jpg',
     'Basque Block': 'img/activities/basque_block.jpg',
     'Shoshone Falls': 'img/activities/shoshone_falls.jpg',
+    'Perrine Bridge': 'img/activities/perrine_bridge.jpg',
+    'Evel Knievel': 'img/activities/evel_knievel_jump_site.jpg',
     'Mesa Arch': 'img/activities/mesa_arch.jpg',
     'Upheaval Dome': 'img/activities/upheaval_dome.jpg',
     'Delicate Arch': 'img/activities/delicate_arch.jpg',
@@ -182,6 +186,7 @@ const activityPhotos = {
     'Hall of Mosses': 'img/activities/hall_of_mosses.jpg',
     'La Push': 'img/activities/la_push.jpg',
     'Columbia River Gorge': 'img/activities/columbia_river_gorge.jpg',
+    'Deadman Pass': 'img/activities/deadman_pass.jpg',
     'Antelope Island': 'img/activities/antelope_island.jpg',
     'Great Salt Lake': 'img/activities/great_salt_lake.jpg',
     'Grand View Point': 'img/activities/grand_view_point.jpg',
@@ -311,6 +316,26 @@ const activityPhotos = {
     'Farmers Market': 'img/activities/the_grove_la.jpg',
     'Citadel Outlets': 'img/activities/citadel_outlets.jpg',
     'The Lark': 'img/activities/santa_barbara.jpg',
+    // --- Roadside stops ---
+    'Alien Fresh Jerky': 'img/activities/alien_fresh_jerky.jpg',
+    'Cape Disappointment': 'img/activities/cape_disappointment.jpg',
+    'Capitol Reef': 'img/activities/capitol_reef.jpg',
+    'Checkerboard Mesa': 'img/activities/checkerboard_mesa.jpg',
+    'Glass Beach': 'img/activities/glass_beach.jpg',
+    'Goblin Valley': 'img/activities/goblin_valley.jpg',
+    'Hackberry General Store': 'img/activities/hackberry_general_store.jpg',
+    'Head of the Rocks': 'img/activities/head_of_the_rocks.jpg',
+    'Hoover Dam': 'img/activities/hoover_dam.jpg',
+    'Kalaloch': 'img/activities/kalaloch_tree_of_life.jpg',
+    'Tree of Life': 'img/activities/kalaloch_tree_of_life.jpg',
+    'Mendocino': 'img/activities/mendocino.jpg',
+    'Navajo Bridge': 'img/activities/navajo_bridge.jpg',
+    'Peter Iredale': 'img/activities/peter_iredale_shipwreck.jpg',
+    'Seligman': 'img/activities/seligman_route66.jpg',
+    'Tehachapi Loop': 'img/activities/tehachapi_loop.jpg',
+    'Vista House': 'img/activities/vista_house.jpg',
+    'Crown Point': 'img/activities/vista_house.jpg',
+    'World\'s Tallest Thermometer': 'img/activities/worlds_tallest_thermometer.jpg',
 };
 
 // Pre-sort keys longest-first for accurate matching (e.g., "Brooklyn Bridge Park" before "Brooklyn Bridge")
@@ -394,6 +419,7 @@ const placeInfo = {
     'E Corp': { addr: '135 E 57th St, New York, NY 10022', coords: '40.7616,-73.9686', detail: 'Fachada usada como E Corp HQ no seriado Mr. Robot.' },
     'Roosevelt Island Tramway': { addr: '59th St & 2nd Ave, New York, NY 10022', coords: '40.7613,-73.9645', detail: 'Bondinho aéreo sobre o East River. Vista incrível de Manhattan e Queensboro Bridge. 4 minutos de travessia, usa MetroCard.', hours: '6h-2h (Seg-Sex) / 6h-3h30 (Sáb-Dom)', cost: '$2.90 (MetroCard)' },
     'Eataly': { addr: '200 5th Ave, New York, NY 10010', coords: '40.7420,-73.9893', detail: 'Mega mercado italiano fundado pelo chef Oscar Farinetti. Restaurantes, padaria, queijos, vinhos. Rooftop bar com vista do Flatiron.', hours: '10h-23h', cost: '~$15-30/pessoa' },
+    'Suka Sushi': { addr: '61 Lexington Ave, New York, NY 10010', coords: '40.7430,-73.9828', detail: 'Sushi japonês autêntico em Midtown/Gramercy. Último jantar em NY!', cost: '~$30-60/pessoa' },
     'Flatiron': { addr: 'Flatiron Building, 175 5th Ave, New York, NY 10010', coords: '40.7411,-73.9897', detail: 'Prédio triangular de 1902, um dos mais antigos arranha-céus de NY. Formato de ferro de passar. Recentemente convertido em residências de luxo.', cost: 'Exterior gratuito' },
     "Carmine's": { addr: "200 W 44th St, New York, NY 10036", coords: '40.7575,-73.9875', detail: "Restaurante italiano com porções familiares enormes! Pasta, chicken parm, veal. Reserva recomendada.", hours: '11h-23h', cost: '~$30-50/pessoa' },
     "Junior's": { addr: "1515 Broadway, New York, NY 10036", coords: '40.7580,-73.9856', detail: "Famoso pelo cheesecake de NY! Desde 1950 no Brooklyn, filial em Times Square. Cheesecake de morango é o clássico.", hours: '6h30-0h', cost: '~$10-15/fatia' },
@@ -429,6 +455,11 @@ const placeInfo = {
     'Yosemite Chapel': { addr: 'Yosemite Chapel, Yosemite NP, CA', coords: '37.7441,-119.5880', detail: 'A estrutura mais antiga de Yosemite (1879). Igrejinha de madeira encantadora com Yosemite Falls ao fundo.' },
     'Ansel Adams Gallery': { addr: 'Ansel Adams Gallery, Yosemite Village, CA', coords: '37.7490,-119.5885', detail: 'Galeria do fotógrafo Ansel Adams, famoso pelas fotos icônicas de Yosemite em preto e branco. Vende prints originais.', hours: '10h-17h', cost: 'Entrada gratuita' },
 
+    // Day 9 — Three Rivers → Vegas (roadside stops)
+    'Tehachapi Loop': { addr: 'Tehachapi Loop, Keene, CA 93531', coords: '35.1328,-118.5470', detail: 'Maravilha de engenharia ferroviária! O trem faz um loop de 1.17 km subindo a montanha — quando é longo o bastante, a locomotiva passa POR CIMA dos últimos vagões! Melhor visto do mirante na Woodford-Tehachapi Rd.', cost: 'Gratuito' },
+    'World\'s Tallest Thermometer': { addr: '72157 Baker Blvd, Baker, CA 92309', coords: '35.2661,-116.0731', detail: 'Termômetro de 40m construído em 1991 — marca 134°F, a temperatura mais alta já registrada (Death Valley, 1913). Baker é o último posto antes de Vegas!', cost: 'Gratuito' },
+    'Alien Fresh Jerky': { addr: '72242 Baker Blvd, Baker, CA 92309', coords: '35.2665,-116.0738', detail: 'Loja temática de aliens com >100 sabores de jerky artesanal! Divertida parada no deserto. Estátuas de ETs gigantes na frente.', hours: '8h-20h', cost: '~$5-15' },
+
     // Day 10 — SF
     'Supercharger Manteca': { addr: 'Bass Pro Shops, Manteca, CA 95337', coords: '37.7880,-121.2390', detail: 'Supercharger V3 com ~16 stalls. Ao lado de Bass Pro Shops — bom pra esticar as pernas.' },
     'Embarcadero': { addr: 'The Embarcadero, San Francisco, CA', coords: '37.7955,-122.3937', detail: 'Orla de SF. Ferry Building Marketplace tem comidas artesanais, queijos, ostras. Vista da Bay Bridge.', hours: 'Ferry Building: 10h-18h', cost: 'Gratuito' },
@@ -458,6 +489,8 @@ const placeInfo = {
     // Day 13 — Point Reyes / Eureka
     'Point Reyes': { addr: 'Point Reyes National Seashore, CA', coords: '38.0682,-122.8776', detail: 'Reserva costeira com elk preserve (alces tule!), Point Reyes Lighthouse (308 degraus descendo), praias selvagens.', hours: 'Lighthouse: 10h-16h30 (Sex-Seg)', cost: '$0 (estacionamento gratuito)' },
     'Supercharger Ukiah': { addr: 'Ukiah, CA 95482', coords: '39.1532,-123.2063', detail: 'Supercharger V3. Bom ponto pra almoço — restaurantes perto.' },
+    'Mendocino': { addr: 'Mendocino, CA 95460', coords: '39.3076,-123.7995', detail: 'Vila vitoriana na costa de Mendocino — cenário de "A Dama de Ferro" e serviu como Cabot Cove em "Se Ela Dança, Eu Danço" (Murder, She Wrote). Galerias de arte, cafés charmosos, vista espetacular dos penhascos.', cost: 'Gratuito' },
+    'Glass Beach': { addr: 'Glass Beach, Fort Bragg, CA 95437', coords: '39.4521,-123.8136', detail: 'Praia coberta de vidro marítimo polido pelas ondas! De 1906-1967 era área de despejo — a natureza transformou o lixo em arte. Vidro colorido (verde, azul, âmbar) brilha com o sol. Não coletar!', hours: 'Amanhecer ao anoitecer', cost: 'Gratuito' },
     'Old Town Eureka': { addr: 'Old Town, Eureka, CA 95501', coords: '40.8027,-124.1637', detail: 'Distrito histórico vitoriano. Carson Mansion (1886) é a mansão vitoriana mais fotografada dos EUA! Não abre pro público, mas vale ver de fora.', cost: 'Gratuito' },
     'Carson Mansion': { addr: '143 M St, Eureka, CA 95501', coords: '40.8032,-124.1626', detail: 'Mansão vitoriana Queen Anne de 1886, considerada a mais ornamentada dos EUA. Agora é um clube privado — exterior apenas.', cost: 'Gratuito (exterior)' },
 
@@ -475,6 +508,7 @@ const placeInfo = {
     'Samuel Boardman': { addr: 'Samuel H. Boardman State Scenic Corridor, OR', coords: '42.1481,-124.3533', detail: 'Os 19 km mais bonitos da costa de Oregon! Arcos naturais, sea stacks, mirantes sobre o Pacífico.', cost: 'Gratuito' },
     'Natural Bridges': { addr: 'Natural Bridges Viewpoint, Samuel Boardman Corridor, OR', coords: '42.1489,-124.3564', detail: 'Arcos de rocha naturais esculpidos pelo mar. Vista espetacular do mirante!', cost: 'Gratuito' },
     'Cape Blanco': { addr: 'Cape Blanco State Park, OR 97415', coords: '42.8372,-124.5634', detail: 'O ponto mais ocidental de Oregon continental! Farol de 1870. Vista selvagem do Pacífico.', cost: 'Gratuito' },
+    'Dean Creek': { addr: 'Dean Creek Elk Viewing Area, Reedsport, OR 97467', coords: '43.7210,-124.1220', detail: 'Manada de 60-100 Roosevelt elk selvagens visíveis da estrada! Maior subespécie de elk da América do Norte. Área de observação com painéis informativos. Melhor ao amanhecer/entardecer, mas visíveis o dia todo.', cost: 'Gratuito' },
     'Shore Acres': { addr: 'Shore Acres State Park, Coos Bay, OR 97420', coords: '43.3220,-124.3870', detail: 'Jardim botânico num penhasco sobre o mar! Antigo estado do magnata Louis J. Simpson. Ondas batendo nas rochas — show!', cost: '$5 day use' },
     'Supercharger Coos Bay': { addr: 'Coos Bay, OR 97420', coords: '43.3660,-124.2138', detail: 'Supercharger Tesla V3. Perto de restaurantes.' },
 
@@ -495,6 +529,9 @@ const placeInfo = {
     'Lake Crescent': { addr: 'Lake Crescent, Olympic NP, WA', coords: '48.0596,-123.7898', detail: 'Lago glacial cristalino com 190m de profundidade! Rodeado por montanhas cobertas de floresta. Storm King trail parte daqui.', cost: 'Incluso na entrada ($30/veículo)' },
     'Sol Duc Falls': { addr: 'Sol Duc Falls Trail, Olympic NP, WA', coords: '47.9525,-123.8359', detail: 'Cachoeira tríplice numa floresta densa. Trilha fácil de ~2.5 km. Hot springs naturais perto (Sol Duc Hot Springs Resort).', cost: 'Incluso na entrada' },
     'Forks': { addr: 'Forks, WA 98331', coords: '47.9504,-124.3855', detail: 'Cidade do Twilight! Forks High School, casa da Bella Swan, placa "Welcome to Forks". Também a capital madeireira de WA.' },
+    'Cape Disappointment': { addr: 'Cape Disappointment State Park, Ilwaco, WA 98624', coords: '46.2790,-124.0520', detail: 'Farol de 1856 no ponto onde o Rio Columbia encontra o Pacífico. Lewis & Clark Interpretive Center conta a expedição de 1805. Nome dado por um capitão britânico que não conseguiu entrar na foz em 1788!', hours: '6h30-pôr do sol', cost: '$10/veículo (Discover Pass)' },
+    'Kalaloch': { addr: 'Kalaloch Tree of Life, US-101, Kalaloch, WA 98331', coords: '47.6088,-124.3744', detail: 'Impressionante Sitka Spruce crescendo sobre uma caverna costeira com raízes expostas como tentáculos! A erosão criou uma cavidade sob a árvore mas ela sobrevive agarrada pelas raízes. Uma das fotos mais icônicas de Olympic!', cost: 'Gratuito' },
+    'Peter Iredale': { addr: 'Peter Iredale Shipwreck, Fort Stevens State Park, Hammond, OR 97121', coords: '46.1753,-123.9964', detail: 'Naufrágio de 1906! O veleiro britânico Peter Iredale encalhou numa tempestade e o esqueleto de ferro ainda está na praia — uma das fotos mais icônicas da costa de Oregon!', cost: '$5/veículo' },
 
     // Day 18 — Olympic NP
     'Hoh Rain Forest': { addr: 'Hoh Rain Forest, Olympic NP, WA', coords: '47.8602,-123.9343', detail: 'Uma das poucas florestas tropicais temperadas do hemisfério norte! 3-4m de chuva/ano. Árvores cobertas de musgo e samambaias.', hours: 'Amanhecer ao anoitecer', cost: 'Incluso ($30/veículo)' },
@@ -514,12 +551,16 @@ const placeInfo = {
     'Pittock Mansion': { addr: '3229 NW Pittock Dr, Portland, OR 97210', coords: '45.5255,-122.7162', detail: 'Mansão de 1914 com vista panorâmica de Portland, Mt. Hood e Mt. St. Helens! Exterior gratuito, interior ~$15.', hours: '10h-16h', cost: 'Exterior gratuito / Interior ~$15' },
 
     // Day 20 — Multnomah / Columbia / Boise
+    'Deadman Pass': { addr: 'Deadman Pass Rest Area, I-84, Emigrant Hill, OR 97850', coords: '45.6042,-118.5561', detail: 'Passagem a 1.278m de altitude nas Blue Mountains. Mirante com vista panorâmica espetacular! Nome vem de um confronto entre colonos e nativos em 1878. Rest area com banheiros.', cost: 'Gratuito' },
     'Multnomah Falls': { addr: 'Multnomah Falls, Bridal Veil, OR 97010', coords: '45.5762,-122.1158', detail: 'Cachoeira de 189m — a mais alta de Oregon e uma das mais altas dos EUA! Ponte Benson a 32m. A apenas 50 km de Portland!', hours: '9h-18h', cost: 'Gratuito (reserva de estacionamento: $2)' },
     'Columbia River Gorge': { addr: 'Columbia River Gorge, OR', coords: '45.5956,-122.0517', detail: 'Desfiladeiro de 130 km no rio Columbia. Paredões de 1.200m, cachoeiras, windsurfing. Historic Columbia River Highway é imperdível.', cost: 'Gratuito' },
+    'Vista House': { addr: 'Vista House at Crown Point, 40700 E Historic Columbia River Hwy, Corbett, OR 97019', coords: '45.5391,-122.2443', detail: 'Edifício octogonal de 1917 no topo de Crown Point, 222m acima do Rio Columbia. Vista 270° do Columbia River Gorge. Museu sobre a construção da Historic Columbia River Highway.', hours: '9h-18h', cost: 'Gratuito' },
     'Basque Block': { addr: 'Basque Block, 619 Grove St, Boise, ID 83702', coords: '43.6154,-116.2023', detail: 'Boise tem a maior comunidade basca fora da Espanha! Bar Gernika: croquetas, pintxos, lamb grinder. Basque Museum ao lado.', cost: '~$15-25/pessoa' },
     'Bar Gernika': { addr: '202 S Capitol Blvd, Boise, ID 83702', coords: '43.6155,-116.2023', detail: 'Pub basco autêntico! Croquetas, solomo (pork loin sandwich) e lamb grinder são imperdíveis. Cerveja basca.', hours: '11h-22h', cost: '~$12-20/pessoa' },
 
     // Day 21 — Shoshone / Antelope Island / Moab
+    'Perrine Bridge': { addr: 'Perrine Bridge, US-93, Twin Falls, ID 83301', coords: '42.5968,-114.4529', detail: 'Ponte de 148m sobre o Snake River Canyon. Um dos únicos locais nos EUA onde BASE jumping é legal sem permissão! Construída em 1976. Vista espetacular do canyon.', cost: 'Gratuito' },
+    'Evel Knievel': { addr: 'Evel Knievel Jump Site, Shoshone Falls Grade Rd, Twin Falls, ID 83301', coords: '42.5889,-114.3900', detail: 'Em 8/set/1974, Evel Knievel tentou saltar o Snake River Canyon na "Skycycle X-2" (foguete a vapor). O paraquedas abriu cedo e ele caiu no canyon, mas sobreviveu! Placa comemorativa e rampa original visíveis.', cost: 'Gratuito' },
     'Shoshone Falls': { addr: 'Shoshone Falls, Twin Falls, ID 83301', coords: '42.5930,-114.3984', detail: "'Niágara do Oeste' — 65m de altura (mais alta que Niágara Falls!). Melhor fluxo na primavera. ~5 min do Supercharger Twin Falls.", cost: '$5/veículo' },
     'Antelope Island': { addr: 'Antelope Island State Park, Syracuse, UT 84075', coords: '40.9577,-112.2102', detail: '~700 bisões selvagens na maior ilha do Great Salt Lake! Buffalo Point tem vista 360°. Pode ver bisões de perto na estrada.', hours: '6h-22h', cost: '$15/veículo' },
     'Buffalo Point': { addr: 'Buffalo Point, Antelope Island State Park, UT', coords: '40.9516,-112.2326', detail: 'Mirante no topo da ilha com vista 360° do Great Salt Lake e Wasatch Mountains. Trilha curta até o topo.' },
@@ -562,6 +603,7 @@ const placeInfo = {
     'Court of the Patriarchs': { addr: 'Court of the Patriarchs, Zion NP, UT', coords: '37.2512,-112.9635', detail: 'Três picos de arenito nomeados Abraham, Isaac e Jacob. Mirante curto do ponto de shuttle.', cost: 'Incluso' },
     'Weeping Rock': { addr: 'Weeping Rock, Zion NP, UT', coords: '37.2720,-112.9404', detail: 'Parede de rocha que "chora" — água de chuva que levou 1.200 anos pra filtrar pela rocha! Trilha curta.', cost: 'Incluso' },
     'Canyon Junction Bridge': { addr: 'Canyon Junction Bridge, Zion NP, UT', coords: '37.2099,-112.9777', detail: 'Ponte com vista panorâmica dos paredões de Zion. Um dos melhores pontos pra pôr do sol no parque!', cost: 'Incluso' },
+    'Checkerboard Mesa': { addr: 'Checkerboard Mesa, UT-9, Zion NP, UT', coords: '37.2371,-112.8757', detail: 'Formação de arenito Navajo com padrão xadrez natural! As linhas verticais são fraturas e as horizontais são camadas de deposição. Pullover na UT-9 saindo de Zion pelo lado leste.', cost: 'Incluso na entrada de Zion' },
 
     // Day 27-28 — Grand Canyon
     'Kanab': { addr: 'Kanab, UT 84741', coords: '37.0475,-112.5263', detail: '⚠️ CARREGAR ATÉ 100%! GC tem ~130 km internos + 260 km até próximo SC (Kingman). Cidade pequena e charmosa — "Little Hollywood".', cost: 'SC: ~$15' },
@@ -575,6 +617,10 @@ const placeInfo = {
     'Bright Angel Trail': { addr: 'Bright Angel Trailhead, Grand Canyon, AZ', coords: '36.0575,-112.1440', detail: 'Trilha mais popular do Grand Canyon! Primeiros switchbacks (1.5 Mile Resthouse) levam ~1-2h. Vista incrível descendo no cânion.', cost: 'Incluso' },
     'Hermit Road': { addr: 'Hermit Road, Grand Canyon, AZ', coords: '36.0726,-112.1543', detail: 'Estrada panorâmica de 11 km (shuttle only). 8 mirantes: Hopi Point (melhor pôr do sol), Pima Point, Hermits Rest.', cost: 'Incluso' },
     'Supercharger Kingman': { addr: 'Kingman, AZ 86401', coords: '35.1894,-114.0530', detail: 'Supercharger na Historic Route 66! Kingman é um marco da Route 66 com museus e diners vintage.' },
+    'Hackberry General Store': { addr: 'Hackberry General Store, AZ-66, Hackberry, AZ 86411', coords: '35.3710,-113.7274', detail: 'Posto de gasolina vintage da Route 66 desde 1934. Corvette vermelho clássico estacionado na frente, memorabilia de Route 66, refrigerantes retrô.', hours: '9h-17h', cost: 'Gratuito' },
+    'Seligman': { addr: 'Historic Route 66, Seligman, AZ 86337', coords: '35.3248,-112.8756', detail: '"Berço da Route 66" — Angel Delgadillo lutou pra preservar a rota histórica nos anos 80. Inspiração direta de Radiator Springs do filme Carros da Pixar! Lanchonetes retrô, carros antigos, neon.', cost: 'Gratuito' },
+    'Hoover Dam': { addr: 'Hoover Dam, Boulder City, NV 89005', coords: '36.0160,-114.7377', detail: 'Barragem de 221m construída em 1935 durante a Grande Depressão. A ponte Mike O\'Callaghan–Pat Tillman Memorial Bridge (2010) tem passarela pedestre com vista espetacular da barragem a 270m acima do rio Colorado.', hours: '9h-17h (tours)', cost: 'Vista gratuita / Tour: $30' },
+    'Navajo Bridge': { addr: 'Navajo Bridge, US-89A, Marble Canyon, AZ 86036', coords: '36.8115,-111.6327', detail: 'Duas pontes a 142m sobre o Rio Colorado em Marble Canyon! A ponte original (1929) é agora pedestre. Condores da Califórnia frequentemente avistados planando abaixo da ponte.', cost: 'Gratuito' },
 
     // Day 28-29 — Las Vegas
     'In-N-Out': { addr: 'In-N-Out Burger, 3545 S Las Vegas Blvd, Las Vegas, NV', coords: '36.1195,-115.1727', detail: 'Fast food cult da Califórnia! Double-Double Animal Style é o pedido secreto. Batata frita fresca. Não existe na Costa Leste!', cost: '~$8-12' },
@@ -639,6 +685,9 @@ const placeInfo = {
     'Moab': { addr: 'Moab, UT 84532', coords: '38.5733,-109.5498', detail: 'Cidade-base para Arches e Canyonlands. Capital da aventura de Utah: jeep, mountain bike, rafting.' },
     'Corona Arch Trail': { addr: 'Corona Arch Trail, Moab, UT 84532', coords: '38.5777,-109.6208', detail: 'Trilha de ~5 km até um arco gigante sem multidões. Alternativa gratuita ao Arches NP!', cost: 'Gratuito' },
     'Scenic Byway 128': { addr: 'UT-128, Moab, UT 84532', coords: '38.6131,-109.5103', detail: 'Estrada cênica com paredões vermelhos ao longo do Rio Colorado. Cenário de vários filmes de faroeste.', cost: 'Gratuito' },
+    'Capitol Reef': { addr: 'Capitol Reef National Park, UT-24, Torrey, UT 84775', coords: '38.2972,-111.2615', detail: 'Parque nacional subestimado! Waterpocket Fold — dobra geológica de 160 km. Petroglífos Fremont de 2.000 anos visíveis da estrada. Fruita Historic District com pomares do séc. XIX. Scenic Drive gratuita pela UT-24!', cost: '$20/veículo (America the Beautiful Pass aceito)' },
+    'Head of the Rocks': { addr: 'Head of the Rocks Overlook, UT-12, Escalante, UT 84726', coords: '37.7650,-111.5920', detail: 'Um dos mirantes mais espetaculares da UT-12 Scenic Byway! Vista panorâmica dos cânions de Escalante e do Grand Staircase. A UT-12 é considerada uma das estradas mais bonitas dos EUA.', cost: 'Gratuito' },
+    'Goblin Valley': { addr: 'Goblin Valley State Park, Green River, UT 84525', coords: '38.5694,-110.7025', detail: 'Milhares de formações rochosas em forma de cogumelos/aliens esculpidas pela erosão! Crianças adoram escalar e explorar os "goblins". Cenário do filme Galaxy Quest. Parece outro planeta!', hours: '6h-22h', cost: '$20/veículo' },
 
     // Day 13 — Canyonlands
     'White Rim Overlook': { addr: 'White Rim Overlook Trail, Canyonlands NP, UT 84532', coords: '38.4593,-109.8203', detail: 'Trilha de ~3 km (ida e volta) com vista do White Rim abaixo. Vista vertiginosa dos canyons e do Rio Colorado.', cost: 'Incluído no ingresso do parque' },
@@ -1376,17 +1425,16 @@ var dayRouteSegments = {
     9: [[36.45,-118.91],[36.06,-118.96],[35.40,-118.98],[35.13,-118.44],[35.05,-118.17],[34.90,-117.02],[35.27,-116.07],[35.61,-115.39],[36.17,-115.14]],
     13: [[36.17,-115.14],[35.98,-114.83],[35.20,-114.05],[35.25,-112.19],[36.06,-112.14],[36.81,-111.63],[36.86,-112.53],[37.02,-112.53]],
     15: [[37.02,-112.53],[37.29,-112.68],[37.68,-112.15],[37.63,-112.17],[37.21,-112.99]],
-    16: [[37.21,-112.99],[37.76,-112.33],[38.29,-111.57],[38.75,-111.50],[38.99,-110.16],[38.57,-109.55]],
+    16: [[37.21,-112.99],[37.76,-112.33],[38.29,-111.57],[38.75,-111.50],[38.57,-110.70],[38.99,-110.16],[38.57,-109.55]],
     19: [[38.57,-109.55],[38.99,-110.16],[39.60,-110.81],[39.97,-111.53],[40.76,-111.89],[41.07,-112.25],[40.76,-111.89],[41.73,-112.17],[42.00,-112.45],[42.56,-114.46]],
     20: [[42.56,-114.46],[42.87,-115.54],[43.62,-116.20],[44.05,-116.97],[44.77,-117.83],[45.67,-118.79],[45.60,-121.18],[45.57,-122.40],[46.07,-122.88],[46.72,-122.95]],
     21: [[46.72,-122.95],[46.85,-121.76],[47.04,-122.90],[47.30,-123.10],[47.59,-123.79],[47.95,-124.39]],
-    23: [[47.95,-124.39],[47.50,-124.35],[46.98,-123.82],[46.19,-123.83],[45.89,-123.96]],
-    24: [[45.89,-123.96],[45.37,-123.97],[44.96,-124.02],[43.97,-124.10],[43.37,-124.22],[42.86,-124.42],[42.41,-124.42]],
+    23: [[47.95,-124.39],[47.61,-124.37],[47.50,-124.35],[46.98,-123.82],[46.19,-123.83],[45.89,-123.96]],
+    24: [[45.89,-123.96],[45.37,-123.97],[44.96,-124.02],[43.97,-124.10],[43.72,-124.12],[43.37,-124.22],[42.86,-124.42],[42.41,-124.42]],
     25: [[42.41,-124.42],[41.94,-124.20],[41.76,-124.20]],
     26: [[41.76,-124.20],[41.20,-124.09],[40.80,-124.16]],
-    27: [[40.80,-124.16],[40.10,-123.79],[39.15,-123.21],[38.44,-122.72],[38.07,-122.88],[37.77,-122.42]],
-    30: [[37.77,-122.42],[37.46,-122.43],[36.97,-122.03],[36.60,-121.89],[36.37,-121.90],[36.27,-121.81],[35.97,-121.47],[35.66,-121.25],[35.28,-120.66],[34.95,-120.44],[34.61,-120.19],[34.42,-119.70]],
-    31: [[34.42,-119.70],[34.28,-119.29],[34.09,-119.04],[34.03,-118.69],[34.02,-118.49],[34.05,-118.24]]
+    27: [[40.80,-124.16],[40.10,-123.79],[39.15,-123.21],[39.45,-123.81],[39.31,-123.80],[38.44,-122.72],[38.07,-122.88],[37.77,-122.42]],
+    30: [[37.77,-122.42],[37.46,-122.43],[36.97,-122.03],[36.60,-121.89],[36.37,-121.90],[36.27,-121.81],[35.97,-121.47],[35.66,-121.25],[35.28,-120.66],[34.95,-120.44],[34.61,-120.19],[34.42,-119.70],[34.28,-119.29],[34.09,-119.04],[34.03,-118.69],[34.02,-118.49],[34.05,-118.24]]
 };
 
 // Day stats for stats card
@@ -1406,7 +1454,7 @@ var dayStats = {
     13: { km: '~700', drive: 'Vegas → GC → Zion', hotel: 'Springdale' },
     14: { km: '~30', drive: 'Zion NP', hotel: 'Springdale' },
     15: { km: '~130', drive: 'Zion → Bryce', hotel: 'Bryce Canyon' },
-    16: { km: '~430', drive: 'Bryce → Moab', hotel: 'Moab' },
+    16: { km: '~490', drive: 'Bryce → Goblin Valley → Moab', hotel: 'Moab' },
     17: { km: '~80', drive: 'Canyonlands', hotel: 'Moab' },
     18: { km: '~50', drive: 'Arches NP', hotel: 'Moab' },
     19: { km: '~770', drive: 'Moab → SLC → Twin Falls', hotel: 'Twin Falls' },
@@ -1420,8 +1468,8 @@ var dayStats = {
     27: { km: '~440', drive: 'Eureka → SF', hotel: 'San Francisco' },
     28: { km: '~30', drive: 'San Francisco', hotel: 'San Francisco' },
     29: { km: '~30', drive: 'San Francisco', hotel: 'San Francisco' },
-    30: { km: '~600', drive: 'SF → PCH → Santa Barbara', hotel: 'Santa Barbara' },
-    31: { km: '~200', drive: 'Santa Barbara → LA', hotel: 'Los Angeles' },
+    30: { km: '~750', drive: 'SF → PCH → LA', hotel: 'Los Angeles' },
+    31: { km: '~50', drive: 'LA: praias + descanso', hotel: 'Los Angeles' },
     32: { km: '~80', drive: 'LA: Hollywood, shopping', hotel: 'Los Angeles' },
     33: { km: '~30', drive: 'LAX → voo', hotel: '✈️ Volta!' }
 };
@@ -1470,7 +1518,7 @@ function doInitMap() {
         { n: "Zion NP", lat: 37.2090, lng: -112.9871, i: "🏞️", info: "Dias 13–15 • Watchman, Emerald Pools", days: [13,14,15], photo: 14 },
         { n: "Bryce Canyon", lat: 37.6283, lng: -112.1677, i: "🏔️", info: "Dias 15–16 • Hoodoos + stargazing", days: [15,16], photo: 15 },
         { n: "Moab, UT", lat: 38.5733, lng: -109.5498, i: "🏜️", info: "Dias 16–18 • Arches, Canyonlands", days: [16,17,18], photo: 17 },
-        { n: "Twin Falls, ID", lat: 42.5558, lng: -114.4701, i: "🌊", info: "Dia 19 • Shoshone Falls", days: [19], photo: 19 },
+        { n: "Twin Falls, ID", lat: 42.5558, lng: -114.4701, i: "🌊", info: "Dia 19 • Perrine Bridge, Evel Knievel Jump Site, Shoshone Falls", days: [19], photo: 19 },
         { n: "Mt. Rainier NP", lat: 46.8523, lng: -121.7603, i: "🌋", info: "Dia 21 • Paradise", days: [21], photo: 21 },
         { n: "Olympic NP", lat: 47.9504, lng: -124.3855, i: "🧛", info: "Dias 21–22 • Hoh, Ruby Beach", days: [21,22], photo: 22 },
         { n: "Cannon Beach", lat: 45.8918, lng: -123.9615, i: "🌅", info: "Dia 23 • Haystack Rock", days: [23], photo: 23 },

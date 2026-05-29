@@ -89,7 +89,7 @@ const days = [
             { time: "14:00", text: "🎮 Voltar na <strong>Nintendo NY</strong> ou explorar algo novo", type: "" },
             { time: "16:00", text: "Tempo livre — descansar no hotel ou última exploração", type: "" },
             { time: "18:00", text: "🧳 Volta ao hotel — arrumar malas", type: "" },
-            { time: "19:00", text: "🍽️ Jantar", type: "food" },
+            { time: "19:00", text: "� Jantar — <strong>Suka Sushi</strong> — despedida de NY com sushi!", type: "food" },
             { time: "21:00", text: "🏨 Hotel — dormir cedo (voo amanhã!)", type: "" }
         ]
     },
@@ -211,7 +211,9 @@ const days = [
             { time: "08:00", text: "☕ Café + check-out de Three Rivers", type: "" },
             { time: "08:30", text: "🚗 Saída rumo a <strong>Las Vegas</strong> (~430 km, ~4.5h via CA-99 S → CA-58 E → I-15 N)", type: "drive" },
             { time: "10:00", text: "⚡ <strong>Supercharger Bakersfield</strong> (~170 km) — ~25 min", type: "charge" },
+            { time: "10:45", text: "🛤️ <strong>Tehachapi Loop</strong> — mirante da famosa curva ferroviária! Trens fazem um loop completo!", type: "" },
             { time: "12:00", text: "⚡🍽️ <strong>Supercharger Barstow</strong> (~200 km) — ~25 min + almoço", type: "charge" },
+            { time: "12:45", text: "🌡️ <strong>World's Tallest Thermometer</strong> — termômetro de 40m em Baker, CA! Ao lado: <strong>Alien Fresh Jerky</strong> 🛸", type: "" },
             { time: "~14:00", text: "🎰 Chegada em <strong>Las Vegas</strong>! Check-in", type: "" },
             { time: "14:30", text: "🏨 Descanso / piscina do hotel", type: "" },
             { time: "16:00", text: "📸 <strong>Welcome to Las Vegas Sign</strong> — foto icônica!", type: "" },
@@ -292,7 +294,10 @@ const days = [
         items: [
             { time: "06:30", text: "☕ Café + check-out de Vegas", type: "" },
             { time: "07:00", text: "🚗 Saída rumo ao <strong>Grand Canyon South Rim</strong> (~430 km, ~4.5h)", type: "drive" },
+            { time: "07:45", text: "🏗️ <strong>Hoover Dam</strong> — mirante na US-93! Ponte Memorial com vista da barragem a 270m acima do Rio Colorado!", type: "highlight" },
             { time: "09:00", text: "⚡ <strong>Supercharger Kingman, AZ</strong> (~260 km) — ~25 min", type: "charge" },
+            { time: "10:00", text: "🛣️ <strong>Hackberry General Store</strong> — posto vintage da Route 66 com Corvette clássico!", type: "" },
+            { time: "10:30", text: "🏚️ <strong>Seligman</strong> — 'Berço da Route 66'! Inspiração de Radiator Springs do filme Carros da Pixar!", type: "highlight" },
             { time: "~11:30", text: "🏜️ Chegada no <strong>Grand Canyon</strong>!", type: "highlight" },
             { time: "11:45", text: "📸 <strong>Mather Point</strong> — vista absurda!", type: "highlight" },
             { time: "12:15", text: "🍽️ Almoço no parque", type: "food" },
@@ -301,6 +306,7 @@ const days = [
             { time: "14:30", text: "📸 <strong>Bright Angel Trailhead</strong>", type: "" },
             { time: "15:00", text: "📸 <strong>Hopi Point</strong>", type: "" },
             { time: "15:30", text: "🚗 Saída rumo a <strong>Zion</strong> (~270 km, ~3.5h via Kanab)", type: "drive" },
+            { time: "16:15", text: "🌉 <strong>Navajo Bridge</strong> — 2 pontes a 142m sobre o Rio Colorado! Condores da Califórnia frequentes 🦅", type: "" },
             { time: "17:00", text: "⚡ <strong>Kanab, UT</strong> — ~25 min", type: "charge" },
             { time: "~19:00", text: "🏨 Chegada em <strong>Springdale</strong>!", type: "" },
             { time: "19:30", text: "🍽️ Jantar em Springdale", type: "food" }
@@ -336,6 +342,7 @@ const days = [
             { time: "08:30", text: "🥾 <strong>Riverside Walk</strong>", type: "" },
             { time: "09:30", text: "📸 Últimas fotos em Zion", type: "" },
             { time: "10:30", text: "🚗 Check-out + saída pra <strong>Bryce</strong> (~130 km, ~1.5h)", type: "drive" },
+            { time: "10:45", text: "🏁 <strong>Checkerboard Mesa</strong> — arenito com padrão xadrez natural! Pullover na UT-9", type: "" },
             { time: "11:00", text: "🛣️ <strong>Red Canyon</strong> — arcos vermelhos na estrada!", type: "" },
             { time: "12:00", text: "🏨 Check-in Bryce Canyon", type: "" },
             { time: "12:30", text: "🍽️ Almoço", type: "food" },
@@ -361,10 +368,13 @@ const days = [
         items: [
             { time: "06:30", text: "🌅 <strong>Nascer do sol em Bryce Point</strong>!", type: "highlight" },
             { time: "07:30", text: "☕ Café + check-out", type: "" },
-            { time: "08:00", text: "🚗 Saída rumo a <strong>Moab</strong> (~430 km, ~5h)", type: "drive" },
+            { time: "08:00", text: "🚗 Saída rumo a <strong>Moab</strong> (~490 km, ~6h)", type: "drive" },
+            { time: "08:45", text: "🌄 <strong>Head of the Rocks Overlook</strong> — mirante da UT-12 com vista épica de Escalante!", type: "" },
             { time: "09:30", text: "⚡ <strong>Supercharger Salina, UT</strong> (~170 km) — ~25 min", type: "charge" },
-            { time: "11:30", text: "⚡ <strong>Supercharger Green River, UT</strong> (~170 km) — ~20 min", type: "charge" },
-            { time: "~13:00", text: "🏨 Chegada em <strong>Moab</strong>!", type: "" },
+            { time: "10:15", text: "🏜️ <strong>Capitol Reef NP</strong> — paredões vermelhos! Petroglífos Fremont de 2.000 anos + Fruita Historic District", type: "highlight" },
+            { time: "11:15", text: "👽 <strong>Goblin Valley State Park</strong> — formações em forma de cogumelos/aliens! Parece outro planeta!", type: "highlight" },
+            { time: "12:15", text: "⚡ <strong>Supercharger Green River, UT</strong> (~170 km) — ~20 min", type: "charge" },
+            { time: "~13:45", text: "🏨 Chegada em <strong>Moab</strong>!", type: "" },
             { time: "13:30", text: "🍽️ Almoço em Moab", type: "food" },
             { time: "14:30", text: "🥾 <strong>Corona Arch Trail</strong> (~5 km, ~2h) — arco gigante sem multidões!", type: "highlight" },
             { time: "16:30", text: "🚗 <strong>Scenic Byway 128</strong> — rio Colorado", type: "" },
@@ -424,8 +434,8 @@ const days = [
             { name: 'Twin Falls, ID', leg: 'Moab → Twin Falls', critical: false }
         ],
         location: "Moab → Antelope Island → Twin Falls",
-        route: "Bisões + Shoshone Falls! 🦬",
-        note: "Dia longo — bisões na Antelope Island + Shoshone Falls!",
+        route: "Bisões + Shoshone Falls + Evel Knievel! 🦬",
+        note: "Dia longo — bisões na Antelope Island + Shoshone Falls + local do salto do Evel Knievel!",
         region: "pnw",
         items: [
             { time: "07:00", text: "☕ Café + check-out", type: "" },
@@ -437,7 +447,9 @@ const days = [
             { time: "13:00", text: "🍽️ Almoço rápido", type: "food" },
             { time: "13:30", text: "🚗 I-15 N → I-84 W rumo Twin Falls (~340 km, ~3.5h)", type: "drive" },
             { time: "~17:00", text: "⚡ <strong>Supercharger Twin Falls</strong>", type: "charge" },
-            { time: "17:15", text: "🌊 <strong>Shoshone Falls</strong> — 'Niágara do Oeste'! 65m de queda!", type: "highlight" },
+            { time: "17:15", text: "� <strong>Perrine Bridge</strong> — ponte sobre o Snake River Canyon! Ponto de BASE jumping legal 🪂", type: "highlight" },
+            { time: "17:30", text: "📸 <strong>Evel Knievel Jump Site</strong> — local do famoso salto de 1974 sobre o Snake River Canyon!", type: "highlight" },
+            { time: "17:50", text: "�🌊 <strong>Shoshone Falls</strong> — 'Niágara do Oeste'! 65m de queda!", type: "highlight" },
             { time: "18:00", text: "🏨 Check-in", type: "" },
             { time: "18:30", text: "🍽️ Jantar", type: "food" }
         ],
@@ -459,9 +471,11 @@ const days = [
             { time: "07:30", text: "☕ Café + check-out", type: "" },
             { time: "08:00", text: "🚗 Saída via I-84 W", type: "drive" },
             { time: "09:30", text: "⚡ <strong>Supercharger Baker City, OR</strong> (~200 km) — ~25 min", type: "charge" },
+            { time: "10:45", text: "📸 <strong>Deadman Pass Overlook</strong> — mirante nas Blue Mountains! Vista panorâmica a 1.278m de altitude", type: "highlight" },
             { time: "11:30", text: "⚡🍽️ <strong>Supercharger Pendleton, OR</strong> (~200 km) — ~20 min + almoço", type: "charge" },
             { time: "13:30", text: "⚡ <strong>Supercharger The Dalles, OR</strong> (~200 km) — ~25 min", type: "charge" },
             { time: "14:00", text: "🏞️ <strong>Columbia River Gorge</strong>", type: "" },
+            { time: "14:15", text: "🏛️ <strong>Vista House at Crown Point</strong> — edifício octogonal de 1917 com vista 270° do Gorge!", type: "highlight" },
             { time: "14:30", text: "🌲 <strong>Multnomah Falls</strong> — cachoeira icônica de 189m!", type: "highlight" },
             { time: "15:00", text: "🚗 I-84 W → I-5 N → Centralia (~240 km, ~2.5h)", type: "drive" },
             { time: "~17:30", text: "🏨 Chegada em <strong>Centralia</strong>!", type: "" },
@@ -527,8 +541,11 @@ const days = [
         items: [
             { time: "08:00", text: "☕ Café + check-out de Forks", type: "" },
             { time: "08:30", text: "🚗 Saída rumo ao sul via US-101 S (~380 km)", type: "drive" },
+            { time: "09:30", text: "🌳 <strong>Kalaloch Tree of Life</strong> — árvore crescendo sobre caverna com raízes expostas como tentáculos!", type: "" },
             { time: "11:00", text: "⚡ <strong>Supercharger Aberdeen, WA</strong> (~200 km) — ~25 min", type: "charge" },
             { time: "11:30", text: "🍽️ Almoço em Aberdeen", type: "food" },
+            { time: "12:30", text: "🏖️ <strong>Cape Disappointment</strong> — farol no encontro do Rio Columbia com o Pacífico!", type: "" },
+            { time: "13:15", text: "🚢 <strong>Peter Iredale Shipwreck</strong> — naufrágio de 1906 na praia! Esqueleto do navio visível!", type: "highlight" },
             { time: "14:00", text: "🌊 <strong>Astoria</strong> — cenário de <strong>The Goonies</strong>! Astoria Column!", type: "highlight" },
             { time: "15:30", text: "🏨 Check-in em <strong>Cannon Beach</strong>", type: "" },
             { time: "16:00", text: "📸 <strong>Haystack Rock</strong> — ícone de Oregon!", type: "highlight" },
@@ -554,6 +571,7 @@ const days = [
             { time: "11:15", text: "🍽️ Almoço em <strong>Newport</strong>", type: "food" },
             { time: "12:15", text: "📸 <strong>Cape Perpetua + Thor's Well</strong>", type: "highlight" },
             { time: "12:45", text: "🏖️ <strong>Heceta Head Lighthouse</strong>", type: "" },
+            { time: "13:45", text: "🦌 <strong>Dean Creek Elk Viewing Area</strong> — manada de Roosevelt elk selvagens!", type: "highlight" },
             { time: "14:30", text: "📸 <strong>Shore Acres State Park</strong>", type: "" },
             { time: "15:15", text: "⚡ <strong>Supercharger Coos Bay</strong> — ~25 min", type: "charge" },
             { time: "16:45", text: "📸 <strong>Samuel Boardman Scenic Corridor</strong>!", type: "highlight" },
@@ -625,6 +643,8 @@ const days = [
             { time: "08:00", text: "☕ Café + check-out de Eureka", type: "" },
             { time: "08:30", text: "🚗 US-101 S (~440 km, ~5.5h)", type: "drive" },
             { time: "10:30", text: "⚡🍽️ <strong>Supercharger Ukiah</strong> (~250 km) — ~25 min + almoço", type: "charge" },
+            { time: "11:15", text: "🏖️ <strong>Glass Beach</strong> (Fort Bragg) — praia coberta de vidro marítimo polido pelas ondas!", type: "" },
+            { time: "11:30", text: "🌊 <strong>Mendocino</strong> — vila costeira charmosa, cenário de filmes! Parada rápida", type: "" },
             { time: "12:30", text: "🐋 <strong>Point Reyes</strong> — Elk Preserve, Lighthouse + <strong>baleias cinzentas!</strong> (migração jan-abr!)", type: "highlight" },
             { time: "~15:00", text: "🏨 Chegada em <strong>SF</strong>! Check-in", type: "" },
             { time: "15:30", text: "🌆 <strong>Embarcadero</strong> — Ferry Building", type: "" },
@@ -670,54 +690,50 @@ const days = [
         tips: ["⚠️ Alcatraz esgota meses antes! Comprar em alcatrazcruises.com (~$45/pessoa)."]
     },
 
-    // ==================== PCH + LA (Dias 30-33) ====================
+    // ==================== PCH + LA (Dias 30-32) ====================
     {
         photo: 'img/activities/big_sur_coast.jpg', shortLoc: 'PCH',
-        chargeStops: [{ name: 'San Luis Obispo, CA', leg: 'SF → PCH → Santa Barbara', critical: false }],
-        location: "SF → PCH → Santa Barbara",
-        route: "Pacific Coast Highway! 🌊",
-        note: "Big Sur, Bixby Bridge, Hearst Castle — o trecho mais bonito da CA!",
+        chargeStops: [
+            { name: 'San Luis Obispo, CA', leg: 'SF → PCH → LA', critical: false },
+            { name: 'Santa Barbara, CA', leg: 'SF → PCH → LA', critical: false }
+        ],
+        location: "SF → PCH → LA",
+        route: "Pacific Coast Highway num dia! 🌊",
+        note: "Bixby Bridge, Big Sur, elefantes-marinhos + direto pra LA! Se PCH fechada: I-5 (~6h).",
         region: "ca",
         items: [
             { time: "07:00", text: "☕ Café + check-out de SF", type: "" },
             { time: "07:30", text: "🚗 Highway 1 sul", type: "drive" },
-            { time: "09:00", text: "🏖️ <strong>Half Moon Bay</strong> — parada rápida", type: "" },
-            { time: "09:45", text: "🏄 <strong>Santa Cruz</strong> — boardwalk", type: "" },
-            { time: "11:00", text: "🚗 <strong>Monterey</strong> — Cannery Row", type: "" },
-            { time: "12:00", text: "🍽️ Almoço em <strong>Carmel-by-the-Sea</strong>", type: "food" },
-            { time: "13:00", text: "🛣️ <strong>17-Mile Drive</strong> ($11.25) — Lone Cypress", type: "" },
-            { time: "14:00", text: "📸 <strong>Bixby Creek Bridge</strong> — a ponte mais fotografada da CA!", type: "highlight" },
-            { time: "14:30", text: "🏞️ <strong>Big Sur</strong> — McWay Falls, Pfeiffer Beach!", type: "highlight" },
-            { time: "16:00", text: "🚗 Highway 1 sul → <strong>San Simeon</strong>", type: "drive" },
-            { time: "16:30", text: "🦭 <strong>Elephant Seal Vista Point</strong> — centenas de elefantes-marinhos! Grátis!", type: "highlight" },
-            { time: "17:00", text: "🏰 <strong>Hearst Castle</strong> (vista externa)", type: "" },
-            { time: "17:30", text: "🚗 Highway 1 → SLO → US-101 S", type: "drive" },
-            { time: "18:00", text: "⚡ <strong>Supercharger San Luis Obispo</strong> — ~25 min", type: "charge" },
-            { time: "19:00", text: "🏨 Chegada em <strong>Santa Barbara</strong>! Check-in", type: "" },
-            { time: "19:30", text: "🍽️ Jantar na <strong>Stearns Wharf</strong>", type: "food" }
+            { time: "09:00", text: "🏄 <strong>Santa Cruz</strong> — boardwalk, parada rápida", type: "" },
+            { time: "10:30", text: "🚗 <strong>Monterey</strong> — Cannery Row", type: "" },
+            { time: "11:30", text: "🍽️ Almoço em <strong>Carmel-by-the-Sea</strong>", type: "food" },
+            { time: "12:30", text: "📸 <strong>Bixby Creek Bridge</strong> — a ponte mais fotografada da CA!", type: "highlight" },
+            { time: "13:00", text: "🏞️ <strong>Big Sur</strong> — McWay Falls!", type: "highlight" },
+            { time: "14:30", text: "🦭 <strong>Elephant Seal Vista Point</strong> — centenas de elefantes-marinhos!", type: "highlight" },
+            { time: "15:00", text: "🚗 Highway 1 → US-101 S rumo LA", type: "drive" },
+            { time: "15:30", text: "⚡ <strong>Supercharger San Luis Obispo</strong> — ~25 min", type: "charge" },
+            { time: "17:00", text: "⚡ <strong>Supercharger Santa Barbara</strong> — ~20 min", type: "charge" },
+            { time: "~19:00", text: "🏨 Chegada em <strong>LA</strong>! Check-in", type: "" },
+            { time: "19:30", text: "🍽️ Jantar", type: "food" }
         ],
-        tips: ["⚠️ Verificar se Highway 1 está aberta — trechos de Big Sur podem fechar no inverno."]
+        tips: ["⚠️ Se Highway 1 estiver FECHADA em Big Sur (comum no inverno): SF → I-5 S → LA direto (~6h, ~600 km). Parar em Tejon SC.", "🔄 Nesse caso o dia fica leve — aproveitar pra descansar em LA!"]
     },
     {
         photo: 'img/activities/malibu_pch.jpg', shortLoc: 'LA',
-        location: "Santa Barbara → PCH Malibu → LA",
-        route: "PCH dia 2 + entrada em LA! 🌊",
-        note: "Manhã em Santa Barbara + Malibu + Venice Beach!",
+        location: "LA — praias + descanso 🧺",
+        route: "Dia leve: praias + lavanderia! 🏖️",
+        note: "Santa Monica, Venice Beach + lavar roupa e recarregar as energias!",
         region: "ca",
         items: [
-            { time: "09:00", text: "☕ Café com calma", type: "" },
-            { time: "09:30", text: "🏖️ <strong>Santa Barbara</strong> — passeio pela <strong>State Street</strong>", type: "" },
-            { time: "10:00", text: "📸 <strong>Santa Barbara County Courthouse</strong> — torre com vista 360°, grátis!", type: "" },
-            { time: "10:30", text: "🏖️ <strong>East Beach</strong> ou <strong>Butterfly Beach</strong>", type: "" },
-            { time: "11:30", text: "🍽️ Almoço — <strong>The Lark</strong> ou tacos no <strong>Lilly's Taqueria</strong>", type: "food" },
-            { time: "12:30", text: "🚗 Check-out + US-101 S → <strong>Oxnard</strong> → <strong>PCH / Highway 1</strong>", type: "drive" },
-            { time: "13:30", text: "🌊 <strong>Point Mugu</strong> — penhascos no mar!", type: "" },
-            { time: "14:00", text: "🏖️ <strong>PCH por Malibu</strong> — praias icônicas", type: "" },
-            { time: "14:30", text: "🏝️ <strong>El Matador Beach</strong> — grutas e arcos de rocha!", type: "highlight" },
-            { time: "15:30", text: "🏖️ <strong>Santa Monica Pier</strong> — roda-gigante, praia", type: "" },
-            { time: "16:30", text: "🏖️ <strong>Venice Beach</strong> — Muscle Beach, murais, Abbot Kinney", type: "" },
-            { time: "17:30", text: "🏨 Check-in em <strong>LA</strong>", type: "" },
-            { time: "18:00", text: "🍽️ Jantar", type: "food" }
+            { time: "09:00", text: "☕ Café com calma — sem pressa hoje!", type: "" },
+            { time: "10:00", text: "🧺 <strong>Lavanderia</strong> — lavar e secar roupa (~1.5h)", type: "" },
+            { time: "11:30", text: "🏖️ <strong>Santa Monica Pier</strong> — roda-gigante, praia, Route 66 End Sign!", type: "highlight" },
+            { time: "12:30", text: "🍽️ Almoço na praia", type: "food" },
+            { time: "13:30", text: "🏖️ <strong>Venice Beach</strong> — Muscle Beach, murais, Abbot Kinney Blvd", type: "" },
+            { time: "15:00", text: "🏝️ <strong>El Matador Beach</strong> — grutas e arcos de rocha! (~30 min de carro)", type: "highlight" },
+            { time: "16:30", text: "Tempo livre — descanso / piscina / compras", type: "" },
+            { time: "18:00", text: "🌅 Pôr do sol na praia!", type: "highlight" },
+            { time: "19:00", text: "🍽️ Jantar", type: "food" }
         ]
     },
     {
@@ -774,8 +790,7 @@ const hotels = [
     { num: 13, name: "Crescent City / Klamath, CA", checkin: "14/02", checkout: "15/02", nights: 1 },
     { num: 14, name: "Eureka / Arcata, CA", checkin: "15/02", checkout: "16/02", nights: 1 },
     { num: 15, name: "San Francisco, CA", checkin: "16/02", checkout: "19/02", nights: 3 },
-    { num: 16, name: "Santa Barbara, CA", checkin: "19/02", checkout: "20/02", nights: 1 },
-    { num: 17, name: "Los Angeles, CA", checkin: "20/02", checkout: "22/02", nights: 2 }
+    { num: 16, name: "Los Angeles, CA", checkin: "19/02", checkout: "22/02", nights: 3 }
 ];
 
 // ==================== NATIONAL PARKS ====================
