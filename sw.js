@@ -1,4 +1,4 @@
-const CACHE_NAME = 'viagem-eua-2027-v127';
+const CACHE_NAME = 'viagem-eua-2027-v128';
 const TILE_CACHE = 'viagem-tiles-v1';
 
 // Critical assets — must succeed for install
@@ -223,6 +223,7 @@ const ASSETS_TO_CACHE = [
   './img/activities/moro_rock.jpg',
   './img/activities/mt__rainier.jpg',
   './img/activities/mt_charleston.jpg',
+  './img/activities/mt_hood.jpg',
   './img/activities/muir_woods.jpg',
   './img/activities/multnomah_falls.jpg',
   './img/activities/muscle_beach.jpg',
@@ -288,6 +289,7 @@ const ASSETS_TO_CACHE = [
   './img/activities/the_vessel_nyc.jpg',
   './img/activities/thor_s_well.jpg',
   './img/activities/times_square.jpg',
+  './img/activities/trillium_lake.jpg',
   './img/activities/trinity_church.jpg',
   './img/activities/tunnel_view.jpg',
   './img/activities/union_square_sf.jpg',

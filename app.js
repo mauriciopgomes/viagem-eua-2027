@@ -185,6 +185,8 @@ const activityPhotos = {
     'Forks': 'img/activities/forks_washington.jpg',
     'Hall of Mosses': 'img/activities/hall_of_mosses.jpg',
     'La Push': 'img/activities/la_push.jpg',
+    'Mt. Hood': 'img/activities/mt_hood.jpg',
+    'Trillium Lake': 'img/activities/trillium_lake.jpg',
     'Columbia River Gorge': 'img/activities/columbia_river_gorge.jpg',
     'Deadman Pass': 'img/activities/deadman_pass.jpg',
     'Antelope Island': 'img/activities/antelope_island.jpg',
@@ -549,6 +551,9 @@ const placeInfo = {
     'Voodoo Doughnut': { addr: '22 SW 3rd Ave, Portland, OR 97204', coords: '45.5228,-122.6726', detail: 'Donuts bizarros e famosos! O Bacon Maple Bar e o Voodoo Doll são os mais pedidos. Fila rápida no inverno.', hours: '24h', cost: '~$3-6/donut' },
     "Powell's Books": { addr: '1005 W Burnside St, Portland, OR 97209', coords: '45.5231,-122.6812', detail: 'Maior livraria independente do MUNDO! Ocupa um quarteirão inteiro. Mapa do 1º andar na entrada. Seção Rare Books imperdível.', hours: '10h-21h', cost: 'Gratuito' },
     'Pittock Mansion': { addr: '3229 NW Pittock Dr, Portland, OR 97210', coords: '45.5255,-122.7162', detail: 'Mansão de 1914 com vista panorâmica de Portland, Mt. Hood e Mt. St. Helens! Exterior gratuito, interior ~$15.', hours: '10h-16h', cost: 'Exterior gratuito / Interior ~$15' },
+
+    'Mt. Hood': { addr: 'Mt. Hood, OR', coords: '45.3735,-121.6959', detail: 'Vulcão de 3.429m — pico mais alto de Oregon! Coberto de neve o ano todo. Timberline Lodge (1937) inspirou o hotel de O Iluminado. Desvio de ~1h ao sul da I-84 pela US-26.', cost: 'Gratuito' },
+    'Trillium Lake': { addr: 'Trillium Lake, Mt Hood National Forest, OR 97028', coords: '45.2685,-121.7400', detail: 'Lago alpino com reflexo perfeito do Mt. Hood! Um dos spots de foto mais icônicos de Oregon. Trilha fácil de 3 km ao redor do lago. Neve possível no inverno.', cost: 'Northwest Forest Pass: $5/dia' },
 
     // Day 20 — Multnomah / Columbia / Boise
     'Deadman Pass': { addr: 'Deadman Pass Rest Area, I-84, Emigrant Hill, OR 97850', coords: '45.6042,-118.5561', detail: 'Passagem a 1.278m de altitude nas Blue Mountains. Mirante com vista panorâmica espetacular! Nome vem de um confronto entre colonos e nativos em 1878. Rest area com banheiros.', cost: 'Gratuito' },
