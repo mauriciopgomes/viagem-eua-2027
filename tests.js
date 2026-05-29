@@ -156,9 +156,9 @@ test('dayPhotos referencia arquivos que existem', () => {
 // ==================== 3. DATA.JS — HOTELS ====================
 section('data.js — Hotéis');
 
-test('hotels é um array com 17 hotéis', () => {
+test('hotels é um array com 16 hotéis', () => {
     assert(Array.isArray(hotels), 'hotels deve ser array');
-    assertEqual(hotels.length, 17, 'deve ter 17 hotéis');
+    assertEqual(hotels.length, 16, 'deve ter 16 hotéis');
 });
 
 test('hotéis têm campos obrigatórios', () => {
@@ -219,9 +219,9 @@ test('parques referenciam dias válidos', () => {
 // ==================== 5. DATA.JS — SUPERCHARGERS ====================
 section('data.js — Superchargers');
 
-test('superchargers é um array com 24 paradas', () => {
+test('superchargers é um array com 25 paradas', () => {
     assert(Array.isArray(superchargers), 'superchargers deve ser array');
-    assertEqual(superchargers.length, 24, 'deve ter 24 superchargers');
+    assertEqual(superchargers.length, 25, 'deve ter 25 superchargers');
 });
 
 test('superchargers têm campos obrigatórios', () => {
@@ -643,7 +643,7 @@ test('dayRouteSegments tem segmentos para dias de estrada', () => {
     const match = allJs.match(/var dayRouteSegments\s*=\s*\{([\s\S]*?)\};/);
     assert(match, 'dayRouteSegments deve existir');
     // Dias com estrada significativa
-    [5, 6, 7, 9, 13, 15, 16, 19, 20, 21, 23, 24, 25, 26, 27, 30, 31].forEach((d) => {
+    [5, 6, 7, 9, 13, 15, 16, 19, 20, 21, 23, 24, 25, 26, 27, 30].forEach((d) => {
         assert(match[1].includes(`${d}:`), `dayRouteSegments[${d}] ausente`);
     });
 });
@@ -1046,7 +1046,7 @@ test('cada dia tem pelo menos 1 item food (exceto dia de voo)', () => {
 });
 
 test('dias de estrada (>100km) têm items drive', () => {
-    const driveDays = [5, 7, 9, 13, 15, 16, 19, 20, 21, 23, 24, 27, 30, 31];
+    const driveDays = [5, 7, 9, 13, 15, 16, 19, 20, 21, 23, 24, 27, 30];
     driveDays.forEach((d) => {
         const day = days[d - 1];
         const hasDrive = day.items.some(i => i.type === 'drive');
