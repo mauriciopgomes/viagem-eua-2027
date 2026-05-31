@@ -7,21 +7,22 @@
 | # | Cidade/Região | Check-in | Check-out | Noites | Dias |
 |---|---------------|----------|-----------|--------|------|
 | 1 | **New York, NY** (Marriott Marquis) | 21/01 (Qui) | 25/01 (Seg) | 4 | 1-4 |
-| 2 | **Las Vegas, NV** | 25/01 (Seg) | 29/01 (Sex) | 4 | 5-8 |
-| 3 | **Springdale, UT** (Zion) | 29/01 (Sex) | 31/01 (Dom) | 2 | 9-10 |
-| 4 | **Bryce Canyon, UT** | 31/01 (Dom) | 01/02 (Seg) | 1 | 11 |
-| 5 | **Moab, UT** (Arches/Canyonlands) | 01/02 (Seg) | 04/02 (Qui) | 3 | 12-14 |
-| 6 | **Twin Falls, ID** | 04/02 (Qui) | 05/02 (Sex) | 1 | 15 |
-| 7 | **Centralia, WA** | 05/02 (Sex) | 06/02 (Sáb) | 1 | 16 |
-| 8 | **Forks / Port Angeles, WA** (Olympic) | 06/02 (Sáb) | 08/02 (Seg) | 2 | 17-18 |
-| 9 | **Cannon Beach, OR** | 08/02 (Seg) | 09/02 (Ter) | 1 | 19 |
-| 10 | **Gold Beach / Coos Bay, OR** | 09/02 (Ter) | 10/02 (Qua) | 1 | 20 |
-| 11 | **Crescent City / Klamath, CA** (Redwood) | 10/02 (Qua) | 11/02 (Qui) | 1 | 21 |
-| 12 | **Eureka / Arcata, CA** | 11/02 (Qui) | 12/02 (Sex) | 1 | 22 |
-| 13 | **San Francisco, CA** | 12/02 (Sex) | 16/02 (Ter) | 4 | 23-26 |
-| 14 | **Mariposa / El Portal, CA** | 16/02 (Ter) | 19/02 (Sex) | 3 | 27-29 |
-| 15 | **Three Rivers, CA** (Sequoia) | 19/02 (Sex) | 20/02 (Sáb) | 1 | 30 |
-| 16 | **Los Angeles, CA** | 20/02 (Sáb) | 22/02 (Seg) | 2 | 31-32 |
+| 2 | **Las Vegas, NV** | 25/01 (Seg) | 28/01 (Qui) | 3 | 5-7 |
+| 3 | **Springdale, UT** (Zion) | 28/01 (Qui) | 30/01 (Sáb) | 2 | 8-9 |
+| 4 | **Bryce Canyon, UT** | 30/01 (Sáb) | 31/01 (Dom) | 1 | 10 |
+| 5 | **Moab, UT** (Arches/Canyonlands) | 31/01 (Dom) | 03/02 (Qua) | 3 | 11-13 |
+| 6 | **Twin Falls, ID** | 03/02 (Qua) | 04/02 (Qui) | 1 | 14 |
+| 7 | **Centralia, WA** | 04/02 (Qui) | 05/02 (Sex) | 1 | 15 |
+| 8 | **Forks / Port Angeles, WA** (Olympic) | 05/02 (Sex) | 07/02 (Dom) | 2 | 16-17 |
+| 9 | **Cannon Beach, OR** | 07/02 (Dom) | 08/02 (Seg) | 1 | 18 |
+| 10 | **Gold Beach / Coos Bay, OR** | 08/02 (Seg) | 09/02 (Ter) | 1 | 19 |
+| 11 | **Crescent City / Klamath, CA** (Redwood) | 09/02 (Ter) | 10/02 (Qua) | 1 | 20 |
+| 12 | **Eureka / Arcata, CA** | 10/02 (Qua) | 11/02 (Qui) | 1 | 21 |
+| 13 | **San Francisco, CA** | 11/02 (Qui) | 14/02 (Dom) | 3 | 22-24 |
+| 14 | **Carmel, CA** | 14/02 (Dom) | 15/02 (Seg) | 1 | 25 |
+| 15 | **Mariposa / El Portal, CA** | 15/02 (Seg) | 18/02 (Qui) | 3 | 26-28 |
+| 16 | **Three Rivers, CA** (Sequoia) | 18/02 (Qui) | 19/02 (Sex) | 1 | 29 |
+| 17 | **Los Angeles, CA** | 19/02 (Sex) | 22/02 (Seg) | 3 | 30-33 |
 
 > **Total: 32 noites de hospedagem** (noite de 20→21/01 no avião GRU→JFK, noite de 22/02 no avião LAX→MIA→GIG)
 
@@ -30,45 +31,57 @@
 ## 🗺️ Rota Visual
 
 ```
-NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
+NYC ✈️ LAX → Las Vegas → Valley of Fire
 → Zion → Bryce Canyon → Moab (Canyonlands + Arches)
 → Antelope Island → Twin Falls → Multnomah Falls → Centralia
 → Mt. Rainier → Olympic NP → Cannon Beach → Costa Oregon ↓
 → Redwood NP → Eureka → SF → PCH (Monterey → Big Sur)
-→ Yosemite → Sequoia/KC → LA ✈️ volta
+→ Yosemite → Sequoia/KC → Big Bear → LA ✈️ volta
 ```
 
 ---
 
-## 📊 National Parks no Roteiro (11)
+## 📊 National Parks no Roteiro (10)
 
 | # | National Park | Dia(s) |
 |---|--------------|--------|
-| 1 | Death Valley | 8 |
-| 2 | Grand Canyon | 9 |
-| 3 | Zion | 10-11 |
-| 4 | Bryce Canyon | 11-12 |
-| 5 | Canyonlands | 13 |
-| 6 | Arches | 14 |
-| 7 | Mt. Rainier | 17 |
-| 8 | Olympic | 17-18 |
-| 9 | Redwood | 21-22 |
-| 10 | Yosemite | 28-29 |
-| 11 | Sequoia + Kings Canyon | 30 |
+| 1 | Death Valley | 7 |
+| 2 | Zion | 8–10 |
+| 3 | Bryce Canyon | 10–11 |
+| 4 | Canyonlands | 12 |
+| 5 | Arches | 13 |
+| 6 | Mt. Rainier | 16 |
+| 7 | Olympic | 16–17 |
+| 8 | Redwood | 20–21 |
+| 9 | Yosemite | 27–28 |
+| 10 | Sequoia + Kings Canyon | 29 |
 
 ---
 
 ## 📅 Roteiro Dia a Dia
 
-| Arquivo | Dias | Região |
-|---------|------|--------|
-| [roteiro-dias-01-05.md](roteiro-dias-01-05.md) | 1-5 | NYC + Voo para Vegas |
-| [roteiro-dias-06-10.md](roteiro-dias-06-10.md) | 6-10 | Vegas + Grand Canyon + Zion |
-| [roteiro-dias-11-15.md](roteiro-dias-11-15.md) | 11-15 | Bryce + Moab + Twin Falls |
-| [roteiro-dias-16-20.md](roteiro-dias-16-20.md) | 16-20 | PNW: Olympic + Oregon Coast |
-| [roteiro-dias-21-25.md](roteiro-dias-21-25.md) | 21-25 | Redwood + San Francisco |
-| [roteiro-dias-26-30.md](roteiro-dias-26-30.md) | 26-30 | SF + PCH + Yosemite + Sequoia |
-| [roteiro-dias-31-33.md](roteiro-dias-31-33.md) | 31-33 | Los Angeles + Volta |
+---
+
+### Dia 1 — Qui, 21/01 (Chegada + Midtown leve) 📍 New York
+
+> Chegada no JFK às 07h. Dia tranquilo pra se adaptar — tudo a pé em Midtown.
+
+| Horário | Atividade |
+|---------|----------|
+| 07:00 | ✈️ Chegada no JFK — imigração + bagagem |
+| ~09:00 | 🚕 Transporte JFK → Hotel |
+| ~10:00 | 🏨 Check-in no **Marriott Marquis** (1535 Broadway, Times Square) |
+| 10:30 | ☕ Café da manhã perto do hotel |
+| 11:00 | 🎮 **Nintendo NY** (10 Rockefeller Plaza) — loja oficial, 2 andares! |
+| 12:15 | ⛪ **St. Patrick's Cathedral** (5th Ave com 50th St) — gratuita |
+| 12:30 | 🧸 **FAO Schwarz** (30 Rockefeller Plaza) — loja de brinquedos icônica |
+| 12:45 | 🧱 **LEGO Store** (636 5th Ave) — maquetes gigantes de NY em LEGO |
+| 13:15 | 🍕 Almoço — **Joe's Pizza** (clássica de NY!) |
+| 14:00 | 🚶 Passeio pela **5th Avenue** — Saks, Tiffany's, Apple Store (cubo de vidro!) |
+| 15:00 | 📸 **Rockefeller Center Plaza** — pista de patinação, bandeiras |
+| 15:30 | 🧊 **Bryant Park** — Winter Village no inverno (mercadinho, patinação) |
+| 19:00 | 🍽️ Jantar perto do hotel (Times Square / Midtown) |
+| 20:30 | 🏨 Hotel — descanso (jet lag!) |
 
 ---
 
@@ -103,10 +116,9 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 |---------|-----------|
 | 08:00 | ☕ Café — **Levain Bakery** (167 W 74th St) — cookies famosos! |
 | 09:00 | 🌳 **Central Park** — Strawberry Fields, Bethesda Fountain, Bow Bridge |
-| 10:30 | 🏛️ **MET** (opcional ~2h) — na 82nd com 5th! Ingresso ~$30 |
-| 12:30 | 🏨 **The Plaza Hotel** — hotel do Kevin em Esqueceram de Mim 2! |
-| 13:00 | 🍔 Almoço — **Shake Shack** (Columbus Circle ou Midtown) |
-| 15:00 | 🏮 **Chinatown** — Canal St + Mott St, a maior dos EUA! |
+| 11:00 | 🏨 **The Plaza Hotel** — hotel do Kevin em Esqueceram de Mim 2! |
+| 11:30 | 🍔 Almoço — **Shake Shack** (Columbus Circle ou Midtown) |
+| 13:00 | 🏮 **Chinatown** — Canal St + Mott St, a maior dos EUA! |
 | 16:30 | 🍝 **Little Italy** — Mulberry St. Cannoli na **Ferrara Bakery** (desde 1892!) |
 | 17:30 | 🍖 Jantar — **Katz's Deli** (205 E Houston St) — pastrami lendário! |
 | 19:00 | 🏨 Volta ao hotel |
@@ -157,7 +169,6 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 | 16:30 | ⚡🍽️ **Supercharger Barstow** (~200 km) — ~25 min + lanche |
 | 16:35 | 🎨 **Elmer's Bottle Tree Ranch** (Oro Grande) — floresta de "árvores" de garrafas de vidro e metal! Arte outsider no deserto. Grátis |
 | 17:30 | 👽 **Alien Fresh Jerky** (Baker) — loja alien + jerky de 100 sabores! + 🌡️ World's Tallest Thermometer! |
-| 18:30 | 🎨 **Seven Magic Mountains** — 7 torres de pedras neon de 10m no deserto! Grátis, na beira da I-15 |
 | ~19:00 | 🎰 Chegada em **Las Vegas**! Check-in |
 | 19:30 | 🍽️ Jantar perto do hotel |
 | 21:00 | 🏨 Dormir cedo (jet lag + dia longo!) |
@@ -183,37 +194,14 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 | 15:00 | 🏨 Explorar hotéis — **Venetian** (canais), **Bellagio** (conservatório), **Caesars Palace** |
 | 18:00 | 🌅 **Bellagio Fountains** — show a cada 30 min! |
 | 19:00 | 🍽️ Jantar na Strip |
-| 20:30 | 🌃 **Strip à noite** — cassinos, neon! |
 
 > 🏔️ Mt. Charleston: pode estar -5°C com neve! Levar casaco, luvas e botas.
 
 ---
 
-### Dia 7 — Qua, 27/01 (Valley of Fire + Strip) 📍 Las Vegas, NV
+### Dia 7 — Qua, 27/01 (Day trip Death Valley) 📍 Las Vegas, NV
 
-> Manhã num dos parques mais fotogênicos de Nevada!
-
-| Horário | Atividade |
-|---------|-----------|
-| 08:45 | 🚗 Rumo a **Valley of Fire** (~45 min pela I-15 N) |
-| 09:30 | 🔥 **Valley of Fire** — arenito vermelho surreal! |
-| 09:45 | 🥾 **Fire Wave Trail** (~2 km) — ondas de rocha listrada! |
-| 10:30 | 📸 **Elephant Rock** |
-| 11:00 | 📸 **White Domes Trail** (~1.8 km) — cânion colorido |
-| 11:45 | 🚗 Volta pra Vegas (~1h) |
-| 12:45 | 🍽️ Almoço na Strip |
-| 14:00 | 🚗 Rumo a **Eldorado Canyon** (~45 min ao sul da Strip) |
-| 14:45 | 🏚️ **Eldorado Canyon Ghost Town** — mina de ouro Techatticup (1861)! Ruínas, carros antigos, cenário de faroeste |
-| 16:15 | 🚗 Volta pra Vegas (~45 min) |
-| 17:00 | 🏨 Descanso / piscina |
-| 19:00 | 🍽️ Jantar na Strip |
-| 20:30 | 🌃 Noite na Strip |
-
----
-
-### Dia 8 — Qui, 28/01 (Day trip Death Valley) 📍 Las Vegas, NV
-
-> Última noite em Vegas! Inverno é a melhor época pra Death Valley.
+> Inverno é a melhor época pra Death Valley.
 
 | Horário | Atividade |
 |---------|-----------|
@@ -228,44 +216,39 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 | 15:00 | 🚗 Volta pra Vegas (~2h) |
 | 17:00 | 🏨 Chegada em Vegas — piscina / descanso |
 | 19:00 | 🍽️ Jantar na Strip |
-| 20:00 | 🌃 Última noite em Vegas! |
+| 20:00 | 🌃 Noite em Vegas |
 
 > ⚡ EV: Round trip ~380 km. Carregar a 100% na noite anterior!
 
 ---
 
-### 🏜️ UTAH (Dias 9-14)
+### Dia 8 — Qui, 28/01 (Valley of Fire → Zion) 📍 Springdale, UT
 
----
-
-### Dia 9 — Sex, 29/01 (Vegas → Grand Canyon → Zion) 📍 Springdale, UT
-
-> Grand Canyon à tarde + Zion à noite! Dia longo (~700 km) mas épico!
+> Check-out Vegas! Valley of Fire de manhã, Zion à tarde.
 
 | Horário | Atividade |
 |---------|-----------|
-| 06:30 | ☕ Café + check-out de Vegas |
-| 07:00 | 🚗 Saída rumo ao **Grand Canyon South Rim** (~430 km, ~4.5h) |
-| 07:45 | 🏗️ **Hoover Dam** — mirante na US-93! Ponte Memorial com vista da barragem a 270m acima do Rio Colorado! |
-| 09:00 | ⚡ **Supercharger Kingman, AZ** (~260 km) — ~25 min |
-| 10:00 | 🛣️ **Hackberry General Store** — posto vintage da Route 66 com Corvette clássico! |
-| 10:30 | 🏚️ **Seligman** — 'Berço da Route 66'! Inspiração de Radiator Springs do filme Carros da Pixar! |
-| ~11:30 | 🏜️ Chegada no **Grand Canyon**! |
-| 11:45 | 📸 **Mather Point** — vista absurda! |
-| 12:15 | 🍽️ Almoço no parque |
-| 13:00 | 🥾 **Rim Trail** (Mather → Yavapai Point, ~1.5 km) |
-| 13:45 | 🏛️ **Yavapai Geology Museum** |
-| 14:30 | 📸 **Bright Angel Trailhead** |
-| 15:00 | 📸 **Hopi Point** |
-| 15:30 | 🚗 Saída rumo a **Zion** (~270 km, ~3.5h via Kanab) |
-| 16:15 | 🌉 **Navajo Bridge** — 2 pontes a 142m sobre o Rio Colorado! Condores da Califórnia frequentes 🦅 |
-| 17:00 | ⚡ **Kanab, UT** — ~25 min |
-| ~19:00 | 🏨 Chegada em **Springdale**! |
-| 19:30 | 🍽️ Jantar em Springdale |
+| 08:00 | ☕ Café + check-out de Vegas |
+| 08:45 | 🚗 Rumo a **Valley of Fire** (~45 min pela I-15 N) |
+| 09:30 | 🔥 **Valley of Fire** — arenito vermelho surreal! |
+| 09:45 | 🥾 **Fire Wave Trail** (~2 km) — ondas de rocha listrada! |
+| 10:30 | 📸 **Elephant Rock** |
+| 11:00 | 📸 **White Domes Trail** (~1.8 km) — cânion colorido |
+| 11:45 | 🚗 Rumo a **Zion** via I-15 N (~250 km, ~2.5h) |
+| 12:30 | 🍽️ Almoço em St. George (no caminho) |
+| ~14:15 | 🏨 Chegada em **Springdale** — check-in! |
+| 15:00 | 🛍️ Explorar **Springdale** |
+| 15:30 | 🌄 **Canyon Overlook Trail** (~1.6 km, ~1h) — vista incrível! |
+| 17:00 | 🌅 Pôr do sol em Zion! |
+| 18:30 | 🍽️ Jantar em Springdale |
 
 ---
 
-### Dia 10 — Sáb, 30/01 (Zion NP dia cheio) 📍 Springdale, UT
+### 🏜️ UTAH (Dias 9-13)
+
+---
+
+### Dia 9 — Sex, 29/01 (Zion NP dia cheio) 📍 Springdale, UT
 
 > Dia cheio em Zion! No inverno pode dirigir no canyon (sem shuttle).
 
@@ -279,13 +262,13 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 | 13:30 | 📸 **Court of the Patriarchs** |
 | 14:00 | 🛍️ Explorar **Springdale** |
 | 15:00 | 📸 **Big Bend** |
-| 15:30 | 🌄 **Canyon Overlook Trail** (~1.6 km, ~1h) |
+| 15:30 | 🥾 **Riverside Walk** |
 | 16:30 | 🌅 **Pôr do sol no Canyon Junction Bridge** |
 | 18:30 | 🍽️ Jantar em Springdale |
 
 ---
 
-### Dia 11 — Dom, 31/01 (Zion AM → Bryce PM) 📍 Bryce Canyon, UT
+### Dia 10 — Sáb, 30/01 (Zion AM → Bryce PM) 📍 Bryce Canyon, UT
 
 > Última manhã em Zion + Navajo Loop + pôr do sol + stargazing em Bryce!
 
@@ -293,16 +276,17 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 |---------|-----------|
 | 07:30 | ☕ Café |
 | 08:00 | 🚗 Dirigir pra **Zion Canyon** |
-| 08:30 | 🥾 **Riverside Walk** |
-| 09:30 | 📸 Últimas fotos em Zion |
-| 10:30 | 🚗 Check-out + saída pra **Bryce** (~130 km, ~1.5h) |
-| 10:45 | 🏁 **Checkerboard Mesa** — arenito com padrão xadrez natural! Pullover na UT-9 |
-| 11:00 | 🛣️ **Red Canyon** — arcos vermelhos na estrada! |
-| 12:00 | 🏨 Check-in Bryce Canyon |
-| 12:30 | 🍽️ Almoço |
+| 08:30 | 📸 Últimas fotos em Zion |
+| 09:30 | 🚗 Check-out + saída pra **Bryce** (~130 km, ~1.5h) |
+| 09:45 | 🏁 **Checkerboard Mesa** — arenito com padrão xadrez natural! Pullover na UT-9 |
+| 10:00 | 🛣️ **Red Canyon** — arcos vermelhos na estrada! |
+| 11:00 | 🏨 Check-in Bryce Canyon |
+| 11:30 | 🍽️ Almoço |
+| 12:30 | 📸 **Fairyland Point** — mirante menos visitado, vista única dos hoodoos! |
+| 13:00 | 🥾 **Mossy Cave Trail** (~1.5 km, ~30 min) — caverna com musgo + cascata congelada! |
 | 13:30 | 📸 **Sunrise/Sunset Point** |
 | 14:00 | 🥾 **Navajo Loop + Queen's Garden Trail** (~2h) |
-| 16:00 | 🚗 **Scenic Drive** — Inspiration Point, Natural Bridge, Rainbow Point |
+| 15:00 | 🚗 **Scenic Drive** — Inspiration Point, Natural Bridge, Rainbow Point |
 | 17:30 | 🌅 **Pôr do sol no Bryce Amphitheater** |
 | 18:30 | 🍽️ Jantar |
 | 20:30 | 🌌 **Stargazing em Bryce!** — International Dark Sky Park! |
@@ -311,31 +295,31 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 
 ---
 
-### Dia 12 — Seg, 01/02 (Bryce → Moab) 📍 Moab, UT
+### Dia 11 — Dom, 31/01 (Bryce → Moab) 📍 Moab, UT
 
-> Sunrise épico em Bryce, depois estrada até Moab com Capitol Reef e Goblin Valley!
+> Estrada até Moab com Capitol Reef e paradas cênicas!
 
 | Horário | Atividade |
 |---------|-----------|
-| 06:30 | 🌅 **Nascer do sol em Bryce Point**! |
 | 07:30 | ☕ Café + check-out |
 | 08:00 | 🚗 Saída rumo a **Moab** (~490 km, ~6h) |
 | 08:45 | 🌄 **Head of the Rocks Overlook** — mirante da UT-12 com vista épica de Escalante! |
 | 09:30 | ⚡ **Supercharger Salina, UT** (~170 km) — ~25 min |
 | 10:15 | 🏜️ **Capitol Reef NP** — paredões vermelhos! Petroglífos Fremont de 2.000 anos + Fruita Historic District |
-| 11:15 | 👽 **Goblin Valley State Park** — formações em forma de cogumelos/aliens! Parece outro planeta! |
-| 11:45 | 🏜️ **San Rafael Swell** (I-70) — paredões dramáticos de ambos os lados da highway! Corte no canyon espetacular. Rest area com viewpoint |
-| 12:15 | ⚡ **Supercharger Green River, UT** (~170 km) — ~20 min |
-| ~13:45 | 🏨 Chegada em **Moab**! |
-| 13:30 | 🍽️ Almoço em Moab |
-| 14:30 | 🥾 **Corona Arch Trail** (~5 km, ~2h) — arco gigante sem multidões! |
-| 16:30 | 🚗 **Scenic Byway 128** — rio Colorado |
-| 17:30 | 🌅 Pôr do sol em Moab |
-| 18:30 | 🍽️ Jantar em Moab |
+| 10:45 | 🥾 **Hickman Bridge Trail** (~2.8 km, ~1h) — arco natural lindo! |
+| 11:45 | 🚗 **Scenic Drive** parcial + saída pra Moab |
+| 12:15 | 🏜️ **San Rafael Swell** (I-70) — paredões dramáticos de ambos os lados da highway! |
+| 12:45 | ⚡ **Supercharger Green River, UT** (~170 km) — ~20 min |
+| ~14:15 | 🏨 Chegada em **Moab**! |
+| 14:30 | 🍽️ Almoço em Moab |
+| 15:30 | 🥾 **Corona Arch Trail** (~5 km, ~2h) — arco gigante sem multidões! |
+| 17:30 | 🚗 **Scenic Byway 128** — rio Colorado |
+| 18:00 | 🌅 Pôr do sol em Moab |
+| 19:00 | 🍽️ Jantar em Moab |
 
 ---
 
-### Dia 13 — Ter, 02/02 (Canyonlands NP dia cheio) 📍 Moab, UT
+### Dia 12 — Seg, 01/02 (Canyonlands NP dia cheio) 📍 Moab, UT
 
 > Mesa Arch ao nascer do sol — o sol nasce ATRAVÉS do arco!
 
@@ -358,7 +342,7 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 
 ---
 
-### Dia 14 — Qua, 03/02 (Arches NP + Dead Horse Point) 📍 Moab, UT
+### Dia 13 — Ter, 02/02 (Arches NP + Dead Horse Point) 📍 Moab, UT
 
 > O arco mais famoso do mundo + vista sobre o Colorado!
 
@@ -379,11 +363,11 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 
 ---
 
-### 🚗 TRANSIÇÃO → PNW (Dias 15-16)
+### 🚗 TRANSIÇÃO → PNW (Dias 14-15)
 
 ---
 
-### Dia 15 — Qui, 04/02 (Moab → Antelope Island → Twin Falls) 📍 Twin Falls, ID
+### Dia 14 — Qua, 03/02 (Moab → Antelope Island → Twin Falls) 📍 Twin Falls, ID
 
 > Dia longo — bisões na Antelope Island + Shoshone Falls + local do salto do Evel Knievel!
 
@@ -404,11 +388,11 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 | 18:00 | 🏨 Check-in |
 | 18:30 | 🍽️ Jantar |
 
-> ⚠️ Dois dias longos seguidos (15 + 16): ~770km + ~700km. Dormir cedo!
+> ⚠️ Dois dias longos seguidos (14 + 15): ~770km + ~700km. Dormir cedo!
 
 ---
 
-### Dia 16 — Sex, 05/02 (Twin Falls → Multnomah → Centralia) 📍 Centralia, WA
+### Dia 15 — Qui, 04/02 (Twin Falls → Multnomah → Centralia) 📍 Centralia, WA
 
 > Dia de transição longo — cachoeira icônica de 189m!
 
@@ -422,7 +406,9 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 | 11:30 | ⚡🍽️ **Supercharger Pendleton, OR** (~200 km) — ~20 min + almoço |
 | 13:30 | ⚡ **Supercharger The Dalles, OR** (~200 km) — ~25 min |
 | 14:00 | 🏔️ (opcional) **Mt. Hood** — desvio ~1h ao sul pela US-26. Vulcão de 3.429m coberto de neve! |
-| 14:30 | 🏞️ (opcional) **Trillium Lake** — lago com reflexo perfeito do Mt. Hood! || 14:45 | 📸 **Rowena Crest Viewpoint** — mirante épico com curvas hairpin sobre o Columbia River! Panorâmica 360°. Grátis || 15:00 | 🏞️ **Columbia River Gorge** |
+| 14:30 | 🏞️ (opcional) **Trillium Lake** — lago com reflexo perfeito do Mt. Hood! |
+| 14:45 | 📸 **Rowena Crest Viewpoint** — mirante épico com curvas hairpin sobre o Columbia River! Panorâmica 360°. Grátis |
+| 15:00 | 🏞️ **Columbia River Gorge** |
 | — | 🏛️ **Vista House at Crown Point** — edifício octogonal de 1917 com vista 270° do Gorge! |
 | — | 🌲 **Multnomah Falls** — cachoeira icônica de 189m! |
 | 15:00 | 🚗 I-84 W → I-5 N → Centralia (~240 km, ~2.5h) |
@@ -432,11 +418,11 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 
 ---
 
-### 🌲 PNW — PACIFIC NORTHWEST (Dias 17-20)
+### 🌲 PNW — PACIFIC NORTHWEST (Dias 16-19)
 
 ---
 
-### Dia 17 — Sáb, 06/02 (Centralia → Mt. Rainier → Forks) 📍 Forks, WA
+### Dia 16 — Sex, 05/02 (Centralia → Mt. Rainier → Forks) 📍 Forks, WA
 
 > Rainier de manhã, Lake Crescent e Sol Duc Falls à tarde!
 
@@ -463,7 +449,7 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 
 ---
 
-### Dia 18 — Dom, 07/02 (Olympic NP dia cheio) 📍 Forks, WA
+### Dia 17 — Sáb, 06/02 (Olympic NP dia cheio) 📍 Forks, WA
 
 > Hoh Rain Forest + Ruby Beach + Twilight!
 
@@ -484,7 +470,7 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 
 ---
 
-### Dia 19 — Seg, 08/02 (Forks → Cannon Beach) 📍 Cannon Beach, OR
+### Dia 18 — Dom, 07/02 (Forks → Cannon Beach) 📍 Cannon Beach, OR
 
 > Cidade do Goonies + pôr do sol mais bonito da viagem!
 
@@ -508,7 +494,7 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 
 ---
 
-### Dia 20 — Ter, 09/02 (Costa Oregon Sul) 📍 Gold Beach, OR
+### Dia 19 — Seg, 08/02 (Costa Oregon Sul) 📍 Gold Beach, OR
 
 > O melhor dia de costa — 350 km de paradas espetaculares!
 
@@ -532,11 +518,11 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 
 ---
 
-### 🌲 REDWOOD (Dias 21-22)
+### 🌲 REDWOOD (Dias 20-21)
 
 ---
 
-### Dia 21 — Qua, 10/02 (Redwood NP norte — Jedediah Smith) 📍 Crescent City, CA
+### Dia 20 — Ter, 09/02 (Redwood NP norte — Jedediah Smith) 📍 Crescent City, CA
 
 > Dia tranquilo entre redwoods perto de Crescent City.
 
@@ -550,7 +536,7 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 | 13:00 | 🏨 Check-in **Crescent City** |
 | 13:30 | 🍽️ Almoço |
 | 14:30 | 🏝️ **Battery Point Lighthouse** — ilha acessível na maré baixa! |
-| 15:30 | 🌲 **Del Norte Coast Redwoods SP** — **Damnation Creek Trail** (~7 km, ~2.5h) |
+| 15:30 | 🌲 **Del Norte Coast Redwoods SP** — **Coastal Trail (Enderts Beach)** (~4 km) — praia + tidepools! |
 | 18:00 | 🌅 Pôr do sol no porto de Crescent City |
 | 19:00 | 🍽️ Jantar — frutos do mar! |
 
@@ -558,7 +544,7 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 
 ---
 
-### Dia 22 — Qui, 11/02 (Redwood NP sul → Eureka) 📍 Eureka, CA
+### Dia 21 — Qua, 10/02 (Redwood NP sul → Eureka) 📍 Eureka, CA
 
 > Tudo descendo ao sul — sem backtrack! Fern Canyon, Tall Trees e Avenue of Giants.
 
@@ -586,13 +572,13 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 
 ---
 
-### 🌉 SAN FRANCISCO (Dias 23-26)
+### 🌉 SAN FRANCISCO (Dias 22-24)
 
 ---
 
-### Dia 23 — Sex, 12/02 (Eureka → San Francisco) 📍 San Francisco, CA
+### Dia 22 — Qui, 11/02 (Eureka → San Francisco) 📍 San Francisco, CA
 
-> Alces selvagens, baleias cinzentas e Golden Gate!
+> Alces selvagens, baleias cinzentas e Pier 39!
 
 | Horário | Atividade |
 |---------|-----------|
@@ -605,77 +591,54 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 | 13:00 | 🐋 **Point Reyes** — Elk Preserve, Lighthouse + **baleias cinzentas!** (migração jan-abr!) |
 | ~15:00 | 🏨 Chegada em **SF**! Check-in |
 | 15:30 | 🌆 **Embarcadero** — Ferry Building |
-| 17:00 | 🌅 Pôr do sol no **Crissy Field** — vista da Golden Gate! |
-| 18:30 | 🍽️ Jantar em **Fisherman's Wharf** — clam chowder! |
+| 16:30 | 🏖️ **Pier 39** — leões-marinhos! |
+| 18:00 | 🍽️ Jantar em **Fisherman's Wharf** — clam chowder! |
 
 ---
 
-### Dia 24 — Sáb, 13/02 (San Francisco dia cheio 1) 📍 San Francisco, CA
+### Dia 23 — Sex, 12/02 (San Francisco — Golden Gate + West Side) 📍 San Francisco, CA
 
-> Cable Car, Chinatown, Golden Gate Bridge, Nintendo SF!
-
-| Horário | Atividade |
-|---------|-----------|
-| 09:00 | ☕ Café |
-| 10:00 | 🏖️ **Pier 39** — leões-marinhos! |
-| 11:00 | 🚋 Passeio de **Cable Car** |
-| 11:30 | 🌆 **Lombard Street** |
-| 12:00 | 🏮 **Chinatown de SF** — a mais antiga dos EUA! |
-| 13:00 | 🍽️ Almoço — **La Taqueria** (Mission) |
-| 14:30 | 🌉 **Golden Gate Bridge** — caminhar pela ponte! |
-| 16:00 | 🏰 **Fort Point** — cenário de Vertigo! |
-| 17:00 | 🎮 **Nintendo San Francisco** (Union Square) |
-| 18:00 | 🛍️ **Union Square** — compras |
-| 19:00 | 🍽️ Jantar especial |
-
----
-
-### Dia 25 — Dom, 14/02 (San Francisco — Valentine's Day!) ❤️ 📍 San Francisco, CA
-
-> Valentine's Day! Alcatraz de manhã, Golden Gate Park e jantar especial à noite!
-
-| Horário | Atividade |
-|---------|-----------|
-| 09:00 | ☕ Café |
-| 09:30 | 🏝️ **Alcatraz** — ferry Pier 33 (~2h na ilha) |
-| ~11:30 | 🚢 Ferry de volta |
-| 12:00 | 🍽️ Almoço |
-| 13:00 | 🌳 **Golden Gate Park** — Japanese Tea Garden, Conservatory of Flowers |
-| 15:00 | 🎨 **Mission District** — murais, **Painted Ladies** (Alamo Square) |
-| 16:00 | 🏖️ **Ocean Beach** — praia do Pacífico |
-| 17:00 | 🛍️ **Haight-Ashbury** — berço da contracultura, lojas vintage |
-| 18:00 | 🍽️ Jantar especial de Valentine's Day ❤️ — **Fog Harbor Fish House** (Pier 39) |
-
-> ⚠️ Alcatraz esgota meses antes! Comprar em alcatrazcruises.com (~$45/pessoa).
-
----
-
-### Dia 26 — Seg, 15/02 (San Francisco — Sausalito + Exploratorium) 📍 San Francisco, CA
-
-> Sausalito de ferry, Exploratorium e sunset no Baker Beach!
+> Golden Gate de todos os ângulos! Battery Spencer, ponte, parque e praia.
 
 | Horário | Atividade |
 |---------|-----------|
 | 08:30 | ☕ Café |
 | 09:00 | 🏞️ **Battery Spencer** — vista icônica da Golden Gate! |
-| 10:00 | 🚲 Atravessar a **Golden Gate Bridge** de bike até **Sausalito** (~30 min) |
-| 11:00 | 🛍️ **Sausalito** — vila charmosa, galerias, vista da baía |
-| 12:00 | 🍽️ Almoço em Sausalito — frutos do mar à beira-mar |
-| 13:30 | 🚢 **Ferry Sausalito → SF** (~30 min, vista linda da cidade!) |
-| 14:00 | 🏛️ **Coit Tower** — murais art deco + vista 360° de SF! |
-| 15:00 | 🔬 **Exploratorium** — museu de ciência interativo (ótimo pra criança!) |
-| 17:30 | 🌅 Sunset no **Baker Beach** — vista da Golden Gate |
-| 19:00 | 🍽️ Jantar de despedida de SF
+| 10:00 | 🌉 **Golden Gate Bridge** — caminhar pela ponte! |
+| 11:30 | 🏰 **Fort Point** — cenário de Vertigo! |
+| 12:00 | 🌅 **Crissy Field** — vista da Golden Gate! |
+| 12:30 | 🍽️ Almoço |
+| 14:00 | 🌳 **Golden Gate Park** — Japanese Tea Garden, Conservatory of Flowers |
+| 16:00 | 🏖️ **Ocean Beach** — praia do Pacífico |
+| 18:00 | 🍽️ Jantar |
 
 ---
 
-### 🏞️ PCH + YOSEMITE + SEQUOIA (Dias 27-30)
+### Dia 24 — Sáb, 13/02 (San Francisco — City Tour) 📍 San Francisco, CA
+
+> Tour pela cidade! Cable Car, Chinatown, Nintendo e Union Square.
+
+| Horário | Atividade |
+|---------|-----------|
+| 09:00 | ☕ Café |
+| 10:00 | 🚋 Passeio de **Cable Car** |
+| 10:30 | 🌆 **Lombard Street** |
+| 11:00 | 🏮 **Chinatown de SF** — a mais antiga dos EUA! |
+| 12:30 | 🍽️ Almoço — **La Taqueria** (Mission) |
+| 14:00 | 🎮 **Nintendo San Francisco** (Union Square) |
+| 15:30 | 🛍️ **Union Square** — compras |
+| 17:00 | 🍽️ Jantar de despedida de SF |
 
 ---
 
-### Dia 27 — Ter, 16/02 (SF → PCH → Yosemite) 📍 Mariposa, CA
 
-> PCH de manhã, depois corta pro interior rumo a Yosemite!
+### 🏞️ PCH + YOSEMITE + SEQUOIA (Dias 25-29)
+
+---
+
+### Dia 25 — Dom, 14/02 (SF → PCH → Monterey/Carmel) 📍 Carmel, CA
+
+> Costa do Pacífico até Monterey! Aquarium e 17-Mile Drive.
 
 | Horário | Atividade |
 |---------|-----------|
@@ -685,20 +648,37 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 | 08:45 | 🏠 **Pigeon Point Lighthouse** (Pescadero) — um dos faróis mais altos da Costa Oeste! 35m, vista linda do Pacífico. Grátis |
 | 09:00 | 🚗 Continue Hwy 1 → Monterey (~1.5h) |
 | 10:30 | 🦞 **Cannery Row** — passear + café |
-| 11:15 | 🚗 **17-Mile Drive** — Lone Cypress, Pebble Beach! |
-| 12:15 | 🌉 **Bixby Creek Bridge** — foto icônica! |
-| 12:45 | 🍽️ Almoço rápido em Big Sur / Carmel |
-| 13:30 | 🚗 Corta pro interior: Carmel → CA-68 → CA-99 → CA-140 → Yosemite (~300 km, ~3.5h) |
-| 14:00 | ⚡ **Supercharger Gilroy** — ~20 min |
-| 15:30 | ⚡ **Supercharger Merced** — ~20 min |
-| ~17:00 | 🏨 Chegada em **Mariposa**! Check-in |
-| 18:00 | 🍽️ Jantar em Mariposa |
-
-> ⚠️ Se Highway 1 estiver FECHADA em Big Sur: SF → I-5 S → CA-140 E direto pra Mariposa (~450 km, ~5h).
+| 11:00 | 🐙 **Monterey Bay Aquarium** — um dos melhores do mundo! (~2.5h) |
+| 13:30 | 🍽️ Almoço em Monterey |
+| 14:30 | 🚗 **17-Mile Drive** — Lone Cypress, Pebble Beach! |
+| 16:30 | 🏖️ **Carmel-by-the-Sea** — vila charmosa, galerias, Carmel Beach |
+| 18:00 | 🍽️ Jantar em Carmel |
 
 ---
 
-### Dia 28 — Qua, 17/02 (Yosemite NP dia 1 — Valley) 📍 Mariposa, CA
+### Dia 26 — Seg, 15/02 (Carmel → Big Sur → Yosemite) 📍 Mariposa, CA
+
+> Big Sur de manhã, depois corta pro interior rumo a Yosemite!
+
+| Horário | Atividade |
+|---------|-----------|
+| 07:30 | ☕ Café em Carmel |
+| 08:00 | 🌉 **Bixby Creek Bridge** — foto icônica! |
+| 08:45 | 🏖️ **Pfeiffer Beach** — arco de pedra (keyhole rock)! |
+| 09:45 | 🌊 **McWay Falls** — cachoeira de 24m direto na praia! |
+| 10:30 | 🚗 Volta pra Carmel (~1h) |
+| 11:30 | 🍽️ Almoço em Carmel |
+| 12:15 | 🚗 Corta pro interior: Carmel → CA-68 → CA-99 → CA-140 → Yosemite (~300 km, ~3.5h) |
+| 13:00 | ⚡ **Supercharger Gilroy** — ~20 min |
+| 14:30 | ⚡ **Supercharger Merced** — ~20 min |
+| ~16:30 | 🏨 Chegada em **Mariposa**! Check-in |
+| 18:00 | 🍽️ Jantar em Mariposa |
+
+> ⚠️ Se Hwy 1 estiver FECHADA ao sul de Bixby: pular Pfeiffer Beach e McWay Falls, sair direto de Carmel pro interior mais cedo.
+
+---
+
+### Dia 27 — Ter, 16/02 (Yosemite NP dia 1 — Valley) 📍 Mariposa, CA
 
 > Primeiro dia em Yosemite! Valley com neve — lindo!
 
@@ -722,7 +702,7 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 
 ---
 
-### Dia 29 — Qui, 18/02 (Yosemite NP dia 2 — Neve!) 📍 Mariposa, CA
+### Dia 28 — Qua, 17/02 (Yosemite NP dia 2 — Neve!) 📍 Mariposa, CA
 
 > Snow tubing, snowshoeing e mais Yosemite Valley!
 
@@ -742,7 +722,7 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 
 ---
 
-### Dia 30 — Sex, 19/02 (Mariposa → Kings Canyon → Sequoia) 📍 Three Rivers, CA
+### Dia 29 — Qui, 18/02 (Mariposa → Kings Canyon → Sequoia) 📍 Three Rivers, CA
 
 > Dia inteiro entre as maiores árvores do mundo!
 
@@ -767,11 +747,11 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 
 ---
 
-### 🌴 LOS ANGELES (Dias 31-33)
+### 🌴 LOS ANGELES (Dias 30-33)
 
 ---
 
-### Dia 31 — Sáb, 20/02 (Three Rivers → Los Angeles) 📍 Los Angeles, CA
+### Dia 30 — Sex, 19/02 (Three Rivers → Los Angeles) 📍 Los Angeles, CA
 
 > Último dia de estrada! Parada no Tehachapi Loop, depois praias de LA.
 
@@ -786,9 +766,34 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 | 13:30 | 🍽️ Almoço |
 | 14:30 | 🐱 **Cool Cat Collective** (2741 E 4th St, Long Beach) — arte de gatos + gatinhos foster! Qua-Dom 10h-18h |
 | 15:30 | 🏖️ **Santa Monica Pier** — roda-gigante, Route 66 End Sign! |
-| 17:00 | 🌴 **Venice Beach** — boardwalk, Muscle Beach! |
+| 16:30 | 🌴 **Venice Beach** — boardwalk, Muscle Beach! |
 | 18:00 | 🌅 Sunset na praia! |
 | 19:00 | 🍽️ Jantar em Santa Monica |
+
+---
+
+
+### Dia 31 — Sáb, 20/02 (Day trip Big Bear Lake) 📍 Los Angeles, CA
+
+> Neve nas montanhas a 2h de LA! Snow tubing e vila de montanha.
+
+| Horário | Atividade |
+|---------|----------|
+| 08:00 | ☕ Café |
+| 08:30 | 🚗 LA → **Big Bear Lake** (~160 km, ~2h via CA-330) |
+| 10:00 | ⚡ **Supercharger San Bernardino** (no caminho) — ~20 min |
+| 10:45 | 🏔️ Chegada em **Big Bear**! |
+| 11:00 | ⛷️ **Snow Summit** — snow tubing / snow play! |
+| 12:30 | 🍽️ Almoço em **Big Bear Village** |
+| 13:30 | 🎢 **Alpine Slide at Magic Mountain** — tobogã alpino! |
+| 14:30 | 🥾 **Castle Rock Trail** (~1.5 km) — vista panorâmica do lago |
+| 15:30 | 🛍️ Passear pelo **Big Bear Village** — lojas, cafés |
+| 16:00 | ☕ Chocolate quente com vista pro lago! |
+| 16:30 | 🚗 Volta pra LA (~2h) |
+| 18:30 | 🍽️ Jantar em LA |
+
+> ⚡ Round trip ~320 km com subida forte. Carregar 100% antes ou parar em San Bernardino.
+> ❄️ Big Bear a 2.000m — pode ter neve! Levar casacos e botas. Chains podem ser obrigatórias na CA-330.
 
 ---
 
@@ -835,15 +840,15 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 | Dia | Rota | Superchargers |
 |-----|------|---------------|
 | 5 | LAX → Vegas | Barstow |
-| 9 | Vegas → GC → Zion | Kingman, Kanab |
-| 12 | Bryce → Moab | Salina, Green River |
-| 15 | Moab → Twin Falls | Green River, Price, Twin Falls |
-| 16 | Twin Falls → Centralia | Baker City, Pendleton, The Dalles, Centralia |
-| 17 | Centralia → Rainier → Forks | Olympia (100%!) |
-| 19 | Forks → Cannon Beach | Aberdeen |
-| 20 | Cannon Beach → Gold Beach | Lincoln City, Coos Bay |
-| 22 | Crescent City → Eureka | Eureka |
-| 23 | Eureka → SF | Ukiah |
-| 27 | SF → PCH → Yosemite | Gilroy, Merced |
-| 30 | Mariposa → Sequoia | Fresno |
-| 31 | Three Rivers → LA | Bakersfield |
+| 11 | Bryce → Moab | Salina, Green River |
+| 14 | Moab → Twin Falls | Green River, Price, Twin Falls |
+| 15 | Twin Falls → Centralia | Baker City, Pendleton, The Dalles, Centralia |
+| 16 | Centralia → Rainier → Forks | Olympia (100%!) |
+| 18 | Forks → Cannon Beach | Aberdeen |
+| 19 | Cannon Beach → Gold Beach | Lincoln City, Coos Bay |
+| 21 | Crescent City → Eureka | Eureka |
+| 22 | Eureka → SF | Ukiah |
+| 26 | SF → PCH → Yosemite | Gilroy, Merced |
+| 29 | Mariposa → Sequoia | Fresno |
+| 30 | Three Rivers → LA | Bakersfield |
+| 31 | LA → Big Bear → LA | San Bernardino |

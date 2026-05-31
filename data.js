@@ -27,7 +27,7 @@ const days = [
             { time: "14:00", text: "🚶 Passeio pela <strong>5th Avenue</strong> — Saks, Tiffany's, Apple Store (cubo de vidro!)", type: "" },
             { time: "15:00", text: "📸 <strong>Rockefeller Center Plaza</strong> — pista de patinação, bandeiras", type: "" },
             { time: "15:30", text: "🧊 <strong>Bryant Park</strong> — Winter Village no inverno (mercadinho, patinação)", type: "" },
-            { time: "19:00", text: "🍔 Jantar em <strong>Hell's Kitchen</strong> (9th Ave) — Shake Shack, Empanada Mama", type: "food" },
+            { time: "19:00", text: "�️ Jantar perto do hotel (Times Square / Midtown)", type: "food" },
             { time: "20:30", text: "🏨 Hotel — descanso (jet lag!)", type: "" }
         ]
     },
@@ -65,10 +65,9 @@ const days = [
         items: [
             { time: "08:00", text: "☕ Café — <strong>Levain Bakery</strong> (167 W 74th St) — cookies famosos!", type: "food" },
             { time: "09:00", text: "🌳 <strong>Central Park</strong> — Strawberry Fields, Bethesda Fountain, Bow Bridge", type: "highlight" },
-            { time: "10:30", text: "🏛️ <strong>MET</strong> (opcional ~2h) — na 82nd com 5th! Ingresso ~$30", type: "" },
-            { time: "12:30", text: "🏨 <strong>The Plaza Hotel</strong> — hotel do Kevin em Esqueceram de Mim 2!", type: "" },
-            { time: "13:00", text: "🍔 Almoço — <strong>Shake Shack</strong> (Columbus Circle ou Midtown)", type: "food" },
-            { time: "15:00", text: "🏮 <strong>Chinatown</strong> — Canal St + Mott St, a maior dos EUA!", type: "highlight" },
+            { time: "11:00", text: "🏨 <strong>The Plaza Hotel</strong> — hotel do Kevin em Esqueceram de Mim 2!", type: "" },
+            { time: "11:30", text: "🍔 Almoço — <strong>Shake Shack</strong> (Columbus Circle ou Midtown)", type: "food" },
+            { time: "13:00", text: "🏮 <strong>Chinatown</strong> — Canal St + Mott St, a maior dos EUA!", type: "highlight" },
             { time: "16:30", text: "🍝 <strong>Little Italy</strong> — Mulberry St. Cannoli na <strong>Ferrara Bakery</strong> (desde 1892!)", type: "" },
             { time: "17:30", text: "🍖 Jantar — <strong>Katz's Deli</strong> (205 E Houston St) — pastrami lendário!", type: "food" },
             { time: "19:00", text: "🏨 Volta ao hotel", type: "" }
@@ -117,7 +116,6 @@ const days = [
             { time: "16:30", text: "⚡🍽️ <strong>Supercharger Barstow</strong> (~200 km) — ~25 min + lanche", type: "charge" },
             { time: "16:35", text: "🎨 <strong>Elmer's Bottle Tree Ranch</strong> (Oro Grande) — floresta de 'árvores' de garrafas de vidro e metal! Arte outsider no deserto. Grátis", type: "" },
             { time: "17:30", text: "👽 <strong>Alien Fresh Jerky</strong> (Baker) — loja alien + jerky de 100 sabores! + 🌡️ <strong>World's Tallest Thermometer</strong>!", type: "" },
-            { time: "18:30", text: "🎨 <strong>Seven Magic Mountains</strong> — 7 torres de pedras neon de 10m no deserto! Grátis, na beira da I-15", type: "highlight" },
             { time: "~19:00", text: "🎰 Chegada em <strong>Las Vegas</strong>! Check-in", type: "" },
             { time: "19:30", text: "🍽️ Jantar perto do hotel", type: "food" },
             { time: "21:00", text: "🏨 Dormir cedo (jet lag + dia longo!)", type: "" }
@@ -140,36 +138,14 @@ const days = [
             { time: "14:00", text: "🍔 Almoço na Strip", type: "food" },
             { time: "15:00", text: "🏨 Explorar hotéis — <strong>Venetian</strong> (canais), <strong>Bellagio</strong> (conservatório), <strong>Caesars Palace</strong>", type: "highlight" },
             { time: "18:00", text: "🌅 <strong>Bellagio Fountains</strong> — show a cada 30 min!", type: "highlight" },
-            { time: "19:00", text: "🍽️ Jantar na Strip", type: "food" },
-            { time: "20:30", text: "🌃 <strong>Strip à noite</strong> — cassinos, neon!", type: "highlight" }
+            { time: "19:00", text: "🍽️ Jantar na Strip", type: "food" }
         ],
         tips: ["🏔️ Mt. Charleston: pode estar -5°C com neve! Levar casaco, luvas e botas."]
     },
     {
-        photo: 'img/dia-07.jpg', shortLoc: 'Vegas', location: "Valley of Fire + Strip",
-        route: "Parque mais fotogênico de Nevada! 🔥",
-        note: "Fire Wave + Elephant Rock de manhã, tarde livre na Strip.",
-        region: "nv",
-        items: [
-            { time: "08:45", text: "🚗 Rumo a <strong>Valley of Fire</strong> (~45 min pela I-15 N)", type: "drive" },
-            { time: "09:30", text: "🔥 <strong>Valley of Fire</strong> — arenito vermelho surreal!", type: "highlight" },
-            { time: "09:45", text: "🥾 <strong>Fire Wave Trail</strong> (~2 km) — ondas de rocha listrada!", type: "highlight" },
-            { time: "10:30", text: "📸 <strong>Elephant Rock</strong>", type: "" },
-            { time: "11:00", text: "📸 <strong>White Domes Trail</strong> (~1.8 km) — cânion colorido", type: "" },
-            { time: "11:45", text: "🚗 Volta pra Vegas (~1h)", type: "drive" },
-            { time: "12:45", text: "🍽️ Almoço na Strip", type: "food" },
-            { time: "14:00", text: "🚗 Rumo a <strong>Eldorado Canyon</strong> (~45 min ao sul da Strip)", type: "drive" },
-            { time: "14:45", text: "🏚️ <strong>Eldorado Canyon Ghost Town</strong> — mina de ouro Techatticup (1861)! Ruínas, carros antigos, cenário de faroeste", type: "highlight" },
-            { time: "16:15", text: "🚗 Volta pra Vegas (~45 min)", type: "drive" },
-            { time: "17:00", text: "🏨 Descanso / piscina", type: "" },
-            { time: "19:00", text: "🍽️ Jantar na Strip", type: "food" },
-            { time: "20:30", text: "🌃 Noite na Strip", type: "" }
-        ]
-    },
-    {
         photo: 'img/dia-08.jpg', shortLoc: 'Vegas', location: "Day trip Death Valley 🏜️",
         route: "Ponto mais baixo das Américas!",
-        note: "Última noite em Vegas! Inverno é a melhor época pra Death Valley.",
+        note: "Inverno é a melhor época pra Death Valley.",
         region: "nv",
         items: [
             { time: "08:00", text: "☕ Café", type: "" },
@@ -183,43 +159,34 @@ const days = [
             { time: "15:00", text: "🚗 Volta pra Vegas (~2h)", type: "drive" },
             { time: "17:00", text: "🏨 Chegada em Vegas — piscina / descanso", type: "" },
             { time: "19:00", text: "🍽️ Jantar na Strip", type: "food" },
-            { time: "20:00", text: "🌃 Última noite em Vegas!", type: "" }
+            { time: "20:00", text: "🌃 Noite em Vegas", type: "" }
         ],
         tips: ["⚡ EV: Round trip ~380 km. Carregar a 100% na noite anterior!"]
     },
-
-    // ==================== UTAH (Dias 9-14) ====================
     {
-        photo: 'img/dia-09.jpg', shortLoc: 'GC→Zion',
-        chargeStops: [
-            { name: 'Kingman, AZ', leg: 'Vegas → GC → Zion', critical: false },
-            { name: 'Kanab, UT', leg: 'Vegas → GC → Zion', critical: false }
-        ],
-        location: "Vegas → Grand Canyon → Zion",
-        route: "GC de tarde + Zion à noite! 🏜️",
-        note: "Dia longo (~700 km) mas épico — GC à tarde é suficiente!",
-        region: "ut",
+        photo: 'img/dia-07.jpg', shortLoc: 'Vegas→Zion', location: "Valley of Fire → Zion",
+        chargeStops: [{ name: 'St. George, UT', leg: 'Valley of Fire → Zion', critical: false }],
+        route: "Parque mais fotogênico de Nevada + check-in em Zion! 🔥",
+        note: "Check-out Vegas! Valley of Fire de manhã, Zion à tarde.",
+        region: "nv",
         items: [
-            { time: "06:30", text: "☕ Café + check-out de Vegas", type: "" },
-            { time: "07:00", text: "🚗 Saída rumo ao <strong>Grand Canyon South Rim</strong> (~430 km, ~4.5h)", type: "drive" },
-            { time: "07:45", text: "🏗️ <strong>Hoover Dam</strong> — mirante na US-93! Ponte Memorial com vista da barragem a 270m acima do Rio Colorado!", type: "highlight" },
-            { time: "09:00", text: "⚡ <strong>Supercharger Kingman, AZ</strong> (~260 km) — ~25 min", type: "charge" },
-            { time: "10:00", text: "🛣️ <strong>Hackberry General Store</strong> — posto vintage da Route 66 com Corvette clássico!", type: "" },
-            { time: "10:30", text: "🏚️ <strong>Seligman</strong> — 'Berço da Route 66'! Inspiração de Radiator Springs do filme Carros da Pixar!", type: "highlight" },
-            { time: "~11:30", text: "🏜️ Chegada no <strong>Grand Canyon</strong>!", type: "highlight" },
-            { time: "11:45", text: "📸 <strong>Mather Point</strong> — vista absurda!", type: "highlight" },
-            { time: "12:15", text: "🍽️ Almoço no parque", type: "food" },
-            { time: "13:00", text: "🥾 <strong>Rim Trail</strong> (Mather → Yavapai Point, ~1.5 km)", type: "" },
-            { time: "13:45", text: "🏛️ <strong>Yavapai Geology Museum</strong>", type: "" },
-            { time: "14:30", text: "📸 <strong>Bright Angel Trailhead</strong>", type: "" },
-            { time: "15:00", text: "📸 <strong>Hopi Point</strong>", type: "" },
-            { time: "15:30", text: "🚗 Saída rumo a <strong>Zion</strong> (~270 km, ~3.5h via Kanab)", type: "drive" },
-            { time: "16:15", text: "🌉 <strong>Navajo Bridge</strong> — 2 pontes a 142m sobre o Rio Colorado! Condores da Califórnia frequentes 🦅", type: "" },
-            { time: "17:00", text: "⚡ <strong>Kanab, UT</strong> — ~25 min", type: "charge" },
-            { time: "~19:00", text: "🏨 Chegada em <strong>Springdale</strong>!", type: "" },
-            { time: "19:30", text: "🍽️ Jantar em Springdale", type: "food" }
+            { time: "08:00", text: "☕ Café + check-out de Vegas", type: "" },
+            { time: "08:45", text: "🚗 Rumo a <strong>Valley of Fire</strong> (~45 min pela I-15 N)", type: "drive" },
+            { time: "09:30", text: "🔥 <strong>Valley of Fire</strong> — arenito vermelho surreal!", type: "highlight" },
+            { time: "09:45", text: "🥾 <strong>Fire Wave Trail</strong> (~2 km) — ondas de rocha listrada!", type: "highlight" },
+            { time: "10:30", text: "📸 <strong>Elephant Rock</strong>", type: "" },
+            { time: "11:00", text: "📸 <strong>White Domes Trail</strong> (~1.8 km) — cânion colorido", type: "" },
+            { time: "11:45", text: "🚗 Rumo a <strong>Zion</strong> via I-15 N (~250 km, ~2.5h)", type: "drive" },
+            { time: "12:30", text: "🍽️ Almoço em St. George (no caminho)", type: "food" },
+            { time: "~14:15", text: "🏨 Chegada em <strong>Springdale</strong> — check-in!", type: "" },
+            { time: "15:00", text: "🛍️ Explorar <strong>Springdale</strong>", type: "" },
+            { time: "15:30", text: "🌄 <strong>Canyon Overlook Trail</strong> (~1.6 km, ~1h) — vista incrível!", type: "highlight" },
+            { time: "17:00", text: "🌅 Pôr do sol em Zion!", type: "highlight" },
+            { time: "18:30", text: "🍽️ Jantar em Springdale", type: "food" }
         ]
     },
+
+    // ==================== UTAH (Dias 9-13) ====================
     {
         photo: 'img/dia-10.jpg', shortLoc: 'Zion', location: "Zion NP dia cheio",
         route: "Trilhas, mirantes e pôr do sol! 🏞️",
@@ -234,7 +201,7 @@ const days = [
             { time: "13:30", text: "📸 <strong>Court of the Patriarchs</strong>", type: "" },
             { time: "14:00", text: "🛍️ Explorar <strong>Springdale</strong>", type: "" },
             { time: "15:00", text: "📸 <strong>Big Bend</strong>", type: "" },
-            { time: "15:30", text: "🌄 <strong>Canyon Overlook Trail</strong> (~1.6 km, ~1h)", type: "highlight" },
+            { time: "15:30", text: "🥾 <strong>Riverside Walk</strong>", type: "" },
             { time: "16:30", text: "🌅 <strong>Pôr do sol no Canyon Junction Bridge</strong>", type: "highlight" },
             { time: "18:30", text: "🍽️ Jantar em Springdale", type: "food" }
         ]
@@ -247,16 +214,17 @@ const days = [
         items: [
             { time: "07:30", text: "☕ Café", type: "" },
             { time: "08:00", text: "🚗 Dirigir pra <strong>Zion Canyon</strong>", type: "drive" },
-            { time: "08:30", text: "🥾 <strong>Riverside Walk</strong>", type: "" },
-            { time: "09:30", text: "📸 Últimas fotos em Zion", type: "" },
-            { time: "10:30", text: "🚗 Check-out + saída pra <strong>Bryce</strong> (~130 km, ~1.5h)", type: "drive" },
-            { time: "10:45", text: "🏁 <strong>Checkerboard Mesa</strong> — arenito com padrão xadrez natural! Pullover na UT-9", type: "" },
-            { time: "11:00", text: "🛣️ <strong>Red Canyon</strong> — arcos vermelhos na estrada!", type: "" },
-            { time: "12:00", text: "🏨 Check-in Bryce Canyon", type: "" },
-            { time: "12:30", text: "🍽️ Almoço", type: "food" },
+            { time: "08:30", text: "📸 Últimas fotos em Zion", type: "" },
+            { time: "09:30", text: "🚗 Check-out + saída pra <strong>Bryce</strong> (~130 km, ~1.5h)", type: "drive" },
+            { time: "09:45", text: "🏁 <strong>Checkerboard Mesa</strong> — arenito com padrão xadrez natural! Pullover na UT-9", type: "" },
+            { time: "10:00", text: "🛣️ <strong>Red Canyon</strong> — arcos vermelhos na estrada!", type: "" },
+            { time: "11:00", text: "🏨 Check-in Bryce Canyon", type: "" },
+            { time: "11:30", text: "🍽️ Almoço", type: "food" },
+            { time: "12:30", text: "📸 <strong>Fairyland Point</strong> — mirante menos visitado, vista única dos hoodoos!", type: "highlight" },
+            { time: "13:00", text: "🥾 <strong>Mossy Cave Trail</strong> (~1.5 km, ~30 min) — caverna com musgo + cascata congelada!", type: "highlight" },
             { time: "13:30", text: "📸 <strong>Sunrise/Sunset Point</strong>", type: "highlight" },
             { time: "14:00", text: "🥾 <strong>Navajo Loop + Queen's Garden Trail</strong> (~2h)", type: "highlight" },
-            { time: "16:00", text: "🚗 <strong>Scenic Drive</strong> — Inspiration Point, Natural Bridge, Rainbow Point", type: "" },
+            { time: "15:00", text: "🚗 <strong>Scenic Drive</strong> — Inspiration Point, Natural Bridge, Rainbow Point", type: "" },
             { time: "17:30", text: "🌅 <strong>Pôr do sol no Bryce Amphitheater</strong>", type: "highlight" },
             { time: "18:30", text: "🍽️ Jantar", type: "food" },
             { time: "20:30", text: "🌌 <strong>Stargazing em Bryce!</strong> — International Dark Sky Park!", type: "highlight" }
@@ -274,21 +242,21 @@ const days = [
         note: "Sunrise épico, depois estrada até Moab.",
         region: "ut",
         items: [
-            { time: "06:30", text: "🌅 <strong>Nascer do sol em Bryce Point</strong>!", type: "highlight" },
             { time: "07:30", text: "☕ Café + check-out", type: "" },
             { time: "08:00", text: "🚗 Saída rumo a <strong>Moab</strong> (~490 km, ~6h)", type: "drive" },
             { time: "08:45", text: "🌄 <strong>Head of the Rocks Overlook</strong> — mirante da UT-12 com vista épica de Escalante!", type: "" },
             { time: "09:30", text: "⚡ <strong>Supercharger Salina, UT</strong> (~170 km) — ~25 min", type: "charge" },
             { time: "10:15", text: "🏜️ <strong>Capitol Reef NP</strong> — paredões vermelhos! Petroglífos Fremont de 2.000 anos + Fruita Historic District", type: "highlight" },
-            { time: "11:15", text: "👽 <strong>Goblin Valley State Park</strong> — formações em forma de cogumelos/aliens! Parece outro planeta!", type: "highlight" },
-            { time: "11:45", text: "🏜️ <strong>San Rafael Swell</strong> (I-70) — paredões dramáticos de ambos os lados da highway! Corte no canyon espetacular. Rest area com viewpoint", type: "" },
-            { time: "12:15", text: "⚡ <strong>Supercharger Green River, UT</strong> (~170 km) — ~20 min", type: "charge" },
-            { time: "~13:45", text: "🏨 Chegada em <strong>Moab</strong>!", type: "" },
-            { time: "13:30", text: "🍽️ Almoço em Moab", type: "food" },
-            { time: "14:30", text: "🥾 <strong>Corona Arch Trail</strong> (~5 km, ~2h) — arco gigante sem multidões!", type: "highlight" },
-            { time: "16:30", text: "🚗 <strong>Scenic Byway 128</strong> — rio Colorado", type: "" },
-            { time: "17:30", text: "🌅 Pôr do sol em Moab", type: "highlight" },
-            { time: "18:30", text: "🍽️ Jantar em Moab", type: "food" }
+            { time: "10:45", text: "🥾 <strong>Hickman Bridge Trail</strong> (~2.8 km, ~1h) — arco natural lindo!", type: "highlight" },
+            { time: "11:45", text: "🚗 <strong>Scenic Drive</strong> parcial + saída pra Moab", type: "drive" },
+            { time: "12:15", text: "🏜️ <strong>San Rafael Swell</strong> (I-70) — paredões dramáticos de ambos os lados da highway! Corte no canyon espetacular. Rest area com viewpoint", type: "" },
+            { time: "12:45", text: "⚡ <strong>Supercharger Green River, UT</strong> (~170 km) — ~20 min", type: "charge" },
+            { time: "~14:15", text: "🏨 Chegada em <strong>Moab</strong>!", type: "" },
+            { time: "14:30", text: "🍽️ Almoço em Moab", type: "food" },
+            { time: "15:30", text: "🥾 <strong>Corona Arch Trail</strong> (~5 km, ~2h) — arco gigante sem multidões!", type: "highlight" },
+            { time: "17:30", text: "🚗 <strong>Scenic Byway 128</strong> — rio Colorado", type: "" },
+            { time: "18:00", text: "🌅 Pôr do sol em Moab", type: "highlight" },
+            { time: "19:00", text: "🍽️ Jantar em Moab", type: "food" }
         ]
     },
     {
@@ -334,7 +302,7 @@ const days = [
         ]
     },
 
-    // ==================== TRANSIÇÃO → PNW (Dias 15-16) ====================
+    // ==================== TRANSIÇÃO → PNW (Dias 14-15) ====================
     {
         photo: 'img/dia-15.jpg', shortLoc: 'Twin Falls',
         chargeStops: [
@@ -362,7 +330,7 @@ const days = [
             { time: "18:00", text: "🏨 Check-in", type: "" },
             { time: "18:30", text: "🍽️ Jantar", type: "food" }
         ],
-        tips: ["⚠️ Dois dias longos seguidos (19 + 20): ~770km + ~700km. Dormir cedo!"]
+        tips: ["⚠️ Dois dias longos seguidos (14 + 15): ~770km + ~700km. Dormir cedo!"]
     },
     {
         photo: 'img/dia-16.jpg', shortLoc: 'Centralia',
@@ -385,7 +353,9 @@ const days = [
             { time: "11:30", text: "⚡🍽️ <strong>Supercharger Pendleton, OR</strong> (~200 km) — ~20 min + almoço", type: "charge" },
             { time: "13:30", text: "⚡ <strong>Supercharger The Dalles, OR</strong> (~200 km) — ~25 min", type: "charge" },
             { time: "14:00", text: "�️ (opcional) <strong>Mt. Hood</strong> — desvio ~1h ao sul pela US-26. Vulcão de 3.429m coberto de neve!", type: "" },
-            { time: "14:30", text: "🏞️ (opcional) <strong>Trillium Lake</strong> — lago com reflexo perfeito do Mt. Hood! Ótimo pra fotos", type: "" },            { time: "14:45", text: "📸 <strong>Rowena Crest Viewpoint</strong> — mirante épico com curvas hairpin sobre o Columbia River! Panorâmica 360°. Grátis", type: "" },            { time: "15:00", text: "�🏞️ <strong>Columbia River Gorge</strong>", type: "" },
+            { time: "14:30", text: "🏞️ (opcional) <strong>Trillium Lake</strong> — lago com reflexo perfeito do Mt. Hood! Ótimo pra fotos", type: "" },
+            { time: "14:45", text: "📸 <strong>Rowena Crest Viewpoint</strong> — mirante épico com curvas hairpin sobre o Columbia River! Panorâmica 360°. Grátis", type: "" },
+            { time: "15:00", text: "🏞️ <strong>Columbia River Gorge</strong>", type: "" },
             { time: "14:15", text: "🏛️ <strong>Vista House at Crown Point</strong> — edifício octogonal de 1917 com vista 270° do Gorge!", type: "highlight" },
             { time: "14:30", text: "🌲 <strong>Multnomah Falls</strong> — cachoeira icônica de 189m!", type: "highlight" },
             { time: "15:00", text: "🚗 I-84 W → I-5 N → Centralia (~240 km, ~2.5h)", type: "drive" },
@@ -395,7 +365,7 @@ const days = [
         ]
     },
 
-    // ==================== PNW (Dias 17-20) ====================
+    // ==================== PNW (Dias 16-19) ====================
     {
         photo: 'img/dia-17.jpg', shortLoc: 'Rainier',
         chargeStops: [{ name: 'Olympia, WA', leg: 'Centralia → Rainier → Forks', critical: true, note: '⚠️ CARREGAR ATÉ 100% — Olympic 265 km sem SC!' }],
@@ -496,7 +466,7 @@ const days = [
         ]
     },
 
-    // ==================== REDWOOD (Dias 21-22) ====================
+    // ==================== REDWOOD (Dias 20-21) ====================
     {
         photo: 'img/dia-21.jpg', shortLoc: 'Redwood',
         location: "Redwood NP norte — Jedediah Smith! 🌲",
@@ -512,7 +482,7 @@ const days = [
             { time: "13:00", text: "🏨 Check-in <strong>Crescent City</strong>", type: "" },
             { time: "13:30", text: "🍽️ Almoço", type: "food" },
             { time: "14:30", text: "🏝️ <strong>Battery Point Lighthouse</strong> — ilha acessível na maré baixa!", type: "" },
-            { time: "15:30", text: "🌲 <strong>Del Norte Coast Redwoods SP</strong> — <strong>Damnation Creek Trail</strong> (~7 km, ~2.5h)", type: "highlight" },
+            { time: "15:30", text: "🌲 <strong>Del Norte Coast Redwoods SP</strong> — <strong>Coastal Trail (Enderts Beach)</strong> (~4 km) — praia + tidepools!", type: "highlight" },
             { time: "18:00", text: "🌅 Pôr do sol no porto de Crescent City", type: "" },
             { time: "19:00", text: "🍽️ Jantar — frutos do mar!", type: "food" }
         ],
@@ -546,13 +516,13 @@ const days = [
         tips: ["⚠️ Tall Trees Grove: permit gratuito no Thomas Clarke Info Center (Orick).", "⚠️ Fern Canyon: Davison Road pode fechar no inverno. Verificar em nps.gov/redw."]
     },
 
-    // ==================== SAN FRANCISCO (Dias 23-26) ====================
+    // ==================== SAN FRANCISCO (Dias 22-24) ====================
     {
         photo: 'img/dia-23.jpg', shortLoc: 'SF',
         chargeStops: [{ name: 'Ukiah, CA', leg: 'Eureka → SF', critical: false }],
         location: "Eureka → San Francisco",
-        route: "Point Reyes + baleias + SF! 🐋",
-        note: "Alces selvagens, baleias cinzentas e Golden Gate!",
+        route: "Point Reyes + baleias + Pier 39! 🐋",
+        note: "Alces selvagens, baleias cinzentas e Pier 39!",
         region: "ca",
         items: [
             { time: "08:00", text: "☕ Café + check-out de Eureka", type: "" },
@@ -564,76 +534,50 @@ const days = [
             { time: "12:30", text: "🐋 <strong>Point Reyes</strong> — Elk Preserve, Lighthouse + <strong>baleias cinzentas!</strong> (migração jan-abr!)", type: "highlight" },
             { time: "~15:00", text: "🏨 Chegada em <strong>SF</strong>! Check-in", type: "" },
             { time: "15:30", text: "🌆 <strong>Embarcadero</strong> — Ferry Building", type: "" },
-            { time: "17:00", text: "🌅 Pôr do sol no <strong>Crissy Field</strong> — vista da Golden Gate!", type: "highlight" },
-            { time: "18:30", text: "🍽️ Jantar em <strong>Fisherman's Wharf</strong> — clam chowder!", type: "food" }
+            { time: "16:30", text: "🏖️ <strong>Pier 39</strong> — leões-marinhos!", type: "highlight" },
+            { time: "18:00", text: "🍽️ Jantar em <strong>Fisherman's Wharf</strong> — clam chowder!", type: "food" }
         ]
     },
     {
-        photo: 'img/dia-24.jpg', shortLoc: 'SF', location: "San Francisco dia cheio 1",
-        route: "Pier 39 + Golden Gate + Nintendo! 🌉",
-        note: "Cable Car, Chinatown, Golden Gate Bridge, Nintendo SF!",
-        region: "ca",
-        items: [
-            { time: "09:00", text: "☕ Café", type: "" },
-            { time: "10:00", text: "🏖️ <strong>Pier 39</strong> — leões-marinhos!", type: "highlight" },
-            { time: "11:00", text: "🚋 Passeio de <strong>Cable Car</strong>", type: "highlight" },
-            { time: "11:30", text: "🌆 <strong>Lombard Street</strong>", type: "" },
-            { time: "12:00", text: "🏮 <strong>Chinatown de SF</strong> — a mais antiga dos EUA!", type: "highlight" },
-            { time: "13:00", text: "🍽️ Almoço — <strong>La Taqueria</strong> (Mission)", type: "food" },
-            { time: "14:30", text: "🌉 <strong>Golden Gate Bridge</strong> — caminhar pela ponte!", type: "highlight" },
-            { time: "16:00", text: "🏰 <strong>Fort Point</strong> — cenário de Vertigo!", type: "" },
-            { time: "17:00", text: "🎮 <strong>Nintendo San Francisco</strong> (Union Square)", type: "highlight" },
-            { time: "18:00", text: "🛍️ <strong>Union Square</strong> — compras", type: "" },
-            { time: "19:00", text: "🍽️ Jantar especial", type: "food" }
-        ]
-    },
-    {
-        photo: 'img/dia-25.jpg', shortLoc: 'SF', location: "San Francisco — Valentine's Day! ❤️",
-        route: "Alcatraz + Golden Gate Park + Valentine's! ❤️",
-        note: "Valentine's Day! Alcatraz de manhã, Golden Gate Park e jantar especial à noite!",
-        region: "ca",
-        items: [
-            { time: "09:00", text: "☕ Café", type: "" },
-            { time: "09:30", text: "🏝️ <strong>Alcatraz</strong> — ferry Pier 33 (~2h na ilha)", type: "highlight" },
-            { time: "~11:30", text: "🚢 Ferry de volta", type: "" },
-            { time: "12:00", text: "🍽️ Almoço", type: "food" },
-            { time: "13:00", text: "🌳 <strong>Golden Gate Park</strong> — Japanese Tea Garden, Conservatory of Flowers", type: "" },
-            { time: "15:00", text: "🎨 <strong>Mission District</strong> — murais, <strong>Painted Ladies</strong> (Alamo Square)", type: "" },
-            { time: "16:00", text: "🏖️ <strong>Ocean Beach</strong> — praia do Pacífico", type: "" },
-            { time: "17:00", text: "🛍️ <strong>Haight-Ashbury</strong> — berço da contracultura, lojas vintage", type: "" },
-            { time: "18:00", text: "🍽️ Jantar especial de Valentine's Day ❤️ — <strong>Fog Harbor Fish House</strong> (Pier 39)", type: "food" }
-        ],
-        tips: ["⚠️ Alcatraz esgota meses antes! Comprar em alcatrazcruises.com (~$45/pessoa)."]
-    },
-    {
-        photo: 'img/dia-26.jpg', shortLoc: 'SF', location: "San Francisco — Sausalito + Exploratorium",
-        route: "Bike até Sausalito + Exploratorium! 🚲",
-        note: "Sausalito de ferry, Exploratorium e sunset no Baker Beach!",
+        photo: 'img/dia-24.jpg', shortLoc: 'SF', location: "San Francisco — Golden Gate + West Side",
+        route: "Battery Spencer + Golden Gate Bridge + Ocean Beach! 🌉",
+        note: "Golden Gate de todos os ângulos! Battery Spencer, ponte, parque e praia.",
         region: "ca",
         items: [
             { time: "08:30", text: "☕ Café", type: "" },
             { time: "09:00", text: "🏞️ <strong>Battery Spencer</strong> — vista icônica da Golden Gate!", type: "highlight" },
-            { time: "10:00", text: "🚲 Atravessar a <strong>Golden Gate Bridge</strong> de bike até <strong>Sausalito</strong> (~30 min)", type: "highlight" },
-            { time: "11:00", text: "🛍️ <strong>Sausalito</strong> — vila charmosa, galerias, vista da baía", type: "" },
-            { time: "12:00", text: "🍽️ Almoço em Sausalito — frutos do mar à beira-mar", type: "food" },
-            { time: "13:30", text: "🚢 <strong>Ferry Sausalito → SF</strong> (~30 min, vista linda da cidade!)", type: "highlight" },
-            { time: "14:00", text: "🏛️ <strong>Coit Tower</strong> — murais art deco + vista 360° de SF!", type: "highlight" },
-            { time: "15:00", text: "🔬 <strong>Exploratorium</strong> — museu de ciência interativo (ótimo pra criança!)", type: "highlight" },
-            { time: "17:30", text: "🌅 Sunset no <strong>Baker Beach</strong> — vista da Golden Gate", type: "highlight" },
-            { time: "19:00", text: "🍽️ Jantar de despedida de SF", type: "food" }
+            { time: "10:00", text: "🌉 <strong>Golden Gate Bridge</strong> — caminhar pela ponte!", type: "highlight" },
+            { time: "11:30", text: "🏰 <strong>Fort Point</strong> — cenário de Vertigo!", type: "" },
+            { time: "12:00", text: "🌅 <strong>Crissy Field</strong> — vista da Golden Gate!", type: "" },
+            { time: "12:30", text: "🍽️ Almoço", type: "food" },
+            { time: "14:00", text: "🌳 <strong>Golden Gate Park</strong> — Japanese Tea Garden, Conservatory of Flowers", type: "" },
+            { time: "16:00", text: "🏖️ <strong>Ocean Beach</strong> — praia do Pacífico", type: "" },
+            { time: "18:00", text: "🍽️ Jantar", type: "food" }
+        ]
+    },
+    {
+        photo: 'img/dia-25.jpg', shortLoc: 'SF', location: "San Francisco — City Tour",
+        route: "Cable Car + Chinatown + Nintendo! 🚋",
+        note: "Tour pela cidade! Cable Car, Chinatown, Nintendo e Union Square.",
+        region: "ca",
+        items: [
+            { time: "09:00", text: "☕ Café", type: "" },
+            { time: "10:00", text: "🚋 Passeio de <strong>Cable Car</strong>", type: "highlight" },
+            { time: "10:30", text: "🌆 <strong>Lombard Street</strong>", type: "" },
+            { time: "11:00", text: "🏮 <strong>Chinatown de SF</strong> — a mais antiga dos EUA!", type: "highlight" },
+            { time: "12:30", text: "🍽️ Almoço — <strong>La Taqueria</strong> (Mission)", type: "food" },
+            { time: "14:00", text: "🎮 <strong>Nintendo San Francisco</strong> (Union Square)", type: "highlight" },
+            { time: "15:30", text: "🛍️ <strong>Union Square</strong> — compras", type: "" },
+            { time: "17:00", text: "🍽️ Jantar de despedida de SF", type: "food" }
         ]
     },
 
-    // ==================== PCH + YOSEMITE + SEQUOIA (Dias 27-30) ====================
+    // ==================== PCH + YOSEMITE + SEQUOIA (Dias 25-29) ====================
     {
-        photo: 'img/dia-27.jpg', shortLoc: 'Yosemite',
-        chargeStops: [
-            { name: 'Gilroy, CA', leg: 'SF → Yosemite', critical: false },
-            { name: 'Merced, CA', leg: 'SF → Yosemite', critical: false }
-        ],
-        location: "SF → PCH → Yosemite",
-        route: "Bixby Bridge + drive pra Yosemite! 🌊🏔️",
-        note: "PCH de manhã, depois corta pro interior rumo a Yosemite!",
+        photo: 'img/dia-26.jpg', shortLoc: 'Monterey',
+        location: "SF → PCH → Monterey/Carmel",
+        route: "Pigeon Point + Aquarium + 17-Mile Drive! 🌊",
+        note: "Costa do Pacífico até Monterey! Aquarium e 17-Mile Drive.",
         region: "ca",
         items: [
             { time: "07:00", text: "☕ Café + check-out de SF", type: "" },
@@ -642,16 +586,37 @@ const days = [
             { time: "08:45", text: "🏠 <strong>Pigeon Point Lighthouse</strong> (Pescadero) — um dos faróis mais altos da Costa Oeste! 35m, vista linda do Pacífico. Grátis", type: "" },
             { time: "09:00", text: "🚗 Continue Hwy 1 → Monterey (~1.5h)", type: "drive" },
             { time: "10:30", text: "🦞 <strong>Cannery Row</strong> — passear + café", type: "" },
-            { time: "11:15", text: "🚗 <strong>17-Mile Drive</strong> — Lone Cypress, Pebble Beach!", type: "highlight" },
-            { time: "12:15", text: "🌉 <strong>Bixby Creek Bridge</strong> — foto icônica!", type: "highlight" },
-            { time: "12:45", text: "🍽️ Almoço rápido em Big Sur / Carmel", type: "food" },
-            { time: "13:30", text: "🚗 Corta pro interior: Carmel → CA-68 → CA-99 → CA-140 → Yosemite (~300 km, ~3.5h)", type: "drive" },
-            { time: "14:00", text: "⚡ <strong>Supercharger Gilroy</strong> — ~20 min", type: "charge" },
-            { time: "15:30", text: "⚡ <strong>Supercharger Merced</strong> — ~20 min", type: "charge" },
-            { time: "~17:00", text: "🏨 Chegada em <strong>Mariposa</strong>! Check-in", type: "" },
+            { time: "11:00", text: "🐙 <strong>Monterey Bay Aquarium</strong> — um dos melhores do mundo! (~2.5h)", type: "highlight" },
+            { time: "13:30", text: "🍽️ Almoço em Monterey", type: "food" },
+            { time: "14:30", text: "🚗 <strong>17-Mile Drive</strong> — Lone Cypress, Pebble Beach!", type: "highlight" },
+            { time: "16:30", text: "🏖️ <strong>Carmel-by-the-Sea</strong> — vila charmosa, galerias, Carmel Beach", type: "" },
+            { time: "18:00", text: "🍽️ Jantar em Carmel", type: "food" }
+        ]
+    },
+    {
+        photo: 'img/dia-27.jpg', shortLoc: 'Big Sur',
+        chargeStops: [
+            { name: 'Gilroy, CA', leg: 'Carmel → Yosemite', critical: false },
+            { name: 'Merced, CA', leg: 'Carmel → Yosemite', critical: false }
+        ],
+        location: "Carmel → Big Sur → Yosemite",
+        route: "Bixby Bridge + McWay Falls + Yosemite! 🌊🏔️",
+        note: "Big Sur de manhã, depois corta pro interior rumo a Yosemite!",
+        region: "ca",
+        items: [
+            { time: "07:30", text: "☕ Café em Carmel", type: "" },
+            { time: "08:00", text: "🌉 <strong>Bixby Creek Bridge</strong> — foto icônica!", type: "highlight" },
+            { time: "08:45", text: "🏖️ <strong>Pfeiffer Beach</strong> — arco de pedra (keyhole rock)!", type: "highlight" },
+            { time: "09:45", text: "🌊 <strong>McWay Falls</strong> — cachoeira de 24m direto na praia!", type: "highlight" },
+            { time: "10:30", text: "🚗 Volta pra Carmel (~1h)", type: "drive" },
+            { time: "11:30", text: "🍽️ Almoço em Carmel", type: "food" },
+            { time: "12:15", text: "🚗 Corta pro interior: Carmel → CA-68 → CA-99 → CA-140 → Yosemite (~300 km, ~3.5h)", type: "drive" },
+            { time: "13:00", text: "⚡ <strong>Supercharger Gilroy</strong> — ~20 min", type: "charge" },
+            { time: "14:30", text: "⚡ <strong>Supercharger Merced</strong> — ~20 min", type: "charge" },
+            { time: "~16:30", text: "🏨 Chegada em <strong>Mariposa</strong>! Check-in", type: "" },
             { time: "18:00", text: "🍽️ Jantar em Mariposa", type: "food" }
         ],
-        tips: ["⚠️ Se Highway 1 estiver FECHADA em Big Sur: SF → I-5 S → CA-140 E direto pra Mariposa (~450 km, ~5h)."]
+        tips: ["⚠️ Se Hwy 1 estiver FECHADA ao sul de Bixby: pular Pfeiffer Beach e McWay Falls, sair direto de Carmel pro interior mais cedo."]
     },
     {
         photo: 'img/dia-28.jpg', shortLoc: 'Yosemite', location: "Yosemite NP dia 1 — Valley",
@@ -721,7 +686,7 @@ const days = [
         tips: ["❄️ Em fevereiro pode ter neve nas áreas mais altas.", "⚠️ Kings Canyon Scenic Byway (CA-180 leste) fecha no inverno (nov–abr). Só General Grant Tree é acessível."]
     },
 
-    // ==================== LA (Dias 31-33) ====================
+    // ==================== LA (Dias 30-33) ====================
     {
         photo: 'img/dia-31.jpg', shortLoc: 'LA',
         chargeStops: [
@@ -745,6 +710,31 @@ const days = [
             { time: "18:00", text: "🌅 Sunset na praia!", type: "highlight" },
             { time: "19:00", text: "🍽️ Jantar em Santa Monica", type: "food" }
         ]
+    },
+    {
+        photo: 'img/dia-09.jpg', shortLoc: 'Big Bear',
+        chargeStops: [
+            { name: 'San Bernardino, CA', leg: 'LA → Big Bear', critical: false }
+        ],
+        location: "Big Bear Lake",
+        route: "Neve nas montanhas! ⛷️",
+        note: "Day trip a Big Bear Lake — neve a 2h de LA!",
+        region: "ca",
+        items: [
+            { time: "08:00", text: "☕ Café", type: "" },
+            { time: "08:30", text: "🚗 LA → <strong>Big Bear Lake</strong> (~160 km, ~2h via CA-330)", type: "drive" },
+            { time: "10:00", text: "⚡ <strong>Supercharger San Bernardino</strong> (no caminho) — ~20 min", type: "charge" },
+            { time: "10:45", text: "🏔️ Chegada em <strong>Big Bear</strong>!", type: "" },
+            { time: "11:00", text: "⛷️ <strong>Snow Summit</strong> — snow tubing / snow play!", type: "highlight" },
+            { time: "12:30", text: "🍽️ Almoço em <strong>Big Bear Village</strong>", type: "food" },
+            { time: "13:30", text: "🎢 <strong>Alpine Slide at Magic Mountain</strong> — tobogã alpino!", type: "highlight" },
+            { time: "14:30", text: "🥾 <strong>Castle Rock Trail</strong> (~1.5 km) — vista panorâmica do lago", type: "" },
+            { time: "15:30", text: "🛍️ Passear pelo <strong>Big Bear Village</strong> — lojas, cafés", type: "" },
+            { time: "16:00", text: "☕ Chocolate quente com vista pro lago!", type: "" },
+            { time: "16:30", text: "🚗 Volta pra LA (~2h)", type: "drive" },
+            { time: "18:30", text: "🍽️ Jantar em LA", type: "food" }
+        ],
+        tips: ["⚡ Round trip ~320 km com subida forte. Carregar 100% antes ou parar em San Bernardino.", "❄️ Big Bear a 2.000m — pode ter neve! Levar casacos e botas. Chains podem ser obrigatórias na CA-330."]
     },
     {
         photo: 'img/dia-32.jpg', shortLoc: 'LA', location: "LA dia cheio",
@@ -786,36 +776,37 @@ const days = [
 // ==================== HOTELS ====================
 const hotels = [
     { num: 1, name: "Marriott Marquis, Times Square, NY", checkin: "21/01", checkout: "25/01", nights: 4 },
-    { num: 2, name: "Las Vegas, NV", checkin: "25/01", checkout: "29/01", nights: 4 },
-    { num: 3, name: "Springdale, UT (Zion)", checkin: "29/01", checkout: "31/01", nights: 2 },
-    { num: 4, name: "Bryce Canyon, UT", checkin: "31/01", checkout: "01/02", nights: 1 },
-    { num: 5, name: "Moab, UT (Arches/Canyonlands)", checkin: "01/02", checkout: "04/02", nights: 3 },
-    { num: 6, name: "Twin Falls, ID", checkin: "04/02", checkout: "05/02", nights: 1 },
-    { num: 7, name: "Centralia, WA", checkin: "05/02", checkout: "06/02", nights: 1 },
-    { num: 8, name: "Forks / Port Angeles, WA (Olympic)", checkin: "06/02", checkout: "08/02", nights: 2 },
-    { num: 9, name: "Cannon Beach, OR", checkin: "08/02", checkout: "09/02", nights: 1 },
-    { num: 10, name: "Gold Beach / Coos Bay, OR", checkin: "09/02", checkout: "10/02", nights: 1 },
-    { num: 11, name: "Crescent City / Klamath, CA", checkin: "10/02", checkout: "11/02", nights: 1 },
-    { num: 12, name: "Eureka / Arcata, CA", checkin: "11/02", checkout: "12/02", nights: 1 },
-    { num: 13, name: "San Francisco, CA", checkin: "12/02", checkout: "16/02", nights: 4 },
-    { num: 14, name: "Mariposa / El Portal, CA", checkin: "16/02", checkout: "19/02", nights: 3 },
-    { num: 15, name: "Three Rivers, CA (Sequoia)", checkin: "19/02", checkout: "20/02", nights: 1 },
-    { num: 16, name: "Los Angeles, CA", checkin: "20/02", checkout: "22/02", nights: 2 }
+    { num: 2, name: "Las Vegas, NV", checkin: "25/01", checkout: "28/01", nights: 3 },
+    { num: 3, name: "Springdale, UT (Zion)", checkin: "28/01", checkout: "30/01", nights: 2 },
+    { num: 4, name: "Bryce Canyon, UT", checkin: "30/01", checkout: "31/01", nights: 1 },
+    { num: 5, name: "Moab, UT (Arches/Canyonlands)", checkin: "31/01", checkout: "03/02", nights: 3 },
+    { num: 6, name: "Twin Falls, ID", checkin: "03/02", checkout: "04/02", nights: 1 },
+    { num: 7, name: "Centralia, WA", checkin: "04/02", checkout: "05/02", nights: 1 },
+    { num: 8, name: "Forks / Port Angeles, WA (Olympic)", checkin: "05/02", checkout: "07/02", nights: 2 },
+    { num: 9, name: "Cannon Beach, OR", checkin: "07/02", checkout: "08/02", nights: 1 },
+    { num: 10, name: "Gold Beach / Coos Bay, OR", checkin: "08/02", checkout: "09/02", nights: 1 },
+    { num: 11, name: "Crescent City / Klamath, CA", checkin: "09/02", checkout: "10/02", nights: 1 },
+    { num: 12, name: "Eureka / Arcata, CA", checkin: "10/02", checkout: "11/02", nights: 1 },
+    { num: 13, name: "San Francisco, CA", checkin: "11/02", checkout: "14/02", nights: 3 },
+    { num: 14, name: "Carmel, CA", checkin: "14/02", checkout: "15/02", nights: 1 },
+    { num: 15, name: "Mariposa / El Portal, CA", checkin: "15/02", checkout: "18/02", nights: 3 },
+    { num: 16, name: "Three Rivers, CA (Sequoia)", checkin: "18/02", checkout: "19/02", nights: 1 },
+    { num: 17, name: "Los Angeles, CA", checkin: "19/02", checkout: "22/02", nights: 3 }
 ];
 
 // ==================== NATIONAL PARKS ====================
 const parks = [
-    { name: "🏜️ Death Valley National Park", days: "Dia 8", highlights: "Badwater Basin (-86m!), Zabriskie Point, Artist's Palette, Devil's Golf Course, Mesquite Sand Dunes." },
-    { name: "🏞️ Grand Canyon National Park", days: "Dia 9", highlights: "Mather Point, Rim Trail, Yavapai Geology Museum, Bright Angel, Hopi Point." },
-    { name: "🏞️ Zion National Park", days: "Dias 10–11", highlights: "Watchman Trail, Emerald Pools, Canyon Overlook Trail, Riverside Walk." },
-    { name: "🏔️ Bryce Canyon National Park", days: "Dias 11–12", highlights: "Navajo Loop, Queen's Garden, hoodoos, Bryce Amphitheater, stargazing!" },
-    { name: "🏜️ Canyonlands National Park", days: "Dia 13", highlights: "Mesa Arch sunrise, Grand View Point, Upheaval Dome, Aztec Butte." },
-    { name: "🏜️ Arches National Park", days: "Dia 14", highlights: "Delicate Arch, Windows, Double Arch, Landscape Arch (93m!), Fiery Furnace." },
-    { name: "🌋 Mt. Rainier National Park", days: "Dia 17", highlights: "Paradise, neve, vulcão de 4.392m." },
-    { name: "🌲 Olympic National Park", days: "Dias 17–18", highlights: "Hoh Rain Forest, Hall of Mosses, Ruby Beach, La Push (Twilight!), Sol Duc Falls." },
-    { name: "🌲 Redwood National Park", days: "Dias 21–22", highlights: "Stout Memorial Grove, Fern Canyon (Jurassic Park 2!), Tall Trees, Lady Bird Johnson, Avenue of Giants." },
-    { name: "🏞️ Yosemite National Park", days: "Dias 28–29", highlights: "Tunnel View, El Capitan, Half Dome, Yosemite Falls, Badger Pass, Mirror Lake." },
-    { name: "🌲 Sequoia + Kings Canyon NP", days: "Dia 30", highlights: "General Sherman Tree (maior árvore!), Congress Trail, Moro Rock, General Grant Tree." }
+    { name: "🏜️ Death Valley National Park", days: "Dia 7", highlights: "Badwater Basin (-86m!), Zabriskie Point, Artist's Palette, Devil's Golf Course, Mesquite Sand Dunes." },
+    { name: "🏞️ Zion National Park", days: "Dias 8–10", highlights: "Watchman Trail, Emerald Pools, Canyon Overlook, Riverside Walk, Court of the Patriarchs." },
+    { name: "🏔️ Bryce Canyon National Park", days: "Dias 10–11", highlights: "Navajo Loop, Queen's Garden, hoodoos, Bryce Amphitheater, stargazing!" },
+    { name: "🏜️ Capitol Reef National Park", days: "Dia 11", highlights: "Petroglífos Fremont, Hickman Bridge Trail, Fruita Historic District, Scenic Drive." },
+    { name: "🏜️ Canyonlands National Park", days: "Dia 12", highlights: "Mesa Arch sunrise, Grand View Point, Upheaval Dome, Aztec Butte." },
+    { name: "🏜️ Arches National Park", days: "Dia 13", highlights: "Delicate Arch, Windows, Double Arch, Landscape Arch (93m!), Fiery Furnace." },
+    { name: "🌋 Mt. Rainier National Park", days: "Dia 16", highlights: "Paradise, neve, vulcão de 4.392m." },
+    { name: "🌲 Olympic National Park", days: "Dias 16–17", highlights: "Hoh Rain Forest, Hall of Mosses, Ruby Beach, La Push (Twilight!), Sol Duc Falls." },
+    { name: "🌲 Redwood National Park", days: "Dias 20–21", highlights: "Stout Memorial Grove, Fern Canyon (Jurassic Park 2!), Tall Trees, Lady Bird Johnson, Avenue of Giants." },
+    { name: "🏞️ Yosemite National Park", days: "Dias 27–28", highlights: "Tunnel View, El Capitan, Half Dome, Yosemite Falls, Badger Pass, Mirror Lake." },
+    { name: "🌲 Sequoia + Kings Canyon NP", days: "Dia 29", highlights: "General Sherman Tree (maior árvore!), Congress Trail, Moro Rock, General Grant Tree." }
 ];
 
 // ==================== REORDERING SYSTEM ====================

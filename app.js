@@ -350,6 +350,35 @@ const activityPhotos = {
     'Cypress Tree Tunnel': 'img/activities/point_reyes.jpg',
     'Pigeon Point Lighthouse': 'img/activities/heceta_head.jpg',
     'Cool Cat Collective': 'img/activities/santa_monica_pier.jpg',
+    // --- Missing locations audit (roteiro sync) ---
+    'Harry Potter Shop': 'img/activities/flatiron.jpg',
+    "Devil's Golf Course": 'img/activities/badwater_basin.jpg',
+    'Fairyland Point': 'img/activities/bryce_canyon.jpg',
+    'Mossy Cave': 'img/activities/bryce_canyon.jpg',
+    'Hickman Bridge': 'img/activities/capitol_reef.jpg',
+    'San Rafael Swell': 'img/activities/capitol_reef.jpg',
+    'Cannery Row': 'img/activities/monterey_ca.jpg',
+    'Monterey Bay Aquarium': 'img/activities/monterey_ca.jpg',
+    'Pfeiffer Beach': 'img/activities/big_sur_coast.jpg',
+    'McWay Falls': 'img/activities/big_sur_coast.jpg',
+    'North Grove Loop': 'img/activities/general_grant.jpg',
+    'Generals Highway': 'img/activities/general_sherman_tree.jpg',
+    'Universal Studios': 'img/activities/hollywood_sign.jpg',
+    'Snow Summit': 'img/activities/badger_pass.jpg',
+    'Alpine Slide': 'img/activities/badger_pass.jpg',
+    'Castle Rock Trail': 'img/activities/badger_pass.jpg',
+    'Big Bear': 'img/activities/mt_charleston.jpg',
+    // --- Coverage pass 2 (full-text audit) ---
+    'Mt. Charleston': 'img/activities/mt_charleston.jpg',
+    'Venetian': 'img/activities/las_vegas_strip_night.jpg',
+    'Caesars Palace': 'img/activities/las_vegas_strip_night.jpg',
+    'Furnace Creek': 'img/activities/zabriskie_point.jpg',
+    'Zion Canyon': 'img/activities/canyon_overlook.jpg',
+    'Zion': 'img/activities/canyon_overlook.jpg',
+    'Canyonlands': 'img/activities/mesa_arch.jpg',
+    'Arches NP': 'img/activities/delicate_arch.jpg',
+    'Brincar na neve': 'img/activities/badger_pass.jpg',
+    'Battery Spencer': 'img/activities/golden_gate_bridge.jpg',
 };
 
 // Pre-sort keys longest-first for accurate matching (e.g., "Brooklyn Bridge Park" before "Brooklyn Bridge")
@@ -823,6 +852,56 @@ const placeInfo = {
     'Cool Cat Collective': { addr: '2741 E 4th St, Long Beach, CA 90814', coords: '33.7700,-118.1600', detail: 'Café/galeria de arte temática de gatos com gatinhos foster disponíveis para adoção! Ambiente colorido com murais, produtos artísticos de gatos e área de interação com os felinos. Ótimo para famílias!', hours: 'Qua-Dom 10h-18h', cost: 'Gratuito (doações aceitas)' },
     'LA': { addr: 'Los Angeles, CA 90012', coords: '34.0522,-118.2437', detail: 'A Cidade dos Anjos! Segunda maior cidade dos EUA, capital do cinema e do entretenimento.' },
     'Santa Monica': { addr: 'Santa Monica, CA 90401', coords: '34.0195,-118.4912', detail: 'Cidade praiana com o icônico píer, roda-gigante, 3rd Street Promenade (shopping a céu aberto) e ciclovia à beira-mar.' },
+
+    // --- Missing locations audit ---
+    // Day 4 — NYC
+    'Harry Potter Shop': { addr: '935 Broadway, New York, NY 10010', coords: '40.7400,-73.9893', detail: 'Harry Potter New York — maior loja HP do mundo! 3 andares com varinhas interativas, roupas das casas, doces de Honeydukes e experiências imersivas.', hours: '10h-21h', cost: 'Entrada gratuita' },
+
+    // Day 7 — Death Valley
+    "Devil's Golf Course": { addr: "Devil's Golf Course Rd, Death Valley, CA 92328", coords: '36.3103,-116.8339', detail: 'Planície de sal cristalizado com formações pontiagudas irregulares. A superfície estala no calor! Fica entre Badwater Basin e Furnace Creek.' , cost: 'Incluso no passe do parque ($30/carro)' },
+
+    // Day 10 — Bryce Canyon
+    'Fairyland Point': { addr: 'Fairyland Point, Bryce Canyon NP, UT 84764', coords: '37.6521,-112.1426', detail: 'Mirante menos visitado no extremo norte do parque. Vista ampla dos hoodoos sem multidões. Acessível antes da entrada principal (sem taxa!).', cost: 'Incluso no passe do parque' },
+    'Mossy Cave Trail': { addr: 'Mossy Cave Trail, Bryce Canyon, UT 84764', coords: '37.6891,-112.1115', detail: 'Trilha curta (0.8 km ida e volta) até uma caverna com musgo e uma cascata. Fica fora da entrada principal, na Hwy 12. Fácil e fotogênica.', cost: 'Gratuito (fora da área com taxa)' },
+
+    // Day 11 — Capitol Reef
+    'Hickman Bridge Trail': { addr: 'Hickman Bridge Trail, Capitol Reef NP, UT 84775', coords: '38.2888,-111.2297', detail: 'Trilha moderada de 2.9 km (ida e volta) até arco natural de 40m de envergadura. Uma das trilhas mais icônicas do Capitol Reef.', cost: 'Incluso no passe do parque' },
+    'Fruita Historic District': { addr: 'Fruita, Capitol Reef NP, UT 84775', coords: '38.2825,-111.2475', detail: 'Comunidade mórmon do séc. XIX preservada dentro do parque. Pomares históricos onde você pode colher frutas na temporada!', cost: 'Gratuito' },
+    'San Rafael Swell': { addr: 'San Rafael Swell, UT', coords: '38.8500,-110.7500', detail: 'Formação geológica espetacular entre Capitol Reef e Green River. I-70 corta o Spotted Wolf Canyon com paredões de arenito colorido dos dois lados.', cost: 'Gratuito' },
+
+    // Day 25 — Monterey / Carmel
+    'Cannery Row': { addr: 'Cannery Row, Monterey, CA 93940', coords: '36.6181,-121.9014', detail: 'Rua histórica imortalizada por John Steinbeck. Antigas fábricas de sardinha convertidas em lojas, restaurantes e o aquário. Atmosfera encantadora.', cost: 'Gratuito' },
+    'Monterey Bay Aquarium': { addr: '886 Cannery Row, Monterey, CA 93940', coords: '36.6185,-121.9018', detail: 'Um dos melhores aquários do mundo! Tanque de algas gigantes (kelp forest), lontras-marinhas, águas-vivas bioluminescentes e Open Sea com tubarões.', hours: '10h-17h', cost: '$54.95 adulto / $39.95 criança (3-12)' },
+
+    // Day 26 — Big Sur
+    'Pfeiffer Beach': { addr: 'Pfeiffer Beach, Big Sur, CA 93920', coords: '36.2383,-121.8157', detail: 'Praia escondida com areia roxa (mineral manganês) e o famoso Keyhole Arch. Acesso por estrada estreita de 3 km — chegar cedo!', hours: '9h-20h', cost: '$12/carro' },
+    'McWay Falls': { addr: 'McWay Falls, Julia Pfeiffer Burns SP, Big Sur, CA', coords: '36.1582,-121.6719', detail: 'Cachoeira de 24m que cai direto na praia do oceano — uma das cenas mais icônicas da Califórnia! Vista do mirante na trilha curta (0.6 km). Não é possível descer à praia.', cost: '$10/carro' },
+
+    // Day 29 — Kings Canyon / Sequoia
+    'North Grove Loop': { addr: 'North Grove Loop, Grant Grove, Kings Canyon NP, CA', coords: '36.7469,-118.9679', detail: 'Trilha fácil de 2.4 km entre sequoias gigantes, incluindo a General Grant Tree (terceira maior árvore do mundo). Acessível para todas as idades.', cost: 'Incluso no passe do parque' },
+    'Generals Highway': { addr: 'Generals Highway, Sequoia/Kings Canyon NP, CA', coords: '36.6500,-118.8300', detail: 'Estrada cênica de 75 km conectando Grant Grove a Giant Forest. Curvas panorâmicas entre sequoias gigantes, mirantes e vistas do Sierra Nevada.', cost: 'Incluso no passe do parque' },
+
+    // Day 31 — Big Bear
+    'Big Bear Lake': { addr: 'Big Bear Lake, CA 92315', coords: '34.2439,-116.9114', detail: 'Lago de montanha a 2.000m de altitude nas montanhas San Bernardino. Ski, snowboard, trilhas, aldeia alpina. 2h de LA. Neve no inverno!', cost: 'Gratuito' },
+    'Big Bear Village': { addr: 'Village Dr, Big Bear Lake, CA 92315', coords: '34.2428,-116.8925', detail: 'Centro turístico com lojas, restaurantes e sorveterias. Atmosfera de vila alpina com casas de madeira.', cost: 'Gratuito' },
+    'Snow Summit': { addr: '880 Summit Blvd, Big Bear Lake, CA 92315', coords: '34.2310,-116.8900', detail: 'Estação de ski com 240 acres de pistas. No inverno: ski e snowboard. No verão: mountain bike e scenic sky chair. Vista panorâmica do lago.', hours: '8h30-16h', cost: 'Lift ticket: ~$99-149/dia' },
+    'Alpine Slide at Magic Mountain': { addr: '800 Wildrose Ln, Big Bear Lake, CA 92315', coords: '34.2350,-116.8850', detail: 'Tobogã alpino em trilho com bobsled! Descida de 400m com controle de velocidade. Também tem go-karts e minigolfe. Diversão garantida para o Bernardo!', hours: '10h-17h', cost: '$8/descida ou $25 passe ilimitado' },
+    'Castle Rock Trail': { addr: 'Castle Rock Trail, Big Bear Lake, CA 92315', coords: '34.2520,-116.8770', detail: 'Trilha curta (1 km ida) até formação rochosa com vista panorâmica do Big Bear Lake. Inclinação moderada. Ótima para fotos do pôr do sol.', cost: 'Gratuito' },
+
+    // Day 32 — LA
+    'Universal Studios Hollywood': { addr: '100 Universal City Plaza, Universal City, CA 91608', coords: '34.1381,-118.3534', detail: 'Parque temático de cinema! Wizarding World of Harry Potter, Studio Tour (bastidores reais), Jurassic World, Super Nintendo World (2023). Imperdível com criança!', hours: '9h-22h (varia)', cost: '$109-164/adulto (varia por data)' },
+
+    // --- Coverage pass 2 (full-text audit) ---
+    'Mt. Charleston': { addr: 'Mt. Charleston, Spring Mountains, NV 89124', coords: '36.2716,-115.6956', detail: 'Montanha de 3.632m a apenas 45 min de Vegas! Neve no inverno, trilhas no verão. Kyle Canyon Rd é a rota cênica. Mt. Charleston Lodge tem restaurante com lareira.', cost: 'Gratuito' },
+    'Furnace Creek': { addr: 'Furnace Creek, Death Valley NP, CA 92328', coords: '36.4573,-116.8658', detail: 'Centro de Death Valley. Visitor Center (museu gratuito), Furnace Creek Inn (resort), general store e posto de gasolina. Ponto de partida para explorar o parque.', hours: 'Visitor Center: 8h-17h', cost: 'Incluso no passe do parque' },
+    'Big Bend': { addr: 'Big Bend, Zion NP, UT 84767', coords: '37.2550,-112.9500', detail: 'Curva dramática do Virgin River dentro de Zion Canyon. Ponto de parada do shuttle com vistas de paredões verticais. Acesso a trilhas menores.', cost: 'Incluso no passe do parque' },
+    'Canyonlands': { addr: 'Canyonlands National Park, UT 84532', coords: '38.3269,-109.8783', detail: 'Parque dividido em 3 distritos. Island in the Sky é o mais acessível — mesa elevada com vistas vertiginosas de cânions esculpidos pelo Colorado e Green River.', cost: '$30/carro (7 dias)' },
+    'Arches NP': { addr: 'Arches National Park, Moab, UT 84532', coords: '38.7331,-109.5925', detail: 'Mais de 2.000 arcos naturais de arenito! Delicate Arch é o ícone de Utah. Landscape Arch tem 93m — o mais longo da América do Norte.', cost: '$30/carro (7 dias)' },
+    'Newport': { addr: 'Newport, OR 97365', coords: '44.6368,-124.0535', detail: 'Vila de pescadores charmosa. Distrito Bayfront com frutos do mar frescos, leões-marinhos sob a ponte e Oregon Coast Aquarium.', cost: 'Gratuito' },
+    'Orick': { addr: 'Orick, CA 95555', coords: '41.2869,-124.0594', detail: 'Pequena vila gateway para Redwood NP. Ponto de partida para Tall Trees Grove e trilhas costeiras. Elk Meadow com alces Roosevelt pastando à beira da estrada!' },
+    'Battery Spencer': { addr: 'Battery Spencer, Sausalito, CA 94965', coords: '37.8278,-122.4830', detail: 'Antigo forte militar com a vista mais icônica da Golden Gate Bridge! Mirante elevado do lado Marin — a ponte inteira com SF ao fundo. Chegar cedo (estacionamento limitado).', cost: 'Gratuito' },
+    'Yosemite Falls': { addr: 'Yosemite Falls, Yosemite NP, CA 95389', coords: '37.7566,-119.5963', detail: 'A cachoeira mais alta da América do Norte (739m em 3 quedas). Lower Yosemite Fall Trail (1.6 km) é fácil e leva à base. Fluxo máximo na primavera — pode secar no final do verão.', cost: 'Incluso no passe do parque' },
+    'Big Bear': { addr: 'Big Bear Lake, CA 92315', coords: '34.2439,-116.9114', detail: 'Destino de montanha a 2h de LA. Lago alpino a 2.000m com ski, trilhas, aldeia e neve no inverno. Perfeito para um day trip da família!' },
 };
 
 // Pre-sort keys longest-first for accurate matching

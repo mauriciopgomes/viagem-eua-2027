@@ -156,9 +156,9 @@ test('dayPhotos referencia arquivos que existem', () => {
 // ==================== 3. DATA.JS — HOTELS ====================
 section('data.js — Hotéis');
 
-test('hotels é um array com 16 hotéis', () => {
+test('hotels é um array com 17 hotéis', () => {
     assert(Array.isArray(hotels), 'hotels deve ser array');
-    assertEqual(hotels.length, 16, 'deve ter 16 hotéis');
+    assertEqual(hotels.length, 17, 'deve ter 17 hotéis');
 });
 
 test('hotéis têm campos obrigatórios', () => {
@@ -1021,12 +1021,12 @@ test('regiões seguem a rota (NY→NV→UT→PNW→CA)', () => {
     for (let i = 0; i < 4; i++) assertEqual(days[i].region, 'ny', `Dia ${i + 1}`);
     // NV: dias 5-8 (Vegas)
     for (let i = 4; i < 8; i++) assertEqual(days[i].region, 'nv', `Dia ${i + 1}`);
-    // UT: dias 9-14 (GC, Zion, Bryce, Moab)
-    for (let i = 8; i < 14; i++) assertEqual(days[i].region, 'ut', `Dia ${i + 1}`);
-    // PNW: dias 15-20
-    for (let i = 14; i < 20; i++) assertEqual(days[i].region, 'pnw', `Dia ${i + 1}`);
-    // CA: dias 21-33 (Redwood, SF, PCH, Yosemite, Sequoia, LA)
-    for (let i = 20; i < 33; i++) assertEqual(days[i].region, 'ca', `Dia ${i + 1}`);
+    // UT: dias 9-13 (Zion, Bryce, Moab)
+    for (let i = 8; i < 13; i++) assertEqual(days[i].region, 'ut', `Dia ${i + 1}`);
+    // PNW: dias 14-19
+    for (let i = 13; i < 19; i++) assertEqual(days[i].region, 'pnw', `Dia ${i + 1}`);
+    // CA: dias 20-33 (Redwood, SF, PCH, Yosemite, Sequoia, LA)
+    for (let i = 19; i < 33; i++) assertEqual(days[i].region, 'ca', `Dia ${i + 1}`);
 });
 
 test('cada dia tem pelo menos 5 atividades', () => {
@@ -1044,7 +1044,7 @@ test('cada dia tem pelo menos 1 item food (exceto dia de voo)', () => {
 });
 
 test('dias de estrada (>100km) têm items drive', () => {
-    const driveDays = [5, 9, 11, 12, 15, 16, 17, 19, 20, 23, 27, 30, 31];
+    const driveDays = [5, 9, 11, 12, 15, 16, 19, 20, 22, 27, 30, 31];
     driveDays.forEach((d) => {
         const day = days[d - 1];
         const hasDrive = day.items.some(i => i.type === 'drive');
