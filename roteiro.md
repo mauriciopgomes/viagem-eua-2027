@@ -123,8 +123,9 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 | 12:00 | 🚶 **Grand Central Terminal** — teto estrelado, relógio de opala |
 | 12:30 | 🍝 Almoço — **Eataly** (200 5th Ave) — mercado italiano! |
 | 13:30 | 🏢 **Flatiron Building** (23rd St) — prédio triangular de 1902! |
-| 14:00 | 🎮 Voltar na **Nintendo NY** ou explorar algo novo |
-| 16:00 | Tempo livre — descansar no hotel ou última exploração |
+| 14:00 | 🧙 **Harry Potter Shop** (935 Broadway) — butterbeer bar, varinhas, vassouras! Ao lado do Flatiron |
+| 15:30 | 🎮 **Nintendo NY** (Rockefeller Center) + 🏰 **Disney Store** (1540 Broadway, Times Square) |
+| 17:00 | Tempo livre — descansar no hotel ou última exploração |
 | 18:00 | 🧳 Volta ao hotel — arrumar malas |
 | 19:00 | 🍽️ Jantar — **Suka Sushi** — despedida de NY com sushi! |
 | 21:00 | 🏨 Hotel — dormir cedo (voo amanhã!) |
@@ -649,23 +650,22 @@ NYC ✈️ LAX → Las Vegas → Hoover Dam → Route 66 → Grand Canyon
 
 ---
 
-### Dia 26 — Seg, 15/02 (San Francisco dia cheio 3) 📍 San Francisco, CA
+### Dia 26 — Seg, 15/02 (San Francisco — Sausalito + Exploratorium) 📍 San Francisco, CA
 
-> Golden Gate, Painted Ladies, Chinatown!
+> Sausalito de ferry, Exploratorium e sunset no Baker Beach!
 
 | Horário | Atividade |
 |---------|-----------|
 | 08:30 | ☕ Café |
-| 09:00 | 🌉 **Golden Gate Bridge** — caminhada + fotos! |
-| 10:00 | 🏞️ **Battery Spencer** — vista icônica da ponte! |
-| 11:00 | 🦞 **Fisherman's Wharf** + Pier 39 — leões-marinhos! |
-| 12:30 | 🍽️ Almoço — clam chowder em pão! |
-| 13:30 | 🚋 **Cable Car** (Powell-Hyde line) |
-| 14:30 | 🏘️ **Lombard Street** — rua mais sinuosa! |
-| 15:00 | 🎨 **Painted Ladies** — Alamo Square, casinhas vitorianas! |
-| 16:00 | 🌳 **Golden Gate Park** — Japanese Tea Garden |
-| 17:30 | 🌅 Sunset no Baker Beach |
-| 19:00 | 🍽️ Jantar no Chinatown |
+| 09:00 | 🏞️ **Battery Spencer** — vista icônica da Golden Gate! |
+| 10:00 | 🚲 Atravessar a **Golden Gate Bridge** de bike até **Sausalito** (~30 min) |
+| 11:00 | 🛍️ **Sausalito** — vila charmosa, galerias, vista da baía |
+| 12:00 | 🍽️ Almoço em Sausalito — frutos do mar à beira-mar |
+| 13:30 | 🚢 **Ferry Sausalito → SF** (~30 min, vista linda da cidade!) |
+| 14:00 | 🏛️ **Coit Tower** — murais art deco + vista 360° de SF! |
+| 15:00 | 🔬 **Exploratorium** — museu de ciência interativo (ótimo pra criança!) |
+| 17:30 | 🌅 Sunset no **Baker Beach** — vista da Golden Gate |
+| 19:00 | 🍽️ Jantar de despedida de SF
 
 ---
 

@@ -86,8 +86,9 @@ const days = [
             { time: "12:00", text: "🚶 <strong>Grand Central Terminal</strong> — teto estrelado, relógio de opala", type: "highlight" },
             { time: "12:30", text: "🍝 Almoço — <strong>Eataly</strong> (200 5th Ave) — mercado italiano!", type: "food" },
             { time: "13:30", text: "🏢 <strong>Flatiron Building</strong> (23rd St) — prédio triangular de 1902!", type: "" },
-            { time: "14:00", text: "🎮 Voltar na <strong>Nintendo NY</strong> ou explorar algo novo", type: "" },
-            { time: "16:00", text: "Tempo livre — descansar no hotel ou última exploração", type: "" },
+            { time: "14:00", text: "🧙 <strong>Harry Potter Shop</strong> (935 Broadway) — butterbeer bar, varinhas, vassouras! Ao lado do Flatiron", type: "highlight" },
+            { time: "15:30", text: "🎮 <strong>Nintendo NY</strong> (Rockefeller Center) + 🏰 <strong>Disney Store</strong> (1540 Broadway, Times Square)", type: "" },
+            { time: "17:00", text: "Tempo livre — descansar no hotel ou última exploração", type: "" },
             { time: "18:00", text: "🧳 Volta ao hotel — arrumar malas", type: "" },
             { time: "19:00", text: "� Jantar — <strong>Suka Sushi</strong> — despedida de NY com sushi!", type: "food" },
             { time: "21:00", text: "🏨 Hotel — dormir cedo (voo amanhã!)", type: "" }
@@ -280,6 +281,7 @@ const days = [
             { time: "09:30", text: "⚡ <strong>Supercharger Salina, UT</strong> (~170 km) — ~25 min", type: "charge" },
             { time: "10:15", text: "🏜️ <strong>Capitol Reef NP</strong> — paredões vermelhos! Petroglífos Fremont de 2.000 anos + Fruita Historic District", type: "highlight" },
             { time: "11:15", text: "👽 <strong>Goblin Valley State Park</strong> — formações em forma de cogumelos/aliens! Parece outro planeta!", type: "highlight" },
+            { time: "11:45", text: "🏜️ <strong>San Rafael Swell</strong> (I-70) — paredões dramáticos de ambos os lados da highway! Corte no canyon espetacular. Rest area com viewpoint", type: "" },
             { time: "12:15", text: "⚡ <strong>Supercharger Green River, UT</strong> (~170 km) — ~20 min", type: "charge" },
             { time: "~13:45", text: "🏨 Chegada em <strong>Moab</strong>!", type: "" },
             { time: "13:30", text: "🍽️ Almoço em Moab", type: "food" },
@@ -604,22 +606,21 @@ const days = [
         tips: ["⚠️ Alcatraz esgota meses antes! Comprar em alcatrazcruises.com (~$45/pessoa)."]
     },
     {
-        photo: 'img/dia-26.jpg', shortLoc: 'SF', location: "San Francisco dia cheio 3",
-        route: "Golden Gate + Fisherman's Wharf! 🌉",
-        note: "Mais um dia em SF — Golden Gate, Painted Ladies, Chinatown!",
+        photo: 'img/dia-26.jpg', shortLoc: 'SF', location: "San Francisco — Sausalito + Exploratorium",
+        route: "Bike até Sausalito + Exploratorium! 🚲",
+        note: "Sausalito de ferry, Exploratorium e sunset no Baker Beach!",
         region: "ca",
         items: [
             { time: "08:30", text: "☕ Café", type: "" },
-            { time: "09:00", text: "🌉 <strong>Golden Gate Bridge</strong> — caminhada + fotos!", type: "highlight" },
-            { time: "10:00", text: "🏞️ <strong>Battery Spencer</strong> — vista icônica da ponte!", type: "highlight" },
-            { time: "11:00", text: "🦞 <strong>Fisherman's Wharf</strong> + Pier 39 — leões-marinhos!", type: "highlight" },
-            { time: "12:30", text: "🍽️ Almoço — clam chowder em pão!", type: "food" },
-            { time: "13:30", text: "🚋 <strong>Cable Car</strong> (Powell-Hyde line)", type: "highlight" },
-            { time: "14:30", text: "🏘️ <strong>Lombard Street</strong> — rua mais sinuosa!", type: "" },
-            { time: "15:00", text: "🎨 <strong>Painted Ladies</strong> — Alamo Square, casinhas vitorianas!", type: "" },
-            { time: "16:00", text: "🌳 <strong>Golden Gate Park</strong> — Japanese Tea Garden", type: "" },
-            { time: "17:30", text: "🌅 Sunset no Baker Beach", type: "highlight" },
-            { time: "19:00", text: "🍽️ Jantar no Chinatown", type: "food" }
+            { time: "09:00", text: "🏞️ <strong>Battery Spencer</strong> — vista icônica da Golden Gate!", type: "highlight" },
+            { time: "10:00", text: "🚲 Atravessar a <strong>Golden Gate Bridge</strong> de bike até <strong>Sausalito</strong> (~30 min)", type: "highlight" },
+            { time: "11:00", text: "🛍️ <strong>Sausalito</strong> — vila charmosa, galerias, vista da baía", type: "" },
+            { time: "12:00", text: "🍽️ Almoço em Sausalito — frutos do mar à beira-mar", type: "food" },
+            { time: "13:30", text: "🚢 <strong>Ferry Sausalito → SF</strong> (~30 min, vista linda da cidade!)", type: "highlight" },
+            { time: "14:00", text: "🏛️ <strong>Coit Tower</strong> — murais art deco + vista 360° de SF!", type: "highlight" },
+            { time: "15:00", text: "🔬 <strong>Exploratorium</strong> — museu de ciência interativo (ótimo pra criança!)", type: "highlight" },
+            { time: "17:30", text: "🌅 Sunset no <strong>Baker Beach</strong> — vista da Golden Gate", type: "highlight" },
+            { time: "19:00", text: "🍽️ Jantar de despedida de SF", type: "food" }
         ]
     },
 
