@@ -1,4 +1,4 @@
-const CACHE_NAME = 'viagem-eua-2027-v128';
+const CACHE_NAME = 'viagem-eua-2027-v130';
 const TILE_CACHE = 'viagem-tiles-v1';
 
 // Critical assets — must succeed for install
@@ -54,6 +54,7 @@ const ASSETS_TO_CACHE = [
   './img/dia-07.jpg',
   './img/dia-08.jpg',
   './img/dia-09.jpg',
+  './img/dia-10.jpg',
   './img/dia-11.jpg',
   './img/dia-12.jpg',
   './img/dia-13.jpg',
@@ -61,19 +62,22 @@ const ASSETS_TO_CACHE = [
   './img/dia-15.jpg',
   './img/dia-16.jpg',
   './img/dia-17.jpg',
+  './img/dia-18.jpg',
   './img/dia-19.jpg',
+  './img/dia-20.jpg',
   './img/dia-21.jpg',
   './img/dia-22.jpg',
+  './img/dia-23.jpg',
   './img/dia-24.jpg',
   './img/dia-25.jpg',
   './img/dia-26.jpg',
   './img/dia-27.jpg',
+  './img/dia-28.jpg',
   './img/dia-29.jpg',
   './img/dia-30.jpg',
   './img/dia-31.jpg',
   './img/dia-32.jpg',
   './img/dia-33.jpg',
-  './img/dia-34.jpg',
   // Activity photos
   './img/activities/5th_avenue.jpg',
   './img/activities/7_world_trade_center.jpg',

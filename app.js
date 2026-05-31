@@ -338,6 +338,18 @@ const activityPhotos = {
     'Vista House': 'img/activities/vista_house.jpg',
     'Crown Point': 'img/activities/vista_house.jpg',
     'World\'s Tallest Thermometer': 'img/activities/worlds_tallest_thermometer.jpg',
+    // --- Roteiro sync additions ---
+    'Bottle Tree Ranch': 'img/activities/seven_magic_mountains.jpg',
+    'Eldorado Canyon': 'img/activities/valley_of_fire.jpg',
+    'Thousand Springs': 'img/activities/shoshone_falls.jpg',
+    'Rowena Crest': 'img/activities/columbia_river_gorge.jpg',
+    'Kurt Cobain': 'img/activities/cannon_beach.jpg',
+    'Fort Stevens': 'img/activities/peter_iredale_shipwreck.jpg',
+    'Devil\'s Punchbowl': 'img/activities/newport_oregon.jpg',
+    'Elk Meadow': 'img/activities/dean_creek_elk.jpg',
+    'Cypress Tree Tunnel': 'img/activities/point_reyes.jpg',
+    'Pigeon Point Lighthouse': 'img/activities/heceta_head.jpg',
+    'Cool Cat Collective': 'img/activities/santa_monica_pier.jpg',
 };
 
 // Pre-sort keys longest-first for accurate matching (e.g., "Brooklyn Bridge Park" before "Brooklyn Bridge")
@@ -457,6 +469,8 @@ const placeInfo = {
     'Yosemite Chapel': { addr: 'Yosemite Chapel, Yosemite NP, CA', coords: '37.7441,-119.5880', detail: 'A estrutura mais antiga de Yosemite (1879). Igrejinha de madeira encantadora com Yosemite Falls ao fundo.' },
     'Ansel Adams Gallery': { addr: 'Ansel Adams Gallery, Yosemite Village, CA', coords: '37.7490,-119.5885', detail: 'Galeria do fotógrafo Ansel Adams, famoso pelas fotos icônicas de Yosemite em preto e branco. Vende prints originais.', hours: '10h-17h', cost: 'Entrada gratuita' },
 
+    // Day 5 — LAX → Vegas roadside stops
+    'Bottle Tree Ranch': { addr: '24266 National Trails Hwy, Oro Grande, CA 92368', coords: '34.6192,-117.3347', detail: 'Instalação de arte outsider no deserto! "Floresta" de mais de 200 "árvores" feitas com garrafas de vidro, peças de metal e objetos reaproveitados pelo artista Elmer Long. Grátis, às margens da Route 66.', cost: 'Gratuito' },
     // Day 9 — Three Rivers → Vegas (roadside stops)
     'Tehachapi Loop': { addr: 'Tehachapi Loop, Keene, CA 93531', coords: '35.1328,-118.5470', detail: 'Maravilha de engenharia ferroviária! O trem faz um loop de 1.17 km subindo a montanha — quando é longo o bastante, a locomotiva passa POR CIMA dos últimos vagões! Melhor visto do mirante na Woodford-Tehachapi Rd.', cost: 'Gratuito' },
     'World\'s Tallest Thermometer': { addr: '72157 Baker Blvd, Baker, CA 92309', coords: '35.2661,-116.0731', detail: 'Termômetro de 40m construído em 1991 — marca 134°F, a temperatura mais alta já registrada (Death Valley, 1913). Baker é o último posto antes de Vegas!', cost: 'Gratuito' },
@@ -489,6 +503,8 @@ const placeInfo = {
     'Waterbar': { addr: '399 The Embarcadero, San Francisco, CA 94105', coords: '37.7895,-122.3885', detail: 'Restaurante de frutos do mar premium com vista da Bay Bridge. Aquários no interior. Reserva recomendada.', cost: '~$50-80/pessoa' },
 
     // Day 13 — Point Reyes / Eureka
+    // Day 23 — Eureka → SF
+    'Cypress Tree Tunnel': { addr: 'Cypress Tree Tunnel, Point Reyes Station, CA 94956', coords: '38.0780,-122.8450', detail: 'Túnel natural formado por ciprestes de Monterey centenários plantados na década de 1930! Os galhos se entrelaçam sobre a estrada criando um arco perfeito. Ponto de foto clássico de Point Reyes — especialmente lindo com neblina matinal. Na Sir Francis Drake Blvd.', cost: 'Gratuito' },
     'Point Reyes': { addr: 'Point Reyes National Seashore, CA', coords: '38.0682,-122.8776', detail: 'Reserva costeira com elk preserve (alces tule!), Point Reyes Lighthouse (308 degraus descendo), praias selvagens.', hours: 'Lighthouse: 10h-16h30 (Sex-Seg)', cost: '$0 (estacionamento gratuito)' },
     'Supercharger Ukiah': { addr: 'Ukiah, CA 95482', coords: '39.1532,-123.2063', detail: 'Supercharger V3. Bom ponto pra almoço — restaurantes perto.' },
     'Mendocino': { addr: 'Mendocino, CA 95460', coords: '39.3076,-123.7995', detail: 'Vila vitoriana na costa de Mendocino — cenário de "A Dama de Ferro" e serviu como Cabot Cove em "Se Ela Dança, Eu Danço" (Murder, She Wrote). Galerias de arte, cafés charmosos, vista espetacular dos penhascos.', cost: 'Gratuito' },
@@ -503,6 +519,8 @@ const placeInfo = {
     'Newton B. Drury': { addr: 'Newton B. Drury Scenic Parkway, CA', coords: '41.3785,-124.0210', detail: 'Estrada cênica de 16 km sob o dossel de redwoods gigantes. Uma das estradas mais bonitas da CA!' },
     'Big Tree Wayside': { addr: 'Big Tree Wayside, Prairie Creek Redwoods SP, CA', coords: '41.3768,-124.0232', detail: 'Redwood gigante de 93m de altura e 6m de diâmetro. Acesso fácil da estrada — parada rápida.' },
     'Gold Bluffs Beach': { addr: 'Gold Bluffs Beach, Prairie Creek Redwoods SP, CA', coords: '41.3860,-124.0776', detail: 'Praia selvagem com falésias douradas e redwoods chegando até a areia. Cenário surreal!', cost: '$12 day use' },
+    // Day 22 — Redwood
+    'Elk Meadow': { addr: 'Elk Meadow, US-101, Orick, CA 95555', coords: '41.3400,-124.0500', detail: 'Manada de Roosevelt elk (a maior subespécie de elk da América do Norte) pastando tranquilamente ao lado da US-101! Pullover seguro com vista da pradaria. Melhor de manhã cedo ou fim de tarde. Não se aproxime — são selvagens!', cost: 'Gratuito' },
     'Stout Memorial Grove': { addr: 'Stout Memorial Grove, Jedediah Smith Redwoods SP, CA', coords: '41.7867,-124.0946', detail: 'Bosque de redwoods antigos ao longo do Smith River. Trilha fácil de ~30 min. Paz absoluta.', cost: 'Gratuito' },
 
     // Day 15 — Oregon Coast South
@@ -515,6 +533,8 @@ const placeInfo = {
     'Supercharger Coos Bay': { addr: 'Coos Bay, OR 97420', coords: '43.3660,-124.2138', detail: 'Supercharger Tesla V3. Perto de restaurantes.' },
 
     // Day 16 — Oregon Coast / Cannon Beach
+    // Day 20 — Oregon Coast
+    'Devil\'s Punchbowl': { addr: 'Devil\'s Punchbowl State Natural Area, Otter Rock, OR 97369', coords: '44.7480,-124.0650', detail: 'Bacia natural de rocha escavada pelo mar! Na maré alta, ondas explodem dentro do "punchbowl" — espetáculo da natureza. Viewpoint gratuito e fácil de acessar no alto da falésia. Marine Gardens abaixo tem tidepools na maré baixa.', cost: 'Gratuito' },
     'Cape Perpetua': { addr: 'Cape Perpetua Scenic Area, OR', coords: '44.2808,-124.1092', detail: "Thor's Well — 'poço de Thor', buraco no oceano que engole e cospe água! Spouting Horn geyser natural. Melhor na maré alta!", cost: 'Free' },
     "Thor's Well": { addr: "Thor's Well, Cape Perpetua, OR", coords: '44.2790,-124.1112', detail: "Buraco natural na rocha vulcânica que drena e explode água do mar. MUITO fotogênico na maré alta! Cuidado com as ondas — pode ser perigoso.", cost: 'Gratuito' },
     'Heceta Head': { addr: 'Heceta Head Lighthouse, Florence, OR 97439', coords: '44.1372,-124.1285', detail: 'Um dos faróis mais fotografados do mundo! Trilha de ~1 km até o farol. Vista espetacular da costa.', cost: '$5 day use' },
@@ -527,6 +547,9 @@ const placeInfo = {
     'Astoria': { addr: 'Astoria, OR 97103', coords: '46.1879,-123.8313', detail: 'Cidade do filme The Goonies! Astoria Column (164 degraus, vista 360°), Flavel House Museum. Ponte Astoria-Megler cruza pro Washington.', cost: 'Astoria Column: gratuito' },
     'Astoria Column': { addr: 'Astoria Column, 1 Coxcomb Dr, Astoria, OR 97103', coords: '46.1825,-123.8171', detail: 'Coluna de 38m com espiral de murais contando a história do Oregon. 164 degraus — vista incrível do rio Columbia e Pacífico!', cost: '$5 estacionamento' },
     'Astoria-Megler Bridge': { addr: 'Astoria-Megler Bridge, US-101', coords: '46.2273,-123.8806', detail: 'Maior ponte contínua de treliça dos EUA! 6.6 km cruzando o Rio Columbia de Oregon → Washington.' },
+    // Day 19 — Forks → Cannon Beach stops
+    'Kurt Cobain': { addr: 'Kurt Cobain Memorial Park, 500 E 2nd St, Aberdeen, WA 98520', coords: '46.9753,-123.8044', detail: 'Pequeno parque memorial dedicado ao vocalista do Nirvana, nascido em Aberdeen em 1967. Placa "Come As You Are" na entrada, banco com guitarra esculpida, e o rio Wishkah onde Kurt brincava de criança. Fãs deixam mensagens e flores.', cost: 'Gratuito' },
+    'Fort Stevens': { addr: 'Fort Stevens State Park, Hammond, OR 97121', coords: '46.2040,-123.9614', detail: 'Único forte continental dos EUA atacado por forças estrangeiras durante a WWII! Em 21/jun/1942, um submarino japonês (I-25) disparou 17 tiros — nenhum acertou o forte. Ruínas de bunkers e baterias de artilharia. Mesmo parque do naufrágio Peter Iredale.', hours: '6h-pôr do sol', cost: '$5/veículo (dia)' },
     'Supercharger Aberdeen': { addr: 'Aberdeen, WA 98520', coords: '46.9754,-123.8158', detail: '⚠️ CARREGAR ATÉ 100%! Olympic tem 265 km internos + sem SC até Olympia/Centralia (260 km)!' },
     'Lake Crescent': { addr: 'Lake Crescent, Olympic NP, WA', coords: '48.0596,-123.7898', detail: 'Lago glacial cristalino com 190m de profundidade! Rodeado por montanhas cobertas de floresta. Storm King trail parte daqui.', cost: 'Incluso na entrada ($30/veículo)' },
     'Sol Duc Falls': { addr: 'Sol Duc Falls Trail, Olympic NP, WA', coords: '47.9525,-123.8359', detail: 'Cachoeira tríplice numa floresta densa. Trilha fácil de ~2.5 km. Hot springs naturais perto (Sol Duc Hot Springs Resort).', cost: 'Incluso na entrada' },
@@ -556,6 +579,9 @@ const placeInfo = {
     'Trillium Lake': { addr: 'Trillium Lake, Mt Hood National Forest, OR 97028', coords: '45.2685,-121.7400', detail: 'Lago alpino com reflexo perfeito do Mt. Hood! Um dos spots de foto mais icônicos de Oregon. Trilha fácil de 3 km ao redor do lago. Neve possível no inverno.', cost: 'Northwest Forest Pass: $5/dia' },
 
     // Day 20 — Multnomah / Columbia / Boise
+    // Day 16 — Twin Falls → Centralia roadside stops
+    'Thousand Springs': { addr: 'Thousand Springs State Park, Hagerman, ID 83332', coords: '42.7680,-114.8340', detail: 'Cachoeiras brotando diretamente do paredão de basalto no Snake River Canyon! Água do aquífero subterrâneo emerge pelas rochas vulcânicas. Mirante grátis na US-30 / I-84 com vista impressionante.', cost: 'Gratuito (mirante)' },
+    'Rowena Crest': { addr: 'Rowena Crest Viewpoint, Historic Columbia River Hwy, Mosier, OR 97040', coords: '45.6823,-121.3005', detail: 'Mirante espetacular com curvas hairpin (Tom McCall Preserve) e vista panorâmica 360° do Columbia River Gorge! Wildflowers na primavera, cores dramáticas no inverno. Um dos viewpoints mais subestimados de Oregon.', cost: 'Gratuito' },
     'Deadman Pass': { addr: 'Deadman Pass Rest Area, I-84, Emigrant Hill, OR 97850', coords: '45.6042,-118.5561', detail: 'Passagem a 1.278m de altitude nas Blue Mountains. Mirante com vista panorâmica espetacular! Nome vem de um confronto entre colonos e nativos em 1878. Rest area com banheiros.', cost: 'Gratuito' },
     'Multnomah Falls': { addr: 'Multnomah Falls, Bridal Veil, OR 97010', coords: '45.5762,-122.1158', detail: 'Cachoeira de 189m — a mais alta de Oregon e uma das mais altas dos EUA! Ponte Benson a 32m. A apenas 50 km de Portland!', hours: '9h-18h', cost: 'Gratuito (reserva de estacionamento: $2)' },
     'Columbia River Gorge': { addr: 'Columbia River Gorge, OR', coords: '45.5956,-122.0517', detail: 'Desfiladeiro de 130 km no rio Columbia. Paredões de 1.200m, cachoeiras, windsurfing. Historic Columbia River Highway é imperdível.', cost: 'Gratuito' },
@@ -633,6 +659,9 @@ const placeInfo = {
     'Welcome to Las Vegas': { addr: 'Welcome to Fabulous Las Vegas Sign, 5100 Las Vegas Blvd S', coords: '36.0828,-115.1728', detail: 'Placa icônica de 1959! Fila pra foto mas anda rápido. Estacionamento gratuito atrás. Melhor à noite (iluminada).', cost: 'Gratuito' },
     'Bellagio': { addr: 'Bellagio Hotel & Casino, 3600 S Las Vegas Blvd, Las Vegas, NV', coords: '36.1129,-115.1765', detail: 'Hotel icônico! Fountains of Bellagio (show de águas gratuito a cada 15-30 min), Conservatory (jardim botânico grátis), Galeria de arte.', cost: 'Gratuito (shows de água)' },
     'Bellagio Fountains': { addr: 'Fountains of Bellagio, Las Vegas Blvd, Las Vegas, NV', coords: '36.1127,-115.1742', detail: 'Show de águas dançantes com música! A cada 15 min (tarde) ou 30 min (manhã). 1.200 jatos, 4.500 luzes. IMPERDÍVEL à noite.', cost: 'Gratuito' },
+
+    // Day 7 — Eldorado Canyon
+    'Eldorado Canyon': { addr: 'Eldorado Canyon Mine Tours, 16880 NV-165, Nelson, NV 89046', coords: '35.7275,-114.8308', detail: 'Cidade-fantasma no deserto com a mina de ouro Techatticup (1861) — a mais antiga e rica de Nevada! Ruínas de construções, carros antigos enferrujados, cenário de faroeste. Filmagens de comerciais e filmes. ~45 min ao sul da Strip.', hours: 'Amanhecer ao anoitecer (tours: 9h-17h)', cost: 'Self-guided tour: $15/pessoa' },
 
     // Day 29 — Valley of Fire
     'Valley of Fire': { addr: 'Valley of Fire State Park, Overton, NV 89040', coords: '36.4414,-114.5135', detail: 'Parque estadual mais antigo de Nevada! Formações de arenito vermelho de 150 milhões de anos. Fire Wave é o destaque.', hours: '8h-16h30', cost: '$10/veículo' },
@@ -734,6 +763,8 @@ const placeInfo = {
     'Nintendo San Francisco': { addr: '200 Stockton St, San Francisco, CA 94108', coords: '37.7867,-122.4065', detail: 'Segunda loja oficial da Nintendo nos EUA, inaugurada em 2025. Produtos exclusivos, demos jogáveis e experiências interativas.', hours: '10h-20h (Dom: 11h-19h)', cost: 'Gratuito (loja)' },
 
     // Day 26 — PCH
+    // Day 27 — PCH
+    'Pigeon Point Lighthouse': { addr: 'Pigeon Point Lighthouse, 210 Pigeon Point Rd, Pescadero, CA 94060', coords: '37.1820,-122.3930', detail: 'Um dos faróis mais altos da Costa Oeste com 35m de altura! Construído em 1872, nomeado após o naufrágio do clipper Carrier Pigeon em 1853. Vista espetacular do Pacífico, baleias cinzentas frequentes no inverno. Hostel ao lado!', hours: '8h-pôr do sol (terrenos)', cost: 'Gratuito' },
     'Half Moon Bay': { addr: 'Half Moon Bay, CA 94019', coords: '37.4636,-122.4286', detail: 'Cidade costeira famosa pelo surf gigante de Mavericks e festival de abóboras no outono.' },
     'Santa Cruz': { addr: 'Santa Cruz, CA 95060', coords: '36.9741,-122.0308', detail: 'Cidade praiana com o icônico boardwalk (parque de diversões à beira-mar desde 1907). Vibe surf e universitária.' },
     'Monterey': { addr: 'Monterey, CA 93940', coords: '36.6002,-121.8947', detail: 'Cidade portuária histórica. Cannery Row (Steinbeck), Monterey Bay Aquarium de classe mundial e Old Fisherman\'s Wharf.' },
@@ -789,6 +820,7 @@ const placeInfo = {
     'Ferry Building': { addr: 'Ferry Building, San Francisco, CA 94105', coords: '37.7955,-122.3937', detail: 'Marco histórico com mercado gastronômico artesanal. Queijos, ostras, café Blue Bottle, padarias. Farmers market aos sábados.', hours: '10h-18h (mercado)', cost: 'Gratuito' },
 
     // Day 31 — LA
+    'Cool Cat Collective': { addr: '2741 E 4th St, Long Beach, CA 90814', coords: '33.7700,-118.1600', detail: 'Café/galeria de arte temática de gatos com gatinhos foster disponíveis para adoção! Ambiente colorido com murais, produtos artísticos de gatos e área de interação com os felinos. Ótimo para famílias!', hours: 'Qua-Dom 10h-18h', cost: 'Gratuito (doações aceitas)' },
     'LA': { addr: 'Los Angeles, CA 90012', coords: '34.0522,-118.2437', detail: 'A Cidade dos Anjos! Segunda maior cidade dos EUA, capital do cinema e do entretenimento.' },
     'Santa Monica': { addr: 'Santa Monica, CA 90401', coords: '34.0195,-118.4912', detail: 'Cidade praiana com o icônico píer, roda-gigante, 3rd Street Promenade (shopping a céu aberto) e ciclovia à beira-mar.' },
 };

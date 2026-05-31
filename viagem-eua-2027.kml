@@ -1,0 +1,913 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+<name>Viagem EUA 2027 — Road Trip</name>
+<description>34 dias: NYC → Vegas → Utah → PNW → SF → PCH → Yosemite → Sequoia → LA (21/01 – 22/02/2027)</description>
+
+<!-- Styles -->
+<Style id="route"><LineStyle><color>ff4ecdc4</color><width>4</width></LineStyle></Style>
+<Style id="hotel"><IconStyle><Icon><href>https://maps.google.com/mapfiles/kml/paddle/blu-blank.png</href></Icon><scale>1.0</scale></IconStyle></Style>
+<Style id="supercharger"><IconStyle><Icon><href>https://maps.google.com/mapfiles/kml/paddle/grn-circle.png</href></Icon><scale>0.8</scale></IconStyle></Style>
+<Style id="day-ny"><IconStyle><Icon><href>https://maps.google.com/mapfiles/kml/paddle/red-circle.png</href></Icon><scale>0.9</scale></IconStyle></Style>
+<Style id="day-nv"><IconStyle><Icon><href>https://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href></Icon><scale>0.9</scale></IconStyle></Style>
+<Style id="day-ut"><IconStyle><Icon><href>https://maps.google.com/mapfiles/kml/paddle/orange-circle.png</href></Icon><scale>0.9</scale></IconStyle></Style>
+<Style id="day-pnw"><IconStyle><Icon><href>https://maps.google.com/mapfiles/kml/paddle/grn-circle.png</href></Icon><scale>0.9</scale></IconStyle></Style>
+<Style id="day-ca"><IconStyle><Icon><href>https://maps.google.com/mapfiles/kml/paddle/blu-circle.png</href></Icon><scale>0.9</scale></IconStyle></Style>
+<Style id="park"><IconStyle><Icon><href>https://maps.google.com/mapfiles/kml/paddle/grn-blank.png</href></Icon><scale>1.0</scale></IconStyle></Style>
+
+<!-- ==================== ROTA COMPLETA ==================== -->
+<Folder>
+<name>🛣️ Rota Completa</name>
+<Placemark>
+<name>Rota EUA 2027</name>
+<styleUrl>#route</styleUrl>
+<LineString>
+<tessellate>1</tessellate>
+<coordinates>
+-118.41,33.94,0
+-117.89,34.1,0
+-117.02,34.9,0
+-116.07,35.27,0
+-115.39,35.61,0
+-115.14,36.17,0
+-114.83,35.98,0
+-114.05,35.2,0
+-112.19,35.25,0
+-112.14,36.06,0
+-111.63,36.81,0
+-112.53,36.86,0
+-112.53,37.02,0
+-112.68,37.29,0
+-112.15,37.68,0
+-112.17,37.63,0
+-112.99,37.21,0
+-112.33,37.76,0
+-111.57,38.29,0
+-111.5,38.75,0
+-110.16,38.99,0
+-109.55,38.57,0
+-110.16,38.99,0
+-110.81,39.6,0
+-111.53,39.97,0
+-111.89,40.76,0
+-112.25,41.07,0
+-111.89,40.76,0
+-112.17,41.73,0
+-112.45,42,0
+-114.46,42.56,0
+-115.54,42.87,0
+-116.2,43.62,0
+-116.97,44.05,0
+-117.83,44.77,0
+-118.79,45.67,0
+-121.18,45.6,0
+-122.4,45.57,0
+-122.88,46.07,0
+-122.95,46.72,0
+-121.76,46.85,0
+-122.9,47.04,0
+-123.1,47.3,0
+-123.79,47.59,0
+-124.39,47.95,0
+-124.35,47.5,0
+-123.82,46.98,0
+-123.83,46.19,0
+-123.96,45.89,0
+-123.97,45.37,0
+-124.02,44.96,0
+-124.1,43.97,0
+-124.22,43.37,0
+-124.42,42.86,0
+-124.42,42.41,0
+-124.2,41.94,0
+-124.2,41.76,0
+-124.09,41.2,0
+-124.16,40.8,0
+-123.79,40.1,0
+-123.21,39.15,0
+-122.72,38.44,0
+-122.88,38.07,0
+-122.42,37.77,0
+-122.43,37.46,0
+-122.03,36.97,0
+-121.89,36.6,0
+-121.92,36.55,0
+-121.4,36.83,0
+-120.48,37.3,0
+-119.97,37.49,0
+-119.6,37.74,0
+-119.65,37.33,0
+-119.58,37.06,0
+-119.68,36.82,0
+-118.68,36.8,0
+-118.77,36.56,0
+-118.91,36.45,0
+-118.96,36.06,0
+-119.02,35.37,0
+-118.44,35.13,0
+-118.17,34.9,0
+-118.15,34.5,0
+-118.24,34.05,0
+</coordinates>
+</LineString>
+</Placemark>
+</Folder>
+
+<!-- ==================== DIAS ==================== -->
+<Folder>
+<name>📅 Dias (1-33)</name>
+<Placemark>
+<name>Dia 1 — New York, NY</name>
+<description>Dia 1 — Qui, 21/01
+Chegada + Midtown leve 🗽
+Chegada no JFK às 07h. Dia tranquilo pra se adaptar — tudo a pé em Midtown.
+
+• 🏨 Check-in no Marriott Marquis (1535 Broadway, Times Square)
+• 🎮 Nintendo NY (10 Rockefeller Plaza) — loja oficial, 2 andares de games!
+• ⛪ St. Patrick's Cathedral (5th Ave com 50th St) — gratuita, linda por dentro
+• 🧸 FAO Schwarz (30 Rockefeller Plaza) — loja de brinquedos icônica
+• 🧱 LEGO Store (636 5th Ave) — maquetes gigantes de NY em LEGO</description>
+<styleUrl>#day-ny</styleUrl>
+<Point><coordinates>-73.9855,40.758,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 2 — New York, NY</name>
+<description>Dia 2 — Sex, 22/01
+Downtown + Brooklyn + Chelsea 🌉
+Dia intenso! WTC, Brooklyn Bridge, DUMBO, SoHo, High Line, Hudson Yards.
+
+• ☕ Café no hotel ou próximo
+• 👻 Ghostbusters Firehouse (14 North Moore St) — quartel real dos Caça-Fantasmas!
+• 🏛️ Wall Street + Charging Bull + Fearless Girl
+• ⛪ Oculus (WTC) — arquitetura de Calatrava impressionante
+• 🕊️ 9/11 Memorial — piscinas nos locais das torres. Gratuito</description>
+<styleUrl>#day-ny</styleUrl>
+<Point><coordinates>-73.9855,40.758,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 3 — New York, NY</name>
+<description>Dia 3 — Sab, 23/01
+Central Park + Chinatown + Downtown 🌳
+Norte → Sul! Central Park, depois desce: Chinatown, Little Italy, Katz's.
+
+• 🌳 Central Park — Strawberry Fields, Bethesda Fountain, Bow Bridge
+• 🏛️ MET (opcional ~2h) — na 82nd com 5th! Ingresso ~$30
+• 🏨 The Plaza Hotel — hotel do Kevin em Esqueceram de Mim 2!
+• 🏮 Chinatown — Canal St + Mott St, a maior dos EUA!
+• 🍝 Little Italy — Mulberry St. Cannoli na Ferrara Bakery (desde 1892!)</description>
+<styleUrl>#day-ny</styleUrl>
+<Point><coordinates>-73.9855,40.758,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 4 — New York, NY</name>
+<description>Dia 4 — Dom, 24/01
+Mirante + Flatiron + Despedida 🏙️
+Último dia em NY. Roosevelt Island, Summit, Grand Central, Flatiron.
+
+• 🚡 Roosevelt Island Tramway (59th St com 2nd Ave) — bondinho aéreo! $2.90
+• 🏙️ Summit One Vanderbilt (45 E 42nd St) — mirante imersivo de espelhos! ~1.5h
+• 🚶 Grand Central Terminal — teto estrelado, relógio de opala
+• 🏢 Flatiron Building (23rd St) — prédio triangular de 1902!
+• 🎮 Voltar na Nintendo NY ou explorar algo novo</description>
+<styleUrl>#day-ny</styleUrl>
+<Point><coordinates>-73.9855,40.758,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 5 — New York → LAX → Las Vegas</name>
+<description>Dia 5 — Seg, 25/01
+NY → LA → Vegas! ✈️🚗
+Check-out do Marriott, voo pro LAX, Tesla e direto pra Vegas!
+
+• ☕ Café no Marriott Marquis
+• 🏨 Check-out
+• Chegada no JFK — check-in / despachar malas
+• 🎰 Chegada em Las Vegas! Check-in
+• 🏨 Dormir cedo (jet lag + dia longo!)</description>
+<styleUrl>#day-nv</styleUrl>
+<Point><coordinates>-115.1398,36.1699,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 6 — Welcome Sign + Mt. Charleston</name>
+<description>Dia 6 — Ter, 26/01
+Neve a 45 min de Vegas! 🏔️
+Foto no Welcome Sign de manhã + neve em Mt. Charleston!
+
+• ☕ Café
+• 📸 Welcome to Las Vegas Sign — foto icônica!
+• 🏔️ Kyle Canyon Scenic Drive — neve nas montanhas!
+• ⛄ Parada — brincar na neve! Boneco de neve, guerra de bolas!
+• 🏨 Explorar hotéis — Venetian (canais), Bellagio (conservatório), Caesars Palace</description>
+<styleUrl>#day-nv</styleUrl>
+<Point><coordinates>-115.1398,36.1699,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 7 — Valley of Fire + Strip</name>
+<description>Dia 7 — Qua, 27/01
+Parque mais fotogênico de Nevada! 🔥
+Fire Wave + Elephant Rock de manhã, tarde livre na Strip.
+
+• 🔥 Valley of Fire — arenito vermelho surreal!
+• 🥾 Fire Wave Trail (~2 km) — ondas de rocha listrada!
+• 📸 Elephant Rock
+• 📸 White Domes Trail (~1.8 km) — cânion colorido
+• Tempo livre — descanso, piscina, explorar a Strip</description>
+<styleUrl>#day-nv</styleUrl>
+<Point><coordinates>-115.1398,36.1699,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 8 — Day trip Death Valley 🏜️</name>
+<description>Dia 8 — Qui, 28/01
+Ponto mais baixo das Américas!
+Última noite em Vegas! Inverno é a melhor época pra Death Valley.
+
+• ☕ Café
+• ⬇️ Badwater Basin — ponto mais baixo das Américas (-86m)!
+• 🚗 Artist's Drive + Artist's Palette — montanhas coloridas
+• 🏜️ Devil's Golf Course — cristais de sal!
+• 📸 Zabriskie Point — formações douradas</description>
+<styleUrl>#day-nv</styleUrl>
+<Point><coordinates>-115.1398,36.1699,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 9 — Vegas → Grand Canyon → Zion</name>
+<description>Dia 9 — Sex, 29/01
+GC de tarde + Zion à noite! 🏜️
+Dia longo (~700 km) mas épico — GC à tarde é suficiente!
+
+• ☕ Café + check-out de Vegas
+• 🏗️ Hoover Dam — mirante na US-93! Ponte Memorial com vista da barragem a 270m acima do Rio Colorado!
+• 🛣️ Hackberry General Store — posto vintage da Route 66 com Corvette clássico!
+• 🏚️ Seligman — 'Berço da Route 66'! Inspiração de Radiator Springs do filme Carros da Pixar!
+• 🏜️ Chegada no Grand Canyon!</description>
+<styleUrl>#day-ut</styleUrl>
+<Point><coordinates>-112.1401,36.0544,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 10 — Zion NP dia cheio</name>
+<description>Dia 10 — Sab, 30/01
+Trilhas, mirantes e pôr do sol! 🏞️
+Dia cheio em Zion! No inverno pode dirigir no canyon (sem shuttle).
+
+• ☕ Café em Springdale
+• 🥾 Watchman Trail (~5 km, ~2h) — vista panorâmica!
+• 🥾 Emerald Pools Trail (Lower + Upper, ~4 km)
+• 📸 Court of the Patriarchs
+• 🛍️ Explorar Springdale</description>
+<styleUrl>#day-ut</styleUrl>
+<Point><coordinates>-112.9871,37.209,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 11 — Zion AM → Bryce PM</name>
+<description>Dia 11 — Dom, 31/01
+Última manhã em Zion + Bryce à tarde! 🏔️
+Navajo Loop + pôr do sol + stargazing em Bryce!
+
+• ☕ Café
+• 🥾 Riverside Walk
+• 📸 Últimas fotos em Zion
+• 🏁 Checkerboard Mesa — arenito com padrão xadrez natural! Pullover na UT-9
+• 🛣️ Red Canyon — arcos vermelhos na estrada!</description>
+<styleUrl>#day-ut</styleUrl>
+<Point><coordinates>-112.1677,37.6283,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 12 — Bryce → Moab</name>
+<description>Dia 12 — Seg, 01/02
+Nascer do sol em Bryce + Corona Arch! 🏜️
+Sunrise épico, depois estrada até Moab.
+
+• 🌅 Nascer do sol em Bryce Point!
+• ☕ Café + check-out
+• 🌄 Head of the Rocks Overlook — mirante da UT-12 com vista épica de Escalante!
+• 🏜️ Capitol Reef NP — paredões vermelhos! Petroglífos Fremont de 2.000 anos + Fruita Historic District
+• 👽 Goblin Valley State Park — formações em forma de cogumelos/aliens! Parece outro planeta!</description>
+<styleUrl>#day-ut</styleUrl>
+<Point><coordinates>-109.5498,38.5733,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 13 — Canyonlands NP dia cheio 🏜️</name>
+<description>Dia 13 — Ter, 02/02
+Island in the Sky — cânions infinitos!
+Mesa Arch ao nascer do sol — o sol nasce ATRAVÉS do arco!
+
+• ☕ Café cedo
+• 🌅 Mesa Arch ao nascer do sol — o arco mais fotografado de Utah!
+• 📸 Grand View Point — cânions infinitos!
+• 📸 Green River Overlook
+• 🏞️ Shafer Canyon Overlook</description>
+<styleUrl>#day-ut</styleUrl>
+<Point><coordinates>-109.5498,38.5733,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 14 — Arches NP + Dead Horse Point</name>
+<description>Dia 14 — Qua, 03/02
+Delicate Arch + Dead Horse sunset! 🏜️
+O arco mais famoso do mundo + vista sobre o Colorado!
+
+• ☕ Café
+• 🏞️ Entrada em Arches NP
+• 🥾 Delicate Arch Trail (~5 km, ~2-3h) — o arco mais famoso!
+• 📸 Windows Section — North/South Window, Turret Arch
+• 📸 Double Arch</description>
+<styleUrl>#day-ut</styleUrl>
+<Point><coordinates>-109.5498,38.5733,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 15 — Moab → Antelope Island → Twin Falls</name>
+<description>Dia 15 — Qui, 04/02
+Bisões + Shoshone Falls + Evel Knievel! 🦬
+Dia longo — bisões na Antelope Island + Shoshone Falls + local do salto do Evel Knievel!
+
+• ☕ Café + check-out
+• 🦬 Antelope Island SP — bisões selvagens + Great Salt Lake!
+• 📸 Buffalo Point — mirante 360°
+• � Perrine Bridge — ponte sobre o Snake River Canyon! Ponto de BASE jumping legal 🪂
+• 📸 Evel Knievel Jump Site — local do famoso salto de 1974 sobre o Snake River Canyon!</description>
+<styleUrl>#day-pnw</styleUrl>
+<Point><coordinates>-111.891,40.7608,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 16 — Twin Falls → Multnomah → Centralia</name>
+<description>Dia 16 — Sex, 05/02
+Columbia Gorge + Multnomah Falls! 💧
+Dia de transição longo — cachoeira icônica de 189m!
+
+• ☕ Café + check-out
+• 📸 Deadman Pass Overlook — mirante nas Blue Mountains! Vista panorâmica a 1.278m de altitude
+• �️ (opcional) Mt. Hood — desvio ~1h ao sul pela US-26. Vulcão de 3.429m coberto de neve!
+• 🏞️ (opcional) Trillium Lake — lago com reflexo perfeito do Mt. Hood! Ótimo pra fotos
+• �🏞️ Columbia River Gorge</description>
+<styleUrl>#day-pnw</styleUrl>
+<Point><coordinates>-121,45.5,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 17 — Centralia → Mt. Rainier → Forks</name>
+<description>Dia 17 — Sab, 06/02
+Vulcão Rainier + Olympic NP! 🌋
+Rainier de manhã, Lake Crescent e Sol Duc Falls à tarde!
+
+• ☕ Café + check-out
+• 🌋 Mt. Rainier — Paradise! Vulcão de 4.392m coberto de neve!
+• ⛄ Brincar na neve! Boneco de neve, guerra de bolas, sled (~45 min)
+• 📸 Fotos do vulcão — se o céu estiver limpo, vista espetacular!
+• 🚶 Caminhar pela área de Paradise na neve</description>
+<styleUrl>#day-pnw</styleUrl>
+<Point><coordinates>-123.5,47,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 18 — Olympic NP dia cheio 🌲</name>
+<description>Dia 18 — Dom, 07/02
+Florestas místicas + praias selvagens!
+Hoh Rain Forest + Ruby Beach + Twilight!
+
+• ☕ Café
+• 🌲 Hoh Rain Forest — floresta tropical temperada!
+• 🥾 Hall of Mosses Trail (~1.3 km) — musgos pendurados!
+• 🥾 Spruce Nature Trail (~2 km)
+• 🌊 Ruby Beach — sea stacks!</description>
+<styleUrl>#day-pnw</styleUrl>
+<Point><coordinates>-124.3855,47.9504,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 19 — Forks → Cannon Beach</name>
+<description>Dia 19 — Seg, 08/02
+Astoria + Haystack Rock ao pôr do sol! 🌅
+Cidade do Goonies + pôr do sol mais bonito da viagem!
+
+• ☕ Café + check-out de Forks
+• 🌳 Kalaloch Tree of Life — árvore crescendo sobre caverna com raízes expostas como tentáculos!
+• 🏖️ Cape Disappointment — farol no encontro do Rio Columbia com o Pacífico!
+• 🚢 Peter Iredale Shipwreck — naufrágio de 1906 na praia! Esqueleto do navio visível!
+• 🌊 Astoria — cenário de The Goonies! Astoria Column!</description>
+<styleUrl>#day-pnw</styleUrl>
+<Point><coordinates>-123.9615,45.8918,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 20 — Costa Oregon Sul</name>
+<description>Dia 20 — Ter, 09/02
+Thor's Well + faróis + Samuel Boardman! 🌊
+O melhor dia de costa — 350 km de paradas espetaculares!
+
+• ☕ Café + última caminhada em Cannon Beach
+• 📸 Cape Perpetua + Thor's Well
+• 🏖️ Heceta Head Lighthouse
+• 🦌 Dean Creek Elk Viewing Area — manada de Roosevelt elk selvagens!
+• 📸 Shore Acres State Park</description>
+<styleUrl>#day-pnw</styleUrl>
+<Point><coordinates>-124.2179,43.3665,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 21 — Redwood NP norte — Jedediah Smith! 🌲</name>
+<description>Dia 21 — Qua, 10/02
+Jedediah Smith + Crescent City! 🌲
+Dia tranquilo entre redwoods perto de Crescent City.
+
+• ☕ Café + check-out de Gold Beach
+• 🌲 Jedediah Smith Redwoods SP — Stout Memorial Grove Trail (~1 km loop entre gigantes!)
+• 🚗 Howland Hill Road — estrada de terra entre redwoods enormes
+• 🥾 Boy Scout Tree Trail (~4 km) — trilha tranquila entre old-growth
+• 🏨 Check-in Crescent City</description>
+<styleUrl>#day-ca</styleUrl>
+<Point><coordinates>-124.2026,41.7558,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 22 — Redwood NP sul → Eureka</name>
+<description>Dia 22 — Qui, 11/02
+Fern Canyon + Tall Trees + Avenue of Giants! 🌲
+Tudo descendo ao sul — sem backtrack! Fern Canyon, Tall Trees e Avenue of Giants.
+
+• ☕ Café + check-out de Crescent City
+• 🚗 Newton B. Drury Scenic Parkway
+• 📸 Big Tree Wayside
+• 🥾 Fern Canyon (~1.5 km) — samambaias! Jurassic Park 2!
+• 🌊 Gold Bluffs Beach</description>
+<styleUrl>#day-ca</styleUrl>
+<Point><coordinates>-124.1637,40.8021,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 23 — Eureka → San Francisco</name>
+<description>Dia 23 — Sex, 12/02
+Point Reyes + baleias + SF! 🐋
+Alces selvagens, baleias cinzentas e Golden Gate!
+
+• ☕ Café + check-out de Eureka
+• 🏖️ Glass Beach (Fort Bragg) — praia coberta de vidro marítimo polido pelas ondas!
+• 🌊 Mendocino — vila costeira charmosa, cenário de filmes! Parada rápida
+• 🐋 Point Reyes — Elk Preserve, Lighthouse + baleias cinzentas! (migração jan-abr!)
+• 🏨 Chegada em SF! Check-in</description>
+<styleUrl>#day-ca</styleUrl>
+<Point><coordinates>-122.4194,37.7749,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 24 — San Francisco dia cheio 1</name>
+<description>Dia 24 — Sab, 13/02
+Pier 39 + Golden Gate + Nintendo! 🌉
+Cable Car, Chinatown, Golden Gate Bridge, Nintendo SF!
+
+• ☕ Café
+• 🏖️ Pier 39 — leões-marinhos!
+• 🚋 Passeio de Cable Car
+• 🌆 Lombard Street
+• 🏮 Chinatown de SF — a mais antiga dos EUA!</description>
+<styleUrl>#day-ca</styleUrl>
+<Point><coordinates>-122.4194,37.7749,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 25 — San Francisco — Valentine's Day! ❤️</name>
+<description>Dia 25 — Dom, 14/02
+Alcatraz + Golden Gate Park + Valentine's! ❤️
+Valentine's Day! Alcatraz de manhã, Golden Gate Park e jantar especial à noite!
+
+• ☕ Café
+• 🏝️ Alcatraz — ferry Pier 33 (~2h na ilha)
+• 🚢 Ferry de volta
+• 🌳 Golden Gate Park — Japanese Tea Garden, Conservatory of Flowers
+• 🎨 Mission District — murais, Painted Ladies (Alamo Square)</description>
+<styleUrl>#day-ca</styleUrl>
+<Point><coordinates>-122.4194,37.7749,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 26 — San Francisco dia cheio 3</name>
+<description>Dia 26 — Seg, 15/02
+Golden Gate + Fisherman's Wharf! 🌉
+Mais um dia em SF — Golden Gate, Painted Ladies, Chinatown!
+
+• ☕ Café
+• 🌉 Golden Gate Bridge — caminhada + fotos!
+• 🏞️ Battery Spencer — vista icônica da ponte!
+• 🦞 Fisherman's Wharf + Pier 39 — leões-marinhos!
+• 🚋 Cable Car (Powell-Hyde line)</description>
+<styleUrl>#day-ca</styleUrl>
+<Point><coordinates>-122.4194,37.7749,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 27 — SF → PCH → Yosemite</name>
+<description>Dia 27 — Ter, 16/02
+Bixby Bridge + drive pra Yosemite! 🌊🏔️
+PCH de manhã, depois corta pro interior rumo a Yosemite!
+
+• ☕ Café + check-out de SF
+• 🏖️ Parada rápida em Half Moon Bay
+• 🦞 Cannery Row — passear + café
+• 🚗 17-Mile Drive — Lone Cypress, Pebble Beach!
+• 🌉 Bixby Creek Bridge — foto icônica!</description>
+<styleUrl>#day-ca</styleUrl>
+<Point><coordinates>-121.9,36.6,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 28 — Yosemite NP dia 1 — Valley</name>
+<description>Dia 28 — Qua, 17/02
+Tunnel View + cachoeiras + neve! 🏞️
+Primeiro dia em Yosemite! Valley com neve — lindo!
+
+• ☕ Café em Mariposa
+• 📸 Tunnel View — vista icônica: El Capitan + Half Dome + Bridalveil!
+• 🌊 Bridalveil Fall — trilha curta ~10 min
+• 🏔️ El Capitan Meadow — paredão de 900m!
+• 🌊 Yosemite Falls — Lower trail ~30 min — pode ter gelo!</description>
+<styleUrl>#day-ca</styleUrl>
+<Point><coordinates>-119.5383,37.8651,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 29 — Yosemite NP dia 2 — Neve!</name>
+<description>Dia 29 — Qui, 18/02
+Badger Pass + trilhas na neve! ⛷️
+Snow tubing, snowshoeing e mais Yosemite Valley!
+
+• ☕ Café em Mariposa
+• ⛷️ Badger Pass Ski Area — snow tubing! Perfeito pra família!
+• 🏔️ Snowshoeing guiado pelo ranger (grátis, ~2h)
+• 🌲 Cook's Meadow Loop — trilha fácil, Half Dome + Yosemite Falls com neve
+• 📸 Revisitar favoritos — luz diferente da tarde!</description>
+<styleUrl>#day-ca</styleUrl>
+<Point><coordinates>-119.5383,37.8651,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 30 — Mariposa → Kings Canyon → Sequoia</name>
+<description>Dia 30 — Sex, 19/02
+General Sherman + Moro Rock! 🌲
+Dia inteiro entre as maiores árvores do mundo!
+
+• ☕ Café + check-out de Mariposa
+• 🌲 General Grant Tree — 2ª maior sequoia do mundo!
+• 🌲 North Grove Loop (~1 km) — floresta de sequoias gigantes!
+• 🌲 General Sherman Tree — a MAIOR árvore do mundo! 84m!
+• 🥾 Congress Trail (~3 km loop) — entre sequoias gigantes</description>
+<styleUrl>#day-ca</styleUrl>
+<Point><coordinates>-118.751,36.564,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 31 — Three Rivers → Los Angeles</name>
+<description>Dia 31 — Sab, 20/02
+Tehachapi Loop + rumo a LA! 🚗
+Último dia de estrada! Parada no Tehachapi Loop, depois praias de LA.
+
+• ☕ Café + check-out de Three Rivers
+• 🛤️ Tehachapi Loop — famoso loop ferroviário!
+• 🏨 Chegada em LA! Check-in
+• 🏖️ Santa Monica Pier — roda-gigante, Route 66 End Sign!
+• 🌴 Venice Beach — boardwalk, Muscle Beach!</description>
+<styleUrl>#day-ca</styleUrl>
+<Point><coordinates>-118.2437,34.0522,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 32 — LA dia cheio</name>
+<description>Dia 32 — Dom, 21/02
+Hollywood + Griffith Observatory! 🎬
+Último dia completo nos EUA!
+
+• ☕ Café
+• ⭐ Hollywood Walk of Fame + TCL Chinese Theatre
+• 📸 Hollywood Sign — vista do Griffith Observatory trail
+• 🔭 Griffith Observatory — vista panorâmica de LA!
+• 🎬 Universal Studios Hollywood OU passeio livre (compras, Beverly Hills)</description>
+<styleUrl>#day-ca</styleUrl>
+<Point><coordinates>-118.2437,34.0522,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>Dia 33 — LA → Voo de volta ✈️</name>
+<description>Dia 33 — Seg, 22/02
+Dia da volta! 🇧🇷
+Devolução do Tesla + voo MIA → GIG.
+
+• ☕ Café + check-out
+• 🛍️ Manhã livre — compras de última hora
+• Chegada no LAX — check-in
+• 🛍️ Últimas compras duty free
+• Chegada em Miami</description>
+<styleUrl>#day-ca</styleUrl>
+<Point><coordinates>-118.2437,34.0522,0</coordinates></Point>
+</Placemark>
+</Folder>
+
+<!-- ==================== HOTÉIS ==================== -->
+<Folder>
+<name>🏨 Hotéis (16)</name>
+<Placemark>
+<name>🏨 Marriott Marquis, Times Square, NY</name>
+<description>Marriott Marquis, Times Square, NY — 4 noites
+Check-in: 21/01 | Check-out: 25/01</description>
+<styleUrl>#hotel</styleUrl>
+<Point><coordinates>-73.9855,40.758,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>🏨 Las Vegas, NV</name>
+<description>Las Vegas, NV — 4 noites
+Check-in: 25/01 | Check-out: 29/01</description>
+<styleUrl>#hotel</styleUrl>
+<Point><coordinates>-115.1398,36.1699,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>🏨 Springdale, UT (Zion)</name>
+<description>Springdale, UT (Zion) — 2 noites
+Check-in: 29/01 | Check-out: 31/01</description>
+<styleUrl>#hotel</styleUrl>
+<Point><coordinates>-112.9988,37.189,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>🏨 Bryce Canyon, UT</name>
+<description>Bryce Canyon, UT — 1 noite
+Check-in: 31/01 | Check-out: 01/02</description>
+<styleUrl>#hotel</styleUrl>
+<Point><coordinates>-112.1677,37.6283,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>🏨 Moab, UT (Arches/Canyonlands)</name>
+<description>Moab, UT (Arches/Canyonlands) — 3 noites
+Check-in: 01/02 | Check-out: 04/02</description>
+<styleUrl>#hotel</styleUrl>
+<Point><coordinates>-109.5498,38.5733,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>🏨 Twin Falls, ID</name>
+<description>Twin Falls, ID — 1 noite
+Check-in: 04/02 | Check-out: 05/02</description>
+<styleUrl>#hotel</styleUrl>
+<Point><coordinates>-114.4701,42.5558,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>🏨 Centralia, WA</name>
+<description>Centralia, WA — 1 noite
+Check-in: 05/02 | Check-out: 06/02</description>
+<styleUrl>#hotel</styleUrl>
+<Point><coordinates>-122.9542,46.7218,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>🏨 Forks / Port Angeles, WA (Olympic)</name>
+<description>Forks / Port Angeles, WA (Olympic) — 2 noites
+Check-in: 06/02 | Check-out: 08/02</description>
+<styleUrl>#hotel</styleUrl>
+<Point><coordinates>-124.3855,47.9504,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>🏨 Cannon Beach, OR</name>
+<description>Cannon Beach, OR — 1 noite
+Check-in: 08/02 | Check-out: 09/02</description>
+<styleUrl>#hotel</styleUrl>
+<Point><coordinates>-123.9615,45.8918,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>🏨 Gold Beach / Coos Bay, OR</name>
+<description>Gold Beach / Coos Bay, OR — 1 noite
+Check-in: 09/02 | Check-out: 10/02</description>
+<styleUrl>#hotel</styleUrl>
+<Point><coordinates>-124.4218,42.4074,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>🏨 Crescent City / Klamath, CA</name>
+<description>Crescent City / Klamath, CA — 1 noite
+Check-in: 10/02 | Check-out: 11/02</description>
+<styleUrl>#hotel</styleUrl>
+<Point><coordinates>-124.2026,41.7558,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>🏨 Eureka / Arcata, CA</name>
+<description>Eureka / Arcata, CA — 1 noite
+Check-in: 11/02 | Check-out: 12/02</description>
+<styleUrl>#hotel</styleUrl>
+<Point><coordinates>-124.1637,40.8021,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>🏨 San Francisco, CA</name>
+<description>San Francisco, CA — 4 noites
+Check-in: 12/02 | Check-out: 16/02</description>
+<styleUrl>#hotel</styleUrl>
+<Point><coordinates>-122.4194,37.7749,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>🏨 Mariposa / El Portal, CA</name>
+<description>Mariposa / El Portal, CA — 3 noites
+Check-in: 16/02 | Check-out: 19/02</description>
+<styleUrl>#hotel</styleUrl>
+<Point><coordinates>-119.9663,37.4849,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>🏨 Three Rivers, CA (Sequoia)</name>
+<description>Three Rivers, CA (Sequoia) — 1 noite
+Check-in: 19/02 | Check-out: 20/02</description>
+<styleUrl>#hotel</styleUrl>
+<Point><coordinates>-118.9054,36.4519,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>🏨 Los Angeles, CA</name>
+<description>Los Angeles, CA — 2 noites
+Check-in: 20/02 | Check-out: 22/02</description>
+<styleUrl>#hotel</styleUrl>
+<Point><coordinates>-118.2437,34.0522,0</coordinates></Point>
+</Placemark>
+</Folder>
+
+<!-- ==================== SUPERCHARGERS ==================== -->
+<Folder>
+<name>⚡ Superchargers (22)</name>
+<Placemark>
+<name>⚡ SC Barstow, CA</name>
+<description>Dia 5 — LAX → Vegas</description>
+<styleUrl>#supercharger</styleUrl>
+<Point><coordinates>-117.0676,35.0527,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>⚡ SC Kingman, AZ</name>
+<description>Dia 9 — Vegas → GC → Zion</description>
+<styleUrl>#supercharger</styleUrl>
+<Point><coordinates>-114.053,35.2053,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>⚡ SC Kanab, UT</name>
+<description>Dia 9 — Vegas → GC → Zion</description>
+<styleUrl>#supercharger</styleUrl>
+<Point><coordinates>-112.5263,37.0215,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>⚡ SC Salina, UT</name>
+<description>Dia 12 — Bryce → Moab</description>
+<styleUrl>#supercharger</styleUrl>
+<Point><coordinates>-111.86,38.934,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>⚡ SC Green River, UT</name>
+<description>Dia 12 — Bryce → Moab</description>
+<styleUrl>#supercharger</styleUrl>
+<Point><coordinates>-110.1593,38.9953,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>⚡ SC Green River, UT</name>
+<description>Dia 15 — Moab → Twin Falls</description>
+<styleUrl>#supercharger</styleUrl>
+<Point><coordinates>-110.1593,38.9953,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>⚡ SC Price, UT</name>
+<description>Dia 15 — Moab → Twin Falls</description>
+<styleUrl>#supercharger</styleUrl>
+<Point><coordinates>-110.8107,39.5994,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>⚡ SC Twin Falls, ID</name>
+<description>Dia 15 — Moab → Twin Falls</description>
+<styleUrl>#supercharger</styleUrl>
+<Point><coordinates>-114.4614,42.5558,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>⚡ SC Baker City, OR</name>
+<description>Dia 16 — Twin Falls → Centralia</description>
+<styleUrl>#supercharger</styleUrl>
+<Point><coordinates>-117.8344,44.7749,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>⚡ SC Pendleton, OR</name>
+<description>Dia 16 — Twin Falls → Centralia</description>
+<styleUrl>#supercharger</styleUrl>
+<Point><coordinates>-118.7886,45.6721,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>⚡ SC The Dalles, OR</name>
+<description>Dia 16 — Twin Falls → Centralia</description>
+<styleUrl>#supercharger</styleUrl>
+<Point><coordinates>-121.1787,45.5946,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>⚡ SC Centralia, WA</name>
+<description>Dia 16 — Twin Falls → Centralia</description>
+<styleUrl>#supercharger</styleUrl>
+<Point><coordinates>-122.9542,46.7218,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>⚡ SC Aberdeen, WA</name>
+<description>Dia 19 — Forks → Cannon Beach</description>
+<styleUrl>#supercharger</styleUrl>
+<Point><coordinates>-123.8157,46.9754,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>⚡ SC Lincoln City, OR</name>
+<description>Dia 20 — Cannon Beach → Gold Beach</description>
+<styleUrl>#supercharger</styleUrl>
+<Point><coordinates>-124.0159,44.9581,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>⚡ SC Coos Bay, OR</name>
+<description>Dia 20 — Cannon Beach → Gold Beach</description>
+<styleUrl>#supercharger</styleUrl>
+<Point><coordinates>-124.2179,43.3665,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>⚡ SC Eureka, CA</name>
+<description>Dia 22 — Crescent City → Eureka</description>
+<styleUrl>#supercharger</styleUrl>
+<Point><coordinates>-124.1637,40.8021,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>⚡ SC Ukiah, CA</name>
+<description>Dia 23 — Eureka → SF</description>
+<styleUrl>#supercharger</styleUrl>
+<Point><coordinates>-123.2078,39.1502,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>⚡ SC Gilroy, CA</name>
+<description>Dia 27 — SF → Yosemite</description>
+<styleUrl>#supercharger</styleUrl>
+<Point><coordinates>-121.5882,37.0058,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>⚡ SC Merced, CA</name>
+<description>Dia 27 — SF → Yosemite</description>
+<styleUrl>#supercharger</styleUrl>
+<Point><coordinates>-120.483,37.3022,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>⚡ SC Fresno, CA</name>
+<description>Dia 30 — Mariposa → Sequoia</description>
+<styleUrl>#supercharger</styleUrl>
+<Point><coordinates>-119.7871,36.7378,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>⚡ SC Bakersfield, CA</name>
+<description>Dia 31 — Three Rivers → LA</description>
+<styleUrl>#supercharger</styleUrl>
+<Point><coordinates>-119.0187,35.3733,0</coordinates></Point>
+</Placemark>
+</Folder>
+
+<!-- ==================== PARQUES NACIONAIS ==================== -->
+<Folder>
+<name>🏞️ Parques Nacionais (11)</name>
+<Placemark>
+<name>🏞️ 🏜️ Death Valley National Park</name>
+<description>Dia 8
+Badwater Basin (-86m!), Zabriskie Point, Artist's Palette, Devil's Golf Course, Mesquite Sand Dunes.</description>
+<styleUrl>#park</styleUrl>
+<Point><coordinates>-116.9325,36.5054,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>🏞️ 🏞️ Grand Canyon National Park</name>
+<description>Dia 9
+Mather Point, Rim Trail, Yavapai Geology Museum, Bright Angel, Hopi Point.</description>
+<styleUrl>#park</styleUrl>
+<Point><coordinates>-112.1401,36.0544,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>🏞️ 🏞️ Zion National Park</name>
+<description>Dias 10–11
+Watchman Trail, Emerald Pools, Canyon Overlook Trail, Riverside Walk.</description>
+<styleUrl>#park</styleUrl>
+<Point><coordinates>-112.9871,37.209,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>🏞️ 🏔️ Bryce Canyon National Park</name>
+<description>Dias 11–12
+Navajo Loop, Queen's Garden, hoodoos, Bryce Amphitheater, stargazing!</description>
+<styleUrl>#park</styleUrl>
+<Point><coordinates>-112.1677,37.6283,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>🏞️ 🏜️ Canyonlands National Park</name>
+<description>Dia 13
+Mesa Arch sunrise, Grand View Point, Upheaval Dome, Aztec Butte.</description>
+<styleUrl>#park</styleUrl>
+<Point><coordinates>-109.8783,38.3269,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>🏞️ 🏜️ Arches National Park</name>
+<description>Dia 14
+Delicate Arch, Windows, Double Arch, Landscape Arch (93m!), Fiery Furnace.</description>
+<styleUrl>#park</styleUrl>
+<Point><coordinates>-109.5925,38.7331,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>🏞️ 🌋 Mt. Rainier National Park</name>
+<description>Dia 17
+Paradise, neve, vulcão de 4.392m.</description>
+<styleUrl>#park</styleUrl>
+<Point><coordinates>-121.7603,46.8523,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>🏞️ 🌲 Olympic National Park</name>
+<description>Dias 17–18
+Hoh Rain Forest, Hall of Mosses, Ruby Beach, La Push (Twilight!), Sol Duc Falls.</description>
+<styleUrl>#park</styleUrl>
+<Point><coordinates>-124.3855,47.9504,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>🏞️ 🌲 Redwood National Park</name>
+<description>Dias 21–22
+Stout Memorial Grove, Fern Canyon (Jurassic Park 2!), Tall Trees, Lady Bird Johnson, Avenue of Giants.</description>
+<styleUrl>#park</styleUrl>
+<Point><coordinates>-124.0046,41.2132,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>🏞️ 🏞️ Yosemite National Park</name>
+<description>Dias 28–29
+Tunnel View, El Capitan, Half Dome, Yosemite Falls, Badger Pass, Mirror Lake.</description>
+<styleUrl>#park</styleUrl>
+<Point><coordinates>-119.5383,37.8651,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>🏞️ 🌲 Sequoia + Kings Canyon NP</name>
+<description>Dia 30
+General Sherman Tree (maior árvore!), Congress Trail, Moro Rock, General Grant Tree.</description>
+<styleUrl>#park</styleUrl>
+<Point><coordinates>-118.5658,36.4864,0</coordinates></Point>
+</Placemark>
+</Folder>
+</Document>
+</kml>

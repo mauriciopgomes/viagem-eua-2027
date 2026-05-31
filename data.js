@@ -114,6 +114,9 @@ const days = [
             { time: "~14:00", text: "🚗 Retirada do <strong>Tesla Model Y</strong>", type: "drive" },
             { time: "14:30", text: "🛣️ Saída rumo a <strong>Las Vegas</strong> (~430 km, ~4.5h via I-15 N)", type: "drive" },
             { time: "16:30", text: "⚡🍽️ <strong>Supercharger Barstow</strong> (~200 km) — ~25 min + lanche", type: "charge" },
+            { time: "16:35", text: "🎨 <strong>Elmer's Bottle Tree Ranch</strong> (Oro Grande) — floresta de 'árvores' de garrafas de vidro e metal! Arte outsider no deserto. Grátis", type: "" },
+            { time: "17:30", text: "👽 <strong>Alien Fresh Jerky</strong> (Baker) — loja alien + jerky de 100 sabores! + 🌡️ <strong>World's Tallest Thermometer</strong>!", type: "" },
+            { time: "18:30", text: "🎨 <strong>Seven Magic Mountains</strong> — 7 torres de pedras neon de 10m no deserto! Grátis, na beira da I-15", type: "highlight" },
             { time: "~19:00", text: "🎰 Chegada em <strong>Las Vegas</strong>! Check-in", type: "" },
             { time: "19:30", text: "🍽️ Jantar perto do hotel", type: "food" },
             { time: "21:00", text: "🏨 Dormir cedo (jet lag + dia longo!)", type: "" }
@@ -121,7 +124,7 @@ const days = [
         tips: ["⚡ Dia longo mas o fuso horário ajuda (-3h). Chegam cansados — dormir cedo!"]
     },
     {
-        photo: 'img/dia-29.jpg', shortLoc: 'Vegas', location: "Welcome Sign + Mt. Charleston",
+        photo: 'img/dia-06.jpg', shortLoc: 'Vegas', location: "Welcome Sign + Mt. Charleston",
         route: "Neve a 45 min de Vegas! 🏔️",
         note: "Foto no Welcome Sign de manhã + neve em Mt. Charleston!",
         region: "nv",
@@ -142,7 +145,7 @@ const days = [
         tips: ["🏔️ Mt. Charleston: pode estar -5°C com neve! Levar casaco, luvas e botas."]
     },
     {
-        photo: 'img/dia-31.jpg', shortLoc: 'Vegas', location: "Valley of Fire + Strip",
+        photo: 'img/dia-07.jpg', shortLoc: 'Vegas', location: "Valley of Fire + Strip",
         route: "Parque mais fotogênico de Nevada! 🔥",
         note: "Fire Wave + Elephant Rock de manhã, tarde livre na Strip.",
         region: "nv",
@@ -154,13 +157,16 @@ const days = [
             { time: "11:00", text: "📸 <strong>White Domes Trail</strong> (~1.8 km) — cânion colorido", type: "" },
             { time: "11:45", text: "🚗 Volta pra Vegas (~1h)", type: "drive" },
             { time: "12:45", text: "🍽️ Almoço na Strip", type: "food" },
-            { time: "14:00", text: "Tempo livre — descanso, piscina, explorar a Strip", type: "" },
+            { time: "14:00", text: "🚗 Rumo a <strong>Eldorado Canyon</strong> (~45 min ao sul da Strip)", type: "drive" },
+            { time: "14:45", text: "🏚️ <strong>Eldorado Canyon Ghost Town</strong> — mina de ouro Techatticup (1861)! Ruínas, carros antigos, cenário de faroeste", type: "highlight" },
+            { time: "16:15", text: "🚗 Volta pra Vegas (~45 min)", type: "drive" },
+            { time: "17:00", text: "🏨 Descanso / piscina", type: "" },
             { time: "19:00", text: "🍽️ Jantar na Strip", type: "food" },
             { time: "20:30", text: "🌃 Noite na Strip", type: "" }
         ]
     },
     {
-        photo: 'img/dia-32.jpg', shortLoc: 'Vegas', location: "Day trip Death Valley 🏜️",
+        photo: 'img/dia-08.jpg', shortLoc: 'Vegas', location: "Day trip Death Valley 🏜️",
         route: "Ponto mais baixo das Américas!",
         note: "Última noite em Vegas! Inverno é a melhor época pra Death Valley.",
         region: "nv",
@@ -183,7 +189,7 @@ const days = [
 
     // ==================== UTAH (Dias 9-14) ====================
     {
-        photo: 'img/dia-27.jpg', shortLoc: 'GC→Zion',
+        photo: 'img/dia-09.jpg', shortLoc: 'GC→Zion',
         chargeStops: [
             { name: 'Kingman, AZ', leg: 'Vegas → GC → Zion', critical: false },
             { name: 'Kanab, UT', leg: 'Vegas → GC → Zion', critical: false }
@@ -214,7 +220,7 @@ const days = [
         ]
     },
     {
-        photo: 'img/dia-26.jpg', shortLoc: 'Zion', location: "Zion NP dia cheio",
+        photo: 'img/dia-10.jpg', shortLoc: 'Zion', location: "Zion NP dia cheio",
         route: "Trilhas, mirantes e pôr do sol! 🏞️",
         note: "Dia cheio em Zion! No inverno pode dirigir no canyon (sem shuttle).",
         region: "ut",
@@ -233,7 +239,7 @@ const days = [
         ]
     },
     {
-        photo: 'img/dia-24.jpg', shortLoc: 'Bryce', location: "Zion AM → Bryce PM",
+        photo: 'img/dia-11.jpg', shortLoc: 'Bryce', location: "Zion AM → Bryce PM",
         route: "Última manhã em Zion + Bryce à tarde! 🏔️",
         note: "Navajo Loop + pôr do sol + stargazing em Bryce!",
         region: "ut",
@@ -257,7 +263,7 @@ const days = [
         tips: ["🔭 Bryce é um dos melhores céus escuros do MUNDO! Levem cobertores — faz MUITO frio!"]
     },
     {
-        photo: 'img/dia-25.jpg', shortLoc: 'Moab',
+        photo: 'img/dia-12.jpg', shortLoc: 'Moab',
         chargeStops: [
             { name: 'Salina, UT', leg: 'Bryce → Moab', critical: false },
             { name: 'Green River, UT', leg: 'Bryce → Moab', critical: false }
@@ -284,7 +290,7 @@ const days = [
         ]
     },
     {
-        photo: 'img/dia-22.jpg', shortLoc: 'Moab', location: "Canyonlands NP dia cheio 🏜️",
+        photo: 'img/dia-13.jpg', shortLoc: 'Moab', location: "Canyonlands NP dia cheio 🏜️",
         route: "Island in the Sky — cânions infinitos!",
         note: "Mesa Arch ao nascer do sol — o sol nasce ATRAVÉS do arco!",
         region: "ut",
@@ -306,7 +312,7 @@ const days = [
         ]
     },
     {
-        photo: 'img/dia-21.jpg', shortLoc: 'Moab', location: "Arches NP + Dead Horse Point",
+        photo: 'img/dia-14.jpg', shortLoc: 'Moab', location: "Arches NP + Dead Horse Point",
         route: "Delicate Arch + Dead Horse sunset! 🏜️",
         note: "O arco mais famoso do mundo + vista sobre o Colorado!",
         region: "ut",
@@ -328,7 +334,7 @@ const days = [
 
     // ==================== TRANSIÇÃO → PNW (Dias 15-16) ====================
     {
-        photo: 'img/activities/shoshone_falls.jpg', shortLoc: 'Twin Falls',
+        photo: 'img/dia-15.jpg', shortLoc: 'Twin Falls',
         chargeStops: [
             { name: 'Green River, UT', leg: 'Moab → Twin Falls', critical: false },
             { name: 'Price, UT', leg: 'Moab → Twin Falls', critical: false },
@@ -357,7 +363,7 @@ const days = [
         tips: ["⚠️ Dois dias longos seguidos (19 + 20): ~770km + ~700km. Dormir cedo!"]
     },
     {
-        photo: 'img/activities/columbia_river_gorge.jpg', shortLoc: 'Centralia',
+        photo: 'img/dia-16.jpg', shortLoc: 'Centralia',
         chargeStops: [
             { name: 'Baker City, OR', leg: 'Twin Falls → Centralia', critical: false },
             { name: 'Pendleton, OR', leg: 'Twin Falls → Centralia', critical: false },
@@ -371,13 +377,13 @@ const days = [
         items: [
             { time: "07:30", text: "☕ Café + check-out", type: "" },
             { time: "08:00", text: "🚗 Saída via I-84 W", type: "drive" },
+            { time: "08:30", text: "🌊 <strong>Thousand Springs</strong> (Hagerman, ID) — cachoeiras brotando do paredão de rocha no Snake River! Mirante na I-84. Grátis", type: "" },
             { time: "09:30", text: "⚡ <strong>Supercharger Baker City, OR</strong> (~200 km) — ~25 min", type: "charge" },
             { time: "10:45", text: "📸 <strong>Deadman Pass Overlook</strong> — mirante nas Blue Mountains! Vista panorâmica a 1.278m de altitude", type: "highlight" },
             { time: "11:30", text: "⚡🍽️ <strong>Supercharger Pendleton, OR</strong> (~200 km) — ~20 min + almoço", type: "charge" },
             { time: "13:30", text: "⚡ <strong>Supercharger The Dalles, OR</strong> (~200 km) — ~25 min", type: "charge" },
             { time: "14:00", text: "�️ (opcional) <strong>Mt. Hood</strong> — desvio ~1h ao sul pela US-26. Vulcão de 3.429m coberto de neve!", type: "" },
-            { time: "14:30", text: "🏞️ (opcional) <strong>Trillium Lake</strong> — lago com reflexo perfeito do Mt. Hood! Ótimo pra fotos", type: "" },
-            { time: "15:00", text: "�🏞️ <strong>Columbia River Gorge</strong>", type: "" },
+            { time: "14:30", text: "🏞️ (opcional) <strong>Trillium Lake</strong> — lago com reflexo perfeito do Mt. Hood! Ótimo pra fotos", type: "" },            { time: "14:45", text: "📸 <strong>Rowena Crest Viewpoint</strong> — mirante épico com curvas hairpin sobre o Columbia River! Panorâmica 360°. Grátis", type: "" },            { time: "15:00", text: "�🏞️ <strong>Columbia River Gorge</strong>", type: "" },
             { time: "14:15", text: "🏛️ <strong>Vista House at Crown Point</strong> — edifício octogonal de 1917 com vista 270° do Gorge!", type: "highlight" },
             { time: "14:30", text: "🌲 <strong>Multnomah Falls</strong> — cachoeira icônica de 189m!", type: "highlight" },
             { time: "15:00", text: "🚗 I-84 W → I-5 N → Centralia (~240 km, ~2.5h)", type: "drive" },
@@ -389,7 +395,7 @@ const days = [
 
     // ==================== PNW (Dias 17-20) ====================
     {
-        photo: 'img/dia-19.jpg', shortLoc: 'Rainier',
+        photo: 'img/dia-17.jpg', shortLoc: 'Rainier',
         chargeStops: [{ name: 'Olympia, WA', leg: 'Centralia → Rainier → Forks', critical: true, note: '⚠️ CARREGAR ATÉ 100% — Olympic 265 km sem SC!' }],
         location: "Centralia → Mt. Rainier → Forks",
         route: "Vulcão Rainier + Olympic NP! 🌋",
@@ -415,7 +421,7 @@ const days = [
         tips: ["⚠️ Visitor Center fecha no meio da semana no inverno (abre só sex-dom).", "🔄 Se Rainier FECHADO: direto Centralia → Forks (~370 km). Chegada ~12:00!"]
     },
     {
-        photo: 'img/dia-17.jpg', shortLoc: 'Olympic', location: "Olympic NP dia cheio 🌲",
+        photo: 'img/dia-18.jpg', shortLoc: 'Olympic', location: "Olympic NP dia cheio 🌲",
         route: "Florestas místicas + praias selvagens!",
         note: "Hoh Rain Forest + Ruby Beach + Twilight!",
         region: "pnw",
@@ -435,7 +441,7 @@ const days = [
         ]
     },
     {
-        photo: 'img/dia-16.jpg', shortLoc: 'Cannon',
+        photo: 'img/dia-19.jpg', shortLoc: 'Cannon',
         chargeStops: [{ name: 'Aberdeen, WA', leg: 'Forks → Cannon Beach', critical: false }],
         location: "Forks → Cannon Beach",
         route: "Astoria + Haystack Rock ao pôr do sol! 🌅",
@@ -446,9 +452,11 @@ const days = [
             { time: "08:30", text: "🚗 Saída rumo ao sul via US-101 S (~380 km)", type: "drive" },
             { time: "09:30", text: "🌳 <strong>Kalaloch Tree of Life</strong> — árvore crescendo sobre caverna com raízes expostas como tentáculos!", type: "" },
             { time: "11:00", text: "⚡ <strong>Supercharger Aberdeen, WA</strong> (~200 km) — ~25 min", type: "charge" },
+            { time: "11:25", text: "🎸 <strong>Kurt Cobain Memorial</strong> — placa 'Come As You Are' + memorial do Nirvana!", type: "" },
             { time: "11:30", text: "🍽️ Almoço em Aberdeen", type: "food" },
             { time: "12:30", text: "🏖️ <strong>Cape Disappointment</strong> — farol no encontro do Rio Columbia com o Pacífico!", type: "" },
             { time: "13:15", text: "🚢 <strong>Peter Iredale Shipwreck</strong> — naufrágio de 1906 na praia! Esqueleto do navio visível!", type: "highlight" },
+            { time: "13:30", text: "🏚️ <strong>Fort Stevens WWII Bunkers</strong> — único forte continental dos EUA atacado por submarino japonês (1942)! Ruínas grátis no mesmo parque", type: "" },
             { time: "14:00", text: "🌊 <strong>Astoria</strong> — cenário de <strong>The Goonies</strong>! Astoria Column!", type: "highlight" },
             { time: "15:30", text: "🏨 Check-in em <strong>Cannon Beach</strong>", type: "" },
             { time: "16:00", text: "📸 <strong>Haystack Rock</strong> — ícone de Oregon!", type: "highlight" },
@@ -458,7 +466,7 @@ const days = [
         ]
     },
     {
-        photo: 'img/dia-15.jpg', shortLoc: 'Oregon',
+        photo: 'img/dia-20.jpg', shortLoc: 'Oregon',
         chargeStops: [
             { name: 'Lincoln City, OR', leg: 'Cannon Beach → Gold Beach', critical: false },
             { name: 'Coos Bay, OR', leg: 'Cannon Beach → Gold Beach', critical: false }
@@ -471,6 +479,7 @@ const days = [
             { time: "08:00", text: "☕ Café + última caminhada em Cannon Beach", type: "" },
             { time: "09:00", text: "🚗 Saída rumo ao sul pela US-101 (~350 km)", type: "drive" },
             { time: "10:30", text: "⚡ <strong>Supercharger Lincoln City, OR</strong> (~130 km) — ~25 min", type: "charge" },
+            { time: "11:00", text: "🌊 <strong>Devil's Punchbowl</strong> (Otter Rock) — bacia natural de rocha onde as ondas explodem! Viewpoint gratuito", type: "" },
             { time: "11:15", text: "🍽️ Almoço em <strong>Newport</strong>", type: "food" },
             { time: "12:15", text: "📸 <strong>Cape Perpetua + Thor's Well</strong>", type: "highlight" },
             { time: "12:45", text: "🏖️ <strong>Heceta Head Lighthouse</strong>", type: "" },
@@ -487,7 +496,7 @@ const days = [
 
     // ==================== REDWOOD (Dias 21-22) ====================
     {
-        photo: 'img/activities/stout_memorial_grove.jpg', shortLoc: 'Redwood',
+        photo: 'img/dia-21.jpg', shortLoc: 'Redwood',
         location: "Redwood NP norte — Jedediah Smith! 🌲",
         route: "Jedediah Smith + Crescent City! 🌲",
         note: "Dia tranquilo entre redwoods perto de Crescent City.",
@@ -508,7 +517,7 @@ const days = [
         tips: ["🌊 Battery Point: verificar tábua de marés! Só acessível na maré baixa."]
     },
     {
-        photo: 'img/activities/fern_canyon.jpg', shortLoc: 'Redwood',
+        photo: 'img/dia-22.jpg', shortLoc: 'Redwood',
         chargeStops: [{ name: 'Eureka, CA', leg: 'Crescent City → Eureka', critical: false }],
         location: "Redwood NP sul → Eureka",
         route: "Fern Canyon + Tall Trees + Avenue of Giants! 🌲",
@@ -517,6 +526,7 @@ const days = [
         items: [
             { time: "07:00", text: "☕ Café + check-out de Crescent City", type: "" },
             { time: "07:30", text: "🚗 US-101 sul (~35 km) → <strong>Prairie Creek Redwoods SP</strong>", type: "drive" },
+            { time: "07:50", text: "🦌 <strong>Elk Meadow</strong> (Orick) — manada de Roosevelt elk pastando ao lado da US-101! Pullover grátis", type: "" },
             { time: "08:00", text: "🚗 <strong>Newton B. Drury Scenic Parkway</strong>", type: "" },
             { time: "08:30", text: "📸 <strong>Big Tree Wayside</strong>", type: "" },
             { time: "09:00", text: "🥾 <strong>Fern Canyon</strong> (~1.5 km) — samambaias! <strong>Jurassic Park 2</strong>!", type: "highlight" },
@@ -536,7 +546,7 @@ const days = [
 
     // ==================== SAN FRANCISCO (Dias 23-26) ====================
     {
-        photo: 'img/dia-11.jpg', shortLoc: 'SF',
+        photo: 'img/dia-23.jpg', shortLoc: 'SF',
         chargeStops: [{ name: 'Ukiah, CA', leg: 'Eureka → SF', critical: false }],
         location: "Eureka → San Francisco",
         route: "Point Reyes + baleias + SF! 🐋",
@@ -548,6 +558,7 @@ const days = [
             { time: "10:30", text: "⚡🍽️ <strong>Supercharger Ukiah</strong> (~250 km) — ~25 min + almoço", type: "charge" },
             { time: "11:15", text: "🏖️ <strong>Glass Beach</strong> (Fort Bragg) — praia coberta de vidro marítimo polido pelas ondas!", type: "" },
             { time: "11:30", text: "🌊 <strong>Mendocino</strong> — vila costeira charmosa, cenário de filmes! Parada rápida", type: "" },
+            { time: "12:00", text: "🌳 <strong>Cypress Tree Tunnel</strong> (Point Reyes) — túnel de ciprestes centenários formando arco perfeito! Grátis", type: "" },
             { time: "12:30", text: "🐋 <strong>Point Reyes</strong> — Elk Preserve, Lighthouse + <strong>baleias cinzentas!</strong> (migração jan-abr!)", type: "highlight" },
             { time: "~15:00", text: "🏨 Chegada em <strong>SF</strong>! Check-in", type: "" },
             { time: "15:30", text: "🌆 <strong>Embarcadero</strong> — Ferry Building", type: "" },
@@ -556,7 +567,7 @@ const days = [
         ]
     },
     {
-        photo: 'img/dia-12.jpg', shortLoc: 'SF', location: "San Francisco dia cheio 1",
+        photo: 'img/dia-24.jpg', shortLoc: 'SF', location: "San Francisco dia cheio 1",
         route: "Pier 39 + Golden Gate + Nintendo! 🌉",
         note: "Cable Car, Chinatown, Golden Gate Bridge, Nintendo SF!",
         region: "ca",
@@ -575,7 +586,7 @@ const days = [
         ]
     },
     {
-        photo: 'img/activities/golden_gate_park.jpg', shortLoc: 'SF', location: "San Francisco — Valentine's Day! ❤️",
+        photo: 'img/dia-25.jpg', shortLoc: 'SF', location: "San Francisco — Valentine's Day! ❤️",
         route: "Alcatraz + Golden Gate Park + Valentine's! ❤️",
         note: "Valentine's Day! Alcatraz de manhã, Golden Gate Park e jantar especial à noite!",
         region: "ca",
@@ -593,7 +604,7 @@ const days = [
         tips: ["⚠️ Alcatraz esgota meses antes! Comprar em alcatrazcruises.com (~$45/pessoa)."]
     },
     {
-        photo: 'img/dia-12.jpg', shortLoc: 'SF', location: "San Francisco dia cheio 3",
+        photo: 'img/dia-26.jpg', shortLoc: 'SF', location: "San Francisco dia cheio 3",
         route: "Golden Gate + Fisherman's Wharf! 🌉",
         note: "Mais um dia em SF — Golden Gate, Painted Ladies, Chinatown!",
         region: "ca",
@@ -614,7 +625,7 @@ const days = [
 
     // ==================== PCH + YOSEMITE + SEQUOIA (Dias 27-30) ====================
     {
-        photo: 'img/activities/big_sur_coast.jpg', shortLoc: 'Yosemite',
+        photo: 'img/dia-27.jpg', shortLoc: 'Yosemite',
         chargeStops: [
             { name: 'Gilroy, CA', leg: 'SF → Yosemite', critical: false },
             { name: 'Merced, CA', leg: 'SF → Yosemite', critical: false }
@@ -627,6 +638,7 @@ const days = [
             { time: "07:00", text: "☕ Café + check-out de SF", type: "" },
             { time: "07:30", text: "🚗 Hwy 1 sul → <strong>Half Moon Bay</strong> (~45 min)", type: "drive" },
             { time: "08:15", text: "🏖️ Parada rápida em Half Moon Bay", type: "" },
+            { time: "08:45", text: "🏠 <strong>Pigeon Point Lighthouse</strong> (Pescadero) — um dos faróis mais altos da Costa Oeste! 35m, vista linda do Pacífico. Grátis", type: "" },
             { time: "09:00", text: "🚗 Continue Hwy 1 → Monterey (~1.5h)", type: "drive" },
             { time: "10:30", text: "🦞 <strong>Cannery Row</strong> — passear + café", type: "" },
             { time: "11:15", text: "🚗 <strong>17-Mile Drive</strong> — Lone Cypress, Pebble Beach!", type: "highlight" },
@@ -641,7 +653,7 @@ const days = [
         tips: ["⚠️ Se Highway 1 estiver FECHADA em Big Sur: SF → I-5 S → CA-140 E direto pra Mariposa (~450 km, ~5h)."]
     },
     {
-        photo: 'img/dia-08.jpg', shortLoc: 'Yosemite', location: "Yosemite NP dia 1 — Valley",
+        photo: 'img/dia-28.jpg', shortLoc: 'Yosemite', location: "Yosemite NP dia 1 — Valley",
         route: "Tunnel View + cachoeiras + neve! 🏞️",
         note: "Primeiro dia em Yosemite! Valley com neve — lindo!",
         region: "ca",
@@ -663,7 +675,7 @@ const days = [
         tips: ["❄️ Yosemite nevado em fevereiro é LINDO! Menos turistas, silêncio, neve nos picos."]
     },
     {
-        photo: 'img/dia-09.jpg', shortLoc: 'Yosemite', location: "Yosemite NP dia 2 — Neve!",
+        photo: 'img/dia-29.jpg', shortLoc: 'Yosemite', location: "Yosemite NP dia 2 — Neve!",
         route: "Badger Pass + trilhas na neve! ⛷️",
         note: "Snow tubing, snowshoeing e mais Yosemite Valley!",
         region: "ca",
@@ -682,7 +694,7 @@ const days = [
         ]
     },
     {
-        photo: 'img/dia-06.jpg', shortLoc: 'Sequoia',
+        photo: 'img/dia-30.jpg', shortLoc: 'Sequoia',
         chargeStops: [
             { name: 'Fresno, CA', leg: 'Mariposa → Sequoia', critical: false }
         ],
@@ -710,7 +722,7 @@ const days = [
 
     // ==================== LA (Dias 31-33) ====================
     {
-        photo: 'img/dia-33.jpg', shortLoc: 'LA',
+        photo: 'img/dia-31.jpg', shortLoc: 'LA',
         chargeStops: [
             { name: 'Bakersfield, CA', leg: 'Three Rivers → LA', critical: false }
         ],
@@ -726,14 +738,15 @@ const days = [
             { time: "11:30", text: "🚗 Continue I-5 S → LA", type: "drive" },
             { time: "~13:00", text: "🏨 Chegada em <strong>LA</strong>! Check-in", type: "" },
             { time: "13:30", text: "🍽️ Almoço", type: "food" },
-            { time: "15:00", text: "🏖️ <strong>Santa Monica Pier</strong> — roda-gigante, Route 66 End Sign!", type: "highlight" },
+            { time: "14:30", text: "🐱 <strong>Cool Cat Collective</strong> (2741 E 4th St, Long Beach) — arte de gatos + gatinhos foster! Qua-Dom 10h-18h", type: "" },
+            { time: "15:30", text: "🏖️ <strong>Santa Monica Pier</strong> — roda-gigante, Route 66 End Sign!", type: "highlight" },
             { time: "16:30", text: "🌴 <strong>Venice Beach</strong> — boardwalk, Muscle Beach!", type: "" },
             { time: "18:00", text: "🌅 Sunset na praia!", type: "highlight" },
             { time: "19:00", text: "🍽️ Jantar em Santa Monica", type: "food" }
         ]
     },
     {
-        photo: 'img/dia-34.jpg', shortLoc: 'LA', location: "LA dia cheio",
+        photo: 'img/dia-32.jpg', shortLoc: 'LA', location: "LA dia cheio",
         route: "Hollywood + Griffith Observatory! 🎬",
         note: "Último dia completo nos EUA!",
         region: "ca",
@@ -751,7 +764,7 @@ const days = [
         ]
     },
     {
-        photo: 'img/dia-30.jpg', shortLoc: 'LAX', location: "LA → Voo de volta ✈️",
+        photo: 'img/dia-33.jpg', shortLoc: 'LAX', location: "LA → Voo de volta ✈️",
         route: "Dia da volta! 🇧🇷",
         note: "Devolução do Tesla + voo MIA → GIG.",
         region: "ca",
