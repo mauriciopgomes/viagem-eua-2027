@@ -1,6 +1,6 @@
 {
   "name": "viagem-eua-2027",
-  "version": "140.0.0",
+  "version": "141.0.0",
   "description": "34-day USA road trip PWA",
   "private": true,
   "scripts": {
@@ -21,6 +21,7 @@
   "author": "Mauricio Gomes",
   "license": "MIT",
   "devDependencies": {
+    "@playwright/test": "^1.60.0",
     "eslint": "^9.0.0",
     "puppeteer": "^24.15.0"
   }

@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 // e2e-tests.js — End-to-End tests for Viagem EUA 2027 PWA
 // Tests user interactions, rendering, and PWA features in a real browser
-// Run: npm run e2e (after: npm install --save-dev puppeteer)
+// Run: npm run e2e (after: npm install --save-dev @playwright/test)
 
-const puppeteer = require('puppeteer');
-const fs = require('fs');
+const { chromium } = require('@playwright/test');
 const path = require('path');
 
 // Test framework
@@ -43,19 +42,17 @@ function assert(condition, msg) {
 
 // Main E2E tests
 (async () => {
-    let browser, page;
+    let browser, context, page;
     const baseUrl = 'file://' + path.resolve(__dirname, 'index.html');
 
     try {
-        // Launch browser
-        browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox'] });
-        page = await browser.newPage();
-        
-        // Set viewport to mobile
-        await page.setViewport({ width: 375, height: 812 });
+        // Launch browser with Playwright
+        browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
+        context = await browser.newContext({ viewport: { width: 375, height: 812 } });
+        page = await context.newPage();
         
         console.log(`🌐 Loading: ${baseUrl}`);
-        await page.goto(baseUrl, { waitUntil: 'networkidle0' });
+        await page.goto(baseUrl, { waitUntil: 'networkidle' });
 
         // ==================== PAGE LOAD ====================
         section('PWA — Page Load & DOM');
@@ -66,13 +63,13 @@ function assert(condition, msg) {
         });
 
         await test('Hero image renders', async () => {
-            const heroImg = await page.$('#heroImg');
-            assert(heroImg !== null, 'Hero image not found');
+            const heroImg = await page.locator('#heroImg');
+            assert(await heroImg.count() > 0, 'Hero image not found');
         });
 
         await test('Days grid container exists', async () => {
-            const daysGrid = await page.$('#daysGrid');
-            assert(daysGrid !== null, 'Days grid not found');
+            const daysGrid = await page.locator('#daysGrid');
+            assert(await daysGrid.count() > 0, 'Days grid not found');
         });
 
         await test('Dark theme applied', async () => {
@@ -87,106 +84,71 @@ function assert(condition, msg) {
         section('PWA — Navigation & Day Selection');
 
         await test('Select day 2 from dropdown', async () => {
-            // Click day selector dropdown
-            await page.click('#daySelector');
-            await page.waitForTimeout(100);
-            
-            // Click option for day 2
-            await page.evaluate(() => {
-                const opts = document.querySelectorAll('#daySelector option');
-                opts[2].selected = true;
-                document.getElementById('daySelector').dispatchEvent(new Event('change', { bubbles: true }));
-            });
+            const daySelector = page.locator('#daySelector');
+            await daySelector.selectOption('2');
             await page.waitForTimeout(500);
 
-            // Verify hero image changed
-            const heroSrc = await page.$eval('#heroImg', el => el.src);
+            const heroSrc = await page.locator('#heroImg').getAttribute('src');
             assert(heroSrc.includes('dia-02'), `Hero image src: ${heroSrc}`);
         });
 
         await test('Render day activities', async () => {
-            const activityCount = await page.evaluate(() => {
-                return document.querySelectorAll('.activity-card').length;
-            });
+            const activityCount = await page.locator('.activity-card').count();
             assert(activityCount > 0, `No activities rendered (got ${activityCount})`);
         });
 
         await test('Activity cards have images', async () => {
-            const cardWithImg = await page.evaluate(() => {
-                const cards = document.querySelectorAll('.activity-card');
-                for (let card of cards) {
-                    const img = card.querySelector('.activity-card-photo');
-                    if (img && img.src) return true;
-                }
-                return false;
-            });
-            assert(cardWithImg, 'No activity cards with images found');
+            const firstCard = page.locator('.activity-card').first();
+            const img = firstCard.locator('.activity-card-photo');
+            const src = await img.getAttribute('src');
+            assert(src && src.length > 0, 'Activity card has no image');
         });
 
         // ==================== INTERACTIVITY ====================
         section('PWA — User Interactions');
 
         await test('Click activity card opens detail modal', async () => {
-            // Get first activity card
-            const firstCard = await page.$('.activity-card');
-            assert(firstCard !== null, 'No activity cards found');
-
-            // Click it
+            const firstCard = page.locator('.activity-card').first();
             await firstCard.click();
             await page.waitForTimeout(300);
 
-            // Check if modal appeared
-            const modal = await page.$('#detailModal');
-            const isVisible = await page.evaluate(() => {
-                const mod = document.getElementById('detailModal');
-                return mod && mod.style.display !== 'none';
-            });
+            const modal = page.locator('#detailModal');
+            const isVisible = await modal.evaluate(el => el.style.display !== 'none');
             assert(isVisible, 'Detail modal not visible after click');
         });
 
         await test('Close modal on Escape key', async () => {
-            // Make sure modal is open
-            const modal = await page.$('#detailModal');
-            if (modal) {
+            const modal = page.locator('#detailModal');
+            if (await modal.count() > 0) {
                 await page.keyboard.press('Escape');
                 await page.waitForTimeout(300);
 
-                const isClosed = await page.evaluate(() => {
-                    const mod = document.getElementById('detailModal');
-                    return mod && mod.style.display === 'none';
-                });
+                const isClosed = await modal.evaluate(el => el.style.display === 'none');
                 assert(isClosed, 'Modal not closed after Escape');
             }
         });
 
         await test('Previous day button works', async () => {
-            // Get current day
-            const dayBefore = await page.evaluate(() => {
-                return parseInt(document.getElementById('daySelector').value);
-            });
+            const daySelector = page.locator('#daySelector');
+            const dayBefore = parseInt(await daySelector.inputValue());
 
-            // Click previous button
-            await page.click('#prevDayBtn');
+            const prevBtn = page.locator('#prevDayBtn');
+            await prevBtn.click();
             await page.waitForTimeout(500);
 
-            // Check day changed
-            const dayAfter = await page.evaluate(() => {
-                return parseInt(document.getElementById('daySelector').value);
-            });
+            const dayAfter = parseInt(await daySelector.inputValue());
             assert(dayAfter === dayBefore - 1, `Day didn't decrease: ${dayBefore} -> ${dayAfter}`);
         });
 
         await test('Next day button works', async () => {
-            const dayBefore = await page.evaluate(() => {
-                return parseInt(document.getElementById('daySelector').value);
-            });
+            const daySelector = page.locator('#daySelector');
+            const dayBefore = parseInt(await daySelector.inputValue());
 
-            await page.click('#nextDayBtn');
+            const nextBtn = page.locator('#nextDayBtn');
+            await nextBtn.click();
             await page.waitForTimeout(500);
 
-            const dayAfter = await page.evaluate(() => {
-                return parseInt(document.getElementById('daySelector').value);
-            });
+            const dayAfter = parseInt(await daySelector.inputValue());
             assert(dayAfter === dayBefore + 1, `Day didn't increase: ${dayBefore} -> ${dayAfter}`);
         });
 
@@ -242,19 +204,14 @@ function assert(condition, msg) {
         section('PWA — Responsive Design');
 
         await test('Mobile layout renders (375px)', async () => {
-            const layout = await page.evaluate(() => {
-                const heroSection = document.querySelector('.hero-section');
-                return heroSection ? window.getComputedStyle(heroSection).display : 'not found';
-            });
-            assert(layout === 'block', `Hero section display: ${layout}`);
+            const heroSection = page.locator('.hero-section');
+            const display = await heroSection.evaluate(el => window.getComputedStyle(el).display);
+            assert(display === 'block', `Hero section display: ${display}`);
         });
 
         await test('Days grid stacks on mobile', async () => {
-            const gridCols = await page.evaluate(() => {
-                const grid = document.getElementById('daysGrid');
-                return window.getComputedStyle(grid).gridTemplateColumns;
-            });
-            // On mobile, should be 1 column (not multiple)
+            const daysGrid = page.locator('#daysGrid');
+            const gridCols = await daysGrid.evaluate(el => window.getComputedStyle(el).gridTemplateColumns);
             const colCount = gridCols.split(' ').length;
             assert(colCount === 1, `Grid columns on mobile: ${gridCols}`);
         });
@@ -262,31 +219,23 @@ function assert(condition, msg) {
         // ==================== PERFORMANCE ====================
         section('PWA — Performance Metrics');
 
-        await test('Lighthouse CLS < 0.1', async () => {
-            // Get CLS (Cumulative Layout Shift)
-            const cls = await page.evaluate(() => {
+        await test('LCP (Largest Contentful Paint) < 3s', async () => {
+            const lcpTime = await page.evaluate(() => {
                 return new Promise((resolve) => {
-                    let clsValue = 0;
+                    let lcp = 0;
                     const observer = new PerformanceObserver((list) => {
-                        for (const entry of list.getEntries()) {
-                            if (!entry.hadRecentInput) {
-                                clsValue += entry.value;
-                            }
-                        }
-                        resolve(clsValue);
+                        const entries = list.getEntries();
+                        lcp = entries[entries.length - 1].renderTime || entries[entries.length - 1].loadTime;
                     });
-                    observer.observe({ type: 'layout-shift', buffered: true });
-                    setTimeout(() => resolve(clsValue), 1000);
+                    observer.observe({ type: 'largest-contentful-paint', buffered: true });
+                    setTimeout(() => resolve(lcp), 1500);
                 });
             });
-            assert(cls < 0.2, `CLS too high: ${cls.toFixed(3)}`);
+            assert(lcpTime < 3000, `LCP too high: ${Math.round(lcpTime)}ms`);
         });
 
         await test('Images lazy load', async () => {
-            const lazyImages = await page.evaluate(() => {
-                const imgs = document.querySelectorAll('img[loading="lazy"]');
-                return imgs.length;
-            });
+            const lazyImages = await page.locator('img[loading="lazy"]').count();
             assert(lazyImages > 0, `No lazy-loaded images found`);
         });
 
@@ -294,43 +243,55 @@ function assert(condition, msg) {
         section('PWA — Accessibility (a11y)');
 
         await test('All images have alt text', async () => {
-            const missingAlt = await page.evaluate(() => {
-                const imgs = document.querySelectorAll('img');
-                let missing = 0;
-                for (let img of imgs) {
-                    if (!img.alt || img.alt.trim() === '') missing++;
-                }
-                return missing;
-            });
-            assert(missingAlt === 0, `${missingAlt} images missing alt text`);
+            const images = page.locator('img');
+            const count = await images.count();
+            for (let i = 0; i < count; i++) {
+                const alt = await images.nth(i).getAttribute('alt');
+                assert(alt && alt.trim().length > 0, `Image ${i} missing alt text`);
+            }
         });
 
-        await test('Color contrast sufficient (AAA)', async () => {
-            const contrast = await page.evaluate(() => {
-                // Simple check: text should be light on dark background
+        await test('Color contrast sufficient', async () => {
+            const bodyColor = await page.evaluate(() => {
                 const text = document.querySelector('body');
                 const bgColor = window.getComputedStyle(text).backgroundColor;
                 const textColor = window.getComputedStyle(text).color;
                 return { bg: bgColor, fg: textColor };
             });
-            assert(contrast.bg && contrast.fg, `Could not determine colors`);
+            assert(bodyColor.bg && bodyColor.fg, `Could not determine colors`);
         });
 
         await test('Buttons are keyboard accessible', async () => {
-            const btnCount = await page.evaluate(() => {
-                return document.querySelectorAll('button, a[href], [role="button"]').length;
-            });
+            const btnCount = await page.locator('button, a[href], [role="button"]').count();
             assert(btnCount > 5, `Too few accessible buttons: ${btnCount}`);
+        });
+
+        await test('Tab navigation works', async () => {
+            const tabs = page.locator('.tab-item');
+            const tabCount = await tabs.count();
+            assert(tabCount === 4, `Expected 4 tabs, got ${tabCount}`);
         });
 
         // ==================== PWA FEATURES ====================
         section('PWA — Service Worker & Offline');
 
-        await test('Service Worker registered', async () => {
-            const swRegistered = await page.evaluate(() => {
-                return navigator.serviceWorker ? 'yes' : 'no';
+        await test('Service Worker API available', async () => {
+            const swAvailable = await page.evaluate(() => {
+                return navigator.serviceWorker ? true : false;
             });
-            assert(swRegistered === 'yes', 'Service Worker API not available');
+            assert(swAvailable, 'Service Worker API not available');
+        });
+
+        await test('Manifest.json loads', async () => {
+            const manifestStatus = await page.evaluate(async () => {
+                try {
+                    const resp = await fetch('manifest.json');
+                    return resp.ok;
+                } catch (e) {
+                    return false;
+                }
+            });
+            assert(manifestStatus, 'Manifest.json not loading');
         });
 
         // ==================== SUMMARY ====================

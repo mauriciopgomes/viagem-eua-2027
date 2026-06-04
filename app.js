@@ -94,8 +94,51 @@ function notifyCharging() {
     }
 }
 
-// Initialize notifications on app load
-document.addEventListener('DOMContentLoaded', initNotifications);
+// ==================== PWA INSTALL PROMPT ====================
+let deferredPrompt = null;
+function initPWAInstallPrompt() {
+    // Capture the beforeinstallprompt event
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        console.log('[PWA] Install prompt available');
+        // Optionally show subtle notification
+        sendNotification('🚀 Instalar App', {
+            body: 'Adicione Viagem EUA 2027 à sua tela inicial para acesso rápido!',
+            icon: 'icons/icon-192.png',
+            badge: 'icons/icon-192.png',
+            tag: 'pwa-install',
+            requireInteraction: false
+        }).catch(() => {}); // Silent fail if notifications disabled
+    });
+    
+    // Handle successful installation
+    window.addEventListener('appinstalled', () => {
+        deferredPrompt = null;
+        console.log('[PWA] Successfully installed');
+    });
+}
+
+// Trigger PWA install (called from UI, e.g., Ajustes tab button)
+window.triggerPWAInstall = function() {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('[PWA] User accepted install');
+            }
+            deferredPrompt = null;
+        });
+    } else {
+        console.log('[PWA] Install prompt not available');
+    }
+};
+
+// Initialize notifications and PWA install on app load
+document.addEventListener('DOMContentLoaded', function() {
+    initNotifications();
+    initPWAInstallPrompt();
+});
 
 // ==================== PERFORMANCE OBSERVER ====================
 if (typeof PerformanceObserver !== 'undefined') {
