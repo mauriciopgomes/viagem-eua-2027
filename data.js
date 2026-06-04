@@ -639,12 +639,12 @@ const days = [
             { time: "17:30", text: "🚗 Volta pra Mariposa (~45 min)", type: "drive" },
             { time: "19:00", text: "🍽️ Jantar — <strong>Savoury's</strong> (5034 Hwy 140, Mariposa) — cozinha americana eclética com ingredientes locais da Sierra Nevada. ~$20-25/pessoa", type: "food" }
         ],
-        tips: ["❄️ Yosemite nevado em fevereiro é LINDO! Menos turistas, silêncio, neve nos picos."]
+        tips: ["❄️ Yosemite nevado em fevereiro é LINDO! Menos turistas, silêncio, neve nos picos.", "🏨 Hospedagem: <strong>El Portal</strong> (2 km da entrada, Yosemite View Lodge) ou <strong>Fish Camp</strong> (3 km entrada sul, Tenaya Lodge — resort com piscina) ficam bem mais perto que Mariposa. Reserve com meses de antecedência!"]
     },
     {
         photo: 'img/dia-29.jpg', shortLoc: 'Yosemite', location: "Yosemite NP dia 2 — Neve!",
         route: "Badger Pass + trilhas na neve! ⛷️",
-        note: "Snow tubing, snowshoeing e mais Yosemite Valley!",
+        note: "Snow tubing, snowshoeing e mais Yosemite Valley! 🏨 Dica: considere hospedar em El Portal ou Fish Camp — bem na porta do parque.",
         region: "ca",
         items: [
             { time: "07:30", text: "☕ Café em Mariposa", type: "" },
