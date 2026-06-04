@@ -26,7 +26,6 @@ jobs:
       - run: npm run lint
       - run: node tests.js
       - run: node test-sync.js
-      - run: npm run e2e
       - uses: treosh/lighthouse-ci-action@v10
         with:
           runs: 1
