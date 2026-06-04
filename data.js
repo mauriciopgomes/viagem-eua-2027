@@ -27,7 +27,7 @@ const days = [
             { time: "14:00", text: "🚶 Passeio pela <strong>5th Avenue</strong> — Saks, Tiffany's, Apple Store (cubo de vidro!)", type: "" },
             { time: "15:00", text: "📸 <strong>Rockefeller Center Plaza</strong> — pista de patinação, bandeiras", type: "" },
             { time: "15:30", text: "🧊 <strong>Bryant Park</strong> — Winter Village no inverno (mercadinho, patinação)", type: "" },
-            { time: "19:00", text: "�️ Jantar perto do hotel (Times Square / Midtown)", type: "food" },
+            { time: "19:00", text: "🍽️ Jantar — <strong>Gazala Place</strong> (709 9th Ave, Hell's Kitchen) — cozinha druza-israelense única em NYC, burekas e shakshuka. ~$15-20/pessoa", type: "food" },
             { time: "20:30", text: "🏨 Hotel — descanso (jet lag!)", type: "" }
         ]
     },
@@ -53,7 +53,7 @@ const days = [
             { time: "15:30", text: "🌿 <strong>High Line</strong> — parque elevado num antigo trilho de trem", type: "highlight" },
             { time: "16:00", text: "🏢 <strong>Pier 57</strong> (sede Google NY) + 🌴 <strong>Little Island</strong> (parque flutuante)", type: "" },
             { time: "16:30", text: "🌇 <strong>Hudson Yards + The Vessel</strong>", type: "highlight" },
-            { time: "17:30", text: "🍽️ Jantar na região (Chelsea, Hudson Yards ou Midtown)", type: "food" },
+            { time: "17:30", text: "🍽️ Jantar — <strong>Coppelia</strong> (207 W 14th St, Chelsea) — diner latino-cubano aberto 24h, ropa vieja e arroz con pollo. ~$15-20/pessoa", type: "food" },
             { time: "19:00", text: "🏨 Volta ao hotel", type: "" }
         ]
     },
@@ -89,7 +89,7 @@ const days = [
             { time: "15:30", text: "🎮 <strong>Nintendo NY</strong> (Rockefeller Center) + 🏰 <strong>Disney Store</strong> (1540 Broadway, Times Square)", type: "" },
             { time: "17:00", text: "Tempo livre — descansar no hotel ou última exploração", type: "" },
             { time: "18:00", text: "🧳 Volta ao hotel — arrumar malas", type: "" },
-            { time: "19:00", text: "� Jantar — <strong>Suka Sushi</strong> — despedida de NY com sushi!", type: "food" },
+            { time: "19:00", text: "\uD83C\uDF7D\uFE0F Jantar — <strong>Szechuan Gourmet</strong> (21 W 39th St, Midtown) — melhor Szechuan de Midtown, dan dan noodles e mapo tofu. ~$15-20/pessoa", type: "food" },
             { time: "21:00", text: "🏨 Hotel — dormir cedo (voo amanhã!)", type: "" }
         ]
     },
@@ -117,7 +117,7 @@ const days = [
             { time: "16:35", text: "🎨 <strong>Elmer's Bottle Tree Ranch</strong> (Oro Grande) — floresta de 'árvores' de garrafas de vidro e metal! Arte outsider no deserto. Grátis", type: "" },
             { time: "17:30", text: "👽 <strong>Alien Fresh Jerky</strong> (Baker) — loja alien + jerky de 100 sabores! + 🌡️ <strong>World's Tallest Thermometer</strong>!", type: "" },
             { time: "~19:00", text: "🎰 Chegada em <strong>Las Vegas</strong>! Check-in", type: "" },
-            { time: "19:30", text: "🍽️ Jantar perto do hotel", type: "food" },
+            { time: "19:30", text: "🍽️ Jantar — <strong>Secret Pizza</strong> (The Cosmopolitan, 3º andar, sem placa) — o hidden gem de Vegas, pizza NY-style escondida no hotel mais badalado. ~$15-20/pessoa", type: "food" },
             { time: "21:00", text: "🏨 Dormir cedo (jet lag + dia longo!)", type: "" }
         ],
         tips: ["⚡ Dia longo mas o fuso horário ajuda (-3h). Chegam cansados — dormir cedo!"]
@@ -138,7 +138,7 @@ const days = [
             { time: "14:00", text: "🍔 Almoço na Strip", type: "food" },
             { time: "15:00", text: "🏨 Explorar hotéis — <strong>Venetian</strong> (canais), <strong>Bellagio</strong> (conservatório), <strong>Caesars Palace</strong>", type: "highlight" },
             { time: "18:00", text: "🌅 <strong>Bellagio Fountains</strong> — show a cada 30 min!", type: "highlight" },
-            { time: "19:00", text: "🍽️ Jantar na Strip", type: "food" }
+            { time: "19:00", text: "🍽️ Jantar — <strong>China Mama</strong> (3420 S Jones Blvd, Chinatown de LV) — xiao long bao e mapo tofu, favorito dos moradores de Vegas. ~$15-20/pessoa", type: "food" }
         ],
         tips: ["🏔️ Mt. Charleston: pode estar -5°C com neve! Levar casaco, luvas e botas."]
     },
@@ -158,7 +158,7 @@ const days = [
             { time: "14:00", text: "🏜️ <strong>Mesquite Flat Sand Dunes</strong> — dunas clássicas!", type: "" },
             { time: "15:00", text: "🚗 Volta pra Vegas (~2h)", type: "drive" },
             { time: "17:00", text: "🏨 Chegada em Vegas — piscina / descanso", type: "" },
-            { time: "19:00", text: "🍽️ Jantar na Strip", type: "food" },
+            { time: "19:00", text: "🍽️ Jantar — <strong>Lotus of Siam</strong> (620 E Flamingo Rd) — melhor tailandês fora da Tailândia, khao soi e nam prik ong. ~$20-25/pessoa", type: "food" },
             { time: "20:00", text: "🌃 Noite em Vegas", type: "" }
         ],
         tips: ["⚡ EV: Round trip ~380 km. Carregar a 100% na noite anterior!"]
@@ -182,7 +182,7 @@ const days = [
             { time: "15:00", text: "🛍️ Explorar <strong>Springdale</strong>", type: "" },
             { time: "15:30", text: "🌄 <strong>Canyon Overlook Trail</strong> (~1.6 km, ~1h) — vista incrível!", type: "highlight" },
             { time: "17:00", text: "🌅 Pôr do sol em Zion!", type: "highlight" },
-            { time: "18:30", text: "🍽️ Jantar em Springdale", type: "food" }
+            { time: "18:30", text: "🍽️ Jantar — <strong>Oscar's Cafe</strong> (948 Zion Park Blvd, Springdale) — mexicana clássica, burritos e enchiladas. ~$12-18/pessoa", type: "food" }
         ]
     },
 
@@ -203,7 +203,7 @@ const days = [
             { time: "15:00", text: "📸 <strong>Big Bend</strong>", type: "" },
             { time: "15:30", text: "🥾 <strong>Riverside Walk</strong>", type: "" },
             { time: "16:30", text: "🌅 <strong>Pôr do sol no Canyon Junction Bridge</strong>", type: "highlight" },
-            { time: "18:30", text: "🍽️ Jantar em Springdale", type: "food" }
+            { time: "18:30", text: "🍽️ Jantar — <strong>Oscar's Cafe</strong> (948 Zion Park Blvd, Springdale) — mexicana clássica, burritos e enchiladas. ~$12-18/pessoa", type: "food" }
         ]
     },
     {
@@ -226,7 +226,7 @@ const days = [
             { time: "14:00", text: "🥾 <strong>Navajo Loop + Queen's Garden Trail</strong> (~2h)", type: "highlight" },
             { time: "15:00", text: "🚗 <strong>Scenic Drive</strong> — Inspiration Point, Natural Bridge, Rainbow Point", type: "" },
             { time: "17:30", text: "🌅 <strong>Pôr do sol no Bryce Amphitheater</strong>", type: "highlight" },
-            { time: "18:30", text: "🍽️ Jantar", type: "food" },
+            { time: "18:30", text: "🍽️ Jantar — <strong>Cowboy's Smokehouse BBQ</strong> (95 N Main St, Panguitch, ~22 km) — BBQ defumado do Utah rural, ribs e brisket caseiros. ~$15-20/pessoa", type: "food" },
             { time: "20:30", text: "🌌 <strong>Stargazing em Bryce!</strong> — International Dark Sky Park!", type: "highlight" }
         ],
         tips: ["🔭 Bryce é um dos melhores céus escuros do MUNDO! Levem cobertores — faz MUITO frio!"]
@@ -256,7 +256,7 @@ const days = [
             { time: "15:30", text: "🥾 <strong>Corona Arch Trail</strong> (~5 km, ~2h) — arco gigante sem multidões!", type: "highlight" },
             { time: "17:30", text: "🚗 <strong>Scenic Byway 128</strong> — rio Colorado", type: "" },
             { time: "18:00", text: "🌅 Pôr do sol em Moab", type: "highlight" },
-            { time: "19:00", text: "🍽️ Jantar em Moab", type: "food" }
+            { time: "19:00", text: "🍽️ Jantar — <strong>Moab Brewery</strong> (686 S Main St) — cervejaria local tradicional, burger e nachos. ~$15-20/pessoa", type: "food" }
         ]
     },
     {
@@ -278,7 +278,7 @@ const days = [
             { time: "16:30", text: "🌅 Pôr do sol no <strong>Grand View Point</strong>", type: "highlight" },
             { time: "17:45", text: "📸 <strong>Petroglifos na Potash Road</strong>", type: "" },
             { time: "18:00", text: "📸 <strong>Thelma & Louise Point</strong>", type: "" },
-            { time: "19:00", text: "🍽️ Jantar em Moab", type: "food" }
+            { time: "19:00", text: "🍽️ Jantar — <strong>Pasta Jay's</strong> (4 S 100 W, Moab) — italiano caseiro favorito dos moradores, massas e lasanha. ~$15-20/pessoa", type: "food" }
         ]
     },
     {
@@ -298,7 +298,7 @@ const days = [
             { time: "15:30", text: "🏜️ <strong>Fiery Furnace Viewpoint + Park Avenue</strong>", type: "" },
             { time: "16:30", text: "🚗 → <strong>Dead Horse Point SP</strong> (~30 min)", type: "drive" },
             { time: "17:00", text: "🌅 <strong>Dead Horse Point</strong> — 600m sobre o Colorado! Westworld!", type: "highlight" },
-            { time: "18:30", text: "🍽️ Jantar de despedida de Moab", type: "food" }
+            { time: "18:30", text: "🍽️ Jantar de despedida de Moab — <strong>Spoke on Center</strong> (702 S Main St) — bistrô local favorito de trilheiros, sanduíches artesanais e sopa do dia. ~$12-18/pessoa", type: "food" }
         ]
     },
 
@@ -328,7 +328,7 @@ const days = [
             { time: "17:30", text: "📸 <strong>Evel Knievel Jump Site</strong> — local do famoso salto de 1974 sobre o Snake River Canyon!", type: "highlight" },
             { time: "17:50", text: "�🌊 <strong>Shoshone Falls</strong> — 'Niágara do Oeste'! 65m de queda!", type: "highlight" },
             { time: "18:00", text: "🏨 Check-in", type: "" },
-            { time: "18:30", text: "🍽️ Jantar", type: "food" }
+            { time: "18:30", text: "🍽️ Jantar — <strong>Koto Japanese Restaurant</strong> (132 Shoshone St N, Twin Falls) — instituição local surpreendentemente boa, sushi e teriyaki. ~$15-20/pessoa", type: "food" }
         ],
         tips: ["⚠️ Dois dias longos seguidos (14 + 15): ~770km + ~700km. Dormir cedo!"]
     },
@@ -361,7 +361,7 @@ const days = [
             { time: "15:00", text: "🚗 I-84 W → I-5 N → Centralia (~240 km, ~2.5h)", type: "drive" },
             { time: "~17:30", text: "🏨 Chegada em <strong>Centralia</strong>!", type: "" },
             { time: "18:00", text: "⚡ <strong>Supercharger Centralia</strong>", type: "charge" },
-            { time: "18:30", text: "🍽️ Jantar", type: "food" }
+            { time: "18:30", text: "🍽️ Jantar — <strong>Olympic Club Hotel & Bar</strong> (112 N Tower Ave, Centralia) — bar histórico de 1908, o mais antigo de WA em funcionamento, burgers e fish & chips. ~$15-20/pessoa", type: "food" }
         ]
     },
 
@@ -388,7 +388,7 @@ const days = [
             { time: "16:30", text: "🌊 <strong>Sol Duc Falls Trail</strong> (~2.5 km)", type: "" },
             { time: "17:30", text: "🏨 Check-in em <strong>Forks</strong>", type: "" },
             { time: "18:00", text: "🧛 Tour Crepúsculo! Forks High School + Casa da Bella Swan", type: "highlight" },
-            { time: "18:30", text: "🍽️ Jantar em Forks", type: "food" }
+            { time: "18:30", text: "🍽️ Jantar — <strong>Pacific Pizza & Pasta</strong> (70 N Forks Ave, Forks) — a opção mais confiável da cidade, favorita dos moradores locais. ~$12-18/pessoa", type: "food" }
         ],
         tips: ["⚠️ Visitor Center fecha no meio da semana no inverno (abre só sex-dom).", "🔄 Se Rainier FECHADO: direto Centralia → Forks (~370 km). Chegada ~12:00!"]
     },
@@ -409,7 +409,7 @@ const days = [
             { time: "14:30", text: "🌊 <strong>Rialto Beach</strong> — sea stacks e troncos", type: "" },
             { time: "16:00", text: "🥾 <strong>Marymere Falls Trail</strong> (~2.5 km)", type: "" },
             { time: "17:30", text: "🌅 Pôr do sol no Pacífico!", type: "highlight" },
-            { time: "18:30", text: "🍽️ Jantar", type: "food" }
+            { time: "18:30", text: "🍽️ Jantar — <strong>Bella Italia</strong> (118 E 1st St, Port Angeles) — italiano autêntico com ingredientes do PNW, mushroom ravioli e linguine alle vongole. ~$20-25/pessoa", type: "food" }
         ]
     },
     {
@@ -434,7 +434,7 @@ const days = [
             { time: "16:00", text: "📸 <strong>Haystack Rock</strong> — ícone de Oregon!", type: "highlight" },
             { time: "16:45", text: "🌊 <strong>Ecola State Park</strong> — mirante espetacular!", type: "" },
             { time: "17:30", text: "🌅 <strong>Pôr do sol em Cannon Beach</strong> — ESPETACULAR!", type: "highlight" },
-            { time: "18:30", text: "🍽️ Jantar em Cannon Beach", type: "food" }
+            { time: "18:30", text: "🍽️ Jantar — <strong>Ecola Seafood Restaurant & Market</strong> (208 N Spruce St) — Dungeness crab e fish & chips de halibut frescos a poucos metros da Haystack Rock. ~$20-25/pessoa", type: "food" }
         ]
     },
     {
@@ -462,7 +462,7 @@ const days = [
             { time: "17:15", text: "📸 <strong>Natural Bridges Viewpoint</strong>", type: "highlight" },
             { time: "17:30", text: "🌅 Pôr do sol na costa de Oregon", type: "highlight" },
             { time: "18:00", text: "🏨 Check-in em <strong>Gold Beach</strong>", type: "" },
-            { time: "18:30", text: "🍽️ Jantar — frutos do mar!", type: "food" }
+            { time: "18:30", text: "🍽️ Jantar — <strong>Spinner's Seafood Steak & Chowder House</strong> (Gold Beach, OR) — salmão grelhado do Rio Rogue e clam chowder frescos. ~$20-25/pessoa", type: "food" }
         ]
     },
 
@@ -484,7 +484,7 @@ const days = [
             { time: "14:30", text: "🏝️ <strong>Battery Point Lighthouse</strong> — ilha acessível na maré baixa!", type: "" },
             { time: "15:30", text: "🌲 <strong>Del Norte Coast Redwoods SP</strong> — <strong>Coastal Trail (Enderts Beach)</strong> (~4 km) — praia + tidepools!", type: "highlight" },
             { time: "18:00", text: "🌅 Pôr do sol no porto de Crescent City", type: "" },
-            { time: "19:00", text: "🍽️ Jantar — frutos do mar!", type: "food" }
+            { time: "19:00", text: "🍽️ Jantar — <strong>Fisherman's Restaurant</strong> (700 US-101 S, Crescent City) — Dungeness crab e halibut do Pacífico Norte, clássico de cidade de pescadores. ~$15-22/pessoa", type: "food" }
         ],
         tips: ["🌊 Battery Point: verificar tábua de marés! Só acessível na maré baixa."]
     },
@@ -511,7 +511,7 @@ const days = [
             { time: "17:00", text: "🏨 Chegada em <strong>Eureka</strong>! Check-in", type: "" },
             { time: "17:30", text: "🏙️ <strong>Old Town Eureka</strong> — <strong>Carson Mansion</strong>", type: "" },
             { time: "18:00", text: "⚡ <strong>Supercharger Eureka</strong>", type: "charge" },
-            { time: "19:00", text: "🍽️ Jantar", type: "food" }
+            { time: "19:00", text: "🍽️ Jantar — <strong>Lost Coast Brewery & Cafe</strong> (617 4th St, Eureka) — cervejaria artesanal pioneira do North Coast, burgers e fish tacos. ~$15-20/pessoa", type: "food" }
         ],
         tips: ["⚠️ Tall Trees Grove: permit gratuito no Thomas Clarke Info Center (Orick).", "⚠️ Fern Canyon: Davison Road pode fechar no inverno. Verificar em nps.gov/redw."]
     },
@@ -535,7 +535,7 @@ const days = [
             { time: "~15:00", text: "🏨 Chegada em <strong>SF</strong>! Check-in", type: "" },
             { time: "15:30", text: "🌆 <strong>Embarcadero</strong> — Ferry Building", type: "" },
             { time: "16:30", text: "🏖️ <strong>Pier 39</strong> — leões-marinhos!", type: "highlight" },
-            { time: "18:00", text: "🍽️ Jantar em <strong>Fisherman's Wharf</strong> — clam chowder!", type: "food" }
+            { time: "18:00", text: "🍽️ Jantar — <strong>Tony's Pizza Napoletana</strong> (1570 Stockton St, North Beach) — campeão mundial de pizza napolitana, a 5 min de Fisherman's Wharf. ~$20-25/pessoa. OU: Clam chowder no <strong>Boudin</strong> (Pier 39)", type: "food" }
         ]
     },
     {
@@ -552,7 +552,7 @@ const days = [
             { time: "12:30", text: "🍽️ Almoço", type: "food" },
             { time: "14:00", text: "🌳 <strong>Golden Gate Park</strong> — Japanese Tea Garden, Conservatory of Flowers", type: "" },
             { time: "16:00", text: "🏖️ <strong>Ocean Beach</strong> — praia do Pacífico", type: "" },
-            { time: "18:00", text: "🍽️ Jantar", type: "food" }
+            { time: "18:00", text: "🍽️ Jantar — <strong>La Taqueria</strong> (2889 Mission St, Mission District) — vencedor James Beard America's Classic, burrito de carnitas sem arroz, o mais famoso dos EUA. ~$12-15/pessoa", type: "food" }
         ]
     },
     {
@@ -568,7 +568,7 @@ const days = [
             { time: "12:30", text: "🍽️ Almoço — <strong>La Taqueria</strong> (Mission)", type: "food" },
             { time: "14:00", text: "🎮 <strong>Nintendo San Francisco</strong> (Union Square)", type: "highlight" },
             { time: "15:30", text: "🛍️ <strong>Union Square</strong> — compras", type: "" },
-            { time: "17:00", text: "🍽️ Jantar de despedida de SF", type: "food" }
+            { time: "17:00", text: "🍽️ Jantar especial de despedida de SF — <strong>Nopa</strong> (560 Divisadero St) — cozinha californiana de forno a lenha, ingredientes locais. ~$35-45/pessoa. Reserva obrigatória via Resy!", type: "food" }
         ]
     },
 
@@ -590,7 +590,7 @@ const days = [
             { time: "13:30", text: "🍽️ Almoço em Monterey", type: "food" },
             { time: "14:30", text: "🚗 <strong>17-Mile Drive</strong> — Lone Cypress, Pebble Beach!", type: "highlight" },
             { time: "16:30", text: "🏖️ <strong>Carmel-by-the-Sea</strong> — vila charmosa, galerias, Carmel Beach", type: "" },
-            { time: "18:00", text: "🍽️ Jantar em Carmel", type: "food" }
+            { time: "18:00", text: "🍽️ Jantar — <strong>Mundaka</strong> (San Carlos St entre Ocean e 7th, Carmel) — tapas espanholas autênticas, patatas bravas e pulpo a la gallega. ~$20-25/pessoa", type: "food" }
         ]
     },
     {
@@ -614,7 +614,7 @@ const days = [
             { time: "13:00", text: "⚡ <strong>Supercharger Gilroy</strong> — ~20 min", type: "charge" },
             { time: "14:30", text: "⚡ <strong>Supercharger Merced</strong> — ~20 min", type: "charge" },
             { time: "~16:30", text: "🏨 Chegada em <strong>Mariposa</strong>! Check-in", type: "" },
-            { time: "18:00", text: "🍽️ Jantar em Mariposa", type: "food" }
+            { time: "18:00", text: "🍽️ Jantar — <strong>Charles Street Dinner House</strong> (5043 Charles St, Mariposa) — steakhouse local tradicional, prime rib e chicken marsala. ~$20-25/pessoa", type: "food" }
         ],
         tips: ["⚠️ Se Hwy 1 estiver FECHADA ao sul de Bixby: pular Pfeiffer Beach e McWay Falls, sair direto de Carmel pro interior mais cedo."]
     },
@@ -636,7 +636,7 @@ const days = [
             { time: "15:30", text: "📸 <strong>Swinging Bridge</strong> — outra vista do Yosemite Falls", type: "" },
             { time: "16:30", text: "🌅 Sunset no <strong>Sentinel Bridge</strong> — Half Dome dourado!", type: "highlight" },
             { time: "17:30", text: "🚗 Volta pra Mariposa (~45 min)", type: "drive" },
-            { time: "19:00", text: "🍽️ Jantar em Mariposa", type: "food" }
+            { time: "19:00", text: "🍽️ Jantar — <strong>Savoury's</strong> (5034 Hwy 140, Mariposa) — cozinha americana eclética com ingredientes locais da Sierra Nevada. ~$20-25/pessoa", type: "food" }
         ],
         tips: ["❄️ Yosemite nevado em fevereiro é LINDO! Menos turistas, silêncio, neve nos picos."]
     },
@@ -656,7 +656,7 @@ const days = [
             { time: "16:00", text: "🎨 <strong>Ansel Adams Gallery</strong> — fotografia icônica de Yosemite", type: "" },
             { time: "16:30", text: "🌅 Sunset no <strong>Tunnel View</strong> — segunda chance, luz dourada!", type: "highlight" },
             { time: "17:30", text: "🚗 Volta pra Mariposa", type: "drive" },
-            { time: "19:00", text: "🍽️ Jantar de despedida em Mariposa", type: "food" }
+            { time: "19:00", text: "🍽️ Jantar de despedida — <strong>Castillo's Mexican Food</strong> (4995 5th St, Mariposa) — mexicano familiar dos moradores, enchiladas verdes e chile relleno. ~$12-18/pessoa", type: "food" }
         ]
     },
     {
@@ -681,7 +681,7 @@ const days = [
             { time: "16:00", text: "📸 <strong>Moro Rock</strong> — 400 degraus com vista 360°!", type: "highlight" },
             { time: "17:00", text: "🚗 Descida → Three Rivers (~1h)", type: "drive" },
             { time: "18:00", text: "🏨 Check-in em <strong>Three Rivers</strong>", type: "" },
-            { time: "19:00", text: "🍽️ Jantar em Three Rivers", type: "food" }
+            { time: "19:00", text: "🍽️ Jantar — <strong>The Gateway Restaurant</strong> (45978 Sierra Dr, Three Rivers) — o mais confiável na porta do Sequoia, burgers e trout almondine. ~$15-20/pessoa", type: "food" }
         ],
         tips: ["❄️ Em fevereiro pode ter neve nas áreas mais altas.", "⚠️ Kings Canyon Scenic Byway (CA-180 leste) fecha no inverno (nov–abr). Só General Grant Tree é acessível."]
     },
@@ -708,7 +708,7 @@ const days = [
             { time: "15:30", text: "🏖️ <strong>Santa Monica Pier</strong> — roda-gigante, Route 66 End Sign!", type: "highlight" },
             { time: "16:30", text: "🌴 <strong>Venice Beach</strong> — boardwalk, Muscle Beach!", type: "" },
             { time: "18:00", text: "🌅 Sunset na praia!", type: "highlight" },
-            { time: "19:00", text: "🍽️ Jantar em Santa Monica", type: "food" }
+            { time: "19:00", text: "🍽️ Jantar — <strong>Tacos Por Favor</strong> (1406 Olympic Blvd, Santa Monica) — taqueria de bairro amada há décadas, fila de locais, tacos de carne asada. ~$10-15/pessoa", type: "food" }
         ]
     },
     {
@@ -732,7 +732,7 @@ const days = [
             { time: "15:30", text: "🛍️ Passear pelo <strong>Big Bear Village</strong> — lojas, cafés", type: "" },
             { time: "16:00", text: "☕ Chocolate quente com vista pro lago!", type: "" },
             { time: "16:30", text: "🚗 Volta pra LA (~2h)", type: "drive" },
-            { time: "18:30", text: "🍽️ Jantar em LA", type: "food" }
+            { time: "18:30", text: "🍽️ Jantar — <strong>Himalayan Restaurant</strong> (672 Pine Knot Ave, Big Bear Village) — cozinha nepalesa/indiana nas montanhas, momo e chicken tikka masala. ~$15-20/pessoa", type: "food" }
         ],
         tips: ["⚡ Round trip ~320 km com subida forte. Carregar 100% antes ou parar em San Bernardino.", "❄️ Big Bear a 2.000m — pode ter neve! Levar casacos e botas. Chains podem ser obrigatórias na CA-330."]
     },
@@ -749,7 +749,7 @@ const days = [
             { time: "12:30", text: "🍽️ Almoço", type: "food" },
             { time: "14:00", text: "🎬 <strong>Universal Studios Hollywood</strong> OU passeio livre (compras, Beverly Hills)", type: "highlight" },
             { time: "18:00", text: "🌅 Último pôr do sol nos EUA!", type: "highlight" },
-            { time: "19:00", text: "🍽️ Último jantar nos EUA!", type: "food" },
+            { time: "19:00", text: "🍽️ Último jantar nos EUA — <strong>Bavel</strong> (500 Mateo St, Arts District DTLA) — cozinha do Oriente Médio de alto nível, hummus com cordeiro e short rib com tahini. ~$35-45/pessoa. Reserva obrigatória com 2-3 semanas!", type: "food" },
             { time: "20:30", text: "🔭 <strong>Griffith Observatory à noite</strong> — LA iluminada!", type: "highlight" },
             { time: "22:00", text: "🧳 Hotel — arrumar malas", type: "" }
         ]
