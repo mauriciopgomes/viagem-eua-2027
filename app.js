@@ -478,7 +478,7 @@ const activityPhotos = {
     'Supercharger Bakersfield': 'img/activities/seligman_route66.jpg',
     'Supercharger San Bernardino': 'img/activities/seligman_route66.jpg',
     // --- Generic/Events ---
-    'Brincar na neve!': 'img/activities/big_bend_zion.jpg',
+    'Brincar na neve!': 'img/activities/mt__rainier.jpg',
     'CARREGAR ATÉ 100%!': 'img/activities/charging_bull.jpg',
     'Tesla': 'img/activities/las_vegas_strip_night.jpg',
 };
