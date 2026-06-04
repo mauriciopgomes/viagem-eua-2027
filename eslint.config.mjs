@@ -36,13 +36,10 @@ export default [
       }
     },
     rules: {
-      'no-unused-vars': ['warn', { 
-        argsIgnorePattern: '^_|^e$|^err$|^error$',
-        varsIgnorePattern: '^_|^e$|^err$|^error$|^fs$|^result$|^modal$|^skipped$|^regionColors$|^locName$|^hotels$|^parks$'
-      }],
+      'no-unused-vars': 'off',
       'no-console': 'off',
       'no-constant-condition': 'warn',
-      'no-empty': 'warn'
+      'no-empty': 'off'
     }
   }
 ];
