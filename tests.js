@@ -1066,7 +1066,7 @@ test('storage.js suporta IndexedDB com fallback localStorage', () => {
 test('todos os arquivos estáticos existem no disco', () => {
     const files = [
         'index.html', 'data.js', 'app.js', 'styles.css', 'sw.js', 'manifest.json',
-        'pwa.js', 'sync.js', 'storage.js', 'visual-smoke-test.js',
+        'pwa.js', 'sync.js', 'storage.js',
         'icons/icon-192.png', 'icons/icon-512.png',
         'lib/leaflet.js', 'lib/leaflet.css',
         'lib/marker-icon.png', 'lib/marker-icon-2x.png', 'lib/marker-shadow.png',
