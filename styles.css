@@ -205,17 +205,18 @@ body {
     display: flex;
     gap: 8px;
     padding: 12px 20px 16px;
+    padding-top: calc(12px + var(--safe-top));
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     mask-image: linear-gradient(to right, transparent, black 20px, black calc(100% - 20px), transparent);
     -webkit-mask-image: linear-gradient(to right, transparent, black 20px, black calc(100% - 20px), transparent);
     position: sticky;
-    top: var(--safe-top);
+    top: 0;
     z-index: 50;
-    background: var(--bg);
-    backdrop-filter: blur(10px);
-    background: rgba(5,5,8,0.8);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: rgba(5,5,8,0.82);
     border-bottom: 0.5px solid rgba(255,255,255,0.06);
 }
 .day-selector::-webkit-scrollbar { display: none; }
