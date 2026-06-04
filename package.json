@@ -4,7 +4,7 @@
   "description": "34-day USA road trip PWA",
   "private": true,
   "scripts": {
-    "lint": "eslint . --max-warnings=60",
+    "lint": "eslint . --max-warnings=0",
     "lint:fix": "eslint . --fix",
     "test": "node tests.js && node test-sync.js",
     "e2e": "node e2e-tests.js",
