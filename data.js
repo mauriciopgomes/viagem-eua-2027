@@ -591,7 +591,8 @@ const days = [
             { time: "14:30", text: "🚗 <strong>17-Mile Drive</strong> — Lone Cypress, Pebble Beach!", type: "highlight" },
             { time: "16:30", text: "🏖️ <strong>Carmel-by-the-Sea</strong> — vila charmosa, galerias, Carmel Beach", type: "" },
             { time: "18:00", text: "🍽️ Jantar — <strong>The Forge in the Forest</strong> (5th Ave e Junipero St, Carmel) — americana casual em casinha charmosa com jardim, burgers e ribs. Kid-friendly, sem frescura, ambiente de fazenda no centro de Carmel. ~$20-28/pessoa", type: "food" }
-        ]
+        ],
+        tips: ["🎟️ Monterey Bay Aquarium: compre os ingressos online antes da viagem! A bilheteria pode esgotar. ~$50/adulto, ~$30/criança. Site: montereybayaquarium.org"]
     },
     {
         photo: 'img/dia-27.jpg', shortLoc: 'Big Sur',
