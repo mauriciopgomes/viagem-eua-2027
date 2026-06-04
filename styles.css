@@ -204,14 +204,14 @@ body {
 .day-selector {
     display: flex;
     gap: 8px;
-    padding: 12px 20px 16px;
+    padding: calc(12px + var(--safe-top)) 20px 16px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     mask-image: linear-gradient(to right, transparent, black 20px, black calc(100% - 20px), transparent);
     -webkit-mask-image: linear-gradient(to right, transparent, black 20px, black calc(100% - 20px), transparent);
     position: sticky;
-    top: 0;
+    top: var(--safe-top);
     z-index: 50;
     background: var(--bg);
     backdrop-filter: blur(10px);
