@@ -25,7 +25,14 @@ function safeSetHTML(element, html) {
 // ==================== THEME: DARK MODE ONLY ====================
 // Theme is always dark, no toggle needed
 
-// ==================== PUSH NOTIFICATIONS ====================
+// ==================== NAVIGATION HELPERS ====================
+function goToDay(dayNum) {
+    // Switch to home tab first, then show the day
+    switchTab('home', { currentTarget: document.querySelector('[aria-controls="sec-home"]') });
+    setTimeout(function() {
+        showDay(dayNum);
+    }, 50);
+}
 function initNotifications() {
     // Request permission once on app launch
     if ('Notification' in window && Notification.permission === 'default') {
@@ -2524,7 +2531,7 @@ function renderExplore() {
     if (favItems.length > 0) {
         html += '<div class="explore-section-card">';
         favItems.forEach(function(f) {
-            html += '<div class="fav-item" onclick="switchTab(\'home\');showDay(' + f.day + ')">';
+            html += '<div class="fav-item" onclick="goToDay(' + f.day + ')">';
             html += '<div class="fav-day-badge">D' + f.day + '</div>';
             html += '<div class="fav-text">' + f.text + '</div>';
             html += '<div class="fav-time">' + f.time + '</div>';
@@ -2542,7 +2549,7 @@ function renderExplore() {
     html += '<div class="explore-section-card">';
     hotels.forEach(function(h) {
         var mapsUrl = 'https://maps.apple.com/?q=' + encodeURIComponent(h.name);
-        html += '<div class="hotel-item" onclick="switchTab(\'home\');showDay(' + findDayByDate(h.checkin) + ')">';
+        html += '<div class="hotel-item" onclick="goToDay(' + findDayByDate(h.checkin) + ')">';
         html += '<div class="hotel-num">' + h.num + '</div>';
         html += '<div class="hotel-info"><div class="hotel-name">' + h.name + '</div>';
         html += '<div class="hotel-dates">' + h.checkin + ' → ' + h.checkout + '</div></div>';
@@ -2560,7 +2567,7 @@ function renderExplore() {
     parks.forEach(function(p) {
         var dayMatch = p.days.match(/\d+/);
         var dayNum = dayMatch ? parseInt(dayMatch[0]) : 1;
-        html += '<div class="explore-park-card" onclick="switchTab(\'home\');showDay(' + dayNum + ')">';
+        html += '<div class="explore-park-card" onclick="goToDay(' + dayNum + ')">';
         html += '<div class="explore-park-header"><div>';
         html += '<div class="explore-park-name">' + p.name + '</div>';
         html += '<div class="explore-park-days">' + p.days + '</div>';
@@ -2576,7 +2583,7 @@ function renderExplore() {
     html += '<div class="explore-section-card">';
     superchargers.forEach(function(sc) {
         var mapsUrl = 'https://maps.apple.com/?q=' + encodeURIComponent('Tesla Supercharger ' + sc.name);
-        html += '<div class="charge-item' + (sc.critical ? ' critical' : '') + '" onclick="switchTab(\'home\');showDay(' + sc.day + ')">';
+        html += '<div class="charge-item' + (sc.critical ? ' critical' : '') + '" onclick="goToDay(' + sc.day + ')">';
         html += '<div class="charge-icon-wrap">' + (sc.critical ? '⚠️' : '⚡') + '</div>';
         html += '<div class="charge-info"><div class="charge-name">' + sc.name + '</div>';
         html += '<div class="charge-leg">Dia ' + sc.day + ' • ' + sc.leg + '</div>';
