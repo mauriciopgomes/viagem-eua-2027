@@ -457,6 +457,30 @@ const activityPhotos = {
     'Artist\'s Drive': 'img/activities/artists_palette.jpg',
     "Devil's Golf Course": 'img/activities/badwater_basin.jpg',
     'Los Tacos': 'img/activities/chelsea_market.jpg',
+    // --- Superchargers (fallback route photo) ---
+    'Supercharger Barstow': 'img/activities/seligman_route66.jpg',
+    'Supercharger Salina, UT': 'img/activities/seligman_route66.jpg',
+    'Supercharger Green River, UT': 'img/activities/seligman_route66.jpg',
+    'Supercharger Green River': 'img/activities/seligman_route66.jpg',
+    'Supercharger Price': 'img/activities/seligman_route66.jpg',
+    'Supercharger Twin Falls': 'img/activities/seligman_route66.jpg',
+    'Supercharger Baker City, OR': 'img/activities/seligman_route66.jpg',
+    'Supercharger Pendleton, OR': 'img/activities/seligman_route66.jpg',
+    'Supercharger The Dalles, OR': 'img/activities/seligman_route66.jpg',
+    'Supercharger Olympia': 'img/activities/seligman_route66.jpg',
+    'Supercharger Aberdeen, WA': 'img/activities/seligman_route66.jpg',
+    'Supercharger Lincoln City, OR': 'img/activities/seligman_route66.jpg',
+    'Supercharger Coos Bay': 'img/activities/seligman_route66.jpg',
+    'Supercharger Ukiah': 'img/activities/seligman_route66.jpg',
+    'Supercharger Gilroy': 'img/activities/seligman_route66.jpg',
+    'Supercharger Merced': 'img/activities/seligman_route66.jpg',
+    'Supercharger Fresno': 'img/activities/seligman_route66.jpg',
+    'Supercharger Bakersfield': 'img/activities/seligman_route66.jpg',
+    'Supercharger San Bernardino': 'img/activities/seligman_route66.jpg',
+    // --- Generic/Events ---
+    'Brincar na neve!': 'img/activities/big_bend_zion.jpg',
+    'CARREGAR ATÉ 100%!': 'img/activities/charging_bull.jpg',
+    'Tesla': 'img/activities/las_vegas_strip_night.jpg',
 };
 
 // Pre-sort keys longest-first for accurate matching (e.g., "Brooklyn Bridge Park" before "Brooklyn Bridge")
