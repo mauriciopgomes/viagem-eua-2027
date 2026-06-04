@@ -27,7 +27,7 @@ const days = [
             { time: "14:00", text: "🚶 Passeio pela <strong>5th Avenue</strong> — Saks, Tiffany's, Apple Store (cubo de vidro!)", type: "" },
             { time: "15:00", text: "📸 <strong>Rockefeller Center Plaza</strong> — pista de patinação, bandeiras", type: "" },
             { time: "15:30", text: "🧊 <strong>Bryant Park</strong> — Winter Village no inverno (mercadinho, patinação)", type: "" },
-            { time: "19:00", text: "🍽️ Jantar — <strong>Gazala Place</strong> (709 9th Ave, Hell's Kitchen) — cozinha druza-israelense única em NYC, burekas e shakshuka. ~$15-20/pessoa", type: "food" },
+            { time: "19:00", text: "🍽️ Jantar — <strong>John's of Times Square</strong> (260 W 44th St) — pizza em forno de lenha desde 1929, tortas inteiras crocantes. O clássico de NY que todos voltam. ~$15-20/pessoa", type: "food" },
             { time: "20:30", text: "🏨 Hotel — descanso (jet lag!)", type: "" }
         ]
     },
@@ -53,7 +53,7 @@ const days = [
             { time: "15:30", text: "🌿 <strong>High Line</strong> — parque elevado num antigo trilho de trem", type: "highlight" },
             { time: "16:00", text: "🏢 <strong>Pier 57</strong> (sede Google NY) + 🌴 <strong>Little Island</strong> (parque flutuante)", type: "" },
             { time: "16:30", text: "🌇 <strong>Hudson Yards + The Vessel</strong>", type: "highlight" },
-            { time: "17:30", text: "🍽️ Jantar — <strong>Coppelia</strong> (207 W 14th St, Chelsea) — diner latino-cubano aberto 24h, ropa vieja e arroz con pollo. ~$15-20/pessoa", type: "food" },
+            { time: "17:30", text: "🍽️ Jantar — <strong>Dallas BBQ</strong> (261 8th Ave, Chelsea) — churrasco americano com porções absurdas, ribs e onion rings. Fila garantida mas vale! ~$18-25/pessoa", type: "food" },
             { time: "19:00", text: "🏨 Volta ao hotel", type: "" }
         ]
     },
@@ -138,7 +138,7 @@ const days = [
             { time: "14:00", text: "🍔 Almoço na Strip", type: "food" },
             { time: "15:00", text: "🏨 Explorar hotéis — <strong>Venetian</strong> (canais), <strong>Bellagio</strong> (conservatório), <strong>Caesars Palace</strong>", type: "highlight" },
             { time: "18:00", text: "🌅 <strong>Bellagio Fountains</strong> — show a cada 30 min!", type: "highlight" },
-            { time: "19:00", text: "🍽️ Jantar — <strong>China Mama</strong> (3420 S Jones Blvd, Chinatown de LV) — xiao long bao e mapo tofu, favorito dos moradores de Vegas. ~$15-20/pessoa", type: "food" }
+            { time: "19:00", text: "🍽️ Jantar — <strong>Raising Cane's</strong> (3717 Las Vegas Blvd S, na Strip!) — chicken tenders crocantes com o famoso Cane's Sauce. Fila rápida, kids adoram! ~$10-14/pessoa", type: "food" }
         ],
         tips: ["🏔️ Mt. Charleston: pode estar -5°C com neve! Levar casaco, luvas e botas."]
     },
@@ -158,7 +158,7 @@ const days = [
             { time: "14:00", text: "🏜️ <strong>Mesquite Flat Sand Dunes</strong> — dunas clássicas!", type: "" },
             { time: "15:00", text: "🚗 Volta pra Vegas (~2h)", type: "drive" },
             { time: "17:00", text: "🏨 Chegada em Vegas — piscina / descanso", type: "" },
-            { time: "19:00", text: "🍽️ Jantar — <strong>In-N-Out Burger</strong> (4888 Dean Martin Dr, perto do Strip) — o clássico da Califórnia, sem reserva, kids adoram! Double-Double, batata fresquinha. ~$8-12/pessoa. OU <strong>Raising Cane's</strong> no próprio Strip", type: "food" },
+            { time: "19:00", text: "🍽️ Jantar especial — <strong>Fogo de Chão</strong> (3500 Las Vegas Blvd S, Paris Las Vegas) — 🇧🇷 churrascaria brasileira na Strip! Rodízio com picanha, fraldinha, cordeiro e a melhor farofa. Despedida de Vegas com gostinho de casa! ~$45-55/adulto, crianças menor preço", type: "food" },
             { time: "20:00", text: "🌃 Noite em Vegas", type: "" }
         ],
         tips: ["⚡ EV: Round trip ~380 km. Carregar a 100% na noite anterior!"]
@@ -328,7 +328,7 @@ const days = [
             { time: "17:30", text: "📸 <strong>Evel Knievel Jump Site</strong> — local do famoso salto de 1974 sobre o Snake River Canyon!", type: "highlight" },
             { time: "17:50", text: "�🌊 <strong>Shoshone Falls</strong> — 'Niágara do Oeste'! 65m de queda!", type: "highlight" },
             { time: "18:00", text: "🏨 Check-in", type: "" },
-            { time: "18:30", text: "🍽️ Jantar — <strong>Koto Japanese Restaurant</strong> (132 Shoshone St N, Twin Falls) — instituição local surpreendentemente boa, sushi e teriyaki. ~$15-20/pessoa", type: "food" }
+            { time: "18:30", text: "🍽️ Jantar — <strong>Cracker Barrel</strong> (1357 Blue Lakes Blvd N, Twin Falls) — comfort food americano clássico: chicken fried steak, mashed potatoes, biscuits e gravy. Ambiente de country store, kids adoram! ~$12-18/pessoa", type: "food" }
         ],
         tips: ["⚠️ Dois dias longos seguidos (14 + 15): ~770km + ~700km. Dormir cedo!"]
     },
@@ -590,7 +590,7 @@ const days = [
             { time: "13:30", text: "🍽️ Almoço em Monterey", type: "food" },
             { time: "14:30", text: "🚗 <strong>17-Mile Drive</strong> — Lone Cypress, Pebble Beach!", type: "highlight" },
             { time: "16:30", text: "🏖️ <strong>Carmel-by-the-Sea</strong> — vila charmosa, galerias, Carmel Beach", type: "" },
-            { time: "18:00", text: "🍽️ Jantar — <strong>Mundaka</strong> (San Carlos St entre Ocean e 7th, Carmel) — tapas espanholas autênticas, patatas bravas e pulpo a la gallega. ~$20-25/pessoa", type: "food" }
+            { time: "18:00", text: "🍽️ Jantar — <strong>The Forge in the Forest</strong> (5th Ave e Junipero St, Carmel) — americana casual em casinha charmosa com jardim, burgers e ribs. Kid-friendly, sem frescura, ambiente de fazenda no centro de Carmel. ~$20-28/pessoa", type: "food" }
         ]
     },
     {
@@ -732,7 +732,7 @@ const days = [
             { time: "15:30", text: "🛍️ Passear pelo <strong>Big Bear Village</strong> — lojas, cafés", type: "" },
             { time: "16:00", text: "☕ Chocolate quente com vista pro lago!", type: "" },
             { time: "16:30", text: "🚗 Volta pra LA (~2h)", type: "drive" },
-            { time: "16:00", text: "🍽️ Jantar cedo — <strong>Himalayan Restaurant</strong> (672 Pine Knot Ave, Big Bear Village) — cozinha nepalesa/indiana nas montanhas, momo e chicken tikka masala. ~$15-20/pessoa. Janta antes de descer pra LA!", type: "food" }
+            { time: "16:00", text: "🍽️ Jantar cedo — <strong>Big Bear Lake Brewing Company</strong> (40827 Lakeview Dr) — pizza artesanal e burgers com vista pro lago. Cerveja artesanal de montanha, ambiente descontraído. Janta antes de descer pra LA! ~$15-20/pessoa", type: "food" }
         ],
         tips: ["⚡ Round trip ~320 km com subida forte. Carregar 100% antes ou parar em San Bernardino.", "❄️ Big Bear a 2.000m — pode ter neve! Levar casacos e botas. Chains podem ser obrigatórias na CA-330."]
     },
