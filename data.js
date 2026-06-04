@@ -89,7 +89,7 @@ const days = [
             { time: "15:30", text: "🎮 <strong>Nintendo NY</strong> (Rockefeller Center) + 🏰 <strong>Disney Store</strong> (1540 Broadway, Times Square)", type: "" },
             { time: "17:00", text: "Tempo livre — descansar no hotel ou última exploração", type: "" },
             { time: "18:00", text: "🧳 Volta ao hotel — arrumar malas", type: "" },
-            { time: "19:00", text: "\uD83C\uDF7D\uFE0F Jantar — <strong>Szechuan Gourmet</strong> (21 W 39th St, Midtown) — melhor Szechuan de Midtown, dan dan noodles e mapo tofu. ~$15-20/pessoa", type: "food" },
+            { time: "19:00", text: "\uD83C\uDF7D\uFE0F Jantar — <strong>Ellen's Stardust Diner</strong> (1650 Broadway, Times Square) — diner temático anos 50 com garçons que cantam ao vivo, clássico para crianças! Burgers, milkshakes e espetáculo. ~$20-25/pessoa", type: "food" },
             { time: "21:00", text: "🏨 Hotel — dormir cedo (voo amanhã!)", type: "" }
         ]
     },
@@ -158,7 +158,7 @@ const days = [
             { time: "14:00", text: "🏜️ <strong>Mesquite Flat Sand Dunes</strong> — dunas clássicas!", type: "" },
             { time: "15:00", text: "🚗 Volta pra Vegas (~2h)", type: "drive" },
             { time: "17:00", text: "🏨 Chegada em Vegas — piscina / descanso", type: "" },
-            { time: "19:00", text: "🍽️ Jantar — <strong>Lotus of Siam</strong> (620 E Flamingo Rd) — melhor tailandês fora da Tailândia, khao soi e nam prik ong. ~$20-25/pessoa", type: "food" },
+            { time: "19:00", text: "🍽️ Jantar — <strong>In-N-Out Burger</strong> (4888 Dean Martin Dr, perto do Strip) — o clássico da Califórnia, sem reserva, kids adoram! Double-Double, batata fresquinha. ~$8-12/pessoa. OU <strong>Raising Cane's</strong> no próprio Strip", type: "food" },
             { time: "20:00", text: "🌃 Noite em Vegas", type: "" }
         ],
         tips: ["⚡ EV: Round trip ~380 km. Carregar a 100% na noite anterior!"]
@@ -568,7 +568,7 @@ const days = [
             { time: "12:30", text: "🍽️ Almoço — <strong>La Taqueria</strong> (Mission)", type: "food" },
             { time: "14:00", text: "🎮 <strong>Nintendo San Francisco</strong> (Union Square)", type: "highlight" },
             { time: "15:30", text: "🛍️ <strong>Union Square</strong> — compras", type: "" },
-            { time: "17:00", text: "🍽️ Jantar especial de despedida de SF — <strong>Nopa</strong> (560 Divisadero St) — cozinha californiana de forno a lenha, ingredientes locais. ~$35-45/pessoa. Reserva obrigatória via Resy!", type: "food" }
+            { time: "17:00", text: "🍽️ Jantar de despedida de SF — <strong>Fog Harbor Fish House</strong> (Pier 39, Fisherman's Wharf) — frutos do mar com vista para a Baía, menu kids disponível, sem reserva, crianças adoram. ~$20-28/pessoa", type: "food" }
         ]
     },
 
@@ -732,7 +732,7 @@ const days = [
             { time: "15:30", text: "🛍️ Passear pelo <strong>Big Bear Village</strong> — lojas, cafés", type: "" },
             { time: "16:00", text: "☕ Chocolate quente com vista pro lago!", type: "" },
             { time: "16:30", text: "🚗 Volta pra LA (~2h)", type: "drive" },
-            { time: "18:30", text: "🍽️ Jantar — <strong>Himalayan Restaurant</strong> (672 Pine Knot Ave, Big Bear Village) — cozinha nepalesa/indiana nas montanhas, momo e chicken tikka masala. ~$15-20/pessoa", type: "food" }
+            { time: "16:00", text: "🍽️ Jantar cedo — <strong>Himalayan Restaurant</strong> (672 Pine Knot Ave, Big Bear Village) — cozinha nepalesa/indiana nas montanhas, momo e chicken tikka masala. ~$15-20/pessoa. Janta antes de descer pra LA!", type: "food" }
         ],
         tips: ["⚡ Round trip ~320 km com subida forte. Carregar 100% antes ou parar em San Bernardino.", "❄️ Big Bear a 2.000m — pode ter neve! Levar casacos e botas. Chains podem ser obrigatórias na CA-330."]
     },
@@ -749,7 +749,7 @@ const days = [
             { time: "12:30", text: "🍽️ Almoço", type: "food" },
             { time: "14:00", text: "🎬 <strong>Universal Studios Hollywood</strong> OU passeio livre (compras, Beverly Hills)", type: "highlight" },
             { time: "18:00", text: "🌅 Último pôr do sol nos EUA!", type: "highlight" },
-            { time: "19:00", text: "🍽️ Último jantar nos EUA — <strong>Bavel</strong> (500 Mateo St, Arts District DTLA) — cozinha do Oriente Médio de alto nível, hummus com cordeiro e short rib com tahini. ~$35-45/pessoa. Reserva obrigatória com 2-3 semanas!", type: "food" },
+            { time: "19:00", text: "🍽️ Último jantar nos EUA — <strong>Grand Central Market</strong> (317 S Broadway, DTLA) — mercado gastronômico histórico de 1917, cada um escolhe o que quer (tacos, ramen, pizza, burgers), sem reserva, perfeito para família. ~$10-18/pessoa", type: "food" },
             { time: "20:30", text: "🔭 <strong>Griffith Observatory à noite</strong> — LA iluminada!", type: "highlight" },
             { time: "22:00", text: "🧳 Hotel — arrumar malas", type: "" }
         ]
