@@ -738,8 +738,8 @@ const days = [
     },
     {
         photo: 'img/dia-32.jpg', shortLoc: 'LA', location: "LA dia cheio",
-        route: "Hollywood + Griffith Observatory! 🎬",
-        note: "Último dia completo nos EUA!",
+        route: "🎂 Aniversário de 16 anos em Hollywood! 🎬",
+        note: "🎉 Aniversário da Lari! Hollywood de manhã, LACMA + The Grove à tarde, jantar especial no Sunset!",
         region: "ca",
         items: [
             { time: "08:30", text: "☕ Café", type: "" },
@@ -747,10 +747,11 @@ const days = [
             { time: "10:00", text: "📸 <strong>Hollywood Sign</strong> — vista do Griffith Observatory trail", type: "" },
             { time: "11:00", text: "🔭 <strong>Griffith Observatory</strong> — vista panorâmica de LA!", type: "highlight" },
             { time: "12:30", text: "🍽️ Almoço", type: "food" },
-            { time: "14:00", text: "🎬 <strong>Universal Studios Hollywood</strong> OU passeio livre (compras, Beverly Hills)", type: "highlight" },
+            { time: "14:00", text: "📸 <strong>LACMA Urban Light</strong> (5905 Wilshire Blvd) — 202 postes icônicos, a foto mais famosa do Instagram em LA! Gratuito", type: "highlight" },
+            { time: "15:00", text: "🛍️ <strong>The Grove</strong> (189 The Grove Dr) — shopping ao ar livre com trolley vermelho, fonte dançante, Anthropologie, Urban Outfitters e o <strong>Farmers Market</strong> histórico ao lado", type: "highlight" },
+            { time: "17:00", text: "🧁 <strong>Sprinkles Cupcakes</strong> (9635 S Santa Monica Blvd, Beverly Hills) — a primeira cupcakeria do mundo + foto obrigatória no <strong>Cupcake ATM</strong>! 🎂 Parabéns!", type: "highlight" },
             { time: "18:00", text: "🌅 Último pôr do sol nos EUA!", type: "highlight" },
-            { time: "19:00", text: "🍽️ Último jantar nos EUA — <strong>Grand Central Market</strong> (317 S Broadway, DTLA) — mercado gastronômico histórico de 1917, cada um escolhe o que quer (tacos, ramen, pizza, burgers), sem reserva, perfeito para família. ~$10-18/pessoa", type: "food" },
-            { time: "20:30", text: "🔭 <strong>Griffith Observatory à noite</strong> — LA iluminada!", type: "highlight" },
+            { time: "19:30", text: "🎂🍽️ Jantar de aniversário — <strong>El Compadre</strong> (7408 W Sunset Blvd, Hollywood) — mexicano lendário desde 1975, margarita em chamas tableside, ambiente festivo. Surpesa de aniversário garantida! ~$18-30/pessoa", type: "food" },
             { time: "22:00", text: "🧳 Hotel — arrumar malas", type: "" }
         ]
     },
