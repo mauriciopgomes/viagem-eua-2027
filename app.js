@@ -451,7 +451,7 @@ const activityPhotos = {
     'Jurassic Park 2': 'img/activities/fern_canyon.jpg',
     'baleias cinzentas': 'img/activities/la_push.jpg',
     'SF': 'img/activities/golden_gate_bridge.jpg',
-    'Tesla Model Y': 'img/activities/times_square.jpg',
+    'Tesla Model Y': 'img/activities/hollywood_walk_of_fame.jpg',
     'Scenic Drive': 'img/activities/scenic_byway_128.jpg',
     'Disney Store': 'img/activities/times_square.jpg',
     'Artist\'s Drive': 'img/activities/artists_palette.jpg',
