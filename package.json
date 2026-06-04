@@ -1,0 +1,27 @@
+{
+  "name": "viagem-eua-2027",
+  "version": "140.0.0",
+  "description": "34-day USA road trip PWA",
+  "private": true,
+  "scripts": {
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix",
+    "test": "node tests.js && node test-sync.js",
+    "e2e": "node e2e-tests.js",
+    "webp": "node generate-webp.js",
+    "dev": "python3 -m http.server 8000",
+    "version:check": "node auto-version.js"
+  },
+  "keywords": [
+    "pwa",
+    "travel",
+    "usa",
+    "road-trip"
+  ],
+  "author": "Mauricio Gomes",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.53.0",
+    "puppeteer": "^21.0.0"
+  }
+}

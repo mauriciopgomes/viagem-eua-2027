@@ -35,6 +35,29 @@
     --tab-height: calc(72px + var(--safe-bottom));
 }
 
+/* ==================== LIGHT THEME ==================== */
+:root.light-theme {
+    color-scheme: light;
+    --bg: #FFFFFF;
+    --bg2: #F8F8F8;
+    --bg3: #F0F0F0;
+    --bg4: #E8E8E8;
+    --glass: rgba(0,0,0,0.04);
+    --glass2: rgba(0,0,0,0.07);
+    --glass3: rgba(0,0,0,0.12);
+    --border: rgba(0,0,0,0.06);
+    --text: #000000;
+    --text2: #717171;
+    --text3: #8A8A8E;
+    --blue: #0A84FF;
+    --gold: #B8860B;
+    --red: #FF3B30;
+    --green: #34C759;
+    --purple: #AF52DE;
+    --orange: #FF9500;
+    --teal: #30B0C0;
+}
+
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     background: var(--bg);
@@ -1534,3 +1557,75 @@ details[open] > .day-notes-summary::before { content: '▾ '; }
 .hero { view-transition-name: hero; }
 .tab-bar { view-transition-name: tab-bar; }
 .day-pill.active { view-transition-name: active-pill; }
+
+/* ==================== TRAILS CARD ==================== */
+.trails-card {
+    margin: 20px 0;
+    padding: 16px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+.trails-card h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text);
+}
+.trails-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.trail-item {
+    padding: 10px;
+    background: var(--bg4);
+    border-radius: 10px;
+    border-left: 3px solid var(--blue);
+}
+.trail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    gap: 8px;
+}
+.trail-header a {
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.trail-header a:active {
+    opacity: 0.7;
+}
+.trail-rating {
+    font-size: 12px;
+    color: var(--gold);
+    white-space: nowrap;
+    font-weight: 600;
+}
+.trail-info {
+    display: flex;
+    gap: 12px;
+    font-size: 12px;
+    color: var(--text2);
+    flex-wrap: wrap;
+}
+.trail-distance, .trail-difficulty {
+    display: inline-block;
+}
+.trails-note {
+    margin-top: 12px;
+    padding: 10px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--text2);
+    font-style: italic;
+}

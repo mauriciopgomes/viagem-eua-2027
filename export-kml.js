@@ -3,9 +3,11 @@
 // Usage: node export-kml.js → creates viagem-eua-2027.kml
 
 // Load data
-eval(require('fs').readFileSync('data.js', 'utf8')
-    .replace('const ', 'var ')
-    .replace(/const /g, 'var '));
+const vm = require('vm');
+const fs = require('fs');
+const dataCode = fs.readFileSync('data.js', 'utf8')
+    .replace(/const /g, 'var ');
+vm.runInThisContext(dataCode);
 initDays();
 
 // Load app.js for coordinates

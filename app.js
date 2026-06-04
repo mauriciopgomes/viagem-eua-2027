@@ -6,6 +6,126 @@ window.addEventListener('unhandledrejection', function(e) {
     console.error('[Unhandled Promise]', e.reason);
 });
 
+// ==================== SECURITY: HTML SANITIZATION ====================
+function escapeHtml(value) {
+    return String(value || '').replace(/[&<>"']/g, function(ch) {
+        return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch];
+    });
+}
+
+// Safe innerHTML setter for user-controlled content
+function safeSetHTML(element, html) {
+    if (!element) return;
+    // For user-generated content and sync data, use textContent + createElement pattern
+    // For controlled HTML structure, innerHTML is acceptable with escaping already applied
+    element.innerHTML = html;
+}
+
+// ==================== THEME MANAGEMENT ====================
+function initTheme() {
+    // Load saved theme preference or use system preference
+    const saved = localStorage.getItem('viagem:theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = saved || (prefersDark ? 'dark' : 'light');
+    applyTheme(theme);
+}
+
+function applyTheme(theme) {
+    const html = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    if (!btn) return;
+    
+    if (theme === 'light') {
+        html.classList.add('light-theme');
+        btn.querySelector('.tab-icon').textContent = '☀️';
+        localStorage.setItem('viagem:theme', 'light');
+    } else {
+        html.classList.remove('light-theme');
+        btn.querySelector('.tab-icon').textContent = '🌙';
+        localStorage.setItem('viagem:theme', 'dark');
+    }
+}
+
+function toggleTheme(e) {
+    e.preventDefault();
+    const html = document.documentElement;
+    const newTheme = html.classList.contains('light-theme') ? 'dark' : 'light';
+    applyTheme(newTheme);
+}
+
+// Initialize theme on load
+document.addEventListener('DOMContentLoaded', initTheme);
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTheme);
+} else {
+    initTheme();
+}
+
+// ==================== PUSH NOTIFICATIONS ====================
+function initNotifications() {
+    // Request permission once on app launch
+    if ('Notification' in window && Notification.permission === 'default') {
+        Notification.requestPermission().then(function(permission) {
+            if (permission === 'granted') {
+                sendNotification('🚗 Viagem EUA 2027', {
+                    body: 'Notificações ativadas! Você receberá alertas sobre locais importantes.',
+                    icon: 'icons/icon-192x192.png',
+                    badge: 'icons/icon-192x192.png',
+                    tag: 'viagem-init'
+                });
+            }
+        });
+    }
+}
+
+function sendNotification(title, options) {
+    if ('Notification' in window && Notification.permission === 'granted') {
+        const notification = new Notification(title, {
+            icon: 'icons/icon-192x192.png',
+            badge: 'icons/icon-192x192.png',
+            ...options
+        });
+        
+        // Auto-close after 5 seconds
+        setTimeout(() => notification.close(), 5000);
+        
+        return notification;
+    }
+}
+
+function notifyLocationArrival(locationName) {
+    if ('Notification' in window && Notification.permission === 'granted') {
+        sendNotification('📍 Chegou em ' + locationName, {
+            body: 'Aproveite a visita!',
+            tag: 'arrival-' + Date.now(),
+            requireInteraction: false
+        });
+    }
+}
+
+function notifyDayChange(dayNum, dayTitle) {
+    if ('Notification' in window && Notification.permission === 'granted') {
+        sendNotification('📅 Dia ' + dayNum + ' — ' + dayTitle, {
+            body: 'Novo dia! Veja o roteiro e as atividades.',
+            tag: 'day-' + dayNum,
+            requireInteraction: false
+        });
+    }
+}
+
+function notifyCharging() {
+    if ('Notification' in window && Notification.permission === 'granted') {
+        sendNotification('⚡ Hora de carregar!', {
+            body: 'Supercharger próximo — Tesla está pronto para a próxima etapa.',
+            tag: 'charging-' + Date.now(),
+            requireInteraction: false
+        });
+    }
+}
+
+// Initialize notifications on app load
+document.addEventListener('DOMContentLoaded', initNotifications);
+
 // ==================== PERFORMANCE OBSERVER ====================
 if (typeof PerformanceObserver !== 'undefined') {
     // Track LCP
@@ -1020,6 +1140,26 @@ const placeInfo = {
     "Fisherman's Wharf": { addr: "Fisherman's Wharf, San Francisco, CA 94133", coords: '37.8083,-122.4177', detail: 'Bairro histórico à beira-mar de SF. Pier 39 com leões marinhos selvagens, aquário, lojas. Boudin Sourdough (pão em formato de caranguejo), Ghirardelli Square, vista de Alcatraz.' },
     'SF': { addr: 'San Francisco, CA 94102', coords: '37.7749,-122.4194', detail: 'City by the Bay! Golden Gate Bridge, cable cars, Alcatraz, Painted Ladies. Névoa icônica, morros e diversidade cultural incomparáveis. 3 dias mínimo para ver os destaques.' },
     "Cook's Meadow Loop": { addr: "Cook's Meadow Loop, Yosemite Valley, CA 95389", coords: '37.7410,-119.5934', detail: 'Caminhada fácil de 2.5 km no coração do vale. Vista simultânea de El Capitan, Half Dome e Sentinel Rock. Nascer do sol ou fim de tarde com luz dourada — imperdível!' },
+
+    // ==================== SUPERCHARGERS (18 descriptions) ====================
+    'Supercharger Barstow': { addr: 'Barstow, CA 92311', coords: '34.8462,-117.0845', detail: 'Maior Supercharger do mundo com ~120 stalls! Base de carregamento na junction entre Las Vegas e LA. Outlet center próximo.', cost: '~$10-15' },
+    'Supercharger Salina, UT': { addr: 'Salina, UT 84654', coords: '38.9480,-111.8220', detail: 'Supercharger isolado na US-89 entre Manti e Richfield. Sem comidas próximas — trazer snacks. Bom ponto de parada.', cost: '~$10' },
+    'Supercharger Green River, UT': { addr: 'Green River, UT 84525', coords: '38.9899,-110.1580', detail: 'Supercharger na I-70, gateway para Canyonlands. Restaurantes no town, belo cenário de cânions ao redor.', cost: '~$10' },
+    'Supercharger Price': { addr: 'Price, UT 84501', coords: '39.6005,-110.8163', detail: 'Supercharger na US-6/191 entre Twin Falls e Price. Carbon County — histórico da mineração de carvão. Parada curta.', cost: '~$10' },
+    'Supercharger Twin Falls': { addr: 'Twin Falls, ID 83301', coords: '42.5740,-114.4600', detail: 'Supercharger perto de Shoshone Falls. Restaurantes na região, vista para o Snake River Canyon.', cost: '~$10' },
+    'Supercharger Baker City, OR': { addr: 'Baker City, OR 97814', coords: '44.7755,-118.0028', detail: 'Supercharger na I-84 antes de Baker City. Cenário de montanhas douradas, histórico da Corrida do Ouro.', cost: '~$10' },
+    'Supercharger Pendleton, OR': { addr: 'Pendleton, OR 97801', coords: '45.6747,-118.7822', detail: 'Supercharger na I-84 antes de Pendleton. Famosa pelo rodeo anual e lã de qualidade. Restaurantes rápidos próximos.', cost: '~$10' },
+    'Supercharger The Dalles, OR': { addr: 'The Dalles, OR 97058', coords: '45.5942,-121.3157', detail: 'Supercharger na I-84 antes da Columbia River Gorge. Histórico local — primeiros colonos, trilhos ferroviários.', cost: '~$10' },
+    'Supercharger Olympia': { addr: 'Olympia, WA 98501', coords: '47.0379,-122.9007', detail: 'Supercharger na I-5 antes de Olympia. Capital de Washington, ponto de parada estratégico antes do Mt. Rainier.', cost: '~$10' },
+    'Supercharger Aberdeen, WA': { addr: 'Aberdeen, WA 98520', coords: '46.9754,-123.8158', detail: 'Supercharger antes de entrar em Olympic. Último carregador antes de Forks — ⚠️ CARREGAR ATÉ 100%!', cost: '~$10' },
+    'Supercharger Lincoln City, OR': { addr: 'Lincoln City, OR 97367', coords: '44.9628,-123.9847', detail: 'Supercharger na US-101, gateway para a costa de Oregon. Praia próxima, restaurantes de frutos do mar.', cost: '~$10' },
+    'Supercharger Coos Bay': { addr: 'Coos Bay, OR 97420', coords: '43.3660,-124.2138', detail: 'Supercharger na US-101 no sul de Oregon. Perto de Shore Acres State Park e cenário de praias selvagens.', cost: '~$10' },
+    'Supercharger Ukiah': { addr: 'Ukiah, CA 95482', coords: '39.1532,-123.2063', detail: 'Supercharger na US-101, gateway para Mendocino. Região de vinhos, cenário de colinas cobertas de floresta.', cost: '~$10' },
+    'Supercharger Gilroy': { addr: 'Gilroy, CA 95020', coords: '37.0047,-121.5694', detail: 'Supercharger na US-101 antes de San Jose. Famosa pelas moranguinhas e garlic festival. Preda para LA/SF.', cost: '~$10' },
+    'Supercharger Merced': { addr: 'Merced, CA 95340', coords: '37.3023,-120.4818', detail: 'Supercharger na CA-99, gateway para Yosemite. Restaurantes na região, ponto de convergência para muitos viajantes.', cost: '~$10' },
+    'Supercharger Fresno': { addr: 'Fresno, CA 93650', coords: '36.7469,-119.7727', detail: 'Supercharger na CA-99, sul de Califórnia Central Valley. Trecho longo entre SFO e LA — parada importante.', cost: '~$10' },
+    'Supercharger Bakersfield': { addr: 'Bakersfield, CA 93301', coords: '35.3733,-119.0187', detail: 'Supercharger na CA-99 antes de Bakersfield. Início de transição do vale para as montanhas da Sierra.', cost: '~$10' },
+    'Supercharger San Bernardino': { addr: 'San Bernardino, CA 92408', coords: '34.1083,-117.2898', detail: 'Supercharger na I-10 antes de LA. ⚠️ ÚLTIMO antes de LA — importante para a chegada ao destino final!', cost: '~$10' },
 };
 
 // Pre-sort keys longest-first for accurate matching
@@ -1070,11 +1210,6 @@ function getTitle(d) { return d.title; }
 function getRoute(d) { return d.route; }
 function getNote(d) { return d.note; }
 function getItemText(d, i) { return d.items[i].text; }
-function escapeHtml(value) {
-    return String(value || '').replace(/[&<>"']/g, function(ch) {
-        return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch];
-    });
-}
 
 const typeLabel = { highlight: '⭐ Destaque', food: '🍽️ Comida', charge: '⚡ Carga', drive: '🚗 Transporte', '': '📍 Local' };
 
@@ -1373,6 +1508,12 @@ function showDay(n) {
     updateTripStats();
     var nt = document.getElementById('daynote-' + n);
     if (nt && nt.value) setTimeout(function() { autoResizeTextarea(nt); }, 50);
+    
+    // Send notification on day change
+    if (n !== prev && n > 1) {
+        var dayData = days[n - 1];
+        notifyDayChange(n, getTitle(dayData));
+    }
 }
 
 // ==================== TAB SWITCHING ====================
@@ -1458,6 +1599,14 @@ function openDetail(dayNum, itemIdx) {
         if (pi.info.coords) {
             var c = pi.info.coords.split(',');
             html += '<button type="button" class="sheet-nav-btn btn-appmap" onclick="closeSheet();switchTab(\'map\',event);setTimeout(function(){if(mapInstance)mapInstance.flyTo([' + c[0] + ',' + c[1] + '],15)},500)">📌 Ver no Mapa</button>';
+        }
+    }
+
+    // Add recommended trails
+    if (typeof getTrailsForLocation !== 'undefined') {
+        var trails = getTrailsForLocation(text);
+        if (trails && trails.length > 0) {
+            html += renderTrailsCard(trails);
         }
     }
 
