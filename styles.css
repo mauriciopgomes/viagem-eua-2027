@@ -204,7 +204,7 @@ body {
 .day-selector {
     display: flex;
     gap: 8px;
-    padding: calc(12px + var(--safe-top)) 20px 16px;
+    padding: 12px 20px 16px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
