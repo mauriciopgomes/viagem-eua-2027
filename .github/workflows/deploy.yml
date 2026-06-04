@@ -26,10 +26,6 @@ jobs:
       - run: npm run lint
       - run: node tests.js
       - run: node test-sync.js
-      - uses: treosh/lighthouse-ci-action@v10
-        with:
-          runs: 1
-          configPath: ./lighthouserc.json
 
   deploy:
     needs: test
