@@ -2,7 +2,7 @@
   "id": "/viagem-eua-2027/",
   "name": "Viagem EUA 2027",
   "short_name": "EUA 2027",
-  "description": "Roteiro interativo — 34 dias pelos EUA",
+  "description": "Roteiro interativo — 33 dias pelos EUA",
   "lang": "pt-BR",
   "dir": "ltr",
   "start_url": "./",
@@ -13,6 +13,11 @@
   "background_color": "#050508",
   "theme_color": "#050508",
   "categories": ["travel", "navigation"],
+  "shortcuts": [
+    { "name": "Mapa", "url": "?tab=map", "description": "Ver rota no mapa", "icons": [{"src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png"}] },
+    { "name": "Big Bear", "url": "?day=31", "description": "Day trip Big Bear Lake", "icons": [{"src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png"}] },
+    { "name": "Favoritos", "url": "?tab=explore", "description": "Explorar favoritos", "icons": [{"src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png"}] }
+  ],
   "prefer_related_applications": false,
   "launch_handler": {
     "client_mode": "navigate-existing"

@@ -796,17 +796,17 @@ const hotels = [
 
 // ==================== NATIONAL PARKS ====================
 const parks = [
-    { name: "🏜️ Death Valley National Park", days: "Dia 7", highlights: "Badwater Basin (-86m!), Zabriskie Point, Artist's Palette, Devil's Golf Course, Mesquite Sand Dunes." },
-    { name: "🏞️ Zion National Park", days: "Dias 8–10", highlights: "Watchman Trail, Emerald Pools, Canyon Overlook, Riverside Walk, Court of the Patriarchs." },
-    { name: "🏔️ Bryce Canyon National Park", days: "Dias 10–11", highlights: "Navajo Loop, Queen's Garden, hoodoos, Bryce Amphitheater, stargazing!" },
-    { name: "🏜️ Capitol Reef National Park", days: "Dia 11", highlights: "Petroglífos Fremont, Hickman Bridge Trail, Fruita Historic District, Scenic Drive." },
-    { name: "🏜️ Canyonlands National Park", days: "Dia 12", highlights: "Mesa Arch sunrise, Grand View Point, Upheaval Dome, Aztec Butte." },
-    { name: "🏜️ Arches National Park", days: "Dia 13", highlights: "Delicate Arch, Windows, Double Arch, Landscape Arch (93m!), Fiery Furnace." },
-    { name: "🌋 Mt. Rainier National Park", days: "Dia 16", highlights: "Paradise, neve, vulcão de 4.392m." },
-    { name: "🌲 Olympic National Park", days: "Dias 16–17", highlights: "Hoh Rain Forest, Hall of Mosses, Ruby Beach, La Push (Twilight!), Sol Duc Falls." },
-    { name: "🌲 Redwood National Park", days: "Dias 20–21", highlights: "Stout Memorial Grove, Fern Canyon (Jurassic Park 2!), Tall Trees, Lady Bird Johnson, Avenue of Giants." },
-    { name: "🏞️ Yosemite National Park", days: "Dias 27–28", highlights: "Tunnel View, El Capitan, Half Dome, Yosemite Falls, Badger Pass, Mirror Lake." },
-    { name: "🌲 Sequoia + Kings Canyon NP", days: "Dia 29", highlights: "General Sherman Tree (maior árvore!), Congress Trail, Moro Rock, General Grant Tree." }
+    { name: "🏜️ Death Valley National Park", days: "Dia 8", highlights: "Badwater Basin (-86m!), Zabriskie Point, Artist's Palette, Devil's Golf Course, Mesquite Sand Dunes." },
+    { name: "🏞️ Zion National Park", days: "Dias 9–11", highlights: "Watchman Trail, Emerald Pools, Canyon Overlook, Riverside Walk, Court of the Patriarchs." },
+    { name: "🏔️ Bryce Canyon National Park", days: "Dias 11–12", highlights: "Navajo Loop, Queen's Garden, hoodoos, Bryce Amphitheater, stargazing!" },
+    { name: "🏜️ Capitol Reef National Park", days: "Dia 12", highlights: "Petroglífos Fremont, Hickman Bridge Trail, Fruita Historic District, Scenic Drive." },
+    { name: "🏜️ Canyonlands National Park", days: "Dia 13", highlights: "Mesa Arch sunrise, Grand View Point, Upheaval Dome, Aztec Butte." },
+    { name: "🏜️ Arches National Park", days: "Dia 14", highlights: "Delicate Arch, Windows, Double Arch, Landscape Arch (93m!), Fiery Furnace." },
+    { name: "🌋 Mt. Rainier National Park", days: "Dia 17", highlights: "Paradise, neve, vulcão de 4.392m." },
+    { name: "🌲 Olympic National Park", days: "Dias 17–18", highlights: "Hoh Rain Forest, Hall of Mosses, Ruby Beach, La Push (Twilight!), Sol Duc Falls." },
+    { name: "🌲 Redwood National Park", days: "Dias 21–22", highlights: "Stout Memorial Grove, Fern Canyon (Jurassic Park 2!), Tall Trees, Lady Bird Johnson, Avenue of Giants." },
+    { name: "🏞️ Yosemite National Park", days: "Dias 27–29", highlights: "Tunnel View, El Capitan, Half Dome, Yosemite Falls, Badger Pass, Mirror Lake." },
+    { name: "🌲 Sequoia + Kings Canyon NP", days: "Dia 30", highlights: "General Sherman Tree (maior árvore!), Congress Trail, Moro Rock, General Grant Tree." }
 ];
 
 // ==================== REORDERING SYSTEM ====================

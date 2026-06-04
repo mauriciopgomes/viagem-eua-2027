@@ -1,4 +1,4 @@
-const CACHE_NAME = 'viagem-eua-2027-v134';
+const CACHE_NAME = 'viagem-eua-2027-v136';
 const TILE_CACHE = 'viagem-tiles-v1';
 
 // Critical assets — must succeed for install
@@ -6,7 +6,10 @@ const CRITICAL_ASSETS = [
   './',
   './index.html',
   './data.js',
+  './storage.js',
   './app.js',
+  './pwa.js',
+  './sync.js',
   './styles.css',
   './manifest.json',
   './icons/icon-192.png',
@@ -28,7 +31,10 @@ const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './data.js',
+  './storage.js',
   './app.js',
+  './pwa.js',
+  './sync.js',
   './styles.css',
   './manifest.json',
   './icons/icon-192.png',
@@ -383,18 +389,19 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
-  // Map tiles: cache on first load in dedicated tile cache
-  if (url.hostname.includes('basemaps.cartocdn.com') || url.hostname.includes('tile.openstreetmap.org')) {
+  // Map tiles: stale-while-revalidate (fast load + background update)
+  if (url.hostname.includes('basemaps.cartocdn.com') || url.hostname.includes('tile.openstreetmap.org') || url.hostname.includes('server.arcgisonline.com')) {
     event.respondWith(
       caches.open(TILE_CACHE).then((cache) => {
         return cache.match(event.request).then((cached) => {
-          if (cached) return cached;
-          return fetch(event.request).then((response) => {
+          // Return cached immediately, update in background
+          const fetchPromise = fetch(event.request).then((response) => {
             if (response.ok) {
               cache.put(event.request, response.clone());
             }
             return response;
-          }).catch(() => new Response('', { status: 404 }));
+          }).catch(() => null);
+          return cached || fetchPromise || new Response('', { status: 404 });
         });
       })
     );

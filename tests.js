@@ -46,16 +46,29 @@ function assertRange(val, min, max, msg) {
     }
 }
 
+function parseDaysSpec(spec) {
+    const match = spec.match(/(\d+)(?:[–-](\d+))?/);
+    if (!match) return [];
+    const start = Number(match[1]);
+    const end = match[2] ? Number(match[2]) : start;
+    const days = [];
+    for (let day = start; day <= end; day++) days.push(day);
+    return days;
+}
+
 // ==================== LOAD SOURCE FILES ====================
 const BASE = __dirname;
 const dataJs = fs.readFileSync(path.join(BASE, 'data.js'), 'utf8');
 const swJs = fs.readFileSync(path.join(BASE, 'sw.js'), 'utf8');
 const indexHtml = fs.readFileSync(path.join(BASE, 'index.html'), 'utf8');
 const appJs = fs.readFileSync(path.join(BASE, 'app.js'), 'utf8');
+const pwaJs = fs.readFileSync(path.join(BASE, 'pwa.js'), 'utf8');
+const syncJs = fs.readFileSync(path.join(BASE, 'sync.js'), 'utf8');
+const storageJs = fs.readFileSync(path.join(BASE, 'storage.js'), 'utf8');
 const stylesCSS = fs.readFileSync(path.join(BASE, 'styles.css'), 'utf8');
 const manifestJson = JSON.parse(fs.readFileSync(path.join(BASE, 'manifest.json'), 'utf8'));
 // Combined source for searching JS functions/patterns across both HTML and app.js
-const allJs = indexHtml + '\n' + appJs;
+const allJs = indexHtml + '\n' + appJs + '\n' + pwaJs + '\n' + syncJs + '\n' + storageJs;
 
 // Execute data.js to get the actual data objects
 const vm = require('vm');
@@ -264,6 +277,7 @@ test('tile cache definido', () => {
 
 test('critical assets incluem arquivos essenciais', () => {
     const criticalFiles = ['./', './index.html', './data.js', './manifest.json',
+        './app.js', './pwa.js', './sync.js',
         './icons/icon-192.png', './icons/icon-512.png',
         './lib/leaflet.js', './lib/leaflet.css', './fonts/inter.woff2'];
     criticalFiles.forEach((file) => {
@@ -445,6 +459,11 @@ test('orientation é portrait', () => {
     assertEqual(manifestJson.orientation, 'portrait');
 });
 
+test('manifest descreve a mesma quantidade de dias da viagem', () => {
+    assert(manifestJson.description.includes(`${days.length} dias`),
+        `manifest description deve mencionar ${days.length} dias`);
+});
+
 // ==================== 8. INDEX.HTML — META TAGS ====================
 section('index.html — Meta Tags & Head');
 
@@ -489,6 +508,21 @@ test('tem preload da imagem hero', () => {
 test('tem registro do Service Worker', () => {
     assert(allJs.includes("navigator.serviceWorker.register('./sw.js')"),
         'deve registrar sw.js');
+});
+
+test('CSP permite tiles do mapa escuro e satélite', () => {
+    assert(indexHtml.includes('https://*.basemaps.cartocdn.com'), 'CSP deve permitir CARTO tiles');
+    assert(indexHtml.includes('https://server.arcgisonline.com'), 'CSP deve permitir Esri satellite tiles');
+});
+
+test('hero mostra a quantidade real de superchargers', () => {
+    assert(indexHtml.includes(`<b>${superchargers.length}</b> SC`),
+        `hero deve mostrar ${superchargers.length} SC`);
+});
+
+test('hero image tem alt contextualizado', () => {
+    assert(!indexHtml.includes('alt="Day photo"'), 'hero image não deve usar alt genérico');
+    assert(indexHtml.includes('alt="Foto do Dia 1'), 'hero image deve descrever o dia inicial');
 });
 
 // ==================== 9. INDEX.HTML — CSS CUSTOM PROPERTIES ====================
@@ -825,6 +859,22 @@ test('saveDayNote integra com SyncEngine', () => {
     assert(allJs.includes("SyncEngine.track('note-'"), 'saveDayNote deve chamar SyncEngine.track');
 });
 
+test('mergeRemote atualiza textarea de nota com id correto', () => {
+    assert(allJs.includes("document.getElementById('daynote-' + dayNum)"),
+        'mergeRemote deve procurar textarea daynote-N');
+});
+
+test('notas pessoais são escapadas ao renderizar', () => {
+    assert(appJs.includes('function escapeHtml('), 'deve haver helper escapeHtml');
+    assert(appJs.includes('escapeHtml(noteVal)'), 'renderização de notas deve escapar conteúdo');
+});
+
+test('sync tenta POST antes do fallback GET', () => {
+    assert(syncJs.includes("method: 'POST'"), 'sync deve tentar POST');
+    assert(syncJs.includes("'?action=push&data='") || syncJs.includes('?action=push&data='),
+        'sync deve manter fallback GET para Apps Script');
+});
+
 test('push usa splice (não reset de array)', () => {
     const pushCode = allJs.match(/push:\s*async\s*function[\s\S]*?this\.syncing\s*=\s*false/);
     assert(pushCode, 'push function');
@@ -863,6 +913,12 @@ test('tem cache de tiles do mapa', () => {
 test('tem update toast para nova versão', () => {
     assert(allJs.includes('update-toast') || allJs.includes('Nova versão'),
         'deve ter toast de nova versão');
+});
+
+test('update toast não usa HTML inline para ação de reload', () => {
+    assert(pwaJs.includes('showUpdateToast'), 'deve ter showUpdateToast');
+    assert(pwaJs.includes('addEventListener'), 'botão de update deve usar addEventListener');
+    assert(!pwaJs.includes('innerHTML'), 'pwa.js não deve montar update toast com innerHTML');
 });
 
 test('export/import de dados do usuário', () => {
@@ -963,6 +1019,15 @@ test('HTML carrega app.js', () => {
     assert(indexHtml.includes('src="app.js"'), 'index.html deve carregar app.js');
 });
 
+test('HTML carrega módulos pwa.js e sync.js', () => {
+    assert(indexHtml.includes('src="pwa.js"'), 'index.html deve carregar pwa.js');
+    assert(indexHtml.includes('src="sync.js"'), 'index.html deve carregar sync.js');
+});
+
+test('HTML carrega storage.js', () => {
+    assert(indexHtml.includes('src="storage.js"'), 'index.html deve carregar storage.js');
+});
+
 test('HTML carrega styles.css', () => {
     assert(indexHtml.includes('href="styles.css"'), 'index.html deve linkar styles.css');
 });
@@ -971,13 +1036,37 @@ test('app.js está no SW cache', () => {
     assert(swJs.includes("'./app.js'"), 'app.js deve estar no SW cache');
 });
 
+test('módulos pwa.js e sync.js estão no SW cache', () => {
+    assert(swJs.includes("'./pwa.js'"), 'pwa.js deve estar no SW cache');
+    assert(swJs.includes("'./sync.js'"), 'sync.js deve estar no SW cache');
+});
+
+test('storage.js está no SW cache', () => {
+    assert(swJs.includes("'./storage.js'"), 'storage.js deve estar no SW cache');
+});
+
 test('styles.css está no SW cache', () => {
     assert(swJs.includes("'./styles.css'"), 'styles.css deve estar no SW cache');
+});
+
+test('storage.js define StorageLayer object', () => {
+    assert(storageJs.includes('var StorageLayer'), 'storage.js deve exportar StorageLayer');
+    assert(storageJs.includes('get: function'), 'StorageLayer.get deve existir');
+    assert(storageJs.includes('set: function'), 'StorageLayer.set deve existir');
+    assert(storageJs.includes('remove: function'), 'StorageLayer.remove deve existir');
+    assert(storageJs.includes('clear: function'), 'StorageLayer.clear deve existir');
+});
+
+test('storage.js suporta IndexedDB com fallback localStorage', () => {
+    assert(storageJs.includes('indexedDB.open'), 'storage.js deve usar IndexedDB');
+    assert(storageJs.includes('localStorage.getItem'), 'storage.js deve ter fallback localStorage');
+    assert(storageJs.includes('this.db'), 'storage.js deve manter referência DB');
 });
 
 test('todos os arquivos estáticos existem no disco', () => {
     const files = [
         'index.html', 'data.js', 'app.js', 'styles.css', 'sw.js', 'manifest.json',
+        'pwa.js', 'sync.js', 'storage.js', 'visual-smoke-test.js',
         'icons/icon-192.png', 'icons/icon-512.png',
         'lib/leaflet.js', 'lib/leaflet.css',
         'lib/marker-icon.png', 'lib/marker-icon-2x.png', 'lib/marker-shadow.png',
@@ -1027,6 +1116,29 @@ test('regiões seguem a rota (NY→NV→UT→PNW→CA)', () => {
     for (let i = 13; i < 19; i++) assertEqual(days[i].region, 'pnw', `Dia ${i + 1}`);
     // CA: dias 20-33 (Redwood, SF, PCH, Yosemite, Sequoia, LA)
     for (let i = 19; i < 33; i++) assertEqual(days[i].region, 'ca', `Dia ${i + 1}`);
+});
+
+test('dias dos parques estão alinhados com o roteiro', () => {
+    const expected = {
+        'Death Valley': [8],
+        'Zion': [9, 10, 11],
+        'Bryce Canyon': [11, 12],
+        'Capitol Reef': [12],
+        'Canyonlands': [13],
+        'Arches': [14],
+        'Mt. Rainier': [17],
+        'Olympic': [17, 18],
+        'Redwood': [21, 22],
+        'Yosemite': [27, 28, 29],
+        'Sequoia': [30]
+    };
+    Object.entries(expected).forEach(([name, expectedDays]) => {
+        const park = parks.find(p => p.name.includes(name));
+        assert(park, `Parque '${name}' ausente`);
+        const actualDays = parseDaysSpec(park.days);
+        assertEqual(JSON.stringify(actualDays), JSON.stringify(expectedDays),
+            `Dias de '${name}'`);
+    });
 });
 
 test('cada dia tem pelo menos 5 atividades', () => {

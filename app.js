@@ -377,8 +377,86 @@ const activityPhotos = {
     'Zion': 'img/activities/canyon_overlook.jpg',
     'Canyonlands': 'img/activities/mesa_arch.jpg',
     'Arches NP': 'img/activities/delicate_arch.jpg',
-    'Brincar na neve': 'img/activities/badger_pass.jpg',
     'Battery Spencer': 'img/activities/golden_gate_bridge.jpg',
+    // --- Coverage pass 3 (missing photos) ---
+    'St. Patrick': 'img/activities/st_patricks_cathedral.jpg',
+    "Joe's Pizza": 'img/activities/joes_pizza.jpg',
+    'Ghostbusters Firehouse': 'img/activities/ghostbusters.jpg',
+    'Wall Street': 'img/activities/charging_bull.jpg',
+    'Brooklyn Bridge Park': 'img/activities/brooklyn_bridge_park.jpg',
+    "Juliana's Pizza": 'img/activities/julianas_pizza.jpg',
+    'Los Tacos No.1': 'img/activities/la_taqueria.jpg',
+    'Hudson Yards': 'img/activities/hudson_yards.jpg',
+    'Ferrara Bakery': 'img/activities/levain_bakery.jpg',
+    'Disney Store': 'img/activities/times_square.jpg',
+    'Rockefeller Center': 'img/activities/rockefeller_center.jpg',
+    'Bellagio': 'img/activities/bellagio_fountains.jpg',
+    'Venetian': 'img/activities/las_vegas_strip_night.jpg',
+    'Caesars Palace': 'img/activities/las_vegas_strip_night.jpg',
+    'Valley of Fire': 'img/activities/valley_of_fire.jpg',
+    'Artist Palette': 'img/activities/artists_palette.jpg',
+    'Badwater Basin': 'img/activities/badwater_basin.jpg',
+    'Canyon Overlook': 'img/activities/canyon_overlook.jpg',
+    'Emerald Pools': 'img/activities/emerald_pools.jpg',
+    'Bryce Canyon': 'img/activities/bryce_canyon.jpg',
+    'Queen\'s Garden': 'img/activities/queens_garden.jpg',
+    'Navajo Loop': 'img/activities/navajo_loop.jpg',
+    'Capitol Reef': 'img/activities/capitol_reef.jpg',
+    'Island in the Sky': 'img/activities/grand_view_point.jpg',
+    'Delicate Arch': 'img/activities/delicate_arch.jpg',
+    'Landscape Arch': 'img/activities/landscape_arch.jpg',
+    'Dead Horse Point': 'img/activities/dead_horse_point.jpg',
+    'Antelope Island': 'img/activities/antelope_island.jpg',
+    'Evel Knievel': 'img/activities/evel_knievel_jump_site.jpg',
+    'Mt. Rainier': 'img/activities/mt__rainier.jpg',
+    'Paradise': 'img/activities/mt__rainier.jpg',
+    'Olympic NP': 'img/activities/sol_duc_falls.jpg',
+    'Hoh Rain Forest': 'img/activities/hall_of_mosses.jpg',
+    'Hall of Mosses': 'img/activities/hall_of_mosses.jpg',
+    'Sol Duc Falls': 'img/activities/sol_duc_falls.jpg',
+    'La Push': 'img/activities/la_push.jpg',
+    'Cannon Beach': 'img/activities/cannon_beach.jpg',
+    'Thor\'s Well': 'img/activities/thor_s_well.jpg',
+    'Heceta Head': 'img/activities/heceta_head.jpg',
+    'Cape Perpetua': 'img/activities/cape_perpetua.jpg',
+    'Shore Acres': 'img/activities/shore_acres.jpg',
+    'Fern Canyon': 'img/activities/fern_canyon.jpg',
+    'Redwood NP': 'img/activities/lady_bird_johnson_grove.jpg',
+    'Stout Grove': 'img/activities/stout_memorial_grove.jpg',
+    'San Francisco': 'img/activities/golden_gate_bridge.jpg',
+    'Golden Gate Bridge': 'img/activities/golden_gate_bridge.jpg',
+    'Crissy Field': 'img/activities/crissy_field.jpg',
+    'Painted Ladies': 'img/activities/painted_ladies.jpg',
+    'Cable Car': 'img/activities/cable_car.jpg',
+    'Alcatraz': 'img/activities/alcatraz.jpg',
+    'Lombard Street': 'img/activities/lombard_street.jpg',
+    'Yosemite NP': 'img/activities/tunnel_view.jpg',
+    'Half Dome': 'img/activities/half_dome.jpg',
+    'Tunnel View': 'img/activities/tunnel_view.jpg',
+    'Sequoia NP': 'img/activities/general_sherman_tree.jpg',
+    'General Sherman': 'img/activities/general_sherman_tree.jpg',
+    'Moro Rock': 'img/activities/moro_rock.jpg',
+    'Kings Canyon': 'img/activities/kings_canyon.jpg',
+    'Griffith Observatory': 'img/activities/griffith_observatory.jpg',
+    // --- Coverage pass 4 ---
+    "Katz's Deli": 'img/activities/katz_s_deli.jpg',
+    "World's Tallest Thermometer": 'img/activities/worlds_tallest_thermometer.jpg',
+    'Bryce': 'img/activities/bryce_canyon.jpg',
+    "Cook's Meadow Loop": 'img/activities/cooks_meadow.jpg',
+    "Fisherman's Wharf": 'img/activities/fishermans_wharf.jpg',
+    'Time Out Market': 'img/activities/chelsea_market.jpg',
+    'The Goonies': 'img/activities/astoria.jpg',
+    "Devil's Punchbowl": 'img/activities/cape_perpetua.jpg',
+    'Coastal Trail': 'img/activities/lady_bird_johnson_grove.jpg',
+    'Jurassic Park 2': 'img/activities/fern_canyon.jpg',
+    'baleias cinzentas': 'img/activities/la_push.jpg',
+    'SF': 'img/activities/golden_gate_bridge.jpg',
+    'Tesla Model Y': 'img/activities/las_vegas_strip_night.jpg',
+    'Scenic Drive': 'img/activities/scenic_byway_128.jpg',
+    'Disney Store': 'img/activities/times_square.jpg',
+    'Artist\'s Drive': 'img/activities/artists_palette.jpg',
+    "Devil's Golf Course": 'img/activities/badwater_basin.jpg',
+    'Los Tacos': 'img/activities/chelsea_market.jpg',
 };
 
 // Pre-sort keys longest-first for accurate matching (e.g., "Brooklyn Bridge Park" before "Brooklyn Bridge")
@@ -902,6 +980,22 @@ const placeInfo = {
     'Battery Spencer': { addr: 'Battery Spencer, Sausalito, CA 94965', coords: '37.8278,-122.4830', detail: 'Antigo forte militar com a vista mais icônica da Golden Gate Bridge! Mirante elevado do lado Marin — a ponte inteira com SF ao fundo. Chegar cedo (estacionamento limitado).', cost: 'Gratuito' },
     'Yosemite Falls': { addr: 'Yosemite Falls, Yosemite NP, CA 95389', coords: '37.7566,-119.5963', detail: 'A cachoeira mais alta da América do Norte (739m em 3 quedas). Lower Yosemite Fall Trail (1.6 km) é fácil e leva à base. Fluxo máximo na primavera — pode secar no final do verão.', cost: 'Incluso no passe do parque' },
     'Big Bear': { addr: 'Big Bear Lake, CA 92315', coords: '34.2439,-116.9114', detail: 'Destino de montanha a 2h de LA. Lago alpino a 2.000m com ski, trilhas, aldeia e neve no inverno. Perfeito para um day trip da família!' },
+    // --- Coverage pass 4 ---
+    'Los Tacos No.1': { addr: '75 9th Ave, Chelsea Market, New York, NY 10011', coords: '40.7424,-74.0061', detail: 'Os melhores tacos autênticos de NYC! Carnitas, carne asada e adobada com tortillas feitas na hora. Fila enorme mas vale cada minuto no Chelsea Market.' },
+    'Disney Store': { addr: '1540 Broadway, Times Square, NY 10036', coords: '40.7580,-73.9856', detail: 'Loja oficial da Disney em Times Square. 2 andares de merchandise de Parks, personagens e novidades. Imperdível para as crianças!', hours: '9h-23h' },
+    "World's Tallest Thermometer": { addr: "World's Tallest Thermometer, Baker, CA 92309", coords: '35.2642,-116.0709', detail: 'Termômetro monumental de 42m em Baker — porta do Death Valley! Marca a temperatura recorde de 56.7°C registrada em 1913. Parada obrigatória para a foto icônica.' },
+    'Venetian': { addr: 'The Venetian Resort, 3355 Las Vegas Blvd S, Las Vegas, NV 89109', coords: '36.1224,-115.1702', detail: 'Hotel/cassino temático de Veneza. Canais internos com gôndolas, teto pintado como céu, réplica do Campanile. Grand Canal Shoppes com dezenas de restaurantes.' },
+    'Caesars Palace': { addr: 'Caesars Palace, 3570 Las Vegas Blvd S, Las Vegas, NV 89109', coords: '36.1397,-115.1733', detail: 'Ícone de Vegas desde 1966. Tema Império Romano com estátuas e fontes. The Forum Shops (160 lojas de luxo), Gordon Ramsay\'s Hell\'s Kitchen e piscinas épicas.' },
+    'Bryce': { addr: 'Bryce Canyon National Park, UT 84717', coords: '37.5930,-112.1871', detail: 'Anfiteatro natural com 2.000+ hoodoos (agulhas de rocha avermelhada) — cenário de outro planeta! Inspiration Point, Bryce Point e trilhas Navajo Loop + Queen\'s Garden.' },
+    'Scenic Drive': { addr: 'Capitol Reef Scenic Drive, Torrey, UT 84775', coords: '38.2918,-111.2340', detail: 'Estrada panorâmica de 16 km em Capitol Reef. Passa por cânions coloridos e o Water Pocket Fold — dobra geológica de 160 km visível da estrada. Gratuita com passe.' },
+    "Devil's Golf Course": { addr: "Devil's Golf Course, Death Valley NP, CA", coords: '36.3492,-116.7934', detail: 'Campo de cristais de sal tão irregulares que só o diabo poderia jogar golfe aqui! Formações afiadas criadas por evaporação de lago pré-histórico. Incrível de perto.' },
+    "Devil's Punchbowl": { addr: "Devil's Punchbowl, Yachats, OR 97498", coords: '44.2943,-124.1145', detail: 'Piscina circular de rocha onde o oceano entra rugindo em maré alta! Água jorrei para cima pelas fendas. Fica em Cape Perpetua — combine com Thor\'s Well.' },
+    'The Goonies': { addr: '368 38th St, Astoria, OR 97103', coords: '46.1819,-123.8347', detail: 'Casa do filme The Goonies (1985)! Fachada original preservada em Astoria. Astoria também aparece em Twilight, Kindergarten Cop e Short Circuit. HEY YOU GUYS!' },
+    'Coastal Trail': { addr: 'Coastal Trail, Enderts Beach, Crescent City, CA 95531', coords: '41.6944,-124.1413', detail: 'Trilha costeira onde sequoias encontram o Pacífico. Enderts Beach tem piscinas de marés com estrelas do mar. Acesso por estrada de terra de 5 km.' },
+    'Jurassic Park 2': { addr: 'Fern Canyon, Prairie Creek Redwoods SP, CA 95555', coords: '41.4012,-124.0635', detail: 'Fern Canyon foi cenário de Jurassic Park 2: O Mundo Perdido (1997)! Paredes de 15m cobertas de samambaias verdes. Caminhar pela trilha é entrar dentro do filme.' },
+    "Fisherman's Wharf": { addr: "Fisherman's Wharf, San Francisco, CA 94133", coords: '37.8083,-122.4177', detail: 'Bairro histórico à beira-mar de SF. Pier 39 com leões marinhos selvagens, aquário, lojas. Boudin Sourdough (pão em formato de caranguejo), Ghirardelli Square, vista de Alcatraz.' },
+    'SF': { addr: 'San Francisco, CA 94102', coords: '37.7749,-122.4194', detail: 'City by the Bay! Golden Gate Bridge, cable cars, Alcatraz, Painted Ladies. Névoa icônica, morros e diversidade cultural incomparáveis. 3 dias mínimo para ver os destaques.' },
+    "Cook's Meadow Loop": { addr: "Cook's Meadow Loop, Yosemite Valley, CA 95389", coords: '37.7410,-119.5934', detail: 'Caminhada fácil de 2.5 km no coração do vale. Vista simultânea de El Capitan, Half Dome e Sentinel Rock. Nascer do sol ou fim de tarde com luz dourada — imperdível!' },
 };
 
 // Pre-sort keys longest-first for accurate matching
@@ -952,6 +1046,11 @@ function getTitle(d) { return d.title; }
 function getRoute(d) { return d.route; }
 function getNote(d) { return d.note; }
 function getItemText(d, i) { return d.items[i].text; }
+function escapeHtml(value) {
+    return String(value || '').replace(/[&<>"']/g, function(ch) {
+        return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch];
+    });
+}
 
 const typeLabel = { highlight: '⭐ Destaque', food: '🍽️ Comida', charge: '⚡ Carga', drive: '🚗 Transporte', '': '📍 Local' };
 
@@ -1116,7 +1215,7 @@ function renderDay(d) {
     var noteVal = loadDayNote(d.day);
     h.push('<details class="day-notes-wrap"' + (noteVal ? ' open' : '') + '>');
     h.push('<summary class="day-notes-summary">📝 Notas pessoais</summary>');
-    h.push('<textarea class="day-notes-textarea" id="daynote-' + d.day + '" placeholder="Adicione suas anotações para este dia..." oninput="saveDayNote(' + d.day + ')">' + noteVal.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</textarea>');
+    h.push('<textarea class="day-notes-textarea" id="daynote-' + d.day + '" placeholder="Adicione suas anotações para este dia..." oninput="saveDayNote(' + d.day + ')">' + escapeHtml(noteVal) + '</textarea>');
     h.push('</details>');
 
     // Tips section
@@ -1149,6 +1248,11 @@ function showDay(n) {
     if (n < 1 || n > protoDays) return;
     var prev = currentDay;
     currentDay = n;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Preload next 2 days for smoother navigation
+    if (!renderedDays[n+1] && n+1 <= protoDays) setTimeout(function() { ensureDayRendered(n+1); }, 300);
+    if (!renderedDays[n+2] && n+2 <= protoDays) setTimeout(function() { ensureDayRendered(n+2); }, 600);
 
     // Animate outgoing day slide
     var outgoing = document.querySelector('.day-slide.active');
@@ -2032,40 +2136,6 @@ checkMapCacheStatus();
 // Auto-download map tiles in background after 3s (only if online and not already cached)
 setTimeout(function() { cacheMapTiles(true); }, 3000);
 
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js').then(function(reg) {
-        // Check for updates, but don't auto-reload — let the new SW take control on next visit
-        reg.addEventListener('updatefound', function() {
-            var newWorker = reg.installing;
-            newWorker.addEventListener('statechange', function() {
-                if (newWorker.state === 'activated' && navigator.serviceWorker.controller) {
-                    // New version available — show subtle toast instead of reload loop
-                    var toast = document.createElement('div');
-                    toast.className = 'update-toast';
-                    toast.innerHTML = '🔄 Nova versão disponível <button onclick="window.location.reload()">Atualizar</button>';
-                    toast.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--glass2);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:0.5px solid rgba(255,255,255,0.15);color:var(--text);padding:12px 20px;border-radius:16px;z-index:9999;font-family:inherit;font-size:14px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 32px rgba(0,0,0,0.4)';
-                    toast.querySelector('button').style.cssText = 'background:var(--blue);color:#fff;border:none;padding:8px 16px;border-radius:10px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer';
-                    document.body.appendChild(toast);
-                    setTimeout(function() { if (toast.parentNode) toast.remove(); }, 15000);
-                }
-            });
-        });
-    }).catch(function(err) { console.warn('SW:', err); });
-}
-
-// Show actual cache version in settings
-function updateAppVersion() {
-    var el = document.getElementById('appVersion');
-    if (!el) return;
-    if ('caches' in window) {
-        caches.keys().then(function(names) {
-            var ver = names.find(function(n) { return n.startsWith('viagem-eua-2027-v'); });
-            if (ver) el.textContent = 'EUA 2027 PWA — cache ' + ver.replace('viagem-eua-2027-', '');
-        }).catch(function() {});
-    }
-}
-updateAppVersion();
-
 // ==================== FAVORITES ====================
 function isFav(dayNum, itemIdx) {
     return localStorage.getItem('fav-' + dayNum + '-' + itemIdx) === '1';
@@ -2239,9 +2309,9 @@ function animateCounter(el, target, prefix, suffix, duration) {
 function updateTripStats() {
     var totalChecked = 0, totalItems = 0, kmTraveled = 0;
     var parkDaySets = {
-        'Death Valley': [8], 'Grand Canyon': [9], 'Zion': [10,11], 'Bryce Canyon': [11,12],
-        'Canyonlands': [13], 'Arches': [14], 'Mt. Rainier': [18], 'Olympic': [18,19],
-        'Redwood': [22], 'Yosemite': [27,28], 'Sequoia': [30]
+        'Death Valley': [8], 'Zion': [9,10,11], 'Bryce Canyon': [11,12], 'Capitol Reef': [12],
+        'Canyonlands': [13], 'Arches': [14], 'Mt. Rainier': [17], 'Olympic': [17,18],
+        'Redwood': [21,22], 'Yosemite': [27,28,29], 'Sequoia': [30]
     };
     days.forEach(function(d) {
         var dayHasCheck = false;
@@ -2566,275 +2636,6 @@ window.addEventListener('scroll', function() {
         try { localStorage.setItem('lastDay', n); } catch(e) {}
     };
 })();
-
-// ==================== GOOGLE SHEETS SYNC ====================
-var SyncEngine = {
-    defaultUrl: 'https://script.google.com/macros/s/AKfycbyEfTe62Z58eUSE5KOTzRy6Tm5DoDIso6qZPE1MsUXU1bdzA9ObT2eyWTKfeCZDgfp-Og/exec',
-    url: (function() {
-        var saved = localStorage.getItem('syncUrl');
-        var def = 'https://script.google.com/macros/s/AKfycbyEfTe62Z58eUSE5KOTzRy6Tm5DoDIso6qZPE1MsUXU1bdzA9ObT2eyWTKfeCZDgfp-Og/exec';
-        // Reset if user has old/stale URL
-        if (saved && saved !== def && saved.indexOf('AKfycbzYaHa1') !== -1) {
-            localStorage.removeItem('syncUrl');
-            return def;
-        }
-        return saved || def;
-    })(),
-    queue: JSON.parse(localStorage.getItem('syncQueue') || '[]'),
-    syncing: false,
-    debounceTimer: null,
-
-    track: function(key, value) {
-        if (!this.url) return;
-        var ts = Date.now();
-        localStorage.setItem('_ts_' + key, ts);
-        this.queue.push({ key: key, value: value, ts: ts });
-        localStorage.setItem('syncQueue', JSON.stringify(this.queue));
-        this.debouncedSync();
-    },
-
-    debouncedSync: function() {
-        var self = this;
-        if (self.debounceTimer) clearTimeout(self.debounceTimer);
-        self.debounceTimer = setTimeout(function() { self.push(); }, 3000);
-    },
-
-    pushRetries: 0,
-
-    push: async function() {
-        if (!this.url || this.syncing || this.queue.length === 0) return;
-        // Use Web Locks to prevent concurrent sync across tabs
-        if (navigator.locks) {
-            var self = this;
-            return navigator.locks.request('sync-push', { ifAvailable: true }, function(lock) {
-                if (!lock) return; // Another tab is syncing
-                return self._doPush();
-            });
-        }
-        return this._doPush();
-    },
-
-    _doPush: async function() {
-        if (this.syncing) return;
-        this.syncing = true;
-        this.updateUI('syncing');
-        // Snapshot current queue — items added during push will remain
-        var snapshotLen = this.queue.length;
-        var snapshot = this.queue.slice(0, snapshotLen);
-        // Deduplicate: keep only latest per key
-        var latest = {};
-        snapshot.forEach(function(e) {
-            if (!latest[e.key] || e.ts > latest[e.key].ts) latest[e.key] = e;
-        });
-        var changes = Object.values(latest);
-        try {
-            // Batch in chunks of 15 to avoid URL length limits (GET workaround for Apps Script)
-            var BATCH = 15;
-            for (var i = 0; i < changes.length; i += BATCH) {
-                var chunk = changes.slice(i, i + BATCH);
-                var payload = encodeURIComponent(JSON.stringify({ changes: chunk }));
-                var resp = await fetch(this.url + '?action=push&data=' + payload);
-                if (!resp.ok) throw new Error('HTTP ' + resp.status);
-            }
-            // Pull final state after all batches
-            var pullResp = await fetch(this.url);
-            var result = await pullResp.json();
-            // Remove only sent items, keep any added during push
-            this.queue.splice(0, snapshotLen);
-            localStorage.setItem('syncQueue', JSON.stringify(this.queue));
-            if (result && result.data) this.mergeRemote(result.data);
-            this.updateUI('synced');
-            this.pushRetries = 0;
-        } catch(e) {
-            console.warn('Sync push failed:', e);
-            this.updateUI('error');
-            // Retry with exponential backoff (3s, 6s, 12s, max 30s)
-            this.pushRetries = Math.min((this.pushRetries || 0) + 1, 5);
-            var delay = Math.min(3000 * Math.pow(2, this.pushRetries - 1), 30000);
-            var self = this;
-            this.syncing = false;
-            setTimeout(function() { self.push(); }, delay);
-            return;
-        }
-        this.syncing = false;
-        // If new items were added during push, trigger another push
-        if (this.queue.length > 0) {
-            var self = this;
-            setTimeout(function() { self.push(); }, 1000);
-        }
-    },
-
-    pull: async function() {
-        if (!this.url || this.syncing) return;
-        // Drain pending queue before pulling
-        if (this.queue.length > 0) {
-            await this.push();
-            return; // push already pulls after sending
-        }
-        this.syncing = true;
-        this.updateUI('syncing');
-        try {
-            var resp = await fetch(this.url);
-            if (!resp.ok) throw new Error('HTTP ' + resp.status);
-            var result = await resp.json();
-            if (result && result.data) this.mergeRemote(result.data);
-            this.updateUI('synced');
-        } catch(e) {
-            console.warn('Sync pull failed:', e);
-            this.updateUI('error');
-        }
-        this.syncing = false;
-    },
-
-    mergeRemote: function(remote) {
-        var dominated = false;
-        Object.keys(remote).forEach(function(key) {
-            var localTs = parseInt(localStorage.getItem('_ts_' + key)) || 0;
-            var remoteTs = remote[key].ts || 0;
-            if (remoteTs > localTs) {
-                localStorage.setItem(key, remote[key].v);
-                localStorage.setItem('_ts_' + key, remoteTs);
-                // Targeted DOM update instead of full re-render
-                var val = remote[key].v;
-                if (key.startsWith('check-')) {
-                    var parts = key.replace('check-', '').split('-');
-                    var actionBtn = document.querySelector('[data-action-check="' + parts[0] + '-' + parts[1] + '"]');
-                    if (actionBtn) {
-                        actionBtn.classList.toggle('action-done', val === '1');
-                        var card = actionBtn.closest('.activity-card');
-                        if (card) card.classList.toggle('item-done', val === '1');
-                    }
-                    dominated = true;
-                } else if (key.startsWith('fav-')) {
-                    var parts2 = key.replace('fav-', '').split('-');
-                    var favBtn = document.querySelector('[data-action-fav="' + parts2[0] + '-' + parts2[1] + '"]');
-                    if (favBtn) favBtn.classList.toggle('action-fav-active', val === '1');
-                    dominated = true;
-                } else if (key.startsWith('note-')) {
-                    var dayNum = key.replace('note-', '');
-                    var noteEl = document.getElementById('note-' + dayNum);
-                    if (noteEl && noteEl.value !== val) noteEl.value = val || '';
-                    dominated = true;
-                }
-            }
-        });
-        if (dominated) updateTripStats();
-    },
-
-    fullSync: async function() {
-        if (!this.url) { this.updateUI('nourl'); return; }
-        if (!localStorage.getItem('syncInitialPushDone')) {
-            await this.initialPush();
-            localStorage.setItem('syncInitialPushDone', '1');
-        } else {
-            await this.push();
-            await this.pull();
-        }
-    },
-
-    initialPush: async function() {
-        var changes = [];
-        for (var i = 0; i < localStorage.length; i++) {
-            var key = localStorage.key(i);
-            if (key.startsWith('check-') || key.startsWith('fav-') || key.startsWith('note-')) {
-                if (key.startsWith('_ts_')) continue;
-                var ts = parseInt(localStorage.getItem('_ts_' + key)) || Date.now();
-                changes.push({ key: key, value: localStorage.getItem(key), ts: ts });
-            }
-        }
-        if (changes.length > 0) {
-            this.queue = changes.concat(this.queue);
-            localStorage.setItem('syncQueue', JSON.stringify(this.queue));
-        }
-        await this.push();
-        await this.pull();
-    },
-
-    setUrl: function(url) {
-        this.url = (url || '').trim();
-        localStorage.setItem('syncUrl', this.url);
-        if (this.url) this.initialPush();
-        else this.updateUI('');
-    },
-
-    updateUI: function(status) {
-        var el = document.getElementById('syncStatus');
-        if (!el) return;
-        var pending = this.queue.length;
-        if (status === 'syncing') el.textContent = '🔄 Sincronizando...';
-        else if (status === 'synced') {
-            localStorage.setItem('lastSync', Date.now());
-            el.textContent = '✅ Sincronizado agora';
-        }
-        else if (status === 'error') el.textContent = '⚠️ Falha na sync' + (pending ? ' (' + pending + ' pendentes)' : '');
-        else if (status === 'nourl') el.textContent = '⚠️ Cole a URL acima primeiro';
-        else el.textContent = '';
-    },
-
-    initUI: function() {
-        var input = document.getElementById('syncUrlInput');
-        if (input && this.url) input.value = this.url;
-        var last = parseInt(localStorage.getItem('lastSync'));
-        if (last && this.url) {
-            var ago = Math.round((Date.now() - last) / 60000);
-            var el = document.getElementById('syncStatus');
-            if (el) el.textContent = ago < 1 ? '✅ Sincronizado agora' : '✅ Última sync: ' + (ago < 60 ? ago + ' min' : Math.round(ago/60) + 'h') + ' atrás';
-        }
-    }
-};
-
-// ==================== HAPTIC FEEDBACK ====================
-function haptic(style) {
-    if (navigator.vibrate) {
-        if (style === 'light') navigator.vibrate(10);
-        else if (style === 'medium') navigator.vibrate(20);
-        else navigator.vibrate(30);
-    }
-}
-// Patch toggleCheck, toggleFav, saveDayNote for haptic + sync
-(function() {
-    var origCheck = toggleCheck;
-    toggleCheck = function(d, i, e) {
-        origCheck(d, i, e);
-        haptic('light');
-        SyncEngine.track('check-' + d + '-' + i, localStorage.getItem('check-' + d + '-' + i));
-    };
-    var origFav = toggleFav;
-    toggleFav = function(d, i, e) {
-        origFav(d, i, e);
-        haptic('light');
-        SyncEngine.track('fav-' + d + '-' + i, localStorage.getItem('fav-' + d + '-' + i));
-    };
-    var origNote = saveDayNote;
-    saveDayNote = function(dayNum) {
-        origNote(dayNum);
-        SyncEngine.track('note-' + dayNum, localStorage.getItem('note-' + dayNum));
-    };
-})();
-
-// Init sync UI and auto-sync
-SyncEngine.initUI();
-if (SyncEngine.url) setTimeout(function() {
-    if (!localStorage.getItem('syncInitialPushDone')) {
-        SyncEngine.initialPush().then(function() {
-            localStorage.setItem('syncInitialPushDone', '1');
-        });
-    } else {
-        SyncEngine.fullSync();
-    }
-}, 5000);
-
-// Poll for remote changes every 30 seconds
-if (SyncEngine.url) setInterval(function() {
-    if (navigator.onLine && !SyncEngine.syncing) SyncEngine.pull();
-}, 30000);
-
-// Pull when tab/app regains focus (user switches back)
-document.addEventListener('visibilitychange', function() {
-    if (!document.hidden && SyncEngine.url && navigator.onLine && !SyncEngine.syncing) {
-        SyncEngine.fullSync();
-    }
-});
 
 // ==================== EXPORT / IMPORT USER DATA ====================
 function exportUserData() {
