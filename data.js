@@ -747,7 +747,7 @@ const days = [
             { time: "10:00", text: "📸 <strong>Hollywood Sign</strong> — vista do Griffith Observatory trail", type: "" },
             { time: "11:00", text: "🔭 <strong>Griffith Observatory</strong> — vista panorâmica de LA!", type: "highlight" },
             { time: "12:30", text: "🍽️ Almoço", type: "food" },
-            { time: "14:00", text: "🎬 <strong>Universal Studios Hollywood</strong> OU passeio livre (compras, Beverly Hills)", type: "highlight" },
+            { time: "14:00", text: "🛍️ Passeio livre — <strong>Beverly Hills</strong> (Rodeo Drive) OU <strong>The Grove</strong> (shopping ao ar livre com trolley) OU <strong>LACMA Urban Light</strong> (202 postes icônicos, foto obrigatória!)", type: "highlight" },
             { time: "18:00", text: "🌅 Último pôr do sol nos EUA!", type: "highlight" },
             { time: "19:00", text: "🍽️ Último jantar nos EUA — <strong>Grand Central Market</strong> (317 S Broadway, DTLA) — mercado gastronômico histórico de 1917, cada um escolhe o que quer (tacos, ramen, pizza, burgers), sem reserva, perfeito para família. ~$10-18/pessoa", type: "food" },
             { time: "20:30", text: "🔭 <strong>Griffith Observatory à noite</strong> — LA iluminada!", type: "highlight" },
