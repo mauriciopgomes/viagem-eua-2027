@@ -21,7 +21,7 @@
   "author": "Mauricio Gomes",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^8.53.0",
-    "puppeteer": "^21.0.0"
+    "eslint": "^9.0.0",
+    "puppeteer": "^24.15.0"
   }
 }
