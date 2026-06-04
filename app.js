@@ -22,44 +22,8 @@ function safeSetHTML(element, html) {
 }
 
 // ==================== THEME MANAGEMENT ====================
-function initTheme() {
-    // Load saved theme preference or use system preference
-    const saved = localStorage.getItem('viagem:theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const theme = saved || (prefersDark ? 'dark' : 'light');
-    applyTheme(theme);
-}
-
-function applyTheme(theme) {
-    const html = document.documentElement;
-    const btn = document.getElementById('themeToggle');
-    if (!btn) return;
-    
-    if (theme === 'light') {
-        html.classList.add('light-theme');
-        btn.querySelector('.tab-icon').textContent = '☀️';
-        localStorage.setItem('viagem:theme', 'light');
-    } else {
-        html.classList.remove('light-theme');
-        btn.querySelector('.tab-icon').textContent = '🌙';
-        localStorage.setItem('viagem:theme', 'dark');
-    }
-}
-
-function toggleTheme(e) {
-    e.preventDefault();
-    const html = document.documentElement;
-    const newTheme = html.classList.contains('light-theme') ? 'dark' : 'light';
-    applyTheme(newTheme);
-}
-
-// Initialize theme on load
-document.addEventListener('DOMContentLoaded', initTheme);
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initTheme);
-} else {
-    initTheme();
-}
+// ==================== THEME: DARK MODE ONLY ====================
+// Theme is always dark, no toggle needed
 
 // ==================== PUSH NOTIFICATIONS ====================
 function initNotifications() {
