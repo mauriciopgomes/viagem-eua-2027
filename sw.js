@@ -1,4 +1,4 @@
-const CACHE_NAME = 'viagem-eua-2027-v141';
+const CACHE_NAME = 'viagem-eua-2027-v142';
 const TILE_CACHE = 'viagem-tiles-v1';
 
 // Critical assets — must succeed for install
@@ -353,17 +353,23 @@ const ASSETS_TO_CACHE = [
   './img/activities/worlds_tallest_thermometer.jpg',
 ];
 
-// Install: precache critical assets, then best-effort images
+// Install: precache critical assets, then best-effort images (JPG + WebP)
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(async (cache) => {
       // Critical assets must all succeed
       await cache.addAll(CRITICAL_ASSETS);
       // Images: best-effort — don't block install if one fails
-      const images = ASSETS_TO_CACHE.filter(a => a.includes('/img/'));
+      // Auto-derive WebP variants (.webp and -400w.webp) from every .jpg in the list
+      const jpgImages = ASSETS_TO_CACHE.filter(a => a.endsWith('.jpg'));
+      const allImages = [
+        ...jpgImages,
+        ...jpgImages.map(u => u.replace('.jpg', '.webp')),
+        ...jpgImages.map(u => u.replace('.jpg', '-400w.webp')),
+      ];
       await Promise.allSettled(
-        images.map(async (url) => {
-          try { await cache.add(url); } catch (e) { console.warn('SW: skip', url); }
+        allImages.map(async (url) => {
+          try { await cache.add(url); } catch (e) { /* file may not exist — skip silently */ }
         })
       );
     }).then(() => self.skipWaiting())
