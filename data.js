@@ -705,7 +705,7 @@ const days = [
             { time: "11:30", text: "🚗 Continue I-5 S → LA", type: "drive" },
             { time: "~13:00", text: "🏨 Chegada em <strong>LA</strong>! Check-in", type: "" },
             { time: "13:30", text: "🍽️ Almoço", type: "food" },
-            { time: "14:30", text: "🐱 <strong>Cool Cat Collective</strong> (2741 E 4th St, Long Beach) — arte de gatos + gatinhos foster! Qua-Dom 10h-18h", type: "" },
+            { time: "14:30", text: "⛩️ <strong>Lake Shrine</strong> (17190 Sunset Blvd, Pacific Palisades) — jardim de meditação sereno com lago, moinho histórico e esculturas. Gratuito, 30 min — no caminho de Santa Monica!", type: "" },
             { time: "15:30", text: "🏖️ <strong>Santa Monica Pier</strong> — roda-gigante, Route 66 End Sign!", type: "highlight" },
             { time: "16:30", text: "🌴 <strong>Venice Beach</strong> — boardwalk, Muscle Beach!", type: "" },
             { time: "18:00", text: "🌅 Sunset na praia!", type: "highlight" },
@@ -744,7 +744,11 @@ const days = [
         region: "ca",
         items: [
             { time: "08:30", text: "☕ Café", type: "" },
+            { time: "09:00", text: "🚀 <strong>California Science Center</strong> (700 Exposition Park Dr) — Space Shuttle Endeavour real em tamanho natural! Gratuito, imperdível para a família. ~2h", type: "highlight" },
+            { time: "11:30", text: "🏰 <strong>Greystone Mansion & Gardens</strong> (905 Loma Vista Dr, Beverly Hills) — mansão histórica de cenário de filmes e séries, jardins gratuitos. ~45 min", type: "" },
             { time: "12:30", text: "🍽️ Almoço", type: "food" },
+            { time: "14:00", text: "🏛️ <strong>Getty Center</strong> (1200 Getty Center Dr) — museu gratuito com jardins e vista panorâmica incrível de LA, arte + fotos!", type: "highlight" },
+            { time: "17:00", text: "🌆 Pôr do sol com vista de LA no Getty!", type: "highlight" },
             { time: "19:00", text: "🍽️ Jantar — <strong>Grand Central Market</strong> (317 S Broadway, DTLA) — mercado gastronômico histórico de 1917, cada um escolhe o que quer (tacos, ramen, pizza, burgers), sem reserva, perfeito para família. ~$10-18/pessoa", type: "food" },
             { time: "20:30", text: "🔭 <strong>Griffith Observatory à noite</strong> — LA iluminada!", type: "highlight" },
             { time: "22:00", text: "🧳 Hotel — arrumar malas", type: "" }
