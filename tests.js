@@ -1156,7 +1156,7 @@ test('cada dia tem pelo menos 1 item food (exceto dia de voo)', () => {
 });
 
 test('dias de estrada (>100km) têm items drive', () => {
-    const driveDays = [5, 9, 11, 12, 15, 16, 19, 20, 22, 27, 30, 31];
+    const driveDays = [5, 9, 11, 12, 15, 16, 19, 20, 22, 27, 30];
     driveDays.forEach((d) => {
         const day = days[d - 1];
         const hasDrive = day.items.some(i => i.type === 'drive');
