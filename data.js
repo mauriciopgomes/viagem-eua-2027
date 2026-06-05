@@ -713,7 +713,24 @@ const days = [
         ]
     },
     {
-        photo: 'img/dia-09.jpg', shortLoc: 'Big Bear',
+        photo: 'img/dia-09.jpg', shortLoc: 'LA', location: "LA dia cheio",
+        route: "Hollywood + Griffith Observatory! 🎬",
+        note: "Último dia completo nos EUA!",
+        region: "ca",
+        items: [
+            { time: "08:30", text: "☕ Café", type: "" },
+            { time: "09:00", text: "🚀 <strong>California Science Center</strong> (700 Exposition Park Dr) — Space Shuttle Endeavour real em tamanho natural! Gratuito, imperdível para a família. ~2h", type: "highlight" },
+            { time: "11:30", text: "🏰 <strong>Greystone Mansion & Gardens</strong> (905 Loma Vista Dr, Beverly Hills) — mansão histórica de cenário de filmes e séries, jardins gratuitos. ~45 min", type: "" },
+            { time: "12:30", text: "🍽️ Almoço", type: "food" },
+            { time: "14:00", text: "🏛️ <strong>Getty Center</strong> (1200 Getty Center Dr) — museu gratuito com jardins e vista panorâmica incrível de LA, arte + fotos!", type: "highlight" },
+            { time: "17:00", text: "🌆 Pôr do sol com vista de LA no Getty!", type: "highlight" },
+            { time: "19:00", text: "🍽️ Jantar — <strong>Grand Central Market</strong> (317 S Broadway, DTLA) — mercado gastronômico histórico de 1917, cada um escolhe o que quer (tacos, ramen, pizza, burgers), sem reserva, perfeito para família. ~$10-18/pessoa", type: "food" },
+            { time: "20:30", text: "🔭 <strong>Griffith Observatory à noite</strong> — LA iluminada!", type: "highlight" },
+            { time: "22:00", text: "🧳 Hotel — arrumar malas", type: "" }
+        ]
+    },
+    {
+        photo: 'img/dia-32.jpg', shortLoc: 'Big Bear',
         chargeStops: [
             { name: 'San Bernardino, CA', leg: 'LA → Big Bear', critical: false }
         ],
@@ -736,23 +753,6 @@ const days = [
             { time: "17:30", text: "🚗 Volta pra LA (~2h)", type: "drive" }
         ],
         tips: ["⚡ Round trip ~320 km com subida forte. Carregar 100% antes ou parar em San Bernardino.", "❄️ Big Bear a 2.000m — pode ter neve! Levar casacos e botas. Chains podem ser obrigatórias na CA-330."]
-    },
-    {
-        photo: 'img/dia-32.jpg', shortLoc: 'LA', location: "LA dia cheio",
-        route: "Hollywood + Griffith Observatory! 🎬",
-        note: "Último dia completo nos EUA!",
-        region: "ca",
-        items: [
-            { time: "08:30", text: "☕ Café", type: "" },
-            { time: "09:00", text: "🚀 <strong>California Science Center</strong> (700 Exposition Park Dr) — Space Shuttle Endeavour real em tamanho natural! Gratuito, imperdível para a família. ~2h", type: "highlight" },
-            { time: "11:30", text: "🏰 <strong>Greystone Mansion & Gardens</strong> (905 Loma Vista Dr, Beverly Hills) — mansão histórica de cenário de filmes e séries, jardins gratuitos. ~45 min", type: "" },
-            { time: "12:30", text: "🍽️ Almoço", type: "food" },
-            { time: "14:00", text: "🏛️ <strong>Getty Center</strong> (1200 Getty Center Dr) — museu gratuito com jardins e vista panorâmica incrível de LA, arte + fotos!", type: "highlight" },
-            { time: "17:00", text: "🌆 Pôr do sol com vista de LA no Getty!", type: "highlight" },
-            { time: "19:00", text: "🍽️ Jantar — <strong>Grand Central Market</strong> (317 S Broadway, DTLA) — mercado gastronômico histórico de 1917, cada um escolhe o que quer (tacos, ramen, pizza, burgers), sem reserva, perfeito para família. ~$10-18/pessoa", type: "food" },
-            { time: "20:30", text: "🔭 <strong>Griffith Observatory à noite</strong> — LA iluminada!", type: "highlight" },
-            { time: "22:00", text: "🧳 Hotel — arrumar malas", type: "" }
-        ]
     },
     {
         photo: 'img/dia-33.jpg', shortLoc: 'LAX', location: "LA → Voo de volta ✈️",
