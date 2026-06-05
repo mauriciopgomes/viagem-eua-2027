@@ -744,13 +744,8 @@ const days = [
         region: "ca",
         items: [
             { time: "08:30", text: "☕ Café", type: "" },
-            { time: "09:00", text: "⭐ <strong>Hollywood Walk of Fame</strong> + <strong>TCL Chinese Theatre</strong>", type: "" },
-            { time: "10:00", text: "📸 <strong>Hollywood Sign</strong> — vista do Griffith Observatory trail", type: "" },
-            { time: "11:00", text: "🔭 <strong>Griffith Observatory</strong> — vista panorâmica de LA!", type: "highlight" },
             { time: "12:30", text: "🍽️ Almoço", type: "food" },
-            { time: "14:00", text: "� <strong>LACMA Urban Light</strong> (5905 Wilshire Blvd) — 202 postes de luz icônicos, a foto mais famosa do Instagram em LA! Gratuito + <strong>The Grove</strong> ao lado para passear", type: "highlight" },
-            { time: "18:00", text: "🌅 Último pôr do sol nos EUA!", type: "highlight" },
-            { time: "19:00", text: "🍽️ Último jantar nos EUA — <strong>Grand Central Market</strong> (317 S Broadway, DTLA) — mercado gastronômico histórico de 1917, cada um escolhe o que quer (tacos, ramen, pizza, burgers), sem reserva, perfeito para família. ~$10-18/pessoa", type: "food" },
+            { time: "19:00", text: "🍽️ Jantar — <strong>Grand Central Market</strong> (317 S Broadway, DTLA) — mercado gastronômico histórico de 1917, cada um escolhe o que quer (tacos, ramen, pizza, burgers), sem reserva, perfeito para família. ~$10-18/pessoa", type: "food" },
             { time: "20:30", text: "🔭 <strong>Griffith Observatory à noite</strong> — LA iluminada!", type: "highlight" },
             { time: "22:00", text: "🧳 Hotel — arrumar malas", type: "" }
         ]
