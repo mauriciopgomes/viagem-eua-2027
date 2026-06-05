@@ -709,7 +709,7 @@ const days = [
             { time: "15:30", text: "🏖️ <strong>Santa Monica Pier</strong> — roda-gigante, Route 66 End Sign!", type: "highlight" },
             { time: "16:30", text: "🌴 <strong>Venice Beach</strong> — boardwalk, Muscle Beach!", type: "" },
             { time: "18:00", text: "🌅 Sunset na praia!", type: "highlight" },
-            { time: "19:00", text: "🍽️ Jantar — <strong>Tacos Por Favor</strong> (1406 Olympic Blvd, Santa Monica) — taqueria de bairro amada há décadas, fila de locais, tacos de carne asada. ~$10-15/pessoa", type: "food" }
+            { time: "19:00", text: "🍽️ Jantar no <strong>Santa Monica Pier</strong> — <strong>Bubba Gump Shrimp Co.</strong> (com vista pro oceano, menu de frutos do mar, temático do Forrest Gump, kids adoram!) ~$20-30/pessoa", type: "food" }
         ]
     },
     {
