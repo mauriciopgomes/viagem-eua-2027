@@ -732,8 +732,8 @@ const days = [
             { time: "14:30", text: "🥾 <strong>Castle Rock Trail</strong> (~1.5 km) — vista panorâmica do lago", type: "" },
             { time: "15:30", text: "🛍️ Passear pelo <strong>Big Bear Village</strong> — lojas, cafés", type: "" },
             { time: "16:00", text: "☕ Chocolate quente com vista pro lago!", type: "" },
-            { time: "16:30", text: "🚗 Volta pra LA (~2h)", type: "drive" },
-            { time: "16:00", text: "🍽️ Jantar cedo — <strong>Big Bear Lake Brewing Company</strong> (40827 Lakeview Dr) — pizza artesanal e burgers com vista pro lago. Cerveja artesanal de montanha, ambiente descontraído. Janta antes de descer pra LA! ~$15-20/pessoa", type: "food" }
+            { time: "16:30", text: "🍽️ Jantar cedo — <strong>Big Bear Lake Brewing Company</strong> (40827 Lakeview Dr) — pizza artesanal e burgers com vista pro lago. Cerveja artesanal de montanha, ambiente descontraído. Janta antes de descer pra LA! ~$15-20/pessoa", type: "food" },
+            { time: "17:30", text: "🚗 Volta pra LA (~2h)", type: "drive" }
         ],
         tips: ["⚡ Round trip ~320 km com subida forte. Carregar 100% antes ou parar em San Bernardino.", "❄️ Big Bear a 2.000m — pode ter neve! Levar casacos e botas. Chains podem ser obrigatórias na CA-330."]
     },
