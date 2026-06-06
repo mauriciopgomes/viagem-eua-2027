@@ -245,6 +245,7 @@ const days = [
             { time: "08:45", text: "🌄 <strong>Head of the Rocks Overlook</strong> — mirante da UT-12 com vista épica de Escalante!", type: "" },
             { time: "09:30", text: "⚡ <strong>Supercharger Salina, UT</strong> (~170 km) — ~25 min", type: "charge" },
             { time: "10:15", text: "🏜️ <strong>Capitol Reef NP</strong> — paredões vermelhos! Petroglífos Fremont de 2.000 anos + Fruita Historic District", type: "highlight" },
+            { time: "10:30", text: "👀 <strong>Goosenecks Overlook</strong> — meandros do Sulphur Creek vistos de cima, ~5 min do Visitors Center. Vista impressionante!", type: "" },
             { time: "10:45", text: "🥾 <strong>Hickman Bridge Trail</strong> (~2.8 km, ~1h) — arco natural lindo!", type: "highlight" },
             { time: "11:45", text: "🚗 <strong>Scenic Drive</strong> parcial + saída pra Moab", type: "drive" },
             { time: "12:15", text: "🏜️ <strong>San Rafael Swell</strong> (I-70) — paredões dramáticos de ambos os lados da highway! Corte no canyon espetacular. Rest area com viewpoint", type: "" },
