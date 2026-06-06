@@ -199,9 +199,8 @@ const days = [
             { time: "10:30", text: "🥾 <strong>Emerald Pools Trail</strong> (Lower + Upper, ~4 km)", type: "" },
             { time: "12:30", text: "🍽️ Almoço em Springdale ou Zion Lodge", type: "food" },
             { time: "13:30", text: "📸 <strong>Court of the Patriarchs</strong>", type: "" },
-            { time: "14:00", text: "🛍️ Explorar <strong>Springdale</strong>", type: "" },
-            { time: "15:00", text: "📸 <strong>Big Bend</strong>", type: "" },
-            { time: "15:30", text: "🥾 <strong>Riverside Walk</strong>", type: "" },
+            { time: "14:00", text: "🥾 <strong>Scout Lookout</strong> (~6.4 km ida e volta, ~2.5h) — mesma trilha de Angels Landing mas sem as correntes. Degraus esculpidos na rocha, vista incrível do canyon! ⚠️ Em fevereiro pode ter gelo — levar microspikes ou confirmar condições.", type: "highlight" },
+            { time: "16:30", text: "🏔️ <em>Opcional para os corajosos:</em> <strong>Angels Landing</strong> (+ 1.2 km com correntes) — requer permit por loteria (recreation.gov). Vista 360° do canyon!", type: "" },
             { time: "16:30", text: "🌅 <strong>Pôr do sol no Canyon Junction Bridge</strong>", type: "highlight" },
             { time: "18:30", text: "🍽️ Jantar — <strong>Oscar's Cafe</strong> (948 Zion Park Blvd, Springdale) — mexicana clássica, burritos e enchiladas. ~$12-18/pessoa", type: "food" }
         ]
