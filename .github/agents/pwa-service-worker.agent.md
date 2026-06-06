@@ -1,5 +1,5 @@
 ---
-description: "Use when: working on service worker, caching strategies, offline support, cache versioning, sw.js, precaching, runtime caching, background sync, push notifications, workbox patterns"
+description: "Use when: sw.js changes, offline behavior, cache strategy, and service worker lifecycle"
 tools: [read, edit, search, execute]
 ---
 

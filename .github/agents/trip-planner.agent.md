@@ -1,6 +1,6 @@
 ---
-description: "Use when: planning USA travel, NYC tips, West Coast road trip, national parks, restaurant recommendations, supercharger route planning, Tesla road trips, hotel suggestions, activity ideas, budget estimates, seasonal advice, USA travel logistics"
-tools: [execute/runNotebookCell, execute/getTerminalOutput, execute/killTerminal, execute/sendToTerminal, execute/runTask, execute/createAndRunTask, execute/runInTerminal, execute/runTests, execute/testFailure, read/getNotebookSummary, read/problems, read/readFile, read/viewImage, read/readNotebookCellOutput, read/terminalSelection, read/terminalLastCommand, read/getTaskOutput, agent/runSubagent, edit/createDirectory, edit/createFile, edit/createJupyterNotebook, edit/editFiles, edit/editNotebook, edit/rename, search/changes, search/codebase, search/fileSearch, search/listDirectory, search/textSearch, search/usages, browser/openBrowserPage, browser/readPage, browser/screenshotPage, browser/navigatePage, browser/clickElement, browser/dragElement, browser/hoverElement, browser/typeInPage, browser/runPlaywrightCode, browser/handleDialog]
+description: "Use when: USA trip planning, destination ideas, logistics, and Tesla road trip guidance"
+tools: [read, edit, search, execute, web]
 ---
 
 You are an **expert USA travel planner** specializing in:

@@ -713,7 +713,7 @@ const days = [
         ]
     },
     {
-        photo: 'img/dia-09.jpg', shortLoc: 'LA', location: "LA dia cheio",
+        photo: 'img/activities/griffith_observatory.jpg', shortLoc: 'LA', location: "LA dia cheio",
         route: "Hollywood + Griffith Observatory! 🎬",
         note: "Último dia completo nos EUA!",
         region: "ca",
@@ -730,7 +730,7 @@ const days = [
         ]
     },
     {
-        photo: 'img/dia-32.jpg', shortLoc: 'Big Bear',
+        photo: 'img/activities/mt_hood.jpg', shortLoc: 'Big Bear',
         chargeStops: [
             { name: 'San Bernardino, CA', leg: 'LA → Big Bear', critical: false }
         ],
@@ -755,7 +755,7 @@ const days = [
         tips: ["⚡ Round trip ~320 km com subida forte. Carregar 100% antes ou parar em San Bernardino.", "❄️ Big Bear a 2.000m — pode ter neve! Levar casacos e botas. Chains podem ser obrigatórias na CA-330."]
     },
     {
-        photo: 'img/dia-33.jpg', shortLoc: 'LAX', location: "LA → Voo de volta ✈️",
+        photo: 'img/activities/santa_monica_pier.jpg', shortLoc: 'LAX', location: "LA → Voo de volta ✈️",
         route: "Dia da volta! 🇧🇷",
         note: "Devolução do Tesla + voo MIA → GIG.",
         region: "ca",

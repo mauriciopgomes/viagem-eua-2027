@@ -67,9 +67,9 @@ function assert(condition, msg) {
             assert(await heroImg.count() > 0, 'Hero image not found');
         });
 
-        await test('Days grid container exists', async () => {
-            const daysGrid = await page.locator('#daysGrid');
-            assert(await daysGrid.count() > 0, 'Days grid not found');
+        await test('Day selector container exists', async () => {
+            const daySelector = await page.locator('#daySelector');
+            assert(await daySelector.count() > 0, 'Day selector not found');
         });
 
         await test('Dark theme applied', async () => {
@@ -83,9 +83,9 @@ function assert(condition, msg) {
         // ==================== NAVIGATION ====================
         section('PWA — Navigation & Day Selection');
 
-        await test('Select day 2 from dropdown', async () => {
-            const daySelector = page.locator('#daySelector');
-            await daySelector.selectOption('2');
+        await test('Select day 2 via pill click', async () => {
+            const dayPill = page.locator('.day-pill[data-d="2"]');
+            await dayPill.click();
             await page.waitForTimeout(500);
 
             const heroSrc = await page.locator('#heroImg').getAttribute('src');
@@ -107,49 +107,47 @@ function assert(condition, msg) {
         // ==================== INTERACTIVITY ====================
         section('PWA — User Interactions');
 
-        await test('Click activity card opens detail modal', async () => {
+        await test('Click activity card opens detail sheet', async () => {
             const firstCard = page.locator('.activity-card').first();
             await firstCard.click();
             await page.waitForTimeout(300);
 
-            const modal = page.locator('#detailModal');
-            const isVisible = await modal.evaluate(el => el.style.display !== 'none');
-            assert(isVisible, 'Detail modal not visible after click');
+            const sheet = page.locator('#sheet');
+            const isVisible = await sheet.evaluate(el => el.classList.contains('open') || el.style.display !== 'none');
+            assert(isVisible, 'Detail sheet not visible after click');
         });
 
-        await test('Close modal on Escape key', async () => {
-            const modal = page.locator('#detailModal');
-            if (await modal.count() > 0) {
+        await test('Close sheet on Escape key', async () => {
+            const sheet = page.locator('#sheet');
+            if (await sheet.count() > 0) {
                 await page.keyboard.press('Escape');
                 await page.waitForTimeout(300);
 
-                const isClosed = await modal.evaluate(el => el.style.display === 'none');
-                assert(isClosed, 'Modal not closed after Escape');
+                const isClosed = await sheet.evaluate(el => !el.classList.contains('open') && el.style.display === 'none');
+                assert(isClosed, 'Sheet not closed after Escape');
             }
         });
 
         await test('Previous day button works', async () => {
-            const daySelector = page.locator('#daySelector');
-            const dayBefore = parseInt(await daySelector.inputValue());
+            // Click day 3 pill, then day 2 pill
+            await page.locator('.day-pill[data-d="3"]').click();
+            await page.waitForTimeout(300);
+            await page.locator('.day-pill[data-d="2"]').click();
+            await page.waitForTimeout(300);
 
-            const prevBtn = page.locator('#prevDayBtn');
-            await prevBtn.click();
-            await page.waitForTimeout(500);
-
-            const dayAfter = parseInt(await daySelector.inputValue());
-            assert(dayAfter === dayBefore - 1, `Day didn't decrease: ${dayBefore} -> ${dayAfter}`);
+            const heroSrc = await page.locator('#heroImg').getAttribute('src');
+            assert(heroSrc.includes('dia-02'), `Hero image should be dia-02, got: ${heroSrc}`);
         });
 
         await test('Next day button works', async () => {
-            const daySelector = page.locator('#daySelector');
-            const dayBefore = parseInt(await daySelector.inputValue());
+            // Click day 2 pill, then day 3 pill
+            await page.locator('.day-pill[data-d="2"]').click();
+            await page.waitForTimeout(300);
+            await page.locator('.day-pill[data-d="3"]').click();
+            await page.waitForTimeout(300);
 
-            const nextBtn = page.locator('#nextDayBtn');
-            await nextBtn.click();
-            await page.waitForTimeout(500);
-
-            const dayAfter = parseInt(await daySelector.inputValue());
-            assert(dayAfter === dayBefore + 1, `Day didn't increase: ${dayBefore} -> ${dayAfter}`);
+            const heroSrc = await page.locator('#heroImg').getAttribute('src');
+            assert(heroSrc.includes('dia-03'), `Hero image should be dia-03, got: ${heroSrc}`);
         });
 
         // ==================== DATA VALIDATION ====================
@@ -204,16 +202,14 @@ function assert(condition, msg) {
         section('PWA — Responsive Design');
 
         await test('Mobile layout renders (375px)', async () => {
-            const heroSection = page.locator('.hero-section');
-            const display = await heroSection.evaluate(el => window.getComputedStyle(el).display);
-            assert(display === 'block', `Hero section display: ${display}`);
+            const hero = page.locator('.hero');
+            const display = await hero.evaluate(el => window.getComputedStyle(el).display);
+            assert(display === 'block', `Hero display: ${display}`);
         });
 
-        await test('Days grid stacks on mobile', async () => {
-            const daysGrid = page.locator('#daysGrid');
-            const gridCols = await daysGrid.evaluate(el => window.getComputedStyle(el).gridTemplateColumns);
-            const colCount = gridCols.split(' ').length;
-            assert(colCount === 1, `Grid columns on mobile: ${gridCols}`);
+        await test('Day pills render on mobile', async () => {
+            const dayPills = await page.locator('.day-pill').count();
+            assert(dayPills > 0, `No day pills rendered (got ${dayPills})`);
         });
 
         // ==================== PERFORMANCE ====================

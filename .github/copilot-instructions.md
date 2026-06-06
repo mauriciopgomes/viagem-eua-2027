@@ -36,9 +36,21 @@ This is a Progressive Web App (PWA) for an interactive 34-day USA road trip itin
 
 ## PWA Agents Available
 
-Use `@pwa-orchestrator` for cross-cutting tasks, or go directly to:
+Use `@pwa-tm-pm` for intake, prioritization, scope definition, and delivery planning.
+
+Use `@pwa-manager` as a single entry point to route tasks to the right specialist.
+
+For direct specialist calls, use:
 - `@pwa-service-worker` — Caching, offline, sw.js
 - `@pwa-ui` — HTML, CSS, responsive, accessibility
 - `@pwa-performance` — Lighthouse, Core Web Vitals
 - `@pwa-data` — Trip data, itinerary content
 - `@pwa-manifest` — manifest.json, installability
+- `@pwa-testing-qa` — Unit/integration/E2E tests, regressions, flakiness
+- `@pwa-security` — Security hardening, XSS/input validation
+- `@pwa-devops-release` — CI/CD, quality gates, release reliability
+- `@pwa-sync-data` — Sync robustness, conflict resolution, retries/queue
+- `@pwa-a11y-seo` — Accessibility and technical SEO
+
+Planning and coordination:
+- `@pwa-tm-pm` — TM/PM triage, prioritization, scope, dependencies, and definition of done

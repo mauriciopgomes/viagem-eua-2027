@@ -40,8 +40,8 @@ function initNotifications() {
             if (permission === 'granted') {
                 sendNotification('🚗 Viagem EUA 2027', {
                     body: 'Notificações ativadas! Você receberá alertas sobre locais importantes.',
-                    icon: 'icons/icon-192x192.png',
-                    badge: 'icons/icon-192x192.png',
+                    icon: 'icons/icon-192.png',
+                    badge: 'icons/icon-192.png',
                     tag: 'viagem-init'
                 });
             }
@@ -52,8 +52,8 @@ function initNotifications() {
 function sendNotification(title, options) {
     if ('Notification' in window && Notification.permission === 'granted') {
         const notification = new Notification(title, {
-            icon: 'icons/icon-192x192.png',
-            badge: 'icons/icon-192x192.png',
+            icon: 'icons/icon-192.png',
+            badge: 'icons/icon-192.png',
             ...options
         });
         
@@ -109,7 +109,7 @@ function initPWAInstallPrompt() {
             badge: 'icons/icon-192.png',
             tag: 'pwa-install',
             requireInteraction: false
-        }).catch(() => {}); // Silent fail if notifications disabled
+        });
     });
     
     // Handle successful installation
@@ -2234,6 +2234,24 @@ function mapScrubNext() {
 
 // ==================== OFFLINE MAP TILES ====================
 var tileCacheRunning = false;
+var tileCachePaused = false;
+var tileDownloadLockKey = 'mapTilesLock';
+var tileDownloadLockTTL = 30000; // 30 segundos em ms
+
+function acquireTileDownloadLock() {
+    var now = Date.now();
+    var existingLock = localStorage.getItem(tileDownloadLockKey);
+    if (existingLock) {
+        var lockTime = parseInt(existingLock, 10);
+        if (now - lockTime < tileDownloadLockTTL) return false; // Lock ativo em outra aba
+    }
+    localStorage.setItem(tileDownloadLockKey, String(now));
+    return true;
+}
+
+function releaseTileDownloadLock() {
+    localStorage.removeItem(tileDownloadLockKey);
+}
 
 function generateTileList() {
     var tileUrl = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
@@ -2253,31 +2271,54 @@ function generateTileList() {
 }
 
 async function cacheMapTiles(silent) {
-    if (tileCacheRunning) return;
+    if (tileCacheRunning && !tileCachePaused) return;
     if (localStorage.getItem('mapTilesCached') === 'tiles-v1') {
         updateTileCacheUI(true, 0);
         return;
     }
-    if (!navigator.onLine) return;
+    if (!navigator.onLine) {
+        tileCachePaused = true;
+        tileCacheRunning = false;
+        return;
+    }
+    if (tileCachePaused) tileCachePaused = false; // Resume if paused
 
+    if (tileCacheRunning) return; // Already running, continue from where we paused
+    
+    // Acquire multi-tab lock to prevent concurrent downloads
+    if (!acquireTileDownloadLock()) return;
+    
     tileCacheRunning = true;
     var btn = document.getElementById('btnCacheMap');
     var status = document.getElementById('mapCacheStatus');
     var progress = document.getElementById('mapProgress');
     var fill = document.getElementById('mapProgressFill');
 
-    if (btn) { btn.disabled = true; btn.textContent = '⏳ Baixando...'; }
-    if (progress) progress.style.display = 'block';
+    if (btn && !tileCachePaused) { btn.disabled = true; btn.textContent = '⏳ Baixando...'; }
+    if (progress && !tileCachePaused) progress.style.display = 'block';
 
     var tiles = generateTileList();
-    if (status) status.textContent = '0 / ' + tiles.length + ' tiles...';
+    var startIdx = parseInt(localStorage.getItem('mapTilesIndex') || '0');
+    var totalErrors = parseInt(localStorage.getItem('mapTilesErrors') || '0');
+    var totalTiles = parseInt(localStorage.getItem('mapTilesTotal') || tiles.length);
+    localStorage.setItem('mapTilesTotal', totalTiles);
+
+    if (status && startIdx === 0) status.textContent = '0 / ' + tiles.length + ' tiles...';
 
     var cache = await caches.open('viagem-tiles-v1');
-    var done = 0;
-    var errors = 0;
+    var done = startIdx;
+    var errors = totalErrors;
     var batchSize = silent ? 6 : 10; // smaller batches in background to save bandwidth
 
-    for (var i = 0; i < tiles.length; i += batchSize) {
+    for (var i = startIdx; i < tiles.length; i += batchSize) {
+        if (!navigator.onLine) {
+            tileCachePaused = true;
+            tileCacheRunning = false;
+            localStorage.setItem('mapTilesIndex', i);
+            localStorage.setItem('mapTilesErrors', errors);
+            if (status) status.textContent = 'Pausado: ' + done + ' / ' + tiles.length + ' tiles. Retomara ao reconectar.';
+            return;
+        }
         var batch = tiles.slice(i, i + batchSize);
         var results = await Promise.allSettled(batch.map(function(url) {
             return cache.match(url).then(function(cached) {
@@ -2289,13 +2330,20 @@ async function cacheMapTiles(silent) {
         }));
         results.forEach(function(r) { if (r.status === 'rejected') errors++; });
         done += batch.length;
+        localStorage.setItem('mapTilesIndex', done);
+        localStorage.setItem('mapTilesErrors', errors);
         var pct = Math.round((done / tiles.length) * 100);
         if (fill) fill.style.width = pct + '%';
         if (status) status.textContent = done + ' / ' + tiles.length + ' tiles...' + (errors > 0 ? ' (' + errors + ' erros)' : '');
     }
 
     tileCacheRunning = false;
+    tileCachePaused = false;
+    releaseTileDownloadLock();
     localStorage.setItem('mapTilesCached', 'tiles-v1');
+    localStorage.removeItem('mapTilesIndex');
+    localStorage.removeItem('mapTilesErrors');
+    localStorage.removeItem('mapTilesTotal');
     updateTileCacheUI(true, errors);
 }
 
@@ -2374,8 +2422,14 @@ requestAnimationFrame(function() {
     }
 });
 checkMapCacheStatus();
+
+// Helper to schedule automatic map tile download
+function scheduleAutoMapTileDownload() {
+    setTimeout(function() { cacheMapTiles(true); }, 3000);
+}
+
 // Auto-download map tiles in background after 3s (only if online and not already cached)
-setTimeout(function() { cacheMapTiles(true); }, 3000);
+scheduleAutoMapTileDownload();
 
 // ==================== FAVORITES ====================
 function isFav(dayNum, itemIdx) {
@@ -2863,6 +2917,10 @@ window.addEventListener('scroll', function() {
         setOffline(false);
         if (typeof SyncEngine !== 'undefined' && SyncEngine.url && SyncEngine.queue.length > 0) {
             setTimeout(function() { SyncEngine.push(); }, 2000);
+        }
+        // Resume or start map tile caching if not already cached
+        if (localStorage.getItem('mapTilesCached') !== 'tiles-v1') {
+            setTimeout(function() { cacheMapTiles(true); }, 1500);
         }
     });
     window.addEventListener('offline', function() { setOffline(true); });

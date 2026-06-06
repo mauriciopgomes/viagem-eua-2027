@@ -1,5 +1,5 @@
 ---
-description: "Use when: editing trip data, adding days, modifying itinerary, updating activities, data.js changes, trip content, location data, GPS coordinates, map markers, translations, tips"
+description: "Use when: data.js updates, itinerary edits, coordinates, translations, and trip content"
 tools: [read, edit, search]
 ---
 
