@@ -689,7 +689,7 @@ const days = [
 
     // ==================== LA (Dias 30-33) ====================
     {
-        photo: 'img/dia-31.jpg', shortLoc: 'LA',
+        photo: 'img/activities/hollywood_sign.jpg', shortLoc: 'LA',
         chargeStops: [
             { name: 'Bakersfield, CA', leg: 'Three Rivers → LA', critical: false }
         ],

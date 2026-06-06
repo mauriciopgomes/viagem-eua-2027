@@ -81,9 +81,6 @@ const ASSETS_TO_CACHE = [
   './img/dia-28.jpg',
   './img/dia-29.jpg',
   './img/dia-30.jpg',
-  './img/dia-31.jpg',
-  './img/dia-32.jpg',
-  './img/dia-33.jpg',
   // Activity photos
   './img/activities/5th_avenue.jpg',
   './img/activities/7_world_trade_center.jpg',
