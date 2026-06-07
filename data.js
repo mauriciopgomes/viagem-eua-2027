@@ -116,6 +116,7 @@ const days = [
             { time: "16:30", text: "⚡🍽️ <strong>Supercharger Barstow</strong> (~200 km) — ~25 min + lanche", type: "charge" },
             { time: "16:35", text: "🎨 <strong>Elmer's Bottle Tree Ranch</strong> (Oro Grande) — floresta de 'árvores' de garrafas de vidro e metal! Arte outsider no deserto. Grátis", type: "" },
             { time: "17:30", text: "👽 <strong>Alien Fresh Jerky</strong> (Baker) — loja alien + jerky de 100 sabores! + 🌡️ <strong>World's Tallest Thermometer</strong>!", type: "" },
+            { time: "18:15", text: "🏜️ <strong>Terrible's Road House</strong> (Jean, NV) — rancho temático do deserto com cenas do Far West, bom pra estender as pernas!", type: "" },
             { time: "~19:00", text: "🎰 Chegada em <strong>Las Vegas</strong>! Check-in", type: "" },
             { time: "19:30", text: "🍽️ Jantar — <strong>Secret Pizza</strong> (The Cosmopolitan, 3º andar, sem placa) — o hidden gem de Vegas, pizza NY-style escondida no hotel mais badalado. ~$15-20/pessoa", type: "food" },
             { time: "21:00", text: "🏨 Dormir cedo (jet lag + dia longo!)", type: "" }
@@ -546,6 +547,7 @@ const days = [
         items: [
             { time: "08:30", text: "☕ Café", type: "" },
             { time: "09:00", text: "🏞️ <strong>Battery Spencer</strong> — vista icônica da Golden Gate!", type: "highlight" },
+            { time: "09:45", text: "📸 <strong>Golden Gate Overlook</strong> (Langdon Ct) — segundo ponto de vista em SF lado, Marin Headlands!", type: "highlight" },
             { time: "10:00", text: "🌉 <strong>Golden Gate Bridge</strong> — caminhar pela ponte!", type: "highlight" },
             { time: "11:30", text: "🏰 <strong>Fort Point</strong> — cenário de Vertigo!", type: "" },
             { time: "12:00", text: "🌅 <strong>Crissy Field</strong> — vista da Golden Gate!", type: "" },

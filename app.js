@@ -516,6 +516,7 @@ const activityPhotos = {
     'Canyonlands': 'img/activities/mesa_arch.jpg',
     'Arches NP': 'img/activities/delicate_arch.jpg',
     'Battery Spencer': 'img/activities/golden_gate_bridge.jpg',
+    'Golden Gate Overlook': 'img/activities/golden_gate_bridge.jpg',
     // --- Coverage pass 3 (missing photos) ---
     'St. Patrick': 'img/activities/st_patricks_cathedral.jpg',
     "Joe's Pizza": 'img/activities/joes_pizza.jpg',
@@ -619,6 +620,9 @@ const activityPhotos = {
     'Brincar na neve!': 'img/activities/mt__rainier.jpg',
     'CARREGAR ATÉ 100%!': 'img/activities/charging_bull.jpg',
     'Tesla': 'img/activities/las_vegas_strip_night.jpg',
+    // --- Roadside stops (missing mappings) ---
+    'Terrible\'s Road House': 'img/activities/seligman_route66.jpg',
+    'Boudin': 'img/activities/fishermans_wharf.jpg',
 };
 
 // Pre-sort keys longest-first for accurate matching (e.g., "Brooklyn Bridge Park" before "Brooklyn Bridge")
@@ -1190,6 +1194,7 @@ const placeInfo = {
     'Newport': { addr: 'Newport, OR 97365', coords: '44.6368,-124.0535', detail: 'Vila de pescadores charmosa. Distrito Bayfront com frutos do mar frescos, leões-marinhos sob a ponte e Oregon Coast Aquarium.', cost: 'Gratuito' },
     'Orick': { addr: 'Orick, CA 95555', coords: '41.2869,-124.0594', detail: 'Pequena vila gateway para Redwood NP. Ponto de partida para Tall Trees Grove e trilhas costeiras. Elk Meadow com alces Roosevelt pastando à beira da estrada!' },
     'Battery Spencer': { addr: 'Battery Spencer, Sausalito, CA 94965', coords: '37.8278,-122.4830', detail: 'Antigo forte militar com a vista mais icônica da Golden Gate Bridge! Mirante elevado do lado Marin — a ponte inteira com SF ao fundo. Chegar cedo (estacionamento limitado).', cost: 'Gratuito' },
+    'Golden Gate Overlook': { addr: 'Langdon Ct, San Francisco, CA 94129', coords: '37.8242,-122.4882', detail: 'Segundo mirante de Golden Gate em Marin Headlands, lado SF. Vista alternativa da ponte com ângulo diferente de Battery Spencer. Menos multidão, também ótimo para fotos!', cost: 'Gratuito' },
     'Yosemite Falls': { addr: 'Yosemite Falls, Yosemite NP, CA 95389', coords: '37.7566,-119.5963', detail: 'A cachoeira mais alta da América do Norte (739m em 3 quedas). Lower Yosemite Fall Trail (1.6 km) é fácil e leva à base. Fluxo máximo na primavera — pode secar no final do verão.', cost: 'Incluso no passe do parque' },
     'Big Bear': { addr: 'Big Bear Lake, CA 92315', coords: '34.2439,-116.9114', detail: 'Destino de montanha a 2h de LA. Lago alpino a 2.000m com ski, trilhas, aldeia e neve no inverno. Perfeito para um day trip da família!' },
     // --- Coverage pass 4 ---
