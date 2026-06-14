@@ -43,7 +43,6 @@ body {
     -webkit-font-smoothing: antialiased;
     line-height: 1.5;
     padding-bottom: var(--tab-height);
-    padding-top: var(--safe-top);
     letter-spacing: -0.01em;
     scrollbar-gutter: stable;
     -webkit-text-size-adjust: 100%;
@@ -125,7 +124,6 @@ body {
 .hero {
     position: relative;
     height: calc(340px + var(--safe-top));
-    margin-top: calc(var(--safe-top) * -1);
     overflow: hidden;
 }
 .hero img {
@@ -537,7 +535,9 @@ body {
 
 /* ==================== MAP ==================== */
 #map-section { padding-bottom: 0; }
-#sec-map { position: relative; }
+#sec-map { position: relative; padding-top: var(--safe-top); }
+#sec-explore { padding-top: var(--safe-top); }
+#sec-settings { padding-top: var(--safe-top); }
 #map {
     height: calc(100vh - var(--tab-height) - var(--safe-top));
     height: calc(100dvh - var(--tab-height) - var(--safe-top));
@@ -1019,9 +1019,15 @@ html, body { overscroll-behavior: none; }
 }
 .offline-bar.visible { transform: translateY(0); }
 body.is-offline { padding-top: calc(var(--safe-top) + 28px); }
-body.is-offline .tab-bar { /* keep tab bar position */ }
+body.is-offline #sec-home .hero { margin-top: calc((var(--safe-top) + 28px) * -1); height: calc(340px + var(--safe-top) + 28px); }
+body.is-offline #sec-map,
+body.is-offline #sec-explore,
+body.is-offline #sec-settings { padding-top: calc(var(--safe-top) + 28px); }
 @media (min-width: 1200px) {
-    body.is-offline { padding-top: calc(52px + 28px); }
+    body.is-offline #sec-map,
+    body.is-offline #sec-explore,
+    body.is-offline #sec-settings { padding-top: calc(52px + 28px); }
+    body.is-offline #sec-home .hero { margin-top: calc((52px + 28px) * -1); height: calc(340px + 52px + 28px); }
 }
 
 /* Reduced motion */
