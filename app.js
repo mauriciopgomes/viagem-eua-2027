@@ -3383,6 +3383,11 @@ function importUserData(event) {
     var triggered = false;
     var indicator = null;
 
+    // iOS Safari PWA: use documentElement.scrollTop as fallback
+    function getScrollY() {
+        return window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    }
+
     function getIndicator() {
         if (!indicator) {
             indicator = document.getElementById('ptrIndicator');
@@ -3400,20 +3405,29 @@ function importUserData(event) {
         var el = getIndicator();
         var pct = Math.min(dy / PTR_THRESHOLD, 1);
         var translateY = Math.min(dy * 0.6, PTR_MAX * 0.6);
+        el.style.transition = 'none';
         el.style.transform = 'translateX(-50%) translateY(' + translateY + 'px)';
         el.style.opacity = Math.min(pct * 1.5, 1);
         el.querySelector('.ptr-spinner').style.transform = 'rotate(' + (pct * 360) + 'deg)';
-        el.querySelector('.ptr-label').textContent = pct >= 1 ? 'Solte para atualizar' : 'Puxe para atualizar';
+        el.querySelector('.ptr-label').textContent = pct >= 1 ? 'Solte para atualizar ↑' : 'Puxe para atualizar';
         el.classList.toggle('ptr-ready', pct >= 1);
+    }
+
+    function showToast(msg) {
+        var toast = document.getElementById('toast');
+        if (!toast) return;
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(function() { toast.classList.remove('show'); }, 2500);
     }
 
     function resetIndicator() {
         var el = getIndicator();
-        el.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+        el.style.transition = 'transform 0.35s ease, opacity 0.35s ease';
         el.style.transform = 'translateX(-50%) translateY(-100%)';
         el.style.opacity = '0';
         el.classList.remove('ptr-ready', 'ptr-refreshing');
-        setTimeout(function() { el.style.transition = ''; }, 300);
+        setTimeout(function() { el.style.transition = ''; }, 350);
         triggered = false;
     }
 
@@ -3421,40 +3435,45 @@ function importUserData(event) {
         var el = getIndicator();
         el.classList.add('ptr-refreshing');
         el.querySelector('.ptr-label').textContent = 'Atualizando...';
-        el.style.transform = 'translateX(-50%) translateY(48px)';
+        el.style.transition = 'transform 0.2s ease';
+        el.style.transform = 'translateX(-50%) translateY(52px)';
 
-        // Sync first, then reload if SW has update pending
         var done = false;
         function finish() {
             if (done) return;
             done = true;
-            // Check if SW has a waiting worker (new version available)
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.getRegistration().then(function(reg) {
                     if (reg && reg.waiting) {
+                        // Nova versão disponível — recarregar
+                        el.querySelector('.ptr-label').textContent = 'Nova versão! Reiniciando...';
                         reg.waiting.postMessage({ type: 'SKIP_WAITING' });
-                        setTimeout(function() { window.location.reload(); }, 400);
+                        setTimeout(function() { window.location.reload(); }, 600);
                     } else {
-                        setTimeout(resetIndicator, 600);
+                        showToast('✅ Sincronizado!');
+                        setTimeout(resetIndicator, 300);
                     }
-                }).catch(function() { setTimeout(resetIndicator, 600); });
+                }).catch(function() {
+                    showToast('✅ Atualizado!');
+                    setTimeout(resetIndicator, 300);
+                });
             } else {
-                setTimeout(resetIndicator, 600);
+                showToast('✅ Atualizado!');
+                setTimeout(resetIndicator, 300);
             }
         }
 
         if (typeof SyncEngine !== 'undefined' && SyncEngine.url && navigator.onLine) {
             SyncEngine.fullSync().then(finish).catch(finish);
-            setTimeout(finish, 5000); // fallback timeout
+            setTimeout(finish, 6000); // fallback
         } else {
-            setTimeout(finish, 800);
+            setTimeout(finish, 600);
         }
     }
 
     document.addEventListener('touchstart', function(e) {
         if (e.touches.length !== 1) return;
-        // Only trigger when at very top of page AND home tab is active
-        if (window.scrollY > 2) return;
+        if (getScrollY() > 4) return;
         var homeActive = document.getElementById('sec-home') && document.getElementById('sec-home').classList.contains('active');
         if (!homeActive) return;
         startY = e.touches[0].clientY;
@@ -3466,8 +3485,7 @@ function importUserData(event) {
         if (!pulling || triggered) return;
         var dy = e.touches[0].clientY - startY;
         if (dy <= 0) { pulling = false; return; }
-        // Only if still at top
-        if (window.scrollY > 2) { pulling = false; resetIndicator(); return; }
+        if (getScrollY() > 4) { pulling = false; resetIndicator(); return; }
         setIndicatorProgress(dy);
     }, { passive: true });
 
