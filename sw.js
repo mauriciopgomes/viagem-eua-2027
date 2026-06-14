@@ -1,4 +1,4 @@
-const CACHE_NAME = 'viagem-eua-2027-v150';
+const CACHE_NAME = 'viagem-eua-2027-v151';
 const TILE_CACHE = 'viagem-tiles-v1';
 
 // Critical assets — must succeed for install
@@ -349,6 +349,13 @@ const ASSETS_TO_CACHE = [
   './img/activities/vista_house.jpg',
   './img/activities/worlds_tallest_thermometer.jpg',
 ];
+
+// Message handler: allow page to trigger skipWaiting (pull-to-refresh / update toast)
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});
 
 // Install: precache critical assets, then best-effort images (JPG + WebP)
 self.addEventListener('install', (event) => {

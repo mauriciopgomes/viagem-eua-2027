@@ -1657,6 +1657,33 @@ details[open] > .day-notes-summary::before { content: '▾ '; }
 .time-group-label[data-period="noite"] { color: #a78bfa; }
 .time-group-label::after { content: ''; flex: 1; height: 0.5px; background: rgba(255,255,255,0.06); }
 
+/* ==================== PULL-TO-REFRESH ==================== */
+#ptrIndicator {
+    position: fixed; top: calc(var(--safe-top, 0px) - 56px); left: 50%;
+    transform: translateX(-50%) translateY(-100%);
+    z-index: 9997; opacity: 0;
+    display: flex; align-items: center; gap: 10px;
+    background: var(--bg3); border: 0.5px solid rgba(255,255,255,0.12);
+    border-radius: 100px; padding: 10px 18px 10px 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    pointer-events: none; will-change: transform, opacity;
+    white-space: nowrap;
+}
+.ptr-spinner {
+    width: 20px; height: 20px; border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.15);
+    border-top-color: var(--blue);
+    transition: transform 0.1s linear;
+    flex-shrink: 0;
+}
+#ptrIndicator.ptr-refreshing .ptr-spinner {
+    animation: ptrSpin 0.7s linear infinite;
+}
+@keyframes ptrSpin { to { transform: rotate(360deg); } }
+.ptr-label { font-size: 13px; font-weight: 600; color: var(--text2); }
+#ptrIndicator.ptr-ready .ptr-label { color: var(--blue); }
+#ptrIndicator.ptr-ready .ptr-spinner { border-top-color: var(--blue); border-color: rgba(10,132,255,0.3); }
+
 /* ==================== TOAST ==================== */
 .toast {
     position: fixed; bottom: calc(var(--tab-height) + 12px); left: 50%;
