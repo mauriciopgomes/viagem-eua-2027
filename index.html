@@ -74,7 +74,7 @@
     </div>
 
     <div class="search-bar-wrap">
-        <input type="search" class="search-input" id="searchInput" placeholder="🔍 Buscar lugares, atividades..." autocomplete="off">
+        <input type="search" class="search-input" id="searchInput" placeholder="🔍 Buscar lugares, atividades..." autocomplete="off" aria-label="Buscar lugares e atividades">
         <button class="search-fav-btn" id="searchFavFilter" aria-label="Filtrar favoritos">⭐</button>
     </div>
     <div class="search-results" id="searchResults" style="display:none"></div>
@@ -198,7 +198,7 @@
                     <div class="setting-label">☁️ Google Sheets Sync</div>
                     <div class="setting-desc">Sincronizar progresso, favoritos e notas entre dispositivos via Google Sheets</div>
                 </div>
-                <input type="url" id="syncUrlInput" placeholder="URL do Google Apps Script (ver instruções abaixo)" style="background:var(--glass);border:0.5px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 14px;font-family:inherit;font-size:13px;color:var(--text);outline:none;width:100%">
+                <input type="url" id="syncUrlInput" placeholder="URL do Google Apps Script (ver instruções abaixo)" aria-label="URL do Google Apps Script para sincronização" style="background:var(--glass);border:0.5px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 14px;font-family:inherit;font-size:13px;color:var(--text);outline:none;width:100%">
                 <button id="btnSyncNow" style="background:var(--glass2);color:var(--text);border:0.5px solid rgba(255,255,255,0.1);padding:14px 20px;border-radius:14px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;width:100%">
                     🔄 Sincronizar Agora
                 </button>

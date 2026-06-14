@@ -124,9 +124,14 @@ document.addEventListener('DOMContentLoaded', function() {
     var heroSection = document.getElementById('heroSection');
     if (heroSection) heroSection.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
-    // Search
+    // Search (debounced 300ms)
     var searchInput = document.getElementById('searchInput');
-    if (searchInput) searchInput.addEventListener('input', function() { searchItems(this.value); });
+    var _searchDebounce = null;
+    if (searchInput) searchInput.addEventListener('input', function() {
+        var val = this.value;
+        if (_searchDebounce) clearTimeout(_searchDebounce);
+        _searchDebounce = setTimeout(function() { searchItems(val); }, 300);
+    });
     var searchFavFilter = document.getElementById('searchFavFilter');
     if (searchFavFilter) searchFavFilter.addEventListener('click', function() { toggleSearchFav(this); });
 
@@ -1525,12 +1530,7 @@ function updateDayProgress(dayNum) {
     var pill = document.querySelector('.day-pill[data-d="' + dayNum + '"]');
     if (pill) pill.classList.toggle('day-complete', done === total && total > 0);
     if (done === total && total > 0) {
-        var toast = document.getElementById('toast');
-        if (toast) {
-            toast.textContent = '🎉 Dia ' + dayNum + ' completo!';
-            toast.classList.add('show');
-            setTimeout(function() { toast.classList.remove('show'); }, 2500);
-        }
+        showToast('🎉 Dia ' + dayNum + ' completo!');
     }
     // Update app badge with remaining items for current day
     updateAppBadge();
@@ -1673,6 +1673,8 @@ function showDay(n) {
     if (n < 1 || n > protoDays) return;
     var prev = currentDay;
     currentDay = n;
+    // Update URL hash for deep linking (replace to avoid polluting history)
+    if (history.replaceState) history.replaceState(null, '', '#day/' + n);
     window.scrollTo({ top: 0, behavior: 'smooth' });
     
     // Preload next 2 days for smoother navigation
@@ -1843,8 +1845,10 @@ function openDetail(dayNum, itemIdx) {
     var tl = typeLabel[item.type] || '📍 Local';
 
     var img = document.getElementById('sheetPhoto');
+    var plainAlt = text.replace(/<[^>]+>/g, '');
     if (photo) {
         img.src = webpSrc(photo);
+        img.alt = plainAlt;
         img.onerror = function() { img.onerror = null; if (img.src !== photo) img.src = photo; else img.style.display = 'none'; };
         img.style.display = 'block';
     } else { img.style.display = 'none'; }
@@ -1893,6 +1897,8 @@ function openDetail(dayNum, itemIdx) {
     document.getElementById('sheet').classList.add('open');
     document.body.style.overflow = 'hidden';
     // Focus trap
+    var sheet = document.getElementById('sheet');
+    trapFocus(sheet);
     setTimeout(function() {
         var close = document.querySelector('.sheet-close');
         if (close) close.focus();
@@ -1903,6 +1909,7 @@ function closeSheet() {
     document.getElementById('sheetOverlay').classList.remove('open');
     document.getElementById('sheet').classList.remove('open');
     document.body.style.overflow = '';
+    releaseFocus();
 }
 
 document.addEventListener('keydown', function(e) {
@@ -2734,13 +2741,31 @@ document.getElementById('daySelector').addEventListener('mousedown', function(e)
 });
 
 var initDay = getTodayDay();
-// Restore last viewed day if not during trip dates
-if (initDay === 1) {
+// Deep link: #day/N in URL takes priority
+var hashMatch = location.hash.match(/^#day\/(\d+)$/);
+if (hashMatch) {
+    var hashDay = parseInt(hashMatch[1], 10);
+    if (hashDay >= 1 && hashDay <= totalDays) initDay = hashDay;
+} else if (initDay === 1) {
+    // Restore last viewed day if not during trip dates
     var saved = parseInt(localStorage.getItem('lastDay'), 10);
     if (saved >= 1 && saved <= totalDays && !isNaN(saved)) initDay = saved;
 }
 showDay(initDay);
 updateCountdown(); // show countdown only on initial load
+
+// Handle hash changes for deep linking (e.g. user shares URL or uses back/forward)
+window.addEventListener('hashchange', function() {
+    var m = location.hash.match(/^#day\/(\d+)$/);
+    if (m) {
+        var d = parseInt(m[1], 10);
+        if (d >= 1 && d <= totalDays && d !== currentDay) {
+            switchTab('home');
+            showDay(d);
+        }
+    }
+});
+
 // Ensure day selector scroll position is correct after layout
 requestAnimationFrame(function() {
     var btn = document.querySelector('.day-pill.active');
@@ -2806,7 +2831,7 @@ function searchItems(query) {
     results.slice(0, 40).forEach(function(r) {
         var thumb = findPhoto(r.text);
         var thumbHtml = thumb
-            ? '<img class="search-result-thumb" src="' + webpSrc(thumb) + '" alt="" width="40" height="40" loading="lazy" onerror="this.style.display=\'none\'">'
+            ? '<img class="search-result-thumb" src="' + webpSrc(thumb) + '" alt="' + r.text.replace(/<[^>]+>/g, '').replace(/"/g, '&quot;').substring(0, 80) + '" width="40" height="40" loading="lazy" onerror="this.style.display=\'none\'">'
             : '<div class="search-result-thumb search-result-thumb-placeholder"></div>';
         html += '<div class="search-result-item" tabindex="0" role="option" data-search-day="' + r.day + '"' + (r.hasInfo ? ' data-search-idx="' + r.idx + '"' : '') + '>';
         html += thumbHtml;
@@ -2844,10 +2869,13 @@ function openLightbox(src, caption) {
     lbScale = 1;
     lb.classList.add('open');
     document.body.style.overflow = 'hidden';
+    trapFocus(lb);
+    setTimeout(function() { document.getElementById('btnLightboxClose').focus(); }, 200);
 }
 function closeLightbox() {
     document.getElementById('lightbox').classList.remove('open');
     document.body.style.overflow = '';
+    releaseFocus();
 }
 function lbGetDist(t) {
     var dx = t[0].clientX - t[1].clientX;
@@ -3041,7 +3069,7 @@ function renderExplore() {
         var hotelPhoto = dayPhotos[checkinDay] || '';
         html += '<div class="hotel-item" data-goto-day="' + checkinDay + '">';
         if (hotelPhoto) {
-            html += '<div class="hotel-thumb-wrap"><img class="hotel-thumb" src="' + webpSrc(hotelPhoto) + '" alt="" width="72" height="72" loading="lazy" onerror="this.parentElement.style.display=\'none\'"></div>';
+            html += '<div class="hotel-thumb-wrap"><img class="hotel-thumb" src="' + webpSrc(hotelPhoto) + '" alt="' + escapeHtml(h.name) + '" width="72" height="72" loading="lazy" onerror="this.parentElement.style.display=\'none\'"></div>';
         } else {
             html += '<div class="hotel-num">' + h.num + '</div>';
         }
@@ -3207,7 +3235,7 @@ function filterExplore(filter, btn) {
         var endX = e.changedTouches[0].clientX;
         var dx = endX - startX;
 
-        if (Math.abs(dx) < 60) {
+        if (Math.abs(dx) < 50) {
             resetSlide();
             return;
         }
@@ -3354,29 +3382,64 @@ function importUserData(event) {
             if (data.notes) Object.keys(data.notes).forEach(function(k) {
                 if (/^note-\d+$/.test(k)) { localStorage.setItem(k, data.notes[k]); count++; }
             });
-            var toast = document.getElementById('toast');
-            toast.textContent = '✅ ' + count + ' itens restaurados!';
-            toast.classList.add('show');
-            setTimeout(function() { toast.classList.remove('show'); }, 2500);
+            showToast('✅ ' + count + ' itens restaurados!');
             // Re-render current day to reflect imported data
             renderedDays = {};
             document.getElementById('dayContainer').innerHTML = '';
             showDay(currentDay);
         } catch(err) {
-            var toast = document.getElementById('toast');
-            toast.textContent = '❌ Arquivo inválido';
-            toast.style.background = 'var(--red)';
-            toast.classList.add('show');
-            setTimeout(function() { toast.classList.remove('show'); toast.style.background = ''; }, 2500);
+            showToast('❌ Arquivo inválido', { type: 'error' });
         }
     };
     reader.readAsText(file);
     event.target.value = '';
 }
 
+// ==================== GLOBAL TOAST ====================
+function showToast(msg, opts) {
+    var toast = document.getElementById('toast');
+    if (!toast) return;
+    var type = (opts && opts.type) || 'default';
+    toast.textContent = msg;
+    toast.style.background = type === 'error' ? 'var(--red)' : type === 'warning' ? 'var(--orange)' : '';
+    toast.classList.add('show');
+    var duration = (opts && opts.duration) || 2500;
+    setTimeout(function() { toast.classList.remove('show'); toast.style.background = ''; }, duration);
+}
+
+// ==================== FOCUS TRAP ====================
+var _focusTrapEl = null;
+var _focusTrapPrev = null;
+
+function trapFocus(el) {
+    _focusTrapEl = el;
+    _focusTrapPrev = document.activeElement;
+    document.addEventListener('keydown', _focusTrapHandler);
+}
+
+function releaseFocus() {
+    document.removeEventListener('keydown', _focusTrapHandler);
+    if (_focusTrapPrev && _focusTrapPrev.focus) _focusTrapPrev.focus();
+    _focusTrapEl = null;
+    _focusTrapPrev = null;
+}
+
+function _focusTrapHandler(e) {
+    if (e.key !== 'Tab' || !_focusTrapEl) return;
+    var focusable = _focusTrapEl.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])');
+    if (focusable.length === 0) return;
+    var first = focusable[0];
+    var last = focusable[focusable.length - 1];
+    if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+    } else {
+        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+}
+
 // ==================== PULL-TO-REFRESH ====================
 (function() {
-    var PTR_THRESHOLD = 72; // px to pull before triggering
+    var PTR_THRESHOLD = 50; // px to pull before triggering
     var PTR_MAX = 110;      // max visual pull distance
     var startY = 0;
     var pulling = false;
@@ -3411,14 +3474,6 @@ function importUserData(event) {
         el.querySelector('.ptr-spinner').style.transform = 'rotate(' + (pct * 360) + 'deg)';
         el.querySelector('.ptr-label').textContent = pct >= 1 ? 'Solte para atualizar ↑' : 'Puxe para atualizar';
         el.classList.toggle('ptr-ready', pct >= 1);
-    }
-
-    function showToast(msg) {
-        var toast = document.getElementById('toast');
-        if (!toast) return;
-        toast.textContent = msg;
-        toast.classList.add('show');
-        setTimeout(function() { toast.classList.remove('show'); }, 2500);
     }
 
     function resetIndicator() {

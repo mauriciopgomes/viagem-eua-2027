@@ -102,6 +102,7 @@ var SyncEngine = {
             if (errMsg.indexOf('403') !== -1) {
                 // Auth error: não tentar novamente, avisar usuário
                 this.updateUI('autherror');
+                if (typeof showToast === 'function') showToast('⚠️ Sync sem permissão (403) — verifique URL', { type: 'error', duration: 4000 });
                 this.syncing = false;
                 this.pushRetries = 0;
                 return;
@@ -109,6 +110,7 @@ var SyncEngine = {
             if (this.pushRetries >= maxRetries) {
                 console.error('Sync push: máximo de tentativas atingido (' + maxRetries + ')');
                 this.updateUI('maxretry');
+                if (typeof showToast === 'function') showToast('❌ Sync falhou após ' + maxRetries + ' tentativas', { type: 'error', duration: 4000 });
                 this.syncing = false;
                 this.pushRetries = 0;
                 return;
@@ -144,6 +146,7 @@ var SyncEngine = {
         } catch(e) {
             console.warn('Sync pull failed:', e);
             this.updateUI('error');
+            if (typeof showToast === 'function') showToast('⚠️ Falha ao sincronizar', { type: 'warning' });
         }
         this.syncing = false;
     },
