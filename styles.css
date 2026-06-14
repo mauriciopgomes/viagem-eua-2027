@@ -124,7 +124,7 @@ body {
 /* ==================== HOME / ITINERARY ==================== */
 .hero {
     position: relative;
-    height: 320px;
+    height: 340px;
     overflow: hidden;
 }
 .hero img {
@@ -179,6 +179,12 @@ body {
     letter-spacing: 0.01em;
 }
 .hero-badge b { color: var(--text); font-weight: 700; }
+.hero-badge-countdown {
+    background: rgba(255,214,10,0.12);
+    border-color: rgba(255,214,10,0.3);
+    color: var(--gold);
+    font-weight: 700;
+}
 .hero-progress {
     margin-top: 14px;
     height: 3px;
@@ -222,9 +228,9 @@ body {
 .day-selector::-webkit-scrollbar { display: none; }
 .day-pill {
     position: relative;
-    min-width: 56px;
-    height: 54px;
-    border-radius: 14px;
+    min-width: 68px;
+    height: 86px;
+    border-radius: 16px;
     border: 1.5px solid rgba(255,255,255,0.06);
     background: rgba(255,255,255,0.03);
     color: var(--text3);
@@ -233,14 +239,16 @@ body {
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
     font-family: inherit;
-    padding: 4px 10px 8px;
+    padding: 6px 8px 8px;
     white-space: nowrap;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    gap: 5px;
     line-height: 1;
+    overflow: hidden;
 }
 .day-pill.active {
     background: var(--blue);
@@ -261,9 +269,20 @@ body {
 .day-pill.active { animation: pillPulse 2.5s ease-in-out infinite; }
 @keyframes pillPulse { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.15); } }
 @media (prefers-reduced-motion: reduce) { .day-pill.active { animation: none; } }
-.pill-label { display: block; font-size: 9px; font-weight: 500; opacity: 0.7; margin-top: 1px; letter-spacing: 0; }
-.pill-date { display: block; font-size: 12px; font-weight: 700; letter-spacing: -0.01em; }
+.pill-label { display: block; font-size: 9px; font-weight: 600; opacity: 0.75; letter-spacing: 0; text-overflow: ellipsis; overflow: hidden; max-width: 64px; text-align: center; }
+.pill-date { display: block; font-size: 11px; font-weight: 700; letter-spacing: -0.01em; }
 .day-pill.active .pill-label { opacity: 1; }
+/* Thumbnail da foto no pill */
+.pill-thumb {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    object-fit: cover;
+    display: block;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+    flex-shrink: 0;
+}
+.day-pill.active .pill-thumb { opacity: 1; box-shadow: 0 0 0 2px rgba(255,255,255,0.4); }
 @media (max-width: 374px) { .hero { height: 240px; } .hero-title { font-size: 22px; } }
 
 /* Pill progress dot */
@@ -349,12 +368,67 @@ body {
     height: auto;
     aspect-ratio: 2 / 1;
     object-fit: cover;
-    max-height: 160px;
+    max-height: 180px;
     filter: blur(6px);
     transition: filter 0.4s ease;
+    display: block;
 }
 .activity-card-photo.loaded {
     filter: blur(0);
+}
+/* Placeholder gradiente quando não há foto */
+.activity-card-placeholder {
+    width: 100%;
+    height: 90px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.activity-card-placeholder::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.25);
+}
+.activity-card[data-type="drive"] .activity-card-placeholder { background: linear-gradient(135deg, rgba(10,132,255,0.25) 0%, rgba(10,132,255,0.08) 100%); }
+.activity-card[data-type="food"] .activity-card-placeholder { background: linear-gradient(135deg, rgba(255,69,58,0.25) 0%, rgba(255,69,58,0.08) 100%); }
+.activity-card[data-type="highlight"] .activity-card-placeholder { background: linear-gradient(135deg, rgba(255,214,10,0.25) 0%, rgba(255,214,10,0.08) 100%); }
+.activity-card[data-type="charge"] .activity-card-placeholder { background: linear-gradient(135deg, rgba(48,209,88,0.25) 0%, rgba(48,209,88,0.08) 100%); }
+.activity-card:not([data-type]) .activity-card-placeholder,
+.activity-card[data-type=""] .activity-card-placeholder { background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%); }
+/* Ícone grande no centro do placeholder */
+.activity-card-placeholder-icon {
+    position: absolute; inset: 0; z-index: 1;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px; opacity: 0.35;
+}
+/* Type badge — pill sobre a foto */
+.activity-type-badge {
+    position: absolute;
+    top: 10px; left: 10px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 0.5px solid rgba(255,255,255,0.15);
+}
+.activity-card[data-type="drive"] .activity-type-badge { background: rgba(10,132,255,0.35); color: #fff; }
+.activity-card[data-type="food"] .activity-type-badge { background: rgba(255,69,58,0.35); color: #fff; }
+.activity-card[data-type="highlight"] .activity-type-badge { background: rgba(255,214,10,0.35); color: #1a1a1a; }
+.activity-card[data-type="charge"] .activity-type-badge { background: rgba(48,209,88,0.35); color: #fff; }
+.activity-card:not([data-type]) .activity-type-badge,
+.activity-card[data-type=""] .activity-type-badge { background: rgba(255,255,255,0.15); color: var(--text2); }
+/* Wrapper relativo para o badge se posicionar sobre foto/placeholder */
+.activity-card-media {
+    position: relative;
+    flex-shrink: 0;
 }
 .activity-card-body {
     padding: 14px 16px 16px;
@@ -388,6 +462,10 @@ body {
     color: var(--text2);
     margin-top: 6px;
     line-height: 1.55;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 
@@ -463,6 +541,37 @@ body {
     height: calc(100vh - var(--tab-height) - var(--safe-top));
     height: calc(100dvh - var(--tab-height) - var(--safe-top));
     width: 100%;
+}
+#map.map-loading::before {
+    content: '';
+    position: absolute; inset: 0; z-index: 500;
+    background: var(--bg);
+}
+#map.map-loading::after {
+    content: 'Carregando mapa…';
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    z-index: 501; color: var(--text3); font-size: 14px; font-family: inherit;
+    letter-spacing: 0.01em;
+}
+/* Offline sem tiles baixados */
+.map-offline-banner {
+    position: absolute; bottom: 100px; left: 12px; right: 12px;
+    z-index: 1100;
+    background: rgba(5,5,8,0.92);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,69,58,0.4);
+    border-radius: 16px; padding: 16px 18px;
+    display: flex; flex-direction: column; gap: 10px;
+}
+.map-offline-banner-text {
+    font-size: 13px; color: var(--text2); line-height: 1.5;
+}
+.map-offline-banner-text strong { color: var(--text); }
+.map-offline-banner-btn {
+    background: var(--blue); color: #fff; border: none;
+    border-radius: 12px; padding: 12px 16px;
+    font-size: 14px; font-weight: 600; font-family: inherit;
+    cursor: pointer; text-align: center;
 }
 #map .leaflet-top { top: 56px; }
 #map .leaflet-control-zoom { border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; }
@@ -792,8 +901,9 @@ path.route-upcoming {
     padding-bottom: calc(24px + var(--safe-bottom));
     -webkit-overflow-scrolling: touch;
     box-shadow: 0 -8px 40px rgba(0,0,0,0.5);
+    visibility: hidden;
 }
-.sheet.open { transform: translateY(0); }
+.sheet.open { transform: translateY(0); visibility: visible; }
 .sheet-handle {
     width: 40px; height: 5px; border-radius: 3px;
     background: rgba(255,255,255,0.15);
@@ -849,14 +959,16 @@ path.route-upcoming {
 .btn-amaps { background: rgba(52,199,89,0.12); color: #34C759; }
 .sheet-close {
     position: absolute; top: 12px; right: 12px;
-    width: 44px; height: 44px; border-radius: 50%;
-    background: rgba(0,0,0,0.4);
+    width: 48px; height: 48px; border-radius: 50%;
+    background: rgba(0,0,0,0.65);
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border: 0.5px solid rgba(255,255,255,0.1);
-    color: rgba(255,255,255,0.85); font-size: 17px;
+    border: 0.5px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.95); font-size: 18px;
     display: flex; align-items: center; justify-content: center;
     cursor: pointer; z-index: 2;
     transition: background 0.2s, transform 0.15s;
+    /* Aumentar área de toque sem mudar tamanho visual */
+    touch-action: manipulation;
 }
 .sheet-close:active { transform: scale(0.9); }
 
@@ -987,10 +1099,10 @@ button:focus-visible, a:focus-visible {
     align-items: center;
     justify-content: center;
     padding: 0;
-    width: 36px;
-    height: 36px;
-    min-height: 36px;
-    border-radius: 10px;
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    border-radius: 12px;
     background: transparent;
     border: 1px solid rgba(255,255,255,0.08);
     cursor: pointer;
@@ -1163,26 +1275,37 @@ button:focus-visible, a:focus-visible {
     #sec-home.active { display: flex; flex-direction: row; }
     .home-sidebar {
         display: block;
-        width: 240px; min-width: 240px; max-height: 100vh; height: 100vh;
+        width: 260px; min-width: 260px; max-height: 100vh; height: 100vh;
         position: sticky; top: 0;
         overflow-y: auto; scrollbar-width: thin;
         background: var(--bg2); border-right: 0.5px solid rgba(255,255,255,0.06);
-        padding: 16px 0; flex-shrink: 0;
+        padding: 8px 0 16px; flex-shrink: 0;
     }
     .home-sidebar::-webkit-scrollbar { width: 4px; }
     .home-sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
     .home-main { flex: 1; min-width: 0; }
     .sidebar-item {
         display: flex; align-items: center; gap: 10px;
-        padding: 10px 16px; cursor: pointer; font-size: 13px;
+        padding: 8px 14px; cursor: pointer;
         color: var(--text2); transition: background 0.15s, color 0.15s;
         border-left: 3px solid transparent;
     }
     .sidebar-item:hover { background: var(--glass); }
-    .sidebar-item.active { background: rgba(10,132,255,0.1); border-left-color: var(--blue); color: var(--text); }
-    .sidebar-day { font-weight: 700; font-size: 12px; min-width: 40px; }
-    .sidebar-loc { font-size: 12px; color: var(--text3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .sidebar-item.active .sidebar-loc { color: var(--text2); }
+    .sidebar-item.active { background: rgba(10,132,255,0.08); border-left-color: var(--blue); color: var(--text); }
+    /* Thumbnail na sidebar */
+    .sidebar-thumb {
+        width: 36px; height: 36px; border-radius: 8px;
+        object-fit: cover; display: block; flex-shrink: 0; opacity: 0.75;
+    }
+    .sidebar-thumb-placeholder {
+        background: var(--glass2);
+    }
+    .sidebar-item.active .sidebar-thumb { opacity: 1; }
+    .sidebar-item-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+    .sidebar-day { font-weight: 700; font-size: 11px; color: var(--text3); }
+    .sidebar-item.active .sidebar-day { color: var(--blue); }
+    .sidebar-loc { font-size: 13px; font-weight: 600; color: var(--text2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .sidebar-item.active .sidebar-loc { color: var(--text); }
 
     /* Hide horizontal day selector on desktop */
     .day-selector { display: none; }
@@ -1206,8 +1329,18 @@ button:focus-visible, a:focus-visible {
     .tab-item.active::before { top: auto; bottom: 0; width: 100%; height: 2px; left: 0; transform: none; }
     body { padding-bottom: 0; padding-top: 52px; }
 
-    /* Hero smaller on desktop */
-    .hero { height: 240px; }
+    /* Hero menor no desktop */
+    .hero { height: 260px; }
+
+    /* Sheet como modal centralizado verdadeiro no desktop */
+    .sheet {
+        max-width: 600px;
+        left: 50%; right: auto;
+        transform: translateX(-50%) translateY(100%);
+        border-radius: 24px;
+        bottom: 40px;
+    }
+    .sheet.open { transform: translateX(-50%) translateY(0); }
 }
 
 /* ==================== SEARCH BAR ==================== */
@@ -1218,7 +1351,7 @@ button:focus-visible, a:focus-visible {
     flex: 1; background: var(--glass2);
     backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
     border: 0.5px solid rgba(255,255,255,0.1); border-radius: 100px;
-    padding: 12px 18px; font-size: 14px; font-family: inherit;
+    padding: 12px 18px; font-size: 16px; font-family: inherit;
     color: var(--text); outline: none; transition: border-color 0.2s;
 }
 .search-input:focus { border-color: var(--blue); }
@@ -1321,7 +1454,7 @@ details[open] > .day-notes-summary::before { content: '▾ '; }
 .day-notes-textarea {
     width: 100%; min-height: 60px; background: var(--glass);
     border: 0.5px solid rgba(255,255,255,0.1); border-radius: 12px;
-    padding: 12px 14px; font-family: inherit; font-size: 13px;
+    padding: 12px 14px; font-family: inherit; font-size: 16px;
     color: var(--text); resize: none; outline: none; line-height: 1.6;
     overflow: hidden; transition: border-color 0.2s;
 }
@@ -1333,8 +1466,18 @@ details[open] > .day-notes-summary::before { content: '▾ '; }
 .explore-header {
     font-size: 32px; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 16px;
 }
+.explore-filters-wrap {
+    position: relative; margin-bottom: 20px;
+}
+.explore-filters-wrap::after {
+    content: '';
+    position: absolute; top: 0; right: 0; bottom: 0; width: 48px;
+    background: linear-gradient(to right, transparent, var(--bg));
+    pointer-events: none; border-radius: 0 100px 100px 0;
+}
 .explore-filters {
-    display: flex; gap: 6px; margin-bottom: 20px; overflow-x: auto; scrollbar-width: none;
+    display: flex; gap: 6px; margin-bottom: 0; overflow-x: auto; scrollbar-width: none;
+    padding-right: 40px;
 }
 .explore-filters::-webkit-scrollbar { display: none; }
 .explore-filter-btn {
@@ -1363,13 +1506,30 @@ details[open] > .day-notes-summary::before { content: '▾ '; }
 .explore-stat-value.green { color: var(--green); }
 .explore-stat-value.blue { color: var(--blue); }
 .explore-stat-value.gold { color: var(--gold); }
+.explore-stat-value.muted { color: var(--text3); }
 /* Park cards */
 .explore-park-card {
     background: var(--bg3); border-radius: var(--radius);
-    border: 0.5px solid rgba(255,255,255,0.06); padding: 16px; margin-bottom: 12px;
-    cursor: pointer; transition: background 0.2s;
+    border: 0.5px solid rgba(255,255,255,0.06); padding: 0; margin-bottom: 12px;
+    cursor: pointer; transition: background 0.2s; overflow: hidden;
 }
 .explore-park-card:active { background: var(--glass2); }
+/* Foto do parque */
+.explore-park-photo-wrap {
+    width: 100%; height: 130px; overflow: hidden; flex-shrink: 0;
+}
+.explore-park-photo {
+    width: 100%; height: 130px; object-fit: cover;
+    display: block; transition: transform 0.4s ease;
+}
+.explore-park-card:active .explore-park-photo { transform: scale(1.03); }
+/* Conteúdo do park card */
+.explore-park-card .explore-park-header,
+.explore-park-card .explore-park-highlights {
+    padding: 0 16px;
+}
+.explore-park-card .explore-park-header { padding-top: 14px; }
+.explore-park-card .explore-park-highlights { padding-bottom: 16px; }
 .explore-park-header { display: flex; align-items: center; justify-content: space-between; }
 .explore-park-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
 .explore-park-days { font-size: 12px; color: var(--text3); font-weight: 600; margin-bottom: 8px; }
@@ -1383,6 +1543,13 @@ details[open] > .day-notes-summary::before { content: '▾ '; }
 }
 .hotel-item:active { background: var(--glass2); }
 .hotel-item:last-child { border-bottom: none; }
+/* Thumbnail foto hotel */
+.hotel-thumb-wrap {
+    width: 56px; height: 56px; border-radius: 12px; overflow: hidden; flex-shrink: 0;
+}
+.hotel-thumb {
+    width: 56px; height: 56px; object-fit: cover; display: block;
+}
 .hotel-num {
     width: 32px; height: 32px; border-radius: 10px; background: var(--glass2);
     display: flex; align-items: center; justify-content: center;
@@ -1606,3 +1773,30 @@ details[open] > .day-notes-summary::before { content: '▾ '; }
     color: var(--text2);
     font-style: italic;
 }
+
+/* ==================== SKELETON LOADING ==================== */
+@keyframes shimmer {
+    0% { background-position: -400px 0; }
+    100% { background-position: 400px 0; }
+}
+.skeleton {
+    background: linear-gradient(90deg, var(--bg3) 25%, var(--bg4) 50%, var(--bg3) 75%);
+    background-size: 800px 100%;
+    animation: shimmer 1.4s ease-in-out infinite;
+    border-radius: 8px;
+}
+/* Skeleton cards ao trocar de dia */
+.day-slide.loading .activity-card-media { background: var(--bg3) !important; }
+.day-slide.loading .activity-card-placeholder { opacity: 0.4; }
+.day-slide.loading .activity-card-body { opacity: 0.4; }
+/* Fade-in rápido ao aparecer */
+.day-slide.active { animation: slideIn 0.22s ease both; }
+@keyframes slideIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .day-slide.active { animation: none; } }
+
+/* ==================== TIPOGRAFIA — ajustes finais ==================== */
+/* Títulos de seção no Explore com letter-spacing negativo */
+.explore-title { letter-spacing: -0.02em; }
+.explore-header { letter-spacing: -0.03em; }
+/* Day info mais espaçoso */
+.day-info h2 { letter-spacing: -0.03em; }

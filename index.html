@@ -13,7 +13,7 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#050508">
     <meta name="color-scheme" content="dark">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' https://*.basemaps.cartocdn.com https://*.tile.openstreetmap.org https://server.arcgisonline.com data:; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://*.basemaps.cartocdn.com https://*.tile.openstreetmap.org https://server.arcgisonline.com; font-src 'self'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https://*.basemaps.cartocdn.com https://*.tile.openstreetmap.org https://server.arcgisonline.com data:; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://*.basemaps.cartocdn.com https://*.tile.openstreetmap.org https://server.arcgisonline.com; font-src 'self'">
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
     <link rel="preconnect" href="https://basemaps.cartocdn.com" crossorigin>
@@ -28,7 +28,7 @@
     <meta name="apple-mobile-web-app-title" content="EUA 2027">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-192.png">
-    <link rel="stylesheet" href="lib/leaflet.css" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="lib/leaflet.css" media="print" id="leafletCss" />
     <link rel="stylesheet" href="styles.css">
     <script src="data.js" defer></script>
     <script src="storage.js" defer></script>
@@ -45,7 +45,7 @@
 <div class="section active" id="sec-home" role="tabpanel" aria-label="Roteiro">
     <div class="home-sidebar" id="homeSidebar"></div>
     <div class="home-main">
-    <div class="hero" id="heroSection" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <div class="hero" id="heroSection">
         <picture>
             <source type="image/webp" srcset="img/dia-01.webp">
             <img id="heroImg" src="img/dia-01.jpg" alt="Foto do Dia 1 em New York" fetchpriority="high" width="960" height="641">
@@ -67,15 +67,15 @@
         </div>
     </div>
 
-    <div class="trip-stats-card" id="tripStatsCard">
+    <div class="trip-stats-card" id="tripStatsCard" aria-live="polite" aria-atomic="true">
         <div class="trip-stat"><span class="trip-stat-value" id="statChecked">0/0</span><span class="trip-stat-label">Concluídos</span></div>
         <div class="trip-stat"><span class="trip-stat-value" id="statParks">0/11</span><span class="trip-stat-label">Parques</span></div>
         <div class="trip-stat"><span class="trip-stat-value" id="statKm">~0/6.500</span><span class="trip-stat-label">km</span></div>
     </div>
 
     <div class="search-bar-wrap">
-        <input type="search" class="search-input" id="searchInput" placeholder="🔍 Buscar lugares, atividades..." oninput="searchItems(this.value)" autocomplete="off">
-        <button class="search-fav-btn" id="searchFavFilter" onclick="toggleSearchFav(this)" aria-label="Filtrar favoritos">⭐</button>
+        <input type="search" class="search-input" id="searchInput" placeholder="🔍 Buscar lugares, atividades..." autocomplete="off">
+        <button class="search-fav-btn" id="searchFavFilter" aria-label="Filtrar favoritos">⭐</button>
     </div>
     <div class="search-results" id="searchResults" style="display:none"></div>
 
@@ -89,20 +89,20 @@
 <div class="section" id="sec-map" role="tabpanel" aria-label="Mapa">
     <div id="map"></div>
     <div class="map-toolbar">
-        <button class="map-tb-btn" id="btnMapDay" onclick="mapFlyToDay()" title="Ir ao dia atual">📅 <span id="mapDayLabel">Dia 1</span></button>
-        <button class="map-tb-btn" id="btnMapFit" onclick="mapFitAll()" title="Ver rota completa">🗺️</button>
-        <button class="map-tb-btn" id="btnMapSat" onclick="mapToggleSat()" title="Alternar satélite">🛰️</button>
-        <button class="map-tb-btn" id="btnMapLayers" onclick="mapTogglePanel()" title="Camadas">☰</button>
+        <button class="map-tb-btn" id="btnMapDay" title="Ir ao dia atual">📅 <span id="mapDayLabel">Dia 1</span></button>
+        <button class="map-tb-btn" id="btnMapFit" title="Ver rota completa">🗺️ Rota</button>
+        <button class="map-tb-btn" id="btnMapSat" title="Alternar satélite">🛰️ Satélite</button>
+        <button class="map-tb-btn" id="btnMapLayers" title="Camadas">☰ Camadas</button>
     </div>
     <div class="map-layers-panel" id="mapLayersPanel">
-        <label><input type="checkbox" id="chkRoute" checked onchange="mapToggleLayer('route')"> 🛣️ Rota completa</label>
-        <label><input type="checkbox" id="chkStops" checked onchange="mapToggleLayer('stops')"> 📍 Paradas</label>
-        <label><input type="checkbox" id="chkSuperchargers" checked onchange="mapToggleLayer('sc')"> ⚡ Superchargers</label>
-        <label><input type="checkbox" id="chkDayTrips" checked onchange="mapToggleLayer('daytrips')"> 🟡 Day trips</label>
-        <label><input type="checkbox" id="chkDayRoute" checked onchange="mapToggleLayer('dayroute')"> 🔵 Trecho do dia</label>
+        <label><input type="checkbox" id="chkRoute" checked> 🛣️ Rota completa</label>
+        <label><input type="checkbox" id="chkStops" checked> 📍 Paradas</label>
+        <label><input type="checkbox" id="chkSuperchargers" checked> ⚡ Superchargers</label>
+        <label><input type="checkbox" id="chkDayTrips" checked> 🟡 Day trips</label>
+        <label><input type="checkbox" id="chkDayRoute" checked> 🔵 Trecho do dia</label>
     </div>
     <div class="map-stats-card" id="mapStatsCard">
-        <div class="map-stats-main" onclick="switchTab('home');showDay(mapScrubDay)">
+        <div class="map-stats-main" id="mapStatsMain">
             <div class="map-stats-photo" id="mapStatsPhoto"></div>
             <div class="map-stats-info">
                 <div class="map-stats-title" id="mapStatsTitle">Dia 1</div>
@@ -114,9 +114,9 @@
     </div>
     <div class="map-scrubber">
         <div class="map-scrub-loc" id="mapScrubLoc"></div>
-        <button class="map-scrub-arrow" onclick="mapScrubPrev()" aria-label="Dia anterior">‹</button>
-        <input type="range" id="mapScrubRange" min="1" max="33" value="1" oninput="mapScrubTo(this.value)" aria-label="Selecionar dia">
-        <button class="map-scrub-arrow" onclick="mapScrubNext()" aria-label="Próximo dia">›</button>
+        <button class="map-scrub-arrow" id="btnScrubPrev" aria-label="Dia anterior">‹</button>
+        <input type="range" id="mapScrubRange" min="1" max="33" value="1" aria-label="Selecionar dia">
+        <button class="map-scrub-arrow" id="btnScrubNext" aria-label="Próximo dia">›</button>
         <div class="map-scrub-label" id="mapScrubLabel">1 / 33</div>
     </div>
 </div>
@@ -125,12 +125,14 @@
 <div class="section" id="sec-explore" role="tabpanel" aria-label="Explorar">
     <div class="explore-container">
         <h2 class="explore-header">Explorar</h2>
+        <div class="explore-filters-wrap">
         <div class="explore-filters">
-            <button class="explore-filter-btn active" onclick="filterExplore('all', this)">Todos</button>
-            <button class="explore-filter-btn" onclick="filterExplore('favs', this)">❤️ Favoritos</button>
-            <button class="explore-filter-btn" onclick="filterExplore('hotels', this)">🏨 Hotéis</button>
-            <button class="explore-filter-btn" onclick="filterExplore('parks', this)">🏞️ Parques</button>
-            <button class="explore-filter-btn" onclick="filterExplore('superchargers', this)">⚡ SC</button>
+            <button class="explore-filter-btn active" data-filter="all">Todos</button>
+            <button class="explore-filter-btn" data-filter="favs">❤️ Favoritos</button>
+            <button class="explore-filter-btn" data-filter="hotels">🏨 Hotéis</button>
+            <button class="explore-filter-btn" data-filter="parks">🏞️ Parques</button>
+            <button class="explore-filter-btn" data-filter="superchargers">⚡ SC</button>
+        </div>
         </div>
         <div id="exploreContent"></div>
     </div>
@@ -140,7 +142,7 @@
 <div class="section" id="sec-settings" role="tabpanel" aria-label="Ajustes">
     <div class="settings-section">
         <h2>Ajustes</h2>
-        <div id="appVersion" style="font-size:12px;color:var(--text3);text-align:center;margin:-16px 0 20px">EUA 2027 PWA v135</div>
+        <div id="appVersion" style="font-size:12px;color:var(--text3);text-align:center;margin:-16px 0 20px">EUA 2027 PWA</div>
         <div class="settings-group-label">Viagem</div>
         <div class="settings-group">
             <div class="setting-row">
@@ -196,8 +198,8 @@
                     <div class="setting-label">☁️ Google Sheets Sync</div>
                     <div class="setting-desc">Sincronizar progresso, favoritos e notas entre dispositivos via Google Sheets</div>
                 </div>
-                <input type="url" id="syncUrlInput" placeholder="URL do Google Apps Script (ver instruções abaixo)" style="background:var(--glass);border:0.5px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 14px;font-family:inherit;font-size:13px;color:var(--text);outline:none;width:100%" onchange="SyncEngine.setUrl(this.value)">
-                <button onclick="SyncEngine.fullSync()" style="background:var(--glass2);color:var(--text);border:0.5px solid rgba(255,255,255,0.1);padding:14px 20px;border-radius:14px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;width:100%">
+                <input type="url" id="syncUrlInput" placeholder="URL do Google Apps Script (ver instruções abaixo)" style="background:var(--glass);border:0.5px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 14px;font-family:inherit;font-size:13px;color:var(--text);outline:none;width:100%">
+                <button id="btnSyncNow" style="background:var(--glass2);color:var(--text);border:0.5px solid rgba(255,255,255,0.1);padding:14px 20px;border-radius:14px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;width:100%">
                     🔄 Sincronizar Agora
                 </button>
                 <div id="syncStatus" style="font-size:12px;color:var(--text3);text-align:center;min-height:18px"></div>
@@ -221,7 +223,7 @@
                     <div class="setting-label">🗺️ Mapa Offline</div>
                     <div class="setting-desc" id="mapCacheStatus">Tiles do mapa são baixados automaticamente</div>
                 </div>
-                <button id="btnCacheMap" onclick="localStorage.removeItem('mapTilesCached');cacheMapTiles(false)" style="background:var(--blue);color:#fff;border:none;padding:14px 20px;border-radius:14px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;width:100%">
+                <button id="btnCacheMap" style="background:var(--blue);color:#fff;border:none;padding:14px 20px;border-radius:14px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;width:100%">
                     📥 Baixar Mapa Offline
                 </button>
                 <div class="progress-bar" id="mapProgress" style="display:none;height:6px;background:var(--glass);border-radius:3px;overflow:hidden">
@@ -233,12 +235,12 @@
                     <div class="setting-label">💾 Backup de Dados</div>
                     <div class="setting-desc">Exportar notas, favoritos e progresso</div>
                 </div>
-                <button id="btnExportData" onclick="exportUserData()" style="background:var(--glass2);color:var(--text);border:0.5px solid rgba(255,255,255,0.1);padding:14px 20px;border-radius:14px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;width:100%">
+                <button id="btnExportData" style="background:var(--glass2);color:var(--text);border:0.5px solid rgba(255,255,255,0.1);padding:14px 20px;border-radius:14px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;width:100%">
                     📤 Exportar Backup
                 </button>
                 <label style="display:flex;align-items:center;gap:10px;cursor:pointer;padding:4px 0">
-                    <input type="file" id="importDataFile" accept=".json" onchange="importUserData(event)" style="display:none">
-                    <button onclick="this.previousElementSibling.click()" style="background:var(--glass2);color:var(--text);border:0.5px solid rgba(255,255,255,0.1);padding:14px 20px;border-radius:14px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;width:100%">
+                    <input type="file" id="importDataFile" accept=".json" style="display:none">
+                    <button id="btnImportData" style="background:var(--glass2);color:var(--text);border:0.5px solid rgba(255,255,255,0.1);padding:14px 20px;border-radius:14px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;width:100%">
                         📥 Importar Backup
                     </button>
                 </label>
@@ -249,17 +251,17 @@
 </main>
 
 <!-- ==================== DETAIL SHEET ==================== -->
-<div class="sheet-overlay" id="sheetOverlay" onclick="closeSheet()"></div>
+<div class="sheet-overlay" id="sheetOverlay"></div>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Detalhes do local">
     <div class="sheet-handle"></div>
-    <button class="sheet-close" onclick="closeSheet()">✕</button>
-    <img class="sheet-photo" id="sheetPhoto" src="" alt="" width="800" height="400" style="display:none" onerror="this.style.display='none'">
+    <button class="sheet-close" id="btnSheetClose">✕</button>
+    <img class="sheet-photo" id="sheetPhoto" src="" alt="" width="800" height="400" style="display:none">
     <div class="sheet-body" id="sheetBody"></div>
 </div>
 
 <!-- ==================== LIGHTBOX ==================== -->
-<div class="lightbox" id="lightbox" onclick="if(event.target===this)closeLightbox()">
-    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="btnLightboxClose">✕</button>
     <img class="lightbox-img" id="lightboxImg" src="" alt="">
     <div class="lightbox-caption" id="lightboxCaption"></div>
 </div>
@@ -269,19 +271,19 @@
 
 <!-- ==================== TAB BAR ==================== -->
 <nav class="tab-bar" role="tablist" aria-label="Navegação principal">
-    <button class="tab-item active" onclick="switchTab('home', event)" role="tab" aria-selected="true" aria-controls="sec-home">
+    <button class="tab-item active" id="tabHome" role="tab" aria-selected="true" aria-controls="sec-home">
         <span class="tab-icon" aria-hidden="true">📅</span>
         <span>Roteiro</span>
     </button>
-    <button class="tab-item" onclick="switchTab('map', event)" role="tab" aria-selected="false" aria-controls="sec-map">
+    <button class="tab-item" id="tabMap" role="tab" aria-selected="false" aria-controls="sec-map">
         <span class="tab-icon" aria-hidden="true">🗺️</span>
         <span>Mapa</span>
     </button>
-    <button class="tab-item" onclick="switchTab('explore', event)" role="tab" aria-selected="false" aria-controls="sec-explore">
+    <button class="tab-item" id="tabExplore" role="tab" aria-selected="false" aria-controls="sec-explore">
         <span class="tab-icon" aria-hidden="true">🔍</span>
         <span>Explorar</span>
     </button>
-    <button class="tab-item" onclick="switchTab('settings', event)" role="tab" aria-selected="false" aria-controls="sec-settings">
+    <button class="tab-item" id="tabSettings" role="tab" aria-selected="false" aria-controls="sec-settings">
         <span class="tab-icon" aria-hidden="true">⚙️</span>
         <span>Ajustes</span>
     </button>

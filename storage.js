@@ -100,14 +100,16 @@ var StorageLayer = {
     // Clear all storage
     clear: function() {
         // Limpar apenas chaves de app (não system keys)
-        ['check-', 'fav-', 'note-', 'syncQueue', 'syncUrl'].forEach(function(prefix) {
-            for (var i = 0; i < localStorage.length; i++) {
-                var key = localStorage.key(i);
-                if (key && key.startsWith(prefix)) {
-                    localStorage.removeItem(key);
-                }
+        // Snapshot das chaves ANTES de remover — evita index drift durante iteração
+        var keysToRemove = [];
+        var prefixes = ['check-', 'fav-', 'note-', 'syncQueue', 'syncUrl'];
+        for (var i = 0; i < localStorage.length; i++) {
+            var k = localStorage.key(i);
+            if (k && prefixes.some(function(p) { return k.startsWith(p); })) {
+                keysToRemove.push(k);
             }
-        });
+        }
+        keysToRemove.forEach(function(key) { localStorage.removeItem(key); });
 
         if (this.db) {
             var self = this;

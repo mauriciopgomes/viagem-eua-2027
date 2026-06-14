@@ -91,8 +91,29 @@ var SyncEngine = {
             this.pushRetries = 0;
         } catch(e) {
             console.warn('Sync push failed:', e);
+            var maxRetries = 10;
+            this.pushRetries = (this.pushRetries || 0) + 1;
+            // Tratar HTTP 429 (rate limit) e 403 (auth) separadamente
+            var errMsg = String(e && e.message ? e.message : e);
+            if (errMsg.indexOf('429') !== -1) {
+                // Rate limit: esperar mais antes de tentar novamente
+                this.pushRetries = Math.max(this.pushRetries, 4);
+            }
+            if (errMsg.indexOf('403') !== -1) {
+                // Auth error: não tentar novamente, avisar usuário
+                this.updateUI('autherror');
+                this.syncing = false;
+                this.pushRetries = 0;
+                return;
+            }
+            if (this.pushRetries >= maxRetries) {
+                console.error('Sync push: máximo de tentativas atingido (' + maxRetries + ')');
+                this.updateUI('maxretry');
+                this.syncing = false;
+                this.pushRetries = 0;
+                return;
+            }
             this.updateUI('error');
-            this.pushRetries = Math.min((this.pushRetries || 0) + 1, 5);
             var delay = Math.min(3000 * Math.pow(2, this.pushRetries - 1), 30000);
             var self = this;
             this.syncing = false;
@@ -138,7 +159,9 @@ var SyncEngine = {
                 var val = remote[key].v;
                 if (key.startsWith('check-')) {
                     var parts = key.replace('check-', '').split('-');
-                    var actionBtn = document.querySelector('[data-action-check="' + parts[0] + '-' + parts[1] + '"]');
+                    // Usar CSS.escape para sanitizar partes vindas de dados remotos
+                    var checkSel = '[data-action-check="' + CSS.escape(parts[0]) + '-' + CSS.escape(parts[1]) + '"]';
+                    var actionBtn = document.querySelector(checkSel);
                     if (actionBtn) {
                         actionBtn.classList.toggle('action-done', val === '1');
                         var card = actionBtn.closest('.activity-card');
@@ -147,7 +170,8 @@ var SyncEngine = {
                     dominated = true;
                 } else if (key.startsWith('fav-')) {
                     var parts2 = key.replace('fav-', '').split('-');
-                    var favBtn = document.querySelector('[data-action-fav="' + parts2[0] + '-' + parts2[1] + '"]');
+                    var favSel = '[data-action-fav="' + CSS.escape(parts2[0]) + '-' + CSS.escape(parts2[1]) + '"]';
+                    var favBtn = document.querySelector(favSel);
                     if (favBtn) favBtn.classList.toggle('action-fav-active', val === '1');
                     dominated = true;
                 } else if (key.startsWith('note-')) {
@@ -210,6 +234,8 @@ var SyncEngine = {
             el.textContent = 'Sincronizado agora';
         }
         else if (status === 'error') el.textContent = 'Falha na sync' + (pending ? ' (' + pending + ' pendentes)' : '');
+        else if (status === 'autherror') el.textContent = 'Sem permissão (403) — verifique a URL do script';
+        else if (status === 'maxretry') el.textContent = 'Sync falhou após 10 tentativas — verifique conexão';
         else if (status === 'nourl') el.textContent = 'Cole a URL acima primeiro';
         else el.textContent = '';
     },

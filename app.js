@@ -138,6 +138,243 @@ window.triggerPWAInstall = function() {
 document.addEventListener('DOMContentLoaded', function() {
     initNotifications();
     initPWAInstallPrompt();
+
+    // Event delegation para botão "Ver no Mapa" no sheet (evita inline onclick com coords)
+    var sheetBody = document.getElementById('sheetBody');
+    if (sheetBody) {
+        sheetBody.addEventListener('click', function(e) {
+            var btn = e.target.closest('[data-fly-lat]');
+            if (!btn) return;
+            var lat = parseFloat(btn.getAttribute('data-fly-lat'));
+            var lng = parseFloat(btn.getAttribute('data-fly-lng'));
+            if (isNaN(lat) || isNaN(lng)) return;
+            closeSheet();
+            switchTab('map', e);
+            setTimeout(function() { if (mapInstance) mapInstance.flyTo([lat, lng], 15); }, 500);
+        });
+    }
+
+    // ==================== EVENT DELEGATION: dayContainer ====================
+    var dayContainer = document.getElementById('dayContainer');
+    if (dayContainer) {
+        dayContainer.addEventListener('click', function(e) {
+            // Share day button
+            var shareBtn = e.target.closest('[data-share-day]');
+            if (shareBtn) { e.stopPropagation(); shareDay(parseInt(shareBtn.getAttribute('data-share-day'))); return; }
+
+            // Toggle hide done
+            var toggleBtn = e.target.closest('[data-toggle-done]');
+            if (toggleBtn) { e.stopPropagation(); toggleHideDone(parseInt(toggleBtn.getAttribute('data-toggle-done'))); return; }
+
+            // Check button
+            var checkBtn = e.target.closest('[data-action-check]');
+            if (checkBtn) { e.stopPropagation(); var parts = checkBtn.getAttribute('data-action-check').split('-'); toggleCheck(parseInt(parts[0]), parseInt(parts[1]), e); return; }
+
+            // Fav button
+            var favBtn = e.target.closest('[data-action-fav]');
+            if (favBtn) { e.stopPropagation(); var parts2 = favBtn.getAttribute('data-action-fav').split('-'); toggleFav(parseInt(parts2[0]), parseInt(parts2[1]), e); return; }
+
+            // Photo: lightbox (no placeInfo)
+            var lightboxImg = e.target.closest('img[data-lightbox]');
+            if (lightboxImg) { e.stopPropagation(); var nameEl = lightboxImg.closest('.activity-card').querySelector('.activity-name'); openLightbox(lightboxImg.src, nameEl ? nameEl.textContent : ''); return; }
+
+            // Photo: openDetail (has placeInfo)
+            var detailImg = e.target.closest('img[data-open-day]');
+            if (detailImg) { e.stopPropagation(); openDetail(parseInt(detailImg.getAttribute('data-open-day')), parseInt(detailImg.getAttribute('data-open-idx'))); return; }
+
+            // Card click → openDetail
+            var detailCard = e.target.closest('[data-open-day].activity-card');
+            if (detailCard) { openDetail(parseInt(detailCard.getAttribute('data-open-day')), parseInt(detailCard.getAttribute('data-open-idx'))); return; }
+        });
+
+        // Image load: fade-in class
+        dayContainer.addEventListener('load', function(e) {
+            if (e.target && e.target.classList && e.target.classList.contains('activity-card-photo')) {
+                e.target.classList.add('loaded');
+            }
+        }, true);
+
+        // Image error: hide broken image and mark card
+        dayContainer.addEventListener('error', function(e) {
+            var img = e.target;
+            if (!img || img.tagName !== 'IMG' || !img.hasAttribute('data-onerror-hide')) return;
+            var cardEl = img.closest('.activity-card');
+            if (cardEl) cardEl.setAttribute('data-no-photo', '1');
+            img.style.display = 'none';
+        }, true);
+
+        // Textarea: save day notes
+        dayContainer.addEventListener('input', function(e) {
+            var ta = e.target.closest('[data-daynote]');
+            if (ta) saveDayNote(parseInt(ta.getAttribute('data-daynote')));
+        });
+    }
+    // Leaflet CSS: carregar de print → all após load
+    var leafletCss = document.getElementById('leafletCss');
+    if (leafletCss) leafletCss.addEventListener('load', function() { this.media = 'all'; });
+
+    // Hero: scroll topo
+    var heroSection = document.getElementById('heroSection');
+    if (heroSection) heroSection.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+    // Search
+    var searchInput = document.getElementById('searchInput');
+    if (searchInput) searchInput.addEventListener('input', function() { searchItems(this.value); });
+    var searchFavFilter = document.getElementById('searchFavFilter');
+    if (searchFavFilter) searchFavFilter.addEventListener('click', function() { toggleSearchFav(this); });
+
+    // Map toolbar
+    var btnMapDay = document.getElementById('btnMapDay');
+    if (btnMapDay) btnMapDay.addEventListener('click', function() { mapFlyToDay(); });
+    var btnMapFit = document.getElementById('btnMapFit');
+    if (btnMapFit) btnMapFit.addEventListener('click', function() { mapFitAll(); });
+    var btnMapSat = document.getElementById('btnMapSat');
+    if (btnMapSat) btnMapSat.addEventListener('click', function() { mapToggleSat(); });
+    var btnMapLayers = document.getElementById('btnMapLayers');
+    if (btnMapLayers) btnMapLayers.addEventListener('click', function() { mapTogglePanel(); });
+
+    // Map layer checkboxes
+    var layerMap = { chkRoute: 'route', chkStops: 'stops', chkSuperchargers: 'sc', chkDayTrips: 'daytrips', chkDayRoute: 'dayroute' };
+    Object.keys(layerMap).forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) el.addEventListener('change', function() { mapToggleLayer(layerMap[id]); });
+    });
+
+    // Map stats main click → go to day
+    var mapStatsMain = document.getElementById('mapStatsMain');
+    if (mapStatsMain) mapStatsMain.addEventListener('click', function() { switchTab('home'); showDay(mapScrubDay); });
+
+    // Map scrubber
+    var mapScrubRange = document.getElementById('mapScrubRange');
+    if (mapScrubRange) mapScrubRange.addEventListener('input', function() { mapScrubTo(this.value); });
+    var btnScrubPrev = document.getElementById('btnScrubPrev');
+    if (btnScrubPrev) btnScrubPrev.addEventListener('click', function() { mapScrubPrev(); });
+    var btnScrubNext = document.getElementById('btnScrubNext');
+    if (btnScrubNext) btnScrubNext.addEventListener('click', function() { mapScrubNext(); });
+
+    // Explore filters (event delegation)
+    var exploreFilters = document.querySelector('.explore-filters');
+    if (exploreFilters) {
+        exploreFilters.addEventListener('click', function(e) {
+            var btn = e.target.closest('[data-filter]');
+            if (!btn) return;
+            filterExplore(btn.getAttribute('data-filter'), btn);
+        });
+    }
+
+    // Sync URL input
+    var syncUrlInput = document.getElementById('syncUrlInput');
+    if (syncUrlInput) syncUrlInput.addEventListener('change', function() { SyncEngine.setUrl(this.value); });
+    var btnSyncNow = document.getElementById('btnSyncNow');
+    if (btnSyncNow) btnSyncNow.addEventListener('click', function() { SyncEngine.fullSync(); });
+
+    // Map cache button
+    var btnCacheMap = document.getElementById('btnCacheMap');
+    if (btnCacheMap) btnCacheMap.addEventListener('click', function() {
+        localStorage.removeItem('mapTilesCached');
+        cacheMapTiles(false);
+    });
+
+    // Export / import data
+    var btnExportData = document.getElementById('btnExportData');
+    if (btnExportData) btnExportData.addEventListener('click', function() { exportUserData(); });
+    var importDataFile = document.getElementById('importDataFile');
+    if (importDataFile) importDataFile.addEventListener('change', function(e) { importUserData(e); });
+    var btnImportData = document.getElementById('btnImportData');
+    if (btnImportData) btnImportData.addEventListener('click', function() {
+        document.getElementById('importDataFile').click();
+    });
+
+    // Sheet overlay + close button
+    var sheetOverlay = document.getElementById('sheetOverlay');
+    if (sheetOverlay) sheetOverlay.addEventListener('click', function() { closeSheet(); });
+    var btnSheetClose = document.getElementById('btnSheetClose');
+    if (btnSheetClose) btnSheetClose.addEventListener('click', function() { closeSheet(); });
+
+    // Sheet photo onerror
+    var sheetPhoto = document.getElementById('sheetPhoto');
+    if (sheetPhoto) sheetPhoto.addEventListener('error', function() { this.style.display = 'none'; });
+
+    // Lightbox: click backdrop to close + close button
+    var lightbox = document.getElementById('lightbox');
+    if (lightbox) lightbox.addEventListener('click', function(e) { if (e.target === this) closeLightbox(); });
+    var btnLightboxClose = document.getElementById('btnLightboxClose');
+    if (btnLightboxClose) btnLightboxClose.addEventListener('click', function() { closeLightbox(); });
+
+    // Tab bar
+    var tabDefs = [
+        { id: 'tabHome', tab: 'home' },
+        { id: 'tabMap', tab: 'map' },
+        { id: 'tabExplore', tab: 'explore' },
+        { id: 'tabSettings', tab: 'settings' }
+    ];
+    tabDefs.forEach(function(def) {
+        var el = document.getElementById(def.id);
+        if (el) el.addEventListener('click', function(e) { switchTab(def.tab, e); });
+    });
+
+    // Day pills → showDay (delegation on daySelector)
+    var daySelectorEl = document.getElementById('daySelector');
+    if (daySelectorEl) {
+        daySelectorEl.addEventListener('click', function(e) {
+            var pill = e.target.closest('.day-pill[data-d]');
+            if (!pill) return;
+            showDay(parseInt(pill.getAttribute('data-d')));
+        });
+    }
+
+    // Sidebar items → showDay (delegation on homeSidebar)
+    var homeSidebarEl = document.getElementById('homeSidebar');
+    if (homeSidebarEl) {
+        homeSidebarEl.addEventListener('click', function(e) {
+            var item = e.target.closest('.sidebar-item[data-sd]');
+            if (!item) return;
+            showDay(parseInt(item.getAttribute('data-sd')));
+        });
+    }
+
+    // data-goto-day → switchTab home + showDay (map popups, map stats btn, explore items)
+    document.addEventListener('click', function(e) {
+        // Legend toggle
+        var legendH3 = e.target.closest('[data-legend-toggle]');
+        if (legendH3) { legendH3.parentElement.classList.toggle('open'); return; }
+
+        // Map links in explore — stop propagation on anchor links
+        if (e.target.closest('.hotel-map-link, .charge-map-link')) {
+            e.stopPropagation();
+            return;
+        }
+
+        // goto-day (explore items, map popups, map stats)
+        var gotoEl = e.target.closest('[data-goto-day]');
+        if (gotoEl) {
+            e.stopPropagation();
+            var day = parseInt(gotoEl.getAttribute('data-goto-day'));
+            switchTab('home', e);
+            setTimeout(function() { showDay(day); }, 50);
+            return;
+        }
+    });
+
+    // Search results delegation (on searchResults container)
+    var searchResultsEl = document.getElementById('searchResults');
+    if (searchResultsEl) {
+        searchResultsEl.addEventListener('click', function(e) {
+            var item = e.target.closest('[data-search-day]');
+            if (!item) return;
+            var day = parseInt(item.getAttribute('data-search-day'));
+            var idx = item.hasAttribute('data-search-idx') ? parseInt(item.getAttribute('data-search-idx')) : null;
+            closeSearch();
+            showDay(day);
+            if (idx !== null) setTimeout(function() { openDetail(day, idx); }, 300);
+        });
+        searchResultsEl.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                var item = e.target.closest('[data-search-day]');
+                if (item) item.click();
+            }
+        });
+    }
 });
 
 // ==================== PERFORMANCE OBSERVER ====================
@@ -1297,7 +1534,16 @@ function renderDaySelector() {
         const short = dd ? dd.shortLoc || '' : '';
         var dt = new Date(TRIP_START); dt.setDate(dt.getDate() + i - 1);
         var dateStr = String(dt.getDate()).padStart(2,'0') + '/' + String(dt.getMonth()+1).padStart(2,'0');
-        html += '<button class="day-pill ' + r + '" data-d="' + i + '" onclick="showDay(' + i + ')" aria-label="Dia ' + i + ' — ' + dateStr + ' — ' + loc + '" title="' + loc + '"><span class="pill-date">' + dateStr + '</span><span class="pill-label">' + short + '</span><span class="pill-dot"></span></button>';
+        var thumbSrc = dd && dd.photo ? dd.photo : '';
+        var thumbHtml = thumbSrc
+            ? '<img class="pill-thumb" src="' + webpSrc(thumbSrc) + '" alt="" width="40" height="40" loading="lazy" onerror="this.style.display=\'none\'">'
+            : '<div class="pill-thumb" style="background:var(--glass2)"></div>';
+        html += '<button class="day-pill ' + r + '" data-d="' + i + '" aria-label="Dia ' + i + ' — ' + dateStr + ' — ' + loc + '" title="' + loc + '">' +
+            thumbHtml +
+            '<span class="pill-date">' + dateStr + '</span>' +
+            '<span class="pill-label">' + short + '</span>' +
+            '<span class="pill-dot"></span>' +
+            '</button>';
     }
     el.innerHTML = html;
 }
@@ -1306,13 +1552,21 @@ function renderDaySelector() {
 function renderSidebar() {
     var el = document.getElementById('homeSidebar');
     if (!el) return;
-    var html = '<div style="padding:12px 16px;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em">Dias</div>';
+    var html = '<div style="padding:16px 16px 8px;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em">33 Dias</div>';
     for (var i = 1; i <= totalDays; i++) {
         var d = days[i-1];
-        var loc = d ? d.location.replace(/ dia cheio| 🌲| 🌊| 🌅| 🧛| 🏜️| ✈️| 🎰| ❤️/g, '').split(' → ').pop().split(' — ').pop().trim() : '';
+        var loc = d ? d.shortLoc || d.location.split(',')[0].trim() : '';
+        var fullLoc = d ? d.location : '';
         var dt = new Date(TRIP_START); dt.setDate(dt.getDate() + i - 1);
         var dateStr = String(dt.getDate()).padStart(2,'0') + '/' + String(dt.getMonth()+1).padStart(2,'0');
-        html += '<div class="sidebar-item" data-sd="' + i + '" onclick="showDay(' + i + ')"><span class="sidebar-day">' + dateStr + '</span><span class="sidebar-loc">' + loc + '</span></div>';
+        var photo = d && d.photo ? d.photo : '';
+        var thumbHtml = photo
+            ? '<img class="sidebar-thumb" src="' + webpSrc(photo) + '" alt="" width="32" height="32" loading="lazy" onerror="this.style.display=\'none\'">'
+            : '<div class="sidebar-thumb sidebar-thumb-placeholder"></div>';
+        html += '<div class="sidebar-item" data-sd="' + i + '" title="' + escapeHtml(fullLoc) + '">' +
+            thumbHtml +
+            '<div class="sidebar-item-text"><span class="sidebar-day">' + dateStr + '</span><span class="sidebar-loc">' + escapeHtml(loc) + '</span></div>' +
+            '</div>';
     }
     el.innerHTML = html;
 }
@@ -1394,14 +1648,14 @@ function toggleHideDone(dayNum) {
 // ==================== RENDER DAY CONTENT ====================
 function renderDay(d) {
     var h = ['<div class="day-slide" id="ds-' + d.day + '">'];
-    h.push('<div class="day-info"><div style="display:flex;align-items:center;justify-content:space-between"><h2>' + getTitle(d) + '</h2><button class="share-day-btn" onclick="shareDay(' + d.day + ')" aria-label="Compartilhar dia">📤</button></div>');
+    h.push('<div class="day-info"><div style="display:flex;align-items:center;justify-content:space-between"><h2>' + getTitle(d) + '</h2><button class="share-day-btn" data-share-day="' + d.day + '" aria-label="Compartilhar dia">📤</button></div>');
     h.push('<div class="day-route">📍 ' + d.location + ' — ' + getRoute(d) + '</div>');
     h.push('<div class="day-note">' + getNote(d) + '</div>');
     h.push(getWeatherCard(d));
     h.push('</div>');
 
     // Progress counter
-    h.push('<div class="day-progress"><span id="day-progress-' + d.day + '">0/' + d.items.length + '</span> concluídos <button type="button" class="toggle-done-btn" id="toggleDone-' + d.day + '" onclick="toggleHideDone(' + d.day + ')" aria-label="Esconder concluídos">👁️ Esconder</button></div>');
+    h.push('<div class="day-progress"><span id="day-progress-' + d.day + '">0/' + d.items.length + '</span> concluídos <button type="button" class="toggle-done-btn" id="toggleDone-' + d.day + '" data-toggle-done="' + d.day + '" aria-label="Esconder concluídos">👁️ Esconder</button></div>');
 
     h.push('<div class="activity-grid">');
     var currentPeriod = '';
@@ -1414,30 +1668,45 @@ function renderDay(d) {
             h.push('<div class="time-group-label">' + periodLabels[period] + '</div>');
         }
         var text = getItemText(d, idx);
-        var plainText = text.replace(/<[^>]+>/g, '');
+        var _tmpDiv = document.createElement('div');
+        _tmpDiv.innerHTML = text;
+        var plainText = _tmpDiv.textContent || _tmpDiv.innerText || '';
         var photo = findPhoto(item.text);
         var tl = typeLabel[item.type] || '📍 Local';
 
         var placeData = findPlaceInfo(item.text);
         var hasInfo = !!placeData;
         var cardTitle = placeData && placeData.info.detail ? ' title="' + placeData.info.detail.replace(/"/g, '&quot;').substring(0, 150) + '"' : '';
-        var click = hasInfo ? ' onclick="openDetail(' + d.day + ',' + idx + ')" style="cursor:pointer"' : '';
         var doneClass = isChecked(d.day, idx) ? ' item-done' : '';
 
-        h.push('<div class="activity-card' + doneClass + '" data-type="' + item.type + '"' + click + cardTitle + '>');
+        h.push('<div class="activity-card' + doneClass + '" data-type="' + (item.type || '') + '"' + (hasInfo ? ' data-open-day="' + d.day + '" data-open-idx="' + idx + '" style="cursor:pointer"' : '') + cardTitle + '>');
+        // Media area (foto real ou placeholder gradiente)
+        h.push('<div class="activity-card-media">');
         if (photo) {
             h.push('<picture>');
             h.push('<source type="image/webp" srcset="' + webpSrc400(photo) + ' 400w, ' + webpSrc(photo) + ' 800w" sizes="(max-width:768px) 400px, 800px">');
-            h.push('<img class="activity-card-photo" src="' + photo + '" alt="' + plainText.replace(/"/g, '&quot;') + '" width="400" height="200" loading="lazy" decoding="async" onload="this.classList.add(\'loaded\')" onerror="this.style.display=\'none\'"' + (hasInfo ? ' onclick="event.stopPropagation();openDetail(' + d.day + ',' + idx + ')"' : ' onclick="event.stopPropagation();openLightbox(this.src,this.parentElement.querySelector(\'.activity-name\').textContent)"') + '>');
+            h.push('<img class="activity-card-photo photo-loading" src="' + photo + '" alt="' + plainText.replace(/"/g, '&quot;') + '" width="400" height="200" loading="lazy" decoding="async" data-onerror-hide="1"' + (hasInfo ? ' data-open-day="' + d.day + '" data-open-idx="' + idx + '"' : ' data-lightbox="1"') + '>');
             h.push('</picture>');
+        } else {
+            // Placeholder com ícone do tipo
+            var placeholderIcons = { highlight: '⭐', food: '🍽️', charge: '⚡', drive: '🚗', '': '📍' };
+            var pIcon = placeholderIcons[item.type || ''] || '📍';
+            h.push('<div class="activity-card-placeholder"><div class="activity-card-placeholder-icon">' + pIcon + '</div></div>');
         }
+        // Type badge sobre a mídia
+        h.push('<div class="activity-type-badge">' + tl + '</div>');
         if (hasInfo) h.push('<span class="detail-arrow">›</span>');
+        h.push('</div>');
         h.push('<div class="activity-card-body">');
-        h.push('<div class="activity-time">' + item.time + ' • ' + tl + (hasInfo ? ' • <span style="color:var(--blue)">ⓘ</span>' : '') + '</div>');
+        h.push('<div class="activity-time">' + item.time + (hasInfo ? ' · <span style="color:var(--blue)">ⓘ</span>' : '') + '</div>');
         h.push('<div class="activity-name">' + text + '</div>');
+        // Descrição do local quando disponível
+        if (placeData && placeData.info.detail) {
+            h.push('<div class="activity-desc">' + escapeHtml(placeData.info.detail.substring(0, 120)) + '</div>');
+        }
         h.push('<div class="card-actions">');
-        h.push('<button type="button" class="card-action-btn' + (isChecked(d.day, idx) ? ' action-done' : '') + '" onclick="event.stopPropagation();toggleCheck(' + d.day + ',' + idx + ',event)" data-action-check="' + d.day + '-' + idx + '" aria-label="Marcar como concluído"></button>');
-        h.push('<button type="button" class="card-action-btn' + (isFav(d.day, idx) ? ' action-fav-active' : '') + '" onclick="event.stopPropagation();toggleFav(' + d.day + ',' + idx + ',event)" data-action-fav="' + d.day + '-' + idx + '" aria-label="Favoritar"></button>');
+        h.push('<button type="button" class="card-action-btn' + (isChecked(d.day, idx) ? ' action-done' : '') + '" data-action-check="' + d.day + '-' + idx + '" aria-label="Marcar como concluído"></button>');
+        h.push('<button type="button" class="card-action-btn' + (isFav(d.day, idx) ? ' action-fav-active' : '') + '" data-action-fav="' + d.day + '-' + idx + '" aria-label="Favoritar"></button>');
         h.push('</div>');
         h.push('</div></div>');
     });
@@ -1447,7 +1716,7 @@ function renderDay(d) {
     var noteVal = loadDayNote(d.day);
     h.push('<details class="day-notes-wrap"' + (noteVal ? ' open' : '') + '>');
     h.push('<summary class="day-notes-summary">📝 Notas pessoais</summary>');
-    h.push('<textarea class="day-notes-textarea" id="daynote-' + d.day + '" placeholder="Adicione suas anotações para este dia..." oninput="saveDayNote(' + d.day + ')">' + escapeHtml(noteVal) + '</textarea>');
+    h.push('<textarea class="day-notes-textarea" id="daynote-' + d.day + '" placeholder="Adicione suas anotações para este dia..." data-daynote="' + d.day + '">' + escapeHtml(noteVal) + '</textarea>');
     h.push('</details>');
 
     // Tips section
@@ -1671,7 +1940,10 @@ function openDetail(dayNum, itemIdx) {
         html += '</div>';
         if (pi.info.coords) {
             var c = pi.info.coords.split(',');
-            html += '<button type="button" class="sheet-nav-btn btn-appmap" onclick="closeSheet();switchTab(\'map\',event);setTimeout(function(){if(mapInstance)mapInstance.flyTo([' + c[0] + ',' + c[1] + '],15)},500)">📌 Ver no Mapa</button>';
+            var lat = parseFloat(c[0]), lng = parseFloat(c[1]);
+            if (!isNaN(lat) && !isNaN(lng)) {
+                html += '<button type="button" class="sheet-nav-btn btn-appmap" data-fly-lat="' + lat + '" data-fly-lng="' + lng + '">📌 Ver no Mapa</button>';
+            }
         }
     }
 
@@ -1724,6 +1996,7 @@ document.addEventListener('keydown', function(e) {
 
 // ==================== MAP ====================
 function initMap() {
+    document.getElementById('map').classList.add('map-loading');
     if (typeof L === 'undefined') {
         var s = document.createElement('script');
         s.src = 'lib/leaflet.js';
@@ -1931,6 +2204,36 @@ function doInitMap() {
     L.Icon.Default.imagePath = 'lib/';
     mapInstance = L.map('map', { center: [38, -105], zoom: 5, zoomControl: false });
 
+    // Remove loading overlay once tile layer finishes first render
+    // mapInstance 'load' fires on map init before tiles arrive — use tileLayer 'load' instead
+    var tilesAreCached = localStorage.getItem('mapTilesCached') === 'tiles-v1';
+    var isOffline = !navigator.onLine;
+    var _mapOfflineBanner = null;
+
+    // Se offline e sem cache de tiles → mostrar banner após 3s sem tiles carregarem
+    var _mapLoadTimer = setTimeout(function() {
+        document.getElementById('map').classList.remove('map-loading');
+        if (!tilesAreCached && isOffline && !_mapOfflineBanner) {
+            _mapOfflineBanner = document.createElement('div');
+            _mapOfflineBanner.className = 'map-offline-banner';
+            _mapOfflineBanner.innerHTML =
+                '<div class="map-offline-banner-text">' +
+                '<strong>📡 Mapa indisponível offline</strong><br>' +
+                'Os tiles do mapa não foram baixados. Conecte-se à internet e baixe o mapa offline nos Ajustes.' +
+                '</div>' +
+                '<button class="map-offline-banner-btn" id="btnGoDownloadTiles">📥 Ir para Ajustes → Baixar Mapa</button>';
+            document.getElementById('sec-map').appendChild(_mapOfflineBanner);
+            var btn = document.getElementById('btnGoDownloadTiles');
+            if (btn) btn.addEventListener('click', function() {
+                document.getElementById('tabSettings').click();
+                setTimeout(function() {
+                    var el = document.getElementById('btnCacheMap');
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 400);
+            });
+        }
+    }, 3000);
+
     // Zoom control bottom-left
     L.control.zoom({ position: 'topleft' }).addTo(mapInstance);
 
@@ -1942,6 +2245,15 @@ function doInitMap() {
         attribution: '&copy; Esri', maxZoom: 18
     });
     mapTileDark.addTo(mapInstance);
+    mapTileDark.once('load', function() {
+        clearTimeout(_mapLoadTimer);
+        document.getElementById('map').classList.remove('map-loading');
+        // Tiles carregaram — remover banner offline se existir
+        if (_mapOfflineBanner && _mapOfflineBanner.parentNode) {
+            _mapOfflineBanner.parentNode.removeChild(_mapOfflineBanner);
+            _mapOfflineBanner = null;
+        }
+    });
 
     // ---- ROUTE: DONE + UPCOMING (progress split) ----
     mapLayers.route = L.layerGroup();
@@ -2001,7 +2313,7 @@ function doInitMap() {
             '<a class="popup-nav-btn gmaps" href="https://www.google.com/maps/search/?api=1&query=' + q + '" target="_blank" rel="noopener">🗺️ Google</a>' +
             '<a class="popup-nav-btn amaps" href="https://maps.apple.com/?q=' + q + '" target="_blank" rel="noopener">🍎 Apple</a>' +
             '</div>' +
-            '<div class="popup-nav-btns" style="margin-top:4px"><a class="popup-nav-btn" style="background:rgba(10,132,255,0.15);color:#0a84ff;flex:1;cursor:pointer" onclick="switchTab(\'home\');showDay(' + s.days[0] + ')">📅 Ver Dia ' + s.days[0] + '</a></div>';
+            '<div class="popup-nav-btns" style="margin-top:4px"><a class="popup-nav-btn" style="background:rgba(10,132,255,0.15);color:#0a84ff;flex:1;cursor:pointer" data-goto-day="' + s.days[0] + '">📅 Ver Dia ' + s.days[0] + '</a></div>';
         var marker = L.marker([s.lat, s.lng], { icon: ic }).addTo(mapLayers.stops)
             .bindPopup('<h3>' + s.i + ' ' + s.n + '</h3><div class="days">' + s.info.replace(/\n/g,'<br>') + '</div>' + navHtml, { className: 'custom-popup' });
         s.days.forEach(function(d) {
@@ -2039,7 +2351,7 @@ function doInitMap() {
             '<a class="popup-nav-btn gmaps" href="https://www.google.com/maps/search/?api=1&query=' + q + '" target="_blank" rel="noopener">🗺️ Google</a>' +
             '<a class="popup-nav-btn amaps" href="https://maps.apple.com/?q=' + q + '" target="_blank" rel="noopener">🍎 Apple</a>' +
             '</div>' +
-            '<div class="popup-nav-btns" style="margin-top:4px"><a class="popup-nav-btn" style="background:rgba(10,132,255,0.15);color:#0a84ff;flex:1;cursor:pointer" onclick="switchTab(\'home\');showDay(' + sc.day + ')">📅 Ver Dia ' + sc.day + '</a></div>';
+            '<div class="popup-nav-btns" style="margin-top:4px"><a class="popup-nav-btn" style="background:rgba(10,132,255,0.15);color:#0a84ff;flex:1;cursor:pointer" data-goto-day="' + sc.day + '">📅 Ver Dia ' + sc.day + '</a></div>';
         L.marker(c, { icon: scI }).addTo(mapLayers.sc)
             .bindPopup('<h3>⚡ SC ' + sc.name + '</h3><div class="days">Dia ' + sc.day + ' • ' + sc.leg + (sc.note ? '<br>' + sc.note : '') + '</div>' + navHtml, { className: 'custom-popup' });
     });
@@ -2053,7 +2365,7 @@ function doInitMap() {
     var legend = L.control({ position: 'topright' });
     legend.onAdd = function() {
         var div = L.DomUtil.create('div', 'legend');
-        div.innerHTML = '<h3 onclick="this.parentElement.classList.toggle(\'open\')">🗺️ Legenda</h3>' +
+        div.innerHTML = '<h3 data-legend-toggle="1">🗺️ Legenda</h3>' +
             '<div class="legend-body">' +
             '<div class="legend-item"><div class="legend-line" style="background:#4ecdc4;opacity:0.35"></div><span>Rota percorrida</span></div>' +
             '<div class="legend-item"><div class="legend-line" style="background:#4ecdc4;border-style:dashed"></div><span>Trecho restante</span></div>' +
@@ -2176,7 +2488,7 @@ function mapUpdateStatsCard(dayNum) {
 
     // Action buttons
     var actions = '';
-    actions += '<button class="map-stats-action-btn btn-roteiro" onclick="event.stopPropagation();switchTab(\'home\');showDay(' + dayNum + ')">📅 Ver Roteiro</button>';
+    actions += '<button class="map-stats-action-btn btn-roteiro" data-goto-day="' + dayNum + '">📅 Ver Roteiro</button>';
     var coord = dayCoords[dayNum];
     if (coord) {
         var locName = encodeURIComponent(d.location);
@@ -2262,17 +2574,57 @@ function generateTileList() {
     var tileUrl = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
     var subdomains = ['a', 'b', 'c', 'd'];
     var tiles = [];
-    for (var z = 4; z <= 8; z++) {
-        var minTile = latLngToTile(48, -125, z);
-        var maxTile = latLngToTile(33, -109, z);
-        for (var x = minTile.x; x <= maxTile.x; x++) {
-            for (var y = minTile.y; y <= maxTile.y; y++) {
-                var s = subdomains[(x + y) % subdomains.length];
-                tiles.push(tileUrl.replace('{s}', s).replace('{z}', z).replace('{x}', x).replace('{y}', y).replace('{r}', ''));
+
+    function addBbox(north, west, south, east, zMin, zMax) {
+        for (var z = zMin; z <= zMax; z++) {
+            var tMin = latLngToTile(north, west, z);
+            var tMax = latLngToTile(south, east, z);
+            for (var x = tMin.x; x <= tMax.x; x++) {
+                for (var y = tMin.y; y <= tMax.y; y++) {
+                    var s = subdomains[(x + y) % subdomains.length];
+                    tiles.push(tileUrl.replace('{s}', s).replace('{z}', z).replace('{x}', x).replace('{y}', y).replace('{r}', ''));
+                }
             }
         }
     }
-    return tiles;
+
+    // Rota completa EUA Oeste — visão macro z4-8
+    addBbox(48, -125, 33, -109, 4, 8);
+
+    // Zonas estendidas da rota (z9-10) — Nevada, Utah, AZ, CA, OR, WA
+    addBbox(48, -125, 33, -109, 9, 10);
+
+    // Cidades principais do roteiro (z11-13) — detalhe de navegação
+    var cities = [
+        // [north, west, south, east, label]
+        [40.92, -74.26, 40.48, -73.70],  // New York City
+        [36.38, -115.40, 35.95, -114.95], // Las Vegas
+        [36.20, -112.25, 35.95, -111.90], // Grand Canyon South Rim
+        [37.35, -113.05, 37.05, -112.85], // Zion NP (Springdale)
+        [37.70, -112.25, 37.55, -112.10], // Bryce Canyon
+        [38.65, -109.65, 38.45, -109.40], // Arches NP (Moab)
+        [37.30, -111.55, 37.05, -111.45], // Monument Valley
+        [36.10, -109.95, 35.85, -109.70], // Canyon de Chelly / Chinle
+        [33.65, -117.95, 33.45, -117.70], // Orange County / Laguna
+        [34.15, -118.50, 33.95, -118.25], // Los Angeles
+        [37.83, -122.55, 37.65, -122.35], // San Francisco
+        [37.90, -119.65, 37.65, -119.45], // Yosemite Valley
+        [36.65, -118.90, 36.35, -118.60], // Sequoia / Kings Canyon
+        [35.85, -121.55, 35.55, -121.20], // Big Sur / Hearst
+        [34.47, -119.80, 34.36, -119.65], // Santa Barbara
+        [41.75, -124.25, 41.30, -123.90], // Redwoods NP Norte
+        [44.20, -124.20, 43.90, -124.00], // Oregon Coast (Florence)
+        [45.55, -122.80, 45.40, -122.55], // Portland
+        [47.70, -122.45, 47.45, -122.20], // Seattle
+        [47.95, -123.95, 47.80, -123.65], // Olympic NP (Forks/Kalaloch)
+        [48.80, -121.75, 48.45, -121.40], // North Cascades
+        [46.95, -121.85, 46.75, -121.60], // Mount Rainier
+        [25.85, -80.35, 25.65, -80.15],   // Miami
+    ];
+    cities.forEach(function(c) { addBbox(c[0], c[1], c[2], c[3], 11, 13); });
+
+    // Deduplica URLs repetidas
+    return tiles.filter(function(url, i, arr) { return arr.indexOf(url) === i; });
 }
 
 async function cacheMapTiles(silent) {
@@ -2289,10 +2641,20 @@ async function cacheMapTiles(silent) {
     if (tileCachePaused) tileCachePaused = false; // Resume if paused
 
     if (tileCacheRunning) return; // Already running, continue from where we paused
-    
+
     // Acquire multi-tab lock to prevent concurrent downloads
+    // Prefer navigator.locks (atomic) over localStorage-based lock
+    if (navigator.locks) {
+        return navigator.locks.request('map-tile-cache', { ifAvailable: true }, async function(lock) {
+            if (!lock) return; // Another tab holds the lock
+            await _cacheMapTilesInner(silent);
+        });
+    }
     if (!acquireTileDownloadLock()) return;
-    
+    await _cacheMapTilesInner(silent);
+}
+
+async function _cacheMapTilesInner(silent) {
     tileCacheRunning = true;
     var btn = document.getElementById('btnCacheMap');
     var status = document.getElementById('mapCacheStatus');
@@ -2388,15 +2750,44 @@ function getTodayDay() {
 
 function updateCountdown() {
     var tripStart = new Date(TRIP_START);
+    var tripEnd = new Date(2027, 1, 22); // 22 fev 2027
     var today = new Date();
     today.setHours(0,0,0,0);
     tripStart.setHours(0,0,0,0);
+    tripEnd.setHours(0,0,0,0);
+
+    var sub = document.getElementById('heroSub');
+    var title = document.getElementById('heroTitle');
+    var pl = document.getElementById('heroProgressLabel');
+    var pf = document.getElementById('heroProgress');
+
     var diff = Math.floor((tripStart - today) / 86400000);
+
     if (diff > 0) {
-        var pl = document.getElementById('heroProgressLabel');
-        var pf = document.getElementById('heroProgress');
-        if (pl) pl.textContent = '🛫 Faltam ' + diff + ' dias!';
+        // Antes da viagem — countdown
+        if (pl) pl.textContent = '🛫 Faltam ' + diff + (diff === 1 ? ' dia!' : ' dias!');
         if (pf) pf.style.width = '0%';
+        if (sub) sub.innerHTML = '<span style="color:var(--gold);font-weight:700">✈️ ' + diff + ' dias</span> para o grande dia · 21 Jan 2027';
+        // Adicionar badge de countdown no hero
+        var badgesEl = document.querySelector('.hero-badges');
+        if (badgesEl && !document.getElementById('countdownBadge')) {
+            var cb = document.createElement('span');
+            cb.id = 'countdownBadge';
+            cb.className = 'hero-badge hero-badge-countdown';
+            cb.innerHTML = '🗓️ <b>' + diff + '</b> dias';
+            badgesEl.insertBefore(cb, badgesEl.firstChild);
+        }
+    } else if (today <= tripEnd) {
+        // Durante a viagem
+        var dayNum = Math.floor((today - tripStart) / 86400000) + 1;
+        dayNum = Math.max(1, Math.min(dayNum, totalDays));
+        var todayData = days[dayNum - 1];
+        if (sub && todayData) {
+            sub.innerHTML = '<span style="color:var(--green);font-weight:700">🚗 Dia ' + dayNum + ' de ' + totalDays + '</span> · ' + todayData.location;
+        }
+    } else {
+        // Após a viagem
+        if (sub) sub.innerHTML = '<span style="color:var(--teal);font-weight:700">✅ ' + totalDays + ' dias</span> de aventura · Jan–Fev 2027';
     }
 }
 
@@ -2412,8 +2803,8 @@ document.getElementById('daySelector').addEventListener('mousedown', function(e)
 var initDay = getTodayDay();
 // Restore last viewed day if not during trip dates
 if (initDay === 1) {
-    var saved = parseInt(localStorage.getItem('lastDay'));
-    if (saved >= 1 && saved <= totalDays) initDay = saved;
+    var saved = parseInt(localStorage.getItem('lastDay'), 10);
+    if (saved >= 1 && saved <= totalDays && !isNaN(saved)) initDay = saved;
 }
 showDay(initDay);
 updateCountdown(); // show countdown only on initial load
@@ -2480,7 +2871,7 @@ function searchItems(query) {
     }
     var html = '';
     results.slice(0, 40).forEach(function(r) {
-        html += '<div class="search-result-item" tabindex="0" role="option" onclick="closeSearch();showDay(' + r.day + ')' + (r.hasInfo ? ';setTimeout(function(){openDetail(' + r.day + ',' + r.idx + ')},300)' : '') + '" onkeydown="if(event.key===\'Enter\')this.click()">';
+        html += '<div class="search-result-item" tabindex="0" role="option" data-search-day="' + r.day + '"' + (r.hasInfo ? ' data-search-idx="' + r.idx + '"' : '') + '>';
         html += '<span class="search-result-day">Dia ' + r.day + '</span>';
         html += '<span class="search-result-time">' + r.time + '</span>';
         var displayText = r.text;
@@ -2595,7 +2986,7 @@ function autoResizeTextarea(el) {
 var statsAnimated = false;
 function animateCounter(el, target, prefix, suffix, duration) {
     if (!el) return;
-    var numTarget = parseInt(String(target).replace(/[^0-9]/g, '')) || 0;
+    var numTarget = Math.min(parseInt(String(target).replace(/[^0-9]/g, '')) || 0, 99999); // bounds guard
     var start = null;
     function step(ts) {
         if (!start) start = ts;
@@ -2640,11 +3031,11 @@ function updateTripStats() {
             statsAnimated = true;
             animateCounter(document.getElementById('statChecked'), totalChecked, '', '/' + totalItems, 800);
             animateCounter(document.getElementById('statParks'), parksVisited, '', '/11', 800);
-            animateCounter(document.getElementById('statKm'), kmTraveled, '~', '/6.500', 1000);
+            animateCounter(document.getElementById('statKm'), kmTraveled, kmTraveled > 0 ? '~' : '', '/6.500', 1000);
         } else {
             document.getElementById('statChecked').textContent = totalChecked + '/' + totalItems;
             document.getElementById('statParks').textContent = parksVisited + '/11';
-            document.getElementById('statKm').textContent = '~' + kmTraveled.toLocaleString() + '/6.500';
+            document.getElementById('statKm').textContent = (kmTraveled > 0 ? '~' : '') + kmTraveled.toLocaleString() + '/6.500';
         }
     }
 }
@@ -2668,7 +3059,8 @@ function renderExplore() {
     var pct = totalItems > 0 ? Math.round(totalChecked / totalItems * 100) : 0;
     html += '<div class="explore-section" data-explore="stats">';
     html += '<div class="explore-stats">';
-    html += '<div class="explore-stat-card"><div class="explore-stat-value green">' + pct + '%</div><div class="explore-stat-label">Concluído</div></div>';
+    var pctColor = pct === 0 ? 'muted' : pct < 50 ? 'gold' : 'green';
+    html += '<div class="explore-stat-card"><div class="explore-stat-value ' + pctColor + '">' + pct + '%</div><div class="explore-stat-label">Concluído</div></div>';
     html += '<div class="explore-stat-card"><div class="explore-stat-value blue">' + totalItems + '</div><div class="explore-stat-label">Atividades</div></div>';
     html += '<div class="explore-stat-card"><div class="explore-stat-value gold">' + totalFavs + '</div><div class="explore-stat-label">Favoritos</div></div>';
     html += '</div></div>';
@@ -2687,7 +3079,7 @@ function renderExplore() {
     if (favItems.length > 0) {
         html += '<div class="explore-section-card">';
         favItems.forEach(function(f) {
-            html += '<div class="fav-item" onclick="goToDay(' + f.day + ')">';
+            html += '<div class="fav-item" data-goto-day="' + f.day + '">';
             html += '<div class="fav-day-badge">D' + f.day + '</div>';
             html += '<div class="fav-text">' + f.text + '</div>';
             html += '<div class="fav-time">' + f.time + '</div>';
@@ -2705,13 +3097,19 @@ function renderExplore() {
     html += '<div class="explore-section-card">';
     hotels.forEach(function(h) {
         var mapsUrl = 'https://maps.apple.com/?q=' + encodeURIComponent(h.name);
-        html += '<div class="hotel-item" onclick="goToDay(' + findDayByDate(h.checkin) + ')">';
-        html += '<div class="hotel-num">' + h.num + '</div>';
+        var checkinDay = findDayByDate(h.checkin);
+        var hotelPhoto = dayPhotos[checkinDay] || '';
+        html += '<div class="hotel-item" data-goto-day="' + checkinDay + '">';
+        if (hotelPhoto) {
+            html += '<div class="hotel-thumb-wrap"><img class="hotel-thumb" src="' + webpSrc(hotelPhoto) + '" alt="" width="72" height="72" loading="lazy" onerror="this.parentElement.style.display=\'none\'"></div>';
+        } else {
+            html += '<div class="hotel-num">' + h.num + '</div>';
+        }
         html += '<div class="hotel-info"><div class="hotel-name">' + h.name + '</div>';
         html += '<div class="hotel-dates">' + h.checkin + ' → ' + h.checkout + '</div></div>';
         html += '<div class="hotel-right">';
         html += '<div class="hotel-nights">' + h.nights + 'n</div>';
-        html += '<a class="hotel-map-link" href="' + mapsUrl + '" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="Abrir no Maps">📍</a>';
+        html += '<a class="hotel-map-link" href="' + mapsUrl + '" target="_blank" rel="noopener" aria-label="Abrir no Maps">📍</a>';
         html += '</div>';
         html += '</div>';
     });
@@ -2723,7 +3121,11 @@ function renderExplore() {
     parks.forEach(function(p) {
         var dayMatch = p.days.match(/\d+/);
         var dayNum = dayMatch ? parseInt(dayMatch[0]) : 1;
-        html += '<div class="explore-park-card" onclick="goToDay(' + dayNum + ')">';
+        var parkPhoto = dayPhotos[dayNum] || '';
+        html += '<div class="explore-park-card" data-goto-day="' + dayNum + '">';
+        if (parkPhoto) {
+            html += '<div class="explore-park-photo-wrap"><img class="explore-park-photo" src="' + webpSrc(parkPhoto) + '" alt="' + escapeHtml(p.name) + '" width="400" height="120" loading="lazy" onerror="this.parentElement.style.display=\'none\'"></div>';
+        }
         html += '<div class="explore-park-header"><div>';
         html += '<div class="explore-park-name">' + p.name + '</div>';
         html += '<div class="explore-park-days">' + p.days + '</div>';
@@ -2739,13 +3141,13 @@ function renderExplore() {
     html += '<div class="explore-section-card">';
     superchargers.forEach(function(sc) {
         var mapsUrl = 'https://maps.apple.com/?q=' + encodeURIComponent('Tesla Supercharger ' + sc.name);
-        html += '<div class="charge-item' + (sc.critical ? ' critical' : '') + '" onclick="goToDay(' + sc.day + ')">';
+        html += '<div class="charge-item' + (sc.critical ? ' critical' : '') + '" data-goto-day="' + sc.day + '">';
         html += '<div class="charge-icon-wrap">' + (sc.critical ? '⚠️' : '⚡') + '</div>';
         html += '<div class="charge-info"><div class="charge-name">' + sc.name + '</div>';
         html += '<div class="charge-leg">Dia ' + sc.day + ' • ' + sc.leg + '</div>';
         if (sc.note) html += '<div class="charge-note">' + sc.note + '</div>';
         html += '</div>';
-        html += '<a class="charge-map-link" href="' + mapsUrl + '" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="Abrir no Maps">📍</a>';
+        html += '<a class="charge-map-link" href="' + mapsUrl + '" target="_blank" rel="noopener" aria-label="Abrir no Maps">📍</a>';
         html += '</div>';
     });
     html += '</div></div>';
@@ -2978,11 +3380,18 @@ function importUserData(event) {
     reader.onload = function(e) {
         try {
             var data = JSON.parse(e.target.result);
-            if (!data.version) throw new Error('Invalid');
+            if (!data || !data.version) throw new Error('Invalid');
             var count = 0;
-            if (data.checks) Object.keys(data.checks).forEach(function(k) { localStorage.setItem(k, data.checks[k]); count++; });
-            if (data.favs) Object.keys(data.favs).forEach(function(k) { localStorage.setItem(k, data.favs[k]); count++; });
-            if (data.notes) Object.keys(data.notes).forEach(function(k) { localStorage.setItem(k, data.notes[k]); count++; });
+            var validKey = /^(check|fav)-\d+-\d+$|^note-\d+$/;
+            if (data.checks) Object.keys(data.checks).forEach(function(k) {
+                if (validKey.test(k)) { localStorage.setItem(k, data.checks[k]); count++; }
+            });
+            if (data.favs) Object.keys(data.favs).forEach(function(k) {
+                if (validKey.test(k)) { localStorage.setItem(k, data.favs[k]); count++; }
+            });
+            if (data.notes) Object.keys(data.notes).forEach(function(k) {
+                if (/^note-\d+$/.test(k)) { localStorage.setItem(k, data.notes[k]); count++; }
+            });
             var toast = document.getElementById('toast');
             toast.textContent = '✅ ' + count + ' itens restaurados!';
             toast.classList.add('show');
