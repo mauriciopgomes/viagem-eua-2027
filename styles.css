@@ -124,7 +124,7 @@ body {
 /* ==================== HOME / ITINERARY ==================== */
 .hero {
     position: relative;
-    height: 280px;
+    height: 240px;
     overflow: hidden;
 }
 .hero img {
