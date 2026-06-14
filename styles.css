@@ -43,6 +43,7 @@ body {
     -webkit-font-smoothing: antialiased;
     line-height: 1.5;
     padding-bottom: var(--tab-height);
+    padding-top: var(--safe-top);
     letter-spacing: -0.01em;
     scrollbar-gutter: stable;
     -webkit-text-size-adjust: 100%;
@@ -123,7 +124,7 @@ body {
 /* ==================== HOME / ITINERARY ==================== */
 .hero {
     position: relative;
-    height: calc(340px + var(--safe-top));
+    height: 300px;
     overflow: hidden;
 }
 .hero img {
@@ -209,8 +210,8 @@ body {
 .day-selector {
     display: flex;
     gap: 8px;
-    padding: 12px 20px 16px;
-    padding-top: calc(12px + var(--safe-top));
+    padding: 8px 20px 12px;
+    padding-top: calc(8px + var(--safe-top));
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
@@ -282,7 +283,7 @@ body {
     flex-shrink: 0;
 }
 .day-pill.active .pill-thumb { opacity: 1; box-shadow: 0 0 0 2px rgba(255,255,255,0.4); }
-@media (max-width: 374px) { .hero { height: calc(240px + var(--safe-top)); } .hero-title { font-size: 22px; } }
+@media (max-width: 374px) { .hero { height: 220px; } .hero-title { font-size: 22px; } }
 
 /* Pill progress dot */
 .pill-dot { position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 4px; height: 4px; border-radius: 50%; background: var(--green); opacity: 0; transition: opacity 0.3s; }
@@ -535,9 +536,7 @@ body {
 
 /* ==================== MAP ==================== */
 #map-section { padding-bottom: 0; }
-#sec-map { position: relative; padding-top: var(--safe-top); }
-#sec-explore { padding-top: var(--safe-top); }
-#sec-settings { padding-top: var(--safe-top); }
+#sec-map { position: relative; }
 #map {
     height: calc(100vh - var(--tab-height) - var(--safe-top));
     height: calc(100dvh - var(--tab-height) - var(--safe-top));
@@ -1019,15 +1018,8 @@ html, body { overscroll-behavior: none; }
 }
 .offline-bar.visible { transform: translateY(0); }
 body.is-offline { padding-top: calc(var(--safe-top) + 28px); }
-body.is-offline #sec-home .hero { margin-top: calc((var(--safe-top) + 28px) * -1); height: calc(340px + var(--safe-top) + 28px); }
-body.is-offline #sec-map,
-body.is-offline #sec-explore,
-body.is-offline #sec-settings { padding-top: calc(var(--safe-top) + 28px); }
 @media (min-width: 1200px) {
-    body.is-offline #sec-map,
-    body.is-offline #sec-explore,
-    body.is-offline #sec-settings { padding-top: calc(52px + 28px); }
-    body.is-offline #sec-home .hero { margin-top: calc((52px + 28px) * -1); height: calc(340px + 52px + 28px); }
+    body.is-offline { padding-top: calc(52px + 28px); }
 }
 
 /* Reduced motion */
@@ -1213,7 +1205,7 @@ button:focus-visible, a:focus-visible {
 /* ==================== IPAD / TABLET (≥768px) ==================== */
 @media (min-width: 768px) {
     /* Hero wider with larger text */
-    .hero { max-width: 100%; height: calc(260px + var(--safe-top)); }
+    .hero { max-width: 100%; height: 240px; }
     .hero-title { font-size: 36px; }
     .hero-subtitle { font-size: 15px; }
 
@@ -1411,7 +1403,7 @@ button:focus-visible, a:focus-visible {
 
 /* ==================== TRIP STATS ==================== */
 .trip-stats-card {
-    display: flex; gap: 6px; padding: 10px 20px; justify-content: center;
+    display: flex; gap: 6px; padding: 6px 20px; justify-content: center;
 }
 .trip-stat {
     background: rgba(255,255,255,0.06); backdrop-filter: blur(16px);
