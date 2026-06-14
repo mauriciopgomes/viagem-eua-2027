@@ -43,7 +43,6 @@ body {
     -webkit-font-smoothing: antialiased;
     line-height: 1.5;
     padding-bottom: var(--tab-height);
-    padding-top: var(--safe-top);
     letter-spacing: -0.01em;
     scrollbar-gutter: stable;
     -webkit-text-size-adjust: 100%;
@@ -536,7 +535,9 @@ body {
 
 /* ==================== MAP ==================== */
 #map-section { padding-bottom: 0; }
-#sec-map { position: relative; }
+#sec-map { position: relative; padding-top: var(--safe-top); }
+#sec-explore { padding-top: var(--safe-top); }
+#sec-settings { padding-top: var(--safe-top); }
 #map {
     height: calc(100vh - var(--tab-height) - var(--safe-top));
     height: calc(100dvh - var(--tab-height) - var(--safe-top));
