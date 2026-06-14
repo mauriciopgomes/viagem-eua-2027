@@ -5,24 +5,41 @@ function showUpdateToast() {
 
     var toast = document.createElement('div');
     toast.className = 'update-toast';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
 
     var label = document.createElement('span');
-    label.textContent = 'Nova versão pronta para usar';
+    label.textContent = '🆕 Nova versão disponível';
 
     var button = document.createElement('button');
     button.type = 'button';
-    button.textContent = 'Reiniciar app';
+    button.textContent = 'Atualizar';
     button.addEventListener('click', function() {
         window.location.reload();
     });
 
+    var dismiss = document.createElement('button');
+    dismiss.type = 'button';
+    dismiss.className = 'update-toast-dismiss';
+    dismiss.setAttribute('aria-label', 'Dispensar');
+    dismiss.textContent = '✕';
+    dismiss.addEventListener('click', function() {
+        toast.classList.add('update-toast-hiding');
+        setTimeout(function() { if (toast.parentNode) toast.remove(); }, 300);
+    });
+
     toast.appendChild(label);
     toast.appendChild(button);
+    toast.appendChild(dismiss);
     document.body.appendChild(toast);
 
+    // Auto-dismiss after 30s
     setTimeout(function() {
-        if (toast.parentNode) toast.remove();
-    }, 20000);
+        if (toast.parentNode) {
+            toast.classList.add('update-toast-hiding');
+            setTimeout(function() { if (toast.parentNode) toast.remove(); }, 300);
+        }
+    }, 30000);
 }
 
 if ('serviceWorker' in navigator) {

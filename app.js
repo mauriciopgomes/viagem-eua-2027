@@ -26,118 +26,25 @@ function safeSetHTML(element, html) {
 // Theme is always dark, no toggle needed
 
 // ==================== NAVIGATION HELPERS ====================
-function goToDay(dayNum) {
+function goToDay(dayNum, itemIdx) {
     // Switch to home tab first, then show the day
     switchTab('home', { currentTarget: document.querySelector('[aria-controls="sec-home"]') });
     setTimeout(function() {
         showDay(dayNum);
+        if (itemIdx !== undefined && itemIdx !== null) {
+            // Scroll to the specific card after render
+            setTimeout(function() {
+                var card = document.querySelector('[data-action-check="' + dayNum + '-' + itemIdx + '"]');
+                if (card) {
+                    var actCard = card.closest('.activity-card');
+                    if (actCard) actCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 200);
+        }
     }, 50);
 }
-function initNotifications() {
-    // Request permission once on app launch
-    if ('Notification' in window && Notification.permission === 'default') {
-        Notification.requestPermission().then(function(permission) {
-            if (permission === 'granted') {
-                sendNotification('🚗 Viagem EUA 2027', {
-                    body: 'Notificações ativadas! Você receberá alertas sobre locais importantes.',
-                    icon: 'icons/icon-192.png',
-                    badge: 'icons/icon-192.png',
-                    tag: 'viagem-init'
-                });
-            }
-        });
-    }
-}
-
-function sendNotification(title, options) {
-    if ('Notification' in window && Notification.permission === 'granted') {
-        const notification = new Notification(title, {
-            icon: 'icons/icon-192.png',
-            badge: 'icons/icon-192.png',
-            ...options
-        });
-        
-        // Auto-close after 5 seconds
-        setTimeout(() => notification.close(), 5000);
-        
-        return notification;
-    }
-}
-
-function notifyLocationArrival(locationName) {
-    if ('Notification' in window && Notification.permission === 'granted') {
-        sendNotification('📍 Chegou em ' + locationName, {
-            body: 'Aproveite a visita!',
-            tag: 'arrival-' + Date.now(),
-            requireInteraction: false
-        });
-    }
-}
-
-function notifyDayChange(dayNum, dayTitle) {
-    if ('Notification' in window && Notification.permission === 'granted') {
-        sendNotification('📅 Dia ' + dayNum + ' — ' + dayTitle, {
-            body: 'Novo dia! Veja o roteiro e as atividades.',
-            tag: 'day-' + dayNum,
-            requireInteraction: false
-        });
-    }
-}
-
-function notifyCharging() {
-    if ('Notification' in window && Notification.permission === 'granted') {
-        sendNotification('⚡ Hora de carregar!', {
-            body: 'Supercharger próximo — Tesla está pronto para a próxima etapa.',
-            tag: 'charging-' + Date.now(),
-            requireInteraction: false
-        });
-    }
-}
-
-// ==================== PWA INSTALL PROMPT ====================
-let deferredPrompt = null;
-function initPWAInstallPrompt() {
-    // Capture the beforeinstallprompt event
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        console.log('[PWA] Install prompt available');
-        // Optionally show subtle notification
-        sendNotification('🚀 Instalar App', {
-            body: 'Adicione Viagem EUA 2027 à sua tela inicial para acesso rápido!',
-            icon: 'icons/icon-192.png',
-            badge: 'icons/icon-192.png',
-            tag: 'pwa-install',
-            requireInteraction: false
-        });
-    });
-    
-    // Handle successful installation
-    window.addEventListener('appinstalled', () => {
-        deferredPrompt = null;
-        console.log('[PWA] Successfully installed');
-    });
-}
-
-// Trigger PWA install (called from UI, e.g., Ajustes tab button)
-window.triggerPWAInstall = function() {
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-                console.log('[PWA] User accepted install');
-            }
-            deferredPrompt = null;
-        });
-    } else {
-        console.log('[PWA] Install prompt not available');
-    }
-};
-
-// Initialize notifications and PWA install on app load
+// Initialize PWA on app load
 document.addEventListener('DOMContentLoaded', function() {
-    initNotifications();
-    initPWAInstallPrompt();
 
     // Event delegation para botão "Ver no Mapa" no sheet (evita inline onclick com coords)
     var sheetBody = document.getElementById('sheetBody');
@@ -350,8 +257,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (gotoEl) {
             e.stopPropagation();
             var day = parseInt(gotoEl.getAttribute('data-goto-day'));
-            switchTab('home', e);
-            setTimeout(function() { showDay(day); }, 50);
+            var item = gotoEl.hasAttribute('data-goto-item') ? parseInt(gotoEl.getAttribute('data-goto-item')) : undefined;
+            goToDay(day, item);
             return;
         }
     });
@@ -1606,6 +1513,15 @@ function updateDayProgress(dayNum) {
     }
     var el = document.getElementById('day-progress-' + dayNum);
     if (el) el.textContent = done + '/' + total;
+    // Update progress ring
+    var ring = document.getElementById('prog-ring-' + dayNum);
+    if (ring) {
+        var r = 16, circ = Math.round(2 * Math.PI * r);
+        var pct = total > 0 ? done / total : 0;
+        var offset = circ - Math.round(pct * circ);
+        ring.style.strokeDashoffset = offset;
+        ring.style.stroke = pct === 1 ? 'var(--green)' : pct >= 0.5 ? 'var(--blue)' : 'var(--gold)';
+    }
     var pill = document.querySelector('.day-pill[data-d="' + dayNum + '"]');
     if (pill) pill.classList.toggle('day-complete', done === total && total > 0);
     if (done === total && total > 0) {
@@ -1654,8 +1570,16 @@ function renderDay(d) {
     h.push(getWeatherCard(d));
     h.push('</div>');
 
-    // Progress counter
-    h.push('<div class="day-progress"><span id="day-progress-' + d.day + '">0/' + d.items.length + '</span> concluídos <button type="button" class="toggle-done-btn" id="toggleDone-' + d.day + '" data-toggle-done="' + d.day + '" aria-label="Esconder concluídos">👁️ Esconder</button></div>');
+    // Progress counter with ring
+    var r = 16, circ = Math.round(2 * Math.PI * r);
+    h.push('<div class="day-progress">' +
+        '<svg class="progress-ring" width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">' +
+        '<circle class="progress-ring-track" cx="20" cy="20" r="' + r + '" fill="none" stroke-width="3"/>' +
+        '<circle class="progress-ring-fill" id="prog-ring-' + d.day + '" cx="20" cy="20" r="' + r + '" fill="none" stroke-width="3"' +
+        ' stroke-dasharray="' + circ + '" stroke-dashoffset="' + circ + '" stroke-linecap="round"/>' +
+        '</svg>' +
+        '<span id="day-progress-' + d.day + '">0/' + d.items.length + '</span> concluídos ' +
+        '<button type="button" class="toggle-done-btn" id="toggleDone-' + d.day + '" data-toggle-done="' + d.day + '" aria-label="Esconder concluídos">👁️ Esconder</button></div>');
 
     h.push('<div class="activity-grid">');
     var currentPeriod = '';
@@ -1665,7 +1589,7 @@ function renderDay(d) {
         var periodLabels = { manha: '☀️ Manhã', tarde: '🌤️ Tarde', noite: '🌙 Noite' };
         if (period !== currentPeriod) {
             currentPeriod = period;
-            h.push('<div class="time-group-label">' + periodLabels[period] + '</div>');
+            h.push('<div class="time-group-label" data-period="' + period + '">' + periodLabels[period] + '</div>');
         }
         var text = getItemText(d, idx);
         var _tmpDiv = document.createElement('div');
@@ -1773,11 +1697,20 @@ function showDay(n) {
 
     if (!renderedDays[n]) {
         var skelId = 'ds-skel-' + n;
+        // Skeleton fiel ao shape do card: mídia 180px + badge + body (hora + nome + desc + actions)
+        var skelCard = '<div class="skeleton-card">' +
+            '<div class="skeleton-shimmer" style="height:180px;border-radius:12px 12px 0 0"></div>' +
+            '<div style="padding:14px 14px 12px">' +
+            '<div class="skeleton-shimmer" style="height:10px;width:30%;border-radius:4px;margin-bottom:8px"></div>' +
+            '<div class="skeleton-shimmer" style="height:15px;width:80%;border-radius:4px;margin-bottom:6px"></div>' +
+            '<div class="skeleton-shimmer" style="height:11px;width:60%;border-radius:4px;margin-bottom:14px"></div>' +
+            '<div style="display:flex;gap:6px">' +
+            '<div class="skeleton-shimmer" style="height:44px;width:44px;border-radius:12px"></div>' +
+            '<div class="skeleton-shimmer" style="height:44px;width:44px;border-radius:12px"></div>' +
+            '</div></div></div>';
         document.getElementById('dayContainer').insertAdjacentHTML('beforeend',
             '<div class="day-slide" id="' + skelId + '" style="display:block;padding:0 20px 32px">' +
-            '<div class="skeleton-card"><div class="skeleton-shimmer skeleton-photo"></div><div class="skeleton-shimmer skeleton-text w70"></div><div class="skeleton-shimmer skeleton-text w40"></div></div>' +
-            '<div class="skeleton-card"><div class="skeleton-shimmer skeleton-photo"></div><div class="skeleton-shimmer skeleton-text w70"></div><div class="skeleton-shimmer skeleton-text w40"></div></div>' +
-            '<div class="skeleton-card"><div class="skeleton-shimmer skeleton-photo"></div><div class="skeleton-shimmer skeleton-text w70"></div><div class="skeleton-shimmer skeleton-text w40"></div></div>' +
+            skelCard + skelCard + skelCard +
             '</div>');
         requestAnimationFrame(function() {
             var skel = document.getElementById(skelId);
@@ -2871,12 +2804,19 @@ function searchItems(query) {
     }
     var html = '';
     results.slice(0, 40).forEach(function(r) {
+        var thumb = findPhoto(r.text);
+        var thumbHtml = thumb
+            ? '<img class="search-result-thumb" src="' + webpSrc(thumb) + '" alt="" width="40" height="40" loading="lazy" onerror="this.style.display=\'none\'">'
+            : '<div class="search-result-thumb search-result-thumb-placeholder"></div>';
         html += '<div class="search-result-item" tabindex="0" role="option" data-search-day="' + r.day + '"' + (r.hasInfo ? ' data-search-idx="' + r.idx + '"' : '') + '>';
+        html += thumbHtml;
+        html += '<div class="search-result-body">';
         html += '<span class="search-result-day">Dia ' + r.day + '</span>';
         html += '<span class="search-result-time">' + r.time + '</span>';
         var displayText = r.text;
         if (q) { displayText = displayText.replace(new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi'), '<mark style="background:rgba(10,132,255,0.3);color:var(--text);border-radius:2px;padding:0 2px">$1</mark>'); }
         html += '<span class="search-result-text">' + displayText + '</span>';
+        html += '</div>';
         html += '</div>';
     });
     el.innerHTML = html;
@@ -3192,7 +3132,16 @@ function filterExplore(filter, btn) {
     var startX = 0;
     var startY = 0;
     var tracking = false;
-    var decided = false; // whether we've decided horizontal vs vertical
+    var decided = false;
+    var activeSlide = null;
+
+    function resetSlide() {
+        if (activeSlide) {
+            activeSlide.style.transition = 'transform 0.25s ease';
+            activeSlide.style.transform = '';
+            setTimeout(function() { if (activeSlide) activeSlide.style.transition = ''; activeSlide = null; }, 250);
+        }
+    }
 
     container.addEventListener('touchstart', function(e) {
         if (e.touches.length !== 1) return;
@@ -3200,6 +3149,7 @@ function filterExplore(filter, btn) {
         startY = e.touches[0].clientY;
         tracking = true;
         decided = false;
+        activeSlide = document.getElementById('ds-' + currentDay);
     }, { passive: true });
 
     container.addEventListener('touchmove', function(e) {
@@ -3210,17 +3160,16 @@ function filterExplore(filter, btn) {
         var absDy = Math.abs(dy);
 
         if (!decided) {
-            // Wait until enough movement to decide direction
             if (absDx < 15 && absDy < 15) return;
-
-            // Must be CLEARLY horizontal: dx must be at least 2x dy
-            if (absDx < absDy * 2) {
-                tracking = false;
-                return;
-            }
-
-            // Horizontal-dominant: lock in for swipe detection
+            if (absDx < absDy * 2) { tracking = false; return; }
             decided = true;
+        }
+
+        // Parallax: slide current day 30% of drag distance
+        var limited = dx * 0.3;
+        if (activeSlide) {
+            activeSlide.style.transition = 'none';
+            activeSlide.style.transform = 'translateX(' + limited + 'px)';
         }
 
         // Show swipe peek indicators
@@ -3243,7 +3192,6 @@ function filterExplore(filter, btn) {
     }, { passive: true });
 
     container.addEventListener('touchend', function(e) {
-        // Hide swipe hints
         var hintL = document.getElementById('swipeHintL');
         var hintR = document.getElementById('swipeHintR');
         if (hintL) hintL.classList.remove('visible');
@@ -3251,6 +3199,7 @@ function filterExplore(filter, btn) {
 
         if (!tracking || !decided) {
             tracking = false;
+            resetSlide();
             return;
         }
         tracking = false;
@@ -3258,8 +3207,21 @@ function filterExplore(filter, btn) {
         var endX = e.changedTouches[0].clientX;
         var dx = endX - startX;
 
-        // Minimum 60px horizontal distance
-        if (Math.abs(dx) < 60) return;
+        if (Math.abs(dx) < 60) {
+            resetSlide();
+            return;
+        }
+
+        // Snap slide out before showing next day
+        if (activeSlide) {
+            var dir = dx < 0 ? -1 : 1;
+            activeSlide.style.transition = 'transform 0.2s ease';
+            activeSlide.style.transform = 'translateX(' + (dir * 80) + 'px)';
+            setTimeout(function() {
+                if (activeSlide) { activeSlide.style.transition = ''; activeSlide.style.transform = ''; }
+                activeSlide = null;
+            }, 200);
+        }
 
         if (dx < 0 && currentDay < totalDays) {
             showDay(currentDay + 1);
