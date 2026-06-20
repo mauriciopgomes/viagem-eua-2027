@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (btnMapLayers) btnMapLayers.addEventListener('click', function() { mapTogglePanel(); });
 
     // Map layer checkboxes
-    var layerMap = { chkRoute: 'route', chkStops: 'stops', chkSuperchargers: 'sc', chkDayTrips: 'daytrips', chkDayRoute: 'dayroute' };
+    var layerMap = { chkRoute: 'route', chkStops: 'stops', chkSuperchargers: 'sc', chkRoadPois: 'roadpois', chkDayTrips: 'daytrips', chkDayRoute: 'dayroute' };
     Object.keys(layerMap).forEach(function(id) {
         var el = document.getElementById(id);
         if (el) el.addEventListener('change', function() { mapToggleLayer(layerMap[id]); });
@@ -837,7 +837,7 @@ function initMap() {
 }
 
 // Map layer groups & state
-var mapLayers = { route: null, routeDone: null, routeUpcoming: null, stops: null, sc: null, daytrips: null, dayroute: null };
+var mapLayers = { route: null, routeDone: null, routeUpcoming: null, stops: null, sc: null, daytrips: null, dayroute: null, roadpois: null };
 var mapTileDark = null, mapTileSat = null;
 var isSatellite = false;
 var mapStopMarkers = {};
@@ -1100,6 +1100,94 @@ function doInitMap() {
     });
     mapLayers.sc.addTo(mapInstance);
 
+    // ---- ROADSIDE POI LAYER (scenic stops along the route) ----
+    var roadPois = [
+        // Day 5: LAX → Vegas
+        { n: "Bottle Tree Ranch", lat: 34.6192, lng: -117.3347, i: "🎨", day: 5 },
+        // Day 9: Vegas → Grand Canyon → Zion
+        { n: "Watchman Trail", lat: 37.1988, lng: -112.9841, i: "🥾", day: 9 },
+        { n: "Emerald Pools", lat: 37.2568, lng: -112.9587, i: "💎", day: 9 },
+        // Day 11: Zion → Capitol Reef → Moab
+        { n: "Head of the Rocks", lat: 37.7650, lng: -111.5920, i: "🏜️", day: 11 },
+        { n: "Capitol Reef", lat: 38.2972, lng: -111.2615, i: "🏞️", day: 11 },
+        { n: "Scenic Byway 128", lat: 38.6131, lng: -109.5103, i: "🛣️", day: 11 },
+        // Day 12: Canyonlands
+        { n: "Mesa Arch", lat: 38.3891, lng: -109.8673, i: "🌅", day: 12 },
+        { n: "Grand View Point", lat: 38.3103, lng: -109.8591, i: "👀", day: 12 },
+        { n: "Green River Overlook", lat: 38.3300, lng: -109.8839, i: "🏜️", day: 12 },
+        // Day 15: Moab → Twin Falls → Centralia
+        { n: "Multnomah Falls", lat: 45.5762, lng: -122.1158, i: "🌊", day: 15 },
+        { n: "Columbia River Gorge", lat: 45.5956, lng: -122.0517, i: "🏞️", day: 15 },
+        { n: "Rowena Crest", lat: 45.6823, lng: -121.3005, i: "🌀", day: 15 },
+        { n: "Vista House", lat: 45.5391, lng: -122.2443, i: "🏛️", day: 15 },
+        { n: "Deadman Pass", lat: 45.6042, lng: -118.5561, i: "⛰️", day: 15 },
+        // Day 16: Centralia → Rainier → Olympic
+        { n: "Paradise", lat: 46.7853, lng: -121.7356, i: "🌋", day: 16 },
+        { n: "Lake Crescent", lat: 48.0596, lng: -123.7898, i: "🏔️", day: 16 },
+        { n: "Sol Duc Falls", lat: 47.9525, lng: -123.8359, i: "🌊", day: 16 },
+        // Day 17: Olympic NP
+        { n: "Hoh Rain Forest", lat: 47.8602, lng: -123.9343, i: "🌲", day: 17 },
+        { n: "Ruby Beach", lat: 47.7108, lng: -124.4126, i: "🏖️", day: 17 },
+        { n: "Rialto Beach", lat: 47.9210, lng: -124.6376, i: "🪵", day: 17 },
+        { n: "La Push", lat: 47.9075, lng: -124.6356, i: "🧛", day: 17 },
+        // Day 19: Oregon Coast
+        { n: "Cape Perpetua", lat: 44.2808, lng: -124.1092, i: "🌊", day: 19 },
+        { n: "Heceta Head", lat: 44.1372, lng: -124.1285, i: "🏠", day: 19 },
+        { n: "Samuel Boardman", lat: 42.1481, lng: -124.3533, i: "🌉", day: 19 },
+        { n: "Shore Acres", lat: 43.3220, lng: -124.3870, i: "🌺", day: 19 },
+        { n: "Newport", lat: 44.6368, lng: -124.0535, i: "🦀", day: 19 },
+        // Day 20: Redwood coast
+        { n: "Battery Point Lighthouse", lat: 41.7445, lng: -124.2048, i: "🏠", day: 20 },
+        { n: "Stout Memorial Grove", lat: 41.7867, lng: -124.0946, i: "🌲", day: 20 },
+        // Day 21: Redwood NP
+        { n: "Fern Canyon", lat: 41.4012, lng: -124.0635, i: "🌿", day: 21 },
+        { n: "Lady Bird Johnson", lat: 41.3253, lng: -124.0199, i: "🌲", day: 21 },
+        { n: "Tall Trees Grove", lat: 41.2137, lng: -124.0022, i: "🌳", day: 21 },
+        { n: "Avenue of the Giants", lat: 40.3521, lng: -123.9218, i: "🛣️", day: 21 },
+        // Day 22: Eureka → SF
+        { n: "Glass Beach", lat: 39.4521, lng: -123.8136, i: "💎", day: 22 },
+        { n: "Mendocino", lat: 39.3076, lng: -123.7995, i: "🏡", day: 22 },
+        { n: "Point Reyes", lat: 38.0682, lng: -122.8776, i: "🦭", day: 22 },
+        // Day 27: SF → Yosemite
+        { n: "Tunnel View", lat: 37.7157, lng: -119.6770, i: "📸", day: 27 },
+        { n: "El Capitan", lat: 37.7340, lng: -119.6384, i: "🧗", day: 27 },
+        { n: "Bridalveil Fall", lat: 37.7171, lng: -119.6465, i: "🌊", day: 27 },
+        // Day 30: Kings Canyon / Sequoia
+        { n: "General Sherman Tree", lat: 36.5817, lng: -118.7510, i: "🌲", day: 30 }
+    ];
+
+    mapLayers.roadpois = L.layerGroup();
+    roadPois.forEach(function(poi) {
+        var photo = findPhoto(poi.n);
+        var markerHtml;
+        if (photo) {
+            markerHtml = '<div class="map-photo-marker map-road-poi" style="background-image:url(' + photo + ')"></div>';
+        } else {
+            markerHtml = '<div class="map-road-poi-emoji">' + poi.i + '</div>';
+        }
+        var ic = L.divIcon({
+            html: markerHtml,
+            className: '', iconSize: [28,28], iconAnchor: [14,14], popupAnchor: [0,-16]
+        });
+        var q = encodeURIComponent(poi.n);
+        var navHtml = '<div class="popup-nav-btns">' +
+            '<a class="popup-nav-btn gmaps" href="https://www.google.com/maps/search/?api=1&query=' + q + '" target="_blank" rel="noopener">🗺️ Google</a>' +
+            '<a class="popup-nav-btn amaps" href="https://maps.apple.com/?q=' + q + '" target="_blank" rel="noopener">🍎 Apple</a>' +
+            '</div>' +
+            '<div class="popup-nav-btns" style="margin-top:4px"><a class="popup-nav-btn" style="background:rgba(10,132,255,0.15);color:#0a84ff;flex:1;cursor:pointer" data-goto-day="' + poi.day + '">📅 Ver Dia ' + poi.day + '</a></div>';
+        L.marker([poi.lat, poi.lng], { icon: ic }).addTo(mapLayers.roadpois)
+            .bindPopup('<h3>' + poi.i + ' ' + escapeHtml(poi.n) + '</h3><div class="days">Dia ' + poi.day + '</div>' + navHtml, { className: 'custom-popup' });
+    });
+    // Show only when zoomed in enough (≥7)
+    if (mapInstance.getZoom() >= 7) mapLayers.roadpois.addTo(mapInstance);
+    mapInstance.on('zoomend', function() {
+        if (mapInstance.getZoom() >= 7) {
+            if (!mapInstance.hasLayer(mapLayers.roadpois)) mapLayers.roadpois.addTo(mapInstance);
+        } else {
+            if (mapInstance.hasLayer(mapLayers.roadpois)) mapInstance.removeLayer(mapLayers.roadpois);
+        }
+    });
+
     // ---- DAY ROUTE LAYER ----
     mapLayers.dayroute = L.layerGroup();
     mapLayers.dayroute.addTo(mapInstance);
@@ -1115,6 +1203,7 @@ function doInitMap() {
             '<div class="legend-item"><div class="legend-line" style="background:#0a84ff;height:4px"></div><span>Trecho do dia</span></div>' +
             '<div class="legend-item"><div class="legend-line" style="background:#ffd700;border-style:dashed"></div><span>Day trips (Vegas)</span></div>' +
             '<div class="legend-item"><div style="font-size:11px;background:#00c853;border-radius:50%;width:14px;height:14px;display:flex;align-items:center;justify-content:center;border:1.5px solid #fff">⚡</div><span>Superchargers</span></div>' +
+            '<div class="legend-item"><div style="width:14px;height:14px;border-radius:50%;background:#555;border:1.5px solid rgba(255,215,0,0.8)">📷</div><span>Pontos turísticos</span></div>' +
             '<br><div style="color:#888;font-size:10px">📅 21/01 → 22/02/2027<br>🚗 ~6.500 km • 🔄 Sentido horário</div>' +
             '</div>';
         L.DomEvent.disableClickPropagation(div);
