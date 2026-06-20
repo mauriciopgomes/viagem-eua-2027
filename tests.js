@@ -71,6 +71,7 @@ const stylesCSS = fs.readFileSync(path.join(BASE, 'styles.css'), 'utf8');
 const manifestJson = JSON.parse(fs.readFileSync(path.join(BASE, 'manifest.json'), 'utf8'));
 // Combined source for searching JS functions/patterns across both HTML and app.js
 const allJs = indexHtml + '\n' + appJs + '\n' + pwaJs + '\n' + syncJs + '\n' + storageJs + '\n' + photosJs + '\n' + placesJs;
+const routeDataJs = fs.readFileSync(path.join(BASE, 'route-data.js'), 'utf8');
 
 // Execute data.js to get the actual data objects
 const vm = require('vm');
@@ -640,11 +641,14 @@ test('dayCoords definido para todos os 33 dias', () => {
 });
 
 test('dayRouteIdx definido para todos os 33 dias', () => {
-    const match = allJs.match(/var dayRouteIdx\s*=\s*\{([\s\S]*?)\};/);
-    assert(match, 'dayRouteIdx deve existir');
-    for (let i = 1; i <= 33; i++) {
-        assert(match[1].includes(`${i}:`), `dayRouteIdx[${i}] ausente`);
-    }
+    // dayRouteIdx is built dynamically from route-data.js; verify the builder exists
+    assert(appJs.includes('dayRouteIdx[d]') || appJs.includes('dayRouteIdx[day]'), 'dayRouteIdx must be built for all days');
+    // Verify route-data.js has encodedRoutes for all driving days
+    const routeCtx = vm.runInNewContext(routeDataJs + '\n;({encodedRoutes, routeDayOrder, decodePolyline})', {});
+    const drivingDays = [5,9,11,12,15,16,17,19,20,21,22,23,27,28,30,31];
+    drivingDays.forEach(d => {
+        assert(routeCtx.encodedRoutes[d], `encodedRoutes[${d}] ausente`);
+    });
 });
 
 test('dayStats definido para todos os 33 dias', () => {
@@ -669,18 +673,24 @@ test('dayStats tem km, drive e hotel para cada dia', () => {
 });
 
 test('routeCoords tem pontos suficientes', () => {
-    const match = allJs.match(/var routeCoords\s*=\s*\[([\s\S]*?)\];/);
-    assert(match, 'routeCoords deve existir');
-    const coords = match[1].match(/\[[\d\.\-,\s]+\]/g);
-    assert(coords && coords.length >= 20, `routeCoords deve ter ≥20 pontos (tem ${coords ? coords.length : 0})`);
+    // Route is now decoded from encoded polylines in route-data.js
+    const routeCtx = vm.runInNewContext(routeDataJs + '\n;({encodedRoutes, routeDayOrder, decodePolyline})', {});
+    let totalPts = 0;
+    routeCtx.routeDayOrder.forEach(d => {
+        const pts = routeCtx.decodePolyline(routeCtx.encodedRoutes[d]);
+        assert(pts.length >= 10, `day ${d} deve ter ≥10 pontos (tem ${pts.length})`);
+        totalPts += pts.length;
+    });
+    assert(totalPts >= 5000, `rota total deve ter ≥5000 pontos (tem ${totalPts})`);
 });
 
 test('dayRouteSegments tem segmentos para dias de estrada', () => {
-    const match = allJs.match(/var dayRouteSegments\s*=\s*\{([\s\S]*?)\};/);
-    assert(match, 'dayRouteSegments deve existir');
-    // Dias com estrada significativa
+    // dayRouteSegments is now decoded from route-data.js encodedRoutes
+    const routeCtx = vm.runInNewContext(routeDataJs + '\n;({encodedRoutes, routeDayOrder, decodePolyline})', {});
     [5, 9, 11, 12, 15, 16, 17, 19, 20, 21, 22, 23, 27, 28, 30, 31].forEach((d) => {
-        assert(match[1].includes(`${d}:`), `dayRouteSegments[${d}] ausente`);
+        assert(routeCtx.encodedRoutes[d], `encodedRoutes[${d}] ausente`);
+        const pts = routeCtx.decodePolyline(routeCtx.encodedRoutes[d]);
+        assert(pts.length >= 2, `day ${d} deve ter ≥2 pontos na rota`);
     });
 });
 

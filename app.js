@@ -860,137 +860,51 @@ var dayCoords = {
     32:[34.0522,-118.2437], 33:[34.0522,-118.2437]
 };
 
-// Route split by day index (cumulative coordinates for progress)
-var routeCoords = [
-    // Day 5: LAX → Vegas (I-10 → I-15 N)
-    [33.94,-118.41],  // 0: LAX
-    [34.10,-117.89],  // 1: Ontario / I-15 junction
-    [34.90,-117.02],  // 2: Barstow SC
-    [35.27,-116.07],  // 3: Baker
-    [35.61,-115.39],  // 4: Primm / NV border
-    [36.17,-115.14],  // 5: Las Vegas
-    // Day 9: Vegas → GC → Zion (US-93 → I-40 → AZ-64 → US-89)
-    [35.98,-114.83],  // 6: Boulder City
-    [35.20,-114.05],  // 7: Kingman SC
-    [35.25,-112.19],  // 8: Williams
-    [36.06,-112.14],  // 9: Grand Canyon
-    [36.81,-111.63],  // 10: Marble Canyon
-    [36.86,-112.53],  // 11: Kanab
-    [37.02,-112.53],  // 12: Zion / Springdale
-    // Day 11: Zion → Bryce (UT-9 → US-89 → UT-12)
-    [37.29,-112.68],  // 13: UT-9/US-89 junction
-    [37.68,-112.15],  // 14: Panguitch area
-    [37.63,-112.17],  // 15: UT-12 junction
-    [37.21,-112.99],  // 16: Bryce Canyon
-    // Day 12: Bryce → Moab (US-89 → UT-24 → I-70 → US-191)
-    [37.76,-112.33],  // 17: US-89 N
-    [38.29,-111.57],  // 18: Capitol Reef area
-    [38.75,-111.50],  // 19: I-70 junction
-    [38.99,-110.16],  // 20: Green River SC
-    [38.57,-109.55],  // 21: Moab
-    // Day 15: Moab → SLC → Twin Falls
-    [38.99,-110.16],  // 22: Green River (backtrack)
-    [39.60,-110.81],  // 23: Price SC
-    [39.97,-111.53],  // 24: Spanish Fork
-    [40.76,-111.89],  // 25: SLC
-    [41.07,-112.25],  // 26: Antelope Island
-    [40.76,-111.89],  // 27: SLC (back)
-    [41.73,-112.17],  // 28: Brigham City
-    [42.00,-112.45],  // 29: I-84 junction
-    [42.56,-114.46],  // 30: Twin Falls
-    // Day 16: Twin Falls → Centralia (I-84 W → I-82 → I-5 N)
-    [42.87,-115.54],  // 31: I-84 W
-    [43.62,-116.20],  // 32: Boise
-    [44.05,-116.97],  // 33: Ontario OR
-    [44.77,-117.83],  // 34: Baker City SC
-    [45.67,-118.79],  // 35: Pendleton SC
-    [45.60,-121.18],  // 36: The Dalles SC
-    [45.57,-122.40],  // 37: Portland area
-    [46.07,-122.88],  // 38: Kelso
-    [46.72,-122.95],  // 39: Centralia
-    // Day 17: Centralia → Rainier → Forks
-    [46.85,-121.76],  // 40: Mt. Rainier
-    [47.04,-122.90],  // 41: Olympia SC
-    [47.30,-123.10],  // 42: US-101
-    [47.59,-123.79],  // 43: Queets area
-    [47.95,-124.39],  // 44: Forks
-    // Day 19: Forks → Cannon Beach (US-101 S)
-    [47.50,-124.35],  // 45: US-101 S
-    [46.98,-123.82],  // 46: Aberdeen SC
-    [46.19,-123.83],  // 47: Astoria
-    [45.89,-123.96],  // 48: Cannon Beach
-    // Day 20: Oregon Coast (US-101 S)
-    [45.37,-123.97],  // 49: Lincoln City SC
-    [44.96,-124.02],  // 50: Newport
-    [43.97,-124.10],  // 51: Florence / Dunes
-    [43.37,-124.22],  // 52: Coos Bay SC
-    [42.86,-124.42],  // 53: Brookings
-    [42.41,-124.42],  // 54: Gold Beach
-    // Day 21: → Crescent City
-    [41.94,-124.20],  // 55: Brookings
-    [41.76,-124.20],  // 56: Crescent City
-    // Day 22: → Eureka (US-101 S)
-    [41.20,-124.09],  // 57: Prairie Creek / Orick
-    [40.80,-124.16],  // 58: Eureka
-    // Day 23: Eureka → SF (US-101 S)
-    [40.10,-123.79],  // 59: Garberville
-    [39.15,-123.21],  // 60: Ukiah SC
-    [38.44,-122.72],  // 61: Santa Rosa
-    [38.07,-122.88],  // 62: Point Reyes area
-    [37.77,-122.42],  // 63: San Francisco
-    // Day 27: SF → PCH → Mariposa / Yosemite
-    [37.46,-122.43],  // 64: Half Moon Bay
-    [36.97,-122.03],  // 65: Santa Cruz
-    [36.60,-121.89],  // 66: Monterey
-    [36.55,-121.92],  // 67: Carmel
-    [36.83,-121.40],  // 68: inland (Hwy 156)
-    [37.30,-120.48],  // 69: Merced SC
-    [37.49,-119.97],  // 70: Mariposa
-    // Day 28-29: Yosemite (day trip)
-    [37.74,-119.60],  // 71: Yosemite Valley
-    // Day 30: Mariposa → KC → Sequoia → Three Rivers
-    [37.33,-119.65],  // 72: Oakhurst
-    [37.06,-119.58],  // 73: Coarsegold
-    [36.82,-119.68],  // 74: Fresno area
-    [36.80,-118.68],  // 75: Kings Canyon
-    [36.56,-118.77],  // 76: Sequoia
-    [36.45,-118.91],  // 77: Three Rivers
-    // Day 31: Three Rivers → LA
-    [36.06,-118.96],  // 78: Porterville
-    [35.37,-119.02],  // 79: Bakersfield SC
-    [35.13,-118.44],  // 80: Tehachapi
-    [34.90,-118.17],  // 81: Palmdale
-    [34.50,-118.15],  // 82: Santa Clarita
-    [34.05,-118.24]   // 83: LA
-];
+// Build route data from encoded polylines (route-data.js must be loaded first)
+var dayRouteSegments = {};
+var routeCoords = [];
+var dayRouteIdx = {};
 
-// Day index → route coord index (approximate)
-var dayRouteIdx = {
-    1:0,2:0,3:0,4:0,5:5,6:5,7:5,8:5,9:12,10:12,
-    11:16,12:21,13:21,14:21,15:30,16:39,17:44,18:44,19:48,20:54,
-    21:56,22:58,23:63,24:63,25:63,26:63,27:70,28:71,29:71,
-    30:77,31:83,32:83,33:83
-};
-
-// Route coordinates per day for day-route highlighting
-var dayRouteSegments = {
-    5: [[33.94,-118.41],[34.10,-117.89],[34.90,-117.02],[35.27,-116.07],[35.61,-115.39],[36.17,-115.14]],
-    9: [[36.17,-115.14],[35.98,-114.83],[35.20,-114.05],[35.25,-112.19],[36.06,-112.14],[36.81,-111.63],[36.86,-112.53],[37.02,-112.53]],
-    11: [[37.02,-112.53],[37.29,-112.68],[37.68,-112.15],[37.63,-112.17],[37.21,-112.99]],
-    12: [[37.21,-112.99],[37.76,-112.33],[38.29,-111.57],[38.75,-111.50],[38.99,-110.16],[38.57,-109.55]],
-    15: [[38.57,-109.55],[38.99,-110.16],[39.60,-110.81],[39.97,-111.53],[40.76,-111.89],[41.07,-112.25],[40.76,-111.89],[41.73,-112.17],[42.00,-112.45],[42.56,-114.46]],
-    16: [[42.56,-114.46],[42.87,-115.54],[43.62,-116.20],[44.05,-116.97],[44.77,-117.83],[45.67,-118.79],[45.60,-121.18],[45.57,-122.40],[46.07,-122.88],[46.72,-122.95]],
-    17: [[46.72,-122.95],[46.85,-121.76],[47.04,-122.90],[47.30,-123.10],[47.59,-123.79],[47.95,-124.39]],
-    19: [[47.95,-124.39],[47.50,-124.35],[46.98,-123.82],[46.19,-123.83],[45.89,-123.96]],
-    20: [[45.89,-123.96],[45.37,-123.97],[44.96,-124.02],[43.97,-124.10],[43.37,-124.22],[42.86,-124.42],[42.41,-124.42]],
-    21: [[42.41,-124.42],[41.94,-124.20],[41.76,-124.20]],
-    22: [[41.76,-124.20],[41.20,-124.09],[40.80,-124.16]],
-    23: [[40.80,-124.16],[40.10,-123.79],[39.15,-123.21],[38.44,-122.72],[38.07,-122.88],[37.77,-122.42]],
-    27: [[37.77,-122.42],[37.46,-122.43],[36.97,-122.03],[36.60,-121.89],[36.55,-121.92],[36.83,-121.40],[37.30,-120.48],[37.49,-119.97]],
-    28: [[37.49,-119.97],[37.74,-119.60]],
-    30: [[37.49,-119.97],[37.33,-119.65],[37.06,-119.58],[36.82,-119.68],[36.80,-118.68],[36.56,-118.77],[36.45,-118.91]],
-    31: [[36.45,-118.91],[36.06,-118.46],[35.87,-117.99],[35.63,-117.67],[36.60,-118.06],[36.06,-118.46],[35.63,-117.67],[34.70,-118.14],[34.05,-118.24]]
-};
+(function buildRouteData() {
+    if (typeof encodedRoutes === 'undefined' || typeof decodePolyline === 'undefined') {
+        console.warn('route-data.js not loaded — map will use empty routes');
+        return;
+    }
+    // Decode each driving day's polyline
+    routeDayOrder.forEach(function(day) {
+        if (encodedRoutes[day]) {
+            dayRouteSegments[day] = decodePolyline(encodedRoutes[day]);
+        }
+    });
+    // Build full route by concatenating day segments in order
+    routeDayOrder.forEach(function(day) {
+        var seg = dayRouteSegments[day];
+        if (!seg || seg.length === 0) return;
+        // Skip first point if it's close to the last point in routeCoords (avoid duplication at day boundaries)
+        var startIdx = 0;
+        if (routeCoords.length > 0) {
+            var last = routeCoords[routeCoords.length - 1];
+            var first = seg[0];
+            var dist = Math.abs(last[0] - first[0]) + Math.abs(last[1] - first[1]);
+            if (dist < 0.01) startIdx = 1; // ~1km threshold
+        }
+        // Record the index where this day starts in the full route
+        dayRouteIdx[day] = routeCoords.length + (startIdx > 0 ? -1 : 0);
+        for (var i = startIdx; i < seg.length; i++) {
+            routeCoords.push(seg[i]);
+        }
+    });
+    // Fill dayRouteIdx for non-driving days (point to nearest driving day's end)
+    var lastIdx = 0;
+    for (var d = 1; d <= 33; d++) {
+        if (dayRouteIdx[d] !== undefined) {
+            lastIdx = dayRouteIdx[d] + (dayRouteSegments[d] ? dayRouteSegments[d].length - 1 : 0);
+        }
+        if (dayRouteIdx[d] === undefined) {
+            dayRouteIdx[d] = lastIdx;
+        }
+    }
+})();
 
 // Day stats for stats card
 var dayStats = {
