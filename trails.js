@@ -92,10 +92,11 @@ function getTrailsForLocation(locationName) {
         return trailsData[locationName];
     }
     
-    // Try partial match (longest first)
+    // Try partial match (longest first, case-insensitive)
     const keys = Object.keys(trailsData).sort((a, b) => b.length - a.length);
+    const locLower = locationName.toLowerCase();
     for (const key of keys) {
-        if (locationName.includes(key)) {
+        if (locLower.includes(key.toLowerCase())) {
             return trailsData[key];
         }
     }

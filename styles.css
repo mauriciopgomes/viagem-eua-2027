@@ -6,7 +6,8 @@
     src: url('fonts/inter.woff2') format('woff2');
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+button, a, input, select, textarea, [role="button"], [role="tab"] { touch-action: manipulation; }
 
 :root {
     color-scheme: dark;
@@ -28,6 +29,9 @@
     --purple: #BF5AF2;
     --orange: #FF9F0A;
     --teal: #64D2FF;
+    --bg-overlay: rgba(5,5,8,0.82);
+    --border-subtle: rgba(255,255,255,0.06);
+    --border-semi: rgba(255,255,255,0.1);
     --radius: 20px;
     --radius-sm: 14px;
     --safe-top: env(safe-area-inset-top, 0px);
@@ -133,7 +137,6 @@ body {
     height: 100%;
     object-fit: cover;
     transition: opacity 0.5s cubic-bezier(0.32,0.72,0,1);
-    will-change: transform, opacity;
 }
 .hero img.hero-img-out {
     opacity: 0;
@@ -374,6 +377,10 @@ body {
 }
 .activity-card-photo.loaded {
     filter: blur(0);
+}
+@media (prefers-reduced-motion: reduce) {
+    .activity-card-photo { filter: none !important; transition: none !important; }
+    .day-pill.active { animation: none !important; }
 }
 /* Placeholder gradiente quando não há foto */
 .activity-card-placeholder {

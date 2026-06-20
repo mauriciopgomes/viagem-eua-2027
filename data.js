@@ -87,7 +87,7 @@ const days = [
             { time: "13:30", text: "🏢 <strong>Flatiron Building</strong> (23rd St) — prédio triangular de 1902!", type: "" },
             { time: "14:00", text: "🧙 <strong>Harry Potter Shop</strong> (935 Broadway) — butterbeer bar, varinhas, vassouras! Ao lado do Flatiron", type: "highlight" },
             { time: "15:30", text: "🎮 <strong>Nintendo NY</strong> (Rockefeller Center) + 🏰 <strong>Disney Store</strong> (1540 Broadway, Times Square)", type: "" },
-            { time: "17:00", text: "Tempo livre — descansar no hotel ou última exploração", type: "" },
+            { time: "17:00", text: "🕐 Tempo livre — descansar no hotel ou última exploração", type: "" },
             { time: "18:00", text: "🧳 Volta ao hotel — arrumar malas", type: "" },
             { time: "19:00", text: "\uD83C\uDF7D\uFE0F Jantar — <strong>Ellen's Stardust Diner</strong> (1650 Broadway, Times Square) — diner temático anos 50 com garçons que cantam ao vivo, clássico para crianças! Burgers, milkshakes e espetáculo. ~$20-25/pessoa", type: "food" },
             { time: "21:00", text: "🏨 Hotel — dormir cedo (voo amanhã!)", type: "" }
@@ -108,7 +108,8 @@ const days = [
             { time: "07:30", text: "☕ Café no Marriott Marquis", type: "" },
             { time: "08:00", text: "🏨 Check-out", type: "" },
             { time: "08:30", text: "🚕 Times Square → JFK", type: "drive" },
-            { time: "~09:30", text: "Chegada no JFK — check-in / despachar malas", type: "" },
+            { time: "~09:30", text: "🛫 Chegada no JFK — check-in / despachar malas", type: "" },
+            { time: "10:15", text: "🍽️ Almoço no aeroporto (JFK Terminal)", type: "food" },
             { time: "11:00", text: "✈️ Voo AA 3 → Los Angeles (~5.5h)", type: "drive" },
             { time: "13:20", text: "✈️ Chegada no LAX (horário local, -3h)", type: "drive" },
             { time: "~14:00", text: "🚗 Retirada do <strong>Tesla Model Y</strong>", type: "drive" },
@@ -146,7 +147,7 @@ const days = [
     {
         photo: 'img/dia-08.jpg', shortLoc: 'Vegas', location: "Day trip Death Valley 🏜️",
         route: "Ponto mais baixo das Américas!",
-        note: "Inverno é a melhor época pra Death Valley.",
+        note: "Inverno é a melhor época pra Death Valley. Round trip ~380 km — carregar a 100% na noite anterior!",
         region: "nv",
         items: [
             { time: "08:00", text: "☕ Café", type: "" },
@@ -158,7 +159,7 @@ const days = [
             { time: "13:00", text: "🍽️ Almoço no <strong>Furnace Creek</strong>", type: "food" },
             { time: "14:00", text: "🏜️ <strong>Mesquite Flat Sand Dunes</strong> — dunas clássicas!", type: "" },
             { time: "15:00", text: "🚗 Volta pra Vegas (~2h)", type: "drive" },
-            { time: "17:00", text: "🏨 Chegada em Vegas — piscina / descanso", type: "" },
+            { time: "17:00", text: "🏨 Chegada em Vegas — descanso", type: "" },
             { time: "19:00", text: "🍽️ Jantar especial — <strong>Fogo de Chão</strong> (3500 Las Vegas Blvd S, Paris Las Vegas) — 🇧🇷 churrascaria brasileira na Strip! Rodízio com picanha, fraldinha, cordeiro e a melhor farofa. Despedida de Vegas com gostinho de casa! ~$45-55/adulto, crianças menor preço", type: "food" },
             { time: "20:00", text: "🌃 Noite em Vegas", type: "" }
         ],
@@ -178,7 +179,8 @@ const days = [
             { time: "10:30", text: "📸 <strong>Elephant Rock</strong>", type: "" },
             { time: "11:00", text: "📸 <strong>White Domes Trail</strong> (~1.8 km) — cânion colorido", type: "" },
             { time: "11:45", text: "🚗 Rumo a <strong>Zion</strong> via I-15 N (~250 km, ~2.5h)", type: "drive" },
-            { time: "12:30", text: "🍽️ Almoço em St. George (no caminho)", type: "food" },
+            { time: "12:30", text: "⚡ <strong>Supercharger St. George</strong> (~25 min)", type: "charge" },
+            { time: "13:00", text: "🍽️ Almoço em St. George", type: "food" },
             { time: "~14:15", text: "🏨 Chegada em <strong>Springdale</strong> — check-in!", type: "" },
             { time: "15:00", text: "🛍️ Explorar <strong>Springdale</strong>", type: "" },
             { time: "15:30", text: "🌄 <strong>Canyon Overlook Trail</strong> (~1.6 km, ~1h) — vista incrível!", type: "highlight" },
@@ -256,7 +258,7 @@ const days = [
             { time: "14:30", text: "🍽️ Almoço em Moab", type: "food" },
             { time: "15:30", text: "🥾 <strong>Corona Arch Trail</strong> (~5 km, ~2h) — arco gigante sem multidões!", type: "highlight" },
             { time: "17:30", text: "🚗 <strong>Scenic Byway 128</strong> — rio Colorado", type: "" },
-            { time: "18:00", text: "🌅 Pôr do sol em Moab", type: "highlight" },
+            { time: "17:30", text: "🌅 Pôr do sol em Moab", type: "highlight" },
             { time: "19:00", text: "🍽️ Jantar — <strong>Moab Brewery</strong> (686 S Main St) — cervejaria local tradicional, burger e nachos. ~$15-20/pessoa", type: "food" }
         ]
     },
@@ -351,15 +353,16 @@ const days = [
             { time: "08:30", text: "🌊 <strong>Thousand Springs</strong> (Hagerman, ID) — cachoeiras brotando do paredão de rocha no Snake River! Mirante na I-84. Grátis", type: "" },
             { time: "09:30", text: "⚡ <strong>Supercharger Baker City, OR</strong> (~200 km) — ~25 min", type: "charge" },
             { time: "10:45", text: "📸 <strong>Deadman Pass Overlook</strong> — mirante nas Blue Mountains! Vista panorâmica a 1.278m de altitude", type: "highlight" },
-            { time: "11:30", text: "⚡🍽️ <strong>Supercharger Pendleton, OR</strong> (~200 km) — ~20 min + almoço", type: "charge" },
+            { time: "11:30", text: "⚡ <strong>Supercharger Pendleton, OR</strong> (~200 km) — ~20 min", type: "charge" },
+            { time: "12:00", text: "🍽️ Almoço em Pendleton", type: "food" },
             { time: "13:30", text: "⚡ <strong>Supercharger The Dalles, OR</strong> (~200 km) — ~25 min", type: "charge" },
             { time: "14:00", text: "�️ (opcional) <strong>Mt. Hood</strong> — desvio ~1h ao sul pela US-26. Vulcão de 3.429m coberto de neve!", type: "" },
             { time: "14:30", text: "🏞️ (opcional) <strong>Trillium Lake</strong> — lago com reflexo perfeito do Mt. Hood! Ótimo pra fotos", type: "" },
             { time: "14:45", text: "📸 <strong>Rowena Crest Viewpoint</strong> — mirante épico com curvas hairpin sobre o Columbia River! Panorâmica 360°. Grátis", type: "" },
-            { time: "15:00", text: "🏞️ <strong>Columbia River Gorge</strong>", type: "" },
-            { time: "14:15", text: "🏛️ <strong>Vista House at Crown Point</strong> — edifício octogonal de 1917 com vista 270° do Gorge!", type: "highlight" },
-            { time: "14:30", text: "🌲 <strong>Multnomah Falls</strong> — cachoeira icônica de 189m!", type: "highlight" },
-            { time: "15:00", text: "🚗 I-84 W → I-5 N → Centralia (~240 km, ~2.5h)", type: "drive" },
+            { time: "15:00", text: "🏛️ <strong>Vista House at Crown Point</strong> — edifício octogonal de 1917 com vista 270° do Gorge!", type: "highlight" },
+            { time: "15:15", text: "🏞️ <strong>Columbia River Gorge</strong>", type: "" },
+            { time: "15:30", text: "🌲 <strong>Multnomah Falls</strong> — cachoeira icônica de 189m!", type: "highlight" },
+            { time: "16:00", text: "🚗 I-84 W → I-5 N → Centralia (~240 km, ~2.5h)", type: "drive" },
             { time: "~17:30", text: "🏨 Chegada em <strong>Centralia</strong>!", type: "" },
             { time: "18:00", text: "⚡ <strong>Supercharger Centralia</strong>", type: "charge" },
             { time: "18:30", text: "🍽️ Jantar — <strong>Olympic Club Hotel & Bar</strong> (112 N Tower Ave, Centralia) — bar histórico de 1908, o mais antigo de WA em funcionamento, burgers e fish & chips. ~$15-20/pessoa", type: "food" }
@@ -401,12 +404,12 @@ const days = [
             { time: "08:00", text: "🥾 <strong>Hall of Mosses Trail</strong> (~1.3 km) — musgos pendurados!", type: "highlight" },
             { time: "09:00", text: "🥾 <strong>Spruce Nature Trail</strong> (~2 km)", type: "" },
             { time: "10:15", text: "🌊 <strong>Ruby Beach</strong> — sea stacks!", type: "highlight" },
-            { time: "10:45", text: "🧪 Tidepools — estrelas-do-mar!", type: "" },
+            { time: "10:45", text: "🧪 Tidepools — estrelas-do-mar! ⚠️ Inverno: ondas fortes, observar de longe", type: "" },
             { time: "12:00", text: "🍽️ Almoço em Forks", type: "food" },
             { time: "13:00", text: "🌊 <strong>La Push / First Beach</strong> — praia dos Quileute (Twilight!)", type: "" },
             { time: "14:30", text: "🌊 <strong>Rialto Beach</strong> — sea stacks e troncos", type: "" },
             { time: "16:00", text: "🥾 <strong>Marymere Falls Trail</strong> (~2.5 km)", type: "" },
-            { time: "17:30", text: "🌅 Pôr do sol no Pacífico!", type: "highlight" },
+            { time: "17:00", text: "🌅 Pôr do sol no Pacífico!", type: "highlight" },
             { time: "18:30", text: "🍽️ Jantar — <strong>Bella Italia</strong> (118 E 1st St, Port Angeles) — italiano autêntico com ingredientes do PNW, mushroom ravioli e linguine alle vongole. ~$20-25/pessoa", type: "food" }
         ]
     },
@@ -431,7 +434,7 @@ const days = [
             { time: "15:30", text: "🏨 Check-in em <strong>Cannon Beach</strong>", type: "" },
             { time: "16:00", text: "📸 <strong>Haystack Rock</strong> — ícone de Oregon!", type: "highlight" },
             { time: "16:45", text: "🌊 <strong>Ecola State Park</strong> — mirante espetacular!", type: "" },
-            { time: "17:30", text: "🌅 <strong>Pôr do sol em Cannon Beach</strong> — ESPETACULAR!", type: "highlight" },
+            { time: "17:00", text: "🌅 <strong>Pôr do sol em Cannon Beach</strong> — ESPETACULAR!", type: "highlight" },
             { time: "18:30", text: "🍽️ Jantar — <strong>Ecola Seafood Restaurant & Market</strong> (208 N Spruce St) — Dungeness crab e fish & chips de halibut frescos a poucos metros da Haystack Rock. ~$20-25/pessoa", type: "food" }
         ]
     },
@@ -476,12 +479,12 @@ const days = [
             { time: "08:30", text: "🚗 US-101 sul (~70 km, ~1h)", type: "drive" },
             { time: "09:30", text: "🌲 <strong>Jedediah Smith Redwoods SP</strong> — <strong>Stout Memorial Grove Trail</strong> (~1 km loop entre gigantes!)", type: "highlight" },
             { time: "10:30", text: "🚗 <strong>Howland Hill Road</strong> — estrada de terra entre redwoods enormes", type: "" },
-            { time: "11:15", text: "🥾 <strong>Boy Scout Tree Trail</strong> (~4 km) — trilha tranquila entre old-growth", type: "" },
+            { time: "11:15", text: "🥾 <strong>Simpson-Reed Trail</strong> (~1 km loop) — trilha pavimentada entre old-growth redwoods, acessível o ano todo!", type: "" },
             { time: "13:00", text: "🏨 Check-in <strong>Crescent City</strong>", type: "" },
             { time: "13:30", text: "🍽️ Almoço", type: "food" },
             { time: "14:30", text: "🏝️ <strong>Battery Point Lighthouse</strong> — ilha acessível na maré baixa!", type: "" },
-            { time: "15:30", text: "🌲 <strong>Del Norte Coast Redwoods SP</strong> — <strong>Coastal Trail (Enderts Beach)</strong> (~4 km) — praia + tidepools!", type: "highlight" },
-            { time: "18:00", text: "🌅 Pôr do sol no porto de Crescent City", type: "" },
+            { time: "15:30", text: "🌲 <strong>Del Norte Coast Redwoods SP</strong> — <strong>Coastal Trail (Enderts Beach)</strong> (~4 km) — praia selvagem! ⚠️ Ondas fortes no inverno — observar de longe, não entrar na água", type: "highlight" },
+            { time: "17:15", text: "🌅 Pôr do sol no porto de Crescent City", type: "" },
             { time: "19:00", text: "🍽️ Jantar — <strong>Fisherman's Restaurant</strong> (700 US-101 S, Crescent City) — Dungeness crab e halibut do Pacífico Norte, clássico de cidade de pescadores. ~$15-22/pessoa", type: "food" }
         ],
         tips: ["🌊 Battery Point: verificar tábua de marés! Só acessível na maré baixa."]
@@ -502,7 +505,7 @@ const days = [
             { time: "09:00", text: "🥾 <strong>Fern Canyon</strong> (~1.5 km) — samambaias! <strong>Jurassic Park 2</strong>!", type: "highlight" },
             { time: "10:30", text: "🌊 <strong>Gold Bluffs Beach</strong>", type: "" },
             { time: "11:00", text: "🌲 <strong>Lady Bird Johnson Grove Trail</strong> (~2.5 km)", type: "" },
-            { time: "12:00", text: "🌲 <strong>Tall Trees Grove</strong> — árvores mais altas do MUNDO! (~5 km, ~2h)", type: "highlight" },
+            { time: "12:00", text: "🌲 <em>Opcional (checar condições):</em> <strong>Tall Trees Grove</strong> — árvores mais altas do MUNDO! (~5 km, ~2h). ⚠️ Permit no Info Center (Orick), estrada pode estar difícil no inverno", type: "highlight" },
             { time: "14:00", text: "🍽️ Almoço em <strong>Orick</strong>", type: "food" },
             { time: "14:30", text: "🚗 US-101 sul (~60 km)", type: "drive" },
             { time: "15:30", text: "🌲 <strong>Avenue of the Giants</strong> — 50 km entre redwoods!", type: "highlight" },
@@ -511,7 +514,7 @@ const days = [
             { time: "18:00", text: "⚡ <strong>Supercharger Eureka</strong>", type: "charge" },
             { time: "19:00", text: "🍽️ Jantar — <strong>Lost Coast Brewery & Cafe</strong> (617 4th St, Eureka) — cervejaria artesanal pioneira do North Coast, burgers e fish tacos. ~$15-20/pessoa", type: "food" }
         ],
-        tips: ["⚠️ Tall Trees Grove: permit gratuito no Thomas Clarke Info Center (Orick).", "⚠️ Fern Canyon: Davison Road pode fechar no inverno. Verificar em nps.gov/redw."]
+        tips: ["⚠️ Fern Canyon: Davison Road (terra, 10 km) pode fechar com chuva forte. Ligar pro Visitors Center de manhã: (707) 464-6101 ext. 5265. Se fechada, mais tempo em Lady Bird Johnson Grove.", "⚠️ Tall Trees Grove: permit gratuito no Thomas Clarke Info Center (Orick) — pode estar fechado em dia de semana no inverno."]
     },
 
     // ==================== SAN FRANCISCO (Dias 22-24) ====================
@@ -525,7 +528,8 @@ const days = [
         items: [
             { time: "08:00", text: "☕ Café + check-out de Eureka", type: "" },
             { time: "08:30", text: "🚗 US-101 S (~440 km, ~5.5h)", type: "drive" },
-            { time: "10:30", text: "⚡🍽️ <strong>Supercharger Ukiah</strong> (~250 km) — ~25 min + almoço", type: "charge" },
+            { time: "10:30", text: "⚡ <strong>Supercharger Ukiah</strong> (~250 km) — ~25 min", type: "charge" },
+            { time: "11:00", text: "🍽️ Almoço em Ukiah", type: "food" },
             { time: "11:15", text: "🏖️ <strong>Glass Beach</strong> (Fort Bragg) — praia coberta de vidro marítimo polido pelas ondas!", type: "" },
             { time: "11:30", text: "🌊 <strong>Mendocino</strong> — vila costeira charmosa, cenário de filmes! Parada rápida", type: "" },
             { time: "12:00", text: "🌳 <strong>Cypress Tree Tunnel</strong> (Point Reyes) — túnel de ciprestes centenários formando arco perfeito! Grátis", type: "" },
@@ -551,7 +555,7 @@ const days = [
             { time: "12:30", text: "🍽️ Almoço", type: "food" },
             { time: "14:00", text: "🌳 <strong>Golden Gate Park</strong> — Japanese Tea Garden, Conservatory of Flowers", type: "" },
             { time: "16:00", text: "🏖️ <strong>Ocean Beach</strong> — praia do Pacífico", type: "" },
-            { time: "18:00", text: "🍽️ Jantar — <strong>La Taqueria</strong> (2889 Mission St, Mission District) — vencedor James Beard America's Classic, burrito de carnitas sem arroz, o mais famoso dos EUA. ~$12-15/pessoa", type: "food" }
+            { time: "18:00", text: "🍽️ Jantar — <strong>Burma Superstar</strong> (309 Clement St, Inner Richmond) — birmanês premiado, tea leaf salad e coconut chicken noodles. Único em SF! ~$15-22/pessoa", type: "food" }
         ]
     },
     {
@@ -678,35 +682,38 @@ const days = [
             { time: "13:30", text: "🚗 <strong>Generals Highway</strong> → Sequoia NP (~1h, estrada cênica!)", type: "drive" },
             { time: "14:30", text: "🌲 <strong>General Sherman Tree</strong> — a MAIOR árvore do mundo! 84m!", type: "highlight" },
             { time: "15:00", text: "🥾 <strong>Congress Trail</strong> (~3 km loop) — entre sequoias gigantes", type: "" },
-            { time: "16:00", text: "📸 <strong>Moro Rock</strong> — 400 degraus com vista 360°!", type: "highlight" },
+            { time: "16:00", text: "📸 <strong>Tunnel Log</strong> — sequoia caída com túnel pra carro! + <strong>Auto Log</strong> — suba em cima de uma sequoia gigante caída!", type: "" },
             { time: "17:00", text: "🚗 Descida → Three Rivers (~1h)", type: "drive" },
             { time: "18:00", text: "🏨 Check-in em <strong>Three Rivers</strong>", type: "" },
             { time: "19:00", text: "🍽️ Jantar — <strong>The Gateway Restaurant</strong> (45978 Sierra Dr, Three Rivers) — o mais confiável na porta do Sequoia, burgers e trout almondine. ~$15-20/pessoa", type: "food" }
         ],
-        tips: ["❄️ Em fevereiro pode ter neve nas áreas mais altas.", "⚠️ Kings Canyon Scenic Byway (CA-180 leste) fecha no inverno (nov–abr). Só General Grant Tree é acessível."]
+        tips: ["❄️ Em fevereiro pode ter neve nas áreas mais altas.", "⚠️ Kings Canyon Scenic Byway (CA-180 leste) fecha no inverno (nov–abr). Só General Grant Tree é acessível.", "⚠️ Moro Rock: degraus frequentemente fechados no inverno por gelo. Se aberto, vale a subida (~30 min ida e volta, vista 360°)."]
     },
 
     // ==================== LA (Dias 30-33) ====================
     {
         photo: 'img/activities/hollywood_sign.jpg', shortLoc: 'LA',
         chargeStops: [
-            { name: 'Bakersfield, CA', leg: 'Three Rivers → LA', critical: false }
+            { name: 'Ridgecrest, CA', leg: 'Three Rivers → Lone Pine', critical: false },
+            { name: 'Lone Pine, CA', leg: 'Alabama Hills', critical: false },
+            { name: 'Lancaster, CA', leg: 'Lone Pine → LA', critical: false }
         ],
-        location: "Three Rivers → Los Angeles",
-        route: "Tehachapi Loop + rumo a LA! 🚗",
-        note: "Último dia de estrada! Parada no Tehachapi Loop, depois praias de LA.",
+        location: "Three Rivers → Alabama Hills → Los Angeles",
+        route: "Eastern Sierra + Alabama Hills + rumo a LA! 🏜️",
+        note: "Dia longo mas paisagem épica! Kern River Canyon, Walker Pass, vista Mt. Whitney, Alabama Hills (cenário de Tremors!).",
         region: "ca",
         items: [
-            { time: "08:00", text: "☕ Café + check-out de Three Rivers", type: "" },
-            { time: "08:30", text: "🚗 Saída rumo a LA (~330 km, ~3.5h)", type: "drive" },
-            { time: "10:00", text: "⚡ <strong>Supercharger Bakersfield</strong> (~180 km) — ~25 min", type: "charge" },
-            { time: "10:30", text: "🛤️ <strong>Tehachapi Loop</strong> — famoso loop ferroviário!", type: "" },
-            { time: "11:30", text: "🚗 Continue I-5 S → LA", type: "drive" },
-            { time: "~13:00", text: "🏨 Chegada em <strong>LA</strong>! Check-in", type: "" },
-            { time: "13:30", text: "🍽️ Almoço", type: "food" },
-            { time: "14:30", text: "⛩️ <strong>Lake Shrine</strong> (17190 Sunset Blvd, Pacific Palisades) — jardim de meditação sereno com lago, moinho histórico e esculturas. Gratuito, 30 min — no caminho de Santa Monica!", type: "" },
-            { time: "15:30", text: "🏖️ <strong>Santa Monica Pier</strong> — roda-gigante, Route 66 End Sign!", type: "highlight" },
-            { time: "16:30", text: "🌴 <strong>Venice Beach</strong> — boardwalk, Muscle Beach!", type: "" },
+            { time: "07:00", text: "☕ Café + check-out de Three Rivers (sair cedo!)", type: "" },
+            { time: "07:30", text: "🚗 Three Rivers → CA-190 E → CA-178 (<strong>Kern River Canyon</strong> + Walker Pass) — estrada cênica linda pelo cânion!", type: "drive" },
+            { time: "09:30", text: "⚡ <strong>Supercharger Ridgecrest</strong> (~200 km) — ~25 min", type: "charge" },
+            { time: "10:00", text: "🚗 US-395 N → Lone Pine (~100 km, ~1h) — vista da <strong>Sierra Nevada</strong> e <strong>Mt. Whitney</strong> (pico mais alto dos EUA continental, 4.421m!)", type: "drive" },
+            { time: "11:00", text: "🏜️ <strong>Alabama Hills</strong> (Movie Flat Rd, Lone Pine) — formações rochosas surreais! Cenário de <strong>Tremors</strong> (Ataque dos Vermes Malditos), Iron Man, Django, Lone Ranger e +400 filmes/séries. Caminhar até <strong>Mobius Arch</strong> (moldura natural do Mt. Whitney!) e <strong>Movie Flat Road</strong>. Gratuito, ~1h", type: "highlight" },
+            { time: "12:00", text: "⚡ <strong>Supercharger Lone Pine</strong> — ~20 min", type: "charge" },
+            { time: "12:30", text: "🍽️ Almoço — <strong>Alabama Hills Cafe</strong> (111 W Post St, Lone Pine) — café clássico de cidadezinha, panquecas e burgers. ~$12-18/pessoa", type: "food" },
+            { time: "13:00", text: "🚗 US-395 S → CA-14 S → LA (~330 km, ~3.5h) — descida pelo <strong>Antelope Valley</strong>", type: "drive" },
+            { time: "15:00", text: "⚡ <strong>Supercharger Lancaster</strong> (~200 km) — ~20 min", type: "charge" },
+            { time: "~16:30", text: "🏨 Chegada em <strong>LA</strong>! Check-in", type: "" },
+            { time: "17:00", text: "🏖️ <strong>Santa Monica Pier</strong> — roda-gigante, Route 66 End Sign!", type: "highlight" },
             { time: "18:00", text: "🌅 Sunset na praia!", type: "highlight" },
             { time: "19:00", text: "🍽️ Jantar no <strong>Santa Monica Pier</strong> — <strong>Bubba Gump Shrimp Co.</strong> (com vista pro oceano, menu de frutos do mar, temático do Forrest Gump, kids adoram!) ~$20-30/pessoa", type: "food" }
         ]
@@ -721,8 +728,8 @@ const days = [
             { time: "09:00", text: "🚀 <strong>California Science Center</strong> (700 Exposition Park Dr) — Space Shuttle Endeavour real em tamanho natural! Gratuito, imperdível para a família. ~2h", type: "highlight" },
             { time: "11:30", text: "🦕 <strong>La Brea Tar Pits & Museum</strong> (5801 Wilshire Blvd) — fossos de asfalto natural com fósseis de mamutes, sabres-dente e preguiças gigantes! Museu incluso ~$25 adulto / $10 criança. ~1.5h", type: "highlight" },
             { time: "13:00", text: "🍽️ Almoço no <strong>Fairfax District</strong> (perto do La Brea)", type: "food" },
-            { time: "14:00", text: "🏰 <strong>Greystone Mansion & Gardens</strong> (905 Loma Vista Dr, Beverly Hills) — mansão histórica de cenário de filmes e séries, jardins gratuitos. ~45 min", type: "" },
-            { time: "14:00", text: "🏛️ <strong>Getty Center</strong> (1200 Getty Center Dr) — museu gratuito com jardins e vista panorâmica incrível de LA, arte + fotos!", type: "highlight" },
+            { time: "14:00", text: "🌴 <strong>Venice Beach</strong> — boardwalk icônico, Muscle Beach, artistas de rua, skatepark. ~15 min de Santa Monica Pier a pé. ~1h", type: "" },
+            { time: "15:00", text: "🏛️ <strong>Getty Center</strong> (1200 Getty Center Dr) — museu gratuito com jardins e vista panorâmica incrível de LA, arte + fotos!", type: "highlight" },
             { time: "17:00", text: "🌆 Pôr do sol com vista de LA no Getty!", type: "highlight" },
             { time: "19:00", text: "🍽️ Jantar — <strong>Grand Central Market</strong> (317 S Broadway, DTLA) — mercado gastronômico histórico de 1917, cada um escolhe o que quer (tacos, ramen, pizza, burgers), sem reserva, perfeito para família. ~$10-18/pessoa", type: "food" },
             { time: "20:30", text: "🔭 <strong>Griffith Observatory à noite</strong> — LA iluminada!", type: "highlight" },
@@ -763,10 +770,10 @@ const days = [
             { time: "08:00", text: "☕ Café + check-out", type: "" },
             { time: "09:00", text: "🛍️ Manhã livre — compras de última hora", type: "" },
             { time: "11:00", text: "🚗 Devolução do <strong>Tesla</strong> no LAX", type: "drive" },
-            { time: "12:00", text: "Chegada no LAX — check-in", type: "" },
+            { time: "12:00", text: "🛫 Chegada no LAX — check-in", type: "" },
             { time: "13:00", text: "🛍️ Últimas compras duty free", type: "" },
             { time: "13:45", text: "✈️ Voo AA 608 → Miami (conexão)", type: "drive" },
-            { time: "21:44", text: "Chegada em Miami", type: "" },
+            { time: "21:44", text: "🛬 Chegada em Miami", type: "" },
             { time: "22:55", text: "✈️ Voo AA 905 → Rio de Janeiro", type: "drive" }
         ],
         tips: ["Chegada no Rio: 23/02 (terça) às 09:25 🇧🇷 Bem-vindos de volta!"]
@@ -824,6 +831,7 @@ var dayPhotos = {};
 var superchargers = [];
 
 function initDays() {
+    if (typeof window !== 'undefined' && window.__daysInitialized) return;
     dayPhotos = {};
     superchargers = [];
     days.forEach(function(d, i) {
@@ -853,6 +861,7 @@ function initDays() {
             });
         }
     });
+    if (typeof window !== 'undefined') window.__daysInitialized = true;
 }
 
 // Run on load

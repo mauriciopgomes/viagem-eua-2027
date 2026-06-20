@@ -48,8 +48,12 @@ if ('serviceWorker' in navigator) {
             var newWorker = reg.installing;
             if (!newWorker) return;
             newWorker.addEventListener('statechange', function() {
-                if (newWorker.state === 'activated' && navigator.serviceWorker.controller) {
-                    showUpdateToast();
+                if (newWorker.state === 'activated') {
+                    // Show toast on update (controller exists = not first install)
+                    // Also show on first activated if page was refreshed
+                    if (navigator.serviceWorker.controller || performance.navigation.type === 1) {
+                        showUpdateToast();
+                    }
                 }
             });
         });
