@@ -14,6 +14,8 @@ var SyncEngine = {
     queue: JSON.parse(localStorage.getItem('syncQueue') || '[]'),
     syncing: false,
     debounceTimer: null,
+    retryTimer: null,
+    pullIntervalId: null,
     pushRetries: 0,
 
     track: function(key, value) {
@@ -21,7 +23,7 @@ var SyncEngine = {
         var ts = Date.now();
         localStorage.setItem('_ts_' + key, ts);
         this.queue.push({ key: key, value: value, ts: ts });
-        localStorage.setItem('syncQueue', JSON.stringify(this.queue));
+        this._persistQueue();
         this.debouncedSync();
     },
 
@@ -33,10 +35,11 @@ var SyncEngine = {
 
     push: async function() {
         if (!this.url || this.syncing || this.queue.length === 0) return;
+        this.syncing = true;
         if (navigator.locks) {
             var self = this;
             return navigator.locks.request('sync-push', { ifAvailable: true }, function(lock) {
-                if (!lock) return;
+                if (!lock) { self.syncing = false; return; }
                 return self._doPush();
             });
         }
@@ -60,12 +63,22 @@ var SyncEngine = {
         return fetch(this.url + '?action=push&data=' + payload);
     },
 
+    _persistQueue: function() {
+        try {
+            localStorage.setItem('syncQueue', JSON.stringify(this.queue));
+        } catch(e) {
+            console.warn('[Sync] Queue persist failed:', e);
+        }
+    },
+
     _doPush: async function() {
-        if (this.syncing) return;
-        this.syncing = true;
+        if (!this.syncing) this.syncing = true;
         this.updateUI('syncing');
-        var snapshotLen = this.queue.length;
-        var snapshot = this.queue.slice(0, snapshotLen);
+        // Snapshot queue atomically before async work
+        var snapshot = this.queue.slice(0);
+        var snapshotLen = snapshot.length;
+        this.queue = this.queue.slice(snapshotLen);
+        this._persistQueue();
         var latest = {};
         snapshot.forEach(function(e) {
             if (!latest[e.key] || e.ts > latest[e.key].ts) latest[e.key] = e;
@@ -82,15 +95,16 @@ var SyncEngine = {
             }
             if (!result) {
                 var pullResp = await fetch(this.url);
-                result = await pullResp.json();
+                if (pullResp.ok) result = await pullResp.json();
             }
-            this.queue.splice(0, snapshotLen);
-            localStorage.setItem('syncQueue', JSON.stringify(this.queue));
             if (result && result.data) this.mergeRemote(result.data);
             this.updateUI('synced');
             this.pushRetries = 0;
         } catch(e) {
             console.warn('Sync push failed:', e);
+            // Restore snapshot on failure
+            this.queue = snapshot.concat(this.queue);
+            this._persistQueue();
             var maxRetries = 10;
             this.pushRetries = (this.pushRetries || 0) + 1;
             // Tratar HTTP 429 (rate limit) e 403 (auth) separadamente
@@ -116,10 +130,20 @@ var SyncEngine = {
                 return;
             }
             this.updateUI('error');
+            this.syncing = false;
+            // Don't retry when offline — wait for online event
+            if (!navigator.onLine) {
+                var self = this;
+                var onlineHandler = function() {
+                    window.removeEventListener('online', onlineHandler);
+                    self.push();
+                };
+                window.addEventListener('online', onlineHandler);
+                return;
+            }
             var delay = Math.min(3000 * Math.pow(2, this.pushRetries - 1), 30000);
             var self = this;
-            this.syncing = false;
-            setTimeout(function() { self.push(); }, delay);
+            this.retryTimer = setTimeout(function() { self.push(); }, delay);
             return;
         }
         this.syncing = false;
@@ -152,14 +176,18 @@ var SyncEngine = {
     },
 
     mergeRemote: function(remote) {
+        if (!remote || typeof remote !== 'object') return;
         var dominated = false;
         Object.keys(remote).forEach(function(key) {
+            var entry = remote[key];
+            if (!entry || typeof entry !== 'object') return;
+            var remoteTs = parseInt(entry.ts);
+            if (isNaN(remoteTs)) return;
             var localTs = parseInt(localStorage.getItem('_ts_' + key)) || 0;
-            var remoteTs = remote[key].ts || 0;
             if (remoteTs > localTs) {
-                localStorage.setItem(key, remote[key].v);
+                localStorage.setItem(key, entry.v);
                 localStorage.setItem('_ts_' + key, remoteTs);
-                var val = remote[key].v;
+                var val = entry.v;
                 if (key.startsWith('check-')) {
                     var parts = key.replace('check-', '').split('-');
                     // Usar CSS.escape para sanitizar partes vindas de dados remotos
@@ -214,7 +242,7 @@ var SyncEngine = {
         }
         if (changes.length > 0) {
             this.queue = changes.concat(this.queue);
-            localStorage.setItem('syncQueue', JSON.stringify(this.queue));
+            this._persistQueue();
         }
         await this.push();
         await this.pull();
@@ -284,6 +312,12 @@ function haptic(style) {
 })();
 
 SyncEngine.initUI();
+
+// Flush queue to localStorage on page close (prevents data loss during async push)
+window.addEventListener('beforeunload', function() {
+    if (SyncEngine.queue && SyncEngine.queue.length > 0) SyncEngine._persistQueue();
+});
+
 if (SyncEngine.url) setTimeout(function() {
     if (!localStorage.getItem('syncInitialPushDone')) {
         SyncEngine.initialPush().then(function() {
@@ -294,7 +328,7 @@ if (SyncEngine.url) setTimeout(function() {
     }
 }, 5000);
 
-if (SyncEngine.url) setInterval(function() {
+if (SyncEngine.url) SyncEngine.pullIntervalId = setInterval(function() {
     if (navigator.onLine && !SyncEngine.syncing) SyncEngine.pull();
 }, 30000);
 

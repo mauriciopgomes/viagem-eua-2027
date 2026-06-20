@@ -65,10 +65,12 @@ const appJs = fs.readFileSync(path.join(BASE, 'app.js'), 'utf8');
 const pwaJs = fs.readFileSync(path.join(BASE, 'pwa.js'), 'utf8');
 const syncJs = fs.readFileSync(path.join(BASE, 'sync.js'), 'utf8');
 const storageJs = fs.readFileSync(path.join(BASE, 'storage.js'), 'utf8');
+const photosJs = fs.readFileSync(path.join(BASE, 'photos.js'), 'utf8');
+const placesJs = fs.readFileSync(path.join(BASE, 'places.js'), 'utf8');
 const stylesCSS = fs.readFileSync(path.join(BASE, 'styles.css'), 'utf8');
 const manifestJson = JSON.parse(fs.readFileSync(path.join(BASE, 'manifest.json'), 'utf8'));
 // Combined source for searching JS functions/patterns across both HTML and app.js
-const allJs = indexHtml + '\n' + appJs + '\n' + pwaJs + '\n' + syncJs + '\n' + storageJs;
+const allJs = indexHtml + '\n' + appJs + '\n' + pwaJs + '\n' + syncJs + '\n' + storageJs + '\n' + photosJs + '\n' + placesJs;
 
 // Execute data.js to get the actual data objects
 const vm = require('vm');
@@ -232,9 +234,9 @@ test('parques referenciam dias válidos', () => {
 // ==================== 5. DATA.JS — SUPERCHARGERS ====================
 section('data.js — Superchargers');
 
-test('superchargers é um array com 22 paradas', () => {
+test('superchargers é um array com 24 paradas', () => {
     assert(Array.isArray(superchargers), 'superchargers deve ser array');
-    assertEqual(superchargers.length, 22, 'deve ter 22 superchargers');
+    assertEqual(superchargers.length, 24, 'deve ter 24 superchargers');
 });
 
 test('superchargers têm campos obrigatórios', () => {
@@ -875,10 +877,10 @@ test('sync tenta POST antes do fallback GET', () => {
         'sync deve manter fallback GET para Apps Script');
 });
 
-test('push usa splice (não reset de array)', () => {
-    const pushCode = allJs.match(/push:\s*async\s*function[\s\S]*?this\.syncing\s*=\s*false/);
-    assert(pushCode, 'push function');
-    assert(pushCode[0].includes('.splice('), 'push deve usar splice');
+test('push snapshot queue atomicamente antes de async', () => {
+    const pushCode = syncJs.match(/_doPush:\s*async\s*function[\s\S]*?this\.syncing\s*=\s*false/);
+    assert(pushCode, '_doPush function');
+    assert(pushCode[0].includes('.slice(') || pushCode[0].includes('.splice('), 'push deve usar slice ou splice para snapshot');
 });
 
 test('push tem retry com backoff exponencial', () => {

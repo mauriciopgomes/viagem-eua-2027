@@ -471,11 +471,11 @@ async function runTests() {
         assert(!pullMatch[1].includes('navigator.onLine'), 'pull should NOT check navigator.onLine');
     });
 
-    test('index.html: push faz splice em vez de queue=[]', () => {
+    test('index.html: push snapshot atomico da queue', () => {
         const html = fs.readFileSync('index.html', 'utf8') + '\n' + fs.readFileSync('app.js', 'utf8') + '\n' + fs.readFileSync('sync.js', 'utf8');
-        const pushCode = html.match(/push:\s*async\s*function[\s\S]*?this\.syncing\s*=\s*false/);
-        assert(pushCode, 'should find push function');
-        assert(pushCode[0].includes('.splice('), 'push should use splice to remove sent items');
+        const pushCode = html.match(/_doPush:\s*async\s*function[\s\S]*?this\.syncing\s*=\s*false/);
+        assert(pushCode, 'should find _doPush function');
+        assert(pushCode[0].includes('.slice(') || pushCode[0].includes('.splice('), 'push should use slice or splice for atomic snapshot');
         assert(!pushCode[0].includes('this.queue = []'), 'push should NOT reset queue to empty array');
     });
 

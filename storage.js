@@ -9,15 +9,18 @@ var StorageLayer = {
     ready: Promise.resolve(),
 
     // Inicializar IndexedDB (chamado automaticamente na primeira vez)
+    _initPromise: null,
+
     init: function() {
         if (this.db) return Promise.resolve();
+        if (this._initPromise) return this._initPromise;
         if (!('indexedDB' in window)) {
             console.warn('IndexedDB não disponível, usando localStorage');
             return Promise.resolve();
         }
 
         var self = this;
-        return new Promise(function(resolve, reject) {
+        this._initPromise = new Promise(function(resolve, reject) {
             var req = indexedDB.open(self.dbName, self.dbVersion);
             req.onerror = function() { reject(req.error); };
             req.onsuccess = function() {
@@ -32,6 +35,7 @@ var StorageLayer = {
                 }
             };
         });
+        return this._initPromise;
     },
 
     // Get value (com fallback para localStorage)
@@ -57,17 +61,21 @@ var StorageLayer = {
 
     // Set value (com fallback para localStorage)
     set: function(key, value) {
-        localStorage.setItem(key, value);
+        try {
+            localStorage.setItem(key, value);
+        } catch(e) {
+            console.warn('[Storage] localStorage write failed:', e.name);
+        }
 
         if (this.db) {
             var self = this;
-            return new Promise(function(resolve) {
+            return new Promise(function(resolve, reject) {
                 try {
                     var tx = self.db.transaction('state', 'readwrite');
                     var store = tx.objectStore('state');
                     store.put({ key: key, value: value, ts: Date.now() });
                     tx.oncomplete = resolve;
-                    tx.onerror = resolve;
+                    tx.onerror = function() { reject(tx.error || new Error('IDB transaction failed')); };
                 } catch(e) {
                     resolve();
                 }
@@ -82,13 +90,13 @@ var StorageLayer = {
 
         if (this.db) {
             var self = this;
-            return new Promise(function(resolve) {
+            return new Promise(function(resolve, reject) {
                 try {
                     var tx = self.db.transaction('state', 'readwrite');
                     var store = tx.objectStore('state');
                     store.delete(key);
                     tx.oncomplete = resolve;
-                    tx.onerror = resolve;
+                    tx.onerror = function() { reject(tx.error || new Error('IDB transaction failed')); };
                 } catch(e) {
                     resolve();
                 }
@@ -113,13 +121,13 @@ var StorageLayer = {
 
         if (this.db) {
             var self = this;
-            return new Promise(function(resolve) {
+            return new Promise(function(resolve, reject) {
                 try {
                     var tx = self.db.transaction('state', 'readwrite');
                     var store = tx.objectStore('state');
                     store.clear();
                     tx.oncomplete = resolve;
-                    tx.onerror = resolve;
+                    tx.onerror = function() { reject(tx.error || new Error('IDB transaction failed')); };
                 } catch(e) {
                     resolve();
                 }

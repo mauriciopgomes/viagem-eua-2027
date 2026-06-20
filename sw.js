@@ -1,4 +1,4 @@
-const CACHE_NAME = 'viagem-eua-2027-v162';
+const CACHE_NAME = 'viagem-eua-2027-v168';
 const TILE_CACHE = 'viagem-tiles-v1';
 
 // Critical assets — must succeed for install
@@ -7,6 +7,8 @@ const CRITICAL_ASSETS = [
   './index.html',
   './data.js',
   './storage.js',
+  './photos.js',
+  './places.js',
   './app.js',
   './pwa.js',
   './sync.js',
@@ -32,6 +34,8 @@ const ASSETS_TO_CACHE = [
   './index.html',
   './data.js',
   './storage.js',
+  './photos.js',
+  './places.js',
   './app.js',
   './pwa.js',
   './sync.js',
