@@ -1,7 +1,8 @@
 // ==================== TRIP DATA ====================
 // Roteiro Alternativo — Viagem EUA 2027
-// NYC → LAX → Vegas → GC → Zion → Bryce → Moab
-// → Twin Falls → PNW → Costa Oregon → Redwood → SF → PCH → Yosemite → Sequoia → LA
+// NYC → LAX → Zion → Bryce → Moab
+// → Twin Falls → PNW → Costa Oregon → Redwood → SF → PCH → Yosemite → Sequoia
+// → Death Valley → Las Vegas → LA
 //
 // Para REORDENAR dias: mova os objetos dentro do array `days`.
 // initDays() recalcula automaticamente: número, data, dia da semana, dayPhotos e superchargers.
@@ -94,16 +95,18 @@ const days = [
         ]
     },
 
-    // ==================== LAS VEGAS (Dias 5-8) ====================
+    // ==================== UTAH (Dias 5-10) ====================
     {
-        photo: 'img/dia-05.jpg', shortLoc: 'Vegas',
+        photo: 'img/dia-05.jpg', shortLoc: 'Zion',
         chargeStops: [
-            { name: 'Barstow, CA', leg: 'LAX → Vegas', critical: false }
+            { name: 'Barstow, CA', leg: 'LAX → Zion', critical: false },
+            { name: 'Las Vegas, NV', leg: 'LAX → Zion', critical: false },
+            { name: 'St. George, UT', leg: 'LAX → Zion', critical: false }
         ],
-        location: "New York → LAX → Las Vegas",
-        route: "NY → LA → Vegas! ✈️🚗",
-        note: "Check-out do Marriott, voo pro LAX, Tesla e direto pra Vegas!",
-        region: "nv",
+        location: "New York → LAX → Zion",
+        route: "NY → LA → Zion! ✈️🚗",
+        note: "Check-out do Marriott, voo pro LAX, Tesla e direto pra Zion! ~700 km com FSD.",
+        region: "ut",
         items: [
             { time: "07:30", text: "☕ Café no Marriott Marquis", type: "" },
             { time: "08:00", text: "🏨 Check-out", type: "" },
@@ -113,83 +116,15 @@ const days = [
             { time: "11:00", text: "✈️ Voo AA 3 → Los Angeles (~5.5h)", type: "drive" },
             { time: "13:20", text: "✈️ Chegada no LAX (horário local, -3h)", type: "drive" },
             { time: "~14:00", text: "🚗 Retirada do <strong>Tesla Model Y</strong>", type: "drive" },
-            { time: "14:30", text: "🛣️ Saída rumo a <strong>Las Vegas</strong> (~430 km, ~4.5h via I-15 N)", type: "drive" },
+            { time: "14:30", text: "🛣️ Saída rumo a <strong>Zion</strong> (~700 km, ~7h via I-15 N, FSD)", type: "drive" },
             { time: "16:30", text: "⚡🍽️ <strong>Supercharger Barstow</strong> (~200 km) — ~25 min + lanche", type: "charge" },
-            { time: "16:35", text: "🎨 <strong>Elmer's Bottle Tree Ranch</strong> (Oro Grande) — floresta de 'árvores' de garrafas de vidro e metal! Arte outsider no deserto. Grátis", type: "" },
-            { time: "17:30", text: "👽 <strong>Alien Fresh Jerky</strong> (Baker) — loja alien + jerky de 100 sabores! + 🌡️ <strong>World's Tallest Thermometer</strong>!", type: "" },
-            { time: "18:15", text: "🏜️ <strong>Terrible's Road House</strong> (Jean, NV) — rancho temático do deserto com cenas do Far West, bom pra estender as pernas!", type: "" },
-            { time: "~19:00", text: "🎰 Chegada em <strong>Las Vegas</strong>! Check-in", type: "" },
-            { time: "19:30", text: "🍽️ Jantar — <strong>Secret Pizza</strong> (The Cosmopolitan, 3º andar, sem placa) — o hidden gem de Vegas, pizza NY-style escondida no hotel mais badalado. ~$15-20/pessoa", type: "food" },
-            { time: "21:00", text: "🏨 Dormir cedo (jet lag + dia longo!)", type: "" }
+            { time: "18:00", text: "⚡ <strong>Supercharger Las Vegas</strong> (~270 km) — ~20 min", type: "charge" },
+            { time: "19:00", text: "⚡ <strong>Supercharger St. George</strong> (~170 km) — ~25 min", type: "charge" },
+            { time: "~21:30", text: "🏨 Chegada em <strong>Springdale</strong>! Check-in", type: "" },
+            { time: "21:30", text: "🍽️ Jantar — <strong>Oscar's Cafe</strong> (948 Zion Park Blvd, Springdale) — mexicana clássica, burritos e enchiladas. ~$12-18/pessoa", type: "food" }
         ],
-        tips: ["⚡ Dia longo mas o fuso horário ajuda (-3h). Chegam cansados — dormir cedo!"]
+        tips: ["⚡ Dia longo (~700 km) mas FSD ajuda. Se cansar, improvisar hotel em St. George ou Vegas.", "⚡ Fuso horário ajuda (-3h). Chegam cansados — dormir cedo!"]
     },
-    {
-        photo: 'img/dia-06.jpg', shortLoc: 'Vegas', location: "Welcome Sign + Mt. Charleston",
-        route: "Neve a 45 min de Vegas! 🏔️",
-        note: "Foto no Welcome Sign de manhã + neve em Mt. Charleston!",
-        region: "nv",
-        items: [
-            { time: "08:15", text: "☕ Café", type: "" },
-            { time: "09:00", text: "📸 <strong>Welcome to Las Vegas Sign</strong> — foto icônica!", type: "highlight" },
-            { time: "09:30", text: "🚗 Rumo a <strong>Mt. Charleston</strong> (~55 km, ~45 min)", type: "drive" },
-            { time: "10:15", text: "🏔️ <strong>Kyle Canyon Scenic Drive</strong> — neve nas montanhas!", type: "" },
-            { time: "10:45", text: "⛄ Parada — <strong>brincar na neve!</strong> Boneco de neve, guerra de bolas!", type: "highlight" },
-            { time: "12:00", text: "☕ <strong>Mt. Charleston Lodge</strong> — chocolate quente com lareira!", type: "food" },
-            { time: "12:45", text: "🚗 Volta pra Vegas (~45 min)", type: "drive" },
-            { time: "14:00", text: "🍔 Almoço na Strip", type: "food" },
-            { time: "15:00", text: "🏨 Explorar hotéis — <strong>Venetian</strong> (canais), <strong>Bellagio</strong> (conservatório), <strong>Caesars Palace</strong>", type: "highlight" },
-            { time: "18:00", text: "🌅 <strong>Bellagio Fountains</strong> — show a cada 30 min!", type: "highlight" },
-            { time: "19:00", text: "🍽️ Jantar — <strong>Raising Cane's</strong> (3717 Las Vegas Blvd S, na Strip!) — chicken tenders crocantes com o famoso Cane's Sauce. Fila rápida, kids adoram! ~$10-14/pessoa", type: "food" }
-        ],
-        tips: ["🏔️ Mt. Charleston: pode estar -5°C com neve! Levar casaco, luvas e botas."]
-    },
-    {
-        photo: 'img/dia-08.jpg', shortLoc: 'Vegas', location: "Day trip Death Valley 🏜️",
-        route: "Ponto mais baixo das Américas!",
-        note: "Inverno é a melhor época pra Death Valley. Round trip ~380 km — carregar a 100% na noite anterior!",
-        region: "nv",
-        items: [
-            { time: "08:00", text: "☕ Café", type: "" },
-            { time: "08:30", text: "🚗 Rumo a <strong>Death Valley</strong> (~190 km, ~2h)", type: "drive" },
-            { time: "10:30", text: "⬇️ <strong>Badwater Basin</strong> — ponto mais baixo das Américas (-86m)!", type: "highlight" },
-            { time: "11:15", text: "🚗 <strong>Artist's Drive + Artist's Palette</strong> — montanhas coloridas", type: "" },
-            { time: "12:00", text: "🏜️ <strong>Devil's Golf Course</strong> — cristais de sal!", type: "" },
-            { time: "12:30", text: "📸 <strong>Zabriskie Point</strong> — formações douradas", type: "highlight" },
-            { time: "13:00", text: "🍽️ Almoço no <strong>Furnace Creek</strong>", type: "food" },
-            { time: "14:00", text: "🏜️ <strong>Mesquite Flat Sand Dunes</strong> — dunas clássicas!", type: "" },
-            { time: "15:00", text: "🚗 Volta pra Vegas (~2h)", type: "drive" },
-            { time: "17:00", text: "🏨 Chegada em Vegas — descanso", type: "" },
-            { time: "19:00", text: "🍽️ Jantar especial — <strong>Fogo de Chão</strong> (3500 Las Vegas Blvd S, Paris Las Vegas) — 🇧🇷 churrascaria brasileira na Strip! Rodízio com picanha, fraldinha, cordeiro e a melhor farofa. Despedida de Vegas com gostinho de casa! ~$45-55/adulto, crianças menor preço", type: "food" },
-            { time: "20:00", text: "🌃 Noite em Vegas", type: "" }
-        ],
-        tips: ["⚡ EV: Round trip ~380 km. Carregar a 100% na noite anterior!"]
-    },
-    {
-        photo: 'img/dia-07.jpg', shortLoc: 'Vegas→Zion', location: "Valley of Fire → Zion",
-        chargeStops: [{ name: 'St. George, UT', leg: 'Valley of Fire → Zion', critical: false }],
-        route: "Parque mais fotogênico de Nevada + check-in em Zion! 🔥",
-        note: "Check-out Vegas! Valley of Fire de manhã, Zion à tarde.",
-        region: "nv",
-        items: [
-            { time: "08:00", text: "☕ Café + check-out de Vegas", type: "" },
-            { time: "08:45", text: "🚗 Rumo a <strong>Valley of Fire</strong> (~45 min pela I-15 N)", type: "drive" },
-            { time: "09:30", text: "🔥 <strong>Valley of Fire</strong> — arenito vermelho surreal!", type: "highlight" },
-            { time: "09:45", text: "🥾 <strong>Fire Wave Trail</strong> (~2 km) — ondas de rocha listrada!", type: "highlight" },
-            { time: "10:30", text: "📸 <strong>Elephant Rock</strong>", type: "" },
-            { time: "11:00", text: "📸 <strong>White Domes Trail</strong> (~1.8 km) — cânion colorido", type: "" },
-            { time: "11:45", text: "🚗 Rumo a <strong>Zion</strong> via I-15 N (~250 km, ~2.5h)", type: "drive" },
-            { time: "12:30", text: "⚡ <strong>Supercharger St. George</strong> (~25 min)", type: "charge" },
-            { time: "13:00", text: "🍽️ Almoço em St. George", type: "food" },
-            { time: "~14:15", text: "🏨 Chegada em <strong>Springdale</strong> — check-in!", type: "" },
-            { time: "15:00", text: "🛍️ Explorar <strong>Springdale</strong>", type: "" },
-            { time: "15:30", text: "🌄 <strong>Canyon Overlook Trail</strong> (~1.6 km, ~1h) — vista incrível!", type: "highlight" },
-            { time: "17:00", text: "🌅 Pôr do sol em Zion!", type: "highlight" },
-            { time: "18:30", text: "🍽️ Jantar — <strong>Oscar's Cafe</strong> (948 Zion Park Blvd, Springdale) — mexicana clássica, burritos e enchiladas. ~$12-18/pessoa", type: "food" }
-        ]
-    },
-
-    // ==================== UTAH (Dias 9-13) ====================
     {
         photo: 'img/dia-10.jpg', shortLoc: 'Zion', location: "Zion NP dia cheio",
         route: "Trilhas, mirantes e pôr do sol! 🏞️",
@@ -305,7 +240,7 @@ const days = [
         ]
     },
 
-    // ==================== TRANSIÇÃO → PNW (Dias 14-15) ====================
+    // ==================== TRANSIÇÃO → PNW (Dias 11-12) ====================
     {
         photo: 'img/dia-15.jpg', shortLoc: 'Twin Falls',
         chargeStops: [
@@ -369,7 +304,7 @@ const days = [
         ]
     },
 
-    // ==================== PNW (Dias 16-19) ====================
+    // ==================== PNW (Dias 13-16) ====================
     {
         photo: 'img/dia-17.jpg', shortLoc: 'Rainier',
         chargeStops: [{ name: 'Olympia, WA', leg: 'Centralia → Rainier → Forks', critical: true, note: '⚠️ CARREGAR ATÉ 100% — Olympic 265 km sem SC!' }],
@@ -467,7 +402,7 @@ const days = [
         ]
     },
 
-    // ==================== REDWOOD (Dias 20-21) ====================
+    // ==================== REDWOOD (Dias 17-18) ====================
     {
         photo: 'img/dia-21.jpg', shortLoc: 'Redwood',
         location: "Redwood NP norte — Jedediah Smith! 🌲",
@@ -517,7 +452,7 @@ const days = [
         tips: ["⚠️ Fern Canyon: Davison Road (terra, 10 km) pode fechar com chuva forte. Ligar pro Visitors Center de manhã: (707) 464-6101 ext. 5265. Se fechada, mais tempo em Lady Bird Johnson Grove.", "⚠️ Tall Trees Grove: permit gratuito no Thomas Clarke Info Center (Orick) — pode estar fechado em dia de semana no inverno."]
     },
 
-    // ==================== SAN FRANCISCO (Dias 22-24) ====================
+    // ==================== SAN FRANCISCO (Dias 19-21) ====================
     {
         photo: 'img/dia-23.jpg', shortLoc: 'SF',
         chargeStops: [{ name: 'Ukiah, CA', leg: 'Eureka → SF', critical: false }],
@@ -575,7 +510,7 @@ const days = [
         ]
     },
 
-    // ==================== PCH + YOSEMITE + SEQUOIA (Dias 25-29) ====================
+    // ==================== PCH + YOSEMITE + SEQUOIA (Dias 22-26) ====================
     {
         photo: 'img/dia-26.jpg', shortLoc: 'Monterey',
         location: "SF → PCH → Monterey/Carmel",
@@ -690,38 +625,102 @@ const days = [
         tips: ["❄️ Em fevereiro pode ter neve nas áreas mais altas.", "⚠️ Kings Canyon Scenic Byway (CA-180 leste) fecha no inverno (nov–abr). Só General Grant Tree é acessível.", "⚠️ Moro Rock: degraus frequentemente fechados no inverno por gelo. Se aberto, vale a subida (~30 min ida e volta, vista 360°)."]
     },
 
+    // ==================== LAS VEGAS (Dias 27-29) ====================
+    {
+        photo: 'img/dia-30.jpg', shortLoc: 'Vegas',
+        chargeStops: [
+            { name: 'Ridgecrest, CA', leg: 'Three Rivers → Death Valley', critical: false }
+        ],
+        location: "Three Rivers → Death Valley → Las Vegas",
+        route: "Kern Canyon + Death Valley + Vegas! 🏜️",
+        note: "Dia longo mas paisagem épica! Kern River Canyon, Death Valley e chegada em Vegas.",
+        region: "nv",
+        items: [
+            { time: "07:00", text: "☕ Café + check-out de Three Rivers (sair cedo!)", type: "" },
+            { time: "07:30", text: "🚗 Three Rivers → CA-190 E → CA-178 (<strong>Kern River Canyon</strong> + Walker Pass) — estrada cênica linda pelo cânion!", type: "drive" },
+            { time: "09:30", text: "⚡ <strong>Supercharger Ridgecrest</strong> (~200 km) — ~25 min. ⚠️ Carregar a 100%!", type: "charge" },
+            { time: "10:00", text: "🚗 Ridgecrest → <strong>Death Valley</strong> (~180 km, ~2h via CA-178/190)", type: "drive" },
+            { time: "12:00", text: "⬇️ <strong>Badwater Basin</strong> — ponto mais baixo das Américas (-86m)!", type: "highlight" },
+            { time: "12:45", text: "🚗 <strong>Artist's Drive + Artist's Palette</strong> — montanhas coloridas", type: "" },
+            { time: "13:15", text: "📸 <strong>Zabriskie Point</strong> — formações douradas", type: "highlight" },
+            { time: "13:45", text: "🍽️ Almoço no <strong>Furnace Creek</strong>", type: "food" },
+            { time: "14:30", text: "🏜️ <strong>Mesquite Flat Sand Dunes</strong> — dunas clássicas!", type: "" },
+            { time: "15:00", text: "🚗 Death Valley → <strong>Las Vegas</strong> (~200 km, ~2h via NV-160)", type: "drive" },
+            { time: "~17:00", text: "🎰 Chegada em <strong>Las Vegas</strong>! Check-in", type: "" },
+            { time: "18:00", text: "🌅 <strong>Bellagio Fountains</strong> — show a cada 30 min!", type: "highlight" },
+            { time: "19:00", text: "🍽️ Jantar — <strong>Secret Pizza</strong> (The Cosmopolitan, 3º andar, sem placa) — o hidden gem de Vegas, pizza NY-style escondida no hotel mais badalado. ~$15-20/pessoa", type: "food" }
+        ],
+        tips: ["⚡ Carregar 100% em Ridgecrest! Trecho DV→Vegas ~200 km sem Supercharger confirmado.", "🔄 Fallback: se autonomia não der, pular Death Valley e ir Ridgecrest → CA-14 → I-15 → Vegas."]
+    },
+    {
+        photo: 'img/dia-06.jpg', shortLoc: 'Vegas', location: "Mt. Charleston + Valley of Fire",
+        route: "Neve + arenito vermelho! 🏔️🔥",
+        note: "Mt. Charleston de manhã (neve!) + Valley of Fire à tarde (melhor luz).",
+        region: "nv",
+        items: [
+            { time: "08:15", text: "☕ Café", type: "" },
+            { time: "09:00", text: "📸 <strong>Welcome to Las Vegas Sign</strong> — foto icônica!", type: "highlight" },
+            { time: "09:30", text: "🚗 Rumo a <strong>Mt. Charleston</strong> (~55 km, ~45 min)", type: "drive" },
+            { time: "10:15", text: "🏔️ <strong>Kyle Canyon Scenic Drive</strong> — neve nas montanhas!", type: "" },
+            { time: "10:45", text: "⛄ Parada — <strong>brincar na neve!</strong> Boneco de neve, guerra de bolas!", type: "highlight" },
+            { time: "12:00", text: "☕ <strong>Mt. Charleston Lodge</strong> — chocolate quente com lareira!", type: "food" },
+            { time: "12:45", text: "🚗 Volta pra Vegas (~45 min)", type: "drive" },
+            { time: "13:30", text: "🍔 Almoço rápido", type: "food" },
+            { time: "14:30", text: "🚗 Rumo a <strong>Valley of Fire</strong> (~45 min pela I-15 N)", type: "drive" },
+            { time: "15:15", text: "🔥 <strong>Valley of Fire</strong> — arenito vermelho surreal!", type: "highlight" },
+            { time: "15:30", text: "🥾 <strong>Fire Wave Trail</strong> (~2 km) — ondas de rocha listrada!", type: "highlight" },
+            { time: "16:15", text: "📸 <strong>Elephant Rock</strong>", type: "" },
+            { time: "16:45", text: "📸 <strong>White Domes Trail</strong> (~1.8 km) — cânion colorido", type: "" },
+            { time: "17:30", text: "🌅 Pôr do sol em Valley of Fire — ESPETACULAR!", type: "highlight" },
+            { time: "18:30", text: "🚗 Volta pra Vegas (~45 min)", type: "drive" },
+            { time: "19:30", text: "🍽️ Jantar — <strong>Fogo de Chão</strong> (3500 Las Vegas Blvd S, Paris Las Vegas) — 🇧🇷 churrascaria brasileira na Strip! Rodízio com picanha, fraldinha, cordeiro e a melhor farofa. ~$45-55/adulto, crianças menor preço", type: "food" }
+        ],
+        tips: ["🏔️ Mt. Charleston: pode estar -5°C com neve! Levar casaco, luvas e botas."]
+    },
+    {
+        photo: 'img/dia-07.jpg', shortLoc: 'Vegas', location: "Las Vegas Strip",
+        route: "Hotéis icônicos + compras + shows! 🎰",
+        note: "Dia livre em Vegas! Strip, hotéis, compras e show à noite.",
+        region: "nv",
+        items: [
+            { time: "09:00", text: "☕ Café", type: "" },
+            { time: "10:00", text: "🏨 Explorar hotéis — <strong>Venetian</strong> (canais), <strong>Bellagio</strong> (conservatório), <strong>Caesars Palace</strong>", type: "highlight" },
+            { time: "12:00", text: "🍽️ Almoço na Strip", type: "food" },
+            { time: "13:30", text: "🛍️ <strong>Forum Shops</strong> (Caesars) ou <strong>Fashion Show Mall</strong>", type: "" },
+            { time: "15:00", text: "🎮 Tempo livre — piscina, arcade, explorar", type: "" },
+            { time: "17:00", text: "🌅 <strong>High Roller</strong> — roda-gigante ao pôr do sol!", type: "highlight" },
+            { time: "18:00", text: "🌅 <strong>Bellagio Fountains</strong> — show noturno!", type: "highlight" },
+            { time: "19:00", text: "🍽️ Jantar — <strong>Raising Cane's</strong> (3717 Las Vegas Blvd S, na Strip!) — chicken tenders crocantes com o famoso Cane's Sauce. Fila rápida, kids adoram! ~$10-14/pessoa", type: "food" },
+            { time: "20:30", text: "🎪 Show ou passeio noturno na Strip", type: "highlight" }
+        ]
+    },
+
     // ==================== LA (Dias 30-33) ====================
     {
         photo: 'img/activities/hollywood_sign.jpg', shortLoc: 'LA',
         chargeStops: [
-            { name: 'Ridgecrest, CA', leg: 'Three Rivers → Lone Pine', critical: false },
-            { name: 'Lone Pine, CA', leg: 'Alabama Hills', critical: false },
-            { name: 'Lancaster, CA', leg: 'Lone Pine → LA', critical: false }
+            { name: 'Barstow, CA', leg: 'Vegas → LA', critical: false }
         ],
-        location: "Three Rivers → Alabama Hills → Los Angeles",
-        route: "Eastern Sierra + Alabama Hills + rumo a LA! 🏜️",
-        note: "Dia longo mas paisagem épica! Kern River Canyon, Walker Pass, vista Mt. Whitney, Alabama Hills (cenário de Tremors!).",
+        location: "Las Vegas → Los Angeles",
+        route: "I-15 rumo a LA + Santa Monica! 🏖️",
+        note: "Drive tranquilo Vegas→LA + Santa Monica Pier ao pôr do sol!",
         region: "ca",
         items: [
-            { time: "07:00", text: "☕ Café + check-out de Three Rivers (sair cedo!)", type: "" },
-            { time: "07:30", text: "🚗 Three Rivers → CA-190 E → CA-178 (<strong>Kern River Canyon</strong> + Walker Pass) — estrada cênica linda pelo cânion!", type: "drive" },
-            { time: "09:30", text: "⚡ <strong>Supercharger Ridgecrest</strong> (~200 km) — ~25 min", type: "charge" },
-            { time: "10:00", text: "🚗 US-395 N → Lone Pine (~100 km, ~1h) — vista da <strong>Sierra Nevada</strong> e <strong>Mt. Whitney</strong> (pico mais alto dos EUA continental, 4.421m!)", type: "drive" },
-            { time: "11:00", text: "🏜️ <strong>Alabama Hills</strong> (Movie Flat Rd, Lone Pine) — formações rochosas surreais! Cenário de <strong>Tremors</strong> (Ataque dos Vermes Malditos), Iron Man, Django, Lone Ranger e +400 filmes/séries. Caminhar até <strong>Mobius Arch</strong> (moldura natural do Mt. Whitney!) e <strong>Movie Flat Road</strong>. Gratuito, ~1h", type: "highlight" },
-            { time: "12:00", text: "⚡ <strong>Supercharger Lone Pine</strong> — ~20 min", type: "charge" },
-            { time: "12:30", text: "🍽️ Almoço — <strong>Alabama Hills Cafe</strong> (111 W Post St, Lone Pine) — café clássico de cidadezinha, panquecas e burgers. ~$12-18/pessoa", type: "food" },
-            { time: "13:00", text: "🚗 US-395 S → CA-14 S → LA (~330 km, ~3.5h) — descida pelo <strong>Antelope Valley</strong>", type: "drive" },
-            { time: "15:00", text: "⚡ <strong>Supercharger Lancaster</strong> (~200 km) — ~20 min", type: "charge" },
-            { time: "~16:30", text: "🏨 Chegada em <strong>LA</strong>! Check-in", type: "" },
-            { time: "17:00", text: "🏖️ <strong>Santa Monica Pier</strong> — roda-gigante, Route 66 End Sign!", type: "highlight" },
-            { time: "18:00", text: "🌅 Sunset na praia!", type: "highlight" },
+            { time: "09:00", text: "☕ Café + check-out de Vegas", type: "" },
+            { time: "09:30", text: "🚗 Saída rumo a <strong>Los Angeles</strong> (~430 km, ~4h via I-15 S)", type: "drive" },
+            { time: "11:30", text: "⚡🍽️ <strong>Supercharger Barstow</strong> (~200 km) — ~25 min + lanche", type: "charge" },
+            { time: "12:00", text: "🎨 <strong>Elmer's Bottle Tree Ranch</strong> (Oro Grande) — floresta de 'árvores' de garrafas de vidro e metal! Grátis", type: "" },
+            { time: "12:30", text: "👽 <strong>Alien Fresh Jerky</strong> (Baker) — loja alien + jerky de 100 sabores! + 🌡️ <strong>World's Tallest Thermometer</strong>!", type: "" },
+            { time: "~14:00", text: "🏨 Chegada em <strong>LA</strong>! Check-in", type: "" },
+            { time: "15:00", text: "🏖️ <strong>Santa Monica Pier</strong> — roda-gigante, Route 66 End Sign!", type: "highlight" },
+            { time: "17:00", text: "🌅 Sunset na praia!", type: "highlight" },
             { time: "19:00", text: "🍽️ Jantar no <strong>Santa Monica Pier</strong> — <strong>Bubba Gump Shrimp Co.</strong> (com vista pro oceano, menu de frutos do mar, temático do Forrest Gump, kids adoram!) ~$20-30/pessoa", type: "food" }
         ]
     },
     {
         photo: 'img/activities/griffith_observatory.jpg', shortLoc: 'LA', location: "LA dia cheio",
         route: "Hollywood + Griffith Observatory! 🎬",
-        note: "Último dia completo nos EUA!",
+        note: "LA dia cheio! Science Center, Getty, Griffith Observatory.",
         region: "ca",
         items: [
             { time: "08:30", text: "☕ Café", type: "" },
@@ -783,37 +782,37 @@ const days = [
 // ==================== HOTELS ====================
 const hotels = [
     { num: 1, name: "Marriott Marquis, Times Square, NY", checkin: "21/01", checkout: "25/01", nights: 4 },
-    { num: 2, name: "Las Vegas, NV", checkin: "25/01", checkout: "28/01", nights: 3 },
-    { num: 3, name: "Springdale, UT (Zion)", checkin: "28/01", checkout: "30/01", nights: 2 },
-    { num: 4, name: "Bryce Canyon, UT", checkin: "30/01", checkout: "31/01", nights: 1 },
-    { num: 5, name: "Moab, UT (Arches/Canyonlands)", checkin: "31/01", checkout: "03/02", nights: 3 },
-    { num: 6, name: "Twin Falls, ID", checkin: "03/02", checkout: "04/02", nights: 1 },
-    { num: 7, name: "Centralia, WA", checkin: "04/02", checkout: "05/02", nights: 1 },
-    { num: 8, name: "Forks / Port Angeles, WA (Olympic)", checkin: "05/02", checkout: "07/02", nights: 2 },
-    { num: 9, name: "Cannon Beach, OR", checkin: "07/02", checkout: "08/02", nights: 1 },
-    { num: 10, name: "Gold Beach / Coos Bay, OR", checkin: "08/02", checkout: "09/02", nights: 1 },
-    { num: 11, name: "Crescent City / Klamath, CA", checkin: "09/02", checkout: "10/02", nights: 1 },
-    { num: 12, name: "Eureka / Arcata, CA", checkin: "10/02", checkout: "11/02", nights: 1 },
-    { num: 13, name: "San Francisco, CA", checkin: "11/02", checkout: "14/02", nights: 3 },
-    { num: 14, name: "Carmel, CA", checkin: "14/02", checkout: "15/02", nights: 1 },
-    { num: 15, name: "Mariposa / El Portal, CA", checkin: "15/02", checkout: "18/02", nights: 3 },
-    { num: 16, name: "Three Rivers, CA (Sequoia)", checkin: "18/02", checkout: "19/02", nights: 1 },
+    { num: 2, name: "Springdale, UT (Zion)", checkin: "25/01", checkout: "27/01", nights: 2 },
+    { num: 3, name: "Bryce Canyon, UT", checkin: "27/01", checkout: "28/01", nights: 1 },
+    { num: 4, name: "Moab, UT (Arches/Canyonlands)", checkin: "28/01", checkout: "31/01", nights: 3 },
+    { num: 5, name: "Twin Falls, ID", checkin: "31/01", checkout: "01/02", nights: 1 },
+    { num: 6, name: "Centralia, WA", checkin: "01/02", checkout: "02/02", nights: 1 },
+    { num: 7, name: "Forks / Port Angeles, WA (Olympic)", checkin: "02/02", checkout: "04/02", nights: 2 },
+    { num: 8, name: "Cannon Beach, OR", checkin: "04/02", checkout: "05/02", nights: 1 },
+    { num: 9, name: "Gold Beach / Coos Bay, OR", checkin: "05/02", checkout: "06/02", nights: 1 },
+    { num: 10, name: "Crescent City / Klamath, CA", checkin: "06/02", checkout: "07/02", nights: 1 },
+    { num: 11, name: "Eureka / Arcata, CA", checkin: "07/02", checkout: "08/02", nights: 1 },
+    { num: 12, name: "San Francisco, CA", checkin: "08/02", checkout: "11/02", nights: 3 },
+    { num: 13, name: "Carmel, CA", checkin: "11/02", checkout: "12/02", nights: 1 },
+    { num: 14, name: "Mariposa / El Portal, CA", checkin: "12/02", checkout: "15/02", nights: 3 },
+    { num: 15, name: "Three Rivers, CA (Sequoia)", checkin: "15/02", checkout: "16/02", nights: 1 },
+    { num: 16, name: "Las Vegas, NV", checkin: "16/02", checkout: "19/02", nights: 3 },
     { num: 17, name: "Los Angeles, CA", checkin: "19/02", checkout: "22/02", nights: 3 }
 ];
 
 // ==================== NATIONAL PARKS ====================
 const parks = [
-    { name: "🏜️ Death Valley National Park", days: "Dia 8", highlights: "Badwater Basin (-86m!), Zabriskie Point, Artist's Palette, Devil's Golf Course, Mesquite Sand Dunes." },
-    { name: "🏞️ Zion National Park", days: "Dias 9–11", highlights: "Watchman Trail, Emerald Pools, Canyon Overlook, Riverside Walk, Court of the Patriarchs." },
-    { name: "🏔️ Bryce Canyon National Park", days: "Dias 11–12", highlights: "Navajo Loop, Queen's Garden, hoodoos, Bryce Amphitheater, stargazing!" },
-    { name: "🏜️ Capitol Reef National Park", days: "Dia 12", highlights: "Petroglífos Fremont, Hickman Bridge Trail, Fruita Historic District, Scenic Drive." },
-    { name: "🏜️ Canyonlands National Park", days: "Dia 13", highlights: "Mesa Arch sunrise, Grand View Point, Upheaval Dome, Aztec Butte." },
-    { name: "🏜️ Arches National Park", days: "Dia 14", highlights: "Delicate Arch, Windows, Double Arch, Landscape Arch (93m!), Fiery Furnace." },
-    { name: "🌋 Mt. Rainier National Park", days: "Dia 17", highlights: "Paradise, neve, vulcão de 4.392m." },
-    { name: "🌲 Olympic National Park", days: "Dias 17–18", highlights: "Hoh Rain Forest, Hall of Mosses, Ruby Beach, La Push (Twilight!), Sol Duc Falls." },
-    { name: "🌲 Redwood National Park", days: "Dias 21–22", highlights: "Stout Memorial Grove, Fern Canyon (Jurassic Park 2!), Tall Trees, Lady Bird Johnson, Avenue of Giants." },
-    { name: "🏞️ Yosemite National Park", days: "Dias 27–29", highlights: "Tunnel View, El Capitan, Half Dome, Yosemite Falls, Badger Pass, Mirror Lake." },
-    { name: "🌲 Sequoia + Kings Canyon NP", days: "Dia 30", highlights: "General Sherman Tree (maior árvore!), Congress Trail, Moro Rock, General Grant Tree." }
+    { name: "🏜️ Death Valley National Park", days: "Dia 27", highlights: "Badwater Basin (-86m!), Zabriskie Point, Artist's Palette, Devil's Golf Course, Mesquite Sand Dunes." },
+    { name: "🏞️ Zion National Park", days: "Dias 5–7", highlights: "Watchman Trail, Emerald Pools, Canyon Overlook, Riverside Walk, Court of the Patriarchs." },
+    { name: "🏔️ Bryce Canyon National Park", days: "Dias 7–8", highlights: "Navajo Loop, Queen's Garden, hoodoos, Bryce Amphitheater, stargazing!" },
+    { name: "🏜️ Capitol Reef National Park", days: "Dia 8", highlights: "Petroglífos Fremont, Hickman Bridge Trail, Fruita Historic District, Scenic Drive." },
+    { name: "🏜️ Canyonlands National Park", days: "Dia 9", highlights: "Mesa Arch sunrise, Grand View Point, Upheaval Dome, Aztec Butte." },
+    { name: "🏜️ Arches National Park", days: "Dia 10", highlights: "Delicate Arch, Windows, Double Arch, Landscape Arch (93m!), Fiery Furnace." },
+    { name: "🌋 Mt. Rainier National Park", days: "Dia 13", highlights: "Paradise, neve, vulcão de 4.392m." },
+    { name: "🌲 Olympic National Park", days: "Dias 13–14", highlights: "Hoh Rain Forest, Hall of Mosses, Ruby Beach, La Push (Twilight!), Sol Duc Falls." },
+    { name: "🌲 Redwood National Park", days: "Dias 17–18", highlights: "Stout Memorial Grove, Fern Canyon (Jurassic Park 2!), Tall Trees, Lady Bird Johnson, Avenue of Giants." },
+    { name: "🏞️ Yosemite National Park", days: "Dias 24–25", highlights: "Tunnel View, El Capitan, Half Dome, Yosemite Falls, Badger Pass, Mirror Lake." },
+    { name: "🌲 Sequoia + Kings Canyon NP", days: "Dia 26", highlights: "General Sherman Tree (maior árvore!), Congress Trail, Moro Rock, General Grant Tree." }
 ];
 
 // ==================== REORDERING SYSTEM ====================

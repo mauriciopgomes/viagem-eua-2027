@@ -290,8 +290,8 @@ const placeInfo = {
     'Welcome to Las Vegas': { addr: 'Welcome to Fabulous Las Vegas Sign, 5100 Las Vegas Blvd S', coords: '36.0828,-115.1728', detail: 'Placa icônica de 1959! Fila pra foto mas anda rápido. Estacionamento gratuito atrás. Melhor à noite (iluminada).', cost: 'Gratuito' },
     'Bellagio': { addr: 'Bellagio Hotel & Casino, 3600 S Las Vegas Blvd, Las Vegas, NV', coords: '36.1129,-115.1765', detail: 'Hotel icônico! Fountains of Bellagio (show de águas gratuito a cada 15-30 min), Conservatory (jardim botânico grátis), Galeria de arte.', cost: 'Gratuito (shows de água)' },
     'Bellagio Fountains': { addr: 'Fountains of Bellagio, Las Vegas Blvd, Las Vegas, NV', coords: '36.1127,-115.1742', detail: 'Show de águas dançantes com música! A cada 15 min (tarde) ou 30 min (manhã). 1.200 jatos, 4.500 luzes. IMPERDÍVEL à noite.', cost: 'Gratuito' },
-
-    // Day 7 — Eldorado Canyon
+    'High Roller': { addr: 'High Roller, 3545 Las Vegas Blvd S, Las Vegas, NV 89109', coords: '36.1175,-115.1689', detail: 'Maior roda-gigante do mundo (167m)! Volta completa em 30 min com vista 360° de Vegas. Cabines climatizadas com bar.', cost: '~$25-37/pessoa', hours: '11h30-2h' },
+    'Forum Shops': { addr: 'Forum Shops at Caesars, 3500 Las Vegas Blvd S, Las Vegas, NV 89109', coords: '36.1182,-115.1731', detail: 'Shopping temático romano dentro do Caesars Palace. 160+ lojas de luxo, teto com "céu" artificial que muda de dia pra noite. Show de fonte grátis a cada hora.' },
     'Eldorado Canyon': { addr: 'Eldorado Canyon Mine Tours, 16880 NV-165, Nelson, NV 89046', coords: '35.7275,-114.8308', detail: 'Cidade-fantasma no deserto com a mina de ouro Techatticup (1861) — a mais antiga e rica de Nevada! Ruínas de construções, carros antigos enferrujados, cenário de faroeste. Filmagens de comerciais e filmes. ~45 min ao sul da Strip.', hours: 'Amanhecer ao anoitecer (tours: 9h-17h)', cost: 'Self-guided tour: $15/pessoa' },
 
     // Day 29 — Valley of Fire

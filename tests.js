@@ -645,7 +645,7 @@ test('dayRouteIdx definido para todos os 33 dias', () => {
     assert(appJs.includes('dayRouteIdx[d]') || appJs.includes('dayRouteIdx[day]'), 'dayRouteIdx must be built for all days');
     // Verify route-data.js has encodedRoutes for all driving days
     const routeCtx = vm.runInNewContext(routeDataJs + '\n;({encodedRoutes, routeDayOrder, decodePolyline})', {});
-    const drivingDays = [5,9,11,12,15,16,17,19,20,21,22,23,27,28,30,31];
+    const drivingDays = [5,7,8,11,12,13,15,16,17,18,19,22,23,26,30];
     drivingDays.forEach(d => {
         assert(routeCtx.encodedRoutes[d], `encodedRoutes[${d}] ausente`);
     });
@@ -687,7 +687,7 @@ test('routeCoords tem pontos suficientes', () => {
 test('dayRouteSegments tem segmentos para dias de estrada', () => {
     // dayRouteSegments is now decoded from route-data.js encodedRoutes
     const routeCtx = vm.runInNewContext(routeDataJs + '\n;({encodedRoutes, routeDayOrder, decodePolyline})', {});
-    [5, 9, 11, 12, 15, 16, 17, 19, 20, 21, 22, 23, 27, 28, 30, 31].forEach((d) => {
+    [5, 7, 8, 11, 12, 13, 15, 16, 17, 18, 19, 22, 23, 26, 30].forEach((d) => {
         assert(routeCtx.encodedRoutes[d], `encodedRoutes[${d}] ausente`);
         const pts = routeCtx.decodePolyline(routeCtx.encodedRoutes[d]);
         assert(pts.length >= 2, `day ${d} deve ter ≥2 pontos na rota`);
@@ -1117,32 +1117,34 @@ test('dia 5 tem voo NYC → LAX', () => {
     assert(hasFlight, 'Dia 5 deve ter voo');
 });
 
-test('regiões seguem a rota (NY→NV→UT→PNW→CA)', () => {
+test('regiões seguem a rota (NY→UT→PNW→CA→NV→CA)', () => {
     // NY: dias 1-4
     for (let i = 0; i < 4; i++) assertEqual(days[i].region, 'ny', `Dia ${i + 1}`);
-    // NV: dias 5-8 (Vegas)
-    for (let i = 4; i < 8; i++) assertEqual(days[i].region, 'nv', `Dia ${i + 1}`);
-    // UT: dias 9-13 (Zion, Bryce, Moab)
-    for (let i = 8; i < 13; i++) assertEqual(days[i].region, 'ut', `Dia ${i + 1}`);
-    // PNW: dias 14-19
-    for (let i = 13; i < 19; i++) assertEqual(days[i].region, 'pnw', `Dia ${i + 1}`);
-    // CA: dias 20-33 (Redwood, SF, PCH, Yosemite, Sequoia, LA)
-    for (let i = 19; i < 33; i++) assertEqual(days[i].region, 'ca', `Dia ${i + 1}`);
+    // UT: dias 5-10 (LAX→Zion, Zion, Bryce, Moab)
+    for (let i = 4; i < 10; i++) assertEqual(days[i].region, 'ut', `Dia ${i + 1}`);
+    // PNW: dias 11-16
+    for (let i = 10; i < 16; i++) assertEqual(days[i].region, 'pnw', `Dia ${i + 1}`);
+    // CA: dias 17-26 (Redwood, SF, PCH, Yosemite, Sequoia)
+    for (let i = 16; i < 26; i++) assertEqual(days[i].region, 'ca', `Dia ${i + 1}`);
+    // NV: dias 27-29 (Vegas)
+    for (let i = 26; i < 29; i++) assertEqual(days[i].region, 'nv', `Dia ${i + 1}`);
+    // CA: dias 30-33 (LA)
+    for (let i = 29; i < 33; i++) assertEqual(days[i].region, 'ca', `Dia ${i + 1}`);
 });
 
 test('dias dos parques estão alinhados com o roteiro', () => {
     const expected = {
-        'Death Valley': [8],
-        'Zion': [9, 10, 11],
-        'Bryce Canyon': [11, 12],
-        'Capitol Reef': [12],
-        'Canyonlands': [13],
-        'Arches': [14],
-        'Mt. Rainier': [17],
-        'Olympic': [17, 18],
-        'Redwood': [21, 22],
-        'Yosemite': [27, 28, 29],
-        'Sequoia': [30]
+        'Death Valley': [27],
+        'Zion': [5, 6, 7],
+        'Bryce Canyon': [7, 8],
+        'Capitol Reef': [8],
+        'Canyonlands': [9],
+        'Arches': [10],
+        'Mt. Rainier': [13],
+        'Olympic': [13, 14],
+        'Redwood': [17, 18],
+        'Yosemite': [24, 25],
+        'Sequoia': [26]
     };
     Object.entries(expected).forEach(([name, expectedDays]) => {
         const park = parks.find(p => p.name.includes(name));
@@ -1168,7 +1170,7 @@ test('cada dia tem pelo menos 1 item food (exceto dia de voo)', () => {
 });
 
 test('dias de estrada (>100km) têm items drive', () => {
-    const driveDays = [5, 9, 11, 12, 15, 16, 19, 20, 22, 27, 30];
+    const driveDays = [5, 8, 11, 12, 13, 15, 16, 19, 23, 27, 30];
     driveDays.forEach((d) => {
         const day = days[d - 1];
         const hasDrive = day.items.some(i => i.type === 'drive');
