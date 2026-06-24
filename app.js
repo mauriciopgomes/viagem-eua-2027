@@ -116,9 +116,17 @@ document.addEventListener('DOMContentLoaded', function() {
             if (ta) saveDayNote(parseInt(ta.getAttribute('data-daynote')));
         });
     }
-    // Leaflet CSS: carregar de print → all após load
-    var leafletCss = document.getElementById('leafletCss');
-    if (leafletCss) leafletCss.addEventListener('load', function() { this.media = 'all'; });
+    // Resize/orientation: invalidate map size
+    window.addEventListener('resize', function() {
+        if (mapInstance && document.querySelector('#sec-map.active')) {
+            mapInstance.invalidateSize();
+        }
+    });
+    window.addEventListener('orientationchange', function() {
+        if (mapInstance && document.querySelector('#sec-map.active')) {
+            setTimeout(function() { mapInstance.invalidateSize(); }, 200);
+        }
+    });
 
     // Hero: scroll topo
     var heroSection = document.getElementById('heroSection');
@@ -707,8 +715,8 @@ function switchTab(tab, e) {
             next.classList.add('active');
         }
 
-        if (tab === 'map' && !mapInstance) setTimeout(initMap, 100);
-        if (tab === 'map' && mapInstance) setTimeout(function() { mapInstance.invalidateSize(); mapUpdateDay(currentDay, false); }, 100);
+        if (tab === 'map' && !mapInstance) setTimeout(initMap, 400);
+        if (tab === 'map' && mapInstance) setTimeout(function() { mapInstance.invalidateSize(); mapUpdateDay(currentDay, false); }, 150);
         if (tab === 'explore') renderExplore();
         if (tab === 'settings') updateAppVersion();
         if (tab === 'home' && typeof mapScrubDay !== 'undefined' && mapScrubDay && mapScrubDay !== currentDay) {
@@ -991,6 +999,7 @@ function doInitMap() {
     mapTileDark.once('load', function() {
         clearTimeout(_mapLoadTimer);
         document.getElementById('map').classList.remove('map-loading');
+        mapInstance.invalidateSize();
         // Tiles carregaram — remover banner offline se existir
         if (_mapOfflineBanner && _mapOfflineBanner.parentNode) {
             _mapOfflineBanner.parentNode.removeChild(_mapOfflineBanner);
