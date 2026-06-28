@@ -87,8 +87,8 @@ const days = [
             { time: "12:30", text: "🍝 Almoço — <strong>Eataly</strong> (200 5th Ave) — mercado italiano!", type: "food" },
             { time: "13:30", text: "🏢 <strong>Flatiron Building</strong> (23rd St) — prédio triangular de 1902!", type: "" },
             { time: "14:00", text: "🧙 <strong>Harry Potter Shop</strong> (935 Broadway) — butterbeer bar, varinhas, vassouras! Ao lado do Flatiron", type: "highlight" },
-            { time: "15:30", text: "🎮 <strong>Nintendo NY</strong> (Rockefeller Center) + 🏰 <strong>Disney Store</strong> (1540 Broadway, Times Square)", type: "" },
-            { time: "17:00", text: "🕐 Tempo livre — descansar no hotel ou última exploração", type: "" },
+            { time: "15:15", text: "🏰 <strong>Disney Store</strong> (1540 Broadway, Times Square) — flagship de 2 andares! Balões gigantes do Mickey e Minnie, área interativa e produtos exclusivos", type: "highlight" },
+            { time: "16:15", text: "🕐 Tempo livre — descansar no hotel ou última exploração", type: "" },
             { time: "18:00", text: "🧳 Volta ao hotel — arrumar malas", type: "" },
             { time: "19:00", text: "\uD83C\uDF7D\uFE0F Jantar — <strong>Ellen's Stardust Diner</strong> (1650 Broadway, Times Square) — diner temático anos 50 com garçons que cantam ao vivo, clássico para crianças! Burgers, milkshakes e espetáculo. ~$20-25/pessoa", type: "food" },
             { time: "21:00", text: "🏨 Hotel — dormir cedo (voo amanhã!)", type: "" }
