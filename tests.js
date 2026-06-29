@@ -1120,30 +1120,30 @@ test('dia 5 é drive LAX → SF', () => {
 test('regiões seguem a rota (NY→CA→PNW→UT→NV→CA)', () => {
     // NY: dias 1-4
     for (let i = 0; i < 4; i++) assertEqual(days[i].region, 'ny', `Dia ${i + 1}`);
-    // CA: dias 5-10 (LAX→SF, SF, Redwood)
-    for (let i = 4; i < 10; i++) assertEqual(days[i].region, 'ca', `Dia ${i + 1}`);
-    // PNW: dias 11-16 (Oregon Coast, Cannon Beach, Rainier/Olympic, Forks, Centralia)
-    for (let i = 10; i < 16; i++) assertEqual(days[i].region, 'pnw', `Dia ${i + 1}`);
-    // UT: dias 17-22 (Twin Falls→Moab, Canyonlands, Arches, Bryce, Zion)
-    for (let i = 16; i < 22; i++) assertEqual(days[i].region, 'ut', `Dia ${i + 1}`);
-    // NV: dias 23-25 (Vegas)
-    for (let i = 22; i < 25; i++) assertEqual(days[i].region, 'nv', `Dia ${i + 1}`);
+    // CA: dias 5-9 (LAX→SF, SF, Redwood)
+    for (let i = 4; i < 9; i++) assertEqual(days[i].region, 'ca', `Dia ${i + 1}`);
+    // PNW: dias 10-15 (Oregon Coast, Cannon Beach, Rainier/Olympic, Forks, The Dalles, Twin Falls)
+    for (let i = 9; i < 15; i++) assertEqual(days[i].region, 'pnw', `Dia ${i + 1}`);
+    // UT: dias 16-21 (Moab, Canyonlands, Arches, Bryce, Zion)
+    for (let i = 15; i < 21; i++) assertEqual(days[i].region, 'ut', `Dia ${i + 1}`);
+    // NV: dias 22-24 (Page/GC, Vegas)
+    for (let i = 21; i < 24; i++) assertEqual(days[i].region, 'nv', `Dia ${i + 1}`);
     // CA: dias 26-33 (Sequoia, Yosemite, Big Sur, LA)
     for (let i = 25; i < 33; i++) assertEqual(days[i].region, 'ca', `Dia ${i + 1}`);
 });
 
 test('dias dos parques estão alinhados com o roteiro', () => {
     const expected = {
-        'Zion': [21, 22],
-        'Bryce Canyon': [20, 21],
-        'Capitol Reef': [20],
-        'Canyonlands': [18],
-        'Arches': [19],
-        'Mt. Rainier': [13],
-        'Olympic': [13, 14],
-        'Redwood': [9, 10],
-        'Yosemite': [28],
-        'Sequoia': [27]
+        'Zion': [20, 21],
+        'Bryce Canyon': [19, 20],
+        'Capitol Reef': [19],
+        'Canyonlands': [17],
+        'Arches': [18],
+        'Mt. Rainier': [12],
+        'Olympic': [12, 13],
+        'Redwood': [8, 9],
+        'Yosemite': [28, 29],
+        'Sequoia': [26]
     };
     Object.entries(expected).forEach(([name, expectedDays]) => {
         const park = parks.find(p => p.name.includes(name));
@@ -1169,7 +1169,7 @@ test('cada dia tem pelo menos 1 item food (exceto dia de voo)', () => {
 });
 
 test('dias de estrada (>100km) têm items drive', () => {
-    const driveDays = [5, 6, 9, 11, 12, 13, 15, 16, 17, 20, 21, 23, 26, 28, 29, 30, 33];
+    const driveDays = [5, 8, 9, 10, 11, 12, 14, 15, 16, 19, 20, 22, 23, 25, 28, 29, 30, 33];
     driveDays.forEach((d) => {
         const day = days[d - 1];
         const hasDrive = day.items.some(i => i.type === 'drive');

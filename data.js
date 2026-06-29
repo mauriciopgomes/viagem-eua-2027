@@ -99,7 +99,7 @@ const days = [
 
     // ==================== TRANSIÇÃO NYC → SF (Dia 5) ====================
     {
-        photo: 'img/dia-05.jpg', shortLoc: 'SF',
+        photo: 'img/activities/embarcadero_sf.jpg', shortLoc: 'SF',
         chargeStops: [
             { name: 'Bakersfield, CA', leg: 'LAX → SF', critical: false },
             { name: 'Kettleman City, CA', leg: 'LAX → SF', critical: false },
@@ -130,7 +130,7 @@ const days = [
 
     // ==================== SAN FRANCISCO (Dias 6-8) ====================
     {
-        photo: 'img/dia-23.jpg', shortLoc: 'SF',
+        photo: 'img/activities/pier_39.jpg', shortLoc: 'SF',
         location: "San Francisco — Pier 39 + Embarcadero",
         route: "Primeiro dia em SF! Pier 39 + North Beach 🐋",
         note: "Chegamos em SF! Dia de waterfront — Pier 39, Fisherman's Wharf e North Beach.",
@@ -144,12 +144,12 @@ const days = [
             { time: "14:30", text: "🌳 <strong>Cypress Tree Tunnel</strong> (Point Reyes, ~1h de SF) — túnel de ciprestes centenários!", type: "" },
             { time: "15:00", text: "🐋 <strong>Point Reyes</strong> — Elk Preserve, Lighthouse + <strong>baleias cinzentas!</strong> (migração jan-abr!)", type: "highlight" },
             { time: "17:00", text: "🚗 Volta pra SF (~1h)", type: "drive" },
-            { time: "18:00", text: "🍽️ Jantar — <strong>Tony's Pizza Napoletana</strong> (1570 Stockton St, North Beach) — campeão mundial de pizza napolitana. ~$20-25/pessoa", type: "food" }
+            { time: "18:00", text: "🍽️ Jantar — <strong>Fog Harbor Fish House</strong> (Pier 39, Fisherman's Wharf) — frutos do mar com vista pra Baía, menu kids, crianças adoram! ~$20-28/pessoa", type: "food" }
         ]
     },
 
     {
-        photo: 'img/dia-24.jpg', shortLoc: 'SF', location: "San Francisco — Golden Gate + West Side",
+        photo: 'img/activities/golden_gate_bridge.jpg', shortLoc: 'SF', location: "San Francisco — Golden Gate + West Side",
         route: "Battery Spencer + Golden Gate Bridge + Ocean Beach! 🌉",
         note: "Golden Gate de todos os ângulos! Battery Spencer, ponte, parque e praia.",
         region: "ca",
@@ -168,7 +168,7 @@ const days = [
     },
 
     {
-        photo: 'img/dia-25.jpg', shortLoc: 'SF', location: "San Francisco — City Tour",
+        photo: 'img/activities/cable_car.jpg', shortLoc: 'SF', location: "San Francisco — City Tour",
         route: "Cable Car + Chinatown + Redwood! 🚋🌲",
         note: "Manhã de despedida em SF, depois drive pro norte até Crescent City!",
         region: "ca",
@@ -189,61 +189,40 @@ const days = [
         ]
     },
 
-    // ==================== REDWOOD (Dias 9-10) ====================
+    // ==================== REDWOOD (Dia 9) ====================
     {
-        photo: 'img/dia-21.jpg', shortLoc: 'Redwood',
-        location: "Redwood NP norte — Jedediah Smith! 🌲",
-        route: "Trilhas entre sequoias + costa selvagem! 🌲",
-        note: "Dia cheio explorando Redwood NP perto de Crescent City.",
-        region: "ca",
-        items: [
-            { time: "08:00", text: "☕ Café em Crescent City", type: "" },
-            { time: "08:30", text: "🥾 <strong>Simpson-Reed Trail</strong> (~1 km loop) — trilha pavimentada entre old-growth redwoods!", type: "" },
-            { time: "09:30", text: "🌲 <strong>Del Norte Coast Redwoods SP</strong> — <strong>Coastal Trail (Enderts Beach)</strong> (~4 km) — praia selvagem! ⚠️ Ondas fortes no inverno", type: "highlight" },
-            { time: "11:30", text: "🍽️ Almoço em Crescent City", type: "food" },
-            { time: "12:30", text: "🚗 US-101 sul (~35 km) → <strong>Prairie Creek Redwoods SP</strong>", type: "drive" },
-            { time: "13:00", text: "🦌 <strong>Elk Meadow</strong> (Orick) — manada de Roosevelt elk!", type: "" },
-            { time: "13:30", text: "🚗 <strong>Newton B. Drury Scenic Parkway</strong>", type: "" },
-            { time: "14:00", text: "📸 <strong>Big Tree Wayside</strong>", type: "" },
-            { time: "14:30", text: "🥾 <strong>Fern Canyon</strong> (~1.5 km) — samambaias! <strong>Jurassic Park 2</strong>!", type: "highlight" },
-            { time: "16:00", text: "🌲 <strong>Lady Bird Johnson Grove Trail</strong> (~2.5 km)", type: "" },
-            { time: "17:30", text: "🌅 Pôr do sol no porto de Crescent City", type: "" },
-            { time: "19:00", text: "🍽️ Jantar — <strong>Fisherman's Restaurant</strong> (Crescent City) — Dungeness crab. ~$15-22/pessoa", type: "food" }
-        ],
-        tips: ["⚠️ Fern Canyon: Davison Road (terra, 10 km) pode fechar com chuva. Ligar pro Visitors Center: (707) 464-6101."]
-    },
-
-    {
-        photo: 'img/dia-22.jpg', shortLoc: 'Redwood',
+        photo: 'img/activities/fern_canyon.jpg', shortLoc: 'Redwood',
         chargeStops: [{ name: 'Eureka, CA', leg: 'Crescent City → Eureka', critical: false }],
-        location: "Redwood NP sul → Eureka",
+        location: "Crescent City → Redwood NP → Eureka",
         route: "Fern Canyon + Tall Trees + Avenue of Giants! 🌲",
-        note: "Tudo descendo ao sul — sem backtrack! Fern Canyon, Tall Trees e Avenue of Giants.",
+        note: "Dia cheio de Redwood descendo ao sul — trilhas, Fern Canyon e Avenue of Giants!",
         region: "ca",
         items: [
             { time: "07:00", text: "☕ Café + check-out de Crescent City", type: "" },
-            { time: "07:30", text: "🚗 US-101 sul (~35 km) → <strong>Prairie Creek Redwoods SP</strong>", type: "drive" },
-            { time: "07:50", text: "🦌 <strong>Elk Meadow</strong> (Orick) — manada de Roosevelt elk pastando ao lado da US-101! Pullover grátis", type: "" },
-            { time: "08:00", text: "🚗 <strong>Newton B. Drury Scenic Parkway</strong>", type: "" },
-            { time: "08:30", text: "📸 <strong>Big Tree Wayside</strong>", type: "" },
-            { time: "09:00", text: "🥾 <strong>Fern Canyon</strong> (~1.5 km) — samambaias! <strong>Jurassic Park 2</strong>!", type: "highlight" },
-            { time: "10:30", text: "🌊 <strong>Gold Bluffs Beach</strong>", type: "" },
-            { time: "11:00", text: "🌲 <strong>Lady Bird Johnson Grove Trail</strong> (~2.5 km)", type: "" },
-            { time: "12:00", text: "🌲 <em>Opcional (checar condições):</em> <strong>Tall Trees Grove</strong> — árvores mais altas do MUNDO! (~5 km, ~2h). ⚠️ Permit no Info Center (Orick), estrada pode estar difícil no inverno", type: "highlight" },
-            { time: "14:00", text: "🍽️ Almoço em <strong>Orick</strong>", type: "food" },
-            { time: "14:30", text: "🚗 US-101 sul (~60 km)", type: "drive" },
-            { time: "15:30", text: "🌲 <strong>Avenue of the Giants</strong> — 50 km entre redwoods!", type: "highlight" },
-            { time: "17:00", text: "🏨 Chegada em <strong>Eureka</strong>! Check-in", type: "" },
-            { time: "17:30", text: "🏙️ <strong>Old Town Eureka</strong> — <strong>Carson Mansion</strong>", type: "" },
+            { time: "07:30", text: "🥾 <strong>Simpson-Reed Trail</strong> (~1 km loop) — trilha pavimentada entre old-growth redwoods!", type: "" },
+            { time: "08:00", text: "🌲 <strong>Del Norte Coast Redwoods SP</strong> — <strong>Coastal Trail</strong> (~2 km) — costa selvagem entre redwoods!", type: "highlight" },
+            { time: "09:00", text: "🚗 US-101 sul (~35 km) → <strong>Prairie Creek Redwoods SP</strong>", type: "drive" },
+            { time: "09:30", text: "🦌 <strong>Elk Meadow</strong> (Orick) — manada de Roosevelt elk pastando! Pullover grátis", type: "" },
+            { time: "09:45", text: "🚗 <strong>Newton B. Drury Scenic Parkway</strong>", type: "" },
+            { time: "10:00", text: "📸 <strong>Big Tree Wayside</strong>", type: "" },
+            { time: "10:30", text: "🥾 <strong>Fern Canyon</strong> (~1.5 km) — samambaias! <strong>Jurassic Park 2</strong>!", type: "highlight" },
+            { time: "11:30", text: "🌊 <strong>Gold Bluffs Beach</strong>", type: "" },
+            { time: "12:00", text: "🌲 <strong>Lady Bird Johnson Grove Trail</strong> (~2.5 km)", type: "" },
+            { time: "13:00", text: "🌲 <em>Opcional (checar condições):</em> <strong>Tall Trees Grove</strong> — árvores mais altas do MUNDO! (~5 km, ~2h). ⚠️ Permit no Info Center (Orick)", type: "highlight" },
+            { time: "14:30", text: "🍽️ Almoço em <strong>Orick</strong>", type: "food" },
+            { time: "15:00", text: "🚗 US-101 sul (~60 km)", type: "drive" },
+            { time: "16:00", text: "🌲 <strong>Avenue of the Giants</strong> — 50 km entre redwoods!", type: "highlight" },
+            { time: "17:30", text: "🏨 Chegada em <strong>Eureka</strong>! Check-in", type: "" },
+            { time: "17:45", text: "🏙️ <strong>Old Town Eureka</strong> — <strong>Carson Mansion</strong>", type: "" },
             { time: "18:00", text: "⚡ <strong>Supercharger Eureka</strong>", type: "charge" },
-            { time: "19:00", text: "🍽️ Jantar — <strong>Lost Coast Brewery & Cafe</strong> (617 4th St, Eureka) — cervejaria artesanal pioneira do North Coast, burgers e fish tacos. ~$15-20/pessoa", type: "food" }
+            { time: "19:00", text: "🍽️ Jantar — <strong>Lost Coast Brewery & Cafe</strong> (617 4th St, Eureka) — cervejaria artesanal, burgers e fish tacos. ~$15-20/pessoa", type: "food" }
         ],
-        tips: ["⚠️ Fern Canyon: Davison Road (terra, 10 km) pode fechar com chuva forte. Ligar pro Visitors Center de manhã: (707) 464-6101 ext. 5265. Se fechada, mais tempo em Lady Bird Johnson Grove.", "⚠️ Tall Trees Grove: permit gratuito no Thomas Clarke Info Center (Orick) — pode estar fechado em dia de semana no inverno."]
+        tips: ["⚠️ Fern Canyon: Davison Road (terra, 10 km) pode fechar com chuva. Ligar pro Visitors Center: (707) 464-6101.", "⚠️ Tall Trees Grove: permit gratuito no Info Center (Orick) — pode estar fechado em dia de semana no inverno."]
     },
 
     // ==================== COSTA OREGON + CANNON BEACH (Dias 11-12) ====================
     {
-        photo: 'img/dia-20.jpg', shortLoc: 'Oregon',
+        photo: 'img/activities/samuel_boardman.jpg', shortLoc: 'Oregon',
         chargeStops: [
             { name: 'Coos Bay, OR', leg: 'Eureka → Gold Beach', critical: false }
         ],
@@ -268,7 +247,7 @@ const days = [
     },
 
     {
-        photo: 'img/dia-19.jpg', shortLoc: 'Cannon',
+        photo: 'img/activities/cannon_beach.jpg', shortLoc: 'Cannon',
         chargeStops: [
             { name: 'Coos Bay, OR', leg: 'Gold Beach → Cannon Beach', critical: false },
             { name: 'Lincoln City, OR', leg: 'Gold Beach → Cannon Beach', critical: false }
@@ -300,7 +279,7 @@ const days = [
 
     // ==================== PNW (Dias 13-14) ====================
     {
-        photo: 'img/dia-17.jpg', shortLoc: 'Rainier',
+        photo: 'img/activities/mt__rainier.jpg', shortLoc: 'Rainier',
         chargeStops: [{ name: 'Olympia, WA', leg: 'Cannon Beach → Rainier → Forks', critical: true, note: '⚠️ CARREGAR ATÉ 100% — Olympic 265 km sem SC!' }],
         location: "Cannon Beach → Mt. Rainier → Forks",
         route: "De Cannon Beach ao Rainier + Forks! 🌋",
@@ -324,7 +303,7 @@ const days = [
     },
 
     {
-        photo: 'img/dia-18.jpg', shortLoc: 'Olympic', location: "Olympic NP dia cheio 🌲",
+        photo: 'img/activities/hoh_rain_forest.jpg', shortLoc: 'Olympic', location: "Olympic NP dia cheio 🌲",
         route: "Florestas místicas + praias selvagens!",
         note: "Hoh Rain Forest + Ruby Beach + Twilight!",
         region: "pnw",
@@ -346,7 +325,7 @@ const days = [
 
     // ==================== TRANSIÇÃO PNW → UTAH (Dias 15-17) ====================
     {
-        photo: 'img/dia-16.jpg', shortLoc: 'The Dalles',
+        photo: 'img/activities/multnomah_falls.jpg', shortLoc: 'The Dalles',
         chargeStops: [
             { name: 'Aberdeen, WA', leg: 'Forks → The Dalles', critical: false },
             { name: 'Centralia, WA', leg: 'Forks → The Dalles', critical: false }
@@ -374,7 +353,7 @@ const days = [
     },
 
     {
-        photo: 'img/dia-16.jpg', shortLoc: 'Twin Falls',
+        photo: 'img/activities/shoshone_falls.jpg', shortLoc: 'Twin Falls',
         chargeStops: [
             { name: 'Pendleton, OR', leg: 'The Dalles → Twin Falls', critical: false },
             { name: 'Baker City, OR', leg: 'The Dalles → Twin Falls', critical: false }
@@ -400,7 +379,7 @@ const days = [
     },
 
     {
-        photo: 'img/dia-12.jpg', shortLoc: 'Moab',
+        photo: 'img/activities/mesa_arch.jpg', shortLoc: 'Moab',
         chargeStops: [
             { name: 'Twin Falls, ID', leg: 'Twin Falls → Moab', critical: false },
             { name: 'Salt Lake City, UT', leg: 'Twin Falls → Moab', critical: false },
@@ -431,7 +410,7 @@ const days = [
 
     // ==================== UTAH (Dias 18-22) ====================
     {
-        photo: 'img/dia-13.jpg', shortLoc: 'Moab', location: "Canyonlands NP dia cheio 🏜️",
+        photo: 'img/activities/grand_view_point.jpg', shortLoc: 'Moab', location: "Canyonlands NP dia cheio 🏜️",
         route: "Island in the Sky — cânions infinitos!",
         note: "Mesa Arch ao nascer do sol — o sol nasce ATRAVÉS do arco!",
         region: "ut",
@@ -454,7 +433,7 @@ const days = [
     },
 
     {
-        photo: 'img/dia-14.jpg', shortLoc: 'Moab', location: "Arches NP + Dead Horse Point",
+        photo: 'img/activities/delicate_arch.jpg', shortLoc: 'Moab', location: "Arches NP + Dead Horse Point",
         route: "Delicate Arch + Dead Horse sunset! 🏜️",
         note: "O arco mais famoso do mundo + vista sobre o Colorado!",
         region: "ut",
@@ -474,7 +453,7 @@ const days = [
     },
 
     {
-        photo: 'img/dia-11.jpg', shortLoc: 'Bryce',
+        photo: 'img/activities/bryce_canyon.jpg', shortLoc: 'Bryce',
         chargeStops: [
             { name: 'Green River, UT', leg: 'Moab → Bryce', critical: false },
             { name: 'Salina, UT', leg: 'Moab → Bryce', critical: false }
@@ -504,7 +483,7 @@ const days = [
     },
 
     {
-        photo: 'img/dia-10.jpg', shortLoc: 'Zion',
+        photo: 'img/activities/watchman_trail.jpg', shortLoc: 'Zion',
         location: "Bryce → Zion",
         route: "Manhã em Bryce + Zion à tarde! 🏞️",
         note: "Nascer do sol em Bryce, depois estrada cênica até Zion!",
@@ -529,7 +508,7 @@ const days = [
     },
 
     {
-        photo: 'img/dia-10.jpg', shortLoc: 'Zion', location: "Zion NP dia cheio",
+        photo: 'img/activities/canyon_overlook.jpg', shortLoc: 'Zion', location: "Zion NP dia cheio",
         route: "Trilhas, mirantes e pôr do sol! 🏞️",
         note: "Dia cheio em Zion! No inverno pode dirigir no canyon (sem shuttle).",
         region: "ut",
@@ -541,7 +520,7 @@ const days = [
             { time: "12:00", text: "🍽️ Almoço em Springdale", type: "food" },
             { time: "13:00", text: "🥾 <strong>Riverside Walk</strong> (~3.5 km ida e volta) — trilha plana ao longo do rio Virgin!", type: "" },
             { time: "14:30", text: "🥾 <strong>Scout Lookout</strong> (~6.4 km ida e volta, ~2.5h) — degraus esculpidos na rocha! ⚠️ Em fevereiro pode ter gelo — levar microspikes.", type: "highlight" },
-            { time: "16:30", text: "🌅 <strong>Pôr do sol no Canyon Junction Bridge</strong>", type: "highlight" },
+            { time: "16:30", text: "🌅 <strong>Pôr do sol no Watchman Overlook</strong> — último sunset em Zion!", type: "highlight" },
             { time: "17:00", text: "🚗 Check-out + saída pra <strong>Page, AZ</strong> (~160 km, ~2h via US-89)", type: "drive" },
             { time: "~19:00", text: "🏨 Chegada em <strong>Page</strong>! Check-in", type: "" },
             { time: "19:30", text: "🍽️ Jantar — <strong>Big John's Texas BBQ</strong> (153 S Lake Powell Blvd, Page) — brisket e pulled pork defumado. ~$15-20/pessoa", type: "food" }
@@ -550,7 +529,7 @@ const days = [
 
     // ==================== LAS VEGAS (Dias 23-25) ====================
     {
-        photo: 'img/dia-30.jpg', shortLoc: 'Vegas',
+        photo: 'img/activities/grand_canyon.jpg', shortLoc: 'Vegas',
         chargeStops: [
             { name: 'Flagstaff, AZ', leg: 'Page → GC → Vegas', critical: false },
             { name: 'Kingman, AZ', leg: 'GC → Vegas', critical: false }
@@ -573,14 +552,14 @@ const days = [
             { time: "14:00", text: "🚗 Saída rumo a <strong>Las Vegas</strong> (~450 km, ~4.5h via I-40 W → US-93 N)", type: "drive" },
             { time: "15:30", text: "⚡ <strong>Supercharger Kingman, AZ</strong> (~200 km) — ~25 min", type: "charge" },
             { time: "~18:30", text: "🎰 Chegada em <strong>Las Vegas</strong>! Check-in", type: "" },
-            { time: "19:00", text: "🌅 <strong>Bellagio Fountains</strong> — show noturno!", type: "highlight" },
+            { time: "19:00", text: "📸 <strong>Welcome to Las Vegas Sign</strong> — foto icônica à noite!", type: "highlight" },
             { time: "19:30", text: "🍽️ Jantar — <strong>Secret Pizza</strong> (The Cosmopolitan, 3º andar) — pizza NY-style escondida. ~$15-20/pessoa", type: "food" }
         ],
         tips: ["⚡ Dia longo (~660 km) mas com FSD é tranquilo. Sair cedo de Page!", "📸 Horseshoe Bend: melhor luz de manhã cedo (sol ilumina o canyon)."]
     },
 
     {
-        photo: 'img/dia-06.jpg', shortLoc: 'Vegas', location: "Mt. Charleston + Valley of Fire",
+        photo: 'img/activities/mt_charleston.jpg', shortLoc: 'Vegas', location: "Mt. Charleston + Valley of Fire",
         route: "Neve + arenito vermelho! 🏔️🔥",
         note: "Mt. Charleston de manhã (neve!) + Valley of Fire à tarde (melhor luz).",
         region: "nv",
@@ -605,7 +584,7 @@ const days = [
     },
 
     {
-        photo: 'img/dia-07.jpg', shortLoc: 'Vegas', location: "Las Vegas Strip",
+        photo: 'img/activities/las_vegas_strip_night.jpg', shortLoc: 'Vegas', location: "Las Vegas Strip",
         route: "Hotéis icônicos + compras + shows! 🎰",
         note: "Dia livre em Vegas! Strip, hotéis, compras e show à noite.",
         region: "nv",
@@ -624,7 +603,7 @@ const days = [
 
     // ==================== SEQUOIA + YOSEMITE (Dias 26-29) ====================
     {
-        photo: 'img/dia-30.jpg', shortLoc: 'Sequoia',
+        photo: 'img/activities/three_rivers_ca.jpg', shortLoc: 'Sequoia',
         chargeStops: [
             { name: 'Barstow, CA', leg: 'Vegas → Three Rivers', critical: false },
             { name: 'Bakersfield, CA', leg: 'Vegas → Three Rivers', critical: false },
@@ -645,13 +624,13 @@ const days = [
             { time: "14:00", text: "⚡ <strong>Supercharger Visalia</strong> (~100 km) — ~15 min", type: "charge" },
             { time: "~15:00", text: "🏨 Chegada em <strong>Three Rivers</strong>! Check-in", type: "" },
             { time: "15:30", text: "🏞️ Explorar Three Rivers — vilazinha na porta do Sequoia", type: "" },
-            { time: "18:00", text: "🍽️ Jantar — <strong>The Gateway Restaurant</strong> (45978 Sierra Dr, Three Rivers) — burgers e trout almondine. ~$15-20/pessoa", type: "food" }
+            { time: "18:00", text: "🍽️ Jantar — <strong>Sierra Subs & Salads</strong> (41717 Sierra Dr, Three Rivers) — sanduíches artesanais e saladas frescas, casual e rápido. ~$10-15/pessoa", type: "food" }
         ],
         tips: ["⚡ Dia longo (~500 km) mas tranquilo pela I-15/CA-58. FSD ajuda."]
     },
 
     {
-        photo: 'img/dia-30.jpg', shortLoc: 'Sequoia',
+        photo: 'img/activities/general_sherman_tree.jpg', shortLoc: 'Sequoia',
         location: "Three Rivers → Sequoia → Kings Canyon",
         route: "General Sherman + General Grant! 🌲",
         note: "Dia inteiro entre sequoias gigantes! Sobe de Three Rivers até Kings Canyon.",
@@ -674,9 +653,9 @@ const days = [
     },
 
     {
-        photo: 'img/dia-28.jpg', shortLoc: 'Yosemite', location: "Yosemite NP — Valley + Neve!",
-        route: "Tunnel View + cachoeiras + snow tubing! 🏞️⛷️",
-        note: "Dia cheio em Yosemite! Valley de manhã, snow tubing à tarde. Nevado e lindo!",
+        photo: 'img/activities/tunnel_view.jpg', shortLoc: 'Yosemite', location: "Yosemite NP dia 1 — Valley",
+        route: "Tunnel View + cachoeiras + neve! 🏞️",
+        note: "Primeiro dia em Yosemite! Valley com neve — lindo!",
         region: "ca",
         items: [
             { time: "07:00", text: "☕ Café em Mariposa", type: "" },
@@ -687,18 +666,39 @@ const days = [
             { time: "10:30", text: "🌊 <strong>Yosemite Falls</strong> — Lower trail ~30 min — pode ter gelo!", type: "highlight" },
             { time: "11:15", text: "🪞 <strong>Mirror Lake</strong> — trilha ~3 km, reflexo do Half Dome!", type: "" },
             { time: "12:30", text: "🍽️ Almoço no Yosemite Valley Lodge", type: "food" },
-            { time: "13:30", text: "⛷️ <strong>Yosemite Ski & Snowboard Area</strong> (antigo Badger Pass) — snow tubing! Perfeito pra família!", type: "highlight" },
-            { time: "15:30", text: "🌲 <strong>Cook's Meadow Loop</strong> — trilha fácil, Half Dome + Yosemite Falls com neve", type: "" },
-            { time: "16:30", text: "🌅 Sunset no <strong>Sentinel Bridge</strong> — Half Dome dourado!", type: "highlight" },
-            { time: "17:30", text: "🚗 Volta pra Mariposa (~45 min)", type: "drive" },
-            { time: "19:00", text: "🍽️ Jantar — <strong>Castillo's Mexican Food</strong> (4995 5th St, Mariposa) — mexicano familiar, enchiladas verdes e chile relleno. ~$12-18/pessoa", type: "food" }
+            { time: "13:30", text: "🌲 <strong>Cook's Meadow Loop</strong> — trilha fácil, Half Dome + Yosemite Falls com neve", type: "" },
+            { time: "14:30", text: "📸 <strong>Valley View</strong> — foto clássica do Merced River", type: "" },
+            { time: "15:00", text: "🎨 <strong>Ansel Adams Gallery</strong> — fotografia icônica de Yosemite", type: "" },
+            { time: "16:00", text: "🌅 Sunset no <strong>Sentinel Bridge</strong> — Half Dome dourado!", type: "highlight" },
+            { time: "17:00", text: "🚗 Volta pra Mariposa (~45 min)", type: "drive" },
+            { time: "19:00", text: "🍽️ Jantar — <strong>Savoury's</strong> (5034 Hwy 140, Mariposa) — cozinha americana eclética com ingredientes locais da Sierra Nevada. ~$20-25/pessoa", type: "food" }
         ],
-        tips: ["❄️ Yosemite nevado em fevereiro é LINDO! Menos turistas, silêncio, neve nos picos.", "⛷️ Snow tubing em Badger Pass: aberto inverno, ~$20/pessoa, kids adoram!"]
+        tips: ["❄️ Yosemite nevado em fevereiro é LINDO! Menos turistas, silêncio, neve nos picos."]
+    },
+
+    {
+        photo: 'img/activities/half_dome.jpg', shortLoc: 'Yosemite', location: "Yosemite NP dia 2 — Neve!",
+        route: "Snow tubing + snowshoeing + despedida! ⛷️",
+        note: "Snow tubing de manhã, trilhas à tarde. Último dia em Yosemite!",
+        region: "ca",
+        items: [
+            { time: "07:30", text: "☕ Café em Mariposa", type: "" },
+            { time: "08:00", text: "🚗 Drive → Yosemite", type: "drive" },
+            { time: "09:00", text: "⛷️ <strong>Yosemite Ski & Snowboard Area</strong> (antigo Badger Pass) — snow tubing! Perfeito pra família!", type: "highlight" },
+            { time: "11:00", text: "🏔️ Snowshoeing guiado pelo ranger (grátis, ~2h)", type: "highlight" },
+            { time: "13:00", text: "🍽️ Almoço no Yosemite Valley", type: "food" },
+            { time: "14:00", text: "🥾 <strong>Swinging Bridge</strong> + <strong>Sentinel Meadow</strong> — luz da tarde nos picos", type: "" },
+            { time: "15:30", text: "📸 Revisitar favoritos — luz diferente da tarde!", type: "" },
+            { time: "16:30", text: "🌅 Sunset no <strong>Tunnel View</strong> — luz dourada!", type: "highlight" },
+            { time: "17:30", text: "🚗 Volta pra Mariposa", type: "drive" },
+            { time: "19:00", text: "🍽️ Jantar de despedida — <strong>Castillo's Mexican Food</strong> (4995 5th St, Mariposa) — mexicano familiar, enchiladas verdes e chile relleno. ~$12-18/pessoa", type: "food" }
+        ],
+        tips: ["⛷️ Snow tubing em Badger Pass: aberto inverno, ~$20/pessoa, kids adoram!"]
     },
 
     // ==================== COSTA + LA (Dias 30-33) ====================
     {
-        photo: 'img/dia-27.jpg', shortLoc: 'Monterey',
+        photo: 'img/activities/monterey_ca.jpg', shortLoc: 'Monterey',
         chargeStops: [
             { name: 'Merced, CA', leg: 'Yosemite → Monterey', critical: false },
             { name: 'Gilroy, CA', leg: 'Yosemite → Monterey', critical: false }
@@ -772,7 +772,7 @@ const days = [
     },
 
     {
-        photo: 'img/activities/hollywood_sign.jpg', shortLoc: 'LA', location: "LA dia livre",
+        photo: 'img/activities/venice_beach.jpg', shortLoc: 'LA', location: "LA dia livre",
         route: "Dia livre em Los Angeles! 🌴",
         note: "Sem programação fixa — compras, praia, descanso ou explorar o que ficou faltando!",
         region: "ca",
@@ -825,23 +825,23 @@ const hotels = [
     { num: 13, name: "Page, AZ (Horseshoe Bend)", checkin: "10/02", checkout: "11/02", nights: 1 },
     { num: 14, name: "Las Vegas, NV", checkin: "11/02", checkout: "14/02", nights: 3 },
     { num: 15, name: "Three Rivers, CA (Sequoia)", checkin: "14/02", checkout: "16/02", nights: 2 },
-    { num: 16, name: "Mariposa / El Portal, CA", checkin: "16/02", checkout: "17/02", nights: 1 },
-    { num: 17, name: "Carmel, CA", checkin: "17/02", checkout: "18/02", nights: 1 },
-    { num: 18, name: "Los Angeles, CA", checkin: "18/02", checkout: "22/02", nights: 4 }
+    { num: 16, name: "Mariposa / El Portal, CA", checkin: "16/02", checkout: "18/02", nights: 2 },
+    { num: 17, name: "Carmel, CA", checkin: "18/02", checkout: "19/02", nights: 1 },
+    { num: 18, name: "Los Angeles, CA", checkin: "19/02", checkout: "22/02", nights: 3 }
 ];
 
 // ==================== NATIONAL PARKS ====================
 const parks = [
-    { name: "🌲 Redwood National Park", days: "Dias 9–10", highlights: "Stout Memorial Grove, Fern Canyon (Jurassic Park 2!), Tall Trees, Lady Bird Johnson, Avenue of Giants." },
-    { name: "🌋 Mt. Rainier National Park", days: "Dia 13", highlights: "Paradise, neve, vulcão de 4.392m." },
-    { name: "🌲 Olympic National Park", days: "Dias 13–14", highlights: "Hoh Rain Forest, Hall of Mosses, Ruby Beach, La Push (Twilight!), Sol Duc Falls." },
-    { name: "🏜️ Canyonlands National Park", days: "Dia 18", highlights: "Mesa Arch sunrise, Grand View Point, Upheaval Dome, Aztec Butte." },
-    { name: "🏜️ Arches National Park", days: "Dia 19", highlights: "Delicate Arch, Windows, Double Arch, Landscape Arch (93m!), Fiery Furnace." },
-    { name: "🏜️ Capitol Reef National Park", days: "Dia 20", highlights: "Petroglífos Fremont, Hickman Bridge Trail, Fruita Historic District, Scenic Drive." },
-    { name: "🏔️ Bryce Canyon National Park", days: "Dias 20–21", highlights: "Navajo Loop, Queen's Garden, hoodoos, Bryce Amphitheater, stargazing!" },
-    { name: "🏞️ Zion National Park", days: "Dias 21–22", highlights: "Watchman Trail, Emerald Pools, Canyon Overlook, Riverside Walk, Court of the Patriarchs." },
-    { name: "🌲 Sequoia + Kings Canyon NP", days: "Dia 27", highlights: "General Sherman Tree (maior árvore!), Congress Trail, Moro Rock, General Grant Tree." },
-    { name: "🏞️ Yosemite National Park", days: "Dia 28", highlights: "Tunnel View, El Capitan, Half Dome, Yosemite Falls, Snow Tubing, Mirror Lake." }
+    { name: "🌲 Redwood National Park", days: "Dias 8–9", highlights: "Jedediah Smith, Fern Canyon (Jurassic Park 2!), Tall Trees, Lady Bird Johnson, Avenue of Giants." },
+    { name: "🌋 Mt. Rainier National Park", days: "Dia 12", highlights: "Paradise, neve, vulcão de 4.392m." },
+    { name: "🌲 Olympic National Park", days: "Dias 12–13", highlights: "Hoh Rain Forest, Hall of Mosses, Ruby Beach, La Push (Twilight!), Sol Duc Falls." },
+    { name: "🏜️ Canyonlands National Park", days: "Dia 17", highlights: "Mesa Arch sunrise, Grand View Point, Upheaval Dome, Aztec Butte." },
+    { name: "🏜️ Arches National Park", days: "Dia 18", highlights: "Delicate Arch, Windows, Double Arch, Landscape Arch (93m!), Fiery Furnace." },
+    { name: "🏜️ Capitol Reef National Park", days: "Dia 19", highlights: "Petroglífos Fremont, Hickman Bridge Trail, Fruita Historic District, Scenic Drive." },
+    { name: "🏔️ Bryce Canyon National Park", days: "Dias 19–20", highlights: "Navajo Loop, Queen's Garden, hoodoos, Bryce Amphitheater, stargazing!" },
+    { name: "🏞️ Zion National Park", days: "Dias 20–21", highlights: "Watchman Trail, Emerald Pools, Canyon Overlook, Riverside Walk, Court of the Patriarchs." },
+    { name: "🌲 Sequoia + Kings Canyon NP", days: "Dia 26", highlights: "General Sherman Tree (maior árvore!), Congress Trail, Moro Rock, General Grant Tree." },
+    { name: "🏞️ Yosemite National Park", days: "Dias 28–29", highlights: "Tunnel View, El Capitan, Half Dome, Yosemite Falls, Snow Tubing, Mirror Lake." }
 ];
 
 // ==================== REORDERING SYSTEM ====================
