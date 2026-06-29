@@ -1,7 +1,7 @@
 {
   "name": "viagem-eua-2027",
-  "version": "147.0.0",
-  "description": "34-day USA road trip PWA",
+  "version": "148.0.0",
+  "description": "33-day USA road trip PWA",
   "private": true,
   "scripts": {
     "lint": "eslint . --max-warnings=0",
