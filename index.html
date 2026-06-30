@@ -199,25 +199,16 @@
         <div class="settings-group">
             <div class="setting-row" style="flex-direction:column;align-items:stretch;gap:12px">
                 <div>
-                    <div class="setting-label">☁️ Google Sheets Sync</div>
-                    <div class="setting-desc">Sincronizar progresso, favoritos e notas entre dispositivos via Google Sheets</div>
+                    <div class="setting-label">☁️ Sync (Supabase)</div>
+                    <div class="setting-desc">Progresso, favoritos e notas sincronizados automaticamente na nuvem</div>
                 </div>
-                <input type="url" id="syncUrlInput" placeholder="URL do Google Apps Script (ver instruções abaixo)" aria-label="URL do Google Apps Script para sincronização" style="background:var(--glass);border:0.5px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 14px;font-family:inherit;font-size:13px;color:var(--text);outline:none;width:100%">
                 <button id="btnSyncNow" style="background:var(--glass2);color:var(--text);border:0.5px solid rgba(255,255,255,0.1);padding:14px 20px;border-radius:14px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;width:100%">
                     🔄 Sincronizar Agora
                 </button>
                 <div id="syncStatus" style="font-size:12px;color:var(--text3);text-align:center;min-height:18px"></div>
-                <details style="font-size:12px;color:var(--text3);line-height:1.6">
-                    <summary style="cursor:pointer;color:var(--text2);font-weight:600;padding:4px 0">📋 Como configurar</summary>
-                    <div style="padding:8px 0">
-                        1. Abra <a href="https://sheets.google.com" target="_blank" rel="noopener" style="color:var(--blue)">Google Sheets</a> e crie uma planilha<br>
-                        2. Vá em <b>Extensões → Apps Script</b><br>
-                        3. Apague tudo e cole o código da aba <b>Code.gs</b> (veja no GitHub ou peça ao assistente)<br>
-                        4. Clique <b>Implantar → Nova implantação</b><br>
-                        5. Tipo: <b>App da Web</b> • Executar como: <b>Eu</b> • Acesso: <b>Qualquer pessoa</b><br>
-                        6. Copie a URL e cole acima
-                    </div>
-                </details>
+                <div style="font-size:11px;color:var(--text3);text-align:center">
+                    📱 Device ID: <span id="syncDeviceId" style="font-family:monospace;user-select:all"></span>
+                </div>
             </div>
         </div>
         <div class="settings-group-label">Dados</div>

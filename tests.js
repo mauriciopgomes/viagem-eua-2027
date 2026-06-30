@@ -802,8 +802,9 @@ test('tem search input', () => {
     assert(indexHtml.includes('id="searchInput"'), 'deve ter searchInput');
 });
 
-test('tem sync URL input', () => {
-    assert(indexHtml.includes('id="syncUrlInput"'), 'deve ter syncUrlInput');
+test('tem sync status display', () => {
+    assert(indexHtml.includes('id="syncStatus"'), 'deve ter syncStatus');
+    assert(indexHtml.includes('id="syncDeviceId"'), 'deve ter syncDeviceId');
 });
 
 // ==================== 15. INDEX.HTML — ACCESSIBILITY ====================
@@ -881,10 +882,12 @@ test('notas pessoais são escapadas ao renderizar', () => {
     assert(appJs.includes('escapeHtml(noteVal)'), 'renderização de notas deve escapar conteúdo');
 });
 
-test('sync tenta POST antes do fallback GET', () => {
-    assert(syncJs.includes("method: 'POST'"), 'sync deve tentar POST');
-    assert(syncJs.includes("'?action=push&data='") || syncJs.includes('?action=push&data='),
-        'sync deve manter fallback GET para Apps Script');
+test('sync usa Supabase REST API', () => {
+    assert(syncJs.includes("method: 'POST'"), 'sync deve usar POST');
+    assert(syncJs.includes('supabaseUrl'), 'sync deve ter supabaseUrl');
+    assert(syncJs.includes('supabaseKey'), 'sync deve ter supabaseKey');
+    assert(syncJs.includes('deviceId'), 'sync deve ter deviceId');
+    assert(syncJs.includes('/rest/v1/user_data'), 'sync deve usar tabela user_data');
 });
 
 test('push snapshot queue atomicamente antes de async', () => {

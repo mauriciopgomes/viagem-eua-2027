@@ -183,8 +183,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Sync URL input
-    var syncUrlInput = document.getElementById('syncUrlInput');
-    if (syncUrlInput) syncUrlInput.addEventListener('change', function() { SyncEngine.setUrl(this.value); });
     var btnSyncNow = document.getElementById('btnSyncNow');
     if (btnSyncNow) btnSyncNow.addEventListener('click', function() { SyncEngine.fullSync(); });
 

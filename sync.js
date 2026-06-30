@@ -1,16 +1,13 @@
-// ==================== GOOGLE SHEETS SYNC ====================
+// ==================== SUPABASE SYNC ====================
 var SyncEngine = {
-    defaultUrl: 'https://script.google.com/macros/s/AKfycbyEfTe62Z58eUSE5KOTzRy6Tm5DoDIso6qZPE1MsUXU1bdzA9ObT2eyWTKfeCZDgfp-Og/exec',
-    url: (function() {
-        var saved = localStorage.getItem('syncUrl');
-        var def = 'https://script.google.com/macros/s/AKfycbyEfTe62Z58eUSE5KOTzRy6Tm5DoDIso6qZPE1MsUXU1bdzA9ObT2eyWTKfeCZDgfp-Og/exec';
-        // Reset if user has old/stale URL.
-        if (saved && saved !== def && saved.indexOf('AKfycbzYaHa1') !== -1) {
-            localStorage.removeItem('syncUrl');
-            return def;
-        }
-        return saved || def;
+    supabaseUrl: 'https://kahlxqiopfuobciiihzr.supabase.co',
+    supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImthaGx4cWlvcGZ1b2JjaWlpaHpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI4NDE1NjQsImV4cCI6MjA5ODQxNzU2NH0._RxgyjxzYyPpQSnBO4b0xmn44o9OGlzhNvyHCsdkF44',
+    deviceId: localStorage.getItem('deviceId') || (function() {
+        var id = crypto.randomUUID();
+        localStorage.setItem('deviceId', id);
+        return id;
     })(),
+    url: true, // compat flag — always "connected"
     queue: JSON.parse(localStorage.getItem('syncQueue') || '[]'),
     syncing: false,
     debounceTimer: null,
@@ -18,8 +15,15 @@ var SyncEngine = {
     pullIntervalId: null,
     pushRetries: 0,
 
+    _headers: function() {
+        return {
+            'apikey': this.supabaseKey,
+            'Authorization': 'Bearer ' + this.supabaseKey,
+            'Content-Type': 'application/json'
+        };
+    },
+
     track: function(key, value) {
-        if (!this.url) return;
         var ts = Date.now();
         localStorage.setItem('_ts_' + key, ts);
         this.queue.push({ key: key, value: value, ts: ts });
@@ -34,7 +38,7 @@ var SyncEngine = {
     },
 
     push: async function() {
-        if (!this.url || this.syncing || this.queue.length === 0) return;
+        if (this.syncing || this.queue.length === 0) return;
         this.syncing = true;
         if (navigator.locks) {
             var self = this;
@@ -44,23 +48,6 @@ var SyncEngine = {
             });
         }
         return this._doPush();
-    },
-
-    _sendChunk: async function(chunk) {
-        var body = JSON.stringify({ changes: chunk });
-        try {
-            var postResp = await fetch(this.url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                body: body
-            });
-            if (postResp.ok) return postResp;
-        } catch(e) {
-            console.warn('Sync POST fallback:', e);
-        }
-
-        var payload = encodeURIComponent(body);
-        return fetch(this.url + '?action=push&data=' + payload);
     },
 
     _persistQueue: function() {
@@ -79,25 +66,28 @@ var SyncEngine = {
         var snapshotLen = snapshot.length;
         this.queue = this.queue.slice(snapshotLen);
         this._persistQueue();
+        // Dedup: keep only latest per key
         var latest = {};
         snapshot.forEach(function(e) {
             if (!latest[e.key] || e.ts > latest[e.key].ts) latest[e.key] = e;
         });
         var changes = Object.values(latest);
         try {
+            // Upsert to Supabase in batches of 50
             var BATCH = 50;
-            var result = null;
+            var deviceId = this.deviceId;
             for (var i = 0; i < changes.length; i += BATCH) {
                 var chunk = changes.slice(i, i + BATCH);
-                var resp = await this._sendChunk(chunk);
+                var rows = chunk.map(function(c) {
+                    return { device_id: deviceId, key: c.key, value: c.value, ts: c.ts };
+                });
+                var resp = await fetch(this.supabaseUrl + '/rest/v1/user_data', {
+                    method: 'POST',
+                    headers: Object.assign({}, this._headers(), { 'Prefer': 'resolution=merge-duplicates' }),
+                    body: JSON.stringify(rows)
+                });
                 if (!resp.ok) throw new Error('HTTP ' + resp.status);
-                result = await resp.json();
             }
-            if (!result) {
-                var pullResp = await fetch(this.url);
-                if (pullResp.ok) result = await pullResp.json();
-            }
-            if (result && result.data) this.mergeRemote(result.data);
             this.updateUI('synced');
             this.pushRetries = 0;
         } catch(e) {
@@ -107,16 +97,13 @@ var SyncEngine = {
             this._persistQueue();
             var maxRetries = 10;
             this.pushRetries = (this.pushRetries || 0) + 1;
-            // Tratar HTTP 429 (rate limit) e 403 (auth) separadamente
             var errMsg = String(e && e.message ? e.message : e);
             if (errMsg.indexOf('429') !== -1) {
-                // Rate limit: esperar mais antes de tentar novamente
                 this.pushRetries = Math.max(this.pushRetries, 4);
             }
-            if (errMsg.indexOf('403') !== -1) {
-                // Auth error: não tentar novamente, avisar usuário
+            if (errMsg.indexOf('403') !== -1 || errMsg.indexOf('401') !== -1) {
                 this.updateUI('autherror');
-                if (typeof showToast === 'function') showToast('⚠️ Sync sem permissão (403) — verifique URL', { type: 'error', duration: 4000 });
+                if (typeof showToast === 'function') showToast('⚠️ Sync sem permissão — verifique configuração', { type: 'error', duration: 4000 });
                 this.syncing = false;
                 this.pushRetries = 0;
                 return;
@@ -131,7 +118,6 @@ var SyncEngine = {
             }
             this.updateUI('error');
             this.syncing = false;
-            // Don't retry when offline — wait for online event
             if (!navigator.onLine) {
                 var self = this;
                 var onlineHandler = function() {
@@ -154,7 +140,7 @@ var SyncEngine = {
     },
 
     pull: async function() {
-        if (!this.url || this.syncing) return;
+        if (this.syncing) return;
         if (this.queue.length > 0) {
             await this.push();
             return;
@@ -162,10 +148,18 @@ var SyncEngine = {
         this.syncing = true;
         this.updateUI('syncing');
         try {
-            var resp = await fetch(this.url);
+            var resp = await fetch(
+                this.supabaseUrl + '/rest/v1/user_data?device_id=eq.' + encodeURIComponent(this.deviceId) + '&select=key,value,ts',
+                { headers: this._headers() }
+            );
             if (!resp.ok) throw new Error('HTTP ' + resp.status);
-            var result = await resp.json();
-            if (result && result.data) this.mergeRemote(result.data);
+            var rows = await resp.json();
+            // Convert array of {key, value, ts} to object format for mergeRemote
+            var remote = {};
+            rows.forEach(function(r) {
+                remote[r.key] = { v: r.value, ts: r.ts };
+            });
+            this.mergeRemote(remote);
             this.updateUI('synced');
         } catch(e) {
             console.warn('Sync pull failed:', e);
@@ -190,7 +184,6 @@ var SyncEngine = {
                 var val = entry.v;
                 if (key.startsWith('check-')) {
                     var parts = key.replace('check-', '').split('-');
-                    // Usar CSS.escape para sanitizar partes vindas de dados remotos
                     var checkSel = '[data-action-check="' + CSS.escape(parts[0]) + '-' + CSS.escape(parts[1]) + '"]';
                     var actionBtn = document.querySelector(checkSel);
                     if (actionBtn) {
@@ -220,7 +213,6 @@ var SyncEngine = {
     },
 
     fullSync: async function() {
-        if (!this.url) { this.updateUI('nourl'); return; }
         if (!localStorage.getItem('syncInitialPushDone')) {
             await this.initialPush();
             localStorage.setItem('syncInitialPushDone', '1');
@@ -248,11 +240,9 @@ var SyncEngine = {
         await this.pull();
     },
 
-    setUrl: function(url) {
-        this.url = (url || '').trim();
-        localStorage.setItem('syncUrl', this.url);
-        if (this.url) this.initialPush();
-        else this.updateUI('');
+    // Legacy compat — setUrl no longer needed but keep for UI
+    setUrl: function() {
+        this.initialPush();
     },
 
     updateUI: function(status) {
@@ -262,24 +252,24 @@ var SyncEngine = {
         if (status === 'syncing') el.textContent = 'Sincronizando...';
         else if (status === 'synced') {
             localStorage.setItem('lastSync', Date.now());
-            el.textContent = 'Sincronizado agora';
+            el.textContent = 'Sincronizado ✓';
         }
         else if (status === 'error') el.textContent = 'Falha na sync' + (pending ? ' (' + pending + ' pendentes)' : '');
-        else if (status === 'autherror') el.textContent = 'Sem permissão (403) — verifique a URL do script';
-        else if (status === 'maxretry') el.textContent = 'Sync falhou após 10 tentativas — verifique conexão';
-        else if (status === 'nourl') el.textContent = 'Cole a URL acima primeiro';
+        else if (status === 'autherror') el.textContent = 'Erro de autenticação — verifique configuração';
+        else if (status === 'maxretry') el.textContent = 'Sync falhou após 10 tentativas';
         else el.textContent = '';
     },
 
     initUI: function() {
-        var input = document.getElementById('syncUrlInput');
-        if (input && this.url) input.value = this.url;
         var last = parseInt(localStorage.getItem('lastSync'));
-        if (last && this.url) {
+        if (last) {
             var ago = Math.round((Date.now() - last) / 60000);
             var el = document.getElementById('syncStatus');
-            if (el) el.textContent = ago < 1 ? 'Sincronizado agora' : 'Ultima sync: ' + (ago < 60 ? ago + ' min' : Math.round(ago/60) + 'h') + ' atras';
+            if (el) el.textContent = ago < 1 ? 'Sincronizado ✓' : 'Ultima sync: ' + (ago < 60 ? ago + ' min' : Math.round(ago/60) + 'h') + ' atrás';
         }
+        // Show device ID in settings
+        var deviceEl = document.getElementById('syncDeviceId');
+        if (deviceEl) deviceEl.textContent = this.deviceId;
     }
 };
 
@@ -313,12 +303,13 @@ function haptic(style) {
 
 SyncEngine.initUI();
 
-// Flush queue to localStorage on page close (prevents data loss during async push)
+// Flush queue to localStorage on page close
 window.addEventListener('beforeunload', function() {
     if (SyncEngine.queue && SyncEngine.queue.length > 0) SyncEngine._persistQueue();
 });
 
-if (SyncEngine.url) setTimeout(function() {
+// Auto-sync on load (after 5s to let page settle)
+setTimeout(function() {
     if (!localStorage.getItem('syncInitialPushDone')) {
         SyncEngine.initialPush().then(function() {
             localStorage.setItem('syncInitialPushDone', '1');
@@ -328,12 +319,14 @@ if (SyncEngine.url) setTimeout(function() {
     }
 }, 5000);
 
-if (SyncEngine.url) SyncEngine.pullIntervalId = setInterval(function() {
+// Poll every 30s
+SyncEngine.pullIntervalId = setInterval(function() {
     if (navigator.onLine && !SyncEngine.syncing) SyncEngine.pull();
 }, 30000);
 
+// Sync on visibility change (tab re-focus)
 document.addEventListener('visibilitychange', function() {
-    if (!document.hidden && SyncEngine.url && navigator.onLine && !SyncEngine.syncing) {
+    if (!document.hidden && navigator.onLine && !SyncEngine.syncing) {
         SyncEngine.fullSync();
     }
 });
