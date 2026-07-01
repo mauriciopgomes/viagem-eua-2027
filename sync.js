@@ -77,7 +77,7 @@ var SyncEngine = {
                 var rows = chunk.map(function(c) {
                     return { device_id: deviceId, key: c.key, value: c.value, ts: c.ts };
                 });
-                var resp = await fetch(this.supabaseUrl + '/rest/v1/user_data', {
+                var resp = await fetch(this.supabaseUrl + '/rest/v1/user_data?on_conflict=device_id,key', {
                     method: 'POST',
                     headers: Object.assign({}, this._headers(), { 'Prefer': 'resolution=merge-duplicates' }),
                     body: JSON.stringify(rows)
