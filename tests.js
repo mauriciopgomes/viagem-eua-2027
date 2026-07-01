@@ -804,7 +804,6 @@ test('tem search input', () => {
 
 test('tem sync status display', () => {
     assert(indexHtml.includes('id="syncStatus"'), 'deve ter syncStatus');
-    assert(indexHtml.includes('id="syncDeviceId"'), 'deve ter syncDeviceId');
 });
 
 // ==================== 15. INDEX.HTML — ACCESSIBILITY ====================

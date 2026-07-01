@@ -2,11 +2,7 @@
 var SyncEngine = {
     supabaseUrl: 'https://kahlxqiopfuobciiihzr.supabase.co',
     supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImthaGx4cWlvcGZ1b2JjaWlpaHpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI4NDE1NjQsImV4cCI6MjA5ODQxNzU2NH0._RxgyjxzYyPpQSnBO4b0xmn44o9OGlzhNvyHCsdkF44',
-    deviceId: localStorage.getItem('deviceId') || (function() {
-        var id = crypto.randomUUID();
-        localStorage.setItem('deviceId', id);
-        return id;
-    })(),
+    deviceId: 'viagem-gomes-2027',
     url: true, // compat flag — always "connected"
     queue: JSON.parse(localStorage.getItem('syncQueue') || '[]'),
     syncing: false,
@@ -213,9 +209,10 @@ var SyncEngine = {
     },
 
     fullSync: async function() {
-        if (!localStorage.getItem('syncInitialPushDone')) {
+        var doneKey = 'syncInitialPushDone-' + this.deviceId;
+        if (!localStorage.getItem(doneKey)) {
             await this.initialPush();
-            localStorage.setItem('syncInitialPushDone', '1');
+            localStorage.setItem(doneKey, '1');
         } else {
             await this.push();
             await this.pull();
@@ -267,9 +264,6 @@ var SyncEngine = {
             var el = document.getElementById('syncStatus');
             if (el) el.textContent = ago < 1 ? 'Sincronizado ✓' : 'Ultima sync: ' + (ago < 60 ? ago + ' min' : Math.round(ago/60) + 'h') + ' atrás';
         }
-        // Show device ID in settings
-        var deviceEl = document.getElementById('syncDeviceId');
-        if (deviceEl) deviceEl.textContent = this.deviceId;
     }
 };
 
@@ -309,10 +303,14 @@ window.addEventListener('beforeunload', function() {
 });
 
 // Auto-sync on load (after 5s to let page settle)
+// Force initial push on first load with shared ID
 setTimeout(function() {
-    if (!localStorage.getItem('syncInitialPushDone')) {
+    var doneKey = 'syncInitialPushDone-' + SyncEngine.deviceId;
+    if (!localStorage.getItem(doneKey)) {
+        // Clear old flag
+        localStorage.removeItem('syncInitialPushDone');
         SyncEngine.initialPush().then(function() {
-            localStorage.setItem('syncInitialPushDone', '1');
+            localStorage.setItem(doneKey, '1');
         });
     } else {
         SyncEngine.fullSync();
