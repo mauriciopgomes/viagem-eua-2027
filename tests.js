@@ -208,9 +208,9 @@ test('datas de check-in/checkout são contíguas', () => {
 // ==================== 4. DATA.JS — PARKS ====================
 section('data.js — Parques Nacionais');
 
-test('parks é um array com 10 parques', () => {
+test('parks é um array com 12 parques', () => {
     assert(Array.isArray(parks), 'parks deve ser array');
-    assertEqual(parks.length, 10, 'deve ter 10 parques');
+    assertEqual(parks.length, 12, 'deve ter 12 parques');
 });
 
 test('parques têm campos obrigatórios', () => {
@@ -645,7 +645,7 @@ test('dayRouteIdx definido para todos os 33 dias', () => {
     assert(appJs.includes('dayRouteIdx[d]') || appJs.includes('dayRouteIdx[day]'), 'dayRouteIdx must be built for all days');
     // Verify route-data.js has encodedRoutes for all driving days
     const routeCtx = vm.runInNewContext(routeDataJs + '\n;({encodedRoutes, routeDayOrder, decodePolyline})', {});
-    const drivingDays = [5,8,10,11,12,13,15,16,17,20,21,22,23,26,27,28,29,30,33];
+    const drivingDays = [5,8,9,10,11,12,14,15,16,19,20,21,22,24,25,26,27,29,30,33];
     drivingDays.forEach(d => {
         assert(routeCtx.encodedRoutes[d], `encodedRoutes[${d}] ausente`);
     });
@@ -687,7 +687,7 @@ test('routeCoords tem pontos suficientes', () => {
 test('dayRouteSegments tem segmentos para dias de estrada', () => {
     // dayRouteSegments is now decoded from route-data.js encodedRoutes
     const routeCtx = vm.runInNewContext(routeDataJs + '\n;({encodedRoutes, routeDayOrder, decodePolyline})', {});
-    [5, 8, 10, 11, 12, 13, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 30, 33].forEach((d) => {
+    [5, 8, 9, 10, 11, 12, 14, 15, 16, 19, 20, 21, 22, 24, 25, 26, 27, 29, 30, 33].forEach((d) => {
         assert(routeCtx.encodedRoutes[d], `encodedRoutes[${d}] ausente`);
         const pts = routeCtx.decodePolyline(routeCtx.encodedRoutes[d]);
         assert(pts.length >= 2, `day ${d} deve ter ≥2 pontos na rota`);
@@ -1144,7 +1144,9 @@ test('dias dos parques estão alinhados com o roteiro', () => {
         'Mt. Rainier': [12],
         'Olympic': [12, 13],
         'Redwood': [8, 9],
-        'Yosemite': [28, 29],
+        'Grand Canyon': [22],
+        'Death Valley': [24],
+        'Yosemite': [27, 28],
         'Sequoia': [26]
     };
     Object.entries(expected).forEach(([name, expectedDays]) => {
@@ -1171,7 +1173,7 @@ test('cada dia tem pelo menos 1 item food (exceto dia de voo)', () => {
 });
 
 test('dias de estrada (>100km) têm items drive', () => {
-    const driveDays = [5, 8, 9, 10, 11, 12, 14, 15, 16, 19, 20, 22, 23, 25, 28, 29, 30, 33];
+    const driveDays = [5, 8, 9, 10, 11, 12, 14, 15, 16, 19, 20, 22, 23, 24, 25, 28, 29, 30, 33];
     driveDays.forEach((d) => {
         const day = days[d - 1];
         const hasDrive = day.items.some(i => i.type === 'drive');

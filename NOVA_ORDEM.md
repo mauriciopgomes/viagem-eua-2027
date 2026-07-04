@@ -1,5 +1,9 @@
 # Nova Ordem da Viagem — Reorganizacao 2027
 
+> ⚠️ **DEPRECATED** — documento histórico da proposta de reorganização. Rota real implementada em `data.js`
+> divergiu bastante desse rascunho (voo é JFK→LAX, não SFO; ordem final das cidades é diferente; Big Sur
+> não é pernoite, Big Bear não existe no roteiro atual). Consulte `rotas.md` ou `roteiro.md` pra rota atual.
+
 > NYC voa pra SFO (nao mais LAX). Road trip comeca em SF, sobe norte ate WA, volta leste ate UT, desce Vegas, volta costa CA, termina LA.
 
 ## Ordem das Cidades

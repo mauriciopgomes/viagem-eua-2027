@@ -1,8 +1,8 @@
 // ==================== TRIP DATA ====================
 // Roteiro — Viagem EUA 2027
-// NYC → LAX → SF → Redwood → Costa Oregon → Cannon Beach
-// → Rainier → Olympic → Centralia → Twin Falls → Moab → Bryce → Zion
-// → Las Vegas → Sequoia → Yosemite → Big Sur → Monterey → LA → Big Bear → LAX
+// NYC → LAX → SF → Eureka → Crescent City → Costa Oregon → Cannon Beach
+// → Rainier → Olympic → The Dalles → Twin Falls → Moab → Bryce → Zion
+// → Page → Grand Canyon → Las Vegas → Sequoia → Yosemite → Carmel → Big Sur → LA
 //
 // Para REORDENAR dias: mova os objetos dentro do array `days`.
 // initDays() recalcula automaticamente: número, data, dia da semana, dayPhotos e superchargers.
@@ -169,8 +169,9 @@ const days = [
 
     {
         photo: 'img/activities/cable_car.jpg', shortLoc: 'SF', location: "San Francisco — City Tour",
-        route: "Cable Car + Chinatown + Redwood! 🚋🌲",
-        note: "Manhã de despedida em SF, depois drive pro norte até Crescent City!",
+        chargeStops: [{ name: 'Leggett, CA', leg: 'SF → Eureka', critical: false }],
+        route: "Cable Car + Chinatown + Avenue of the Giants! 🚋🌲",
+        note: "Manhã de despedida em SF, depois drive pro norte até Eureka via Avenue of the Giants!",
         region: "ca",
         items: [
             { time: "08:00", text: "☕ Café + check-out de SF", type: "" },
@@ -179,43 +180,42 @@ const days = [
             { time: "09:30", text: "🏮 <strong>Chinatown de SF</strong> — a mais antiga dos EUA!", type: "highlight" },
             { time: "10:00", text: "🎮 <strong>Nintendo San Francisco</strong> (Union Square) — ~5 min de Chinatown! Entrada livre", type: "highlight" },
             { time: "10:30", text: "🍽️ Almoço — <strong>La Taqueria</strong> (Mission)", type: "food" },
-            { time: "11:30", text: "🚗 Saída rumo ao norte via US-101 (~450 km, ~5.5h)", type: "drive" },
-            { time: "14:00", text: "🌲 <strong>Jedediah Smith Redwoods SP</strong> — <strong>Stout Memorial Grove Trail</strong> (~1 km loop entre gigantes!)", type: "highlight" },
-            { time: "15:00", text: "🚗 <strong>Howland Hill Road</strong> — estrada de terra entre redwoods enormes", type: "" },
-            { time: "16:00", text: "🏨 Check-in em <strong>Crescent City</strong>", type: "" },
-            { time: "16:30", text: "🏝️ <strong>Battery Point Lighthouse</strong> — ilha acessível na maré baixa!", type: "" },
-            { time: "17:30", text: "🌅 Pôr do sol no porto de Crescent City", type: "" },
-            { time: "19:00", text: "🍽️ Jantar — <strong>Fisherman's Restaurant</strong> (700 US-101 S, Crescent City) — Dungeness crab e halibut. ~$15-22/pessoa", type: "food" }
+            { time: "11:30", text: "🚗 Saída rumo ao norte via US-101 (~400 km, ~4.5h)", type: "drive" },
+            { time: "15:00", text: "⚡ <strong>Supercharger Leggett</strong> (~30 min)", type: "charge" },
+            { time: "15:45", text: "🌲 <strong>Avenue of the Giants</strong> — 50 km entre redwoods!", type: "highlight" },
+            { time: "17:15", text: "🚗 US-101 norte (~35 km) → Eureka", type: "drive" },
+            { time: "17:45", text: "🏨 Chegada em <strong>Eureka</strong>! Check-in", type: "" },
+            { time: "18:00", text: "🏙️ <strong>Old Town Eureka</strong> — <strong>Carson Mansion</strong>", type: "" },
+            { time: "19:00", text: "🍽️ Jantar — <strong>Lost Coast Brewery & Cafe</strong> (617 4th St, Eureka) — cervejaria artesanal, burgers e fish tacos. ~$15-20/pessoa", type: "food" }
         ]
     },
 
     // ==================== REDWOOD (Dia 9) ====================
     {
         photo: 'img/activities/fern_canyon.jpg', shortLoc: 'Redwood',
-        chargeStops: [{ name: 'Eureka, CA', leg: 'Crescent City → Eureka', critical: false }],
-        location: "Crescent City → Redwood NP → Eureka",
-        route: "Fern Canyon + Tall Trees + Avenue of Giants! 🌲",
-        note: "Dia cheio de Redwood descendo ao sul — trilhas, Fern Canyon e Avenue of Giants!",
+        location: "Eureka → Redwood NP → Crescent City",
+        route: "Fern Canyon + Tall Trees + Jedediah Smith! 🌲",
+        note: "Dia cheio de Redwood subindo ao norte — trilhas, Fern Canyon e Jedediah Smith!",
         region: "ca",
         items: [
-            { time: "07:00", text: "☕ Café + check-out de Crescent City", type: "" },
-            { time: "07:30", text: "🥾 <strong>Simpson-Reed Trail</strong> (~1 km loop) — trilha pavimentada entre old-growth redwoods!", type: "" },
-            { time: "08:00", text: "🌲 <strong>Del Norte Coast Redwoods SP</strong> — <strong>Coastal Trail</strong> (~2 km) — costa selvagem entre redwoods!", type: "highlight" },
-            { time: "09:00", text: "🚗 US-101 sul (~35 km) → <strong>Prairie Creek Redwoods SP</strong>", type: "drive" },
-            { time: "09:30", text: "🦌 <strong>Elk Meadow</strong> (Orick) — manada de Roosevelt elk pastando! Pullover grátis", type: "" },
-            { time: "09:45", text: "🚗 <strong>Newton B. Drury Scenic Parkway</strong>", type: "" },
-            { time: "10:00", text: "📸 <strong>Big Tree Wayside</strong>", type: "" },
-            { time: "10:30", text: "🥾 <strong>Fern Canyon</strong> (~1.5 km) — samambaias! <strong>Jurassic Park 2</strong>!", type: "highlight" },
-            { time: "11:30", text: "🌊 <strong>Gold Bluffs Beach</strong>", type: "" },
-            { time: "12:00", text: "🌲 <strong>Lady Bird Johnson Grove Trail</strong> (~2.5 km)", type: "" },
-            { time: "13:00", text: "🌲 <em>Opcional (checar condições):</em> <strong>Tall Trees Grove</strong> — árvores mais altas do MUNDO! (~5 km, ~2h). ⚠️ Permit no Info Center (Orick)", type: "highlight" },
-            { time: "14:30", text: "🍽️ Almoço em <strong>Orick</strong>", type: "food" },
-            { time: "15:00", text: "🚗 US-101 sul (~60 km)", type: "drive" },
-            { time: "16:00", text: "🌲 <strong>Avenue of the Giants</strong> — 50 km entre redwoods!", type: "highlight" },
-            { time: "17:30", text: "🏨 Chegada em <strong>Eureka</strong>! Check-in", type: "" },
-            { time: "17:45", text: "🏙️ <strong>Old Town Eureka</strong> — <strong>Carson Mansion</strong>", type: "" },
-            { time: "18:00", text: "⚡ <strong>Supercharger Eureka</strong>", type: "charge" },
-            { time: "19:00", text: "🍽️ Jantar — <strong>Lost Coast Brewery & Cafe</strong> (617 4th St, Eureka) — cervejaria artesanal, burgers e fish tacos. ~$15-20/pessoa", type: "food" }
+            { time: "07:00", text: "☕ Café + check-out de Eureka", type: "" },
+            { time: "07:30", text: "🚗 US-101 norte (~35 km) → <strong>Prairie Creek Redwoods SP</strong>", type: "drive" },
+            { time: "08:00", text: "🦌 <strong>Elk Meadow</strong> (Orick) — manada de Roosevelt elk pastando! Pullover grátis", type: "" },
+            { time: "08:15", text: "🚗 <strong>Newton B. Drury Scenic Parkway</strong>", type: "" },
+            { time: "08:30", text: "📸 <strong>Big Tree Wayside</strong>", type: "" },
+            { time: "09:00", text: "🥾 <strong>Fern Canyon</strong> (~1.5 km) — samambaias! <strong>Jurassic Park 2</strong>!", type: "highlight" },
+            { time: "10:00", text: "🌊 <strong>Gold Bluffs Beach</strong>", type: "" },
+            { time: "10:30", text: "🌲 <strong>Lady Bird Johnson Grove Trail</strong> (~2.5 km)", type: "" },
+            { time: "11:30", text: "🌲 <em>Opcional (checar condições):</em> <strong>Tall Trees Grove</strong> — árvores mais altas do MUNDO! (~5 km, ~2h). ⚠️ Permit no Info Center (Orick)", type: "highlight" },
+            { time: "13:00", text: "🍽️ Almoço em <strong>Orick</strong>", type: "food" },
+            { time: "14:00", text: "🌲 <strong>Del Norte Coast Redwoods SP</strong> — <strong>Coastal Trail</strong> (~2 km) — costa selvagem entre redwoods!", type: "highlight" },
+            { time: "14:45", text: "🥾 <strong>Simpson-Reed Trail</strong> (~1 km loop) — trilha pavimentada entre old-growth redwoods!", type: "" },
+            { time: "15:15", text: "🚗 <strong>Howland Hill Road</strong> — estrada de terra entre redwoods enormes", type: "drive" },
+            { time: "16:00", text: "🌲 <strong>Jedediah Smith Redwoods SP</strong> — <strong>Stout Memorial Grove Trail</strong> (~1 km loop entre gigantes!)", type: "highlight" },
+            { time: "17:00", text: "🏨 Chegada em <strong>Crescent City</strong>! Check-in", type: "" },
+            { time: "17:30", text: "🏝️ <strong>Battery Point Lighthouse</strong> — ilha acessível na maré baixa!", type: "" },
+            { time: "18:15", text: "🌅 Pôr do sol no porto de Crescent City", type: "" },
+            { time: "19:00", text: "🍽️ Jantar — <strong>Fisherman's Restaurant</strong> (700 US-101 S, Crescent City) — Dungeness crab e halibut. ~$15-22/pessoa", type: "food" }
         ],
         tips: ["⚠️ Fern Canyon: Davison Road (terra, 10 km) pode fechar com chuva. Ligar pro Visitors Center: (707) 464-6101.", "⚠️ Tall Trees Grove: permit gratuito no Info Center (Orick) — pode estar fechado em dia de semana no inverno."]
     },
@@ -223,23 +223,20 @@ const days = [
     // ==================== COSTA OREGON + CANNON BEACH (Dias 11-12) ====================
     {
         photo: 'img/activities/samuel_boardman.jpg', shortLoc: 'Oregon',
-        chargeStops: [
-            { name: 'Coos Bay, OR', leg: 'Eureka → Gold Beach', critical: false }
-        ],
-        location: "Eureka → Costa Oregon → Gold Beach",
+        location: "Crescent City → Costa Oregon → Gold Beach",
         route: "Samuel Boardman + faróis + costa selvagem! 🌊",
-        note: "Subindo de Eureka pela US-101 — paradas espetaculares até Gold Beach!",
+        note: "Subindo de Crescent City pela US-101 — paradas espetaculares até Gold Beach!",
         region: "pnw",
         items: [
-            { time: "08:00", text: "☕ Café + check-out de Eureka", type: "" },
-            { time: "09:00", text: "🚗 Saída rumo ao norte pela US-101 (~200 km até Gold Beach)", type: "drive" },
-            { time: "10:00", text: "📸 <strong>Thomas H. Kuchel Visitor Center</strong> — último mirante da Redwood NP", type: "" },
-            { time: "11:00", text: "🍽️ Almoço em <strong>Brookings, OR</strong>", type: "food" },
-            { time: "12:00", text: "📸 <strong>Samuel Boardman Scenic Corridor</strong> — mirantes incríveis!", type: "highlight" },
-            { time: "12:30", text: "📸 <strong>Natural Bridges Viewpoint</strong>", type: "highlight" },
-            { time: "13:00", text: "📸 <strong>Arch Rock Viewpoint</strong>", type: "" },
-            { time: "13:30", text: "🏖️ <strong>Cape Sebastian</strong> — mirante épico sobre o Pacífico!", type: "highlight" },
-            { time: "14:30", text: "🏨 Check-in em <strong>Gold Beach</strong>!", type: "" },
+            { time: "08:30", text: "☕ Café + check-out de Crescent City", type: "" },
+            { time: "09:00", text: "🚗 Saída rumo ao norte pela US-101 (~85 km até Gold Beach)", type: "drive" },
+            { time: "09:45", text: "📸 <strong>Thomas H. Kuchel Visitor Center</strong> — último mirante da Redwood NP", type: "" },
+            { time: "10:30", text: "🍽️ Almoço em <strong>Brookings, OR</strong>", type: "food" },
+            { time: "11:30", text: "📸 <strong>Samuel Boardman Scenic Corridor</strong> — mirantes incríveis!", type: "highlight" },
+            { time: "12:00", text: "📸 <strong>Natural Bridges Viewpoint</strong>", type: "highlight" },
+            { time: "12:30", text: "📸 <strong>Arch Rock Viewpoint</strong>", type: "" },
+            { time: "13:00", text: "🏖️ <strong>Cape Sebastian</strong> — mirante épico sobre o Pacífico!", type: "highlight" },
+            { time: "14:00", text: "🏨 Check-in em <strong>Gold Beach</strong>!", type: "" },
             { time: "15:00", text: "🌊 <strong>Jerry's Rogue Jets</strong> (opcional) — passeio de barco pelo Rogue River!", type: "" },
             { time: "17:00", text: "🌅 Pôr do sol na praia de Gold Beach", type: "highlight" },
             { time: "18:30", text: "🍽️ Jantar — <strong>Spinner's Seafood Steak & Chowder House</strong> (Gold Beach) — salmão e clam chowder. ~$20-25/pessoa", type: "food" }
@@ -584,21 +581,25 @@ const days = [
     },
 
     {
-        photo: 'img/activities/las_vegas_strip_night.jpg', shortLoc: 'Vegas', location: "Las Vegas Strip",
-        route: "Hotéis icônicos + compras + shows! 🎰",
-        note: "Dia livre em Vegas! Strip, hotéis, compras e show à noite.",
+        photo: 'img/activities/badwater_basin.jpg', shortLoc: 'Death Valley', location: "Vegas → Death Valley NP → Vegas",
+        chargeStops: [{ name: 'Pahrump, NV', leg: 'Vegas → Death Valley → Vegas', critical: false }],
+        route: "Badwater Basin + Zabriskie Point + Artist's Palette! 🏜️",
+        note: "Day trip pra Death Valley! ~450 km total (incluindo desvio até Badwater) — sai e volta pro mesmo hotel em Vegas. Fevereiro é a época ideal (calor extremo no resto do ano).",
         region: "nv",
         items: [
-            { time: "09:00", text: "☕ Café", type: "" },
-            { time: "10:00", text: "🏨 Explorar hotéis — <strong>Venetian</strong> (canais), <strong>Bellagio</strong> (conservatório), <strong>Caesars Palace</strong>", type: "highlight" },
-            { time: "12:00", text: "🍽️ Almoço na Strip", type: "food" },
-            { time: "13:30", text: "🛍️ <strong>Forum Shops</strong> (Caesars) ou <strong>Fashion Show Mall</strong>", type: "" },
-            { time: "15:00", text: "🎮 Tempo livre — piscina, arcade, explorar", type: "" },
-            { time: "17:00", text: "🌅 <strong>High Roller</strong> — roda-gigante ao pôr do sol! ~$25/adulto, ~$15/criança", type: "highlight" },
-            { time: "18:00", text: "🌅 <strong>Bellagio Fountains</strong> — show noturno!", type: "highlight" },
-            { time: "19:00", text: "🍽️ Jantar — <strong>Raising Cane's</strong> (3717 Las Vegas Blvd S, na Strip!) — chicken tenders crocantes com o famoso Cane's Sauce. Fila rápida, kids adoram! ~$10-14/pessoa", type: "food" },
-            { time: "20:30", text: "🎪 Show ou passeio noturno na Strip", type: "highlight" }
-        ]
+            { time: "07:00", text: "☕ Café + saída de Vegas (carro carregado 100% na noite anterior)", type: "" },
+            { time: "07:15", text: "🚗 Saída rumo a Death Valley NP (~200 km, ~2.5h via NV-160 → CA-190, passando por Pahrump)", type: "drive" },
+            { time: "09:45", text: "📸 <strong>Zabriskie Point</strong> — mirante icônico sobre badlands erodidos!", type: "highlight" },
+            { time: "10:15", text: "🏜️ <strong>Furnace Creek Visitor Center</strong> — contexto do parque, mapas", type: "" },
+            { time: "10:45", text: "🎨 <strong>Artist's Palette</strong> — estrada cênica com rochas coloridas (Artist's Drive, ~9 milhas, mão única)", type: "highlight" },
+            { time: "11:45", text: "🧂 <strong>Badwater Basin</strong> — ponto mais baixo da América do Norte (-86m)! Salt flats infinitos", type: "highlight" },
+            { time: "13:00", text: "🍽️ Almoço no Furnace Creek (The Ranch ou Last Kind Words Saloon)", type: "food" },
+            { time: "14:00", text: "🚗 Volta rumo a Las Vegas (~200 km, ~2.8h via CA-190 → NV-160)", type: "drive" },
+            { time: "16:45", text: "⚡ Supercharger Pahrump (checar disponibilidade no app antes de sair — ⚠️ não confirmado)", type: "charge" },
+            { time: "17:30", text: "🏨 Chegada em Vegas — descanso antes do jantar", type: "" },
+            { time: "19:00", text: "🍽️ Jantar — <strong>Raising Cane's</strong> (3717 Las Vegas Blvd S, na Strip!) — chicken tenders crocantes com o famoso Cane's Sauce. ~$10-14/pessoa", type: "food" }
+        ],
+        tips: ["🌡️ Fevereiro: clima ameno em Death Valley (15-20°C dia), ao contrário do verão extremo. Ainda assim levar água.", "⚡ Sem Supercharger dentro do parque — sair de Vegas com carga cheia. Pahrump (rota de ida/volta) tem carregador, mas confirmar no app Tesla antes de depender dele.", "🚗 Dante's View (mirante a 1.669m) fica de fora do roteiro — adiciona ~1h de estrada de montanha ida e volta. Pular pra manter o dia dentro do tempo.", "🍽️ Sem Strip/show à noite nesse dia — volta de Death Valley já enche o dia. Trade-off aceito: troca dia livre por Death Valley."]
     },
 
     // ==================== SEQUOIA + YOSEMITE (Dias 26-29) ====================
@@ -631,25 +632,25 @@ const days = [
 
     {
         photo: 'img/activities/general_sherman_tree.jpg', shortLoc: 'Sequoia',
-        location: "Three Rivers → Sequoia → Kings Canyon",
-        route: "General Sherman + General Grant! 🌲",
-        note: "Dia inteiro entre sequoias gigantes! Sobe de Three Rivers até Kings Canyon.",
+        location: "Three Rivers → Sequoia → Kings Canyon → Mariposa",
+        route: "General Sherman + General Grant + rumo a Yosemite! 🌲",
+        note: "Dia inteiro entre sequoias gigantes! Sobe de Three Rivers até Kings Canyon, depois segue direto pra Mariposa — sem voltar. Assim o dia 27 começa cedo e aproveita o Valley inteiro! Drive final é mais longo do que parece (~5h, estrada de montanha) — dia cheio.",
         region: "ca",
         items: [
-            { time: "07:30", text: "☕ Café em Three Rivers", type: "" },
-            { time: "08:00", text: "🚗 Drive Three Rivers → Sequoia NP (~30 km, ~45 min)", type: "drive" },
-            { time: "09:00", text: "🌲 <strong>General Sherman Tree</strong> — a MAIOR árvore do mundo! 84m!", type: "highlight" },
-            { time: "09:30", text: "🥾 <strong>Congress Trail</strong> (~3 km loop) — entre sequoias gigantes", type: "" },
-            { time: "10:30", text: "📸 <strong>Tunnel Log</strong> — sequoia caída com túnel pra carro! + <strong>Auto Log</strong>", type: "" },
-            { time: "11:30", text: "🚗 <strong>Generals Highway</strong> → Kings Canyon (~1h, estrada cênica!)", type: "drive" },
-            { time: "12:30", text: "🌲 <strong>General Grant Tree</strong> — 2ª maior sequoia do mundo! (Kings Canyon)", type: "highlight" },
-            { time: "13:00", text: "🌲 <strong>North Grove Loop</strong> (~1 km) — floresta de sequoias gigantes!", type: "" },
-            { time: "13:30", text: "🍽️ Almoço (levar lanche ou Grant Grove Restaurant)", type: "food" },
-            { time: "14:30", text: "🚗 Volta → Three Rivers (~1.5h)", type: "drive" },
-            { time: "16:00", text: "🏞️ Tempo livre em Three Rivers", type: "" },
-            { time: "19:00", text: "🍽️ Jantar — <strong>The Gateway Restaurant</strong> (45978 Sierra Dr, Three Rivers) — burgers e trout almondine. ~$15-20/pessoa", type: "food" }
+            { time: "07:00", text: "☕ Café + check-out de Three Rivers", type: "" },
+            { time: "07:30", text: "🚗 Drive Three Rivers → Sequoia NP (~30 km, ~45 min)", type: "drive" },
+            { time: "08:15", text: "🌲 <strong>General Sherman Tree</strong> — a MAIOR árvore do mundo! 84m!", type: "highlight" },
+            { time: "08:45", text: "🥾 <strong>Congress Trail</strong> (~3 km loop) — entre sequoias gigantes", type: "" },
+            { time: "09:45", text: "📸 <strong>Tunnel Log</strong> — sequoia caída com túnel pra carro! + <strong>Auto Log</strong>", type: "" },
+            { time: "10:15", text: "🚗 <strong>Generals Highway</strong> → Kings Canyon (~1h, estrada cênica!)", type: "drive" },
+            { time: "11:15", text: "🌲 <strong>General Grant Tree</strong> — 2ª maior sequoia do mundo! (Kings Canyon)", type: "highlight" },
+            { time: "11:45", text: "🌲 <strong>North Grove Loop</strong> (~1 km) — floresta de sequoias gigantes!", type: "" },
+            { time: "12:15", text: "🍽️ Almoço no Grant Grove Restaurant", type: "food" },
+            { time: "13:00", text: "🚗 Drive Kings Canyon → Mariposa (~295 km, ~5h via CA-180 W → CA-41 N → CA-49 N — estrada de montanha, mais lenta do que a distância sugere)", type: "drive" },
+            { time: "18:00", text: "🏨 Chegada em Mariposa! Check-in", type: "" },
+            { time: "19:30", text: "🍽️ Jantar — <strong>Charles Street Dinner House</strong> (5043 Hwy 140, Mariposa) — steakhouse histórico local. ~$25-35/pessoa", type: "food" }
         ],
-        tips: ["❄️ Em fevereiro pode ter neve nas áreas mais altas.", "⚠️ Kings Canyon Scenic Byway (CA-180 leste) fecha no inverno (nov–abr). Só General Grant Tree é acessível.", "⚠️ Moro Rock: degraus frequentemente fechados no inverno por gelo. Se aberto, vale a subida (~30 min ida e volta, vista 360°)."]
+        tips: ["❄️ Em fevereiro pode ter neve nas áreas mais altas.", "⚠️ Kings Canyon Scenic Byway (CA-180 leste, pra Cedar Grove) fecha no inverno (nov–abr). Só General Grant Tree é acessível — CA-180 oeste rumo a Fresno segue aberta.", "⚠️ Moro Rock: degraus frequentemente fechados no inverno por gelo. Se aberto, vale a subida (~30 min ida e volta, vista 360°).", "🚗 Dia sem volta a Three Rivers — bagagem toda no carro, check-out definitivo pela manhã.", "⏰ Drive final é ~5h (não ~2.5h) — estrada de montanha sinuosa de Kings Canyon até Fresno antes de pegar a CA-41. Sem tempo livre em Mariposa, direto pro jantar."]
     },
 
     {
@@ -812,8 +813,8 @@ const days = [
 const hotels = [
     { num: 1, name: "Marriott Marquis, Times Square, NY", checkin: "21/01", checkout: "25/01", nights: 4 },
     { num: 2, name: "San Francisco, CA", checkin: "25/01", checkout: "28/01", nights: 3 },
-    { num: 3, name: "Crescent City / Klamath, CA", checkin: "28/01", checkout: "29/01", nights: 1 },
-    { num: 4, name: "Eureka / Arcata, CA", checkin: "29/01", checkout: "30/01", nights: 1 },
+    { num: 3, name: "Eureka / Arcata, CA", checkin: "28/01", checkout: "29/01", nights: 1 },
+    { num: 4, name: "Crescent City / Klamath, CA", checkin: "29/01", checkout: "30/01", nights: 1 },
     { num: 5, name: "Gold Beach / Coos Bay, OR", checkin: "30/01", checkout: "31/01", nights: 1 },
     { num: 6, name: "Cannon Beach, OR", checkin: "31/01", checkout: "01/02", nights: 1 },
     { num: 7, name: "Forks / Port Angeles, WA (Olympic)", checkin: "01/02", checkout: "03/02", nights: 2 },
@@ -824,8 +825,8 @@ const hotels = [
     { num: 12, name: "Springdale, UT (Zion)", checkin: "09/02", checkout: "10/02", nights: 1 },
     { num: 13, name: "Page, AZ (Horseshoe Bend)", checkin: "10/02", checkout: "11/02", nights: 1 },
     { num: 14, name: "Las Vegas, NV", checkin: "11/02", checkout: "14/02", nights: 3 },
-    { num: 15, name: "Three Rivers, CA (Sequoia)", checkin: "14/02", checkout: "16/02", nights: 2 },
-    { num: 16, name: "Mariposa / El Portal, CA", checkin: "16/02", checkout: "18/02", nights: 2 },
+    { num: 15, name: "Three Rivers, CA (Sequoia)", checkin: "14/02", checkout: "15/02", nights: 1 },
+    { num: 16, name: "Mariposa / El Portal, CA", checkin: "15/02", checkout: "18/02", nights: 3 },
     { num: 17, name: "Carmel, CA", checkin: "18/02", checkout: "19/02", nights: 1 },
     { num: 18, name: "Los Angeles, CA", checkin: "19/02", checkout: "22/02", nights: 3 }
 ];
@@ -840,8 +841,10 @@ const parks = [
     { name: "🏜️ Capitol Reef National Park", days: "Dia 19", highlights: "Petroglífos Fremont, Hickman Bridge Trail, Fruita Historic District, Scenic Drive." },
     { name: "🏔️ Bryce Canyon National Park", days: "Dias 19–20", highlights: "Navajo Loop, Queen's Garden, hoodoos, Bryce Amphitheater, stargazing!" },
     { name: "🏞️ Zion National Park", days: "Dias 20–21", highlights: "Watchman Trail, Emerald Pools, Canyon Overlook, Riverside Walk, Court of the Patriarchs." },
+    { name: "🏜️ Grand Canyon National Park", days: "Dia 22", highlights: "South Rim, Mather Point, Yavapai Point + Geology Museum, Hopi Point, Rim Trail." },
+    { name: "🏜️ Death Valley National Park", days: "Dia 24", highlights: "Badwater Basin (-86m, ponto mais baixo da América do Norte), Zabriskie Point, Artist's Palette." },
     { name: "🌲 Sequoia + Kings Canyon NP", days: "Dia 26", highlights: "General Sherman Tree (maior árvore!), Congress Trail, Moro Rock, General Grant Tree." },
-    { name: "🏞️ Yosemite National Park", days: "Dias 28–29", highlights: "Tunnel View, El Capitan, Half Dome, Yosemite Falls, Snow Tubing, Mirror Lake." }
+    { name: "🏞️ Yosemite National Park", days: "Dias 27–28", highlights: "Tunnel View, El Capitan, Half Dome, Yosemite Falls, Snow Tubing, Mirror Lake." }
 ];
 
 // ==================== REORDERING SYSTEM ====================
