@@ -11,46 +11,51 @@
 const fs = require('fs');
 const path = require('path');
 
-// Driving day waypoints — current route order (post Jan/Fev 2027 reorg + Redwood/Sequoia fixes)
-// NYC→LAX→SF→Eureka→Crescent City→Oregon Coast→WA→UT→Page→GC→Vegas→Sequoia→Yosemite→Coast→LA
+// Driving day waypoints — route reorganizada (LA→Vegas primeiro, LA 3 noites no final)
+// NYC→LAX→Vegas→GC→Page→Zion→Bryce→CapitolReef→Moab→TwinFalls→PNW→Rainier→CoastOR→Redwood→SF→Sequoia→Yosemite→PCH→LA
 const dayWaypoints = {
-    // D5: LAX → SF via I-5
-    5: [[33.94,-118.41],[34.85,-118.88],[35.05,-119.02],[35.76,-120.33],[36.68,-120.06],[36.98,-121.07],[37.34,-121.89],[37.77,-122.42]],
-    // D8: SF → Eureka via Leggett / Avenue of the Giants (US-101 N)
-    8: [[37.77,-122.42],[38.44,-122.72],[39.41,-123.36],[39.86,-123.72],[40.10,-123.79],[40.80,-124.16]],
-    // D9: Eureka → Crescent City via Redwood NP / Orick / Klamath (US-101 N)
-    9: [[40.80,-124.16],[41.29,-124.06],[41.53,-124.04],[41.76,-124.20]],
-    // D10: Crescent City → Gold Beach (US-101 N, short hop into Oregon)
-    10: [[41.76,-124.20],[42.05,-124.28],[42.41,-124.42]],
-    // D11: Gold Beach → Cannon Beach (US-101 north, full coast)
-    11: [[42.41,-124.42],[42.86,-124.42],[43.37,-124.22],[43.97,-124.10],[44.63,-124.05],[44.96,-124.02],[45.37,-123.97],[45.89,-123.96],[46.00,-123.92],[45.88,-123.96]],
-    // D12: Cannon Beach → Rainier → Forks
-    12: [[45.89,-123.96],[46.07,-122.88],[46.72,-122.95],[46.85,-121.76],[47.04,-122.90],[47.30,-123.10],[47.59,-123.79],[47.95,-124.39]],
-    // D14: Forks → Aberdeen → Centralia → Multnomah → The Dalles
-    14: [[47.95,-124.39],[47.50,-124.35],[46.98,-123.82],[46.72,-122.95],[46.07,-122.88],[45.57,-122.12],[45.60,-121.18]],
-    // D15: The Dalles → Twin Falls (I-84 east)
-    15: [[45.60,-121.18],[44.77,-117.83],[43.62,-116.20],[42.56,-114.46]],
-    // D16: Twin Falls → SLC → Moab
-    16: [[42.56,-114.46],[41.73,-112.17],[40.76,-111.89],[39.97,-111.53],[39.60,-110.81],[38.99,-110.16],[38.57,-109.55]],
-    // D19: Moab → Capitol Reef → Bryce
-    19: [[38.57,-109.55],[38.99,-110.16],[38.29,-111.57],[38.75,-111.50],[37.68,-112.15],[37.63,-112.17]],
-    // D20: Bryce → Zion
-    20: [[37.63,-112.17],[37.29,-112.68],[37.21,-112.99]],
-    // D21: Zion → Page
-    21: [[37.21,-112.99],[37.10,-112.53],[36.91,-111.46]],
-    // D22: Page → Grand Canyon South Rim → Vegas
-    22: [[36.91,-111.46],[36.05,-111.83],[36.06,-112.14],[35.25,-112.19],[35.20,-114.05],[35.98,-114.83],[36.17,-115.14]],
-    // D25: Vegas → Three Rivers (Sequoia)
-    25: [[36.17,-115.14],[35.27,-116.07],[34.90,-117.02],[35.05,-119.02],[36.12,-119.30],[36.45,-118.91]],
-    // D26: Three Rivers → Sequoia → Kings Canyon → Mariposa (sem volta — CA-180 W → CA-41 N → CA-49 N)
+    // D5: LAX → Vegas via I-15 (Barstow) — NOVA perna
+    5: [[33.94,-118.41],[34.90,-117.02],[36.17,-115.14]],
+    // D7: Vegas → Pahrump → Death Valley (Zabriskie/Badwater) → Vegas (loop, NV-160 → CA-190, = antigo D24 sem mudança)
+    7: [[36.17,-115.14],[36.21,-115.99],[36.43,-116.81],[36.25,-116.83],[36.17,-115.14]],
+    // D8: Vegas → Grand Canyon South Rim → Page (reverso do antigo D22)
+    8: [[36.17,-115.14],[35.98,-114.83],[35.20,-114.05],[35.25,-112.19],[36.06,-112.14],[36.05,-111.83],[36.91,-111.46]],
+    // D9: Page → Zion (reverso do antigo D21)
+    9: [[36.91,-111.46],[37.10,-112.53],[37.21,-112.99]],
+    // D10: Zion → Bryce (reverso do antigo D20)
+    10: [[37.21,-112.99],[37.29,-112.68],[37.63,-112.17]],
+    // D11: Bryce → Capitol Reef → Moab (reverso do antigo D19 — CORRIGIDO: waypoint antigo
+    // [38.75,-111.50] ficava ao norte de Capitol Reef, forçando OSRM a zigue-zaguear
+    // pra cima e voltar. Sequência agora monotônica oeste→leste, sem backtrack.)
+    11: [[37.63,-112.17],[37.76,-111.55],[38.28,-111.26],[38.99,-110.16],[38.57,-109.55]],
+    // D14: Moab → SLC → Twin Falls (reverso do antigo D16)
+    14: [[38.57,-109.55],[38.99,-110.16],[39.60,-110.81],[39.97,-111.53],[40.76,-111.89],[41.73,-112.17],[42.56,-114.46]],
+    // D15: Twin Falls → The Dalles (reverso do antigo D15)
+    15: [[42.56,-114.46],[43.62,-116.20],[44.77,-117.83],[45.60,-121.18]],
+    // D16: The Dalles → Forks (reverso do antigo D14)
+    16: [[45.60,-121.18],[45.57,-122.12],[46.07,-122.88],[46.72,-122.95],[46.98,-123.82],[47.50,-124.35],[47.95,-124.39]],
+    // D18: Forks → Olympia → Mt. Rainier (Paradise, desvio ida-e-volta) → Cannon Beach — Rainier RE-INSERIDO
+    // (posição calendário agora cai num domingo, plowing de inverno garantido; ver tips do dia)
+    18: [[47.95,-124.39],[47.04,-122.90],[46.786,-121.743],[47.04,-122.90],[45.89,-123.96]],
+    // D19: Cannon Beach → Coos Bay (reverso do antigo D11)
+    19: [[45.88,-123.96],[46.00,-123.92],[45.89,-123.96],[45.37,-123.97],[44.96,-124.02],[44.63,-124.05],[43.97,-124.10],[43.37,-124.22],[42.86,-124.42],[42.41,-124.42]],
+    // D20: Coos Bay → Crescent City (reverso do antigo D10)
+    20: [[42.41,-124.42],[42.05,-124.28],[41.76,-124.20]],
+    // D21: Crescent City → Redwood NP → Eureka (reverso do antigo D9)
+    21: [[41.76,-124.20],[41.53,-124.04],[41.29,-124.06],[40.80,-124.16]],
+    // D22: Eureka → SF via Leggett / Avenue of the Giants (reverso do antigo D8)
+    22: [[40.80,-124.16],[40.10,-123.79],[39.86,-123.72],[39.41,-123.36],[38.44,-122.72],[37.77,-122.42]],
+    // D25: SF → Three Rivers via Gilroy / CA-152 / CA-99 / Fresno / CA-198 — NOVA perna
+    25: [[37.77,-122.42],[37.0058,-121.5882],[36.75,-119.77],[36.45,-118.91]],
+    // D26: Three Rivers → Sequoia → Kings Canyon → Mariposa (sem volta — CA-180 W → CA-41 N → CA-49 N, = antigo D26 sem mudança)
     26: [[36.45,-118.91],[36.56,-118.77],[36.74,-118.97],[36.78,-119.79],[37.32,-119.65],[37.49,-119.97]],
-    // D27: Mariposa → Yosemite Valley → Mariposa (CA-140, round trip)
+    // D27: Mariposa → Yosemite Valley → Mariposa (CA-140, round trip, = antigo D27 sem mudança)
     27: [[37.49,-119.97],[37.74,-119.60],[37.49,-119.97]],
-    // D29: Mariposa → Monterey/Carmel (via Merced, Gilroy)
+    // D29: Mariposa → Monterey/Carmel via Merced/Gilroy (= antigo D29 sem mudança)
     29: [[37.49,-119.97],[37.33,-120.48],[37.06,-121.57],[36.97,-122.03],[36.60,-121.89]],
-    // D30: Carmel → PCH (Big Sur) → San Simeon → SLO → Santa Barbara → LA
+    // D30: Carmel → PCH (Big Sur) → San Simeon → SLO → Santa Barbara → LA (= antigo D30 sem mudança)
     30: [[36.55,-121.92],[36.37,-121.90],[36.24,-121.79],[36.18,-121.69],[35.97,-121.49],[35.66,-121.19],[35.28,-120.66],[34.42,-119.70],[34.05,-118.24]],
-    // D33: LA → LAX
+    // D33: LA → LAX (= antigo D33 sem mudança)
     33: [[34.05,-118.24],[33.94,-118.41]]
 };
 

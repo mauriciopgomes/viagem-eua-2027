@@ -47,7 +47,7 @@ Cada arquivo expõe globais; sem módulos ES. `app.js` depende de `data.js` e `s
 Cache Service Worker usa `viagem-eua-2027-vN` (mesmo N do major em `package.json`). **Sempre que modificar** `index.html`, `app.js`, `pwa.js`, `sync.js`, `storage.js`, `styles.css`, `manifest.json` ou `data.js`, incremente em `sw.js`:
 
 ```js
-const CACHE_NAME = 'viagem-eua-2027-v148'; // ← bumpar aqui
+const CACHE_NAME = 'viagem-eua-2027-v197'; // ← bumpar aqui
 ```
 
 `auto-version.js` faz isso automaticamente no CI (GitHub Actions).
@@ -62,6 +62,12 @@ const CACHE_NAME = 'viagem-eua-2027-v148'; // ← bumpar aqui
 - `type`: `""` | `"drive"` | `"food"` | `"highlight"` — controla ícone/estilo
 - `chargeStops`: array de `{ name, leg, critical }` para superchargers do dia
 - `region`: código de região para agrupamento no mapa
+
+### Restrições fixas da viagem (não mudar sem confirmar com usuário)
+
+- **Dias 1-4 (NYC) e dia 33 (voo de volta)**: travados — voos e hotel de NY já comprados. Qualquer reorganização de rota (ex: inverter o road trip) só pode mexer do dia 5 ao dia 32.
+- **LA no final da viagem**: sempre 3 noites. Hoje já está em 3 (`hotels[]`, último hotel) — não reduzir em nenhuma reorganização futura.
+- **33 dias no total**: fixo, sem espaço pra adicionar dia extra (avaliado e rejeitado antes pra resolver dia 14/15 pesados — ver tips desses dias em `data.js`).
 
 ## Convenções
 

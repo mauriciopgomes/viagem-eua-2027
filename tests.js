@@ -75,8 +75,8 @@ const routeDataJs = fs.readFileSync(path.join(BASE, 'route-data.js'), 'utf8');
 
 // Execute data.js to get the actual data objects
 const vm = require('vm');
-const dataExports = vm.runInNewContext(dataJs + '\n;({dayPhotos, days, hotels, parks, superchargers})', {});
-const { dayPhotos, days, hotels, parks, superchargers } = dataExports;
+const dataExports = vm.runInNewContext(dataJs + '\n;({dayPhotos, days, hotels, parks, superchargers, TRIP_START})', {});
+const { dayPhotos, days, hotels, parks, superchargers, TRIP_START } = dataExports;
 
 // Extract JS from index.html
 function extractJsBlock(html, varName) {
@@ -235,9 +235,9 @@ test('parques referenciam dias válidos', () => {
 // ==================== 5. DATA.JS — SUPERCHARGERS ====================
 section('data.js — Superchargers');
 
-test('superchargers é um array com 31 paradas', () => {
+test('superchargers é um array com 23 paradas', () => {
     assert(Array.isArray(superchargers), 'superchargers deve ser array');
-    assertEqual(superchargers.length, 27, 'deve ter 27 superchargers');
+    assertEqual(superchargers.length, 23, 'deve ter 23 superchargers');
 });
 
 test('superchargers têm campos obrigatórios', () => {
@@ -645,7 +645,7 @@ test('dayRouteIdx definido para todos os 33 dias', () => {
     assert(appJs.includes('dayRouteIdx[d]') || appJs.includes('dayRouteIdx[day]'), 'dayRouteIdx must be built for all days');
     // Verify route-data.js has encodedRoutes for all driving days
     const routeCtx = vm.runInNewContext(routeDataJs + '\n;({encodedRoutes, routeDayOrder, decodePolyline})', {});
-    const drivingDays = [5,8,9,10,11,12,14,15,16,19,20,21,22,24,25,26,27,29,30,33];
+    const drivingDays = [5,7,8,9,10,11,14,15,16,18,19,20,21,22,25,26,27,29,30,33];
     drivingDays.forEach(d => {
         assert(routeCtx.encodedRoutes[d], `encodedRoutes[${d}] ausente`);
     });
@@ -687,7 +687,7 @@ test('routeCoords tem pontos suficientes', () => {
 test('dayRouteSegments tem segmentos para dias de estrada', () => {
     // dayRouteSegments is now decoded from route-data.js encodedRoutes
     const routeCtx = vm.runInNewContext(routeDataJs + '\n;({encodedRoutes, routeDayOrder, decodePolyline})', {});
-    [5, 8, 9, 10, 11, 12, 14, 15, 16, 19, 20, 21, 22, 24, 25, 26, 27, 29, 30, 33].forEach((d) => {
+    [5, 7, 8, 9, 10, 11, 14, 15, 16, 18, 19, 20, 21, 22, 25, 26, 27, 29, 30, 33].forEach((d) => {
         assert(routeCtx.encodedRoutes[d], `encodedRoutes[${d}] ausente`);
         const pts = routeCtx.decodePolyline(routeCtx.encodedRoutes[d]);
         assert(pts.length >= 2, `day ${d} deve ter ≥2 pontos na rota`);
@@ -1119,35 +1119,33 @@ test('dia 5 é drive LAX → SF', () => {
     assert(hasDrive, 'Dia 5 deve ter item drive');
 });
 
-test('regiões seguem a rota (NY→CA→PNW→UT→NV→CA)', () => {
+test('regiões seguem a rota (NY→NV→UT→PNW→CA)', () => {
     // NY: dias 1-4
     for (let i = 0; i < 4; i++) assertEqual(days[i].region, 'ny', `Dia ${i + 1}`);
-    // CA: dias 5-9 (LAX→SF, SF, Redwood)
-    for (let i = 4; i < 9; i++) assertEqual(days[i].region, 'ca', `Dia ${i + 1}`);
-    // PNW: dias 10-15 (Oregon Coast, Cannon Beach, Rainier/Olympic, Forks, The Dalles, Twin Falls)
-    for (let i = 9; i < 15; i++) assertEqual(days[i].region, 'pnw', `Dia ${i + 1}`);
-    // UT: dias 16-21 (Moab, Canyonlands, Arches, Bryce, Zion)
-    for (let i = 15; i < 21; i++) assertEqual(days[i].region, 'ut', `Dia ${i + 1}`);
-    // NV: dias 22-24 (Page/GC, Vegas)
-    for (let i = 21; i < 24; i++) assertEqual(days[i].region, 'nv', `Dia ${i + 1}`);
-    // CA: dias 26-33 (Sequoia, Yosemite, Big Sur, LA)
-    for (let i = 25; i < 33; i++) assertEqual(days[i].region, 'ca', `Dia ${i + 1}`);
+    // NV: dias 5-8 (LAX→Vegas, Mt.Charleston, Death Valley, GC→Page)
+    for (let i = 4; i < 8; i++) assertEqual(days[i].region, 'nv', `Dia ${i + 1}`);
+    // UT: dias 9-14 (Zion, Bryce, Capitol Reef, Moab, Canyonlands, Arches, Twin Falls)
+    for (let i = 8; i < 14; i++) assertEqual(days[i].region, 'ut', `Dia ${i + 1}`);
+    // PNW: dias 15-20 (The Dalles, Forks, Olympic, Rainier/Cannon Beach, Coos Bay, Crescent City)
+    for (let i = 14; i < 20; i++) assertEqual(days[i].region, 'pnw', `Dia ${i + 1}`);
+    // CA: dias 21-33 (Eureka, SF, Sequoia, Yosemite, Monterey, LA)
+    for (let i = 20; i < 33; i++) assertEqual(days[i].region, 'ca', `Dia ${i + 1}`);
 });
 
 test('dias dos parques estão alinhados com o roteiro', () => {
     const expected = {
-        'Zion': [20, 21],
-        'Bryce Canyon': [19, 20],
-        'Capitol Reef': [19],
-        'Canyonlands': [17],
-        'Arches': [18],
-        'Mt. Rainier': [12],
-        'Olympic': [12, 13],
-        'Redwood': [8, 9],
-        'Grand Canyon': [22],
-        'Death Valley': [24],
+        'Zion': [9, 10],
+        'Bryce Canyon': [10, 11],
+        'Capitol Reef': [11],
+        'Canyonlands': [12],
+        'Arches': [13],
+        'Olympic': [16, 17],
+        'Mt. Rainier': [18],
+        'Redwood': [21, 22],
+        'Grand Canyon': [8],
+        'Death Valley': [7],
         'Yosemite': [27, 28],
-        'Sequoia': [26]
+        'Sequoia': [25, 26]
     };
     Object.entries(expected).forEach(([name, expectedDays]) => {
         const park = parks.find(p => p.name.includes(name));
@@ -1173,7 +1171,7 @@ test('cada dia tem pelo menos 1 item food (exceto dia de voo)', () => {
 });
 
 test('dias de estrada (>100km) têm items drive', () => {
-    const driveDays = [5, 8, 9, 10, 11, 12, 14, 15, 16, 19, 20, 22, 23, 24, 25, 28, 29, 30, 33];
+    const driveDays = [5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 18, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 33];
     driveDays.forEach((d) => {
         const day = days[d - 1];
         const hasDrive = day.items.some(i => i.type === 'drive');
@@ -1185,6 +1183,156 @@ test('cada dia tem título no formato "Dia N — ..."', () => {
     days.forEach((d) => {
         assert(d.title.startsWith('Dia ' + d.day + ' — '),
             `Dia ${d.day}: título '${d.title}' não segue padrão`);
+    });
+});
+
+// ==================== 21. SYNC — FONTES DE VERDADE DUPLICADAS ====================
+// Estes testes existem porque o repo tem múltiplas cópias manuais do mesmo dado
+// (days[] é fonte única, mas dayStats/hotelCoords/scCoords/driveDays em outros
+// arquivos precisam ser mantidos em sync à mão). Ver ARCHITECTURE.md.
+section('Sync — Fontes de Verdade Duplicadas');
+
+function dayNumFor(ddmm) {
+    const [dd, mm] = ddmm.split('/').map(Number);
+    const d = new Date(2027, mm - 1, dd);
+    const diffDays = Math.round((d - new Date(TRIP_START)) / 86400000);
+    return diffDays + 1;
+}
+
+test('dayStats.hotel bate com hotels[] (checkin/checkout)', () => {
+    const match = allJs.match(/var dayStats\s*=\s*(\{[\s\S]*?\});/);
+    assert(match, 'dayStats deve existir');
+    const dayStats = vm.runInNewContext('(' + match[1] + ')');
+
+    const expected = {};
+    hotels.forEach((h) => {
+        const inDay = dayNumFor(h.checkin);
+        const outDay = dayNumFor(h.checkout);
+        for (let d = inDay; d < outDay; d++) expected[d] = h.name;
+    });
+
+    for (let d = 1; d <= 32; d++) {
+        const exp = expected[d];
+        const got = dayStats[d] && dayStats[d].hotel;
+        assert(exp && got && exp.includes(got),
+            `dayStats[${d}].hotel='${got}' não bate com hotels[] (esperado algo como '${exp}')`);
+    }
+});
+
+test('dayStats tem exatamente days.length entradas', () => {
+    const match = allJs.match(/var dayStats\s*=\s*(\{[\s\S]*?\});/);
+    const dayStats = vm.runInNewContext('(' + match[1] + ')');
+    assertEqual(Object.keys(dayStats).length, days.length,
+        'dayStats deve ter uma entrada por dia, nem mais nem menos');
+});
+
+function haversineKm(a, b) {
+    if (!a || !b) return Infinity;
+    const R = 6371;
+    const dLat = (b[0] - a[0]) * Math.PI / 180, dLng = (b[1] - a[1]) * Math.PI / 180;
+    const lat1 = a[0] * Math.PI / 180, lat2 = b[0] * Math.PI / 180;
+    const h = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
+    return 2 * R * Math.asin(Math.sqrt(h));
+}
+
+test('dayCoords[N] aponta pro hotel do dia N, não do dia anterior (bug de fly-to)', () => {
+    // Achado real: 12/33 dias tinham dayCoords copiado do hotel de ONTEM (mapa
+    // voava pro lugar errado ao trocar de dia). Dia 13 é exceção documentada:
+    // ponto de atividade dentro do Olympic NP, não o hotel de Forks (~125km, intencional).
+    const dcMatch = appJs.match(/var dayCoords\s*=\s*\{([\s\S]*?)\};/);
+    assert(dcMatch, 'dayCoords deve existir');
+    const dayCoords = vm.runInNewContext('({' + dcMatch[1] + '})');
+
+    const hotelCoordsSrc = fs.readFileSync(path.join(BASE, 'hotel-coords.js'), 'utf8');
+    const hcMatch = hotelCoordsSrc.match(/const hotelCoords = \{([\s\S]*?)\};/);
+    const hotelCoords = vm.runInNewContext('({' + hcMatch[1] + '})');
+
+    const expected = {};
+    hotels.forEach((h) => {
+        const inDay = dayNumFor(h.checkin), outDay = dayNumFor(h.checkout);
+        for (let d = inDay; d < outDay; d++) expected[d] = h.name;
+    });
+    expected[33] = hotels[hotels.length - 1].name;
+
+    const KNOWN_ACTIVITY_POINT_DAYS = [13]; // documentado em ARCHITECTURE.md
+
+    for (let d = 1; d <= 33; d++) {
+        if (KNOWN_ACTIVITY_POINT_DAYS.includes(d)) continue;
+        const hotelName = expected[d];
+        const key = Object.keys(hotelCoords).find(k => hotelName && hotelName.includes(k));
+        const expCoord = key ? hotelCoords[key] : null;
+        const dist = haversineKm(dayCoords[d], expCoord);
+        assert(dist <= 90, `dayCoords[${d}]=${JSON.stringify(dayCoords[d])} está a ${dist.toFixed(0)}km do hotel esperado '${hotelName}' — provável cópia do dia anterior`);
+    }
+});
+
+test('dayStats.km bate com distância real da rota (route-data.js, tolerância 20%)', () => {
+    // Achado real: km era estimativa digitada à mão, nunca validada contra a
+    // geometria OSRM real. route-data.js é a fonte de verdade de distância —
+    // se dessincronizar de novo (waypoint mudou, dia reorganizado), isso trava.
+    const match = allJs.match(/var dayStats\s*=\s*(\{[\s\S]*?\});/);
+    const dayStats = vm.runInNewContext('(' + match[1] + ')');
+    const routeCtx = vm.runInNewContext(routeDataJs + '\n;({encodedRoutes, routeDayOrder, decodePolyline})', {});
+
+    routeCtx.routeDayOrder.forEach((d) => {
+        const pts = routeCtx.decodePolyline(routeCtx.encodedRoutes[d]);
+        let real = 0;
+        for (let i = 1; i < pts.length; i++) real += haversineKm(pts[i - 1], pts[i]);
+        const statKm = dayStats[d] ? dayStats[d].km : null;
+        const statNum = parseInt(String(statKm).replace(/[^0-9]/g, '')) || 0;
+        assert(statNum > 0, `dayStats[${d}].km ausente ou inválido`);
+        const pctDiff = Math.abs(real - statNum) / statNum * 100;
+        assert(pctDiff <= 20, `dayStats[${d}].km='${statKm}' mas rota real é ~${real.toFixed(0)}km (${pctDiff.toFixed(0)}% de diferença)`);
+    });
+});
+
+test('app.js: scCoords cobre todos os superchargers (sem sumir do mapa)', () => {
+    const scMatch = appJs.match(/var scCoords\s*=\s*\{([\s\S]*?)\};/);
+    assert(scMatch, 'scCoords deve existir em app.js');
+    const keys = [...scMatch[1].matchAll(/"([^"]+)"\s*:/g)].map(m => m[1]);
+    const missing = new Set();
+    superchargers.forEach((sc) => {
+        if (!keys.includes(sc.name)) missing.add(sc.name);
+    });
+    assert(missing.size === 0, `Superchargers sem coordenada em scCoords: ${[...missing].join(', ')}`);
+});
+
+test('highlights nomeados (<strong>) têm placeInfo (sem card sem endereço/link de mapa)', () => {
+    // Achado real: 7 lugares citados como destaque (type:"highlight") não tinham
+    // findPlaceInfo() — card ficava sem endereço/coords/link de mapa. Lista de
+    // exceção = frases descritivas dentro de <strong> que não são nome de lugar
+    // (ex: "Pôr do sol no X"), não bug de cobertura.
+    // Foto (findPhoto) não é obrigatória aqui: sem match, card usa placeholder
+    // gradiente — degrada bem, não vale travar teste por isso.
+    const NOT_A_PLACE_NAME = [
+        'baleias cinzentas!', 'Pôr do sol no Colorado River', 'Pôr do sol no Watchman Overlook',
+    ];
+    const placesCtx = vm.runInNewContext(placesJs.replace(/const /g, 'var ') + '\n;({findPlaceInfo})', {});
+
+    const missing = [];
+    const seen = new Set();
+    days.forEach((d) => {
+        d.items.forEach((item) => {
+            if (item.type !== 'highlight') return;
+            const names = [...item.text.matchAll(/<strong>([^<]+)<\/strong>/g)].map((m) => m[1]);
+            names.forEach((name) => {
+                if (NOT_A_PLACE_NAME.includes(name) || seen.has(name)) return;
+                seen.add(name);
+                if (!placesCtx.findPlaceInfo(name)) missing.push(`Dia ${d.day}: '${name}' sem placeInfo`);
+            });
+        });
+    });
+    assert(missing.length === 0, missing.join('; '));
+});
+
+test('tools/generate-routes.js: dayWaypoints cobre os mesmos dias que routeDayOrder', () => {
+    const genSrc = fs.readFileSync(path.join(BASE, 'tools', 'generate-routes.js'), 'utf8');
+    const routeCtx = vm.runInNewContext(routeDataJs + '\n;({routeDayOrder})', {});
+    const dwMatch = genSrc.match(/const dayWaypoints = \{([\s\S]*?)\n\};/);
+    assert(dwMatch, 'dayWaypoints deve existir em generate-routes.js');
+    routeCtx.routeDayOrder.forEach((d) => {
+        assert(new RegExp(`\\n\\s*${d}:\\s*\\[`).test(dwMatch[1]),
+            `dayWaypoints[${d}] ausente — se rodar o gerador de novo, dia ${d} some do mapa`);
     });
 });
 
