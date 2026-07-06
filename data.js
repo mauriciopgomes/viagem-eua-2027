@@ -613,57 +613,57 @@ const days = [
                 "type": "drive"
             },
             {
-                "time": "08:45",
+                "time": "09:45",
                 "text": "⚡ <strong>Supercharger Kingman, AZ</strong> (~200 km) — ~25 min",
                 "type": "charge"
             },
             {
-                "time": "09:15",
+                "time": "11:55",
                 "text": "🏞️ <strong>Grand Canyon South Rim</strong> — chegada! Entrada $35/veículo",
                 "type": "highlight"
             },
             {
-                "time": "10:00",
+                "time": "12:20",
                 "text": "📸 <strong>Mather Point</strong> — primeiro mirante, vista imediata!",
                 "type": "highlight"
             },
             {
-                "time": "10:45",
+                "time": "12:50",
                 "text": "📸 <strong>Yavapai Point + Geology Museum</strong>",
                 "type": ""
             },
             {
-                "time": "11:15",
+                "time": "13:20",
                 "text": "🍽️ Almoço no <strong>Grand Canyon Village</strong>",
                 "type": "food"
             },
             {
-                "time": "12:15",
+                "time": "14:20",
                 "text": "📸 <strong>Rim Trail</strong> — caminhar pela borda (~30 min)",
                 "type": ""
             },
             {
-                "time": "12:45",
+                "time": "14:50",
                 "text": "📸 <strong>Hopi Point</strong> — um dos melhores mirantes!",
                 "type": "highlight"
             },
             {
-                "time": "13:30",
+                "time": "15:35",
                 "text": "🚗 Saída rumo a <strong>Page, AZ</strong> (~210 km, ~2.5h via AZ-64 → US-89 N)",
                 "type": "drive"
             },
             {
-                "time": "14:15",
+                "time": "17:00",
                 "text": "⚡ <strong>Supercharger Flagstaff, AZ</strong> (~150 km) — ~20 min",
                 "type": "charge"
             },
             {
-                "time": "14:45",
+                "time": "18:05",
                 "text": "🏨 Chegada em <strong>Page</strong>! Check-in",
                 "type": ""
             },
             {
-                "time": "15:15",
+                "time": "18:35",
                 "text": "🍽️ Jantar — <strong>Big John's Texas BBQ</strong> (153 S Lake Powell Blvd, Page) — brisket e pulled pork defumado. ~$15-20/pessoa",
                 "type": "food"
             }
@@ -703,41 +703,42 @@ const days = [
             {
                 "text": "🏨 Chegada em <strong>Springdale</strong>! Check-in",
                 "type": "",
-                "time": "09:15"
+                "time": "10:30"
             },
             {
                 "text": "🍽️ Almoço em Springdale",
                 "type": "food",
-                "time": "09:45"
+                "time": "11:00"
             },
             {
                 "text": "🚗 Dirigir pra <strong>Zion Canyon</strong> (sem shuttle no inverno!)",
                 "type": "drive",
-                "time": "10:45"
+                "time": "12:00"
             },
             {
-                "time": "11:30",
+                "time": "12:20",
                 "text": "🥾 <strong>Emerald Pools Trail</strong> (Lower + Upper, ~4 km)",
                 "type": ""
             },
             {
-                "time": "12:00",
+                "time": "13:35",
                 "text": "🏔️ <strong>Court of the Patriarchs</strong> + <strong>Big Bend</strong> — mirantes rápidos",
                 "type": ""
             },
             {
-                "time": "12:30",
+                "time": "~17:30",
                 "text": "🌅 <strong>Pôr do sol no Canyon Junction Bridge</strong>",
                 "type": "highlight"
             },
             {
                 "text": "🍽️ Jantar — <strong>Oscar's Cafe</strong> (948 Zion Park Blvd, Springdale) — mexicana clássica. ~$12-18/pessoa",
                 "type": "food",
-                "time": "13:15"
+                "time": "18:15"
             }
         ],
         "tips": [
-            "📸 Horseshoe Bend: melhor luz de manhã cedo (sol ilumina o canyon)."
+            "📸 Horseshoe Bend: melhor luz de manhã cedo (sol ilumina o canyon).",
+            "☀️ Tarde livre entre Court of the Patriarchs (~14h) e o pôr do sol (~17:30) — dá pra descansar, explorar Springdale ou repetir alguma trilha com calma."
         ]
     },
     {
@@ -751,81 +752,83 @@ const days = [
             {
                 "text": "☕ Café em Springdale",
                 "type": "",
-                "time": "07:30"
+                "time": "07:00"
             },
             {
-                "time": "08:00",
+                "time": "07:30",
                 "text": "🚗 Dirigir pra <strong>Zion Canyon</strong> (sem shuttle no inverno — pode entrar de carro!)",
                 "type": "drive"
             },
             {
-                "time": "08:45",
+                "time": "07:50",
                 "text": "🥾 <strong>Watchman Trail</strong> (~5 km, ~2h) — vista panorâmica!",
                 "type": "highlight"
             },
             {
-                "time": "09:30",
+                "time": "09:50",
                 "text": "🥾 <strong>Canyon Overlook Trail</strong> (~1.6 km, ~1h) — vista incrível do canyon!",
                 "type": "highlight"
             },
             {
-                "time": "10:15",
-                "text": "🍽️ Almoço em Springdale",
+                "time": "10:50",
+                "text": "🍽️ Almoço em Springdale (rápido)",
                 "type": "food"
             },
             {
-                "time": "11:15",
+                "time": "11:35",
                 "text": "🥾 <strong>Riverside Walk</strong> (~3.5 km ida e volta) — trilha plana ao longo do rio Virgin!",
                 "type": ""
             },
             {
-                "time": "11:45",
+                "time": "12:15",
                 "text": "🥾 <strong>Scout Lookout</strong> (~6.4 km ida e volta, ~2.5h) — degraus esculpidos na rocha! ⚠️ Em fevereiro pode ter gelo — levar microspikes.",
                 "type": "highlight"
             },
             {
-                "time": "12:30",
-                "text": "🌅 <strong>Pôr do sol no Watchman Overlook</strong> — último sunset em Zion!",
-                "type": "highlight"
+                "time": "14:45",
+                "text": "📸 <strong>Watchman Overlook</strong> — última vista de Zion antes de seguir pra Bryce",
+                "type": ""
             },
             {
                 "text": "🚗 Check-out + saída pra <strong>Bryce Canyon</strong> (~130 km, ~1.5h)",
                 "type": "drive",
-                "time": "13:15"
+                "time": "15:15"
             },
             {
-                "time": "14:00",
-                "text": "🛣️ <strong>Red Canyon</strong> — arcos vermelhos na estrada!",
+                "time": "15:45",
+                "text": "🏁 <strong>Checkerboard Mesa</strong> — arenito com padrão xadrez! (perto da saída leste de Zion)",
                 "type": ""
             },
             {
-                "time": "14:30",
-                "text": "🏁 <strong>Checkerboard Mesa</strong> — arenito com padrão xadrez!",
+                "time": "16:15",
+                "text": "🛣️ <strong>Red Canyon</strong> — arcos vermelhos na estrada! (perto da chegada em Bryce)",
                 "type": ""
             },
             {
-                "time": "15:00",
+                "time": "16:45",
                 "text": "🏨 Chegada em <strong>Bryce Canyon</strong>! Check-in",
                 "type": ""
             },
             {
-                "time": "15:30",
+                "time": "~17:30",
                 "text": "🌅 <strong>Pôr do sol no Bryce Amphitheater</strong>",
                 "type": "highlight"
             },
             {
-                "time": "16:15",
+                "time": "18:15",
                 "text": "🍽️ Jantar — <strong>Cowboy's Smokehouse BBQ</strong> (95 N Main St, Panguitch) — BBQ defumado, ribs e brisket. ~$15-20/pessoa",
                 "type": "food"
             },
             {
-                "time": "17:15",
+                "time": "19:30",
                 "text": "🌌 <strong>Stargazing em Bryce!</strong> — International Dark Sky Park!",
                 "type": "highlight"
             }
         ],
         "tips": [
-            "🔭 Bryce é um dos melhores céus escuros do MUNDO!"
+            "🔭 Bryce é um dos melhores céus escuros do MUNDO!",
+            "🌅 Só 1 pôr do sol por dia: mantido o de Bryce Amphitheater (chegada). Watchman Overlook em Zion virou mirante de tarde, sem reivindicar sunset — dá pra ver os dois de verdade só se cortar alguma trilha (ex: Scout Lookout).",
+            "⏰ Dia apertado (Zion inteiro + drive + Bryce sunset). Sair de Springdale às 7h e almoçar rápido garante chegar a tempo do pôr do sol em Bryce."
         ]
     },
     {
@@ -864,79 +867,74 @@ const days = [
                 "type": "highlight"
             },
             {
-                "time": "08:30",
+                "time": "08:15",
                 "text": "🥾 <strong>Navajo Loop + Queen's Garden Trail</strong> (~2h)",
                 "type": "highlight"
             },
             {
-                "time": "09:15",
+                "time": "10:15",
                 "text": "🥾 <strong>Mossy Cave Trail</strong> (~1.5 km, ~30 min) — caverna com musgo + cascata congelada!",
                 "type": "highlight"
             },
             {
-                "time": "10:00",
+                "time": "10:50",
                 "text": "📸 <strong>Sunrise/Sunset Point</strong>",
                 "type": ""
             },
             {
-                "time": "10:30",
+                "time": "11:10",
                 "text": "🚗 <strong>Scenic Drive</strong> — Inspiration Point, Natural Bridge, Rainbow Point",
                 "type": ""
             },
             {
                 "text": "🚗 Check-out + saída rumo leste (~490 km, ~6h)",
                 "type": "drive",
-                "time": "11:00"
+                "time": "11:50"
             },
             {
-                "time": "11:45",
+                "time": "12:35",
                 "text": "🌄 <strong>Head of the Rocks Overlook</strong> — vista épica de Escalante!",
                 "type": ""
             },
             {
-                "time": "12:15",
+                "time": "13:15",
                 "text": "🏜️ <strong>Capitol Reef NP</strong> — petroglífos Fremont + Hickman Bridge!",
                 "type": "highlight"
             },
             {
-                "time": "13:00",
+                "time": "14:00",
                 "text": "🥾 <strong>Hickman Bridge Trail</strong> (~2.8 km, ~1h) — arco natural!",
                 "type": "highlight"
             },
             {
-                "time": "13:45",
+                "time": "15:00",
                 "text": "🍽️ Almoço (levar lanche)",
                 "type": "food"
             },
             {
-                "time": "14:45",
+                "time": "15:45",
                 "text": "⚡ <strong>Supercharger Salina, UT</strong> (~130 km) — ~20 min",
                 "type": "charge"
             },
             {
-                "time": "15:15",
+                "time": "16:10",
                 "text": "🏜️ <strong>San Rafael Swell</strong> (I-70) — paredões dramáticos!",
                 "type": ""
             },
             {
-                "time": "15:45",
+                "time": "16:40",
                 "text": "⚡ <strong>Supercharger Green River, UT</strong> (~100 km) — ~20 min",
                 "type": "charge"
             },
             {
                 "text": "🚗 Seguindo rumo a <strong>Moab</strong>",
                 "type": "drive",
-                "time": "16:15"
+                "time": "17:05"
             },
             {
-                "time": "~17:00",
+                "time": "~17:50",
                 "text": "🏨 Chegada em <strong>Moab</strong>! Check-in",
                 "type": ""
-            },
-            {
-                "time": "17:30",
-                "text": "🌅 <strong>Pôr do sol no Colorado River</strong> (Scenic Byway 128, ~10 min do centro) — luz dourada nas rochas!",
-                "type": "highlight"
             },
             {
                 "time": "18:15",
@@ -945,7 +943,8 @@ const days = [
             }
         ],
         "tips": [
-            "🔭 Bryce é um dos melhores céus escuros do MUNDO!"
+            "🔭 Bryce é um dos melhores céus escuros do MUNDO!",
+            "🌅 Pôr do sol no Colorado River não cabe aqui (chegada tarde demais em Moab, dia já tem nascer do sol em Bryce) — reagendado pro fim do dia 13 (Arches), última noite em Moab, como passeio noturno ao invés de golden hour."
         ]
     },
     {
@@ -1092,6 +1091,11 @@ const days = [
                 "time": "18:30",
                 "text": "🍽️ Jantar de despedida de Moab — <strong>Spoke on Center</strong> (702 S Main St) — bistrô local favorito de trilheiros, sanduíches artesanais e sopa do dia. ~$12-18/pessoa",
                 "type": "food"
+            },
+            {
+                "time": "19:45",
+                "text": "🌌 <strong>Passeio noturno no Colorado River</strong> (Scenic Byway 128, ~10 min do centro) — despedida tranquila de Moab, rio + rochas ao luar",
+                "type": ""
             }
         ],
         "day": 18,
@@ -1138,78 +1142,59 @@ const days = [
                 "time": "07:30"
             },
             {
-                "time": "08:15",
+                "time": "09:00",
                 "text": "⚡ <strong>Supercharger Green River, UT</strong> (~130 km) — ~20 min",
                 "type": "charge"
             },
             {
-                "time": "08:45",
+                "time": "09:30",
                 "text": "🏜️ <strong>San Rafael Swell</strong> (I-70) — paredões dramáticos de ambos os lados!",
                 "type": ""
             },
             {
-                "time": "09:15",
+                "time": "11:15",
                 "text": "⚡ <strong>Supercharger Price, UT</strong> (~200 km) — ~20 min",
                 "type": "charge"
             },
             {
-                "time": "09:45",
+                "time": "13:45",
                 "text": "⚡ <strong>Supercharger Salt Lake City area</strong> (~250 km) — ~25 min",
                 "type": "charge"
             },
             {
-                "time": "10:15",
+                "time": "14:15",
                 "text": "🦬 <strong>Antelope Island SP</strong> — bisões selvagens + Great Salt Lake!",
                 "type": "highlight"
             },
             {
-                "time": "11:00",
+                "time": "15:00",
                 "text": "📸 <strong>Buffalo Point</strong> — mirante 360°",
                 "type": ""
             },
             {
-                "time": "11:30",
-                "text": "🍽️ Almoço rápido em SLC",
+                "time": "15:30",
+                "text": "🍽️ Almoço rápido (tarde) em SLC",
                 "type": "food"
             },
             {
                 "text": "🚗 I-15 N rumo a <strong>Twin Falls</strong>",
                 "type": "drive",
-                "time": "12:30"
+                "time": "16:15"
             },
             {
-                "time": "13:15",
-                "text": "🌊 <strong>Thousand Springs</strong> (Hagerman, ID) — cachoeiras brotando do paredão de rocha!",
-                "type": ""
-            },
-            {
-                "time": "13:45",
-                "text": "🌊 <strong>Shoshone Falls</strong> — 'Niágara do Oeste'! 65m de queda!",
-                "type": "highlight"
-            },
-            {
-                "time": "14:30",
-                "text": "📸 <strong>Perrine Bridge</strong> — ponte sobre o Snake River Canyon!",
-                "type": ""
-            },
-            {
-                "time": "15:00",
-                "text": "📸 <strong>Evel Knievel Jump Site</strong> — local do famoso salto de 1974 sobre o Snake River Canyon!",
-                "type": "highlight"
-            },
-            {
-                "time": "15:45",
+                "time": "19:15",
                 "text": "🏨 Chegada em <strong>Twin Falls</strong>! Check-in",
                 "type": ""
             },
             {
-                "time": "16:15",
+                "time": "19:45",
                 "text": "🍽️ Jantar — <strong>Cracker Barrel</strong> (1357 Blue Lakes Blvd N, Twin Falls) — comfort food americano clássico. ~$12-18/pessoa",
                 "type": "food"
             }
         ],
         "tips": [
-            "⚠️ Dia longo (~770 km). FSD ajuda. Dormir cedo!",
+            "⚠️ Dia mais longo do trip (~770 km, sai 07:30 chega ~19h15). FSD ajuda. Dormir cedo!",
+            "🌊 Shoshone Falls/Perrine Bridge/Evel Knievel Jump Site movidos pra manhã do dia seguinte (Twin Falls→The Dalles) — vistos com luz do dia em vez de escuro, e chegada aqui fica bem mais tranquila.",
             "🦬 Antelope Island mantido de propósito — bisão selvagem visto pela 1ª vez na viagem, não é redundante com resto do trip.",
             "🔍 Já avaliado: cortar Buffalo Point (mirante 360°, sem bisão) daria só ~15-20min, não resolve o dia — mantido como está.",
             "🔍 Já avaliado: dividir esse trecho em 2 dias com pernoite em Price/UT ou SLC deixaria a viagem mais tranquila, mas exige +1 dia no total (viagem fechada em 33 dias) — rejeitado por enquanto.",
@@ -1239,77 +1224,87 @@ const days = [
             {
                 "text": "☕ Café + check-out de Twin Falls",
                 "type": "",
-                "time": "07:30"
+                "time": "06:30"
+            },
+            {
+                "time": "07:00",
+                "text": "🌊 <strong>Shoshone Falls</strong> — 'Niágara do Oeste'! 65m de queda! (luz da manhã)",
+                "type": "highlight"
+            },
+            {
+                "time": "07:35",
+                "text": "📸 <strong>Perrine Bridge</strong> — ponte sobre o Snake River Canyon!",
+                "type": ""
+            },
+            {
+                "time": "08:00",
+                "text": "📸 <strong>Evel Knievel Jump Site</strong> — local do famoso salto de 1974 sobre o Snake River Canyon!",
+                "type": "highlight"
             },
             {
                 "text": "🚗 Saída via I-84 W (~770 km, ~8.5h)",
                 "type": "drive",
-                "time": "08:00"
+                "time": "08:25"
             },
             {
-                "time": "08:45",
-                "text": "🌊 <strong>Thousand Springs</strong> (Hagerman, ID) — cachoeiras brotando do paredão de rocha!",
-                "type": ""
-            },
-            {
-                "time": "09:15",
+                "time": "10:55",
                 "text": "⚡ <strong>Supercharger Baker City, OR</strong> (~200 km) — ~25 min",
                 "type": "charge"
             },
             {
-                "time": "09:45",
+                "time": "11:25",
                 "text": "🍽️ Almoço em Baker City",
                 "type": "food"
             },
             {
-                "time": "10:45",
+                "time": "12:10",
                 "text": "📸 <strong>Deadman Pass Overlook</strong> — mirante nas Blue Mountains!",
                 "type": "highlight"
             },
             {
-                "time": "11:30",
+                "time": "13:30",
                 "text": "⚡ <strong>Supercharger Pendleton, OR</strong> (~200 km) — ~20 min",
                 "type": "charge"
             },
             {
                 "text": "🚗 Seguindo rumo a <strong>The Dalles</strong>",
                 "type": "drive",
-                "time": "12:00"
+                "time": "14:00"
             },
             {
-                "time": "12:45",
+                "time": "15:40",
                 "text": "🌲 <strong>Multnomah Falls</strong> — cachoeira icônica de 189m!",
                 "type": "highlight"
             },
             {
-                "time": "13:30",
+                "time": "16:05",
                 "text": "🏛️ <strong>Vista House at Crown Point</strong> — vista 270° do Gorge!",
                 "type": "highlight"
             },
             {
-                "time": "14:15",
+                "time": "16:30",
                 "text": "📸 <strong>Rowena Crest Viewpoint</strong> — mirante épico sobre o Columbia River!",
                 "type": ""
             },
             {
-                "time": "14:45",
+                "time": "16:50",
                 "text": "🏞️ <strong>Columbia River Gorge</strong>",
                 "type": ""
             },
             {
-                "time": "15:15",
+                "time": "17:15",
                 "text": "🏨 Chegada em <strong>The Dalles / Hood River</strong>! Check-in",
                 "type": ""
             },
             {
-                "time": "15:45",
+                "time": "18:15",
                 "text": "🍽️ Jantar — <strong>Clock Tower Ales</strong> (311 Union St, The Dalles) — brewpub local com vista pro Columbia River, burgers e fish tacos. ~$15-20/pessoa",
                 "type": "food"
             }
         ],
         "tips": [
             "⚠️ Dia longo (~770 km, ~8.5h) — empata com o dia anterior (Moab→Twin Falls) como os 2 dias mais pesados do trip. FSD ajuda bastante nos trechos retos de I-84.",
-            "☕ Considerar sair mais cedo (antes das 08:00) dado o tamanho do trecho."
+            "🌅 Últimos mirantes (Rowena Crest/Columbia River Gorge) já perto do pôr do sol (~17h em fevereiro) — luz baixa mas ainda visível."
         ]
     },
     {
@@ -1343,60 +1338,63 @@ const days = [
                 "time": "07:30"
             },
             {
-                "time": "08:15",
+                "time": "09:30",
                 "text": "⚡ <strong>Supercharger Centralia, WA</strong> (~160 km) — ~20 min",
                 "type": "charge"
             },
             {
-                "time": "08:45",
+                "time": "12:20",
                 "text": "⚡ <strong>Supercharger Aberdeen, WA</strong> (~200 km) — ~25 min",
                 "type": "charge"
             },
             {
-                "time": "09:15",
+                "time": "12:45",
                 "text": "🎸 <strong>Kurt Cobain Memorial</strong> — placa 'Come As You Are' + memorial do Nirvana!",
                 "type": ""
             },
             {
-                "time": "09:45",
+                "time": "13:00",
                 "text": "🍽️ Almoço em Aberdeen",
                 "type": "food"
             },
             {
-                "time": "10:45",
+                "time": "13:45",
                 "text": "🌳 <strong>Kalaloch Tree of Life</strong> — árvore crescendo sobre caverna com raízes expostas!",
                 "type": ""
             },
             {
                 "text": "🚗 Seguindo rumo a <strong>Forks</strong>",
                 "type": "drive",
-                "time": "11:15"
+                "time": "16:05"
             },
             {
-                "time": "12:00",
-                "text": "🏞️ <strong>Lake Crescent</strong> — lago cristalino, ainda com luz do dia!",
+                "time": "17:20",
+                "text": "🏞️ <strong>Lake Crescent</strong> — lago cristalino, chegando no fim da tarde!",
                 "type": "highlight"
             },
             {
-                "time": "12:45",
-                "text": "🌊 <strong>Sol Duc Falls Trail</strong> (~2.5 km)",
+                "time": "17:50",
+                "text": "🌊 <strong>Sol Duc Falls Trail</strong> (~2.5 km) — já no fim da luz, atenção ao horário",
                 "type": ""
             },
             {
-                "time": "13:15",
+                "time": "18:30",
                 "text": "🏨 Check-in em <strong>Forks</strong>",
                 "type": ""
             },
             {
-                "time": "13:45",
+                "time": "19:00",
                 "text": "🧛 Tour Crepúsculo! Forks High School + Casa da Bella Swan",
                 "type": "highlight"
             },
             {
-                "time": "14:30",
+                "time": "19:30",
                 "text": "🍽️ Jantar — <strong>Pacific Pizza & Pasta</strong> (70 N Forks Ave, Forks) — a opção mais confiável da cidade, favorita dos moradores locais. ~$12-18/pessoa",
                 "type": "food"
             }
+        ],
+        "tips": [
+            "⚠️ Dia longo (~570 km, sai 07:30 chega ~18:30). Lake Crescent/Sol Duc Falls ficam pro fim da tarde — se atrasar, considerar deixar Sol Duc pro dia seguinte (Olympic NP dia cheio já passa perto)."
         ]
     },
     {
@@ -1484,80 +1482,83 @@ const days = [
         ],
         "location": "Forks → Mt. Rainier → Cannon Beach",
         "route": "Vulcão Rainier + rumo a Cannon Beach! 🌋",
-        "note": "Descendo de Forks, desvio ao Mt. Rainier (Paradise) via Olympia, depois Cannon Beach.",
+        "note": "Descendo de Forks, desvio ao Mt. Rainier (Paradise) via Olympia, depois direto pra Cannon Beach.",
         "region": "pnw",
         "items": [
             {
                 "text": "☕ Café + check-out de Forks",
                 "type": "",
-                "time": "06:30"
+                "time": "06:00"
             },
             {
                 "text": "🚗 Rumo a <strong>Olympia</strong> (~255 km, ~3.5h via US-101 S)",
                 "type": "drive",
-                "time": "07:00"
+                "time": "06:30"
             },
             {
-                "time": "07:45",
+                "time": "09:45",
                 "text": "🍽️ Almoço em Olympia",
                 "type": "food"
             },
             {
-                "time": "08:45",
+                "time": "10:30",
                 "text": "⚡ <strong>Supercharger Olympia</strong> — ⚠️ <strong>CARREGAR ATÉ 100%!</strong> (~35 min)",
                 "type": "charge"
             },
             {
                 "text": "🚗 Desvio rumo a <strong>Mt. Rainier NP (Paradise)</strong> (~100 km, ~1.5h via SR-7 → SR-706)",
                 "type": "drive",
-                "time": "09:15"
+                "time": "11:05"
             },
             {
                 "text": "🌋 <strong>Mt. Rainier — Paradise!</strong> Vulcão de 4.392m nevado!",
                 "type": "highlight",
-                "time": "10:00"
+                "time": "12:35"
             },
             {
                 "text": "🥾 <strong>Nisqually Vista Trail</strong> (~2 km) — trilha com neve, vista do glaciar",
                 "type": "",
-                "time": "10:45"
+                "time": "13:20"
             },
             {
                 "text": "🚗 Volta a Olympia + seguindo rumo a <strong>Cannon Beach</strong> (~350 km, ~4.5h via SR-706 → I-5 → US-26)",
                 "type": "drive",
-                "time": "11:15"
+                "time": "14:05"
             },
             {
-                "time": "12:00",
-                "text": "🏨 Check-in em <strong>Cannon Beach</strong>",
+                "time": "18:35",
+                "text": "🏨 Chegada em <strong>Cannon Beach</strong>! Check-in",
                 "type": ""
             },
             {
-                "time": "12:30",
-                "text": "📸 <strong>Haystack Rock</strong> — ícone de Oregon!",
+                "time": "19:00",
+                "text": "📸 <strong>Haystack Rock</strong> — ícone de Oregon! (já escuro, mas iluminado — silhueta contra o céu noturno)",
                 "type": "highlight"
             },
             {
-                "time": "13:15",
-                "text": "🌊 <strong>Ecola State Park</strong> — mirante espetacular!",
+                "time": "19:20",
+                "text": "🌊 <strong>Ecola State Park</strong> — mirante espetacular! (já escuro — portão pode estar fechado, checar horário)",
                 "type": ""
             },
             {
-                "time": "13:45",
-                "text": "🌅 <strong>Pôr do sol em Cannon Beach</strong> — ESPETACULAR!",
+                "time": "~17:20",
+                "text": "🌅 <em>Opcional, se pular o desvio do Mt. Rainier:</em> <strong>Pôr do sol em Cannon Beach</strong> — ESPETACULAR! (chegando por volta de 17:20 sem o desvio, dá tempo de ver — ver tips)",
                 "type": "highlight"
             },
             {
-                "time": "14:30",
+                "time": "19:45",
                 "text": "🍽️ Jantar — <strong>Ecola Seafood Restaurant & Market</strong> (208 N Spruce St) — Dungeness crab e fish & chips. ~$20-25/pessoa",
                 "type": "food"
             }
         ],
         "tips": [
             "🌋 Mt. Rainier de volta ao roteiro: essa posição cai num domingo (07/fev/2027) — plowing de inverno em Paradise historicamente garantido fim de semana/feriado, diferente da posição antiga (segunda-feira) que motivou o corte original.",
-            "⚠️ Dia pesado (~705 km, quase o mais longo do trip) — desvio Rainier é rua sem saída (SR-7/SR-706), ida e volta pela mesma estrada até Olympia.",
-            "🔄 Se Rainier FECHADO ou com neve forte: cortar o desvio (Paradise + Nisqually Vista Trail) e seguir direto Olympia → Cannon Beach — economiza ~200 km e 2.5h.",
-            "⚡ Supercharger Olympia obrigatório — carregar até 100% cobre desvio Rainier + trecho até Cannon Beach sem outro charger no caminho."
+            "⚠️ Dia mais pesado do trip (~705 km) — desvio Rainier é rua sem saída (SR-7/SR-706), ida e volta pela mesma estrada até Olympia. Chegada em Cannon Beach já de noite (~18:35).",
+            "🌅⚡ Trade-off real: com Rainier, perde o pôr do sol em Cannon Beach (chega ~1h depois). Pra ver o sunset (~17:20), pule o desvio inteiro do Rainier (economiza ~3h) — Haystack Rock/Ecola State Park também ficam melhores com luz do dia.",
+            "🔄 Se Rainier FECHADO ou com neve forte: cortar o desvio (Paradise + Nisqually Vista Trail) e seguir direto Olympia → Cannon Beach — economiza ~200 km e 2.5h, e recupera o sunset.",
+            "⚡ Supercharger Olympia obrigatório — carregar até 100% cobre desvio Rainier + trecho até Cannon Beach sem outro charger no caminho.",
+            "🌊 Astoria/Peter Iredale/Cape Disappointment movidos pro início do dia seguinte (Cannon Beach→Coos Bay) — vistos de manhã com luz em vez de escuro à noite; ficam ao norte de Cannon Beach, mais perto de lá do que faria sentido chegando atrasado aqui.",
+            "🌙 Ecola State Park pode fechar o portão ao anoitecer — checar horário antes."
         ]
     },
     {
@@ -1571,73 +1572,73 @@ const days = [
             }
         ],
         "location": "Cannon Beach → Coos Bay",
-        "route": "Faróis + Thor's Well! 🌊",
-        "note": "Descendo a costa a partir de Cannon Beach — paradas espetaculares até Coos Bay!",
+        "route": "Astoria + faróis + Thor's Well! 🌊",
+        "note": "Manhã em Astoria (luz do dia), depois descendo a costa até Coos Bay — paradas espetaculares!",
         "region": "pnw",
         "items": [
             {
                 "text": "☕ Café + check-out de Cannon Beach",
                 "type": "",
-                "time": "07:30"
+                "time": "06:30"
             },
             {
-                "text": "🚗 Saída rumo sul pela US-101 S (~250 km)",
+                "text": "🚗 Backtrack rumo ao norte via US-101 N (~40 km, ~40 min)",
                 "type": "drive",
-                "time": "08:00"
+                "time": "07:00"
             },
             {
-                "time": "08:45",
-                "text": "🌊 <strong>Astoria</strong> — cenário de <strong>The Goonies</strong>! Astoria Column!",
-                "type": "highlight"
-            },
-            {
-                "time": "09:30",
-                "text": "🚢 <strong>Peter Iredale Shipwreck</strong> — naufrágio de 1906 na praia!",
-                "type": "highlight"
-            },
-            {
-                "time": "10:15",
+                "time": "07:45",
                 "text": "🏖️ <strong>Cape Disappointment</strong> — farol no encontro do Columbia com o Pacífico!",
                 "type": ""
             },
             {
-                "time": "10:45",
+                "time": "08:15",
+                "text": "🌊 <strong>Astoria</strong> — cenário de <strong>The Goonies</strong>! Astoria Column!",
+                "type": "highlight"
+            },
+            {
+                "time": "08:50",
+                "text": "🚢 <strong>Peter Iredale Shipwreck</strong> — naufrágio de 1906 na praia!",
+                "type": "highlight"
+            },
+            {
+                "text": "🚗 Voltando rumo sul pela US-101 S (~330 km)",
+                "type": "drive",
+                "time": "09:15"
+            },
+            {
+                "time": "11:15",
                 "text": "⚡ <strong>Supercharger Lincoln City, OR</strong> (~100 km) — ~25 min",
                 "type": "charge"
             },
             {
-                "time": "11:15",
+                "time": "12:00",
                 "text": "🍽️ Almoço em <strong>Newport</strong>",
                 "type": "food"
             },
             {
-                "time": "12:15",
+                "time": "13:00",
                 "text": "📸 <strong>Cape Perpetua + Thor's Well</strong> (Yachats) — gêiser natural nas rochas!",
                 "type": "highlight"
             },
             {
-                "time": "13:00",
+                "time": "13:45",
                 "text": "🏖️ <strong>Heceta Head Lighthouse</strong> (Florence) — farol icônico!",
                 "type": ""
             },
             {
-                "time": "13:30",
+                "time": "14:15",
                 "text": "🦌 <strong>Dean Creek Elk Viewing Area</strong> (Reedsport) — manada de Roosevelt elk selvagens!",
                 "type": "highlight"
             },
             {
                 "text": "🚗 Seguindo rumo a <strong>Coos Bay</strong>",
                 "type": "drive",
-                "time": "14:15"
-            },
-            {
-                "time": "15:00",
-                "text": "📸 <strong>Shore Acres State Park</strong> (Charleston) — jardins sobre penhascos, melhor pôr do sol da região!",
-                "type": "highlight"
+                "time": "15:00"
             },
             {
                 "time": "15:45",
-                "text": "🌅 Pôr do sol em Shore Acres",
+                "text": "📸 <strong>Shore Acres State Park</strong> (Charleston) — jardins sobre penhascos, melhor pôr do sol da região!",
                 "type": "highlight"
             },
             {
@@ -1646,10 +1647,18 @@ const days = [
                 "type": ""
             },
             {
-                "time": "17:00",
+                "time": "17:15",
+                "text": "🌅 Pôr do sol em Shore Acres (volta pro parque pro fim de tarde)",
+                "type": "highlight"
+            },
+            {
+                "time": "18:15",
                 "text": "🍽️ Jantar em Coos Bay/Charleston — opções de frutos do mar no porto",
                 "type": "food"
             }
+        ],
+        "tips": [
+            "🌊 Astoria/Peter Iredale/Cape Disappointment vistos de manhã com luz do dia — pequeno backtrack ao norte (~40 km) antes de virar rumo sul de vez. Cape Disappointment fica em Washington, Astoria/Peter Iredale já em Oregon — ordem geográfica norte→sul."
         ]
     },
     {
@@ -1678,32 +1687,32 @@ const days = [
                 "time": "08:30"
             },
             {
-                "time": "09:15",
+                "time": "10:00",
                 "text": "⚡ <strong>Supercharger Coos Bay</strong> (~100 km) — ~25 min",
                 "type": "charge"
             },
             {
-                "time": "09:45",
+                "time": "10:30",
                 "text": "🌊 <strong>Jerry's Rogue Jets</strong> (opcional, passagem por Gold Beach) — passeio de barco pelo Rogue River, se der tempo!",
                 "type": ""
             },
             {
-                "time": "10:15",
+                "time": "11:00",
                 "text": "🏖️ <strong>Cape Sebastian</strong> — mirante épico sobre o Pacífico!",
                 "type": "highlight"
             },
             {
-                "time": "11:00",
+                "time": "11:35",
                 "text": "📸 <strong>Arch Rock Viewpoint</strong>",
                 "type": ""
             },
             {
-                "time": "11:30",
+                "time": "11:55",
                 "text": "📸 <strong>Natural Bridges Viewpoint</strong>",
                 "type": "highlight"
             },
             {
-                "time": "12:15",
+                "time": "12:20",
                 "text": "📸 <strong>Samuel Boardman Scenic Corridor</strong> — mirantes incríveis!",
                 "type": "highlight"
             },
@@ -1720,25 +1729,25 @@ const days = [
             {
                 "text": "🚗 Seguindo rumo a <strong>Crescent City</strong> (~85 km)",
                 "type": "drive",
-                "time": "14:30"
+                "time": "14:20"
             },
             {
-                "time": "15:15",
+                "time": "15:30",
                 "text": "🏨 Chegada em <strong>Crescent City</strong>! Check-in",
                 "type": ""
             },
             {
-                "time": "15:45",
+                "time": "16:00",
                 "text": "🏝️ <strong>Battery Point Lighthouse</strong> — ilha acessível na maré baixa!",
                 "type": ""
             },
             {
-                "time": "16:15",
+                "time": "~17:15",
                 "text": "🌅 Pôr do sol no porto de Crescent City",
                 "type": ""
             },
             {
-                "time": "16:45",
+                "time": "18:00",
                 "text": "🍽️ Jantar — <strong>Fisherman's Restaurant</strong> (700 US-101 S, Crescent City) — Dungeness crab e halibut. ~$15-22/pessoa",
                 "type": "food"
             }
@@ -1874,27 +1883,27 @@ const days = [
                 "time": "08:30"
             },
             {
-                "time": "09:15",
+                "time": "10:00",
                 "text": "🌲 <strong>Avenue of the Giants</strong> — 50 km entre redwoods!",
                 "type": "highlight"
             },
             {
-                "time": "10:00",
+                "time": "11:00",
                 "text": "⚡ <strong>Supercharger Leggett</strong> (~30 min)",
                 "type": "charge"
             },
             {
                 "text": "🚗 US-101 sul rumo a <strong>San Francisco</strong>",
                 "type": "drive",
-                "time": "10:30"
+                "time": "11:30"
             },
             {
-                "time": "~11:15",
+                "time": "~14:00",
                 "text": "🏨 Chegada em <strong>San Francisco</strong>! Check-in",
                 "type": ""
             },
             {
-                "time": "11:45",
+                "time": "19:00",
                 "text": "🍽️ Jantar — <strong>Tony's Pizza Napoletana</strong> (1570 Stockton St, North Beach) — campeão mundial de pizza napolitana. ~$20-25/pessoa",
                 "type": "food"
             }
@@ -1904,22 +1913,42 @@ const days = [
         "photo": "img/activities/pier_39.jpg",
         "shortLoc": "SF",
         "location": "San Francisco — Pier 39 + Embarcadero",
-        "route": "Primeiro dia em SF! Pier 39 + North Beach 🐋",
-        "note": "Chegamos em SF! Dia de waterfront — Pier 39, Fisherman's Wharf e North Beach.",
+        "route": "Primeiro dia em SF! Cable Car + Chinatown + Pier 39 🐋",
+        "note": "Chegamos em SF! Manhã de centro histórico (Cable Car, Chinatown), depois waterfront — Pier 39, Fisherman's Wharf e Point Reyes.",
         "region": "ca",
         "items": [
             {
-                "time": "08:30",
+                "time": "07:30",
                 "text": "☕ Café",
                 "type": ""
             },
             {
+                "time": "08:00",
+                "text": "🚋 Passeio de <strong>Cable Car</strong>. $8/pessoa/viagem",
+                "type": "highlight"
+            },
+            {
+                "time": "08:30",
+                "text": "🌆 <strong>Lombard Street</strong>",
+                "type": ""
+            },
+            {
+                "time": "09:00",
+                "text": "🏮 <strong>Chinatown de SF</strong> — a mais antiga dos EUA!",
+                "type": "highlight"
+            },
+            {
                 "time": "09:30",
+                "text": "🎮 <strong>Nintendo San Francisco</strong> (Union Square) — ~5 min de Chinatown! Entrada livre",
+                "type": "highlight"
+            },
+            {
+                "time": "10:00",
                 "text": "🌆 <strong>Embarcadero</strong> — Ferry Building, mercado gourmet!",
                 "type": ""
             },
             {
-                "time": "10:30",
+                "time": "10:45",
                 "text": "🏖️ <strong>Fisherman's Wharf</strong> — Ghirardelli Square, barcos históricos",
                 "type": ""
             },
@@ -1929,27 +1958,27 @@ const days = [
                 "type": "highlight"
             },
             {
-                "time": "12:30",
+                "time": "12:15",
                 "text": "🍽️ Almoço — clam chowder no <strong>Boudin Bakery</strong> (Pier 39)",
                 "type": "food"
             },
             {
-                "time": "14:30",
+                "time": "13:30",
                 "text": "🌳 <strong>Cypress Tree Tunnel</strong> (Point Reyes, ~1h de SF) — túnel de ciprestes centenários!",
                 "type": ""
             },
             {
-                "time": "15:00",
+                "time": "14:00",
                 "text": "🐋 <strong>Point Reyes</strong> — Elk Preserve, Lighthouse + <strong>baleias cinzentas!</strong> (migração jan-abr!)",
                 "type": "highlight"
             },
             {
-                "time": "17:00",
+                "time": "16:00",
                 "text": "🚗 Volta pra SF (~1h)",
                 "type": "drive"
             },
             {
-                "time": "18:00",
+                "time": "17:15",
                 "text": "🍽️ Jantar — <strong>Fog Harbor Fish House</strong> (Pier 39, Fisherman's Wharf) — frutos do mar com vista pra Baía, menu kids, crianças adoram! ~$20-28/pessoa",
                 "type": "food"
             }
@@ -2031,7 +2060,7 @@ const days = [
         ],
         "location": "San Francisco → Three Rivers (Sequoia)",
         "route": "Rumo às sequoias! 🌲",
-        "note": "Manhã de despedida em SF, depois drive até Three Rivers. Chegada com folga: sobe até Sequoia pra ver a General Sherman Tree no fim de tarde.",
+        "note": "Manhã tranquila em SF (Cable Car/Chinatown/Nintendo já vistos no dia 6), almoço rápido e drive até Three Rivers. Sobe até Sequoia pra ver a General Sherman Tree no fim de tarde.",
         "region": "ca",
         "items": [
             {
@@ -2040,73 +2069,54 @@ const days = [
                 "time": "08:00"
             },
             {
-                "time": "08:30",
-                "text": "🚋 Passeio de <strong>Cable Car</strong>. $8/pessoa/viagem",
-                "type": "highlight"
-            },
-            {
-                "time": "09:15",
-                "text": "🌆 <strong>Lombard Street</strong>",
-                "type": ""
-            },
-            {
-                "time": "09:45",
-                "text": "🏮 <strong>Chinatown de SF</strong> — a mais antiga dos EUA!",
-                "type": "highlight"
-            },
-            {
-                "time": "10:30",
-                "text": "🎮 <strong>Nintendo San Francisco</strong> (Union Square) — ~5 min de Chinatown! Entrada livre",
-                "type": "highlight"
-            },
-            {
-                "time": "11:15",
-                "text": "🍽️ Almoço — <strong>La Taqueria</strong> (Mission)",
+                "time": "09:00",
+                "text": "🍽️ Almoço cedo — <strong>La Taqueria</strong> (Mission, a caminho da saída)",
                 "type": "food"
             },
             {
                 "text": "🚗 Saída rumo a <strong>Three Rivers</strong> (~410 km, ~5.2h via CA-152 → CA-99 → CA-198)",
                 "type": "drive",
-                "time": "12:15"
+                "time": "09:45"
             },
             {
                 "text": "⚡ <strong>Supercharger Fresno, CA</strong> (~200 km) — ~25 min",
                 "type": "charge",
-                "time": "13:00"
+                "time": "12:00"
             },
             {
                 "text": "🏨 Chegada em <strong>Three Rivers</strong>! Check-in",
                 "type": "",
-                "time": "13:30"
+                "time": "14:45"
             },
             {
-                "time": "14:00",
+                "time": "16:00",
                 "text": "🚗 Subida até <strong>Sequoia NP</strong> (~30 km, ~45 min via CA-198 — sem shuttle no inverno, entra de carro)",
                 "type": "drive"
             },
             {
-                "time": "14:45",
+                "time": "16:45",
                 "text": "🌲 <strong>General Sherman Tree</strong> — a MAIOR árvore do mundo! 84m, luz de fim de tarde e bem mais vazio",
                 "type": "highlight"
             },
             {
-                "time": "15:30",
+                "time": "17:25",
                 "text": "🥾 <strong>Congress Trail</strong> (~3 km loop) — entre sequoias gigantes",
                 "type": ""
             },
             {
-                "time": "16:00",
+                "time": "18:05",
                 "text": "🚗 Volta pra Three Rivers (~45 min)",
                 "type": "drive"
             },
             {
-                "time": "16:45",
+                "time": "18:50",
                 "text": "🍽️ Jantar — <strong>Sierra Subs & Salads</strong> (41717 Sierra Dr, Three Rivers) — sanduíches artesanais e saladas frescas, casual e rápido. ~$10-15/pessoa",
                 "type": "food"
             }
         ],
         "tips": [
-            "🌲 General Sherman à tarde (não de manhã) libera o dia seguinte, que tem trecho de montanha pesado até Mariposa."
+            "🌲 General Sherman à tarde (não de manhã) libera o dia seguinte, que tem trecho de montanha pesado até Mariposa.",
+            "⏰ Chegada em Three Rivers já no fim de tarde (~17:15) — SF→Three Rivers são ~5.2h reais de estrada. Trilha e jantar ficam tarde da noite; se preferir chegar com mais folga, considerar sair de SF mais cedo (pular alguma parada da manhã)."
         ]
     },
     {
@@ -2550,16 +2560,6 @@ const days = [
                 "time": "19:00",
                 "text": "🍽️ Jantar — <strong>Grand Central Market</strong> (317 S Broadway, DTLA) — mercado gastronômico histórico de 1917, cada um escolhe o que quer (tacos, ramen, pizza, burgers), sem reserva, perfeito para família. ~$10-18/pessoa",
                 "type": "food"
-            },
-            {
-                "time": "20:30",
-                "text": "🔭 <strong>Griffith Observatory à noite</strong> — LA iluminada!",
-                "type": "highlight"
-            },
-            {
-                "time": "22:00",
-                "text": "🧳 Hotel — arrumar malas",
-                "type": ""
             }
         ],
         "day": 31,
@@ -2617,6 +2617,11 @@ const days = [
                 "time": "19:00",
                 "text": "🍽️ Jantar de despedida — <strong>In-N-Out Burger</strong> — o clássico californiano! ~$10/pessoa",
                 "type": "food"
+            },
+            {
+                "time": "20:30",
+                "text": "🔭 <strong>Griffith Observatory à noite</strong> — LA iluminada! Última noite da viagem",
+                "type": "highlight"
             }
         ],
         "day": 32,
