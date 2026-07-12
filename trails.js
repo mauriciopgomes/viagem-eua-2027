@@ -67,9 +67,6 @@ const trailsData = {
     'Muir Woods': [
         { name: 'Redwood Creek Trail', distance: '3.2 km', difficulty: 'Fácil', rating: 4.8, url: 'https://www.alltrails.com' }
     ],
-    'Mt. Rainier': [
-        { name: 'Skyline Trail', distance: '10 km', difficulty: 'Moderado', rating: 4.9, url: 'https://www.alltrails.com' }
-    ],
     'Olympic NP': [
         { name: 'Hoh Rain Forest', distance: '5 km', difficulty: 'Fácil', rating: 4.8, url: 'https://www.alltrails.com' }
     ],
