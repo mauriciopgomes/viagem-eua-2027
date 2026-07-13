@@ -17,7 +17,7 @@ const hotelCoords = {
     'Crescent City': [41.7558, -124.2026],
     'Eureka': [40.8021, -124.1637],
     'San Francisco': [37.7749, -122.4194],
-    'Mariposa': [37.4849, -119.9663],
+    'Fishcamp': [37.4877, -119.6423],
     'Three Rivers': [36.4519, -118.9054],
     'Los Angeles': [34.0522, -118.2437],
     'Pendleton': [45.6721, -118.7886],

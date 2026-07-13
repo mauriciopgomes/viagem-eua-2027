@@ -854,7 +854,7 @@ var mapScrubDay = 1;
 // Day → coordinate mapping for fly-to
 var dayCoords = {
     1:[40.7580,-73.9855], 2:[40.7580,-73.9855], 3:[40.7580,-73.9855], 4:[40.7580,-73.9855],
-    5:[36.4519,-118.9054], 6:[36.4519,-118.9054], 7:[37.4849,-119.9663], 8:[37.4849,-119.9663],
+    5:[36.4519,-118.9054], 6:[36.7978,-118.5551], 7:[37.4877,-119.6423], 8:[37.4877,-119.6423],
     9:[37.7749,-122.4194],
     10:[37.7749,-122.4194], 11:[37.7749,-122.4194],
     12:[40.8021,-124.1637], 13:[41.7558,-124.2026],
@@ -923,9 +923,9 @@ var dayStats = {
     3: { km: '—', drive: '', hotel: 'Marriott Marquis' },
     4: { km: '—', drive: '', hotel: 'Marriott Marquis' },
     5: { km: '~330', drive: 'NY (voo) → LAX → Three Rivers (CA-99)', hotel: 'Three Rivers' },
-    6: { km: '~130', drive: 'Sequoia + Kings Canyon NP', hotel: 'Three Rivers' },
-    7: { km: '~370', drive: 'Three Rivers → Fresno → Mariposa/El Portal → Yosemite Valley', hotel: 'Mariposa' },
-    8: { km: '~176', drive: 'Yosemite Valley — dia completo (snow tubing + trilhas)', hotel: 'Mariposa' },
+    6: { km: '~304', drive: 'Sequoia + Kings Canyon NP → Fishcamp (via Fresno)', hotel: 'Fishcamp' },
+    7: { km: '~102', drive: 'Fishcamp — Mariposa Grove + Yosemite Valley', hotel: 'Fishcamp' },
+    8: { km: '~89', drive: 'Yosemite Valley — dia completo (snow tubing + trilhas)', hotel: 'Fishcamp' },
     9: { km: '~425', drive: 'Yosemite → San Francisco', hotel: 'San Francisco' },
     10: { km: '~110', drive: 'Golden Gate + Point Reyes', hotel: 'San Francisco' },
     11: { km: '~50', drive: 'SF — Embarcadero + Ocean Beach', hotel: 'San Francisco' },
@@ -1031,7 +1031,7 @@ function doInitMap() {
     var stops = [
         { n: "New York", lat: 40.7580, lng: -73.9855, i: "✈️", info: "Dias 1–4 • 4 noites\nMarriott Marquis, Times Square", days: [1,2,3,4], photo: 1 },
         { n: "Three Rivers / Sequoia", lat: 36.4519, lng: -118.9054, i: "🌲", info: "Dias 5–6 • Sequoia + Kings Canyon", days: [5,6], photo: 5 },
-        { n: "Mariposa / Yosemite", lat: 37.4849, lng: -119.9663, i: "🏞️", info: "Dias 7–8 • Yosemite NP", days: [7,8], photo: 8 },
+        { n: "Fishcamp / Yosemite", lat: 37.4877, lng: -119.6423, i: "🏞️", info: "Dias 7–8 • Mariposa Grove + Yosemite Valley", days: [7,8], photo: 8 },
         { n: "San Francisco", lat: 37.7749, lng: -122.4194, i: "🌉", info: "Dias 9–11 • Golden Gate, Pier 39", days: [9,10,11], photo: 10 },
         { n: "Redwood NP", lat: 41.7558, lng: -124.2026, i: "🦕", info: "Dias 12–13 • Avenue of Giants, Fern Canyon", days: [12,13], photo: 13 },
         { n: "Coos Bay, OR", lat: 43.3665, lng: -124.2179, i: "🌊", info: "Dia 14 • Samuel Boardman, Shore Acres", days: [14], photo: 14 },
@@ -1118,7 +1118,8 @@ function doInitMap() {
 
     // ---- ROADSIDE POI LAYER (scenic stops along the route) ----
     var roadPois = [
-        // Day 7: drive to Yosemite Valley + first views
+        // Day 7: Fishcamp — Mariposa Grove + Yosemite Valley afternoon
+        { n: "Mariposa Grove", lat: 37.5139, lng: -119.6069, i: "🌲", day: 7 },
         { n: "Tunnel View", lat: 37.7157, lng: -119.6770, i: "📸", day: 7 },
         { n: "El Capitan", lat: 37.7340, lng: -119.6384, i: "🧗", day: 7 },
         { n: "Bridalveil Fall", lat: 37.7171, lng: -119.6465, i: "🌊", day: 7 },

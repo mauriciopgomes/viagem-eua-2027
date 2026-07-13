@@ -15,12 +15,14 @@ const path = require('path');
 const dayWaypoints = {
     // D5: LAX → Three Rivers via CA-99 (Bakersfield)
     5: [[33.94,-118.41],[35.37,-119.02],[36.45,-118.91]],
-    // D7: Three Rivers → Fresno → Mariposa/El Portal → Yosemite Valley → Mariposa/El Portal (one day: drive + Valley round trip)
-    7: [[36.45,-118.91],[36.74,-119.79],[37.49,-119.97],[37.74,-119.60],[37.49,-119.97]],
-    // D8: Mariposa/El Portal → Yosemite Valley (full day: falls, Badger Pass, Sentinel Bridge) → Mariposa/El Portal (round trip)
-    8: [[37.49,-119.97],[37.66,-119.66],[37.49,-119.97]],
-    // D9: Mariposa/El Portal → Yosemite Valley (quick pass, no stop) → El Portal (Arch Rock) → CA-140 Merced River Canyon → Mariposa (no stop) → CA-99 → I-580 → SF
-    9: [[37.49,-119.97],[37.7157,-119.6570],[37.6725,-119.7048],[37.4849,-119.9663],[37.77,-122.42]],
+    // D6: Kings Canyon → Fresno → Fishcamp (direct, no return to Three Rivers)
+    6: [[36.45,-118.91],[36.80,-118.96],[36.74,-119.79],[37.4877,-119.6423]],
+    // D7: Fishcamp → Mariposa Grove → Yosemite Valley (Tunnel View) → Fishcamp (round trip, full day)
+    7: [[37.4877,-119.6423],[37.5139,-119.6069],[37.7157,-119.6770],[37.4877,-119.6423]],
+    // D8: Fishcamp → Yosemite Valley (full day: falls, Badger Pass, Sentinel Bridge) → Fishcamp (round trip)
+    8: [[37.4877,-119.6423],[37.66,-119.66],[37.4877,-119.6423]],
+    // D9: Fishcamp → Yosemite Valley (quick pass, no stop) → El Portal (Arch Rock) → CA-140 Merced River Canyon → Mariposa (no stop) → CA-99 → I-580 → SF
+    9: [[37.4877,-119.6423],[37.7157,-119.6570],[37.6725,-119.7048],[37.4849,-119.9663],[37.77,-122.42]],
     // D12: SF → Eureka via Avenue of the Giants (Leggett)
     12: [[37.77,-122.42],[39.87,-123.72],[40.35,-123.92],[40.80,-124.16]],
     // D13: Eureka → Redwood NP → Crescent City

@@ -400,9 +400,16 @@ const days = [
     {
         "photo": "img/activities/general_sherman_tree.jpg",
         "shortLoc": "Sequoia",
-        "location": "Sequoia + Kings Canyon NP",
-        "route": "General Sherman + Kings Canyon! 🌲",
-        "note": "Dia cheio nos parques! Sequoia de manhã, Kings Canyon à tarde.",
+        "chargeStops": [
+            {
+                "name": "Fresno, CA",
+                "leg": "Kings Canyon → Fishcamp",
+                "critical": false
+            }
+        ],
+        "location": "Sequoia + Kings Canyon NP → Fishcamp",
+        "route": "General Sherman + Kings Canyon → Fishcamp! 🌲",
+        "note": "Dia cheio nos parques! Sequoia de manhã, Kings Canyon à tarde. No fim do dia, drive direto pra Fishcamp (sem voltar a Three Rivers).",
         "region": "ca",
         "items": [
             {
@@ -457,104 +464,104 @@ const days = [
             },
             {
                 "time": "16:00",
-                "text": "🚗 Volta pra Three Rivers (~1h30)",
+                "text": "🚗 Saída de Kings Canyon rumo a <strong>Fishcamp</strong>, via Fresno (~190 km, ~3h via CA-180 W → CA-41 N) — sem voltar a Three Rivers",
                 "type": "drive"
             },
             {
-                "time": "18:00",
-                "text": "🍽️ Jantar — <strong>Gateway Restaurant & Lodge</strong> (45978 Sierra Dr, Three Rivers) — americana casual com vista. ~$15-22/pessoa",
+                "time": "17:15",
+                "text": "⚡ <strong>Supercharger Fresno, CA</strong> (~130 km) — ~20 min",
+                "type": "charge"
+            },
+            {
+                "time": "~19:00",
+                "text": "🏨 Chegada em <strong>Fishcamp</strong>! Check-in",
+                "type": ""
+            },
+            {
+                "time": "19:30",
+                "text": "🍽️ Jantar — <strong>Narrow Gauge Inn Restaurant</strong> (Fish Camp) — americana casual em cabana de montanha. ~$18-25/pessoa",
                 "type": "food"
             }
         ],
         "tips": [
             "❄️ Em janeiro pode ter neve nas áreas mais altas — chains podem ser obrigatórias.",
-            "⚠️ Kings Canyon Scenic Byway (CA-180 leste) fecha no inverno. Só General Grant Tree é acessível."
+            "⚠️ Kings Canyon Scenic Byway (CA-180 leste) fecha no inverno. Só General Grant Tree é acessível.",
+            "🛣️ Drive direto de Kings Canyon pra Fishcamp (sem voltar a Three Rivers) — economiza tempo pro dia seguinte, que fica inteiro livre em Yosemite."
         ]
     },
     {
         "photo": "img/activities/tunnel_view.jpg",
         "shortLoc": "Yosemite",
-        "chargeStops": [
-            {
-                "name": "Fresno, CA",
-                "leg": "Three Rivers → Mariposa/El Portal",
-                "critical": false
-            }
-        ],
-        "location": "Three Rivers → Yosemite Valley",
-        "route": "Rumo a Yosemite! 🏞️",
-        "note": "Drive de Three Rivers até Mariposa/El Portal via Fresno. Check-in rápido e à tarde direto pro Valley: Tunnel View, cachoeiras e sunset.",
+        "location": "Fishcamp — Mariposa Grove + Yosemite Valley",
+        "route": "Mariposa Grove + Yosemite Valley! 🌲🏞️",
+        "note": "Dia inteiro saindo de Fishcamp — sem drive de chegada! Manhã na Mariposa Grove (sequoias, sem shuttle em janeiro — trilha a pé). Tarde no Yosemite Valley: Tunnel View, Bridalveil Fall e El Capitan Meadow.",
         "region": "ca",
         "items": [
             {
                 "time": "08:00",
-                "text": "☕ Café + check-out de Three Rivers",
+                "text": "☕ Café no hotel em Fishcamp",
                 "type": ""
             },
             {
                 "time": "08:30",
-                "text": "🚗 Drive Three Rivers → Fresno → Mariposa/El Portal (~295 km, ~4h via CA-180 W → CA-41 N → CA-49 N)",
+                "text": "🚗 Drive até <strong>Mariposa Grove</strong> (~5 km, ~10 min via CA-41 N — entrada sul do parque)",
                 "type": "drive"
             },
             {
-                "time": "10:30",
-                "text": "⚡ <strong>Supercharger Fresno, CA</strong> (~150 km) — ~25 min",
-                "type": "charge"
+                "time": "09:00",
+                "text": "🌲 <strong>Grizzly Giant</strong> — uma das maiores sequoias do parque, ~1.900 anos!",
+                "type": "highlight"
             },
             {
-                "time": "11:00",
-                "text": "🍽️ Almoço em Fresno",
-                "type": "food"
-            },
-            {
-                "time": "~13:00",
-                "text": "🏨 Chegada no hotel! Check-in rápido — sem tempo pra passeio na cidade hoje",
+                "time": "09:30",
+                "text": "🥾 <strong>Mariposa Grove Trail</strong> (~3 km loop) — sem shuttle em janeiro, tudo a pé entre as sequoias gigantes",
                 "type": ""
             },
             {
-                "time": "13:30",
-                "text": "🚗 Drive até <strong>Yosemite Valley</strong> (~1h-1h30 via CA-140)",
+                "time": "11:00",
+                "text": "🚗 Drive até <strong>Yosemite Valley</strong> via Wawona Rd (~1h-1h15)",
                 "type": "drive"
             },
             {
-                "time": "15:00",
+                "time": "12:15",
+                "text": "🍽️ Almoço no <strong>Wawona Hotel Dining Room</strong> (a caminho do Valley)",
+                "type": "food"
+            },
+            {
+                "time": "13:30",
                 "text": "📸 <strong>Tunnel View</strong> — vista icônica: El Capitan + Half Dome + Bridalveil!",
                 "type": "highlight"
             },
             {
-                "time": "15:30",
+                "time": "14:00",
                 "text": "🌊 <strong>Bridalveil Fall</strong> — trilha curta ~10 min",
                 "type": ""
             },
             {
-                "time": "16:00",
+                "time": "14:30",
                 "text": "🏔️ <strong>El Capitan Meadow</strong> — paredão de 900m!",
                 "type": ""
             },
             {
-                "time": "16:30",
-                "text": "🌲 <strong>Cook's Meadow Loop</strong> — trilha fácil, Half Dome + Yosemite Falls com neve",
-                "type": ""
-            },
-            {
-                "time": "17:15",
-                "text": "🌅 Sunset no <strong>Tunnel View</strong> — luz dourada!",
-                "type": "highlight"
-            },
-            {
-                "time": "18:00",
-                "text": "🚗 Volta pro hotel",
+                "time": "15:15",
+                "text": "🚗 Volta pra Fishcamp via Wawona Rd (~1h-1h15)",
                 "type": "drive"
             },
             {
-                "time": "19:30",
-                "text": "🍽️ Jantar perto do hotel (Mariposa, El Portal ou Fishcamp, a definir)",
+                "time": "16:30",
+                "text": "🕐 Tarde livre em Fishcamp — descanso no hotel, sem compromisso",
+                "type": ""
+            },
+            {
+                "time": "19:00",
+                "text": "🍽️ Jantar — <strong>Jackalope's Bar & Grill</strong> (Tenaya Lodge, Fish Camp) — grelhados e cerveja artesanal. ~$20-28/pessoa",
                 "type": "food"
             }
         ],
         "tips": [
-            "🚗 Estrada de montanha sinuosa — mais lenta do que a distância sugere.",
-            "🏨 Hospedagem ainda em aberto entre Mariposa/El Portal/Fishcamp — check-in tratado como pernoite simples, sem passeio na cidade."
+            "🥾 Mariposa Grove sem shuttle em janeiro — a caminhada até o Grizzly Giant é tranquila (~800m ida), mas o loop completo exige mais fôlego.",
+            "🚗 Wawona Rd (CA-41) é sinuosa e sobe bastante — mais lenta do que a distância sugere.",
+            "🌲 Este é o único dia com Mariposa Grove no roteiro — Yosemite Valley completo fica pro dia seguinte."
         ]
     },
     {
@@ -622,7 +629,7 @@ const days = [
             },
             {
                 "time": "19:30",
-                "text": "🍽️ Jantar de despedida perto do hotel (Mariposa, El Portal ou Fishcamp, a definir)",
+                "text": "🍽️ Jantar de despedida — <strong>South Gate Brewing Co</strong> (Oakhurst) — cervejaria artesanal com comida americana. ~$18-25/pessoa",
                 "type": "food"
             }
         ],
@@ -642,7 +649,7 @@ const days = [
         ],
         "location": "Yosemite → San Francisco",
         "route": "Serra Nevada → SF! 🌉",
-        "note": "Drive de Yosemite (Mariposa/El Portal/Fishcamp) até SF, passando de relance pelo Valley e saindo por El Portal/Merced River Canyon. Chegada à tarde.",
+        "note": "Drive de Fishcamp até SF, passando de relance pelo Valley e saindo por El Portal/Merced River Canyon. Chegada à tarde.",
         "region": "ca",
         "items": [
             {
@@ -657,7 +664,7 @@ const days = [
             },
             {
                 "time": "09:00",
-                "text": "📸 <strong>Tunnel View</strong> — parada rápida de ~5-10 min (já visto ontem)",
+                "text": "📸 <strong>Tunnel View</strong> — parada rápida de ~5-10 min (já visto nos dias anteriores)",
                 "type": ""
             },
             {
@@ -2490,15 +2497,15 @@ const hotels = [
         "num": 2,
         "name": "Three Rivers, CA (Sequoia)",
         "checkin": "25/01",
-        "checkout": "27/01",
-        "nights": 2
+        "checkout": "26/01",
+        "nights": 1
     },
     {
         "num": 3,
-        "name": "Mariposa / El Portal / Fishcamp, CA (Yosemite)",
-        "checkin": "27/01",
+        "name": "Fishcamp, CA (Yosemite)",
+        "checkin": "26/01",
         "checkout": "29/01",
-        "nights": 2
+        "nights": 3
     },
     {
         "num": 4,

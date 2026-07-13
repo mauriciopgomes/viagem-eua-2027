@@ -1272,7 +1272,9 @@ test('dayCoords[N] aponta pro hotel do dia N, não do dia anterior (bug de fly-t
     });
     expected[33] = hotels[hotels.length - 1].name;
 
-    const KNOWN_ACTIVITY_POINT_DAYS = [12]; // documentado em ARCHITECTURE.md (era dia 13, -1 após compressão Yosemite)
+    const KNOWN_ACTIVITY_POINT_DAYS = [12, 6]; // dia 12: ponto de atividade dentro do Olympic NP (~125km do hotel de Forks).
+    // dia 6: drive longo Kings Canyon → Fishcamp no fim do dia (mudança de rota — sem retorno a Three Rivers);
+    // dayCoords aponta pro parque (Kings Canyon), não pro hotel de chegada (Fishcamp, ~132km).
 
     for (let d = 1; d <= 33; d++) {
         if (KNOWN_ACTIVITY_POINT_DAYS.includes(d)) continue;

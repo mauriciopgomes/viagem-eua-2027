@@ -85,6 +85,7 @@ const placeInfo = {
     'Crescent Meadow': { addr: 'Crescent Meadow, Sequoia NP, CA', coords: '36.5525,-118.7530', detail: "John Muir a chamou de 'Jóia da Sierra'. Tharp's Log: cabana pioneira dentro de um tronco oco de sequoia!", cost: 'Incluso' },
 
     // Day 8-9 — Yosemite
+    'Grizzly Giant': { addr: 'Mariposa Grove, Yosemite NP, CA', coords: '37.5139,-119.6069', detail: 'Uma das maiores sequoias do parque, ~1.900 anos! Trilha a pé ~800m da entrada (sem shuttle em janeiro).', cost: 'Entrada: $35/veículo' },
     'Tunnel View': { addr: 'Tunnel View, Yosemite NP, CA', coords: '37.7157,-119.6770', detail: 'A vista mais icônica de Yosemite! El Capitan à esquerda, Half Dome ao centro, Bridalveil Fall à direita. Estacionamento pequeno — chegue cedo!', cost: 'Entrada: $35/veículo' },
     'Yosemite Valley': { addr: 'Yosemite Valley, Yosemite NP, CA', coords: '37.7459,-119.5933', detail: 'Vale glacial de 11 km rodeado por paredões de granito. Village tem restaurantes, lojas e centro de visitantes.' },
     'El Capitan': { addr: 'El Capitan Meadow, Yosemite NP, CA', coords: '37.7340,-119.6384', detail: 'Paredão vertical de 900m — maior monolito de granito do mundo! Escaladores levam 4-5 dias. Free Solo (2018) filmado aqui.' },
