@@ -477,13 +477,13 @@ const days = [
         "chargeStops": [
             {
                 "name": "Fresno, CA",
-                "leg": "Three Rivers → Mariposa",
+                "leg": "Three Rivers → Mariposa/El Portal",
                 "critical": false
             }
         ],
-        "location": "Three Rivers → Mariposa (Yosemite)",
+        "location": "Three Rivers → Yosemite Valley",
         "route": "Rumo a Yosemite! 🏞️",
-        "note": "Drive de Three Rivers até Mariposa via Fresno. Tarde livre em Mariposa.",
+        "note": "Drive de Three Rivers até Mariposa/El Portal via Fresno. Check-in rápido e à tarde direto pro Valley: Tunnel View, cachoeiras e sunset.",
         "region": "ca",
         "items": [
             {
@@ -493,7 +493,7 @@ const days = [
             },
             {
                 "time": "08:30",
-                "text": "🚗 Drive Three Rivers → Fresno → Mariposa (~295 km, ~4h via CA-180 W → CA-41 N → CA-49 N)",
+                "text": "🚗 Drive Three Rivers → Fresno → Mariposa/El Portal (~295 km, ~4h via CA-180 W → CA-41 N → CA-49 N)",
                 "type": "drive"
             },
             {
@@ -508,159 +508,32 @@ const days = [
             },
             {
                 "time": "~13:00",
-                "text": "🏨 Chegada em <strong>Mariposa</strong>! Check-in",
+                "text": "🏨 Chegada no hotel! Check-in rápido — sem tempo pra passeio na cidade hoje",
                 "type": ""
             },
             {
-                "time": "14:00",
-                "text": "🏛️ <strong>Mariposa Museum & History Center</strong> — história da corrida do ouro!",
-                "type": ""
-            },
-            {
-                "time": "15:30",
-                "text": "🚶 Passeio pelo centro histórico de Mariposa — galerias e lojas",
-                "type": ""
-            },
-            {
-                "time": "19:00",
-                "text": "🍽️ Jantar — <strong>Charles Street Dinner House</strong> (5043 Hwy 140, Mariposa) — steakhouse histórico. ~$25-35/pessoa",
-                "type": "food"
-            }
-        ],
-        "tips": [
-            "🚗 Estrada de montanha sinuosa — mais lenta do que a distância sugere."
-        ]
-    },
-    {
-        "photo": "img/activities/half_dome.jpg",
-        "shortLoc": "Yosemite",
-        "location": "Yosemite NP dia 1 — Valley",
-        "route": "Tunnel View + cachoeiras + neve! 🏞️",
-        "note": "Primeiro dia em Yosemite! Valley com neve — lindo!",
-        "region": "ca",
-        "items": [
-            {
-                "time": "07:00",
-                "text": "☕ Café em Mariposa",
-                "type": ""
-            },
-            {
-                "time": "07:30",
-                "text": "🚗 Drive Mariposa → Yosemite Valley (~1.5h via CA-140)",
+                "time": "13:30",
+                "text": "🚗 Drive até <strong>Yosemite Valley</strong> (~1h-1h30 via CA-140)",
                 "type": "drive"
             },
             {
-                "time": "09:00",
+                "time": "15:00",
                 "text": "📸 <strong>Tunnel View</strong> — vista icônica: El Capitan + Half Dome + Bridalveil!",
                 "type": "highlight"
             },
             {
-                "time": "09:30",
+                "time": "15:30",
                 "text": "🌊 <strong>Bridalveil Fall</strong> — trilha curta ~10 min",
                 "type": ""
             },
             {
-                "time": "10:00",
+                "time": "16:00",
                 "text": "🏔️ <strong>El Capitan Meadow</strong> — paredão de 900m!",
                 "type": ""
             },
             {
-                "time": "10:30",
-                "text": "🌊 <strong>Yosemite Falls</strong> — Lower trail ~30 min — pode ter gelo!",
-                "type": "highlight"
-            },
-            {
-                "time": "11:15",
-                "text": "🪞 <strong>Mirror Lake</strong> — trilha ~3 km, reflexo do Half Dome!",
-                "type": ""
-            },
-            {
-                "time": "12:30",
-                "text": "🍽️ Almoço no Yosemite Valley Lodge",
-                "type": "food"
-            },
-            {
-                "time": "13:30",
+                "time": "16:30",
                 "text": "🌲 <strong>Cook's Meadow Loop</strong> — trilha fácil, Half Dome + Yosemite Falls com neve",
-                "type": ""
-            },
-            {
-                "time": "14:30",
-                "text": "📸 <strong>Valley View</strong> — foto clássica do Merced River",
-                "type": ""
-            },
-            {
-                "time": "15:00",
-                "text": "🎨 <strong>Ansel Adams Gallery</strong> — fotografia icônica de Yosemite",
-                "type": ""
-            },
-            {
-                "time": "16:00",
-                "text": "⛷️ <strong>Yosemite Ski & Snowboard Area</strong> (Badger Pass) — snow tubing! ~$20-30/pessoa",
-                "type": "highlight"
-            },
-            {
-                "time": "17:30",
-                "text": "🚗 Volta pra Mariposa (~45 min)",
-                "type": "drive"
-            },
-            {
-                "time": "19:00",
-                "text": "🍽️ Jantar — <strong>Savoury's</strong> (5034 Hwy 140, Mariposa) — cozinha americana eclética. ~$20-25/pessoa",
-                "type": "food"
-            }
-        ],
-        "tips": [
-            "❄️ Yosemite nevado em janeiro é LINDO! Menos turistas, silêncio, neve nos picos.",
-            "⛷️ Snow tubing em Badger Pass: aberto inverno, ~$20/pessoa, kids adoram!"
-        ]
-    },
-    {
-        "photo": "img/activities/badger_pass.jpg",
-        "shortLoc": "Yosemite",
-        "location": "Yosemite NP dia 2 — Neve!",
-        "route": "Snow tubing + snowshoeing + despedida! ⛷️",
-        "note": "Snow tubing de manhã, trilhas à tarde. Último dia em Yosemite!",
-        "region": "ca",
-        "items": [
-            {
-                "time": "07:30",
-                "text": "☕ Café em Mariposa",
-                "type": ""
-            },
-            {
-                "time": "08:00",
-                "text": "🚗 Drive → Yosemite",
-                "type": "drive"
-            },
-            {
-                "time": "09:00",
-                "text": "⛷️ <strong>Yosemite Ski & Snowboard Area</strong> (Badger Pass) — snow tubing! ~$20-30/pessoa",
-                "type": "highlight"
-            },
-            {
-                "time": "11:00",
-                "text": "🏔️ Snowshoeing guiado pelo ranger (grátis, ~2h)",
-                "type": "highlight"
-            },
-            {
-                "time": "13:00",
-                "text": "🍽️ Almoço no Yosemite Valley",
-                "type": "food"
-            },
-            {
-                "time": "13:45",
-                "text": "🪞 <strong>Sentinel Bridge</strong> — reflexo do Half Dome no rio Merced, melhor luz do meio-dia à tarde!",
-                "type": "highlight"
-            },
-            {
-                "time": "14:30",
-                "text": "🥾 <strong>Swinging Bridge</strong> + <strong>Sentinel Meadow</strong> — luz da tarde nos picos",
-                "type": ""
-            },
-            {
-                "time": "15:30",
-                "text": "📸 Revisitar favoritos — luz diferente da tarde!",
                 "type": ""
             },
             {
@@ -669,18 +542,92 @@ const days = [
                 "type": "highlight"
             },
             {
-                "time": "17:30",
-                "text": "🚗 Volta pra Mariposa",
+                "time": "18:00",
+                "text": "🚗 Volta pro hotel",
                 "type": "drive"
             },
             {
-                "time": "19:00",
-                "text": "🍽️ Jantar de despedida — <strong>Castillo's Mexican Food</strong> (4995 5th St, Mariposa) — enchiladas verdes. ~$12-18/pessoa",
+                "time": "19:30",
+                "text": "🍽️ Jantar perto do hotel (Mariposa, El Portal ou Fishcamp, a definir)",
                 "type": "food"
             }
         ],
         "tips": [
-            "⛷️ Snow tubing em Badger Pass: aberto inverno, ~$20/pessoa, kids adoram!"
+            "🚗 Estrada de montanha sinuosa — mais lenta do que a distância sugere.",
+            "🏨 Hospedagem ainda em aberto entre Mariposa/El Portal/Fishcamp — check-in tratado como pernoite simples, sem passeio na cidade."
+        ]
+    },
+    {
+        "photo": "img/activities/half_dome.jpg",
+        "shortLoc": "Yosemite",
+        "location": "Yosemite Valley — dia completo",
+        "route": "Cachoeiras + neve + snow tubing + despedida! ⛷️",
+        "note": "Único dia inteiro dentro do Valley: cachoeiras, mirantes, snow tubing e snowshoeing. Último dia em Yosemite!",
+        "region": "ca",
+        "items": [
+            {
+                "time": "07:00",
+                "text": "☕ Café no hotel",
+                "type": ""
+            },
+            {
+                "time": "07:30",
+                "text": "🚗 Drive até Yosemite Valley (~1h-1h30 via CA-140)",
+                "type": "drive"
+            },
+            {
+                "time": "09:00",
+                "text": "🌊 <strong>Yosemite Falls</strong> — Lower trail ~30 min — pode ter gelo!",
+                "type": "highlight"
+            },
+            {
+                "time": "09:45",
+                "text": "🪞 <strong>Mirror Lake</strong> — trilha ~3 km, reflexo do Half Dome!",
+                "type": ""
+            },
+            {
+                "time": "11:00",
+                "text": "📸 <strong>Valley View</strong> — foto clássica do Merced River",
+                "type": ""
+            },
+            {
+                "time": "11:30",
+                "text": "🎨 <strong>Ansel Adams Gallery</strong> — fotografia icônica de Yosemite",
+                "type": ""
+            },
+            {
+                "time": "12:00",
+                "text": "🍽️ Almoço no Yosemite Valley Lodge",
+                "type": "food"
+            },
+            {
+                "time": "14:00",
+                "text": "🪞 <strong>Sentinel Bridge</strong> — reflexo do Half Dome no rio Merced, melhor luz do fim de tarde!",
+                "type": "highlight"
+            },
+            {
+                "time": "15:15",
+                "text": "🥾 <strong>Swinging Bridge</strong> + <strong>Sentinel Meadow</strong> — luz da tarde nos picos",
+                "type": ""
+            },
+            {
+                "time": "16:30",
+                "text": "🕐 Tempo livre no Valley — descanso, aproveitar a neve e os últimos momentos em Yosemite",
+                "type": ""
+            },
+            {
+                "time": "18:00",
+                "text": "🚗 Volta pro hotel",
+                "type": "drive"
+            },
+            {
+                "time": "19:30",
+                "text": "🍽️ Jantar de despedida perto do hotel (Mariposa, El Portal ou Fishcamp, a definir)",
+                "type": "food"
+            }
+        ],
+        "tips": [
+            "❄️ Yosemite nevado em janeiro é LINDO! Menos turistas, silêncio, neve nos picos."
         ]
     },
     {
@@ -688,50 +635,60 @@ const days = [
         "shortLoc": "SF",
         "chargeStops": [
             {
-                "name": "Merced, CA",
-                "leg": "Mariposa → SF",
+                "name": "Manteca/Oakdale, CA",
+                "leg": "Yosemite → SF",
                 "critical": false
             }
         ],
-        "location": "Mariposa → San Francisco",
+        "location": "Yosemite → San Francisco",
         "route": "Serra Nevada → SF! 🌉",
-        "note": "Drive de Mariposa até SF. Chegada à tarde, explorar North Beach.",
+        "note": "Drive de Yosemite (Mariposa/El Portal/Fishcamp) até SF, passando de relance pelo Valley e saindo por El Portal/Merced River Canyon. Chegada à tarde.",
         "region": "ca",
         "items": [
             {
                 "time": "08:00",
-                "text": "☕ Café + check-out de Mariposa",
+                "text": "☕ Café + check-out do hotel",
                 "type": ""
             },
             {
                 "time": "08:30",
-                "text": "🚗 Drive Mariposa → SF (~280 km, ~3.5h via CA-140 → CA-99 → I-580)",
+                "text": "🚗 Wawona Rd rumo ao <strong>Yosemite Valley</strong> — passagem rápida, sem parar",
                 "type": "drive"
             },
             {
-                "time": "10:00",
-                "text": "⚡ <strong>Supercharger Merced, CA</strong> (~100 km) — ~20 min",
+                "time": "09:00",
+                "text": "📸 <strong>Tunnel View</strong> — parada rápida de ~5-10 min (já visto ontem)",
+                "type": ""
+            },
+            {
+                "time": "09:15",
+                "text": "🚗 Saída do parque por <strong>El Portal (Arch Rock)</strong> → CA-140 pelo <strong>Merced River Canyon</strong>",
+                "type": "drive"
+            },
+            {
+                "time": "10:30",
+                "text": "🚗 Passagem por <strong>Mariposa</strong> — só paisagem, sem parar",
+                "type": "drive"
+            },
+            {
+                "time": "12:15",
+                "text": "⚡ <strong>Supercharger Manteca/Oakdale, CA</strong> (opcional) — ~20 min",
                 "type": "charge"
             },
             {
-                "time": "~12:00",
+                "time": "~13:00",
                 "text": "🏨 Chegada em <strong>San Francisco</strong>! Check-in",
                 "type": ""
             },
             {
-                "time": "13:00",
+                "time": "13:30",
                 "text": "🍽️ Almoço — <strong>Tony's Pizza Napoletana</strong> (1570 Stockton St, North Beach) — campeão mundial de pizza. ~$20-25/pessoa",
                 "type": "food"
             },
             {
-                "time": "14:30",
+                "time": "15:00",
                 "text": "🌆 <strong>Lombard Street</strong> — a rua mais sinuosa do mundo!",
                 "type": ""
-            },
-            {
-                "time": "15:00",
-                "text": "🚋 Passeio de <strong>Cable Car</strong>. $8/pessoa/viagem",
-                "type": "highlight"
             },
             {
                 "time": "16:00",
@@ -972,11 +929,6 @@ const days = [
             },
             {
                 "time": "09:45",
-                "text": "📸 <strong>Big Tree Wayside</strong>",
-                "type": ""
-            },
-            {
-                "time": "10:00",
                 "text": "🌲 <em>Opcional:</em> <strong>Tall Trees Grove</strong> (~5 km, ~2h). ⚠️ Permit no Info Center",
                 "type": "highlight"
             },
@@ -1008,11 +960,6 @@ const days = [
             {
                 "time": "14:45",
                 "text": "🚗 <strong>Howland Hill Road</strong> — estrada de terra entre redwoods enormes",
-                "type": ""
-            },
-            {
-                "time": "15:15",
-                "text": "📸 <strong>Thomas H. Kuchel Visitor Center</strong> — último mirante da Redwood NP",
                 "type": ""
             },
             {
@@ -1342,14 +1289,19 @@ const days = [
                 "type": ""
             },
             {
-                "time": "12:00",
+                "time": "11:00",
+                "text": "🌊 <strong>Sol Duc Falls Trail</strong> (~2.5 km) — cachoeira linda!",
+                "type": "highlight"
+            },
+            {
+                "time": "12:30",
                 "text": "🍽️ Almoço em Forks",
                 "type": "food"
             },
             {
                 "time": "13:30",
-                "text": "♨️ <strong>Sol Duc Hot Springs</strong> — piscinas termais naturais!",
-                "type": "highlight"
+                "text": "🕐 Tarde livre — descanso, lavar roupa",
+                "type": ""
             },
             {
                 "time": "19:00",
@@ -1391,21 +1343,16 @@ const days = [
             },
             {
                 "time": "13:30",
-                "text": "🌊 <strong>Sol Duc Falls Trail</strong> (~2.5 km) — cachoeira linda!",
-                "type": "highlight"
-            },
-            {
-                "time": "15:00",
                 "text": "🌊 <strong>La Push / First Beach</strong> — praia dos Quileute (Twilight!)",
                 "type": ""
             },
             {
-                "time": "16:30",
+                "time": "15:00",
                 "text": "🌊 <strong>Rialto Beach</strong> — sea stacks e troncos",
                 "type": ""
             },
             {
-                "time": "17:30",
+                "time": "16:30",
                 "text": "🌅 Pôr do sol em <strong>Second Beach</strong> — último sunset no PNW!",
                 "type": "highlight"
             },
@@ -1727,18 +1674,8 @@ const days = [
             },
             {
                 "time": "16:30",
-                "text": "🌅 Pôr do sol no <strong>Grand View Point</strong>",
+                "text": "🌅 Pôr do sol nos <strong>Petroglifos na Potash Road</strong>",
                 "type": "highlight"
-            },
-            {
-                "time": "17:45",
-                "text": "📸 <strong>Petroglifos na Potash Road</strong>",
-                "type": ""
-            },
-            {
-                "time": "18:00",
-                "text": "📸 <strong>Thelma & Louise Point</strong>",
-                "type": ""
             },
             {
                 "time": "19:00",
@@ -1750,9 +1687,9 @@ const days = [
     {
         "photo": "img/activities/delicate_arch.jpg",
         "shortLoc": "Moab",
-        "location": "Arches NP + Dead Horse Point",
-        "route": "Delicate Arch + Dead Horse Point sunset! 🏜️",
-        "note": "O arco mais famoso do mundo + pôr do sol na vista sobre o Colorado!",
+        "location": "Arches NP",
+        "route": "Delicate Arch + sunset nas Windows! 🏜️",
+        "note": "O arco mais famoso do mundo + pôr do sol dentro do próprio Arches!",
         "region": "ut",
         "items": [
             {
@@ -1801,13 +1738,8 @@ const days = [
                 "type": ""
             },
             {
-                "time": "16:30",
-                "text": "🚗 Saída de Arches rumo a <strong>Dead Horse Point State Park</strong> (~30 min)",
-                "type": "drive"
-            },
-            {
-                "time": "17:00",
-                "text": "🌅 <strong>Pôr do sol em Dead Horse Point</strong> — mirante icônico sobre o Colorado River (~180m acima do rio)",
+                "time": "17:30",
+                "text": "🌅 <strong>Pôr do sol nas Windows Section</strong> — North/South Window com luz dourada!",
                 "type": "highlight"
             },
             {
@@ -1817,7 +1749,7 @@ const days = [
             },
             {
                 "time": "20:15",
-                "text": "🌌 <strong>Passeio noturno no Colorado River</strong> (Scenic Byway 128) — despedida de Moab",
+                "text": "🌌 <strong>Stargazing em Sand Flats Recreation Area</strong> — despedida de Moab",
                 "type": ""
             }
         ]
@@ -2010,8 +1942,8 @@ const days = [
         "photo": "img/activities/canyon_overlook.jpg",
         "shortLoc": "Zion",
         "location": "Zion NP dia cheio → Page",
-        "route": "Trilhas épicas + Horseshoe Bend! 🏞️🏜️",
-        "note": "Dia cheio em Zion! Depois estrada até Page para Horseshoe Bend.",
+        "route": "Trilhas épicas + rumo a Page! 🏞️🏜️",
+        "note": "Dia cheio em Zion! Depois estrada até Page — Horseshoe Bend fica pro amanhã.",
         "region": "ut",
         "items": [
             {
@@ -2046,38 +1978,60 @@ const days = [
             },
             {
                 "time": "13:00",
-                "text": "🚗 Check-out + saída pra <strong>Page, AZ</strong> (~170 km, ~2h via US-89)",
-                "type": "drive"
+                "text": "🥾 <strong>Weeping Rock</strong> (~30 min)",
+                "type": ""
             },
             {
-                "time": "15:00",
-                "text": "🏨 Chegada em <strong>Page</strong>! Check-in",
+                "time": "13:30",
+                "text": "🏛️ <strong>Zion Human History Museum</strong>",
+                "type": ""
+            },
+            {
+                "time": "14:15",
+                "text": "🥾 <strong>Pa'rus Trail</strong> (~1h, trilha leve)",
                 "type": ""
             },
             {
                 "time": "15:30",
-                "text": "🏜️ <strong>Horseshoe Bend</strong> — mirante sobre o meandro do Colorado! Gratuito",
-                "type": "highlight"
+                "text": "🚗 Check-out + saída pra <strong>Page, AZ</strong> (~170 km, ~2h via US-89)",
+                "type": "drive"
             },
             {
-                "time": "16:15",
-                "text": "🏜️ <strong>Page Sand Cave</strong> — caverna de arenito com luz incrível!",
-                "type": "highlight"
-            },
-            {
-                "time": "~17:15",
-                "text": "🌅 Pôr do sol em Horseshoe Bend — ESPETACULAR!",
-                "type": "highlight"
+                "time": "17:30",
+                "text": "🏨 Chegada em <strong>Page</strong>! Check-in",
+                "type": ""
             },
             {
                 "time": "18:30",
                 "text": "🍽️ Jantar — <strong>Big John's Texas BBQ</strong> (153 S Lake Powell Blvd, Page) — brisket e pulled pork. ~$15-20/pessoa",
                 "type": "food"
             }
+        ]
+    },
+    {
+        "photo": "img/activities/grand_canyon.jpg",
+        "shortLoc": "Monument Valley",
+        "location": "Page → Monument Valley → Grand Canyon South Rim",
+        "route": "Horseshoe Bend + Monument Valley + rumo ao Grand Canyon! 🏜️🎥",
+        "note": "Manhã em Page (Horseshoe Bend + Sand Cave), checkout definitivo, day-trip a Monument Valley e depois direto pro Grand Canyon South Rim.",
+        "region": "ut",
+        "items": [
+            { "time": "06:00", "text": "☕ Café cedo + <strong>Horseshoe Bend</strong> — mirante sobre o meandro do Colorado! Gratuito", "type": "highlight" },
+            { "time": "06:45", "text": "🏜️ <strong>Page Sand Cave</strong> — caverna de arenito com luz incrível!", "type": "highlight" },
+            { "time": "07:30", "text": "🚗 Check-out definitivo de Page + saída rumo a <strong>Monument Valley</strong> (~200 km, ~2h via US-160 → US-163)", "type": "drive" },
+            { "time": "09:30", "text": "🏜️ Chegada em <strong>Monument Valley</strong>", "type": "" },
+            { "time": "09:45", "text": "🚙 <strong>Valley Drive</strong> — loop cênico de 17 milhas dentro do parque Navajo (carro comum dá, devagar; 4x4 opcional)", "type": "highlight" },
+            { "time": "11:15", "text": "📸 <strong>John Ford's Point</strong> — mirante clássico dos westerns", "type": "highlight" },
+            { "time": "12:00", "text": "📸 <strong>Forrest Gump Point</strong> (US-163) — a reta icônica com as buttes ao fundo", "type": "highlight" },
+            { "time": "12:30", "text": "🍽️ Almoço em Kayenta", "type": "food" },
+            { "time": "13:30", "text": "🚗 Saída rumo ao <strong>Grand Canyon South Rim</strong> (~2h30-3h via US-160 → US-89 → AZ-64)", "type": "drive" },
+            { "time": "~16:30", "text": "🏨 Chegada em <strong>Tusayan / Grand Canyon South Rim</strong>! Check-in", "type": "" },
+            { "time": "17:15", "text": "📸 Mirante rápido no South Rim antes de escurecer", "type": "highlight" },
+            { "time": "18:30", "text": "🍽️ Jantar em Tusayan/Grand Canyon Village", "type": "food" }
         ],
         "tips": [
-            "📸 Horseshoe Bend: melhor luz de tarde (sol ilumina o canyon).",
-            "🌅 Pôr do sol em Horseshoe Bend é um dos melhores do trip!"
+            "⚡ Sem Supercharger em Kayenta/Monument Valley — saia de Page com carga alta.",
+            "🚗 Checkout definitivo de Page — não volta mais pra lá nessa viagem."
         ]
     },
     {
@@ -2085,83 +2039,78 @@ const days = [
         "shortLoc": "Vegas",
         "chargeStops": [
             {
-                "name": "Flagstaff, AZ",
-                "leg": "Page → Vegas",
-                "critical": false
-            },
-            {
                 "name": "Kingman, AZ",
-                "leg": "Page → Vegas",
+                "leg": "Grand Canyon → Vegas",
                 "critical": false
             }
         ],
-        "location": "Page → Grand Canyon → Las Vegas",
-        "route": "Grand Canyon + rumo a Vegas! 🏜️🎰",
-        "note": "Grand Canyon de manhã, depois longa estrada até Las Vegas (~660 km).",
+        "location": "Grand Canyon South Rim → Las Vegas",
+        "route": "Grand Canyon + Hoover Dam + rumo a Vegas! 🏜️🎰",
+        "note": "Manhã de mirantes no South Rim (já hospedados), depois estrada até Las Vegas com parada no Hoover Dam.",
         "region": "nv",
         "items": [
             {
-                "time": "07:00",
-                "text": "☕ Café + check-out de Page",
+                "time": "08:00",
+                "text": "☕ Café em Tusayan/South Rim",
                 "type": ""
             },
             {
-                "time": "07:30",
-                "text": "🚗 Saída rumo ao <strong>Grand Canyon South Rim</strong> (~210 km, ~2.5h via US-89 S → AZ-64)",
-                "type": "drive"
-            },
-            {
-                "time": "09:00",
-                "text": "⚡ <strong>Supercharger Flagstaff, AZ</strong> (~150 km) — ~20 min",
-                "type": "charge"
-            },
-            {
-                "time": "10:30",
-                "text": "🏞️ <strong>Grand Canyon South Rim</strong> — chegada!",
-                "type": "highlight"
-            },
-            {
-                "time": "11:00",
+                "time": "08:30",
                 "text": "📸 <strong>Mather Point</strong> — primeiro mirante!",
                 "type": "highlight"
             },
             {
-                "time": "11:30",
+                "time": "09:00",
                 "text": "📸 <strong>Yavapai Point + Geology Museum</strong>",
                 "type": ""
             },
             {
-                "time": "12:00",
+                "time": "09:30",
                 "text": "📸 <strong>Rim Trail</strong> — caminhar pela borda (~30 min)",
                 "type": ""
             },
             {
-                "time": "12:30",
+                "time": "10:00",
                 "text": "📸 <strong>Hopi Point</strong> — um dos melhores mirantes!",
                 "type": "highlight"
             },
             {
-                "time": "13:00",
+                "time": "10:45",
+                "text": "📸 Mirantes extra se der tempo — <strong>Powell Point / Hermits Rest</strong>",
+                "type": ""
+            },
+            {
+                "time": "12:00",
                 "text": "🍽️ Almoço no <strong>Grand Canyon Village</strong>",
                 "type": "food"
             },
             {
-                "time": "14:00",
-                "text": "🚗 Saída rumo a <strong>Las Vegas</strong> (~340 km, ~3.5h via AZ-64 → I-40 W → US-93 S)",
+                "time": "13:00",
+                "text": "🚗 Check-out + saída rumo a <strong>Las Vegas</strong> (~450 km, ~4h via AZ-64 → I-40 W → US-93 S, com parada no Hoover Dam)",
                 "type": "drive"
             },
             {
-                "time": "15:30",
+                "time": "14:30",
                 "text": "⚡ <strong>Supercharger Kingman, AZ</strong> (~200 km) — ~25 min",
                 "type": "charge"
             },
             {
-                "time": "~18:00",
+                "time": "16:00",
+                "text": "🏜️ <strong>Hoover Dam</strong> — represa icônica no Colorado River! ~30-45 min",
+                "type": "highlight"
+            },
+            {
+                "time": "16:45",
+                "text": "🚗 Seguir rumo a <strong>Las Vegas</strong> (~45 min)",
+                "type": "drive"
+            },
+            {
+                "time": "~17:30",
                 "text": "🎰 Chegada em <strong>Las Vegas</strong>! Check-in",
                 "type": ""
             },
             {
-                "time": "19:00",
+                "time": "18:30",
                 "text": "📸 <strong>Welcome to Las Vegas Sign</strong> — foto icônica à noite!",
                 "type": "highlight"
             },
@@ -2172,7 +2121,8 @@ const days = [
             }
         ],
         "tips": [
-            "⚡ Dia longo (~660 km) mas com FSD é tranquilo."
+            "⚡ Hoover Dam fica no caminho — parada rápida sem desviar muito da rota.",
+            "⚡ Dia mais tranquilo agora que o Grand Canyon já foi visto no dia anterior chegando."
         ]
     },
     {
@@ -2545,10 +2495,10 @@ const hotels = [
     },
     {
         "num": 3,
-        "name": "Mariposa / El Portal, CA (Yosemite)",
+        "name": "Mariposa / El Portal / Fishcamp, CA (Yosemite)",
         "checkin": "27/01",
-        "checkout": "30/01",
-        "nights": 3
+        "checkout": "29/01",
+        "nights": 2
     },
     {
         "num": 4,
@@ -2636,16 +2586,23 @@ const hotels = [
     },
     {
         "num": 16,
-        "name": "Las Vegas, NV",
+        "name": "Tusayan, AZ (Grand Canyon South Rim)",
         "checkin": "17/02",
-        "checkout": "20/02",
-        "nights": 3
+        "checkout": "18/02",
+        "nights": 1
     },
     {
         "num": 17,
+        "name": "Las Vegas, NV",
+        "checkin": "18/02",
+        "checkout": "21/02",
+        "nights": 3
+    },
+    {
+        "num": 18,
         "name": "Los Angeles, CA",
-        "checkin": "20/02",
-        "checkout": "22/02",
+        "checkin": "21/02",
+        "checkout": "23/02",
         "nights": 2
     }
 ];
@@ -2659,47 +2616,47 @@ const parks = [
     },
     {
         "name": "🏞️ Yosemite National Park",
-        "days": "Dias 8–9",
+        "days": "Dias 7–8",
         "highlights": "Tunnel View, El Capitan, Half Dome, Yosemite Falls, Snow Tubing, Mirror Lake."
     },
     {
         "name": "🌲 Redwood National Park",
-        "days": "Dia 14",
+        "days": "Dia 13",
         "highlights": "Jedediah Smith, Fern Canyon (Jurassic Park 2!), Tall Trees, Lady Bird Johnson, Avenue of Giants."
     },
     {
         "name": "🌲 Olympic National Park",
-        "days": "Dias 18–19",
+        "days": "Dias 17–18",
         "highlights": "Hoh Rain Forest, Hall of Mosses, Ruby Beach, Sol Duc Falls, Rialto Beach."
     },
     {
         "name": "🏜️ Canyonlands National Park",
-        "days": "Dia 23",
+        "days": "Dia 22",
         "highlights": "Mesa Arch sunrise, Grand View Point, Upheaval Dome, Aztec Butte."
     },
     {
         "name": "🏜️ Arches National Park",
-        "days": "Dia 24",
+        "days": "Dia 23",
         "highlights": "Delicate Arch, Windows, Double Arch, Landscape Arch (93m!), Fiery Furnace."
     },
     {
         "name": "🏜️ Capitol Reef National Park",
-        "days": "Dia 25",
+        "days": "Dia 24",
         "highlights": "Petroglífos Fremont, Hickman Bridge Trail, Fruita Historic District, Scenic Drive."
     },
     {
         "name": "🏔️ Bryce Canyon National Park",
-        "days": "Dias 25–26",
+        "days": "Dias 24–25",
         "highlights": "Navajo Loop, Queen's Garden, hoodoos, Bryce Amphitheater, stargazing!"
     },
     {
         "name": "🏞️ Zion National Park",
-        "days": "Dias 26–27",
+        "days": "Dias 25–26",
         "highlights": "Watchman Trail, Emerald Pools, Canyon Overlook, Riverside Walk, Court of the Patriarchs."
     },
     {
         "name": "🏜️ Grand Canyon National Park",
-        "days": "Dia 28",
+        "days": "Dias 27–28",
         "highlights": "South Rim, Mather Point, Yavapai Point + Geology Museum, Hopi Point, Rim Trail."
     },
     {

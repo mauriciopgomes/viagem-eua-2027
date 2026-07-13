@@ -855,17 +855,17 @@ var mapScrubDay = 1;
 var dayCoords = {
     1:[40.7580,-73.9855], 2:[40.7580,-73.9855], 3:[40.7580,-73.9855], 4:[40.7580,-73.9855],
     5:[36.4519,-118.9054], 6:[36.4519,-118.9054], 7:[37.4849,-119.9663], 8:[37.4849,-119.9663],
-    9:[37.4849,-119.9663], 10:[37.7749,-122.4194],
-    11:[37.7749,-122.4194], 12:[37.7749,-122.4194],
-    13:[40.8021,-124.1637], 14:[41.7558,-124.2026],
-    15:[43.3665,-124.2179], 16:[45.8918,-123.9615],
-    17:[47.9504,-124.3855], 18:[47.9504,-124.3855], 19:[47.9504,-124.3855],
-    20:[45.6721,-118.7886],
-    21:[42.5558,-114.4701],
-    22:[38.5733,-109.5498], 23:[38.5733,-109.5498], 24:[38.5733,-109.5498],
-    25:[37.6283,-112.1677],
-    26:[37.1890,-112.9988], 27:[36.9147,-111.4558],
-    28:[36.1699,-115.1398], 29:[36.1699,-115.1398], 30:[36.1699,-115.1398],
+    9:[37.7749,-122.4194],
+    10:[37.7749,-122.4194], 11:[37.7749,-122.4194],
+    12:[40.8021,-124.1637], 13:[41.7558,-124.2026],
+    14:[43.3665,-124.2179], 15:[45.8918,-123.9615],
+    16:[47.9504,-124.3855], 17:[47.9504,-124.3855], 18:[47.9504,-124.3855],
+    19:[45.6721,-118.7886],
+    20:[42.5558,-114.4701],
+    21:[38.5733,-109.5498], 22:[38.5733,-109.5498], 23:[38.5733,-109.5498],
+    24:[37.6283,-112.1677],
+    25:[37.1890,-112.9988], 26:[36.9147,-111.4558],
+    27:[36.0544,-112.1401], 28:[36.1699,-115.1398], 29:[36.1699,-115.1398], 30:[36.1699,-115.1398],
     31:[34.0522,-118.2437], 32:[34.0522,-118.2437], 33:[34.0522,-118.2437]
 };
 
@@ -924,33 +924,33 @@ var dayStats = {
     4: { km: '—', drive: '', hotel: 'Marriott Marquis' },
     5: { km: '~330', drive: 'NY (voo) → LAX → Three Rivers (CA-99)', hotel: 'Three Rivers' },
     6: { km: '~130', drive: 'Sequoia + Kings Canyon NP', hotel: 'Three Rivers' },
-    7: { km: '~234', drive: 'Three Rivers → Fresno → Mariposa', hotel: 'Mariposa' },
-    8: { km: '~138', drive: 'Yosemite Valley (Tunnel View)', hotel: 'Mariposa' },
-    9: { km: '~179', drive: 'Yosemite (snow tubing + trilhas)', hotel: 'Mariposa' },
-    10: { km: '~271', drive: 'Mariposa → San Francisco', hotel: 'San Francisco' },
-    11: { km: '~110', drive: 'Golden Gate + Point Reyes', hotel: 'San Francisco' },
-    12: { km: '~50', drive: 'SF — Embarcadero + Ocean Beach', hotel: 'San Francisco' },
-    13: { km: '~447', drive: 'SF → Avenue of the Giants → Eureka', hotel: 'Eureka' },
-    14: { km: '~165', drive: 'Eureka → Redwood NP → Crescent City', hotel: 'Crescent City' },
-    15: { km: '~217', drive: 'Crescent City → Coos Bay', hotel: 'Coos Bay' },
-    16: { km: '~340', drive: 'Coos Bay → Cannon Beach', hotel: 'Cannon Beach' },
-    17: { km: '~464', drive: 'Cannon Beach → Astoria → Forks', hotel: 'Forks' },
-    18: { km: '~50', drive: 'Olympic NP — Hoh Rain Forest', hotel: 'Forks' },
-    19: { km: '~100', drive: 'Olympic NP — Costa (Ruby Beach, La Push, Rialto)', hotel: 'Forks' },
-    20: { km: '~800', drive: 'Forks → Pendleton', hotel: 'Pendleton' },
-    21: { km: '~560', drive: 'Pendleton → Twin Falls', hotel: 'Twin Falls' },
-    22: { km: '~732', drive: 'Twin Falls → SLC → Moab', hotel: 'Moab' },
-    23: { km: '~80', drive: 'Canyonlands NP', hotel: 'Moab' },
-    24: { km: '~50', drive: 'Arches NP + Dead Horse Point', hotel: 'Moab' },
-    25: { km: '~442', drive: 'Moab → Capitol Reef → Bryce', hotel: 'Bryce Canyon' },
-    26: { km: '~151', drive: 'Bryce → Zion (Springdale)', hotel: 'Springdale' },
-    27: { km: '~188', drive: 'Zion dia cheio → Page', hotel: 'Page' },
-    28: { km: '~668', drive: 'Page → Grand Canyon → Vegas', hotel: 'Las Vegas' },
+    7: { km: '~370', drive: 'Three Rivers → Fresno → Mariposa/El Portal → Yosemite Valley', hotel: 'Mariposa' },
+    8: { km: '~176', drive: 'Yosemite Valley — dia completo (snow tubing + trilhas)', hotel: 'Mariposa' },
+    9: { km: '~425', drive: 'Yosemite → San Francisco', hotel: 'San Francisco' },
+    10: { km: '~110', drive: 'Golden Gate + Point Reyes', hotel: 'San Francisco' },
+    11: { km: '~50', drive: 'SF — Embarcadero + Ocean Beach', hotel: 'San Francisco' },
+    12: { km: '~445', drive: 'SF → Avenue of the Giants → Eureka', hotel: 'Eureka' },
+    13: { km: '~163', drive: 'Eureka → Redwood NP → Crescent City', hotel: 'Crescent City' },
+    14: { km: '~218', drive: 'Crescent City → Coos Bay', hotel: 'Coos Bay' },
+    15: { km: '~339', drive: 'Coos Bay → Cannon Beach', hotel: 'Cannon Beach' },
+    16: { km: '~464', drive: 'Cannon Beach → Astoria → Forks', hotel: 'Forks' },
+    17: { km: '~50', drive: 'Olympic NP — Hoh Rain Forest', hotel: 'Forks' },
+    18: { km: '~100', drive: 'Olympic NP — Costa (Ruby Beach, La Push, Rialto)', hotel: 'Forks' },
+    19: { km: '~795', drive: 'Forks → Pendleton', hotel: 'Pendleton' },
+    20: { km: '~560', drive: 'Pendleton → Twin Falls', hotel: 'Twin Falls' },
+    21: { km: '~731', drive: 'Twin Falls → SLC → Moab', hotel: 'Moab' },
+    22: { km: '~80', drive: 'Canyonlands NP', hotel: 'Moab' },
+    23: { km: '~50', drive: 'Arches NP', hotel: 'Moab' },
+    24: { km: '~440', drive: 'Moab → Capitol Reef → Bryce', hotel: 'Bryce Canyon' },
+    25: { km: '~150', drive: 'Bryce → Zion (Springdale)', hotel: 'Springdale' },
+    26: { km: '~187', drive: 'Zion dia cheio → Page', hotel: 'Page' },
+    27: { km: '~500', drive: 'Page → Monument Valley → Grand Canyon', hotel: 'Tusayan' },
+    28: { km: '~455', drive: 'Grand Canyon → Hoover Dam → Vegas', hotel: 'Las Vegas' },
     29: { km: '~210', drive: 'Mt. Charleston + Valley of Fire', hotel: 'Las Vegas' },
-    30: { km: '~434', drive: 'Vegas → Death Valley → Vegas', hotel: 'Las Vegas' },
+    30: { km: '~433', drive: 'Vegas → Death Valley → Vegas', hotel: 'Las Vegas' },
     31: { km: '~437', drive: 'Las Vegas → Los Angeles (I-15)', hotel: 'Los Angeles' },
     32: { km: '~80', drive: 'LA dia cheio', hotel: 'Los Angeles' },
-    33: { km: '~30', drive: 'LAX → voo', hotel: '✈️ Volta!' }
+    33: { km: '~31', drive: 'LAX → voo', hotel: '✈️ Volta!' }
 };
 
 function doInitMap() {
@@ -1031,18 +1031,19 @@ function doInitMap() {
     var stops = [
         { n: "New York", lat: 40.7580, lng: -73.9855, i: "✈️", info: "Dias 1–4 • 4 noites\nMarriott Marquis, Times Square", days: [1,2,3,4], photo: 1 },
         { n: "Three Rivers / Sequoia", lat: 36.4519, lng: -118.9054, i: "🌲", info: "Dias 5–6 • Sequoia + Kings Canyon", days: [5,6], photo: 5 },
-        { n: "Mariposa / Yosemite", lat: 37.4849, lng: -119.9663, i: "🏞️", info: "Dias 7–9 • Yosemite NP", days: [7,8,9], photo: 8 },
-        { n: "San Francisco", lat: 37.7749, lng: -122.4194, i: "🌉", info: "Dias 10–12 • Golden Gate, Pier 39", days: [10,11,12], photo: 11 },
-        { n: "Redwood NP", lat: 41.7558, lng: -124.2026, i: "🦕", info: "Dias 13–14 • Avenue of Giants, Fern Canyon", days: [13,14], photo: 14 },
-        { n: "Coos Bay, OR", lat: 43.3665, lng: -124.2179, i: "🌊", info: "Dia 15 • Samuel Boardman, Shore Acres", days: [15], photo: 15 },
-        { n: "Cannon Beach", lat: 45.8918, lng: -123.9615, i: "🌅", info: "Dia 16 • Thor's Well, Haystack Rock", days: [16], photo: 16 },
-        { n: "Olympic NP", lat: 47.9504, lng: -124.3855, i: "🧛", info: "Dias 17–19 • Astoria, Hoh, Ruby Beach", days: [17,18,19], photo: 18 },
-        { n: "Pendleton, OR", lat: 45.6721, lng: -118.7886, i: "🌲", info: "Dia 20 • Columbia River Gorge + Pendleton", days: [20], photo: 20 },
-        { n: "Twin Falls, ID", lat: 42.5558, lng: -114.4701, i: "🌊", info: "Dia 21 • Shoshone Falls", days: [21], photo: 21 },
-        { n: "Moab, UT", lat: 38.5733, lng: -109.5498, i: "🏜️", info: "Dias 22–24 • Canyonlands, Arches", days: [22,23,24], photo: 23 },
-        { n: "Bryce Canyon", lat: 37.6283, lng: -112.1677, i: "🏔️", info: "Dias 25–26 • Hoodoos + stargazing", days: [25,26], photo: 25 },
-        { n: "Zion NP", lat: 37.2090, lng: -112.9871, i: "🏞️", info: "Dias 26–27 • Watchman, Emerald Pools", days: [26,27], photo: 26 },
-        { n: "Grand Canyon", lat: 36.0544, lng: -112.1401, i: "🏞️", info: "Dia 28 • South Rim", days: [28], photo: 28 },
+        { n: "Mariposa / Yosemite", lat: 37.4849, lng: -119.9663, i: "🏞️", info: "Dias 7–8 • Yosemite NP", days: [7,8], photo: 8 },
+        { n: "San Francisco", lat: 37.7749, lng: -122.4194, i: "🌉", info: "Dias 9–11 • Golden Gate, Pier 39", days: [9,10,11], photo: 10 },
+        { n: "Redwood NP", lat: 41.7558, lng: -124.2026, i: "🦕", info: "Dias 12–13 • Avenue of Giants, Fern Canyon", days: [12,13], photo: 13 },
+        { n: "Coos Bay, OR", lat: 43.3665, lng: -124.2179, i: "🌊", info: "Dia 14 • Samuel Boardman, Shore Acres", days: [14], photo: 14 },
+        { n: "Cannon Beach", lat: 45.8918, lng: -123.9615, i: "🌅", info: "Dia 15 • Thor's Well, Haystack Rock", days: [15], photo: 15 },
+        { n: "Olympic NP", lat: 47.9504, lng: -124.3855, i: "🧛", info: "Dias 16–18 • Astoria, Hoh, Ruby Beach", days: [16,17,18], photo: 17 },
+        { n: "Pendleton, OR", lat: 45.6721, lng: -118.7886, i: "🌲", info: "Dia 19 • Columbia River Gorge + Pendleton", days: [19], photo: 19 },
+        { n: "Twin Falls, ID", lat: 42.5558, lng: -114.4701, i: "🌊", info: "Dia 20 • Shoshone Falls", days: [20], photo: 20 },
+        { n: "Moab, UT", lat: 38.5733, lng: -109.5498, i: "🏜️", info: "Dias 21–23 • Canyonlands, Arches", days: [21,22,23], photo: 22 },
+        { n: "Bryce Canyon", lat: 37.6283, lng: -112.1677, i: "🏔️", info: "Dias 24–25 • Hoodoos + stargazing", days: [24,25], photo: 24 },
+        { n: "Zion NP", lat: 37.2090, lng: -112.9871, i: "🏞️", info: "Dias 25–26 • Watchman, Emerald Pools", days: [25,26], photo: 25 },
+        { n: "Monument Valley", lat: 36.9989, lng: -110.0985, i: "🏜️", info: "Dia 27 • Day-trip saindo de Page, rumo ao Grand Canyon", days: [27], photo: 27 },
+        { n: "Grand Canyon", lat: 36.0544, lng: -112.1401, i: "🏞️", info: "Dias 27–28 • South Rim (Tusayan)", days: [27,28], photo: 28 },
         { n: "Las Vegas", lat: 36.1699, lng: -115.1398, i: "🎰", info: "Dias 28–30 • Strip, Death Valley", days: [28,29,30], photo: 28 },
         { n: "Los Angeles, CA", lat: 34.0522, lng: -118.2437, i: "🎬", info: "Dias 31–33 • Griffith, Hollywood", days: [31,32,33], photo: 31 }
     ];
@@ -1089,6 +1090,7 @@ function doInitMap() {
         "Coos Bay, OR": [43.3665,-124.2179], "Eureka, CA": [40.8021,-124.1637],
         "Ukiah, CA": [39.1502,-123.2078], "Gilroy, CA": [37.0058,-121.5882],
         "Merced, CA": [37.3022,-120.4830], "Fresno, CA": [36.7378,-119.7871],
+        "Manteca/Oakdale, CA": [37.7974,-121.2161],
         "Bakersfield, CA": [35.3733,-119.0187],
         "Kettleman City, CA": [35.9974,-119.9601], "Leggett, CA": [39.8676,-123.7042],
         "Salt Lake City, UT": [40.7608,-111.8910], "Flagstaff, AZ": [35.1983,-111.6513],
@@ -1116,48 +1118,59 @@ function doInitMap() {
 
     // ---- ROADSIDE POI LAYER (scenic stops along the route) ----
     var roadPois = [
-        // Day 8: Yosemite Valley
-        { n: "Tunnel View", lat: 37.7157, lng: -119.6770, i: "📸", day: 8 },
-        { n: "El Capitan", lat: 37.7340, lng: -119.6384, i: "🧗", day: 8 },
-        { n: "Bridalveil Fall", lat: 37.7171, lng: -119.6465, i: "🌊", day: 8 },
+        // Day 7: drive to Yosemite Valley + first views
+        { n: "Tunnel View", lat: 37.7157, lng: -119.6770, i: "📸", day: 7 },
+        { n: "El Capitan", lat: 37.7340, lng: -119.6384, i: "🧗", day: 7 },
+        { n: "Bridalveil Fall", lat: 37.7171, lng: -119.6465, i: "🌊", day: 7 },
         // Day 6: Sequoia
         { n: "General Sherman Tree", lat: 36.5817, lng: -118.7510, i: "🌲", day: 6 },
-        // Day 14: Redwood NP
-        { n: "Fern Canyon", lat: 41.4012, lng: -124.0635, i: "🌿", day: 14 },
-        { n: "Lady Bird Johnson", lat: 41.3253, lng: -124.0199, i: "🌲", day: 14 },
-        { n: "Tall Trees Grove", lat: 41.2137, lng: -124.0022, i: "🌳", day: 14 },
-        { n: "Stout Memorial Grove", lat: 41.7867, lng: -124.0946, i: "🌲", day: 14 },
-        // Day 13: Eureka → Avenue of the Giants
-        { n: "Avenue of the Giants", lat: 40.3521, lng: -123.9218, i: "🛣️", day: 13 },
-        // Day 15: Crescent City → Coos Bay (Samuel Boardman corridor + Shore Acres)
-        { n: "Samuel Boardman", lat: 42.1481, lng: -124.3533, i: "🌉", day: 15 },
-        { n: "Shore Acres", lat: 43.3220, lng: -124.3870, i: "🌺", day: 15 },
-        // Day 16: Coos Bay → Cannon Beach (Thor's Well, Heceta Head)
-        { n: "Cape Perpetua", lat: 44.2808, lng: -124.1092, i: "🌊", day: 16 },
-        { n: "Heceta Head", lat: 44.1372, lng: -124.1285, i: "🏠", day: 16 },
-        // Day 14: Redwood NP → Crescent City
-        { n: "Battery Point Lighthouse", lat: 41.7445, lng: -124.2048, i: "🏠", day: 14 },
-        // Day 18: Olympic NP — Hoh Rain Forest
-        { n: "Hoh Rain Forest", lat: 47.8602, lng: -123.9343, i: "🌲", day: 18 },
-        // Day 19: Olympic NP — Costa (Ruby Beach, Sol Duc, Rialto)
-        { n: "Ruby Beach", lat: 47.7108, lng: -124.4126, i: "🏖️", day: 19 },
-        { n: "Sol Duc Falls", lat: 47.9525, lng: -123.8359, i: "🌊", day: 19 },
-        { n: "Rialto Beach", lat: 47.9210, lng: -124.6376, i: "🪵", day: 19 },
-        // Day 20: Forks → Pendleton
-        { n: "Multnomah Falls", lat: 45.5762, lng: -122.1158, i: "🌊", day: 20 },
-        { n: "Vista House", lat: 45.5391, lng: -122.2443, i: "🏛️", day: 20 },
-        // Day 21: Pendleton → Twin Falls
-        { n: "Deadman Pass", lat: 45.6042, lng: -118.5561, i: "⛰️", day: 21 },
-        // Day 23: Canyonlands
-        { n: "Mesa Arch", lat: 38.3891, lng: -109.8673, i: "🌅", day: 23 },
-        { n: "Grand View Point", lat: 38.3103, lng: -109.8591, i: "👀", day: 23 },
-        { n: "Green River Overlook", lat: 38.3300, lng: -109.8839, i: "🏜️", day: 23 },
-        // Day 25: Moab → Capitol Reef → Bryce
-        { n: "Head of the Rocks", lat: 37.7650, lng: -111.5920, i: "🏜️", day: 25 },
-        { n: "Capitol Reef", lat: 38.2972, lng: -111.2615, i: "🏞️", day: 25 },
-        // Day 26: Bryce → Zion
-        { n: "Watchman Trail", lat: 37.1988, lng: -112.9841, i: "🥾", day: 27 },
-        { n: "Emerald Pools", lat: 37.2568, lng: -112.9587, i: "💎", day: 26 }
+        // Day 13: Redwood NP
+        { n: "Fern Canyon", lat: 41.4012, lng: -124.0635, i: "🌿", day: 13 },
+        { n: "Lady Bird Johnson", lat: 41.3253, lng: -124.0199, i: "🌲", day: 13 },
+        { n: "Tall Trees Grove", lat: 41.2137, lng: -124.0022, i: "🌳", day: 13 },
+        { n: "Stout Memorial Grove", lat: 41.7867, lng: -124.0946, i: "🌲", day: 13 },
+        // Day 12: Eureka → Avenue of the Giants
+        { n: "Avenue of the Giants", lat: 40.3521, lng: -123.9218, i: "🛣️", day: 12 },
+        // Day 14: Crescent City → Coos Bay (Samuel Boardman corridor + Shore Acres)
+        { n: "Samuel Boardman", lat: 42.1481, lng: -124.3533, i: "🌉", day: 14 },
+        { n: "Shore Acres", lat: 43.3220, lng: -124.3870, i: "🌺", day: 14 },
+        // Day 15: Coos Bay → Cannon Beach (Thor's Well, Heceta Head)
+        { n: "Cape Perpetua", lat: 44.2808, lng: -124.1092, i: "🌊", day: 15 },
+        { n: "Heceta Head", lat: 44.1372, lng: -124.1285, i: "🏠", day: 15 },
+        // Day 13: Redwood NP → Crescent City
+        { n: "Battery Point Lighthouse", lat: 41.7445, lng: -124.2048, i: "🏠", day: 13 },
+        // Day 17: Olympic NP — Hoh Rain Forest
+        { n: "Hoh Rain Forest", lat: 47.8602, lng: -123.9343, i: "🌲", day: 17 },
+        { n: "Sol Duc Falls", lat: 47.9525, lng: -123.8359, i: "🌊", day: 17 },
+        // Day 18: Olympic NP — Costa (Ruby Beach, Rialto)
+        { n: "Ruby Beach", lat: 47.7108, lng: -124.4126, i: "🏖️", day: 18 },
+        { n: "Rialto Beach", lat: 47.9210, lng: -124.6376, i: "🪵", day: 18 },
+        // Day 19: Forks → Pendleton
+        { n: "Multnomah Falls", lat: 45.5762, lng: -122.1158, i: "🌊", day: 19 },
+        { n: "Vista House", lat: 45.5391, lng: -122.2443, i: "🏛️", day: 19 },
+        // Day 20: Pendleton → Twin Falls
+        { n: "Deadman Pass", lat: 45.6042, lng: -118.5561, i: "⛰️", day: 20 },
+        // Day 22: Canyonlands
+        { n: "Mesa Arch", lat: 38.3891, lng: -109.8673, i: "🌅", day: 22 },
+        { n: "Grand View Point", lat: 38.3103, lng: -109.8591, i: "👀", day: 22 },
+        { n: "Green River Overlook", lat: 38.3300, lng: -109.8839, i: "🏜️", day: 22 },
+        { n: "Petroglifos Potash Road", lat: 38.5642, lng: -109.6906, i: "🎨", day: 22 },
+        // Day 23: Arches NP
+        { n: "Sand Flats", lat: 38.5636, lng: -109.4744, i: "🌌", day: 23 },
+        // Day 24: Moab → Capitol Reef → Bryce
+        { n: "Head of the Rocks", lat: 37.7650, lng: -111.5920, i: "🏜️", day: 24 },
+        { n: "Capitol Reef", lat: 38.2972, lng: -111.2615, i: "🏞️", day: 24 },
+        // Day 25: Bryce → Zion
+        { n: "Watchman Trail", lat: 37.1988, lng: -112.9841, i: "🥾", day: 26 },
+        { n: "Emerald Pools", lat: 37.2568, lng: -112.9587, i: "💎", day: 25 },
+        // Day 27: Page → Monument Valley → Grand Canyon South Rim
+        { n: "Horseshoe Bend", lat: 36.8791, lng: -111.5104, i: "🏜️", day: 27 },
+        { n: "Page Sand Cave", lat: 36.9736, lng: -111.4664, i: "🕳️", day: 27 },
+        { n: "Mittens", lat: 36.9986, lng: -110.0989, i: "🏜️", day: 27 },
+        { n: "John Ford's Point", lat: 36.9765, lng: -110.1044, i: "📸", day: 27 },
+        { n: "Forrest Gump Point", lat: 37.0967, lng: -109.9877, i: "📸", day: 27 },
+        // Day 28: Grand Canyon → Vegas
+        { n: "Hoover Dam", lat: 36.0161, lng: -114.7377, i: "🏗️", day: 28 }
     ];
 
     mapLayers.roadpois = L.layerGroup();
@@ -1863,9 +1876,9 @@ function animateCounter(el, target, prefix, suffix, duration) {
 function updateTripStats() {
     var totalChecked = 0, totalItems = 0, kmTraveled = 0;
     var parkDaySets = {
-        'Death Valley': [30], 'Zion': [26,27], 'Bryce Canyon': [25], 'Capitol Reef': [25],
-        'Canyonlands': [23], 'Arches': [24], 'Olympic': [17,18,19],
-        'Redwood': [14], 'Yosemite': [7,8,9], 'Sequoia': [6]
+        'Death Valley': [30], 'Zion': [25,26], 'Bryce Canyon': [24], 'Capitol Reef': [24],
+        'Canyonlands': [22], 'Arches': [23], 'Olympic': [16,17,18],
+        'Redwood': [13], 'Yosemite': [7,8], 'Sequoia': [6], 'Grand Canyon': [27,28]
     };
     days.forEach(function(d) {
         var dayHasCheck = false;
