@@ -1041,7 +1041,7 @@ function doInitMap() {
         { n: "Twin Falls, ID", lat: 42.5558, lng: -114.4701, i: "🌊", info: "Dia 20 • Shoshone Falls", days: [20], photo: 20 },
         { n: "Moab, UT", lat: 38.5733, lng: -109.5498, i: "🏜️", info: "Dias 21–23 • Canyonlands, Arches", days: [21,22,23], photo: 22 },
         { n: "Bryce Canyon", lat: 37.6283, lng: -112.1677, i: "🏔️", info: "Dias 24–25 • Hoodoos + stargazing", days: [24,25], photo: 24 },
-        { n: "Zion NP", lat: 37.2090, lng: -112.9871, i: "🏞️", info: "Dias 25–26 • Watchman, Emerald Pools", days: [25,26], photo: 25 },
+        { n: "Zion NP", lat: 37.2982, lng: -113.0263, i: "🏞️", info: "Dias 25–26 • Watchman, Emerald Pools", days: [25,26], photo: 25 },
         { n: "Monument Valley", lat: 36.9989, lng: -110.0985, i: "🏜️", info: "Dia 27 • Day-trip saindo de Page, rumo ao Grand Canyon", days: [27], photo: 27 },
         { n: "Grand Canyon", lat: 36.0544, lng: -112.1401, i: "🏞️", info: "Dias 27–28 • South Rim (Tusayan)", days: [27,28], photo: 28 },
         { n: "Las Vegas", lat: 36.1699, lng: -115.1398, i: "🎰", info: "Dias 28–30 • Strip, Death Valley", days: [28,29,30], photo: 28 },
