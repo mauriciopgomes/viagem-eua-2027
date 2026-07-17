@@ -2510,106 +2510,106 @@ const hotels = [
     {
         "num": 4,
         "name": "San Francisco, CA",
-        "checkin": "30/01",
-        "checkout": "02/02",
+        "checkin": "29/01",
+        "checkout": "01/02",
         "nights": 3
     },
     {
         "num": 5,
         "name": "Eureka / Arcata, CA",
-        "checkin": "02/02",
-        "checkout": "03/02",
+        "checkin": "01/02",
+        "checkout": "02/02",
         "nights": 1
     },
     {
         "num": 6,
         "name": "Crescent City, CA (Redwood)",
-        "checkin": "03/02",
-        "checkout": "04/02",
+        "checkin": "02/02",
+        "checkout": "03/02",
         "nights": 1
     },
     {
         "num": 7,
         "name": "Coos Bay, OR",
-        "checkin": "04/02",
-        "checkout": "05/02",
+        "checkin": "03/02",
+        "checkout": "04/02",
         "nights": 1
     },
     {
         "num": 8,
         "name": "Cannon Beach, OR",
-        "checkin": "05/02",
-        "checkout": "06/02",
+        "checkin": "04/02",
+        "checkout": "05/02",
         "nights": 1
     },
     {
         "num": 9,
         "name": "Forks / Port Angeles, WA (Olympic)",
-        "checkin": "06/02",
-        "checkout": "09/02",
+        "checkin": "05/02",
+        "checkout": "08/02",
         "nights": 3
     },
     {
         "num": 10,
         "name": "Pendleton, OR",
-        "checkin": "09/02",
-        "checkout": "10/02",
+        "checkin": "08/02",
+        "checkout": "09/02",
         "nights": 1
     },
     {
         "num": 11,
         "name": "Twin Falls, ID",
-        "checkin": "10/02",
-        "checkout": "11/02",
+        "checkin": "09/02",
+        "checkout": "10/02",
         "nights": 1
     },
     {
         "num": 12,
         "name": "Moab, UT (Arches/Canyonlands)",
-        "checkin": "11/02",
-        "checkout": "14/02",
+        "checkin": "10/02",
+        "checkout": "13/02",
         "nights": 3
     },
     {
         "num": 13,
         "name": "Bryce Canyon, UT",
-        "checkin": "14/02",
-        "checkout": "15/02",
+        "checkin": "13/02",
+        "checkout": "14/02",
         "nights": 1
     },
     {
         "num": 14,
         "name": "Springdale, UT (Zion)",
-        "checkin": "15/02",
-        "checkout": "16/02",
+        "checkin": "14/02",
+        "checkout": "15/02",
         "nights": 1
     },
     {
         "num": 15,
         "name": "Page, AZ (Horseshoe Bend)",
-        "checkin": "16/02",
-        "checkout": "17/02",
+        "checkin": "15/02",
+        "checkout": "16/02",
         "nights": 1
     },
     {
         "num": 16,
         "name": "Tusayan, AZ (Grand Canyon South Rim)",
-        "checkin": "17/02",
-        "checkout": "18/02",
+        "checkin": "16/02",
+        "checkout": "17/02",
         "nights": 1
     },
     {
         "num": 17,
         "name": "Las Vegas, NV",
-        "checkin": "18/02",
-        "checkout": "21/02",
+        "checkin": "17/02",
+        "checkout": "20/02",
         "nights": 3
     },
     {
         "num": 18,
         "name": "Los Angeles, CA",
-        "checkin": "21/02",
-        "checkout": "23/02",
+        "checkin": "20/02",
+        "checkout": "22/02",
         "nights": 2
     }
 ];

@@ -198,10 +198,8 @@ test('total de noites = 32 (21/01 a 22/02)', () => {
     assertEqual(totalNights, 32, 'total de noites da viagem');
 });
 
-test('datas de check-in/checkout são contíguas (exceto 1 gap documentado: Yosemite→SF)', () => {
-    const KNOWN_GAP_AFTER_HOTEL_INDEX = 2; // hotels[2] = Yosemite, checkout 29/01; hotels[3] = SF, checkin 30/01
+test('datas de check-in/checkout são contíguas', () => {
     for (let i = 1; i < hotels.length; i++) {
-        if (i - 1 === KNOWN_GAP_AFTER_HOTEL_INDEX) continue;
         assertEqual(hotels[i].checkin, hotels[i - 1].checkout,
             `Hotel ${i} checkin deve ser igual ao checkout do hotel ${i - 1}`);
     }
@@ -1195,19 +1193,11 @@ test('cada dia tem título no formato "Dia N — ..."', () => {
 // arquivos precisam ser mantidos em sync à mão). Ver ARCHITECTURE.md.
 section('Sync — Fontes de Verdade Duplicadas');
 
-// NOTA: há 1 dia de "gap" no calendário (29/01→30/01) que ainda não foi
-// realocado no array days[] (ver hotels[] — Yosemite comprimido de 3→2 noites
-// liberou esse dia de orçamento). dayNumFor() computa a posição real no
-// calendário; GAP_CUTOFF_DDMM marca a partir de quando subtrair 1 dia pra
-// alinhar com o índice de days[] (que tem 1 dia a menos que o calendário).
-const GAP_CUTOFF = new Date(2027, 0, 30); // 30/01 — primeiro dia depois do gap
 function dayNumFor(ddmm) {
     const [dd, mm] = ddmm.split('/').map(Number);
     const d = new Date(2027, mm - 1, dd);
     const diffDays = Math.round((d - new Date(TRIP_START)) / 86400000);
-    let dayNum = diffDays + 1;
-    if (d >= GAP_CUTOFF) dayNum -= 1; // compensa o dia de gap ainda não realocado
-    return dayNum;
+    return diffDays + 1;
 }
 
 test('dayStats.hotel bate com hotels[] (checkin/checkout)', () => {
