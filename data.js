@@ -321,9 +321,10 @@ const days = [
         "shortLoc": "Sequoia",
         "chargeStops": [
             {
-                "name": "Bakersfield, CA",
+                "name": "Visalia, CA",
                 "leg": "LAX → Three Rivers",
-                "critical": false
+                "critical": true,
+                "note": "Carregar 100% — Three Rivers/Sequoia não têm Supercharger, e vampire drain no frio some com a folga."
             }
         ],
         "location": "New York → LAX → Three Rivers",
@@ -377,8 +378,8 @@ const days = [
                 "type": "drive"
             },
             {
-                "time": "16:00",
-                "text": "⚡ <strong>Supercharger Bakersfield, CA</strong> (~180 km) — ~25 min",
+                "time": "17:15",
+                "text": "⚡ <strong>Supercharger Visalia, CA</strong> (~280 km) — carregar 100% (vampire drain no frio + sem charger em Three Rivers/Sequoia)",
                 "type": "charge"
             },
             {
@@ -394,7 +395,8 @@ const days = [
         ],
         "tips": [
             "⚡ Dia longo (~330 km) mas FSD ajuda. CA-99 é reta e rápida.",
-            "⚡ Fuso horário ajuda (-3h). Chegam cansados — dormir cedo!"
+            "⚡ Fuso horário ajuda (-3h). Chegam cansados — dormir cedo!",
+            "⚠️ Carregar 100% em Visalia — Three Rivers e Sequoia/Kings Canyon não têm Supercharger. Frio à noite causa vampire drain (~10%/noite); sem folga, próxima carga só em Fresno no dia seguinte (~225 km depois)."
         ]
     },
     {
