@@ -748,7 +748,12 @@ const days = [
                 "type": ""
             },
             {
-                "time": "11:00",
+                "time": "10:50",
+                "text": "🌲 <strong>Battery East Tunnel</strong> — túnel histórico no Presidio, foto diferente!",
+                "type": ""
+            },
+            {
+                "time": "11:10",
                 "text": "🌅 <strong>Crissy Field</strong> — vista da Golden Gate!",
                 "type": ""
             },
