@@ -792,7 +792,7 @@ const days = [
         ]
     },
     {
-        "photo": "img/activities/pier_39.jpg",
+        "photo": "img/activities/ocean_beach_sf.jpg",
         "shortLoc": "SF",
         "location": "San Francisco — Embarcadero + Ocean Beach",
         "route": "Ferry Building + Ocean Beach! 🌊",
@@ -1328,7 +1328,7 @@ const days = [
         ]
     },
     {
-        "photo": "img/activities/hoh_rain_forest.jpg",
+        "photo": "img/activities/ruby_beach.jpg",
         "shortLoc": "Olympic",
         "location": "Olympic NP — Costa 🌊",
         "route": "Ruby Beach + La Push + Rialto Beach!",
@@ -2049,7 +2049,7 @@ const days = [
         ]
     },
     {
-        "photo": "img/activities/grand_canyon.jpg",
+        "photo": "img/activities/hoover_dam.jpg",
         "shortLoc": "Vegas",
         "chargeStops": [
             {
