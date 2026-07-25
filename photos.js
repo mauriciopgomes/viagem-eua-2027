@@ -462,6 +462,10 @@ const activityPhotos = {
     // --- Roadside stops (missing mappings) ---
     'Terrible\'s Road House': 'img/activities/seligman_route66.jpg',
     'Boudin': 'img/activities/fishermans_wharf.jpg',
+    // --- Complemento: reaproveitando fotos existentes por proximidade/tema ---
+    'Grizzly Giant': 'img/activities/mariposa_ca.jpg',
+    'Second Beach': 'img/activities/la_push.jpg',
+    'Powell Point / Hermits Rest': 'img/activities/hermit_road.jpg',
 };
 
 // Pre-sort keys longest-first for accurate matching (e.g., "Brooklyn Bridge Park" before "Brooklyn Bridge")
