@@ -99,7 +99,8 @@ var SyncEngine = {
             }
             if (errMsg.indexOf('403') !== -1 || errMsg.indexOf('401') !== -1) {
                 this.updateUI('autherror');
-                if (typeof showToast === 'function') showToast('⚠️ Sync sem permissão — verifique configuração', { type: 'error', duration: 4000 });
+                var selfAuth = this;
+                if (typeof showToast === 'function') showToast('⚠️ Sync sem permissão — verifique configuração', { type: 'error', duration: 4000, actionLabel: 'Tentar novamente', onAction: function() { selfAuth.push(); } });
                 this.syncing = false;
                 this.pushRetries = 0;
                 return;
@@ -107,7 +108,8 @@ var SyncEngine = {
             if (this.pushRetries >= maxRetries) {
                 console.error('Sync push: máximo de tentativas atingido (' + maxRetries + ')');
                 this.updateUI('maxretry');
-                if (typeof showToast === 'function') showToast('❌ Sync falhou após ' + maxRetries + ' tentativas', { type: 'error', duration: 4000 });
+                var selfMax = this;
+                if (typeof showToast === 'function') showToast('❌ Sync falhou após ' + maxRetries + ' tentativas', { type: 'error', duration: 4000, actionLabel: 'Tentar novamente', onAction: function() { selfMax.pushRetries = 0; selfMax.push(); } });
                 this.syncing = false;
                 this.pushRetries = 0;
                 return;
@@ -160,7 +162,8 @@ var SyncEngine = {
         } catch(e) {
             console.warn('Sync pull failed:', e);
             this.updateUI('error');
-            if (typeof showToast === 'function') showToast('⚠️ Falha ao sincronizar', { type: 'warning' });
+            var selfPull = this;
+            if (typeof showToast === 'function') showToast('⚠️ Falha ao sincronizar', { type: 'warning', actionLabel: 'Tentar novamente', onAction: function() { selfPull.pull(); } });
         }
         this.syncing = false;
     },

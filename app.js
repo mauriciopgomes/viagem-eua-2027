@@ -13,6 +13,19 @@ function escapeHtml(value) {
     });
 }
 
+// Fallback visível para <img> quebrada — mantém espaço ocupado (evita buraco no layout)
+function imgFallback(img, emoji) {
+    if (!img || img.getAttribute('data-fallback-applied')) return;
+    img.setAttribute('data-fallback-applied', '1');
+    var ph = document.createElement('div');
+    ph.className = 'img-fallback-placeholder';
+    ph.textContent = emoji || '🖼️';
+    ph.style.width = (img.getAttribute('width') || img.offsetWidth || 40) + 'px';
+    ph.style.height = (img.getAttribute('height') || img.offsetHeight || 40) + 'px';
+    var target = img.closest('picture') || img;
+    if (target.parentNode) target.replaceWith(ph);
+}
+
 // Safe innerHTML setter for user-controlled content
 function safeSetHTML(element, html) {
     if (!element) return;
@@ -32,14 +45,17 @@ function goToDay(dayNum, itemIdx) {
     setTimeout(function() {
         showDay(dayNum);
         if (itemIdx !== undefined && itemIdx !== null) {
-            // Scroll to the specific card after render
-            setTimeout(function() {
+            // Scroll to the specific card after render (retry once if not found yet)
+            var tryScroll = function(attempt) {
                 var card = document.querySelector('[data-action-check="' + dayNum + '-' + itemIdx + '"]');
                 if (card) {
                     var actCard = card.closest('.activity-card');
                     if (actCard) actCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else if (attempt < 1) {
+                    setTimeout(function() { tryScroll(attempt + 1); }, 400);
                 }
-            }, 200);
+            };
+            setTimeout(function() { tryScroll(0); }, 200);
         }
     }, 50);
 }
@@ -101,13 +117,21 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, true);
 
-        // Image error: hide broken image and mark card
+        // Image error: replace broken image with visible placeholder (keeps layout space)
         dayContainer.addEventListener('error', function(e) {
             var img = e.target;
             if (!img || img.tagName !== 'IMG' || !img.hasAttribute('data-onerror-hide')) return;
             var cardEl = img.closest('.activity-card');
             if (cardEl) cardEl.setAttribute('data-no-photo', '1');
-            img.style.display = 'none';
+            var media = img.closest('.activity-card-media');
+            var picture = img.closest('picture') || img;
+            var placeholderIcons = { highlight: '⭐', food: '🍽️', charge: '⚡', drive: '🚗', '': '📍' };
+            var typeAttr = cardEl ? (cardEl.getAttribute('data-type') || '') : '';
+            var pIcon = placeholderIcons[typeAttr] || '📍';
+            var ph = document.createElement('div');
+            ph.className = 'activity-card-placeholder';
+            ph.innerHTML = '<div class="activity-card-placeholder-icon">' + pIcon + '</div>';
+            if (media) { picture.replaceWith(ph); } else { img.style.display = 'none'; }
         }, true);
 
         // Textarea: save day notes
@@ -296,7 +320,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ==================== PERFORMANCE OBSERVER ====================
-if (typeof PerformanceObserver !== 'undefined') {
+if (typeof PerformanceObserver !== 'undefined' && localStorage.getItem('debugPerf') === '1') {
     // Track LCP
     try {
         new PerformanceObserver(function(list) {
@@ -343,7 +367,7 @@ function renderDaySelector() {
         var dateStr = String(dt.getDate()).padStart(2,'0') + '/' + String(dt.getMonth()+1).padStart(2,'0');
         var thumbSrc = dd && dd.photo ? dd.photo : '';
         var thumbHtml = thumbSrc
-            ? '<img class="pill-thumb" src="' + webpSrc(thumbSrc) + '" alt="" width="40" height="40" loading="lazy" onerror="this.style.display=\'none\'">'
+            ? '<img class="pill-thumb" src="' + webpSrc(thumbSrc) + '" alt="" width="40" height="40" loading="lazy" onerror="imgFallback(this,&quot;📍&quot;)">'
             : '<div class="pill-thumb" style="background:var(--glass2)"></div>';
         html += '<button class="day-pill ' + r + '" data-d="' + i + '" aria-label="Dia ' + i + ' — ' + dateStr + ' — ' + loc + '" title="' + loc + '">' +
             thumbHtml +
@@ -368,7 +392,7 @@ function renderSidebar() {
         var dateStr = String(dt.getDate()).padStart(2,'0') + '/' + String(dt.getMonth()+1).padStart(2,'0');
         var photo = d && d.photo ? d.photo : '';
         var thumbHtml = photo
-            ? '<img class="sidebar-thumb" src="' + webpSrc(photo) + '" alt="" width="32" height="32" loading="lazy" onerror="this.style.display=\'none\'">'
+            ? '<img class="sidebar-thumb" src="' + webpSrc(photo) + '" alt="" width="32" height="32" loading="lazy" onerror="imgFallback(this,&quot;📍&quot;)">'
             : '<div class="sidebar-thumb sidebar-thumb-placeholder"></div>';
         html += '<div class="sidebar-item" data-sd="' + i + '" title="' + escapeHtml(fullLoc) + '">' +
             thumbHtml +
@@ -605,9 +629,10 @@ function showDay(n) {
             '<div class="skeleton-shimmer" style="height:44px;width:44px;border-radius:12px"></div>' +
             '<div class="skeleton-shimmer" style="height:44px;width:44px;border-radius:12px"></div>' +
             '</div></div></div>';
+        var skelPeriodLabel = '<div class="time-group-label skeleton-shimmer" style="opacity:0.4"></div>';
         document.getElementById('dayContainer').insertAdjacentHTML('beforeend',
             '<div class="day-slide" id="' + skelId + '" style="display:block;padding:0 20px 32px">' +
-            skelCard + skelCard + skelCard +
+            skelPeriodLabel + skelCard + skelCard + skelCard +
             '</div>');
         requestAnimationFrame(function() {
             var skel = document.getElementById(skelId);
@@ -688,6 +713,29 @@ function showDay(n) {
     }
 }
 
+// ==================== WAKE LOCK (keep screen on while navigating/on map) ====================
+var wakeLockRef = null;
+function requestWakeLockIfNeeded() {
+    if (!('wakeLock' in navigator)) return;
+    var activeTab = document.querySelector('.tab-item.active');
+    var wants = activeTab && (activeTab.id === 'tabHome' || activeTab.id === 'tabMap');
+    if (!wants || wakeLockRef || document.hidden) return;
+    navigator.wakeLock.request('screen').then(function(lock) {
+        wakeLockRef = lock;
+        wakeLockRef.addEventListener('release', function() { wakeLockRef = null; });
+    }).catch(function() { wakeLockRef = null; });
+}
+function releaseWakeLock() {
+    if (wakeLockRef) { wakeLockRef.release().catch(function() {}); wakeLockRef = null; }
+}
+document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+        releaseWakeLock();
+    } else {
+        requestWakeLockIfNeeded();
+    }
+});
+
 // ==================== TAB SWITCHING ====================
 function switchTab(tab, e) {
     var doSwitch = function() {
@@ -720,6 +768,9 @@ function switchTab(tab, e) {
         if (tab === 'home' && typeof mapScrubDay !== 'undefined' && mapScrubDay && mapScrubDay !== currentDay) {
             showDay(mapScrubDay);
         }
+        // Wake Lock: only keep screen on for home/map tabs (used while navigating/driving)
+        if (tab === 'home' || tab === 'map') requestWakeLockIfNeeded();
+        else releaseWakeLock();
     };
     // Use View Transitions API if available
     if (document.startViewTransition) {
@@ -750,7 +801,7 @@ function openDetail(dayNum, itemIdx) {
 
     var html = '';
     html += '<div class="sheet-badge" data-t="' + escapeHtml(item.type) + '">' + tl + '</div>';
-    html += '<div class="sheet-name">' + text + '</div>';
+    html += '<div class="sheet-name" id="sheetTitle">' + text + '</div>';
 
     html += '<div class="sheet-meta">';
     html += '<div class="sheet-meta-item">🕐 ' + item.time + '</div>';
@@ -802,7 +853,9 @@ function openDetail(dayNum, itemIdx) {
 
 function closeSheet() {
     document.getElementById('sheetOverlay').classList.remove('open');
+    document.getElementById('sheetOverlay').style.opacity = '';
     document.getElementById('sheet').classList.remove('open');
+    document.getElementById('sheet').style.transform = '';
     document.body.style.overflow = '';
     releaseFocus();
 }
@@ -1102,8 +1155,8 @@ function doInitMap() {
         var c = scCoords[sc.name];
         if (!c) return;
         var scI = L.divIcon({
-            html: '<div style="font-size:13px;background:#00c853;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.5);border:2px solid #fff">⚡</div>',
-            className: '', iconSize: [18,18], iconAnchor: [9,9], popupAnchor: [0,-9]
+            html: '<div style="width:32px;height:32px;display:flex;align-items:center;justify-content:center"><span style="font-size:13px;background:#00c853;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.5);border:2px solid #fff">⚡</span></div>',
+            className: '', iconSize: [32,32], iconAnchor: [16,16], popupAnchor: [0,-16]
         });
         var q = encodeURIComponent('Tesla Supercharger ' + sc.name);
         var navHtml = '<div class="popup-nav-btns">' +
@@ -1185,7 +1238,7 @@ function doInitMap() {
         }
         var ic = L.divIcon({
             html: markerHtml,
-            className: '', iconSize: [28,28], iconAnchor: [14,14], popupAnchor: [0,-16]
+            className: '', iconSize: [32,32], iconAnchor: [16,16], popupAnchor: [0,-18]
         });
         var q = encodeURIComponent(poi.n);
         var navHtml = '<div class="popup-nav-btns">' +
@@ -1662,6 +1715,7 @@ if (hashMatch) {
 }
 showDay(initDay);
 updateCountdown(); // show countdown only on initial load
+requestWakeLockIfNeeded(); // home tab is active by default
 
 // Handle hash changes for deep linking (e.g. user shares URL or uses back/forward)
 window.addEventListener('hashchange', function() {
@@ -1685,6 +1739,27 @@ requestAnimationFrame(function() {
     }
 });
 checkMapCacheStatus();
+
+// ==================== ONBOARDING (first visit only) ====================
+function showOnboarding() {
+    if (localStorage.getItem('onboardingSeen') === '1') return;
+    var el = document.createElement('div');
+    el.className = 'onboarding-toast';
+    el.setAttribute('role', 'dialog');
+    el.setAttribute('aria-label', 'Bem-vindo');
+    el.innerHTML = '<p>👋 Bem-vindo! Use <strong>📅 Roteiro</strong>, <strong>🗺️ Mapa</strong>, <strong>🔍 Explorar</strong> e <strong>⚙️ Ajustes</strong> na barra abaixo — deslize os cards do dia para os lados e arraste o painel de detalhes para baixo para fechar.</p><button type="button" class="onboarding-toast-btn">Entendi</button>';
+    document.body.appendChild(el);
+    requestAnimationFrame(function() { requestAnimationFrame(function() { el.classList.add('show'); }); });
+    function dismiss() {
+        localStorage.setItem('onboardingSeen', '1');
+        el.classList.remove('show');
+        setTimeout(function() { if (el.parentNode) el.remove(); }, 350);
+    }
+    el.querySelector('.onboarding-toast-btn').addEventListener('click', dismiss);
+    setTimeout(dismiss, 12000);
+}
+setTimeout(showOnboarding, 1200);
+
 
 // Helper to schedule automatic map tile download
 function scheduleAutoMapTileDownload() {
@@ -1731,7 +1806,9 @@ function searchItems(query) {
     });
     var el = document.getElementById('searchResults');
     if (results.length === 0) {
-        var emptyMsg = showFavsOnly ? '<div style="padding:24px;text-align:center;color:var(--text3);font-size:13px"><div style="font-size:32px;margin-bottom:8px">⭐</div>Nenhum favorito ainda.<br>Toque ♥ nos cards para favoritar.</div>' : '<div style="padding:16px;color:var(--text3);font-size:13px">Nenhum resultado encontrado</div>';
+        var emptyMsg = showFavsOnly
+            ? '<div class="explore-empty"><div style="font-size:32px;margin-bottom:8px">⭐</div>Nenhum favorito ainda.<br>Toque ♥ nos cards para favoritar.</div>'
+            : '<div class="explore-empty"><div style="font-size:32px;margin-bottom:8px">🔍</div>Nada encontrado para "' + escapeHtml(query) + '"<br>Tente outro termo de busca.</div>';
         el.innerHTML = emptyMsg;
         el.style.display = 'block';
         return;
@@ -1740,7 +1817,7 @@ function searchItems(query) {
     results.slice(0, 40).forEach(function(r) {
         var thumb = findPhoto(r.text);
         var thumbHtml = thumb
-            ? '<img class="search-result-thumb" src="' + webpSrc(thumb) + '" alt="' + r.text.replace(/<[^>]+>/g, '').replace(/"/g, '&quot;').substring(0, 80) + '" width="40" height="40" loading="lazy" onerror="this.style.display=\'none\'">'
+            ? '<img class="search-result-thumb" src="' + webpSrc(thumb) + '" alt="' + r.text.replace(/<[^>]+>/g, '').replace(/"/g, '&quot;').substring(0, 80) + '" width="40" height="40" loading="lazy" onerror="imgFallback(this,&quot;🔍&quot;)">'
             : '<div class="search-result-thumb search-result-thumb-placeholder"></div>';
         html += '<div class="search-result-item" tabindex="0" role="option" data-search-day="' + r.day + '"' + (r.hasInfo ? ' data-search-idx="' + r.idx + '"' : '') + '>';
         html += thumbHtml;
@@ -1978,7 +2055,7 @@ function renderExplore() {
         var hotelPhoto = dayPhotos[checkinDay] || '';
         html += '<div class="hotel-item" data-goto-day="' + checkinDay + '">';
         if (hotelPhoto) {
-            html += '<div class="hotel-thumb-wrap"><img class="hotel-thumb" src="' + webpSrc(hotelPhoto) + '" alt="' + escapeHtml(h.name) + '" width="72" height="72" loading="lazy" onerror="this.parentElement.style.display=\'none\'"></div>';
+            html += '<div class="hotel-thumb-wrap"><img class="hotel-thumb" src="' + webpSrc(hotelPhoto) + '" alt="' + escapeHtml(h.name) + '" width="72" height="72" loading="lazy" onerror="imgFallback(this,&quot;🏨&quot;)"></div>';
         } else {
             html += '<div class="hotel-num">' + h.num + '</div>';
         }
@@ -2001,7 +2078,7 @@ function renderExplore() {
         var parkPhoto = dayPhotos[dayNum] || '';
         html += '<div class="explore-park-card" data-goto-day="' + dayNum + '">';
         if (parkPhoto) {
-            html += '<div class="explore-park-photo-wrap"><img class="explore-park-photo" src="' + webpSrc(parkPhoto) + '" alt="' + escapeHtml(p.name) + '" width="400" height="120" loading="lazy" onerror="this.parentElement.style.display=\'none\'"></div>';
+            html += '<div class="explore-park-photo-wrap"><img class="explore-park-photo" src="' + webpSrc(parkPhoto) + '" alt="' + escapeHtml(p.name) + '" width="400" height="120" loading="lazy" onerror="imgFallback(this,&quot;🏞️&quot;)"></div>';
         }
         html += '<div class="explore-park-header"><div>';
         html += '<div class="explore-park-name">' + escapeHtml(p.name) + '</div>';
@@ -2102,6 +2179,9 @@ function filterExplore(filter, btn) {
             decided = true;
         }
 
+        // Gesture is clearly horizontal — prevent vertical scroll from fighting the swipe
+        if (e.cancelable) e.preventDefault();
+
         // Parallax: slide current day 30% of drag distance
         var limited = dx * 0.3;
         if (activeSlide) {
@@ -2126,7 +2206,7 @@ function filterExplore(filter, btn) {
                 hintR.classList.remove('visible');
             }
         }
-    }, { passive: true });
+    }, { passive: false });
 
     container.addEventListener('touchend', function(e) {
         var hintL = document.getElementById('swipeHintL');
@@ -2179,7 +2259,9 @@ window.addEventListener('scroll', function() {
 // ==================== SHEET PULL-TO-DISMISS ====================
 (function() {
     var sheet = document.getElementById('sheet');
+    var sheetOverlayEl = document.getElementById('sheetOverlay');
     var startY = 0, dragging = false;
+    var DAMP_THRESHOLD = 120; // px of drag before rubber-band damping kicks in
     sheet.addEventListener('touchstart', function(e) {
         if (sheet.scrollTop > 0) return;
         startY = e.touches[0].clientY;
@@ -2189,14 +2271,26 @@ window.addEventListener('scroll', function() {
     sheet.addEventListener('touchmove', function(e) {
         if (!dragging) return;
         var dy = e.touches[0].clientY - startY;
-        if (dy > 0) { sheet.style.transform = 'translateY(' + dy + 'px)'; e.preventDefault(); }
+        if (dy > 0) {
+            // Rubber-band damping past the threshold, so it feels like it resists
+            var damped = dy <= DAMP_THRESHOLD ? dy : DAMP_THRESHOLD + (dy - DAMP_THRESHOLD) * 0.4;
+            sheet.style.transform = 'translateY(' + damped + 'px)';
+            if (sheetOverlayEl) sheetOverlayEl.style.opacity = Math.max(0.3, 1 - damped / 300);
+            e.preventDefault();
+        }
     }, { passive: false });
     sheet.addEventListener('touchend', function(e) {
         if (!dragging) return;
         dragging = false;
         sheet.style.transition = '';
+        if (sheetOverlayEl) sheetOverlayEl.style.transition = '';
         var dy = e.changedTouches[0].clientY - startY;
-        if (dy > 100) closeSheet(); else sheet.style.transform = '';
+        if (dy > 100) {
+            closeSheet();
+        } else {
+            sheet.style.transform = '';
+            if (sheetOverlayEl) sheetOverlayEl.style.opacity = '';
+        }
     });
 })();
 
@@ -2305,15 +2399,38 @@ function importUserData(event) {
 }
 
 // ==================== GLOBAL TOAST ====================
+var _toastHideTimer = null;
 function showToast(msg, opts) {
     var toast = document.getElementById('toast');
     if (!toast) return;
     var type = (opts && opts.type) || 'default';
-    toast.textContent = msg;
-    toast.style.background = type === 'error' ? 'var(--red)' : type === 'warning' ? 'var(--orange)' : '';
+    var isError = type === 'error';
+    // Errors need immediate announcement (assertive); everything else is polite
+    // to avoid interrupting screen reader users constantly (e.g. "Dia completo!").
+    toast.setAttribute('role', isError ? 'alert' : 'status');
+    toast.setAttribute('aria-live', isError ? 'assertive' : 'polite');
+    toast.innerHTML = '';
+    var label = document.createElement('span');
+    label.textContent = msg;
+    toast.appendChild(label);
+    if (opts && opts.actionLabel && typeof opts.onAction === 'function') {
+        var actionBtn = document.createElement('button');
+        actionBtn.type = 'button';
+        actionBtn.className = 'toast-action-btn';
+        actionBtn.textContent = opts.actionLabel;
+        actionBtn.addEventListener('click', function() {
+            if (_toastHideTimer) clearTimeout(_toastHideTimer);
+            toast.classList.remove('show');
+            toast.style.background = '';
+            opts.onAction();
+        });
+        toast.appendChild(actionBtn);
+    }
+    toast.style.background = isError ? 'var(--red)' : type === 'warning' ? 'var(--orange)' : '';
     toast.classList.add('show');
+    if (_toastHideTimer) clearTimeout(_toastHideTimer);
     var duration = (opts && opts.duration) || 2500;
-    setTimeout(function() { toast.classList.remove('show'); toast.style.background = ''; }, duration);
+    _toastHideTimer = setTimeout(function() { toast.classList.remove('show'); toast.style.background = ''; }, duration);
 }
 
 // ==================== FOCUS TRAP ====================
