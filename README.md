@@ -5,7 +5,7 @@ Uma Progressive Web App (PWA) interativa para um road trip de **33 dias** pelos 
 ## ✨ Features
 
 - **📱 Instalável** — Add to Home Screen (iOS/Android)
-- **🗺️ Mapa interativo** — Leaflet.js com tiles offline
+- **🗺️ Mapa interativo** — Leaflet.js com mapa escuro e rótulos Esri, satélite e tiles offline, sem API key
 - **🔄 Sincronização** — Google Apps Script + localStorage
 - **📝 Notas pessoais** — Salvas localmente e sincronizadas
 - **💾 Offline-first** — Service Worker com precache
@@ -29,6 +29,11 @@ Uma Progressive Web App (PWA) interativa para um road trip de **33 dias** pelos 
 3. Pronto!
 
 ### Local Development
+
+O mapa usa os serviços públicos Esri (Dark Gray Base + Reference e World Imagery).
+O download offline inclui a base escura e seus rótulos. Ao atualizar do antigo
+provedor CARTO, o cache de tiles é descartado e precisa ser baixado novamente;
+notas, favoritos e demais dados pessoais são preservados.
 
 ```bash
 # Clonar e entrar no diretório

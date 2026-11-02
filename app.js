@@ -898,6 +898,10 @@ function initMap() {
 // Map layer groups & state
 var mapLayers = { route: null, routeDone: null, routeUpcoming: null, stops: null, sc: null, daytrips: null, dayroute: null, roadpois: null };
 var mapTileDark = null, mapTileSat = null;
+var mapDarkTileUrls = [
+    'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
+    'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}'
+];
 var isSatellite = false;
 var mapStopMarkers = {};
 var allStopMarkerEls = [];
@@ -1012,7 +1016,7 @@ function doInitMap() {
 
     // Remove loading overlay once tile layer finishes first render
     // mapInstance 'load' fires on map init before tiles arrive — use tileLayer 'load' instead
-    var tilesAreCached = localStorage.getItem('mapTilesCached') === 'tiles-v1';
+    var tilesAreCached = localStorage.getItem('mapTilesCached') === 'tiles-v2';
     var isOffline = !navigator.onLine;
     var _mapOfflineBanner = null;
 
@@ -1044,14 +1048,18 @@ function doInitMap() {
     L.control.zoom({ position: 'topleft' }).addTo(mapInstance);
 
     // Tile layers
-    mapTileDark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; OSM &copy; CARTO', maxZoom: 19
+    var darkBase = L.tileLayer(mapDarkTileUrls[0], {
+        attribution: '&copy; Esri, HERE, Garmin, OpenStreetMap contributors',
+        maxNativeZoom: 16, maxZoom: 19
     });
+    var darkLabels = L.tileLayer(mapDarkTileUrls[1], {
+        maxNativeZoom: 16, maxZoom: 19
+    });
+    mapTileDark = L.layerGroup([darkBase, darkLabels]);
     mapTileSat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
         attribution: '&copy; Esri', maxZoom: 18
     });
-    mapTileDark.addTo(mapInstance);
-    mapTileDark.once('load', function() {
+    darkBase.once('load', function() {
         clearTimeout(_mapLoadTimer);
         document.getElementById('map').classList.remove('map-loading');
         mapInstance.invalidateSize();
@@ -1061,6 +1069,7 @@ function doInitMap() {
             _mapOfflineBanner = null;
         }
     });
+    mapTileDark.addTo(mapInstance);
 
     // ---- ROUTE: DONE + UPCOMING (progress split) ----
     mapLayers.route = L.layerGroup();
@@ -1474,8 +1483,6 @@ function releaseTileDownloadLock() {
 }
 
 function generateTileList() {
-    var tileUrl = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
-    var subdomains = ['a', 'b', 'c', 'd'];
     var tiles = [];
 
     function addBbox(north, west, south, east, zMin, zMax) {
@@ -1484,8 +1491,9 @@ function generateTileList() {
             var tMax = latLngToTile(south, east, z);
             for (var x = tMin.x; x <= tMax.x; x++) {
                 for (var y = tMin.y; y <= tMax.y; y++) {
-                    var s = subdomains[(x + y) % subdomains.length];
-                    tiles.push(tileUrl.replace('{s}', s).replace('{z}', z).replace('{x}', x).replace('{y}', y).replace('{r}', ''));
+                    mapDarkTileUrls.forEach(function(tileUrl) {
+                        tiles.push(tileUrl.replace('{z}', z).replace('{x}', x).replace('{y}', y));
+                    });
                 }
             }
         }
@@ -1526,12 +1534,12 @@ function generateTileList() {
     cities.forEach(function(c) { addBbox(c[0], c[1], c[2], c[3], 11, 13); });
 
     // Deduplica URLs repetidas
-    return tiles.filter(function(url, i, arr) { return arr.indexOf(url) === i; });
+    return Array.from(new Set(tiles));
 }
 
 async function cacheMapTiles(silent) {
     if (tileCacheRunning && !tileCachePaused) return;
-    if (localStorage.getItem('mapTilesCached') === 'tiles-v1') {
+    if (localStorage.getItem('mapTilesCached') === 'tiles-v2') {
         updateTileCacheUI(true, 0);
         return;
     }
@@ -1558,6 +1566,12 @@ async function cacheMapTiles(silent) {
 
 async function _cacheMapTilesInner(silent) {
     tileCacheRunning = true;
+    if (localStorage.getItem('mapTilesVersion') !== 'tiles-v2') {
+        ['mapTilesCached', 'mapTilesIndex', 'mapTilesErrors', 'mapTilesTotal'].forEach(function(key) {
+            localStorage.removeItem(key);
+        });
+        localStorage.setItem('mapTilesVersion', 'tiles-v2');
+    }
     var btn = document.getElementById('btnCacheMap');
     var status = document.getElementById('mapCacheStatus');
     var progress = document.getElementById('mapProgress');
@@ -1574,7 +1588,7 @@ async function _cacheMapTilesInner(silent) {
 
     if (status && startIdx === 0) status.textContent = '0 / ' + tiles.length + ' tiles...';
 
-    var cache = await caches.open('viagem-tiles-v1');
+    var cache = await caches.open('viagem-tiles-v2');
     var done = startIdx;
     var errors = totalErrors;
     var batchSize = silent ? 6 : 10; // smaller batches in background to save bandwidth
@@ -1609,7 +1623,7 @@ async function _cacheMapTilesInner(silent) {
     tileCacheRunning = false;
     tileCachePaused = false;
     releaseTileDownloadLock();
-    localStorage.setItem('mapTilesCached', 'tiles-v1');
+    localStorage.setItem('mapTilesCached', 'tiles-v2');
     localStorage.removeItem('mapTilesIndex');
     localStorage.removeItem('mapTilesErrors');
     localStorage.removeItem('mapTilesTotal');
@@ -1626,7 +1640,7 @@ function updateTileCacheUI(complete, errors) {
 }
 
 async function checkMapCacheStatus() {
-    if (localStorage.getItem('mapTilesCached') === 'tiles-v1') {
+    if (localStorage.getItem('mapTilesCached') === 'tiles-v2') {
         updateTileCacheUI(true, 0);
     }
 }
@@ -2319,7 +2333,7 @@ window.addEventListener('scroll', function() {
             setTimeout(function() { SyncEngine.push(); }, 2000);
         }
         // Resume or start map tile caching if not already cached
-        if (localStorage.getItem('mapTilesCached') !== 'tiles-v1') {
+        if (localStorage.getItem('mapTilesCached') !== 'tiles-v2') {
             setTimeout(function() { cacheMapTiles(true); }, 1500);
         }
     });

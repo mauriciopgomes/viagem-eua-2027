@@ -1,5 +1,5 @@
-const CACHE_NAME = 'viagem-eua-2027-v215';
-const TILE_CACHE = 'viagem-tiles-v1';
+const CACHE_NAME = 'viagem-eua-2027-v216';
+const TILE_CACHE = 'viagem-tiles-v2';
 
 // Critical assets — must succeed for install
 const CRITICAL_ASSETS = [
@@ -407,7 +407,7 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
   // Map tiles: stale-while-revalidate (fast load + background update)
-  if (url.hostname.includes('basemaps.cartocdn.com') || url.hostname.includes('tile.openstreetmap.org') || url.hostname.includes('server.arcgisonline.com')) {
+  if (url.hostname === 'server.arcgisonline.com') {
     event.respondWith(
       caches.open(TILE_CACHE).then((cache) => {
         return cache.match(event.request).then((cached) => {

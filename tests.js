@@ -275,7 +275,9 @@ test('cache name segue padrão viagem-eua-2027-vN', () => {
 });
 
 test('tile cache definido', () => {
-    assert(swJs.includes("TILE_CACHE = 'viagem-tiles-v1'"), 'TILE_CACHE deve ser viagem-tiles-v1');
+    assert(swJs.includes("TILE_CACHE = 'viagem-tiles-v2'"), 'TILE_CACHE deve invalidar tiles antigos do CARTO');
+    assert(appJs.includes("caches.open('viagem-tiles-v2')"), 'download offline deve usar o mesmo cache do SW');
+    assert(!appJs.includes("'tiles-v1'"), 'estado offline antigo não deve ser reutilizado');
 });
 
 test('critical assets incluem arquivos essenciais', () => {
@@ -367,7 +369,7 @@ test('SW tem fallback de imagem offline', () => {
 });
 
 test('SW cacheia tiles de mapa', () => {
-    assert(swJs.includes('basemaps.cartocdn.com') || swJs.includes('tile.openstreetmap.org'),
+    assert(swJs.includes("url.hostname === 'server.arcgisonline.com'"),
         'SW deve cachear tiles de mapa');
 });
 
@@ -514,8 +516,12 @@ test('tem registro do Service Worker', () => {
 });
 
 test('CSP permite tiles do mapa escuro e satélite', () => {
-    assert(indexHtml.includes('https://*.basemaps.cartocdn.com'), 'CSP deve permitir CARTO tiles');
-    assert(indexHtml.includes('https://server.arcgisonline.com'), 'CSP deve permitir Esri satellite tiles');
+    const csp = indexHtml.match(/Content-Security-Policy" content="([^"]+)"/)[1];
+    for (const directive of ['img-src', 'connect-src']) {
+        assert(csp.split(';').some(value => value.trim().startsWith(directive + ' ') &&
+            value.includes('https://server.arcgisonline.com')), directive + ' deve permitir tiles Esri');
+    }
+    assert(!appJs.includes('basemaps.cartocdn.com'), 'mapa não deve usar CARTO sem API key');
 });
 
 test('hero mostra a quantidade real de superchargers', () => {
@@ -922,6 +928,48 @@ test('tem listener de online/offline', () => {
 
 test('tem cache de tiles do mapa', () => {
     assert(allJs.includes('cacheMapTiles'), 'deve ter função cacheMapTiles');
+});
+
+test('download offline inclui base escura e rótulos com coordenadas corretas', () => {
+    const urls = appJs.match(/var mapDarkTileUrls = \[[\s\S]*?\n\];/)[0];
+    const generate = appJs.slice(appJs.indexOf('function generateTileList()'), appJs.indexOf('async function cacheMapTiles('));
+    const coords = appJs.match(/function latLngToTile\([\s\S]*?\n\}/)[0];
+    const context = {};
+    vm.runInNewContext(urls + '\n' + coords + '\n' + generate + '\nvar tiles = generateTileList();', context);
+    const tiles = context.tiles;
+    assert(tiles.length > 0, 'deve gerar tiles offline');
+    assertEqual(tiles.length, new Set(tiles).size, 'URLs devem ser únicas');
+    assertEqual(tiles[0], context.mapDarkTileUrls[0].replace('{z}', '4').replace('{y}', '5').replace('{x}', '2'),
+        'tile deve usar a ordem Esri z/y/x');
+    for (let i = 0; i < tiles.length; i += 2) {
+        assert(tiles[i].includes('/World_Dark_Gray_Base/'), 'par deve começar com base escura');
+        assertEqual(tiles[i + 1], tiles[i].replace('World_Dark_Gray_Base', 'World_Dark_Gray_Reference'),
+            'cada tile deve incluir seus rótulos para uso offline');
+        assert(!/[{}?]/.test(tiles[i]), 'URL não deve ter placeholders ou API key');
+    }
+    assert(appJs.includes('L.layerGroup([darkBase, darkLabels])'), 'alternar satélite deve incluir/remover ambas as camadas');
+});
+
+test('troca de provedor reinicia progresso antigo do download offline', () => {
+    const reset = appJs.match(/if \(localStorage.getItem\('mapTilesVersion'\) !== 'tiles-v2'\) \{[\s\S]*?\n    \}/)[0];
+    const store = new Map([
+        ['mapTilesCached', 'tiles-v1'], ['mapTilesIndex', '120'],
+        ['mapTilesErrors', '3'], ['mapTilesTotal', '400'], ['notes_1', 'Manter']
+    ]);
+    const context = { localStorage: {
+        getItem: key => store.get(key) || null,
+        setItem: (key, value) => store.set(key, value),
+        removeItem: key => store.delete(key)
+    } };
+    vm.runInNewContext(reset, context);
+    for (const key of ['mapTilesCached', 'mapTilesIndex', 'mapTilesErrors', 'mapTilesTotal']) {
+        assert(!store.has(key), key + ' deve ser reiniciado');
+    }
+    assertEqual(store.get('mapTilesVersion'), 'tiles-v2', 'deve registrar a versão nova');
+    assertEqual(store.get('notes_1'), 'Manter', 'não deve remover dados pessoais');
+    store.set('mapTilesIndex', '50');
+    vm.runInNewContext(reset, context);
+    assertEqual(store.get('mapTilesIndex'), '50', 'deve preservar progresso da versão atual');
 });
 
 test('tem update toast para nova versão', () => {
