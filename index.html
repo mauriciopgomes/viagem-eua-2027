@@ -44,7 +44,7 @@
 
 <main>
 <!-- ==================== HOME / ITINERARY ==================== -->
-<div class="section active" id="sec-home" role="tabpanel" aria-label="Roteiro">
+<div class="section active" id="sec-home" role="tabpanel" aria-labelledby="tabHome" aria-label="Roteiro" aria-hidden="false">
     <div class="home-sidebar" id="homeSidebar"></div>
     <div class="home-main">
     <div class="hero" id="heroSection">
@@ -77,7 +77,7 @@
 
     <div class="search-bar-wrap">
         <input type="search" class="search-input" id="searchInput" placeholder="🔍 Buscar lugares, atividades..." autocomplete="off" aria-label="Buscar lugares e atividades">
-        <button class="search-fav-btn" id="searchFavFilter" aria-label="Filtrar favoritos">⭐</button>
+        <button class="search-fav-btn" id="searchFavFilter" aria-label="Filtrar favoritos" aria-pressed="false">⭐</button>
     </div>
     <div class="search-results" id="searchResults" style="display:none"></div>
 
@@ -88,31 +88,31 @@
 </div>
 
 <!-- ==================== MAP ==================== -->
-<div class="section" id="sec-map" role="tabpanel" aria-label="Mapa">
+<div class="section" id="sec-map" role="tabpanel" aria-labelledby="tabMap" aria-label="Mapa" aria-hidden="true">
     <div id="map"></div>
     <div class="map-toolbar">
-        <button class="map-tb-btn" id="btnMapDay" title="Ir ao dia atual">📅 <span id="mapDayLabel">Dia 1</span></button>
-        <button class="map-tb-btn" id="btnMapFit" title="Ver rota completa">🗺️ Rota</button>
-        <button class="map-tb-btn" id="btnMapSat" title="Alternar satélite">🛰️ Satélite</button>
-        <button class="map-tb-btn" id="btnMapLayers" title="Camadas">☰ Camadas</button>
-    </div>
-    <div class="map-layers-panel" id="mapLayersPanel">
-        <label><input type="checkbox" id="chkRoute" checked> 🛣️ Rota completa</label>
-        <label><input type="checkbox" id="chkStops" checked> 📍 Paradas</label>
-        <label><input type="checkbox" id="chkSuperchargers" checked> ⚡ Superchargers</label>
-        <label><input type="checkbox" id="chkRoadPois" checked> 📷 Pontos turísticos</label>
-        <label><input type="checkbox" id="chkDayTrips" checked> 🟡 Day trips</label>
-        <label><input type="checkbox" id="chkDayRoute" checked> 🔵 Trecho do dia</label>
+        <button class="map-tb-btn" id="btnMapDay" title="Ir ao dia atual" aria-label="Ir ao dia atual">📅 <span id="mapDayLabel">Dia 1</span></button>
+        <button class="map-tb-btn" id="btnMapFit" title="Ver rota completa" aria-label="Ver rota completa">🗺️ Rota</button>
+        <button class="map-tb-btn" id="btnMapSat" title="Alternar satélite" aria-label="Alternar satélite" aria-pressed="false">🛰️ Satélite</button>
+        <button class="map-tb-btn" id="btnMapLayers" title="Camadas" aria-label="Camadas do mapa" aria-expanded="false" aria-controls="mapLayersPanel">☰ Camadas</button>
+        <div class="map-layers-panel" id="mapLayersPanel" role="group" aria-label="Camadas do mapa">
+            <label><input type="checkbox" id="chkRoute" checked> 🛣️ Rota completa</label>
+            <label><input type="checkbox" id="chkStops" checked> 📍 Paradas</label>
+            <label><input type="checkbox" id="chkSuperchargers" checked> ⚡ Superchargers</label>
+            <label><input type="checkbox" id="chkRoadPois" checked> 📷 Pontos turísticos</label>
+            <label><input type="checkbox" id="chkDayTrips" checked> 🟡 Day trips</label>
+            <label><input type="checkbox" id="chkDayRoute" checked> 🔵 Trecho do dia</label>
+        </div>
     </div>
     <div class="map-stats-card" id="mapStatsCard">
-        <div class="map-stats-main" id="mapStatsMain">
+        <button type="button" class="map-stats-main" id="mapStatsMain" aria-label="Abrir roteiro do dia selecionado">
             <div class="map-stats-photo" id="mapStatsPhoto"></div>
             <div class="map-stats-info">
                 <div class="map-stats-title" id="mapStatsTitle">Dia 1</div>
                 <div class="map-stats-sub" id="mapStatsSub"></div>
                 <div class="map-stats-badges" id="mapStatsBadges"></div>
             </div>
-        </div>
+        </button>
         <div class="map-stats-actions" id="mapStatsActions"></div>
     </div>
     <div class="map-scrubber">
@@ -125,7 +125,7 @@
 </div>
 
 <!-- ==================== EXPLORE ==================== -->
-<div class="section" id="sec-explore" role="tabpanel" aria-label="Explorar">
+<div class="section" id="sec-explore" role="tabpanel" aria-labelledby="tabExplore" aria-label="Explorar" aria-hidden="true">
     <div class="explore-container">
         <h2 class="explore-header">Explorar</h2>
         <div class="explore-filters-wrap">
@@ -142,7 +142,7 @@
 </div>
 
 <!-- ==================== SETTINGS ==================== -->
-<div class="section" id="sec-settings" role="tabpanel" aria-label="Ajustes">
+<div class="section" id="sec-settings" role="tabpanel" aria-labelledby="tabSettings" aria-label="Ajustes" aria-hidden="true">
     <div class="settings-section">
         <h2>Ajustes</h2>
         <div id="appVersion" style="font-size:12px;color:var(--text3);text-align:center;margin:-16px 0 20px">EUA 2027 PWA</div>
@@ -212,13 +212,31 @@
             <div class="setting-row" style="flex-direction:column;align-items:stretch;gap:12px">
                 <div>
                     <div class="setting-label">🗺️ Mapa Offline</div>
-                    <div class="setting-desc" id="mapCacheStatus">Tiles do mapa são baixados automaticamente</div>
+                    <div class="setting-desc" id="mapCacheStatus" role="status" aria-live="polite">Mais de 11 mil tiles. Download grande, iniciado apenas quando você tocar (Wi-Fi recomendado).</div>
                 </div>
-                <button id="btnCacheMap" style="background:var(--blue);color:#fff;border:none;padding:14px 20px;border-radius:14px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;width:100%">
+                <button id="btnCacheMap" class="offline-download-btn">
                     📥 Baixar Mapa Offline
                 </button>
-                <div class="progress-bar" id="mapProgress" style="display:none;height:6px;background:var(--glass);border-radius:3px;overflow:hidden">
+                <button type="button" id="btnPauseMap" class="offline-pause-btn">
+                    ⏸ Pausar download
+                </button>
+                <div class="progress-bar offline-progress" id="mapProgress" role="progressbar" aria-label="Download do mapa offline" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="display:none">
                     <div id="mapProgressFill" style="height:100%;background:var(--blue);width:0%;transition:width 0.3s;border-radius:3px"></div>
+                </div>
+            </div>
+            <div class="setting-row" style="flex-direction:column;align-items:stretch;gap:12px">
+                <div>
+                    <div class="setting-label">📸 Fotos Offline</div>
+                    <div class="setting-desc" id="photoCacheStatus" role="status" aria-live="polite">Baixe as fotos apenas se precisar delas sem conexão. Pacote grande; Wi-Fi recomendado.</div>
+                </div>
+                <button type="button" id="btnCachePhotos" class="offline-download-btn">
+                    📥 Baixar Fotos Offline
+                </button>
+                <button type="button" id="btnPausePhotos" class="offline-pause-btn">
+                    ⏸ Pausar download
+                </button>
+                <div class="progress-bar offline-progress" id="photoCacheProgress" role="progressbar" aria-label="Download das fotos offline" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="display:none">
+                    <div id="photoCacheProgressFill" style="height:100%;background:var(--blue);width:0%;transition:width 0.3s;border-radius:3px"></div>
                 </div>
             </div>
             <div class="setting-row" style="flex-direction:column;align-items:stretch;gap:12px">
@@ -251,10 +269,10 @@
 </div>
 
 <!-- ==================== LIGHTBOX ==================== -->
-<div class="lightbox" id="lightbox">
-    <button class="lightbox-close" id="btnLightboxClose">✕</button>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightboxCaption" aria-hidden="true">
+    <button class="lightbox-close" id="btnLightboxClose" aria-label="Fechar imagem ampliada">✕</button>
     <img class="lightbox-img" id="lightboxImg" src="" alt="">
-    <div class="lightbox-caption" id="lightboxCaption"></div>
+    <div class="lightbox-caption" id="lightboxCaption">Imagem ampliada</div>
 </div>
 
 <div class="offline-bar" id="offlineBar" role="status" aria-live="polite" aria-atomic="true">📡 Sem conexão — modo offline</div>
@@ -262,19 +280,19 @@
 
 <!-- ==================== TAB BAR ==================== -->
 <nav class="tab-bar" role="tablist" aria-label="Navegação principal">
-    <button class="tab-item active" id="tabHome" role="tab" aria-selected="true" aria-controls="sec-home">
+    <button class="tab-item active" id="tabHome" role="tab" aria-selected="true" aria-controls="sec-home" tabindex="0">
         <span class="tab-icon" aria-hidden="true">📅</span>
         <span>Roteiro</span>
     </button>
-    <button class="tab-item" id="tabMap" role="tab" aria-selected="false" aria-controls="sec-map">
+    <button class="tab-item" id="tabMap" role="tab" aria-selected="false" aria-controls="sec-map" tabindex="-1">
         <span class="tab-icon" aria-hidden="true">🗺️</span>
         <span>Mapa</span>
     </button>
-    <button class="tab-item" id="tabExplore" role="tab" aria-selected="false" aria-controls="sec-explore">
+    <button class="tab-item" id="tabExplore" role="tab" aria-selected="false" aria-controls="sec-explore" tabindex="-1">
         <span class="tab-icon" aria-hidden="true">🔍</span>
         <span>Explorar</span>
     </button>
-    <button class="tab-item" id="tabSettings" role="tab" aria-selected="false" aria-controls="sec-settings">
+    <button class="tab-item" id="tabSettings" role="tab" aria-selected="false" aria-controls="sec-settings" tabindex="-1">
         <span class="tab-icon" aria-hidden="true">⚙️</span>
         <span>Ajustes</span>
     </button>

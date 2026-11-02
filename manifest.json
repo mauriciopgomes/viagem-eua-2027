@@ -9,7 +9,7 @@
   "scope": "./",
   "display": "standalone",
   "display_override": ["window-controls-overlay", "standalone"],
-  "orientation": "portrait",
+  "orientation": "any",
   "background_color": "#050508",
   "theme_color": "#050508",
   "categories": ["travel", "navigation"],

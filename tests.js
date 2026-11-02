@@ -373,7 +373,7 @@ test('SW cacheia tiles de mapa', () => {
         'SW deve cachear tiles de mapa');
 });
 
-test('todos os arquivos de imagem do disco estão no cache do SW', () => {
+test('todos os arquivos de imagem do disco estão registrados para cache opt-in', () => {
     const assetsMatch = swJs.match(/ASSETS_TO_CACHE\s*=\s*\[([\s\S]*?)\];/);
     const cachedUrls = new Set((assetsMatch[1].match(/'[^']+'/g) || []).map(u => u.replace(/'/g, '')));
 
@@ -384,7 +384,7 @@ test('todos os arquivos de imagem do disco estão no cache do SW', () => {
 
     const missingDayPhotos = dayPhotoFiles.filter(f => !cachedUrls.has(f));
     assert(missingDayPhotos.length === 0,
-        `Fotos de dia não cacheadas: ${missingDayPhotos.join(', ')}`);
+        `Fotos de dia ausentes da lista de download: ${missingDayPhotos.join(', ')}`);
 
     // Check all activity photos
     const actPhotosFiles = fs.readdirSync(path.join(BASE, 'img', 'activities'))
@@ -393,7 +393,7 @@ test('todos os arquivos de imagem do disco estão no cache do SW', () => {
 
     const missingActPhotos = actPhotosFiles.filter(f => !cachedUrls.has(f));
     assert(missingActPhotos.length === 0,
-        `Fotos de atividades não cacheadas: ${missingActPhotos.join(', ')}`);
+        `Fotos de atividades ausentes da lista de download: ${missingActPhotos.join(', ')}`);
 });
 
 // ==================== 7. MANIFEST.JSON ====================
@@ -460,8 +460,8 @@ test('shortcuts referenciam URLs válidas', () => {
     }
 });
 
-test('orientation é portrait', () => {
-    assertEqual(manifestJson.orientation, 'portrait');
+test('manifest permite orientação portrait e landscape', () => {
+    assertEqual(manifestJson.orientation, 'any');
 });
 
 test('manifest descreve a duração total da viagem (33 dias)', () => {
@@ -930,6 +930,52 @@ test('tem cache de tiles do mapa', () => {
     assert(allJs.includes('cacheMapTiles'), 'deve ter função cacheMapTiles');
 });
 
+test('download de tiles exige ação explícita e oferece pausa', () => {
+    assert(!appJs.includes('scheduleAutoMapTileDownload'), 'tiles não devem ser baixados automaticamente');
+    assert(appJs.includes("localStorage.setItem('mapTilesDownloadConsent', '1')"),
+        'deve registrar a ação explícita antes do download');
+    assert(appJs.includes('function pauseMapTileDownload()'), 'deve permitir pausar o download');
+    assert(appJs.includes("localStorage.getItem('mapTilesUserPaused') !== '1'"),
+        'retomada online não deve ignorar uma pausa manual');
+});
+
+test('download de fotos offline é explícito e pode ser pausado', () => {
+    assert(indexHtml.includes('id="btnCachePhotos"'), 'deve haver ação explícita para baixar fotos');
+    assert(appJs.includes("type: 'CACHE_OFFLINE_PHOTOS'"), 'o botão deve solicitar o download ao Service Worker');
+    assert(appJs.includes("type: 'PAUSE_OFFLINE_PHOTOS'"), 'deve haver ação para pausar o download');
+    const install = swJs.slice(swJs.indexOf("self.addEventListener('install'"), swJs.indexOf('// Activate:'));
+    assert(install.includes('cache.addAll(CRITICAL_ASSETS)'), 'o app shell crítico ainda deve ser precacheado');
+    assert(!install.includes('ASSETS_TO_CACHE.filter'), 'fotos não devem ser baixadas durante a instalação');
+});
+
+test('controles interativos têm semântica acessível', () => {
+    assert(indexHtml.includes('aria-expanded="false" aria-controls="mapLayersPanel"'),
+        'camadas do mapa devem expor estado e relação');
+    assert(indexHtml.includes('role="dialog" aria-modal="true" aria-labelledby="lightboxCaption"'),
+        'lightbox deve ser anunciado como diálogo modal');
+    assert(appJs.includes('aria-pressed', appJs.indexOf('function updateCheckUI')),
+        'estado de conclusão deve ser anunciado');
+    assert(appJs.includes('card-detail-btn'), 'cartões com detalhes devem ter ação acessível por teclado');
+    assert(appJs.includes('<button type="button" class="sidebar-item"'),
+        'navegação lateral no iPad deve usar controles nativos');
+    assert(appJs.includes("sideItem.setAttribute('aria-current', 'true')"),
+        'dia atual na navegação lateral deve ser anunciado');
+});
+
+test('navegação programática mantém a aba ativa', () => {
+    assert(appJs.includes("document.getElementById(tabId)"), 'switchTab deve identificar a aba mesmo sem evento');
+    assert(appJs.includes("t.tabIndex = selected ? 0 : -1"), 'navegação deve manter foco roving nas abas');
+    assert(appJs.includes('switchToken !== tabSwitchToken'),
+        'trocas rápidas de aba não devem ativar uma seção antiga');
+});
+
+test('layout de iPad separa orientação portrait e landscape', () => {
+    assert(stylesCSS.includes('@media (min-width: 1100px) and (orientation: landscape)'),
+        'colunas extras devem ser aplicadas conforme o espaço horizontal');
+    assert(stylesCSS.includes('max-height: min(55dvh, 360px)'),
+        'painel de camadas deve caber em telas baixas e permitir rolagem');
+});
+
 test('download offline inclui base escura e rótulos com coordenadas corretas', () => {
     const urls = appJs.match(/var mapDarkTileUrls = \[[\s\S]*?\n\];/)[0];
     const generate = appJs.slice(appJs.indexOf('function generateTileList()'), appJs.indexOf('async function cacheMapTiles('));
@@ -1033,7 +1079,7 @@ test('dayPhotos referenciados no SW cache existem no data.js', () => {
 
     Object.values(dayPhotos).forEach((photo) => {
         const swPath = './' + photo;
-        assert(cachedUrls.has(swPath), `dayPhotos '${photo}' não está no SW cache`);
+        assert(cachedUrls.has(swPath), `dayPhotos '${photo}' não está na lista de download do SW`);
     });
 });
 

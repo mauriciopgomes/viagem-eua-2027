@@ -105,6 +105,9 @@ document.addEventListener('DOMContentLoaded', function() {
             var detailImg = e.target.closest('img[data-open-day]');
             if (detailImg) { e.stopPropagation(); openDetail(parseInt(detailImg.getAttribute('data-open-day')), parseInt(detailImg.getAttribute('data-open-idx'))); return; }
 
+            var detailBtn = e.target.closest('button[data-open-day][data-open-idx]');
+            if (detailBtn) { e.stopPropagation(); openDetail(parseInt(detailBtn.getAttribute('data-open-day')), parseInt(detailBtn.getAttribute('data-open-idx'))); return; }
+
             // Card click → openDetail
             var detailCard = e.target.closest('[data-open-day].activity-card');
             if (detailCard) { openDetail(parseInt(detailCard.getAttribute('data-open-day')), parseInt(detailCard.getAttribute('data-open-idx'))); return; }
@@ -212,10 +215,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Map cache button
     var btnCacheMap = document.getElementById('btnCacheMap');
-    if (btnCacheMap) btnCacheMap.addEventListener('click', function() {
-        localStorage.removeItem('mapTilesCached');
-        cacheMapTiles(false);
-    });
+    if (btnCacheMap) btnCacheMap.addEventListener('click', startMapTileDownload);
+    var btnPauseMap = document.getElementById('btnPauseMap');
+    if (btnPauseMap) btnPauseMap.addEventListener('click', pauseMapTileDownload);
+    var btnCachePhotos = document.getElementById('btnCachePhotos');
+    if (btnCachePhotos) btnCachePhotos.addEventListener('click', startOfflinePhotoDownload);
+    var btnPausePhotos = document.getElementById('btnPausePhotos');
+    if (btnPausePhotos) btnPausePhotos.addEventListener('click', pauseOfflinePhotoDownload);
+    if (navigator.serviceWorker) navigator.serviceWorker.addEventListener('message', handleOfflinePhotoMessage);
 
     // Export / import data
     var btnExportData = document.getElementById('btnExportData');
@@ -252,7 +259,18 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
     tabDefs.forEach(function(def) {
         var el = document.getElementById(def.id);
-        if (el) el.addEventListener('click', function(e) { switchTab(def.tab, e); });
+        if (el) {
+            el.addEventListener('click', function(e) { switchTab(def.tab, e); });
+            el.addEventListener('keydown', function(e) {
+                if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) return;
+                e.preventDefault();
+                var currentIndex = tabDefs.findIndex(function(item) { return item.id === def.id; });
+                var nextIndex = e.key === 'Home' ? 0 : e.key === 'End' ? tabDefs.length - 1 :
+                    (currentIndex + (e.key === 'ArrowRight' ? 1 : tabDefs.length - 1)) % tabDefs.length;
+                var nextTab = document.getElementById(tabDefs[nextIndex].id);
+                if (nextTab) { nextTab.focus(); nextTab.click(); }
+            });
+        }
     });
 
     // Day pills → showDay (delegation on daySelector)
@@ -278,8 +296,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // data-goto-day → switchTab home + showDay (map popups, map stats btn, explore items)
     document.addEventListener('click', function(e) {
         // Legend toggle
-        var legendH3 = e.target.closest('[data-legend-toggle]');
-        if (legendH3) { legendH3.parentElement.classList.toggle('open'); return; }
+        var legendToggle = e.target.closest('[data-legend-toggle]');
+        if (legendToggle) {
+            var legendOpen = legendToggle.closest('.legend').classList.toggle('open');
+            legendToggle.setAttribute('aria-expanded', String(legendOpen));
+            return;
+        }
 
         // Map links in explore — stop propagation on anchor links
         if (e.target.closest('.hotel-map-link, .charge-map-link')) {
@@ -394,10 +416,10 @@ function renderSidebar() {
         var thumbHtml = photo
             ? '<img class="sidebar-thumb" src="' + webpSrc(photo) + '" alt="" width="32" height="32" loading="lazy" onerror="imgFallback(this,&quot;📍&quot;)">'
             : '<div class="sidebar-thumb sidebar-thumb-placeholder"></div>';
-        html += '<div class="sidebar-item" data-sd="' + i + '" title="' + escapeHtml(fullLoc) + '">' +
+        html += '<button type="button" class="sidebar-item" data-sd="' + i + '" title="' + escapeHtml(fullLoc) + '" aria-label="Dia ' + i + ', ' + escapeHtml(fullLoc) + '" aria-current="' + (i === currentDay ? 'true' : 'false') + '">' +
             thumbHtml +
             '<div class="sidebar-item-text"><span class="sidebar-day">' + dateStr + '</span><span class="sidebar-loc">' + escapeHtml(loc) + '</span></div>' +
-            '</div>';
+            '</button>';
     }
     el.innerHTML = html;
 }
@@ -421,6 +443,7 @@ function updateCheckUI(dayNum, itemIdx, done) {
     var actionBtn = document.querySelector('[data-action-check="' + dayNum + '-' + itemIdx + '"]');
     if (actionBtn) {
         actionBtn.classList.toggle('action-done', done);
+        actionBtn.setAttribute('aria-pressed', String(done));
         if (done) { actionBtn.classList.add('just-checked'); setTimeout(function() { actionBtn.classList.remove('just-checked'); }, 600); }
         var parent = actionBtn.closest('.activity-card');
         if (parent) parent.classList.toggle('item-done', done);
@@ -477,6 +500,7 @@ function toggleHideDone(dayNum) {
     var hiding = !grid.classList.contains('hide-done');
     grid.classList.toggle('hide-done', hiding);
     btn.classList.toggle('active', hiding);
+    btn.setAttribute('aria-pressed', String(hiding));
     btn.textContent = hiding ? '👁️ Mostrar' : '👁️ Esconder';
 }
 
@@ -498,7 +522,7 @@ function renderDay(d) {
         ' stroke-dasharray="' + circ + '" stroke-dashoffset="' + circ + '" stroke-linecap="round"/>' +
         '</svg>' +
         '<span id="day-progress-' + d.day + '">0/' + d.items.length + '</span> concluídos ' +
-        '<button type="button" class="toggle-done-btn" id="toggleDone-' + d.day + '" data-toggle-done="' + d.day + '" aria-label="Esconder concluídos">👁️ Esconder</button></div>');
+        ' <button type="button" class="toggle-done-btn" id="toggleDone-' + d.day + '" data-toggle-done="' + d.day + '" aria-label="Esconder concluídos" aria-pressed="false">👁️ Esconder</button></div>');
 
     h.push('<div class="activity-grid">');
     var currentPeriod = '';
@@ -538,7 +562,7 @@ function renderDay(d) {
         }
         // Type badge sobre a mídia
         h.push('<div class="activity-type-badge">' + tl + '</div>');
-        if (hasInfo) h.push('<span class="detail-arrow">›</span>');
+        if (hasInfo) h.push('<span class="detail-arrow" aria-hidden="true">›</span>');
         h.push('</div>');
         h.push('<div class="activity-card-body">');
         h.push('<div class="activity-time">' + item.time + (hasInfo ? ' · <span style="color:var(--blue)">ⓘ</span>' : '') + '</div>');
@@ -548,8 +572,9 @@ function renderDay(d) {
             h.push('<div class="activity-desc">' + escapeHtml(placeData.info.detail.substring(0, 120)) + '</div>');
         }
         h.push('<div class="card-actions">');
-        h.push('<button type="button" class="card-action-btn' + (isChecked(d.day, idx) ? ' action-done' : '') + '" data-action-check="' + d.day + '-' + idx + '" aria-label="Marcar como concluído"></button>');
-        h.push('<button type="button" class="card-action-btn' + (isFav(d.day, idx) ? ' action-fav-active' : '') + '" data-action-fav="' + d.day + '-' + idx + '" aria-label="Favoritar"></button>');
+        h.push('<button type="button" class="card-action-btn' + (isChecked(d.day, idx) ? ' action-done' : '') + '" data-action-check="' + d.day + '-' + idx + '" aria-label="Concluir atividade" aria-pressed="' + isChecked(d.day, idx) + '"></button>');
+        h.push('<button type="button" class="card-action-btn' + (isFav(d.day, idx) ? ' action-fav-active' : '') + '" data-action-fav="' + d.day + '-' + idx + '" aria-label="Favoritar atividade" aria-pressed="' + isFav(d.day, idx) + '"></button>');
+        if (hasInfo) h.push('<button type="button" class="card-action-btn card-detail-btn" data-open-day="' + d.day + '" data-open-idx="' + idx + '" aria-label="Abrir detalhes: ' + escapeHtml(plainText) + '"></button>');
         h.push('</div>');
         h.push('</div></div>');
     });
@@ -612,9 +637,16 @@ function showDay(n) {
     }
     document.querySelectorAll('.day-pill').forEach(function(b) { b.classList.remove('active'); });
     // Sync sidebar
-    document.querySelectorAll('.sidebar-item').forEach(function(s) { s.classList.remove('active'); });
+    document.querySelectorAll('.sidebar-item').forEach(function(s) {
+        s.classList.remove('active');
+        s.setAttribute('aria-current', 'false');
+    });
     var sideItem = document.querySelector('.sidebar-item[data-sd="' + n + '"]');
-    if (sideItem) { sideItem.classList.add('active'); sideItem.scrollIntoView({ block: 'nearest' }); }
+    if (sideItem) {
+        sideItem.classList.add('active');
+        sideItem.setAttribute('aria-current', 'true');
+        sideItem.scrollIntoView({ block: 'nearest' });
+    }
 
     if (!renderedDays[n]) {
         var skelId = 'ds-skel-' + n;
@@ -706,11 +738,6 @@ function showDay(n) {
     var nt = document.getElementById('daynote-' + n);
     if (nt && nt.value) setTimeout(function() { autoResizeTextarea(nt); }, 50);
     
-    // Send notification on day change
-    if (n !== prev && n > 1) {
-        var dayData = days[n - 1];
-        notifyDayChange(n, getTitle(dayData));
-    }
 }
 
 // ==================== WAKE LOCK (keep screen on while navigating/on map) ====================
@@ -737,13 +764,21 @@ document.addEventListener('visibilitychange', function() {
 });
 
 // ==================== TAB SWITCHING ====================
+var tabSwitchToken = 0;
 function switchTab(tab, e) {
     var doSwitch = function() {
-        document.querySelectorAll('.tab-item').forEach(function(t) { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
-        if (e && e.currentTarget) {
-            e.currentTarget.classList.add('active');
-            e.currentTarget.setAttribute('aria-selected', 'true');
-        }
+        var switchToken = ++tabSwitchToken;
+        var tabId = 'tab' + tab.charAt(0).toUpperCase() + tab.slice(1);
+        var selectedTab = e && e.currentTarget ? e.currentTarget : document.getElementById(tabId);
+        document.querySelectorAll('.tab-item').forEach(function(t) {
+            var selected = t === selectedTab;
+            t.classList.toggle('active', selected);
+            t.setAttribute('aria-selected', String(selected));
+            t.tabIndex = selected ? 0 : -1;
+        });
+        document.querySelectorAll('.section').forEach(function(section) {
+            section.setAttribute('aria-hidden', String(section.id !== 'sec-' + tab));
+        });
         // Fade out current, fade in next
         var current = document.querySelector('.section.active');
         var next = document.getElementById('sec-' + tab);
@@ -751,13 +786,16 @@ function switchTab(tab, e) {
             current.classList.remove('active');
             next.classList.add('section-entering');
             requestAnimationFrame(function() {
-                requestAnimationFrame(function() {
-                    next.classList.remove('section-entering');
-                    next.classList.add('active');
+                if (switchToken !== tabSwitchToken) return;
+                document.querySelectorAll('.section').forEach(function(section) {
+                    section.classList.remove('active', 'section-entering');
                 });
+                next.classList.add('active');
             });
         } else if (next) {
-            document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+            document.querySelectorAll('.section').forEach(function(s) {
+                s.classList.remove('active', 'section-entering');
+            });
             next.classList.add('active');
         }
 
@@ -772,12 +810,7 @@ function switchTab(tab, e) {
         if (tab === 'home' || tab === 'map') requestWakeLockIfNeeded();
         else releaseWakeLock();
     };
-    // Use View Transitions API if available
-    if (document.startViewTransition) {
-        document.startViewTransition(doSwitch);
-    } else {
-        doSwitch();
-    }
+    doSwitch();
 }
 
 // ==================== DETAIL SHEET ====================
@@ -1276,7 +1309,7 @@ function doInitMap() {
     var legend = L.control({ position: 'topright' });
     legend.onAdd = function() {
         var div = L.DomUtil.create('div', 'legend');
-        div.innerHTML = '<h3 data-legend-toggle="1">🗺️ Legenda</h3>' +
+        div.innerHTML = '<h3><button type="button" class="legend-toggle" data-legend-toggle="1" aria-expanded="false">🗺️ Legenda</button></h3>' +
             '<div class="legend-body">' +
             '<div class="legend-item"><div class="legend-line" style="background:#4ecdc4;opacity:0.35"></div><span>Rota percorrida</span></div>' +
             '<div class="legend-item"><div class="legend-line" style="background:#4ecdc4;border-style:dashed"></div><span>Trecho restante</span></div>' +
@@ -1385,6 +1418,7 @@ function mapUpdateStatsCard(dayNum) {
         photo.style.display = 'none';
     }
 
+    document.getElementById('mapStatsMain').setAttribute('aria-label', 'Abrir roteiro do Dia ' + dayNum + ' — ' + d.location);
     document.getElementById('mapStatsTitle').textContent = 'Dia ' + dayNum + ' — ' + d.location;
     document.getElementById('mapStatsSub').textContent = d.title.replace(/Dia \d+ — /, '');
 
@@ -1432,11 +1466,16 @@ function mapToggleSat() {
         mapInstance.removeLayer(mapTileSat);
         mapTileDark.addTo(mapInstance);
     }
-    document.getElementById('btnMapSat').classList.toggle('active', isSatellite);
+    var button = document.getElementById('btnMapSat');
+    button.classList.toggle('active', isSatellite);
+    button.setAttribute('aria-pressed', String(isSatellite));
 }
 
 function mapTogglePanel() {
-    document.getElementById('mapLayersPanel').classList.toggle('open');
+    var panel = document.getElementById('mapLayersPanel');
+    var button = document.getElementById('btnMapLayers');
+    var open = panel.classList.toggle('open');
+    button.setAttribute('aria-expanded', String(open));
 }
 
 function mapToggleLayer(key) {
@@ -1546,28 +1585,65 @@ async function cacheMapTiles(silent) {
     if (!navigator.onLine) {
         tileCachePaused = true;
         tileCacheRunning = false;
+        if (localStorage.getItem('mapTilesDownloadConsent') === '1') {
+            if (!localStorage.getItem('mapTilesIndex')) localStorage.setItem('mapTilesIndex', '0');
+            updateTileCacheUI(false, 0, 'Sem conexão. O download continuará quando você voltar a ficar online.');
+        }
         return;
     }
     if (tileCachePaused) tileCachePaused = false; // Resume if paused
 
     if (tileCacheRunning) return; // Already running, continue from where we paused
 
-    // Acquire multi-tab lock to prevent concurrent downloads
-    // Prefer navigator.locks (atomic) over localStorage-based lock
-    if (navigator.locks) {
-        return navigator.locks.request('map-tile-cache', { ifAvailable: true }, async function(lock) {
-            if (!lock) return; // Another tab holds the lock
-            await _cacheMapTilesInner(silent);
-        });
+    try {
+        if (navigator.locks) {
+            var acquired = false;
+            await navigator.locks.request('map-tile-cache', { ifAvailable: true }, async function(lock) {
+                if (!lock) return;
+                acquired = true;
+                await _cacheMapTilesInner(silent);
+            });
+            if (!acquired) updateTileCacheUI(false, 0, 'O download do mapa já está em andamento em outra aba.');
+            return;
+        }
+        if (!acquireTileDownloadLock()) {
+            updateTileCacheUI(false, 0, 'O download do mapa já está em andamento em outra aba.');
+            return;
+        }
+        await _cacheMapTilesInner(silent);
+    } catch (error) {
+        tileCacheRunning = false;
+        tileCachePaused = false;
+        releaseTileDownloadLock();
+        updateTileCacheUI(false, 0, 'Não foi possível baixar o mapa offline: ' + error.message);
+        console.error('[Map cache]', error);
+        showToast('Falha ao baixar o mapa offline. Tente novamente quando a conexão estiver estável.');
     }
-    if (!acquireTileDownloadLock()) return;
-    await _cacheMapTilesInner(silent);
+}
+
+function startMapTileDownload() {
+    if (localStorage.getItem('mapTilesCached') === 'tiles-v2') {
+        updateTileCacheUI(true, 0);
+        return;
+    }
+    localStorage.setItem('mapTilesDownloadConsent', '1');
+    localStorage.removeItem('mapTilesUserPaused');
+    tileCachePaused = false;
+    cacheMapTiles(false);
+}
+
+function pauseMapTileDownload() {
+    if (!tileCacheRunning) return;
+    localStorage.setItem('mapTilesUserPaused', '1');
+    tileCachePaused = true;
+    var button = document.getElementById('btnPauseMap');
+    if (button) { button.disabled = true; button.textContent = '⏳ Pausando...'; }
 }
 
 async function _cacheMapTilesInner(silent) {
     tileCacheRunning = true;
     if (localStorage.getItem('mapTilesVersion') !== 'tiles-v2') {
-        ['mapTilesCached', 'mapTilesIndex', 'mapTilesErrors', 'mapTilesTotal'].forEach(function(key) {
+        ['mapTilesCached', 'mapTilesIndex', 'mapTilesErrors', 'mapTilesTotal', 'mapTilesUserPaused'].forEach(function(key) {
             localStorage.removeItem(key);
         });
         localStorage.setItem('mapTilesVersion', 'tiles-v2');
@@ -1576,14 +1652,16 @@ async function _cacheMapTilesInner(silent) {
     var status = document.getElementById('mapCacheStatus');
     var progress = document.getElementById('mapProgress');
     var fill = document.getElementById('mapProgressFill');
+    var pauseButton = document.getElementById('btnPauseMap');
 
-    if (btn && !tileCachePaused) { btn.disabled = true; btn.textContent = '⏳ Baixando...'; }
-    if (progress && !tileCachePaused) progress.style.display = 'block';
+    if (btn) { btn.disabled = true; btn.textContent = '⏳ Baixando mapa...'; }
+    if (pauseButton) { pauseButton.disabled = false; pauseButton.style.display = 'block'; }
+    if (progress) progress.style.display = 'block';
 
     var tiles = generateTileList();
     var startIdx = parseInt(localStorage.getItem('mapTilesIndex') || '0');
     var totalErrors = parseInt(localStorage.getItem('mapTilesErrors') || '0');
-    var totalTiles = parseInt(localStorage.getItem('mapTilesTotal') || tiles.length);
+    var totalTiles = tiles.length;
     localStorage.setItem('mapTilesTotal', totalTiles);
 
     if (status && startIdx === 0) status.textContent = '0 / ' + tiles.length + ' tiles...';
@@ -1594,12 +1672,18 @@ async function _cacheMapTilesInner(silent) {
     var batchSize = silent ? 6 : 10; // smaller batches in background to save bandwidth
 
     for (var i = startIdx; i < tiles.length; i += batchSize) {
-        if (!navigator.onLine) {
+        if (tileCachePaused || !navigator.onLine) {
+            var userPaused = localStorage.getItem('mapTilesUserPaused') === '1';
             tileCachePaused = true;
             tileCacheRunning = false;
             localStorage.setItem('mapTilesIndex', i);
             localStorage.setItem('mapTilesErrors', errors);
-            if (status) status.textContent = 'Pausado: ' + done + ' / ' + tiles.length + ' tiles. Retomara ao reconectar.';
+            releaseTileDownloadLock();
+            if (status) status.textContent = userPaused
+                ? 'Download pausado em ' + done + ' / ' + tiles.length + ' tiles. Toque em Retomar quando quiser.'
+                : 'Sem conexão: ' + done + ' / ' + tiles.length + ' tiles. O download continuará ao reconectar.';
+            if (btn) { btn.disabled = false; btn.textContent = '▶ Retomar mapa offline'; }
+            if (pauseButton) { pauseButton.disabled = false; pauseButton.style.display = 'none'; }
             return;
         }
         var batch = tiles.slice(i, i + batchSize);
@@ -1607,7 +1691,8 @@ async function _cacheMapTilesInner(silent) {
             return cache.match(url).then(function(cached) {
                 if (cached) return;
                 return fetch(url).then(function(r) {
-                    if (r.ok) return cache.put(url, r);
+                    if (!r.ok) throw new Error('HTTP ' + r.status + ' ao baixar tile');
+                    return cache.put(url, r);
                 });
             });
         }));
@@ -1617,31 +1702,155 @@ async function _cacheMapTilesInner(silent) {
         localStorage.setItem('mapTilesErrors', errors);
         var pct = Math.round((done / tiles.length) * 100);
         if (fill) fill.style.width = pct + '%';
+        if (progress) progress.setAttribute('aria-valuenow', String(pct));
         if (status) status.textContent = done + ' / ' + tiles.length + ' tiles...' + (errors > 0 ? ' (' + errors + ' erros)' : '');
     }
 
     tileCacheRunning = false;
     tileCachePaused = false;
     releaseTileDownloadLock();
+    if (errors > 0) {
+        localStorage.removeItem('mapTilesCached');
+        localStorage.removeItem('mapTilesIndex');
+        localStorage.removeItem('mapTilesErrors');
+        localStorage.removeItem('mapTilesTotal');
+        localStorage.removeItem('mapTilesDownloadConsent');
+        updateTileCacheUI(false, errors, 'Download finalizado com ' + errors + ' falhas. Toque para tentar novamente; tiles já salvos serão mantidos.');
+        return;
+    }
     localStorage.setItem('mapTilesCached', 'tiles-v2');
     localStorage.removeItem('mapTilesIndex');
     localStorage.removeItem('mapTilesErrors');
     localStorage.removeItem('mapTilesTotal');
+    localStorage.removeItem('mapTilesDownloadConsent');
+    localStorage.removeItem('mapTilesUserPaused');
     updateTileCacheUI(true, errors);
 }
 
-function updateTileCacheUI(complete, errors) {
+function updateTileCacheUI(complete, errors, message) {
     var btn = document.getElementById('btnCacheMap');
     var status = document.getElementById('mapCacheStatus');
     var progress = document.getElementById('mapProgress');
-    if (btn) { btn.textContent = '✅ Mapa Offline Pronto!'; btn.style.background = 'var(--green)'; btn.disabled = true; }
-    if (progress) progress.style.display = 'none';
-    if (status) status.textContent = 'Tiles do mapa salvos para uso offline' + (errors ? ' (' + errors + ' falharam)' : '');
+    var pauseButton = document.getElementById('btnPauseMap');
+    if (pauseButton) { pauseButton.style.display = 'none'; pauseButton.disabled = false; }
+    if (complete) {
+        if (btn) { btn.textContent = '✅ Mapa Offline Pronto!'; btn.style.background = 'var(--green)'; btn.disabled = true; }
+        if (progress) { progress.style.display = 'none'; progress.setAttribute('aria-valuenow', '100'); }
+        if (status) status.textContent = 'Tiles do mapa salvos para uso offline';
+        return;
+    }
+    if (btn) {
+        btn.textContent = localStorage.getItem('mapTilesIndex') ? '▶ Retomar mapa offline' : '📥 Baixar Mapa Offline';
+        btn.style.background = 'var(--blue)';
+        btn.disabled = false;
+    }
+    if (progress) progress.style.display = localStorage.getItem('mapTilesIndex') ? 'block' : 'none';
+    if (status) status.textContent = message || (errors ? 'Download com ' + errors + ' falhas. Tente novamente.' : 'Mais de 11 mil tiles. Download grande, iniciado apenas quando você tocar (Wi-Fi recomendado).');
 }
 
 async function checkMapCacheStatus() {
     if (localStorage.getItem('mapTilesCached') === 'tiles-v2') {
         updateTileCacheUI(true, 0);
+        return;
+    }
+    var index = parseInt(localStorage.getItem('mapTilesIndex') || '0');
+    var total = parseInt(localStorage.getItem('mapTilesTotal') || '0');
+    if (localStorage.getItem('mapTilesDownloadConsent') === '1' && index > 0) {
+        var progress = document.getElementById('mapProgress');
+        var fill = document.getElementById('mapProgressFill');
+        var percent = total ? Math.round((index / total) * 100) : 0;
+        if (progress) { progress.style.display = 'block'; progress.setAttribute('aria-valuenow', String(percent)); }
+        if (fill) fill.style.width = percent + '%';
+        updateTileCacheUI(false, 0, localStorage.getItem('mapTilesUserPaused') === '1'
+            ? 'Download pausado em ' + index + ' / ' + total + ' tiles.'
+            : 'Download pendente em ' + index + ' / ' + total + ' tiles. Toque para continuar.');
+    }
+}
+
+function startOfflinePhotoDownload() {
+    var button = document.getElementById('btnCachePhotos');
+    if (!navigator.onLine) {
+        updatePhotoCacheUI('offline', 0, 0, 0);
+        showToast('Conecte-se à internet para baixar as fotos offline.');
+        return;
+    }
+    if (button) { button.disabled = true; button.textContent = '⏳ Preparando download...'; }
+    var status = document.getElementById('photoCacheStatus');
+    if (status) status.textContent = 'Preparando o pacote de fotos...';
+    navigator.serviceWorker.ready.then(function(registration) {
+        if (!registration.active) throw new Error('Service Worker ainda não está ativo.');
+        registration.active.postMessage({ type: 'CACHE_OFFLINE_PHOTOS' });
+    }).catch(function(error) {
+        updatePhotoCacheUI('failed', 0, 0, 0);
+        var message = 'Não foi possível iniciar o download das fotos: ' + error.message;
+        if (status) status.textContent = message;
+        console.error('[Photo cache]', error);
+        showToast(message);
+    });
+}
+
+function pauseOfflinePhotoDownload() {
+    var button = document.getElementById('btnPausePhotos');
+    if (button) { button.disabled = true; button.textContent = '⏳ Pausando...'; }
+    navigator.serviceWorker.ready.then(function(registration) {
+        if (!registration.active) throw new Error('Service Worker ainda não está ativo.');
+        registration.active.postMessage({ type: 'PAUSE_OFFLINE_PHOTOS' });
+    }).catch(function(error) {
+        updatePhotoCacheUI('failed', 0, 0, 0);
+        var status = document.getElementById('photoCacheStatus');
+        if (status) status.textContent = 'Não foi possível pausar o download: ' + error.message;
+        console.error('[Photo cache]', error);
+        showToast('Não foi possível pausar o download das fotos.');
+    });
+}
+
+function handleOfflinePhotoMessage(event) {
+    var data = event.data || {};
+    if (data.type === 'OFFLINE_PHOTOS_PROGRESS') {
+        updatePhotoCacheUI(data.state, data.completed, data.total, data.failed);
+    } else if (data.type === 'OFFLINE_PHOTOS_BUSY') {
+        updatePhotoCacheUI('busy', data.completed || 0, data.total || 0, 0);
+    } else if (data.type === 'OFFLINE_PHOTOS_FAILED') {
+        updatePhotoCacheUI('failed', data.completed || 0, data.total || 0, data.failed || 0);
+        var status = document.getElementById('photoCacheStatus');
+        if (status) status.textContent = 'Falha ao baixar as fotos: ' + data.message + '. Tente novamente com uma conexão estável.';
+        showToast('Falha ao baixar fotos offline. Tente novamente.');
+    }
+}
+
+function updatePhotoCacheUI(state, completed, total, failed) {
+    var button = document.getElementById('btnCachePhotos');
+    var pauseButton = document.getElementById('btnPausePhotos');
+    var status = document.getElementById('photoCacheStatus');
+    var progress = document.getElementById('photoCacheProgress');
+    var fill = document.getElementById('photoCacheProgressFill');
+    var percent = total ? Math.round((completed / total) * 100) : 0;
+    if (progress) {
+        progress.style.display = total && state !== 'failed' ? 'block' : 'none';
+        progress.setAttribute('aria-valuenow', String(percent));
+    }
+    if (fill) fill.style.width = percent + '%';
+    if (pauseButton) {
+        pauseButton.style.display = state === 'running' ? 'block' : 'none';
+        pauseButton.disabled = false;
+        pauseButton.textContent = '⏸ Pausar download';
+    }
+    if (button) {
+        button.disabled = state === 'running' || (state === 'complete' && !failed);
+        button.textContent = state === 'complete' ? (failed ? '↻ Tentar novamente' : '✅ Fotos prontas offline')
+            : state === 'paused' ? '▶ Continuar download'
+            : state === 'running' ? '⏳ Baixando fotos...'
+            : '📥 Baixar Fotos Offline';
+    }
+    if (status) {
+        if (state === 'running') status.textContent = completed + ' / ' + total + ' arquivos preparados' + (failed ? ' (' + failed + ' falhas)' : '');
+        else if (state === 'paused') status.textContent = 'Download pausado em ' + completed + ' / ' + total + '. Os arquivos já salvos serão mantidos.';
+        else if (state === 'complete') status.textContent = failed
+            ? 'Download terminou com ' + failed + ' falhas. Toque para tentar novamente; arquivos já salvos serão mantidos.'
+            : 'Fotos disponíveis para uso offline.';
+        else if (state === 'offline') status.textContent = 'Conecte-se à internet para iniciar o download.';
+        else if (state === 'busy') status.textContent = 'O download já está em andamento em outra aba. Tente novamente depois.';
+        else if (state === 'failed') status.textContent = 'O download não foi concluído. Tente novamente com uma conexão estável.';
     }
 }
 
@@ -1775,14 +1984,6 @@ function showOnboarding() {
 setTimeout(showOnboarding, 1200);
 
 
-// Helper to schedule automatic map tile download
-function scheduleAutoMapTileDownload() {
-    setTimeout(function() { cacheMapTiles(true); }, 3000);
-}
-
-// Auto-download map tiles in background after 3s (only if online and not already cached)
-scheduleAutoMapTileDownload();
-
 // ==================== FAVORITES ====================
 function isFav(dayNum, itemIdx) {
     return localStorage.getItem('fav-' + dayNum + '-' + itemIdx) === '1';
@@ -1795,6 +1996,7 @@ function toggleFav(dayNum, itemIdx, event) {
     var actionBtn = document.querySelector('[data-action-fav="' + dayNum + '-' + itemIdx + '"]');
     if (actionBtn) {
         actionBtn.classList.toggle('action-fav-active', !faved);
+        actionBtn.setAttribute('aria-pressed', String(!faved));
         if (!faved) { actionBtn.classList.add('just-faved'); setTimeout(function() { actionBtn.classList.remove('just-faved'); }, 600); }
     }
 }
@@ -1853,6 +2055,7 @@ function closeSearch() {
 }
 function toggleSearchFav(btn) {
     btn.classList.toggle('active');
+    btn.setAttribute('aria-pressed', String(btn.classList.contains('active')));
     searchItems(document.getElementById('searchInput').value);
 }
 
@@ -1861,19 +2064,23 @@ var lbScale = 1, lbStartDist = 0, lbStartScale = 1;
 function openLightbox(src, caption) {
     var lb = document.getElementById('lightbox');
     var img = document.getElementById('lightboxImg');
-    document.getElementById('lightboxCaption').textContent = caption || '';
+    document.getElementById('lightboxCaption').textContent = caption || 'Imagem ampliada';
     // Prefer WebP for lightbox
     img.src = src.replace(/\.jpg$/, '.webp');
+    img.alt = '';
     img.onerror = function() { img.onerror = null; img.src = src; };
     img.style.transform = '';
     lbScale = 1;
     lb.classList.add('open');
+    lb.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
     trapFocus(lb);
     setTimeout(function() { document.getElementById('btnLightboxClose').focus(); }, 200);
 }
 function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('open');
+    var lightbox = document.getElementById('lightbox');
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
     releaseFocus();
 }
@@ -2332,8 +2539,10 @@ window.addEventListener('scroll', function() {
         if (typeof SyncEngine !== 'undefined' && SyncEngine.url && SyncEngine.queue.length > 0) {
             setTimeout(function() { SyncEngine.push(); }, 2000);
         }
-        // Resume or start map tile caching if not already cached
-        if (localStorage.getItem('mapTilesCached') !== 'tiles-v2') {
+        // Resume only downloads explicitly requested by the user.
+        if (localStorage.getItem('mapTilesDownloadConsent') === '1' &&
+            localStorage.getItem('mapTilesUserPaused') !== '1' &&
+            localStorage.getItem('mapTilesCached') !== 'tiles-v2') {
             setTimeout(function() { cacheMapTiles(true); }, 1500);
         }
     });

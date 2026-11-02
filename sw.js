@@ -1,4 +1,4 @@
-const CACHE_NAME = 'viagem-eua-2027-v216';
+const CACHE_NAME = 'viagem-eua-2027-v217';
 const TILE_CACHE = 'viagem-tiles-v2';
 
 // Critical assets — must succeed for install
@@ -29,7 +29,7 @@ const CRITICAL_ASSETS = [
   './fonts/inter.woff2',
 ];
 
-// ALL assets precached on install (full offline mode)
+// Local asset inventory, including photos available for an explicit offline download.
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -357,33 +357,120 @@ const ASSETS_TO_CACHE = [
   './img/activities/worlds_tallest_thermometer.jpg',
 ];
 
-// Message handler: allow page to trigger skipWaiting (pull-to-refresh / update toast)
+let offlinePhotoDownloadRunning = false;
+let offlinePhotoDownloadCancelled = false;
+let offlinePhotoDownloadOwner = null;
+
+function sendOfflinePhotoMessage(client, message) {
+  if (client && typeof client.postMessage === 'function') client.postMessage(message);
+}
+
+async function cacheOfflinePhotos(client) {
+  if (offlinePhotoDownloadRunning) {
+  sendOfflinePhotoMessage(client, { type: 'OFFLINE_PHOTOS_BUSY' });
+  return;
+  }
+
+  offlinePhotoDownloadRunning = true;
+  offlinePhotoDownloadCancelled = false;
+  offlinePhotoDownloadOwner = client;
+  const jpgImages = ASSETS_TO_CACHE.filter((asset) => asset.endsWith('.jpg'));
+  const urls = Array.from(new Set([
+  ...jpgImages,
+  ...jpgImages.map((url) => url.replace('.jpg', '.webp')),
+  ...jpgImages.map((url) => url.replace('.jpg', '-400w.webp')),
+  ]));
+  let completed = 0;
+  let failed = 0;
+
+  try {
+  const cache = await caches.open(CACHE_NAME);
+  const batchSize = 6;
+  sendOfflinePhotoMessage(client, {
+    type: 'OFFLINE_PHOTOS_PROGRESS',
+    state: 'running',
+    completed,
+    total: urls.length,
+    failed,
+  });
+
+  for (let index = 0; index < urls.length; index += batchSize) {
+    if (offlinePhotoDownloadCancelled) {
+      sendOfflinePhotoMessage(client, {
+        type: 'OFFLINE_PHOTOS_PROGRESS',
+        state: 'paused',
+        completed,
+        total: urls.length,
+        failed,
+      });
+      return;
+    }
+
+    const batch = urls.slice(index, index + batchSize);
+    const results = await Promise.allSettled(batch.map(async (url) => {
+      if (await cache.match(url)) return;
+      const response = await fetch(new URL(url, self.location.href));
+      if (!response.ok) throw new Error('HTTP ' + response.status + ' ao baixar ' + url);
+      await cache.put(url, response);
+    }));
+    failed += results.filter((result) => result.status === 'rejected').length;
+    completed += batch.length;
+    sendOfflinePhotoMessage(client, {
+      type: 'OFFLINE_PHOTOS_PROGRESS',
+      state: 'running',
+      completed,
+      total: urls.length,
+      failed,
+    });
+  }
+
+  sendOfflinePhotoMessage(client, {
+    type: 'OFFLINE_PHOTOS_PROGRESS',
+    state: 'complete',
+    completed,
+    total: urls.length,
+    failed,
+  });
+  } catch (error) {
+  sendOfflinePhotoMessage(client, {
+    type: 'OFFLINE_PHOTOS_FAILED',
+    completed,
+    total: urls.length,
+    failed,
+    message: error.message,
+  });
+  throw error;
+  } finally {
+  offlinePhotoDownloadRunning = false;
+  offlinePhotoDownloadCancelled = false;
+  offlinePhotoDownloadOwner = null;
+  }
+}
+
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
+  self.skipWaiting();
+  return;
+  }
+  if (event.data && event.data.type === 'CACHE_OFFLINE_PHOTOS') {
+  event.waitUntil(cacheOfflinePhotos(event.source));
+  return;
+  }
+  if (event.data && event.data.type === 'PAUSE_OFFLINE_PHOTOS') {
+  if (offlinePhotoDownloadRunning && offlinePhotoDownloadOwner && offlinePhotoDownloadOwner.id === event.source.id) {
+    offlinePhotoDownloadCancelled = true;
+  } else {
+    sendOfflinePhotoMessage(event.source, { type: 'OFFLINE_PHOTOS_BUSY' });
+  }
   }
 });
 
-// Install: precache critical assets, then best-effort images (JPG + WebP)
+// Install only the app shell; large image collections remain opt-in.
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(async (cache) => {
-      // Critical assets must all succeed
-      await cache.addAll(CRITICAL_ASSETS);
-      // Images: best-effort — don't block install if one fails
-      // Auto-derive WebP variants (.webp and -400w.webp) from every .jpg in the list
-      const jpgImages = ASSETS_TO_CACHE.filter(a => a.endsWith('.jpg'));
-      const allImages = [
-        ...jpgImages,
-        ...jpgImages.map(u => u.replace('.jpg', '.webp')),
-        ...jpgImages.map(u => u.replace('.jpg', '-400w.webp')),
-      ];
-      await Promise.allSettled(
-        allImages.map(async (url) => {
-          try { await cache.add(url); } catch (e) { /* file may not exist — skip silently */ }
-        })
-      );
-    }).then(() => self.skipWaiting())
+  caches.open(CACHE_NAME)
+    .then((cache) => cache.addAll(CRITICAL_ASSETS))
+    .then(() => self.skipWaiting())
   );
 });
 

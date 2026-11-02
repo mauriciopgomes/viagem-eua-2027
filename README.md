@@ -1,6 +1,6 @@
 # 🚗 Viagem EUA 2027 — PWA Interativa
 
-Uma Progressive Web App (PWA) interativa para um road trip de **33 dias** pelos EUA em Tesla, com mapa, sincronização com Google Sheets e funcionalidade offline completa.
+Uma Progressive Web App (PWA) interativa para um road trip de **33 dias** pelos EUA em Tesla, com mapa, sincronização com Google Sheets e suporte offline para o app e conteúdos baixados pelo usuário.
 
 ## ✨ Features
 
@@ -8,7 +8,7 @@ Uma Progressive Web App (PWA) interativa para um road trip de **33 dias** pelos 
 - **🗺️ Mapa interativo** — Leaflet.js com mapa escuro e rótulos Esri, satélite e tiles offline, sem API key
 - **🔄 Sincronização** — Google Apps Script + localStorage
 - **📝 Notas pessoais** — Salvas localmente e sincronizadas
-- **💾 Offline-first** — Service Worker com precache
+- **💾 Offline-first** — App shell precacheado; tiles e pacote de fotos offline sob demanda
 - **⚡ Performance** — Lazy loading, code splitting, stale-while-revalidate
 - **🌙 Dark theme** — Otimizado para baterias
 - **📊 11 National Parks** — Death Valley, Zion, Yosemite, Sequoia, e mais
@@ -31,7 +31,10 @@ Uma Progressive Web App (PWA) interativa para um road trip de **33 dias** pelos 
 ### Local Development
 
 O mapa usa os serviços públicos Esri (Dark Gray Base + Reference e World Imagery).
-O download offline inclui a base escura e seus rótulos. Ao atualizar do antigo
+Em **Ajustes**, o download dos mais de 11 mil tiles do mapa e do pacote de fotos é
+iniciado somente por ação explícita; ambos podem ser pausados e retomados, e o Wi-Fi
+é recomendado. O app shell continua disponível offline após a primeira abertura.
+O download de tiles inclui a base escura e seus rótulos. Ao atualizar do antigo
 provedor CARTO, o cache de tiles é descartado e precisa ser baixado novamente;
 notas, favoritos e demais dados pessoais são preservados.
 
@@ -78,8 +81,9 @@ python3 -m http.server 8000
 - **sync.js** — Google Sheets sync engine + haptic feedback
 
 ### Cache Strategy
-- **Precache** (SW install) — Críticos: HTML, CSS, JS, fonts, ícones
-- **Runtime Cache** — Tiles de mapa com stale-while-revalidate
+- **Precache** (SW install) — App shell crítico: HTML, CSS, JS, fontes e ícones
+- **Runtime Cache** — Tiles de mapa consultados com stale-while-revalidate; pacote completo opcional em Ajustes
+- **Fotos** — Cache sob demanda durante a navegação; pacote completo opcional em Ajustes
 - **LocalStorage** — Checks, favorites, notas (sincronizadas)
 
 ### Storage
