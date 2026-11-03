@@ -333,38 +333,38 @@ const days = [
         "region": "ca",
         "items": [
             {
-                "time": "07:30",
+                "time": "05:40",
                 "text": "☕ Café no Marriott Marquis",
                 "type": ""
             },
             {
-                "time": "08:00",
+                "time": "06:10",
                 "text": "🏨 Check-out",
                 "type": ""
             },
             {
-                "time": "08:30",
+                "time": "06:40",
                 "text": "🚕 Times Square → JFK",
                 "type": "drive"
             },
             {
-                "time": "~09:30",
+                "time": "~07:40",
                 "text": "🛫 Chegada no JFK — check-in / despachar malas",
                 "type": ""
             },
             {
-                "time": "10:15",
-                "text": "🍽️ Almoço no aeroporto (JFK Terminal)",
+                "time": "08:25",
+                "text": "☕ Café da manhã no aeroporto (JFK Terminal)",
                 "type": "food"
             },
             {
-                "time": "11:00",
-                "text": "✈️ Voo AA 3 → Los Angeles (~5.5h)",
+                "time": "09:10",
+                "text": "✈️ Voo JFK → Los Angeles (horários locais)",
                 "type": "drive"
             },
             {
-                "time": "13:20",
-                "text": "✈️ Chegada no LAX (horário local, -3h)",
+                "time": "12:30",
+                "text": "✈️ Chegada no LAX (horário local)",
                 "type": "drive"
             },
             {
@@ -2731,4 +2731,3 @@ function initDays() {
 
 // Run on load
 initDays();
-
