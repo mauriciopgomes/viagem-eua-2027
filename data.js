@@ -368,27 +368,27 @@ const days = [
                 "type": "drive"
             },
             {
-                "time": "~14:00",
+                "time": "~13:10",
                 "text": "🚗 Retirada do <strong>Tesla Model Y</strong>",
                 "type": "drive"
             },
             {
-                "time": "14:30",
+                "time": "13:40",
                 "text": "🛣️ Saída rumo a <strong>Three Rivers</strong> (~330 km, ~3.5h via CA-99 N → CA-198 E)",
                 "type": "drive"
             },
             {
-                "time": "17:15",
+                "time": "16:25",
                 "text": "⚡ <strong>Supercharger Visalia, CA</strong> (~280 km) — carregar 100% (vampire drain no frio + sem charger em Three Rivers/Sequoia)",
                 "type": "charge"
             },
             {
-                "time": "~18:00",
+                "time": "~17:10",
                 "text": "🏨 Chegada em <strong>Three Rivers</strong>! Check-in",
                 "type": ""
             },
             {
-                "time": "19:00",
+                "time": "18:10",
                 "text": "🍽️ Jantar — <strong>Sierra Subs & Salads</strong> (41717 Sierra Dr, Three Rivers) — sanduíches artesanais e saladas frescas. ~$10-15/pessoa",
                 "type": "food"
             }
